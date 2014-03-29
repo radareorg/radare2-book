@@ -2,7 +2,7 @@
 
 A basic search for a plain string in a whole file would be something like:
 
-    $ echo "/ lib" | r2 -q /bin/ls
+    $ r2 -c "/ lib" -q /bin/ls
     Searching 3 bytes from 0x00400000 to 0x0041ae08: 6c 69 62 
     hits: 9
     0x00400239 hit0_0 "lib64/ld-linux-x86-64.so.2"
