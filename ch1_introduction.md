@@ -279,6 +279,7 @@ The values can be numbers in many formats:
     10M     : MBytes  10*1024*1024
 
 There are other special syntaxes for the expressions. Here's for example some of them:
+
     ?@?    or stype @@?      ; misc help for '@' (seek), '~' (grep) (see ~??)
     ?$?           ; show available '$' variables
     $$            ; here (current virtual seek)
