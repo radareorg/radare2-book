@@ -412,7 +412,7 @@ With the `c` key you will toggle the cursor mode and being able to select range 
 
 In the visual mode you can enter commands with `:` to dump buffer contents like
 
-x @ esi
+    x @ esi
 
 To get the help in the visual mode press `?`.
 
