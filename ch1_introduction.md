@@ -202,6 +202,102 @@ In the visual mode you should use hjkl keys which are the default ones for scrol
 In the visual mode you can insert (alterate bytes) pressing `i` and then <tab> to switch between the hex or string column. Pressing `q` in hex panel to return into the visual mode.
 
 
+##1.8 Command format
+
+The format of the commands looks something like that:
+
+    [.][times][cmd][~grep][@[@iter]addr!size][|>pipe] ; ...
+
+Commands are named with single chars [a-zA-Z]. So, if we prefix the command with a number. The following command will be executed as many times as we specify.
+
+    px    # run px
+    3px   # run 3 times 'px'
+
+The `!` prefix is used to scape to the shell. If a single exclamation is used then commands will be send to the system() hook defined in the loaded IO plugin. This is used, for example in the ptrace IO plugin which accepts debugger commands from this interface.
+
+Some examples:
+
+    ds                    ; call debugger 'step' command
+    px 200 @ esp          ; show 200 hex bytes at esp
+    pc > file.c           ; dump buffer as a C byte array to file
+    wx 90 @@ sym.*        ; write a nop on every symbol
+    pd 2000 | grep eax    ; grep opcodes using 'eax' register
+    px 20 ; pd 3 ; px 40  ; multiple commands in a single line
+
+The `@` character is used to specify a temporary offset where the command at the left will be executed. 
+
+The `~` character enables the internal grep which can be used to filter the output of any command. The usage is quite simple:
+
+    pd 20~call            ; disassemble 20 instructions and grep for 'call'
+
+We can either grep for columns or rows:
+
+    pd 20~call:0          ; get first row
+    pd 20~call:1          ; get second row
+
+Or even combine them:
+
+    pd 20~call[0]:0       ; grep first column of the first row matching 'call'
+
+The use of internal grep is a key feature for scripting radare, because is used to iterate over list of offsets or data processed from disassembly, ranges, or any other command. Here's an example of usage. See macros section (iterators) for more information.
+
+
+##1.9 Expressions
+
+The expressions are mathematical representations of a 64 bit numeric value which can be displayed in different formats, compared or used at any command as a numeric argument. They support multiple basic arithmetic operations and some binary and boolean ones. The command used to evaluate these math expressions is the `?`. Here there are some examples:
+
+    [0xB7F9D810]> ? 0x8048000
+    134512640 0x8048000 01001100000 128.0M 804000:0000 134512640 00000000 134512640.0 0.000000  
+    [0xB7F9D810]> ? 0x8048000+34
+    134512674 0x8048022 01001100042 128.0M 804000:0022 134512674 00100010 134512674.0 0.000000  
+    [0xB7F9D810]> ? 0x8048000+0x34
+    134512692 0x8048034 01001100064 128.0M 804000:0034 134512692 00110100 134512692.0 0.000000  
+    [0xB7F9D810]> ? 1+2+3-4*3
+    -6 0xfffffffffffffffa 01777777777777777777772 17179869183.0G fffff000:0ffa -6   
+
+The supported arithmetic expressions supported are:
+
+    + : addition
+    - : substraction
+    * : multiply
+    / : division
+    % : modulus
+    > : shift right
+    < : shift left
+
+The binary expressions should be scapped:
+
+    \| : logical OR // ("? 0001010 | 0101001")
+    \& : logical AND
+
+The values can be numbers in many formats:
+
+    0x033   : hexadecimal
+    3334    : decimal
+    sym.fo  : resolve flag offset
+    10K     : KBytes  10*1024
+    10M     : MBytes  10*1024*1024
+
+There are other special syntaxes for the expressions. Here's for example some of them:
+    ?@?    or stype @@?      ; misc help for '@' (seek), '~' (grep) (see ~??)
+    ?$?           ; show available '$' variables
+    $$            ; here (current virtual seek)
+    $l            ; opcode length
+    $s            ; file size
+    $j            ; jump address (e.g. jmp 0x10, jz 0x10 => 0x10)
+    $f            ; jump fail address (e.g. jz 0x10 => next instruction)
+    $m            ; opcode memory reference (e.g. mov eax,[0x10] => 0x10)
+
+For example:
+
+    [0x4A13B8C0]> :? $m + $l
+    140293837812900 0x7f98b45df4a4 03771426427372244 130658.0G 8b45d000:04a4 140293837812900 10100100 140293837812900.0 -0.000000
+
+
+    [0x4A13B8C0]> :pd 1 @ +$l
+    0x4A13B8C2   call 0x4a13c000   
+
+
 ##1.10 Rax
 
 The `rax` utility comes with the radare framework and aims to be a minimalistic expression evaluator for the shell useful for making base conversions easily between floating point values, hexadecimal representations, hexpair strings to ascii, octal to integer. It supports endianness and can be used as a shell if no arguments given.
