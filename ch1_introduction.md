@@ -181,29 +181,30 @@ I hardly encourage you to read the rest of this book to help you understand bett
 
 For walking thru the binary file you will use three different kind of basic actions: seek, print and alterate.
 
-To 'seek' there's an specific command abreviated as 's' than accepts an expression as argument that can be something like '10', '+0x25' or '[0x100+ptr_table]'. If you are working with block-based files you may prefer to set up the block size to 4K or the size required with the command 'b' and move forward or backward at seeks aligned to the block size using the '>' and '<' commands.
+To 'seek' there's an specific command abreviated as `s` than accepts an expression as argument that can be something like `10`, `+0x25` or `[0x100+ptr_table]`. If you are working with block-based files you may prefer to set up the block size to 4K or the size required with the command `b` and move forward or backward at seeks aligned to the block size using the `>` and `<` commands.
 
-The 'print' command aliased as 'p', accepts a second letter to specify the print mode selected. The most common ones are 'px' for printing in hexadecimal, 'pd' for disassembling.
+The 'print' command aliased as `p`, accepts a second letter to specify the print mode selected. The most common ones are `px` for printing in hexadecimal, `pd` for disassembling.
 
-To 'write' open the file with 'radare -w'. This should be specified while opening the file, or just type 'eval file.write=true' in runtime to reopen the file in read-write-mode. You can use the 'w' command to write strings or 'wx' for hexpair strings:
+To 'write' open the file with `radare -w`. This should be specified while opening the file.
+You can use the `w` command to write strings or `wx` for hexpair strings:
 
     > w hello world         ; string
     > wx 90 90 90 90        ; hexpairs
     > wa jmp 0x8048140      ; assemble
     > wf inline.bin         ; write contents of file
 
-Appending a '?' to the command you will get the help message of it. (p? for example)
+Appending a `?` to the command you will get the help message of it. (p? for example)
 
-Enter the visual mode pressing 'V<enter>', and return to the prompt using the 'q' key.
+Enter the visual mode pressing `V<enter>`, and return to the prompt using the `q` key.
 
-In the visual mode you should use hjkl keys which are the default ones for scrolling (like left,down,up,right). So entering in cursor mode ('c') you will be able select bytes if using the shift together with HJKL.
+In the visual mode you should use hjkl keys which are the default ones for scrolling (like left,down,up,right). So entering in cursor mode (`c`) you will be able select bytes if using the shift together with HJKL.
 
-In the visual mode you can insert (alterate bytes) pressing 'i' and then <tab> to switch between the hex or string column. Pressing 'q' in hex panel to return into the visual mode.
+In the visual mode you can insert (alterate bytes) pressing `i` and then <tab> to switch between the hex or string column. Pressing `q` in hex panel to return into the visual mode.
 
 
 ##1.10 Rax
 
-The 'rax' utility comes with the radare framework and aims to be a minimalistic expression evaluator for the shell useful for making base conversions easily between floating point values, hexadecimal representations, hexpair strings to ascii, octal to integer. It supports endianness and can be used as a shell if no arguments given.
+The `rax` utility comes with the radare framework and aims to be a minimalistic expression evaluator for the shell useful for making base conversions easily between floating point values, hexadecimal representations, hexpair strings to ascii, octal to integer. It supports endianness and can be used as a shell if no arguments given.
 
     $ rax2 -h
     
@@ -279,17 +280,16 @@ Some examples:
 
 ##1.11 Basic debugger session
 
-To start debugging a program use the '-d' flag and append the PID or the program path with arguments.
+To start debugging a program use the `-d` flag and append the PID or the program path with arguments.
 
     $ r2 -d /bin/ls
 
-The debugger will fork and load the 'ls' program in memory stopping the execution in the 'ld.so', so don't expect to see the entrypoint or the mapped libraries at this point. To change this you can define a new 'break entry point' adding 'e dbg.bep=entry' or 'dbg.bep=main' to your .radarerc.
+The debugger will fork and load the `ls` program in memory stopping the execution in the `ld.so`, so don`t expect to see the entrypoint or the mapped libraries at this point. To change this you can define a new `break entry point` adding `e dbg.bep=entry` or `dbg.bep=main` to your .radarerc.
 
 But take care on this, because some malware or programs can execute code before the main.
 
-Now the debugger prompt should appear and if you press 'enter' ( null command ) the basic view of the process will be displayed with the stack dump, general purpose registers and disassembly from current program counter (eip on intel).
+Now the debugger prompt should appear and if you press `enter` ( null command ) the basic view of the process will be displayed with the stack dump, general purpose registers and disassembly from current program counter (eip on intel).
 
-All the debugger commands are handled by a plugin, so the 'system()' interface is hooked by it and you will have to supply them prefixing it with a '!' character.
 
 Here's a list of the most common commands for the debugger:
 
@@ -308,16 +308,16 @@ The easiest way to use the debugger is from the Visual mode, so, you will no nee
 
     [0xB7F0C8C0]> V
 
-After entering this command an hexdump of the current eip will be showed. Now press 'p' one time to get into the debugger view. You can press 'p' and 'P' to rotate thru the most commonly used print modes.
+After entering this command an hexdump of the current eip will be showed. Now press `p` one time to get into the debugger view. You can press `p` and `P` to rotate thru the most commonly used print modes.
 
-Use F7 or 's' to step into and F8 or 'S' to step over.
+Use F7 or `s` to step into and F8 or `S` to step over.
 
-With the 'c' key you will toggle the cursor mode and being able to select range of bytes to nop them or set breakpoints using the 'F2' key.
+With the `c` key you will toggle the cursor mode and being able to select range of bytes to nop them or set breakpoints using the `F2` key.
 
-In the visual mode you can enter commands with ':' to dump buffer contents like
+In the visual mode you can enter commands with `:` to dump buffer contents like
 
 x @ esi
 
-To get the help in the visual mode press '?'.
+To get the help in the visual mode press `?`.
 
 At this point the most common commands are !reg that can be used to get or set values for the general purpose registers. You can also manipulate the hardware and extended/floating registers. 
