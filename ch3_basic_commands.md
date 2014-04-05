@@ -113,3 +113,37 @@ The 'bf' command is used to change the block size to the one specified by a flag
 You can perform these two operations in a single one (pdf):
 
      [0x00000000]> pdf @ sym.main
+
+
+
+
+##3.5 Print modes
+
+One of the efforts in radare is the way to show the information to the user. This is interpreting the bytes and giving an almost readable output format.
+
+The bytes can be represented as integers, shorts, longs, floats, timestamps, hexpair strings, or things more complex like C structures, disassembly, decompilations, external processors, ..
+
+This is a list of the available print modes listable with 'p?':
+
+    [0x08049AD0]> p?
+    Usage: p[=68abcdDfiImrstuxz] [arg|len]
+    p=[bep?] [blks]  show entropy/printable chars/chars bars
+    p2 [len]         8x8 2bpp-tiles
+    p6[de] [len]     base64 decode/encode
+    p8 [len]         8bit hexpair list of bytes
+    pa[ed] [hex asm] assemble (pa) or disasm (pad) or esil (pae) from hexpairs
+    p[bB] [len]      bitstream of N bytes
+    pc[p] [len]      output C (or python) format
+    p[dD][lf] [l]    disassemble N opcodes/bytes (see pd?)
+    pf[?|.nam] [fmt] print formatted data (pf.name, pf.name $<expr>) 
+    p[iI][df] [len]  print N instructions/bytes (f=func) (see pi? and pdi)
+    pm [magic]       print libmagic data (pm? for more information)
+    pr [len]         print N raw bytes
+    p[kK] [len]      print key in randomart (K is for mosaic)
+    ps[pwz] [len]    print pascal/wide/zero-terminated strings
+    pt[dn?] [len]    print different timestamps
+    pu[w] [len]      print N url encoded bytes (w=wide)
+    pv[jh] [mode]      bar|json|histogram blocks (mode: e?search.in)
+    p[xX][owq] [len] hexdump of N bytes (o=octal, w=32bit, q=64bit)
+    pz [len]         print zoom view (see pz? for help)
+    pwd              display current working directory
