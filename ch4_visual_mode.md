@@ -41,22 +41,12 @@ To get a help of all the keybindings hooked in visual mode you can press `?`:
     yY       copy and paste selection
     z        toggle zoom mode
     Enter    follow address of jump/call
+    Function Keys: (See 'e key.'), defaults to:
+      F2      toggle breakpoint
+      F7      single step
+      F8      step over
+      F9      continue
 
-Debugger keybindings are located in the key.f* values
-
-    [0x00404888]> e key.
-    key.f1 = 
-    key.f2 = dbs $$
-    key.f3 = 
-    key.f4 = 
-    key.f5 = 
-    key.f6 = 
-    key.f7 = ds
-    key.f8 = dso
-    key.f9 = dc
-    key.f10 = 
-    key.f11 = 
-    key.f12 = 
 
 From the visual mode you can toggle the insert and cursor modes with the `i` and `c` keys.
 
