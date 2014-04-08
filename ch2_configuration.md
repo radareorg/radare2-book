@@ -173,4 +173,4 @@ This boolean variable allows to enable or disable the colorized output
 This variable accepts an expression, a pointer (eg. eip), etc. radare will automatically seek to make sure its value is always within the limits of the screen.
 
     cfg.fortunes
-Enables or disables the 'fortune' message at the begging of the program
+Enables or disables the 'fortune' message at the begining of the program
