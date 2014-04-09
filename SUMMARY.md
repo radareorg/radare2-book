@@ -2,7 +2,7 @@
 
 This is the summary of radare2 book
 
-* [Introduction](introduction/ch1_introduction.md)
+* [Introduction](ch1_introduction.md)
 * [Configuration](ch2_configuration.md)
 * [Visual mode](ch4_visual_mode.md)
 * [Searching bytes](ch5_searchbytes.md)
