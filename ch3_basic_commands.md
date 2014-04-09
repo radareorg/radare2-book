@@ -147,3 +147,49 @@ This is a list of the available print modes listable with 'p?':
     p[xX][owq] [len] hexdump of N bytes (o=octal, w=32bit, q=64bit)
     pz [len]         print zoom view (see pz? for help)
     pwd              display current working directory
+    
+    
+###3.5.9 Configuring the disassembler
+
+There are multiple options that can be used to configure the output of the disassembly, all these options are described using `e? asm.` 
+
+
+                  asm.os: Select operating system (kernel) (linux, darwin, w32,..)
+               asm.bytes: Display the bytes of each instruction
+          asm.cmtflgrefs: Show comment flags associated to branch referece
+            asm.cmtright: Show comments at right of disassembly if they fit in screen
+            asm.comments: Show comments in disassembly view
+              asm.decode: Use code analysis as a disassembler
+               asm.dwarf: Show dwarf comment at disassembly
+                asm.esil: Show ESIL instead of mnemonic
+              asm.filter: Replace numbers in disassembly using flags containing a dot in the name in disassembly
+               asm.flags: Show flags
+              asm.lbytes: Align disasm bytes to left
+               asm.lines: If enabled show ascii-art lines at disassembly
+           asm.linescall: Enable call lines
+            asm.linesout: If enabled show out of block lines
+          asm.linesright: If enabled show lines before opcode instead of offset
+          asm.linesstyle: If enabled iterate the jump list backwards
+           asm.lineswide: If enabled put an space between lines
+              asm.middle: Allow disassembling jumps in the middle of an instruction
+              asm.offset: Show offsets at disassembly
+              asm.pseudo: Enable pseudo syntax
+                asm.size: Show size of opcodes in disassembly (pd)
+            asm.stackptr: Show stack pointer at disassembly
+              asm.cycles: Show cpu-cycles taken by instruction at disassembly
+                asm.tabs: Use tabs in disassembly
+               asm.trace: Show execution traces for each opcode
+               asm.ucase: Use uppercase syntax at disassembly
+              asm.varsub: Substitute variables in disassembly
+                asm.arch: Set the arch to be usedd by asm
+              asm.parser: Set the asm parser to use
+              asm.segoff: Show segmented address in prompt (x86-16)
+                 asm.cpu: Set the kind of asm.arch cpu
+             asm.profile: configure disassembler (default, simple, gas, smart, debug, full)
+               asm.xrefs: Show xrefs in disassembly
+           asm.functions: Show functions in disassembly
+              asm.syntax: Select assembly syntax
+              asm.nbytes: Number of bytes for each opcode at disassembly
+           asm.bytespace: Separate hex bytes with a whitespace
+                asm.bits: Word size in bits at assembler
+          asm.lineswidth: Number of columns for program flow arrows
