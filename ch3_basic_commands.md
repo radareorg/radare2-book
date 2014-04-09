@@ -139,16 +139,17 @@ Mapping files is done with the 'o' (open) command. Let's read the help:
 
 Let's prepare a simple layout:
 
-$ rabin2 -l /bin/ls
-    [Linked libraries]
-    libselinux.so.1
-    librt.so.1
-    libacl.so.1
-    libc.so.6
-
-    4 libraries
+    $ rabin2 -l /bin/ls
+        [Linked libraries]
+        libselinux.so.1
+        librt.so.1
+        libacl.so.1
+        libc.so.6
+        
+        4 libraries
 
 Map a file:
+
     [0x00001190]> o /bin/zsh 0x499999
 
 Listing mapped files:
@@ -161,10 +162,11 @@ Listing mapped files:
 
 Print some hexadecimal from /bin/zsh
 
-[0x00000000]> px @ 0x499999
+    [0x00000000]> px @ 0x499999
 
 
 To unmap these files just use the 'o-' command giving the file descriptor as argument:
+
     [0x00000000]> o-14
 
 
