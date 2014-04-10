@@ -367,7 +367,7 @@ Let's see some examples:
     0x00404888 = 837634432.000000
 
     
-##3.5.8 Selecting the architecture
+###3.5.8 Selecting the architecture
 
 The architecture flavour for the disassembly is defined by the 'asm.arch' eval variable. You can use `e asm.arch = ?` to list all available architectures.
 
@@ -453,3 +453,12 @@ There are multiple options that can be used to configure the output of the disas
            asm.bytespace: Separate hex bytes with a whitespace
                 asm.bits: Word size in bits at assembler
           asm.lineswidth: Number of columns for program flow arrows
+
+###3.5.10 Disassembly syntax
+
+The syntax is the flavour of disassembly syntax prefered to be used by the disasm engine.
+
+    e asm.syntax = intel
+    e asm.syntax = att
+
+You can also check asm.pseudo which is an experimental pseudocode view and asm.esil, ESIL stands for 'Evaluable Strings Intermedate Language'. It aims to describe a human readable representation for every opcode. Those representations can be evaluated in order to emulate code.
