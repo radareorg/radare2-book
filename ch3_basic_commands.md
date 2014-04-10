@@ -320,6 +320,53 @@ Extracted from the strftime(3) manpage:
     %+  The date and time in date(1) format. (TZ) (Not supported in glibc2.)
     %%  A literal '%' character.
     
+
+###3.5.3 Basic types
+
+All basic types are mapped as print modes. If you are interested in a more complex structure or just type : `pf?`
+
+Here's the list of the print (pf?) modes for basic types:
+
+    Usage: pf[.key[.field[=value]]|[ val]]|[times][format] [arg0 arg1 ...]
+    Examples:
+      pf 10xiz pointer length string
+      pf {array_size}b @ array_base
+      pf.             # list all formats
+      pf.obj xxdz prev next size name
+      pf.obj          # run stored format
+      pf.obj.name     # show string inside object
+      pf.obj.size=33  # set new size
+     Format chars:
+      e - temporally swap endian
+      f - float value (4 bytes)
+      c - char (signed byte)
+      b - byte (unsigned)
+      B - show 10 first bytes of buffer
+      i - %i integer value (4 bytes)
+      w - word (2 bytes unsigned short in hex)
+      q - quadword (8 bytes)
+      p - pointer reference (2, 4 or 8 bytes)
+      d - 0x%08x hexadecimal value (4 bytes)
+      D - disassemble one opcode
+      x - 0x%08x hexadecimal value and flag (fd @ addr)
+      z - \0 terminated string
+      Z - \0 terminated wide string
+      s - 32bit pointer to string (4 bytes)
+      S - 64bit pointer to string (8 bytes)
+      * - next char is pointer (honors asm.bits)
+      + - toggle show flags for each offset
+      : - skip 4 bytes
+      . - skip 1 byte
+
+Let's see some examples:
+
+    [0x4A13B8C0]> pf i
+    0x00404888 = 837634441
+    
+    [0x4A13B8C0]> pf
+    0x00404888 = 837634432.000000
+
+    
 ###3.5.9 Configuring the disassembler
 
 There are multiple options that can be used to configure the output of the disassembly, all these options are described using `e? asm.` 
