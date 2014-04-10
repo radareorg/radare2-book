@@ -52,7 +52,7 @@ A basic search for a plain string in a whole file would be something like:
     0x00417160 hit0_7 "lib/xstrtol.c"
     0x00417578 hit0_8 "lib"
 
-`r2 -q` // * for quiet mode *
+`r2 -q` // quiet mode (no prompt) and quit after -i
 
 As you can see, radare generates a `hit` flag for each search result found. You you can just use the `ps` command to visualize the strings at these offsets in this way:
 
