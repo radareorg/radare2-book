@@ -202,6 +202,49 @@ This is a list of the available print modes listable with 'p?':
     pwd              display current working directory
     
     
+###3.5.1 Hexadecimal
+
+User-friendly way:
+
+   [0x00404888]> px
+   - offset -   0 1  2 3  4 5  6 7  8 9  A B  C D  E F  0123456789ABCDEF
+   0x00404888  31ed 4989 d15e 4889 e248 83e4 f050 5449  1.I..^H..H...PTI
+   0x00404898  c7c0 4024 4100 48c7 c1b0 2341 0048 c7c7  ..@$A.H...#A.H..
+   0x004048a8  d028 4000 e83f dcff fff4 6690 662e 0f1f  .(@..?....f.f...
+
+####Show hexadecimal words dump (32bit)
+
+    [0x00404888]> pxw
+    0x00404888  0x8949ed31 0x89485ed1 0xe48348e2 0x495450f0  1.I..^H..H...PTI
+    0x00404898  0x2440c0c7 0xc7480041 0x4123b0c1 0xc7c74800  ..@$A.H...#A.H..
+    0x004048a8  0x004028d0 0xffdc3fe8 0x9066f4ff 0x1f0f2e66  .(@..?....f.f...
+    
+    [0x00404888]> e cfg.bigendian 
+    false
+    
+    [0x00404888]> e cfg.bigendian = true
+    
+    [0x00404888]> pxw
+    0x00404888  0x31ed4989 0xd15e4889 0xe24883e4 0xf0505449  1.I..^H..H...PTI
+    0x00404898  0xc7c04024 0x410048c7 0xc1b02341 0x0048c7c7  ..@$A.H...#A.H..
+    0x004048a8  0xd0284000 0xe83fdcff 0xfff46690 0x662e0f1f  .(@..?....f.f...
+    
+
+####8bit hexpair list of bytes
+
+    [0x00404888]> p8 16
+    31ed4989d15e4889e24883e4f0505449
+
+####Show hexadecimal quad-words dump (64bit)
+
+    [0x08049A80]> pxq
+    0x00001390  0x65625f6b63617473  0x646e6962006e6967   stack_begin.bind
+    0x000013a0  0x616d6f6474786574  0x7469727766006e69   textdomain.fwrit
+    0x000013b0  0x6b636f6c6e755f65  0x6d63727473006465   e_unlocked.strcm
+    ...
+    
+    
+    
 ###3.5.9 Configuring the disassembler
 
 There are multiple options that can be used to configure the output of the disassembly, all these options are described using `e? asm.` 
