@@ -366,6 +366,28 @@ Let's see some examples:
     [0x4A13B8C0]> pf
     0x00404888 = 837634432.000000
 
+
+
+
+
+
+
+###3.5.4 Source (asm, C)
+
+Valid print code formats are: JSON, C, Python, Cstring (pcj, pc, pcp, pcs) 
+    pc     C
+    pcs    string
+    pcj    json
+    pcJ    javascript
+    pcp    python
+    pcw    words (4 byte)
+    pcd    dwords (8 byte)
+ 
+    [0xB7F8E810]> pc 32
+    define _BUFFER_SIZE 32
+    unsigned char buffer[_BUFFER_SIZE] = {
+    0x89, 0xe0, 0xe8, 0x49, 0x02, 0x00, 0x00, 0x89, 0xc7, 0xe8, 0xe2, 0xff, 0xff, 0xff, 0x81, 0xc3, 0xd6, 0xa7, 0x01, 0x00, 0x8b, 0x83, 0x00, 0xff, 0xff, 0xff, 0x5a, 0x8d, 0x24, 0x84, 0x29, 0xc2 };
+
     
 ###3.5.8 Selecting the architecture
 
