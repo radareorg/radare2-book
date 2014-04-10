@@ -384,10 +384,13 @@ Valid print code formats are: JSON, C, Python, Cstring (pcj, pc, pcp, pcs)
     pcd    dwords (8 byte)
  
     [0xB7F8E810]> pc 32
-    define _BUFFER_SIZE 32
+    #define _BUFFER_SIZE 32
     unsigned char buffer[_BUFFER_SIZE] = {
     0x89, 0xe0, 0xe8, 0x49, 0x02, 0x00, 0x00, 0x89, 0xc7, 0xe8, 0xe2, 0xff, 0xff, 0xff, 0x81, 0xc3, 0xd6, 0xa7, 0x01, 0x00, 0x8b, 0x83, 0x00, 0xff, 0xff, 0xff, 0x5a, 0x8d, 0x24, 0x84, 0x29, 0xc2 };
 
+
+    [0x7fcd6a891630]> pcs
+    "\x48\x89\xe7\xe8\x68\x39\x00\x00\x49\x89\xc4\x8b\x05\xef\x16\x22\x00\x5a\x48\x8d\x24\xc4\x29\xc2\x52\x48\x89\xd6\x49\x89\xe5\x48\x83\xe4\xf0\x48\x8b\x3d\x06\x1a
     
 ###3.5.8 Selecting the architecture
 
