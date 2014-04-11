@@ -4,6 +4,7 @@ This is the summary of radare2 book
 
 * [Introduction](ch1_introduction.md)
 * [Configuration](ch2_configuration.md)
+* [Basic Commands](ch3_basic_commands.md)
 * [Visual mode](ch4_visual_mode.md)
 * [Searching bytes](ch5_searchbytes.md)
 * [Disassembling](ch6_disassembling.md)
