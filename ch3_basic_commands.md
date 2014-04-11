@@ -502,6 +502,46 @@ The syntax is the flavour of disassembly syntax prefered to be used by the disas
 You can also check asm.pseudo which is an experimental pseudocode view and asm.esil, ESIL stands for 'Evaluable Strings Intermedate Language'. It aims to describe a human readable representation for every opcode. Those representations can be evaluated in order to emulate code.
 
 
+##3.8 Write
+
+Radare can manipulate the file in multiple ways. You can resize the file, move bytes, copy/paste them, insert mode (shifting data to the end of the block or file) or just overwrite some bytes with an address, the contents of a file, a widestring or inline assembling an opcode.
+
+To resize. Use the 'r' command which accepts a numeric argument. Possitive valule sets the new size to the file. A negative one will strip N bytes from the current seek down-sizing the file.
+
+    r 1024      ; resize the file to 1024 bytes
+    r -10 @ 33  ; strip 10 bytes at offset 33
+To write bytes just use the 'w' command. It accepts multiple input formats like inline assembling, endian-friendly dwords, files, hexpair files, wide strings:
+
+    [0x00404888]> w?
+    |Usage: w[x] [str] [<file] [<<EOF] [@addr]
+    | w foobar     write string 'foobar'
+    | wh r2        whereis/which shell command
+    | wr 10        write 10 random bytes
+    | ww foobar    write wide string 'f\x00o\x00o\x00b\x00a\x00r\x00'
+    | wa push ebp  write opcode, separated by ';' (use '"' around the command)
+    | waf file     assemble file and write bytes
+    | wA r 0       alter/modify opcode at current seek (see wA?)
+    | wb 010203    fill current block with cyclic hexpairs
+    | wc[ir*?]     write cache undo/commit/reset/list (io.cache)
+    | wx 9090      write two intel nops
+    | wv eip+34    write 32-64 bit value
+    | wo? hex      write in block with operation. 'wo?' fmi
+    | wm f0ff      set binary mask hexpair to be used as cyclic write mask
+    | ws pstring   write 1 byte for length and then the string
+    | wf -|file    write contents of file at current offset
+    | wF -|file    write contents of hexpairs file here
+    | wp -|file    apply radare patch file. See wp? fmi
+    | wt file [sz] write to file (from current seek, blocksize or sz bytes)
+    
+Some examples:
+
+     [0x00000000]> wx 123456 @ 0x8048300
+     [0x00000000]> wv 0x8048123 @ 0x8049100
+     [0x00000000]> wa jmp 0x8048320
+All write changes are recorded and can be listed or undo-ed using the 'u' command which is explained in the 'undo/redo' section.
+
+
+
 ###3.8.1 Write over with operation
 
 The 'wo' write command accepts multiple kinds of operations that can be applied on the curren block. This is for example a XOR, ADD, SUB, ...
