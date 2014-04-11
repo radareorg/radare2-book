@@ -756,7 +756,7 @@ A sample session doing a xor(90) + addition(01 02)
     0x7fcd6a891650  c4da 1a6d e89a d959 9192 9159 1cb1 d959  ...m...Y...Y...Y
     0x7fcd6a891660  9192 79cb 81da 1652 81da 1456 a252 7c77  ..y....R...V.R|w
 
-##3.10 Yank/Paste
+##3.9 Yank/Paste
 
 You can yank/paste bytes in visual mode using the `y` and `Y` key bindings that are alias for the `y` and `yy` commands of the shell. There is an internal buffer that stores N bytes from the current seek. You can write-back to another seek using the `yy` one.
 
@@ -798,7 +798,7 @@ You can perform a yank and paste in a single line by just using the `yt` command
     0x4A13B8D8, ffff 5a8d 2484 29c2           ..Z.$.).    
 
 
-###3.11 Comparing bytes
+###3.10 Comparing bytes
 
 You can compare data using the `c` command that accepts different input formats and compares the input against the bytes in the current seek.
 
