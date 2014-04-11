@@ -392,6 +392,19 @@ Valid print code formats are: JSON, C, Python, Cstring (pcj, pc, pcp, pcs)
     [0x7fcd6a891630]> pcs
     "\x48\x89\xe7\xe8\x68\x39\x00\x00\x49\x89\xc4\x8b\x05\xef\x16\x22\x00\x5a\x48\x8d\x24\xc4\x29\xc2\x52\x48\x89\xd6\x49\x89\xe5\x48\x83\xe4\xf0\x48\x8b\x3d\x06\x1a
     
+    
+###3.5.7 Disassembly
+
+The 'pd' command is the one used to disassemble code, it accepts a numeric value to specify how many opcodes are wanted to be disassembled. The 'pD' one acts in the same way, but using a number-of-bytes instead of counting instructions.
+
+     d : disassembly N opcodes   count of opcodes
+     D : asm.arch disassembler   bsize bytes
+ 
+ 
+     [0x00404888]> pd 1
+                ;-- entry0:
+                0x00404888    31ed         xor ebp, ebp
+    
 ###3.5.8 Selecting the architecture
 
 The architecture flavour for the disassembly is defined by the 'asm.arch' eval variable. You can use `e asm.arch = ?` to list all available architectures.
