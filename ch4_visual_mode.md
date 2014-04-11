@@ -58,8 +58,9 @@ Pressing lowercase `c` makes the cursor appear or disappear. The cursor is used 
 
 If you select a range of bytes press `i` and then a byte array to overwrite the selected bytes with the ones you choose in a circular copy way. For example:
 
-<select 10 bytes in visual mode using upper hjkl>
-<press 'i' and then '12 34'>
+    <select 10 bytes in visual mode using upper hjkl>
+    <press 'i' and then '12 34'>
+    
 The 10 bytes selected will become: 12 34 12 34 12 34 12 34 12 34
 The byte range selection can be used together with the `d` key to change the data type of the selected bytes into a string, code or a byte array.
 
