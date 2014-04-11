@@ -392,6 +392,51 @@ Valid print code formats are: JSON, C, Python, Cstring (pcj, pc, pcp, pcs)
     [0x7fcd6a891630]> pcs
     "\x48\x89\xe7\xe8\x68\x39\x00\x00\x49\x89\xc4\x8b\x05\xef\x16\x22\x00\x5a\x48\x8d\x24\xc4\x29\xc2\x52\x48\x89\xd6\x49\x89\xe5\x48\x83\xe4\xf0\x48\x8b\x3d\x06\x1a
     
+###3.5.6 Print memory
+
+It is also possible to print various packed data types in a single line using the 'pf' command. 
+
+
+    [0xB7F08810]> pf xxS @ rsp
+    0x7fff0d29da30 = 0x00000001 
+    0x7fff0d29da34 = 0x00000000 
+    0x7fff0d29da38 = 0x7fff0d29da38 -> 0x0d29f7ee /bin/ls
+    
+
+This is sometimes useful for looking at the arguments passed to a function, by just giving the 'format memory string' as argument and temporally changing the current seek with the '@' token.
+
+It is also possible to define arrays of structures with 'pf'. Just prefix the format string with a numeric value.
+
+You can also define a name for each field of the structure by giving them as optional arguments after the format string splitted by spaces.
+    
+    
+    [0x4A13B8C0]> pf 2*xw pointer type @ esp
+    0x00404888 [0] {
+       pointer : 
+    (*0xffffffff8949ed31)      type : 0x00404888 = 0x8949ed31 
+       0x00404890 = 0x48e2 
+    }
+    0x00404892 [1] {
+    (*0x50f0e483)    pointer : 0x00404892 = 0x50f0e483 
+         type : 0x0040489a = 0x2440 
+    }
+
+A practical example for using pf on a binary GStreamer plugin:
+
+    $ radare ~/.gstreamer-0.10/plugins/libgstflumms.so
+    [0x000028A0]> seek sym.gst_plugin_desc
+    [0x000185E0]> pf iissxsssss major minor name desc _init version \
+     license source package origin
+         major : 0x000185e0 = 0
+         minor : 0x000185e4 = 10
+          name : 0x000185e8 = 0x000185e8 flumms 
+          desc : 0x000185ec = 0x000185ec Fluendo MMS source 
+         _init : 0x000185f0 = 0x00002940 
+       version : 0x000185f4 = 0x000185f4 0.10.15.1 
+       license : 0x000185f8 = 0x000185f8 unknown 
+        source : 0x000185fc = 0x000185fc gst-fluendo-mms 
+       package : 0x00018600 = 0x00018600 Fluendo MMS source 
+        origin : 0x00018604 = 0x00018604 http://www.fluendo.com 
     
 ###3.5.7 Disassembly
 
