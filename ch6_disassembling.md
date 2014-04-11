@@ -1,4 +1,4 @@
-Chapter 6: Disassembling
+#Chapter 6: Disassembling
 
 Disassembling in radare is just a way to represent a bunch of bytes. So it is handled as a print mode with the 'p' command.
 
