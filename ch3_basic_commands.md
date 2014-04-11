@@ -366,12 +366,6 @@ Let's see some examples:
     [0x4A13B8C0]> pf
     0x00404888 = 837634432.000000
 
-
-
-
-
-
-
 ###3.5.4 Source (asm, C)
 
 Valid print code formats are: JSON, C, Python, Cstring (pcj, pc, pcp, pcs) 
@@ -391,7 +385,37 @@ Valid print code formats are: JSON, C, Python, Cstring (pcj, pc, pcp, pcs)
 
     [0x7fcd6a891630]> pcs
     "\x48\x89\xe7\xe8\x68\x39\x00\x00\x49\x89\xc4\x8b\x05\xef\x16\x22\x00\x5a\x48\x8d\x24\xc4\x29\xc2\x52\x48\x89\xd6\x49\x89\xe5\x48\x83\xe4\xf0\x48\x8b\x3d\x06\x1a
+
+###3.5.5 Strings
+
+Strings are probably one of the most important entrypoints while starting to reverse engineer a program because they are usually referencing information about the functions actions ( asserts, debug or info messages, ...).
+
+So it is important for radare to be able to print strings in multiple ways:
+
+    [0x00404888]> ps?
+    |Usage: ps[zpw] [N]
+    | ps  = print string
+    | psb = print strings in current block
+    | psx = show string with scaped chars
+    | psz = print zero terminated string
+    | psp = print pascal string
+    | psw = print wide string
     
+
+Most common strings will be just zero-terminated ones. Here's an example by using the debugger to continue the execution of the program until it executes the 'open' syscall. When we recover the control over the process, we get the arguments passed to the syscall, pointed by %ebx. Which is obviously a zero terminated string.
+
+    [0x4A13B8C0]> dcs open
+    0x4a14fc24 syscall(5) open ( 0x4a151c91 0x00000000 0x00000000 ) = 0xffffffda
+    [0x4A13B8C0]> dr
+      eax  0xffffffda    esi  0xffffffff    eip    0x4a14fc24
+      ebx  0x4a151c91    edi  0x4a151be1    oeax   0x00000005
+      ecx  0x00000000    esp  0xbfbedb1c    eflags 0x200246  
+      edx  0x00000000    ebp  0xbfbedbb0    cPaZstIdor0 (PZI)
+    [0x4A13B8C0]> 
+    [0x4A13B8C0]> psz @ 0x4a151c91
+    /etc/ld.so.cache
+    
+
 ###3.5.6 Print memory
 
 It is also possible to print various packed data types in a single line using the 'pf' command. 
