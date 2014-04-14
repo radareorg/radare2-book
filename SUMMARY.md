@@ -10,5 +10,6 @@ This is the summary of radare2 book
 * [Disassembling](ch6_disassembling.md)
 * [Rabin2](ch11_rabin2.md)
 * [Rasm2](ch14_rasm2.md)
+* [Disassembly](ch16_disassembly.md)
 * [Rahash2](ch18_rahash2.md)
 * [Debugger](ch20_debugger.md)
