@@ -1,0 +1,55 @@
+##1.9 Expressions
+
+The expressions are mathematical representations of a 64 bit numeric value which can be displayed in different formats, compared or used at any command as a numeric argument. They support multiple basic arithmetic operations and some binary and boolean ones. The command used to evaluate these math expressions is the `?`. Here there are some examples:
+
+    [0xB7F9D810]> ? 0x8048000
+    134512640 0x8048000 01001100000 128.0M 804000:0000 134512640 00000000 134512640.0 0.000000  
+    [0xB7F9D810]> ? 0x8048000+34
+    134512674 0x8048022 01001100042 128.0M 804000:0022 134512674 00100010 134512674.0 0.000000  
+    [0xB7F9D810]> ? 0x8048000+0x34
+    134512692 0x8048034 01001100064 128.0M 804000:0034 134512692 00110100 134512692.0 0.000000  
+    [0xB7F9D810]> ? 1+2+3-4*3
+    -6 0xfffffffffffffffa 01777777777777777777772 17179869183.0G fffff000:0ffa -6   
+
+The supported arithmetic expressions supported are:
+
+    + : addition
+    - : substraction
+    * : multiply
+    / : division
+    % : modulus
+    > : shift right
+    < : shift left
+
+The binary expressions should be scapped:
+
+    \| : logical OR // ("? 0001010 | 0101001")
+    \& : logical AND
+
+The values can be numbers in many formats:
+
+    0x033   : hexadecimal
+    3334    : decimal
+    sym.fo  : resolve flag offset
+    10K     : KBytes  10*1024
+    10M     : MBytes  10*1024*1024
+
+There are other special syntaxes for the expressions. Here's for example some of them:
+
+    ?@?    or stype @@?      ; misc help for '@' (seek), '~' (grep) (see ~??)
+    ?$?           ; show available '$' variables
+    $$            ; here (current virtual seek)
+    $l            ; opcode length
+    $s            ; file size
+    $j            ; jump address (e.g. jmp 0x10, jz 0x10 => 0x10)
+    $f            ; jump fail address (e.g. jz 0x10 => next instruction)
+    $m            ; opcode memory reference (e.g. mov eax,[0x10] => 0x10)
+
+For example:
+
+    [0x4A13B8C0]> :? $m + $l
+    140293837812900 0x7f98b45df4a4 03771426427372244 130658.0G 8b45d000:04a4 140293837812900 10100100 140293837812900.0 -0.000000
+
+
+    [0x4A13B8C0]> :pd 1 @ +$l
+    0x4A13B8C2   call 0x4a13c000   
