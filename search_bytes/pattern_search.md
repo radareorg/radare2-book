@@ -1,4 +1,4 @@
-## 5.3 Pattern search
+## Pattern search
 
 The search command allows you to throw repeated pattern searchs against the IO backend to be able to identify repeated sequences of bytes without specifying them. The only property to perform this search is to manually define the minimum length of these patterns.
 
