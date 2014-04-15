@@ -1,4 +1,4 @@
-##14.2 Disassemble
+## Disassemble
 
 In the same way as rasm assembler works, giving the '-d' flag you can disassemble an hexpair string:
 
