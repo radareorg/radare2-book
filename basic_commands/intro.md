@@ -1,4 +1,4 @@
-#Chapter 3: Basic commands
+#Chapter : Basic commands
 
 The basic set of commands in radare can be mostly grouped by action, and they should be easy to remember and short. This is why they are grouped with a single character, subcommands or related commands are described with a second character. For example `/ foo` for searching plain strings or `/x 90 90` to look for hexpair strings.
 
