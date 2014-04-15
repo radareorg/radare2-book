@@ -1,4 +1,4 @@
-##11.4 Symbols (exports)
+## Symbols (exports)
 
 In rabin, symbols list works in a very similar way as exports do.
 
