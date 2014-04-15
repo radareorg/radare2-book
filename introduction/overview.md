@@ -1,4 +1,4 @@
-##1.2 Overview
+## Overview
 
 Nowadays the project is composed by a set of small utilities that can be used together or independently from the command line:
 
