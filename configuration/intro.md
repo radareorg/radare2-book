@@ -1,4 +1,4 @@
-# Chapter 2: Configuration
+# Configuration
 
 The core reads ~/.radare2rc while starting, so you can setup there some `e` commands to set it up in your favorite way.
 
