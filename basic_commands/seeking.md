@@ -1,4 +1,4 @@
-##3.1 Seeking
+## Seeking
 
 The command `s` is used to seek. It accepts a math expression as argument that can be composed by shift operations, basic math ones and memory access.
 
