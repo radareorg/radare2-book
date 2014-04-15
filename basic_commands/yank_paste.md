@@ -1,4 +1,4 @@
-##3.9 Yank/Paste
+## Yank/Paste
 
 You can yank/paste bytes in visual mode using the `y` and `Y` key bindings that are alias for the `y` and `yy` commands of the shell. There is an internal buffer that stores N bytes from the current seek. You can write-back to another seek using the `yy` one.
 
