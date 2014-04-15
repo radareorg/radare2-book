@@ -1,4 +1,4 @@
-##1.9 Expressions
+## Expressions
 
 The expressions are mathematical representations of a 64 bit numeric value which can be displayed in different formats, compared or used at any command as a numeric argument. They support multiple basic arithmetic operations and some binary and boolean ones. The command used to evaluate these math expressions is the `?`. Here there are some examples:
 
