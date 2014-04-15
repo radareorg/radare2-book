@@ -1,3 +1,3 @@
-## 5.5 Backward search
+## Backward search
 
 To search backward just use `\b`
