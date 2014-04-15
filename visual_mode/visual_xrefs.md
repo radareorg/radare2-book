@@ -1,4 +1,4 @@
-##4.3 Visual xrefs
+## Visual xrefs
 
 radare implements many user-friendly features for the visual interface to walk thru the assembly code. One of them is the `x` key that popups a menu for selecting the xref (data or code) against the current seek and then jump there. 
 For example when pressing x when looking at those XREF:
