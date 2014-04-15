@@ -1,4 +1,4 @@
-##3.4 Mapping files
+## Mapping files
 
 Radare IO allows to virtually map contents of files in the same IO space at random offsets. This is useful to open multiple files in a single view or just to 'emulate' an static environment like if it was in the debugger with the program and all its libraries mapped there.
 
