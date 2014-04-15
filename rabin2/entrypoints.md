@@ -1,4 +1,4 @@
-##11.2 Entrypoint
+## Entrypoint
 
 The flag "-e" lets us know the program entrypoint.
 
