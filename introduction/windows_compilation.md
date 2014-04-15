@@ -1,4 +1,4 @@
-##1.5 Windows compilation
+## Windows compilation
 
 The easy way to compile things for windows is using mingw32. The w32 builds distributed in the radare homepage are generated from a GNU/Linux box using mingw32 and they are tested with wine.
 
