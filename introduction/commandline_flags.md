@@ -1,4 +1,4 @@
-##1.6 Commandline flags
+## Commandline flags
 
 The core accepts multiple flags from the command line to change some configuration or start with different options.
 
