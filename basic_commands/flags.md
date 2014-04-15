@@ -1,4 +1,4 @@
-##3.7 Flags
+## Flags
 
 The flags are bookmarks at a certain offset in the file that can be stored inside 'flag spaces'. A flag space is something like a namespace for flags. They are used to group flags with similar characteristics or of a certain type. Some example of flagspaces could be sections, registers, symbols.
 
