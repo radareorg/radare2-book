@@ -1,4 +1,4 @@
-##4.1 Visual cursor
+## Visual cursor
 
 Pressing lowercase `c` makes the cursor appear or disappear. The cursor is used to select a range of bytes or just point to a byte to flag it (press `f` to create a new flag where the cursor points to)
 
