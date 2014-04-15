@@ -1,4 +1,4 @@
-##4.2 Visual insert
+## Visual insert
 
 The insert mode allows you to write bytes at nibble-level like most common hexadecimal editors. In this mode you can press `<tab>` to switch between the hexa and ascii columns of the hexadecimal dump.
 
