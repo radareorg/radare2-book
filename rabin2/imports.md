@@ -1,4 +1,4 @@
-##11.3 Imports
+## Imports
 
 Rabin2 is able to get all the imported objects, as well as their offset at the PLT, this information is quite useful, for example, to recognize wich function is called by a call instruction.
 
