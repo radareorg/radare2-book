@@ -1,4 +1,4 @@
-##1.7 Basic usage
+## Basic usage
 
 Lot of people ping me some times for a sample usage session of radare to help to understand how the shell works and how to perform the most common tasks like disassembling, seeking, binary patching or debugging.
 
