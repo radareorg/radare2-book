@@ -1,4 +1,4 @@
-###3.10 Comparing bytes
+## Comparing bytes
 
 You can compare data using the `c` command that accepts different input formats and compares the input against the bytes in the current seek.
 
