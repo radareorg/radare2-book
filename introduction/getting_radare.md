@@ -1,4 +1,4 @@
-##1.3 Getting radare2
+## Getting radare2
 
 You can get radare from the website http://radare.org/ or Github repo https://github.com/radare/radare2
 
