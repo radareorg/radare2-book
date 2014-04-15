@@ -1,4 +1,4 @@
-## 5.2 Configurating the searchs
+## Configurating the searchs
 
 The search engine can be configured by the `e` interface:
 
