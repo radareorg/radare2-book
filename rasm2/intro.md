@@ -1,4 +1,4 @@
-#Chapter 14: Rasm2
+# Rasm2
 
 The inline assembler/disassembler. Initially 'rasm' was designed to be used for binary patching, just to get the bytes of a certain opcode. Here's the help
 
