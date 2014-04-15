@@ -1,4 +1,4 @@
-##14.1 Assemble
+## Assemble
 
 It is quite common to use 'rasm2' from the shell. It is a nice utility for copypasting the hexpairs that represent the opcode.
 
