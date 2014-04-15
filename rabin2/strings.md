@@ -1,4 +1,4 @@
-##11.6 Strings
+## Strings
 
 The -z flag is used to list all the strings located in the section .rodata for ELF binaries, and .text for PE ones.
 
