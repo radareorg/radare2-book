@@ -1,4 +1,4 @@
-#Chapter 11: Rabin2
+# Rabin2
 
 Under this bunny-arabic-like name, radare hides the power of a wonderful tool to handle binary files and get information to show it in the command line or import it into the core.
 
