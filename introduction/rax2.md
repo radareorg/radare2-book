@@ -1,4 +1,4 @@
-##1.10 Rax2
+## Rax2
 
 The `rax` utility comes with the radare framework and aims to be a minimalistic expression evaluator for the shell useful for making base conversions easily between floating point values, hexadecimal representations, hexpair strings to ascii, octal to integer. It supports endianness and can be used as a shell if no arguments given.
 
