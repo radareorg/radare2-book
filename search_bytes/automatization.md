@@ -1,4 +1,4 @@
-## 5.4 Automatization
+## Automatization
 
 The cmd.hit eval variable is used to define a command that will be executed when a hit is reached by the search engine. If you want to run more than one command use `;` or `. script-file-name` for including a file as a script.
 
