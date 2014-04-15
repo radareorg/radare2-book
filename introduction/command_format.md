@@ -1,4 +1,4 @@
-##1.8 Command format
+## Command format
 
 The format of the commands looks something like that:
 
