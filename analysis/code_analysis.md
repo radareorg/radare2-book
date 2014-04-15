@@ -1,4 +1,4 @@
-#16.1 Code analysis
+Code analysis
 
 The code analysis is a common technique used to extract information from the assembly code. Radare stores multiple internal data structures to identify basic blocks, function trees, extract opcode-level information and such.
 
