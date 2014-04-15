@@ -1,4 +1,4 @@
-# Chapter 16: Analysis
+# Analysis
 
 There are different commands to perform data and code analysis and extract information like pointers, string references, basic blocks, extract opcode information, jump information, xrefs, etc..
 
