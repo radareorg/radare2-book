@@ -1,4 +1,4 @@
-##1.1 History
+## History
 
 The radare project started in February of 2006 aiming to provide a Free and simple command line interface for an hexadecimal editor supporting 64 bit offsets to make searches and recovering data from hard-disks.
 
