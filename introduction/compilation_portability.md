@@ -1,4 +1,4 @@
-##1.4 Compilation and portability
+## Compilation and portability
 
 Currently the core of radare can be compiled in many systems, and architectures, but the main development is done on GNU/Linux and GCC. But it is known to compile with TCC and SunStudio.
 
