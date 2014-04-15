@@ -1,4 +1,4 @@
-## 5.1 Basic searches
+## Basic searches
 
 A basic search for a plain string in a whole file would be something like:
 
