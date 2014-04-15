@@ -1,4 +1,4 @@
-#Chapter 5: Searching bytes
+# Searching bytes
 
 The search engine of radare is based on the work done by esteve plus multiple features on top of it that allows multiple keyword searching with binary masks and automatic flagging of results.
 
