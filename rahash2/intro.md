@@ -1,4 +1,4 @@
-#Chapter 18: Rahash2
+# Rahash2
 
 The it is quite easy to calculate a hash checksum of the current block using the '#' command.
 
