@@ -1,4 +1,4 @@
-##18.1 Rahash2 tool
+## Rahash2 tool
 
 The rahash tool is the used by radare to realize these calculations. It
 
