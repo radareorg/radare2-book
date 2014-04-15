@@ -1,4 +1,4 @@
-## 5.6 Search in assembly
+## Search in assembly
 
 If you want to search for a certain type of opcodes you can either use `/c` or `/a`:
 
