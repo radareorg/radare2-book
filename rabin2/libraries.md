@@ -1,4 +1,4 @@
-##11.5 Libraries
+## Libraries
 
 Rabin2 can list the libraries used by a binary with the flag -l.
 
