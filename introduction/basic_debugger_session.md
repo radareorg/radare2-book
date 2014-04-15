@@ -1,4 +1,4 @@
-##1.11 Basic debugger session
+## Basic debugger session
 
 To start debugging a program use the `-d` flag and append the PID or the program path with arguments.
 
