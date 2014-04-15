@@ -1,4 +1,4 @@
-##11.1 File identification
+## File identification
 
 The file identification is done through the -I flag, it will output information regarding binary class, encoding, OS, type, etc.
 
