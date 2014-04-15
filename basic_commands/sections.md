@@ -1,4 +1,4 @@
-##3.3 Sections
+## Sections
 
 It is usually on firmware images, bootloaders and binary files to find sections that are loaded in memory at different addresses than the one in the disk.
 
