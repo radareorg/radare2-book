@@ -1,4 +1,4 @@
-## 2.2 Common configuration variables
+## Common configuration variables
 
 Here's a list of the most common eval configuration variables, you can get the complete list using the `e` command without arguments or just use `e cfg.` (ending with dot, to list all the configuration variables of the cfg. space). You can get help on any eval configuration variable using : `??e cfg.` for example
 
