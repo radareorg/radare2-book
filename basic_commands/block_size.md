@@ -1,4 +1,4 @@
-##3.2 Block size
+## Block size
 
 The block size is the default view size for radare. All commands will work with this constraint, but you can always temporally change the block size just giving a numeric argument to the print commands for example (px 20)
 
