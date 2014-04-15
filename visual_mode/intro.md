@@ -1,4 +1,4 @@
-#Chapter 4: Visual mode
+# Visual mode
 
 The visual mode is a user-friendlier interface for the commandline prompt of radare which accepts hjkl movement keys, a cursor for selecting bytes and some keybindings to ease the use of the debugger.
 
