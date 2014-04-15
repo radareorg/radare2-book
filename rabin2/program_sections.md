@@ -1,4 +1,4 @@
-##11.7 Program sections
+## Program sections
 
 Rabin2 give us complete information about the program sections. We can know their index, offset, size, align, type and permissions, as we can see in the next example.
 
