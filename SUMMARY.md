@@ -41,6 +41,7 @@ This is the summary of radare2 book
 	* [Search in assembly](search_bytes/search_in_assembly.md)
 	* [Searching AES Keys](search_bytes/searching_aes_keys.md)
 * [Disassembling](disassembling/intro.md)
+	* [Adding metadata](disassembling/adding_metadata.md)
 * [Rabin2](rabin2/intro.md)
 	* [File identification](rabin2/file_identification.md)
 	* [Entrypoint](rabin2/entrypoints.md)
