@@ -22,6 +22,6 @@ Appending a `?` to the command will show its help message (example: p?).
 
 To enter visual mode press `V<enter>`. To quit visual mode and return to the prompt use the `q` key.
 
-In the visual mode you should use hjkl keys which are the default ones for scrolling (like left,down,up,right). So entering in cursor mode (`c`) you will be able select bytes if using the shift together with HJKL.
+In visual mode you can use the hjkl keys to navigate (left, down, up, right respectively). You can use these keys in cursor mode (`c`). To select keys in cursor mode, simply hold down the shift key while using any of the hjkl keys.
 
 In the visual mode you can insert (alterate bytes) pressing `i` and then <tab> to switch between the hex or string column. Pressing `q` in hex panel to return into the visual mode.
