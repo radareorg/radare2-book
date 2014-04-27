@@ -37,7 +37,7 @@ It can be used to check the integrity of or track changes between big files, mem
 
 ###radiff2
 
-Binary diffing utility with multiple algorithms implemented inside. Supports byte-level or delta diffing for binary files and code-analysis diffing to find changes in basic code blocks from radare code analysis or IDA ones using the idc2rdb rsc script.
+Binary diffing utility implementing multiple algorithms. Supports byte-level or delta diffing for binary files and code-analysis diffing to find changes in basic code blocks from radare code analysis or IDA ones using the idc2rdb rsc script.
 
 ###rafind2
 
