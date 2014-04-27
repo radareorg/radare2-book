@@ -28,7 +28,7 @@ The easiest way to use the debugger is from the Visual mode. That way you will n
 
     [0xB7F0C8C0]> V
 
-After entering this command an hexdump of the current eip will be showed. Now press `p` one time to get into the debugger view. You can press `p` and `P` to rotate thru the most commonly used print modes.
+After entering this command a hexdump of the current eip will be showed. Now press `p` one time to get into the debugger view. You can press `p` and `P` to rotate thru the most commonly used print modes.
 
 Use F7 or `s` to step into and F8 or `S` to step over.
 
