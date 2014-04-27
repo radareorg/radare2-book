@@ -45,7 +45,7 @@ rafind2 is a program to find byte patterns in files
 
 ###ragg2
 
-Ragg2 is a frontend for r_egg, compile programs into tiny binaries for x86-32/64 and arm.
+Ragg2 is a frontend for r_egg. It's used to compile programs into tiny binaries for x86-32/64 and arm.
 
 ###rarun2
 
