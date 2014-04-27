@@ -6,7 +6,7 @@ There are binary packages for multiple operating systems and GNU/Linux distribut
 
 I try to publish a new stable release every month and sometimes publish nightly tarballs.
 
-But as always the best way to use a software is to go upstream and pull the development repository which in radare is commonly more stable than the 'stable' releases O:)
+But as always the best way to use a software is to go upstream and pull the development repository which in the case of radare is commonly more stable than the 'stable' releases O:)
 
 To do this you will need Git and type:
 
