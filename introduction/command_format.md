@@ -30,6 +30,8 @@ We can either grep for columns or rows:
 
     pd 20~call:0          ; get first row
     pd 20~call:1          ; get second row
+    pd 20~call[0]         ; get first column
+    pd 20~call[1]         ; get second column
 
 Or even combine them:
 
