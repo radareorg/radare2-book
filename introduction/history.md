@@ -6,4 +6,4 @@ Since then, the project has grown with the aim changed to provide a complete fra
 
 It's mostly a single-person project, but some contributions (in source, patches, ideas or species) have been made and are really appreciated.
 
-The project is composed of a hexadecimal editor as the central point of the project with assembler/disassembler, code analysis, scripting features, analysis and graphs of code and data, easy unix integration, ..
+The project is composed of a hexadecimal editor as the central point of the project with assembler/disassembler, code analysis, scripting features, analysis and graphs of code and data, easy unix integration, ...
