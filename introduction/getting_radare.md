@@ -2,7 +2,7 @@
 
 You can get radare from the website http://radare.org/ or Github repo https://github.com/radare/radare2
 
-There are binary packages for multiple operating systems and GNU/Linux distributions (ubuntu, maemo, gentoo, windows, iphone, etc..) But I hardly encourage you to get the sources and compile them yourself to better understand the dependencies and have the source code and examples more accessible.
+There are binary packages for multiple operating systems and GNU/Linux distributions (Ubuntu, Maemo, Gentoo, Windows, iPhone, etc..) But I hardly encourage you to get the sources and compile them yourself to better understand the dependencies and have the source code and examples more accessible.
 
 I try to publish a new stable release every month and sometimes publish nightly tarballs.
 
