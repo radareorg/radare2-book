@@ -24,7 +24,7 @@ Here's a list of the most common commands for the debugger:
     > dmp A S rwx  ; change page at A with size S protection permissions
     > dr eax=33 ; set register value. eax = 33
 
-The easiest way to use the debugger is from the Visual mode, so, you will no need to remember much commands or keep states in your mind.
+The easiest way to use the debugger is from the Visual mode. That way you will not need to remember many commands nor keep states in your mind.
 
     [0xB7F0C8C0]> V
 
