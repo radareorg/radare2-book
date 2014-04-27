@@ -34,10 +34,10 @@ Use F7 or `s` to step into and F8 or `S` to step over.
 
 With the `c` key you can toggle the cursor mode to enable the selection of a range of bytes to nop them or set breakpoints using the `F2` key.
 
-In the visual mode you can enter commands with `:` to dump buffer contents like
+In visual mode you can enter commands with `:` to dump buffer contents like
 
     x @ esi
 
-To get the help in the visual mode press `?`.
+To get help in visual mode press `?`.
 
 At this point the most common commands are !reg that can be used to get or set values for the general purpose registers. You can also manipulate the hardware and extended/floating registers. 
