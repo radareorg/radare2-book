@@ -1,6 +1,6 @@
 ## Expressions
 
-The expressions are mathematical representations of a 64 bit numeric value which can be displayed in different formats, compared or used at any command as a numeric argument. They support multiple basic arithmetic operations and some binary and boolean ones. The command used to evaluate these math expressions is the `?`. Here there are some examples:
+Expressions are mathematical representations of a 64 bit numeric value which can be displayed in different formats, compared or used with all commands as a numeric argument. Expressions support multiple basic arithmetic operations as well as some binary and boolean ones. The command used to evaluate these mathematical expressions is `?`. Here are some examples:
 
     [0xB7F9D810]> ? 0x8048000
     134512640 0x8048000 01001100000 128.0M 804000:0000 134512640 00000000 134512640.0 0.000000  
@@ -11,22 +11,22 @@ The expressions are mathematical representations of a 64 bit numeric value which
     [0xB7F9D810]> ? 1+2+3-4*3
     -6 0xfffffffffffffffa 01777777777777777777772 17179869183.0G fffff000:0ffa -6   
 
-The supported arithmetic expressions supported are:
+The supported arithmetic operations are:
 
     + : addition
     - : substraction
-    * : multiply
+    * : multiplication
     / : division
     % : modulus
     > : shift right
     < : shift left
 
-The binary expressions should be scapped:
+Binary operations should be escaped:
 
     \| : logical OR // ("? 0001010 | 0101001")
     \& : logical AND
 
-The values can be numbers in many formats:
+Values are numbers expressable in various formats:
 
     0x033   : hexadecimal
     3334    : decimal
@@ -34,7 +34,7 @@ The values can be numbers in many formats:
     10K     : KBytes  10*1024
     10M     : MBytes  10*1024*1024
 
-There are other special syntaxes for the expressions. Here's for example some of them:
+You can also use variables and seeks to build more complex expressions. Here are a few examples:
 
     ?@?    or stype @@?      ; misc help for '@' (seek), '~' (grep) (see ~??)
     ?$?           ; show available '$' variables
