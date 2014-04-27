@@ -32,7 +32,7 @@ After entering this command a hexdump of the current eip will be shown. Now pres
 
 Use F7 or `s` to step into and F8 or `S` to step over.
 
-With the `c` key you will toggle the cursor mode and being able to select range of bytes to nop them or set breakpoints using the `F2` key.
+With the `c` key you can toggle the cursor mode to enable the selection of a range of bytes to nop them or set breakpoints using the `F2` key.
 
 In the visual mode you can enter commands with `:` to dump buffer contents like
 
