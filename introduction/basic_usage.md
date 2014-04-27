@@ -8,19 +8,19 @@ Navigating a binary file is done using three simple actions: seek, print and alt
 
 The 'seek' command is abbreviated as `s` and accepts an expression as its argument. This expression can be something like `10`, `+0x25` or `[0x100+ptr_table]`. If you are working with block-based files you may prefer to set up the block size to 4K or the size required with the command `b` and move forward or backward at seeks aligned to the block size using the `>` and `<` commands.
 
-The 'print' command aliased as `p`, accepts a second letter to specify the print mode selected. The most common ones are `px` for printing in hexadecimal, `pd` for disassembling.
+The 'print' command (short: `p`), accepts a second letter to specify the print mode. The most common ones are `px` for printing in hexadecimal, `pd` for disassembling.
 
-To 'write' open the file with `radare -w`. This should be specified while opening the file.
-You can use the `w` command to write strings or `wx` for hexpair strings:
+To 'write' first open the file with `radare -w`. This should be specified while opening the file.
+You can then use the `w` command to write strings or `wx` for hexpair strings:
 
     > w hello world         ; string
     > wx 90 90 90 90        ; hexpairs
     > wa jmp 0x8048140      ; assemble
     > wf inline.bin         ; write contents of file
 
-Appending a `?` to the command you will get the help message of it. (p? for example)
+Appending a `?` to the command will show its help message (example: p?).
 
-Enter the visual mode pressing `V<enter>`, and return to the prompt using the `q` key.
+To enter visual mode press `V<enter>`. To quit visual mode and return to the prompt use the `q` key.
 
 In the visual mode you should use hjkl keys which are the default ones for scrolling (like left,down,up,right). So entering in cursor mode (`c`) you will be able select bytes if using the shift together with HJKL.
 
