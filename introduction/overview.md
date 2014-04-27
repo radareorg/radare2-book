@@ -41,7 +41,7 @@ Binary diffing utility implementing multiple algorithms. Supports byte-level or 
 
 ###rafind2
 
-rafind2 is a program to find byte patterns into files
+rafind2 is a program to find byte patterns in files
 
 ###ragg2
 
