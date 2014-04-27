@@ -14,7 +14,7 @@ To do this you will need Git and type:
 
 This will probably take a while, so take a coffee break and continue reading this paper.
 
-To update your local copy of the repository you will have to type this command in the root of the recently created 'radare' directory.
+To update your local copy of the repository you will have to type the following command in the root of the recently created 'radare' directory.
 
     $ git pull
 
