@@ -2,11 +2,11 @@
 
 Many people requested a sample session of using radare to help in understanding how the shell works and how to perform the most common tasks like disassembling, seeking, binary patching and debugging.
 
-I strongly encourage you to read the rest of this book to help you understand better how everything works and enhace your skills, the learning curve of radare is usually a bit harder at the beggining, but after an hour of using it you will easily understand how most of the things work and how to get them cooperate together :)
+I strongly encourage you to read the rest of this book to help you understand better how everything works and to improve your skills. The learning curve for radare is usually a bit steep at the beggining. However, after an hour of using it you will easily understand how most of the things work and how to combine the various tools radare offers :)
 
-For walking thru the binary file you will use three different kind of basic actions: seek, print and alterate.
+Navigating a binary file is done using three simple actions: seek, print and alterate.
 
-To 'seek' there's an specific command abreviated as `s` than accepts an expression as argument that can be something like `10`, `+0x25` or `[0x100+ptr_table]`. If you are working with block-based files you may prefer to set up the block size to 4K or the size required with the command `b` and move forward or backward at seeks aligned to the block size using the `>` and `<` commands.
+The 'seek' command is abbreviated as `s` and accepts an expression as its argument. This expression can be something like `10`, `+0x25` or `[0x100+ptr_table]`. If you are working with block-based files you may prefer to set up the block size to 4K or the size required with the command `b` and move forward or backward at seeks aligned to the block size using the `>` and `<` commands.
 
 The 'print' command aliased as `p`, accepts a second letter to specify the print mode selected. The most common ones are `px` for printing in hexadecimal, `pd` for disassembling.
 
