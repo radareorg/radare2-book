@@ -33,7 +33,7 @@ Commandline assembler and disassembler for multiple architectures (intel[32,64],
 
 Implementation of a block-based rahash for small text strings or large disks, supporting multiple algorithms like md4, md5, crc16, crc32, sha1, sha256, sha384, sha512, par, xor, xorpair, mod255, hamdist or entropy.
 
-It can be used to check the integrity or track changes between big files, memory dumps or disks.
+It can be used to check the integrity of or track changes between big files, memory dumps or disks.
 
 ###radiff2
 
