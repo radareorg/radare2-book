@@ -1,6 +1,6 @@
 ## Basic usage
 
-Lot of people ping me some times for a sample usage session of radare to help to understand how the shell works and how to perform the most common tasks like disassembling, seeking, binary patching or debugging.
+Many people requested a sample session of using radare to help in understanding how the shell works and how to perform the most common tasks like disassembling, seeking, binary patching and debugging.
 
 I hardly encourage you to read the rest of this book to help you understand better how everything works and enhace your skills, the learning curve of radare is usually a bit harder at the beggining, but after an hour of using it you will easily understand how most of the things work and how to get them cooperate together :)
 
