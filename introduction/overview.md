@@ -6,7 +6,7 @@ Nowadays the project is composed of a set of small utilities that can be used to
 
 The core of the hexadecimal editor and debugger. Allows to open any kind of file from different IO access like disk, network, kernel plugins, remote devices, debugged processes, ... and handle any of them as if they were a simple plain file.
 
-Implements an advanced command line interface for moving around the file, analyzing data, disassembling, binary patching, data comparision, searching, replacing, scripting with ruby, python, lua and perl, ...
+Implements an advanced command line interface for moving around the file, analyzing data, disassembling, binary patching, data comparision, searching, replacing, scripting with Ruby, Python, Lua and Perl, ...
 
 ###rabin2
 
