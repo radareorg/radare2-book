@@ -1,6 +1,6 @@
 ## Comparing bytes
 
-You can compare data using the `c` command that accepts different input formats and compares the input against the bytes in the current seek.
+You can compare data using the `c` command. It accepts an input in various formats and compares the input against the bytes in the current seek.
 
     [0x00404888]> c?
     |Usage: c[?dfx] [argument]
@@ -27,13 +27,13 @@ An example of memory comparision:
     0x00000002 (byte=03)   90 ' '  ->  4c 'L'
     [0x08048000]> 
 
-Another subcommand of `c` (compare) command is the `cc` which stands for 'compare code'.
+Another subcommand of `c` (compare) command is `cc` which stands for 'compare code'.
 
     [0x4A13B8C0]> cc 0x39e8e089 @ 0x4A13B8C0
     
     [0x08049A80]> cc sym.main2 @ sym.main
 
-`c8` Compare a quadword from the current seek (0x00000000) from a math expression
+`c8` compares a quadword from the current seek (0x00000000) from a math expression
 
     [0x00000000]> c8 4
     
@@ -43,7 +43,7 @@ Another subcommand of `c` (compare) command is the `cc` which stands for 'compar
     0x00000002 (byte=03)   4c 'L'  ->  00 ' '
 
 
-This number can be an math expressions using flag names and so:
+The number paramater can of course also be a math expressions using flag names and so on:
 
     [0x00000000]> cx 7f469046
     
@@ -53,7 +53,7 @@ This number can be an math expressions using flag names and so:
 
 
 
-We can use the compare command against a file previously dumped to disk from the contents of the current block.
+We can use the compare command to compare the current block to a file previously dumped to disk.
 
     r2 /bin/true
     [0x08049A80]> s 0
