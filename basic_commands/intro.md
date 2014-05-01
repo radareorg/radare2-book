@@ -1,6 +1,6 @@
 # Basic commands
 
-Most command names in radare are derived from action named. They should be easy to remember as well as short. Therefore command names are all single letters. Subcommands or related commands are described using a second character. For example `/ foo` for searching plain strings or `/x 90 90` to look for hexpair strings.
+Most command names in radare are derived from action names. They should be easy to remember as well as short. Therefore command names are all single letters. Subcommands or related commands are described using a second character. For example `/ foo` for searching plain strings or `/x 90 90` to look for hexpair strings.
 
 The format of valid command (as explained in 'Command format' chapter) looks something like this:
 
