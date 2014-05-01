@@ -1,17 +1,18 @@
 # Basic commands
 
-The basic set of commands in radare can be mostly grouped by action, and they should be easy to remember and short. This is why they are grouped with a single character, subcommands or related commands are described with a second character. For example `/ foo` for searching plain strings or `/x 90 90` to look for hexpair strings.
+Most command names in radare are derived from action named. They should be easy to remember as well as short. Therefore command names are all single letters. Subcommands or related commands are described using a second character. For example `/ foo` for searching plain strings or `/x 90 90` to look for hexpair strings.
 
-The format of the commands (as explained in 'Command format' chapter) looks something like that:
+The format of valid command (as explained in 'Command format' chapter) looks something like this:
 
     [[.][times][cmd][~grep][@[@iter]addr!size][|>pipe] ; ...
 
     > 3s +1024    ; seeks three times 1024 from the current seek
     
-If the command starts with `!` the string is passed to the plugin hadling the current IO (the debugger for example), if no one handles it calls to posix_system() which is a shell escape, you can prefix the command with two `!!`.
+If the command starts with `!` the string is passed to the currently loaded IO plugin (the debugger for example). If no plugin handles the command, posix_system() is called to hand the command to your shell. You can also force this by prefixing your command with two exlamation marks `!!` to make sure your command is directly handed to the shell.
 
     > !help       ; handled by the debugger or shell
     > !!ls        ; runs ls in the shell
+
 The [arg] argument depends on the command, but most of them take a number as argument to specify the number of bytes to work on instead of block size. Other commands accept math expressions, or strings.
 
     > px 0x17     ; show 0x17 bytes in hexa at current seek
