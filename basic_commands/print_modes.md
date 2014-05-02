@@ -1,10 +1,10 @@
 ##3.5 Print modes
 
-One of the efforts in radare is the way to show the information to the user. This is interpreting the bytes and giving an almost readable output format.
+One of the key features of radare is displaying information in various formats. The goal is to offer a selection of displaying choices to best interpret binary data.
 
-The bytes can be represented as integers, shorts, longs, floats, timestamps, hexpair strings, or things more complex like C structures, disassembly, decompilations, external processors, ..
+Binary data can be represented as integers, shorts, longs, floats, timestamps, hexpair strings, or more complex formats like C structures, disassembly, decompilations, external processors, ..
 
-This is a list of the available print modes listable with `p?`:
+Here's a list of the available print modes listable using `p?`:
 
     [0x08049AD0]> p?
     Usage: p[=68abcdDfiImrstuxz] [arg|len]
@@ -92,16 +92,16 @@ For example, you can 'view' the current buffer as timestamps in ntfs time:
     [0x08048000]> pt 4
     20:05:13001 09:29:21 +0000
 
-As you can see, the endianness affects to the print formats. Once printing these filetimes you can grep the results by the year for example:
+As you can see, the endianness effect on the print formats. Once you have printed a timestamp you can grep the results by the year for example:
 
     [0x08048000]> pt | grep 1974 | wc -l
     15
     [0x08048000]> pt | grep 2022
     27:04:2022 16:15:43 +0000
     
-The date format printed can be configured with the `cfg.datefmt` variable following the strftime(3) format.
+The default date format can be configured using the `cfg.datefmt` variable. The field definitions follow the well known strftime(3) format.
 
-Extracted from the strftime(3) manpage:
+Excerpt from the strftime(3) manpage:
 
     %a  The abbreviated name of the day of the week according to the current locale.
     %A  The full name of the day of the week according to the current locale.
@@ -151,7 +151,7 @@ Extracted from the strftime(3) manpage:
 
 ###3.5.3 Basic types
 
-All basic types are mapped as print modes. If you are interested in a more complex structure or just type : `pf?`
+There are print modes available for all basic types. If you are interested in a more complex structure or just type : `pf?`
 
 Here's the list of the print (pf?) modes for basic types:
 
@@ -216,9 +216,9 @@ Valid print code formats are: JSON, C, Python, Cstring (pcj, pc, pcp, pcs)
 
 ###3.5.5 Strings
 
-Strings are probably one of the most important entrypoints while starting to reverse engineer a program because they are usually referencing information about the functions actions ( asserts, debug or info messages, ...).
+Strings are probably one of the most important entrypoints when starting to reverse engineer a program because they are usually referencing information about the functions actions (asserts, debug or info messages, ...).
 
-So it is important for radare to be able to print strings in multiple ways:
+Therefore radare supports various string formats:
 
     [0x00404888]> ps?
     |Usage: ps[zpw] [N]
@@ -230,7 +230,7 @@ So it is important for radare to be able to print strings in multiple ways:
     | psw = print wide string
     
 
-Most common strings will be just zero-terminated ones. Here's an example by using the debugger to continue the execution of the program until it executes the 'open' syscall. When we recover the control over the process, we get the arguments passed to the syscall, pointed by %ebx. Which is obviously a zero terminated string.
+Most strings will be zero-terminated. Here's an example by using the debugger to continue the execution of the program until it executes the 'open' syscall. When we recover the control over the process, we get the arguments passed to the syscall, pointed by %ebx. In the case of the 'open' call, this parameter is a zero terminated string which we can inspect using `psz`.
 
     [0x4A13B8C0]> dcs open
     0x4a14fc24 syscall(5) open ( 0x4a151c91 0x00000000 0x00000000 ) = 0xffffffda
@@ -246,7 +246,7 @@ Most common strings will be just zero-terminated ones. Here's an example by usin
 
 ###3.5.6 Print memory
 
-It is also possible to print various packed data types in a single line using the `pf` command. 
+It is also possible to print various packed data types using the `pf` command. 
 
 
     [0xB7F08810]> pf xxS @ rsp
@@ -255,11 +255,11 @@ It is also possible to print various packed data types in a single line using th
     0x7fff0d29da38 = 0x7fff0d29da38 -> 0x0d29f7ee /bin/ls
     
 
-This is sometimes useful for looking at the arguments passed to a function, by just giving the 'format memory string' as argument and temporally changing the current seek with the `@` token.
+This can for instance be used to look at the arguments passed to a function. To achive this, simply pass a 'format memory string' as an argument to `pf` and temporally change the current seek position / offset using `@`.
 
-It is also possible to define arrays of structures with `pf`. Just prefix the format string with a numeric value.
+It is also possible to define arrays of structures with `pf`. To do this, prefix the format string with a numeric value.
 
-You can also define a name for each field of the structure by giving them as optional arguments after the format string splitted by spaces.
+You can also define a name for each field of the structure by appending them as a space-separated argument list.
     
     
     [0x4A13B8C0]> pf 2*xw pointer type @ esp
@@ -273,7 +273,7 @@ You can also define a name for each field of the structure by giving them as opt
          type : 0x0040489a = 0x2440 
     }
 
-A practical example for using pf on a binary GStreamer plugin:
+A practical example for using `pf` on a binary of a GStreamer plugin:
 
     $ radare ~/.gstreamer-0.10/plugins/libgstflumms.so
     [0x000028A0]> seek sym.gst_plugin_desc
@@ -292,7 +292,7 @@ A practical example for using pf on a binary GStreamer plugin:
     
 ###3.5.7 Disassembly
 
-The `pd` command is the one used to disassemble code, it accepts a numeric value to specify how many opcodes are wanted to be disassembled. The `pD` one acts in the same way, but using a number-of-bytes instead of counting instructions.
+The `pd` command is used to disassemble code. It accepts a numeric value to specify how many opcodes should be disassembled. The `pD` command is similar but instead of a number of instructions it decompiles a given number of bytes.
 
      d : disassembly N opcodes   count of opcodes
      D : asm.arch disassembler   bsize bytes
@@ -346,7 +346,7 @@ The architecture flavour for the disassembly is defined by the `asm.arch` eval v
     
 ###3.5.9 Configuring the disassembler
 
-There are multiple options that can be used to configure the output of the disassembly, all these options are described using `e? asm.` 
+There are multiple options that can be used to configure the output of the disassembler, all these options are described using `e? asm.` 
 
 
                   asm.os: Select operating system (kernel) (linux, darwin, w32,..)
@@ -391,9 +391,9 @@ There are multiple options that can be used to configure the output of the disas
 
 ###3.5.10 Disassembly syntax
 
-The syntax is the flavour of disassembly syntax prefered to be used by the disasm engine.
+The syntax variable is used to influence the flavor of assembly syntax the disassembler engine outputs.
 
     e asm.syntax = intel
     e asm.syntax = att
 
-You can also check asm.pseudo which is an experimental pseudocode view and asm.esil, ESIL stands for 'Evaluable Strings Intermedate Language'. It aims to describe a human readable representation for every opcode. Those representations can be evaluated in order to emulate code.
+You can also check asm.pseudo which is an experimental pseudocode view and asm.esil which outputs ESIL ('Evaluable Strings Intermedate Language'). It aims to output a human readable representation of every opcode. Those representations can be evaluated in order to emulate the code.
