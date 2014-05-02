@@ -1,8 +1,8 @@
 ## Sections
 
-It is usually on firmware images, bootloaders and binary files to find sections that are loaded in memory at different addresses than the one in the disk.
+Firmware images, bootloaders and binary files usually load various sections of a binary to different addresses in memory.
 
-To solve this issue, radare implements `S`.
+To represent this behavior, radare offers the `S` command.
 
 Here's the help message:
 
@@ -20,7 +20,7 @@ Here's the help message:
     S [off] [vaddr] [sz] [vsz] [name] [rwx] ; add new section
     S-[id|0xoff|*]  ; remove this section definition
 
-We can specify a section in a single line in this way:
+You can specify a section in a single line in this way:
 
     S [off] [vaddr] [sz] [vsz] [name] [rwx] ; add new section
 
@@ -28,7 +28,7 @@ For example:
 
     [0x00404888]> S 0x00000100 0x00400000 0x0001ae08 0001ae08 test rwx
 
-Displaying the sections information:
+Displaying the section information:
 
     [0x00404888]> S ; list sections
     
@@ -48,8 +48,8 @@ Displaying the sections information:
     =>  0x00004888 |-----^------------------------| 0x00004988
     
     
-The first three lines are sections and the last one `=>` is the current seek representation based on the proportions over them.
+The first three lines are sections and the last one (prefixed by `=>`) is the current seek location.
 
-To remove a section definition just prefix the name of the section with `-`:
+To remove a section definition simply prefix the name of the section with `-`:
 
     [0xB7EE8810]> S -.dynsym
