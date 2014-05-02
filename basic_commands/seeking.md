@@ -1,6 +1,6 @@
 ## Seeking
 
-The command `s` is used to seek. It accepts a math expression as argument that can be composed by shift operations, basic math ones and memory access.
+Seeking is done using the `s` command. It accepts a math expression as argument which can be composed of shift operations, basic math operations or memory access operations.
 
 
     [0x00000000]> s?
@@ -30,10 +30,10 @@ The command `s` is used to seek. It accepts a math expression as argument that c
     > s 10+0x80   ; seek at 0x80+10
 
 
-To 'query' the math expression you can evaluate them using the `?` command and giving the math operation as argument. And getting the result in hexa, decimal, octal and binary.
+If you want to inspect the result of a math expression you can evaluate it using the `?` command. Simply pass the expression as an argument. The result can be displayed in hexadecimal, decimal, octal or binary.
 
     > ? 0x100+200
     0x1C8 ; 456d ; 710o ; 1100 1000  
 
 
-In visual mode just press `u` or `U` to undo or redo inside the seek history.
+In visual mode you can press `u` (undo) or `U` (redo) inside the seek history.
