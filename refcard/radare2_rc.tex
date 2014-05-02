@@ -40,8 +40,6 @@
 \def\rapos{\char125}
 \def\lapos{\char123}
 \def\bt{\`{}}
-\def\lt{\char60}
-\def\gt{\char62}
 \def\plus{$+$}
 \def\lbracket{\char123}
 \def\rbracket{\char125}
@@ -93,24 +91,20 @@
 %\hrule\vskip 3pt
 \title{Radare2 REFERENCE CARD}
 
-\vskip 0.1cm
 \sect{Survival Guide}
 \cm{aa}{auto analyse}
-\cm{pd@fcn{\key{Tab}}}{Disassemble function}
+\cm{pdf@fcn{\key{Tab}}}{Disassemble function}
 \cm{f fcn{\key{Tab}}}{List functions}
 \cm{f str{\key{Tab}}}{List strings}
-\cm{fr fcn{\key{Tab}} newname}{Rename function}
-\cm{fr str{\key{Tab}} newname}{Rename string}
+\cm{fr [flagname] [newname]}{Rename flag}
 \cm{psz [offset]}{Print string}
 \cm{arf [flag]}{Find cross ref for a flag}
 
-\vskip 0.2cm
 \sect{Flagspaces}
 \cm{fs}{display flagspaces}
 \cm{fs *}{select all flagspace}
 \cm{fs [sections]}{select one flagspace}
 
-\vskip 0.2cm
 \sect{Flags}
 \cm{f}{list flags}
 \cm{fj}{display flags in json}
@@ -118,7 +112,6 @@
 \cm{fx}{show hexdump of flag}
 \cm{fC [name] [cmt]}{set flag comment}
 
-\vskip 0.2cm
 \sect{Infos}
 \cm{ii}{Info on imports}
 \cm{iI}{Info on binary}
@@ -126,7 +119,6 @@
 \cm{iS}{Display sections}
 \cm{ir}{Display relocations}
 
-\vskip 0.2cm
 \sect{Print string}
 \cm{psz [offset]}{Print stringZ'}
 \cm{psb [offset]}{Print strings in current block}
@@ -134,7 +126,6 @@
 \cm{psp [offset]}{Print pascal string}
 \cm{psw [offset]}{Print wide string}
 
-\vskip 0.2cm
 \sect{Visual mode}
 \cm{V}{Enter visual mode}
 \cm{p/P}{rotate modes (hex, disasm, debug, words, buf)}
@@ -149,7 +140,7 @@
 \cm{:cmd}{run radare command}
 \cm{;[-]cmt}{add/remove comment}
 \cm{/*+-[]}{change block size, [] = resize hex.cols}
-\cm{>||<}{seek aligned to block size}
+\cm{$>$||$<$}{seek aligned to block size}
 \cm{i/a/A}{(i)nsert hex, (a)ssemble code, visual (A)ssembler}
 \cm{b/B}{toggle breakpoint / automatic block size}
 \cm{d[f?]}{define function, data, code, ..}
@@ -172,9 +163,6 @@
 \cm{yY}{copy and paste selection}
 \cm{z}{toggle zoom mode}
 
-
-
-\vskip 0.2cm
 \sect{Searching}
 \cm{/ foo\bs{}00}{search for string 'foo\bs{}0'}
 \cm{/b}{search backwards}
@@ -200,14 +188,12 @@
 \cm{/z min max}{search for strings of given size}
 \cm{/v[?248] num}{look for a asm.bigendian 32bit value}
 
-\vskip 0.2cm
 \sect{Saving}
 \cm{Po [file]}{open project}
 \cm{Ps [file]}{save project}
 \cm{Pi [file]}{show project informations}
 
 
-\vskip 0.2cm
 \sect{Usable variables in expression}
 \cm{\dollar{}\dollar{}}{here (current virtual seek)}
 \cm{\dollar{}o}{here (current disk io offset)}
@@ -217,20 +203,19 @@
 \cm{\dollar{}c,\dollar{}r}{get width and height of terminal}
 \cm{\dollar{}S}{section offset}
 \cm{\dollar{}SS}{section size}
-\cm{\dollar{}j}{jump address (jmp 0x10, jz 0x10 => 0x10)}
-\cm{\dollar{}f}{jump fail address (jz 0x10 => next instruction)}
+\cm{\dollar{}j}{jump address (jmp 0x10, jz 0x10 =$>$ 0x10)}
+\cm{\dollar{}f}{jump fail address (jz 0x10 =$>$ next instruction)}
 \cm{\dollar{}I}{number of instructions of current function}
 \cm{\dollar{}F}{current function size} 
 \cm{\dollar{}Jn}{get nth jump of function}
 \cm{\dollar{}Cn}{get nth call of function}
 \cm{\dollar{}Dn}{get nth data reference in function}
 \cm{\dollar{}Xn}{get nth xref of function}
-\cm{\dollar{}m}{opcode memory reference (mov eax,[0x10] => 0x10)}
+\cm{\dollar{}m}{opcode memory reference (mov eax,[0x10] =$>$ 0x10)}
 \cm{\dollar{}l}{opcode length}
 \cm{\dollar{}e}{1 if end of block, else 0}
 \cm{\dollar{}ev}{get value of eval config variable}
 \cm{\dollar{}?}{last comparision value}
-
 
 % Footer
 \vfill \hrule\smallskip
