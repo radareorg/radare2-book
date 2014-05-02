@@ -1,10 +1,10 @@
 ## Mapping files
 
-Radare IO allows to virtually map contents of files in the same IO space at random offsets. This is useful to open multiple files in a single view or just to 'emulate' an static environment like if it was in the debugger with the program and all its libraries mapped there.
+Radare IO allows you to virtually map contents of files into the same IO space as you loaded binary at random offsets. This is useful to open multiple files in a single view or to 'emulate' an static environment similar to what you would have using a debugger where the program and all its libraries are loaded in memory and can be accessed.
 
-Using the `S`ections command you'll be able to define different base address for each library loaded at different offsets.
+Using the `S`ections command you'll be able to define different base addresses for each library loaded.
 
-Mapping files is done with the `o` (open) command. Let's read the help:
+Mapping files is done using the `o` (open) command. Let's read the help:
 
     [0x00000000]> o?
     Usage: o[com- ] [file] ([offset])
@@ -43,11 +43,11 @@ Listing mapped files:
     - 14 /bin/zsh @ 0x499999 ; r
 
 
-Print some hexadecimal from /bin/zsh
+Print some hexadecimal values from /bin/zsh
 
     [0x00000000]> px @ 0x499999
 
 
-To unmap these files just use the `o-` command giving the file descriptor as argument:
+To unmap these files simply use the `o-` command giving the file descriptor as argument:
 
     [0x00000000]> o-14
