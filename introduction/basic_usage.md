@@ -24,4 +24,4 @@ To enter visual mode press `V<enter>`. To quit visual mode and return to the pro
 
 In visual mode you can use the hjkl keys to navigate (left, down, up, right respectively). You can use these keys in cursor mode (`c`). To select keys in cursor mode, simply hold down the shift key while using any of the hjkl keys.
 
-While in visual mode you can also insert (alterate bytes) pressing `i` followed by <tab> to switch between the hex or string column. Pressing `q` inside the hex panel returns you to visual mode.
+While in visual mode you can also insert (alterate bytes) pressing `i` followed by `<tab>` to switch between the hex or string column. Pressing `q` inside the hex panel returns you to visual mode.
