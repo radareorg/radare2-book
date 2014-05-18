@@ -196,7 +196,8 @@ Let's see some examples:
 
 ###3.5.4 Source (asm, C)
 
-Valid print code formats are: JSON, C, Python, Cstring (pcj, pc, pcp, pcs) 
+Valid print code formats are: 
+
     pc     C
     pcs    string
     pcj    json
@@ -204,7 +205,7 @@ Valid print code formats are: JSON, C, Python, Cstring (pcj, pc, pcp, pcs)
     pcp    python
     pcw    words (4 byte)
     pcd    dwords (8 byte)
- 
+
     [0xB7F8E810]> pc 32
     #define _BUFFER_SIZE 32
     unsigned char buffer[_BUFFER_SIZE] = {
