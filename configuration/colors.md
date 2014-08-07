@@ -11,7 +11,7 @@ r2 supports rgb colors in unix terminals and allows to change the console color 
 Type `ec` to get a list of all the palete elements.
 Type `ecs` to show a color palete to pick colors from:
 
-![img](http://lolcathost.org/b/r2pal.png)
+![img](r2pal.png)
 
 #### xvilka theme
 
@@ -39,4 +39,4 @@ Type `ecs` to show a color palete to pick colors from:
     ec fline rgb:fc0
     ec flow rgb:0f0
 
-![img](http://xvilka.me/r2-rainbow.png)
+![img](r2-rainbow.png)
