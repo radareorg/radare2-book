@@ -33,3 +33,37 @@ Here's the help message:
        -t           load rabin2 info in thread
        -v, -V       show radare2 version (-V show lib versions)
        -w           open file in write mode
+
+Those are some common usage for the commandline flags:
+
+Opening a file in write mode without parsing the file format headers.
+
+    $ r2 -nw file
+
+Quickly get into an r2 shell without opening any disk file.
+
+    $ r2 -
+
+Specify which sub binary you want to select when opening a fatbin file:
+
+    $ r2 -a ppc -b 32 ls.fat
+
+Run a script before showing the promot:
+
+    $ r2 -i patch.r2 target.bin
+
+Execute a command and quit
+
+    $ r2 -qc ij hi.bin > imports.json
+
+Configure an eval variable:
+
+    $ r2 -e scr.color=false blah.bin
+
+Debug a program:
+
+    $ r2 -d ls
+
+Use a project file already created
+
+    $ r2 -p test

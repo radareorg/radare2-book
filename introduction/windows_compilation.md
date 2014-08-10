@@ -15,6 +15,10 @@ Cygwin is another possibility; however, issues relating to Cygwin libraries can 
 
 Please, be sure to build radare2 from that environment you're going to use r2 in. If you're going to use r2 in MinGW32 shell or cmd.exe - you need to build r2 in the MinGW32 environment. And if you're going to use r2 in Cygwin - you need to build from the Cygwin shell as well. Since Cygwin is more UNIX compatible radare2 supports here more colors and unicode symbols.
 
+There's a script that automates the process of autodetecting the crosscompiler toolchain and build a zip file containing the r2 programs and libraries that should be deployed in a windows box (or wine).
+
+    $ sys/mingw32.sh
+
 ## Bindings
 
 To build radare2 bindings you will need to install [Vala (valac) for Windows](https://wiki.gnome.org/Projects/Vala/ValaOnWindows)
@@ -33,3 +37,4 @@ After you installed valabind, you can build radare2-bindings, for example for Py
     $ ./configure --enable=python,perl
     $ make
     $ make install
+
