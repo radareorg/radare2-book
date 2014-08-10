@@ -26,3 +26,35 @@ Or just feed me with a patch
 
     $ git diff > radare-foo.patch
 
+The most common way to get r2 updated and installed system wide is by using:
+
+    $ sys/install.sh
+
+Helper scripts
+--------------
+
+Take a look at the sys/* scripts, those are used to automatize stuff related to syncing, building and installing r2 and its bindings.
+
+The most important one is sys/install.sh. It will pull, clean, build and symstall r2 system wide.
+
+Symstalling is the process of installing all the programs, libraries, documentation and data files using symlinks instead of copying the files.
+
+By default it will be installed in /usr, but you can define a new prefix as argument.
+
+This is useful for developers, because it permits them to just run 'make' and try the changes without having to run make install again.
+
+Cleaning up
+-----------
+
+Cleaning up the source tree is important to avoid problems like linking to old objects or not updating objects after an abi change.
+
+The following commands may help you to get your git clone up to date:
+
+    $ git clean -xdf
+    $ git reset --hard @~10
+    $ git pull
+
+If you want to remove previous installations from your system you must run the following commands:
+
+    $ ./configure --prefix=/usr/local
+    $ make purge
