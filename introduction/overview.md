@@ -1,20 +1,20 @@
 ## Overview
 
-Nowadays the project is composed of a set of small utilities that can be used together or independently from the command line:
+Today, the radare project is a set of small utilities that can be used together or independently from the command line.
 
 ###radare2
 
-The core of the hexadecimal editor and debugger. Allows to open any kind of file from different IO access like disk, network, kernel plugins, remote devices, debugged processes, ... and handle any of them as if they were a simple plain file.
+The core of the hexadecimal editor and debugger. radare2 allows you to open a number of input/output sources as if they were simple, plain files, including disks, networks, kernel plug-ins, processes being debugged, and so on.
 
-Implements an advanced command line interface for moving around the file, analyzing data, disassembling, binary patching, data comparision, searching, replacing, scripting with Ruby, Python, Lua and Perl, ...
+It implements an advanced command line interface for moving around the file, analyzing data, disassembling, binary patching, data comparison, searching, replacing, and scripting with a variety of languages, including Ruby, Python, Lua, and Perl.
 
 ###rabin2
 
-Extracts information from executable binaries like ELF, PE, Java CLASS, MACH-O. It's used from the core to get exported symbols, imports, file information, xrefs, library dependencies, sections, ...
+Extracts information from executable binaries, such as ELF, PE, Java CLASS, and Mach-O. rabin2 is used from the core to get exported symbols, imports, file information, cross references (xrefs), library dependencies, sections, etc.
 
 ###rasm2
 
-Commandline assembler and disassembler for multiple architectures (intel[32,64], mips, arm, powerpc, java, msil, ...)
+A command line assembler and disassembler for multiple architectures (including Intel x86 and x86-64, MIPS, ARM, PowerPC, Java, and MSIL):
 
     $ rasm2 -a java 'nop'
     00
@@ -31,26 +31,26 @@ Commandline assembler and disassembler for multiple architectures (intel[32,64],
 
 ###rahash2
 
-Implementation of a block-based rahash for small text strings or large disks, supporting multiple algorithms like md4, md5, crc16, crc32, sha1, sha256, sha384, sha512, par, xor, xorpair, mod255, hamdist or entropy.
+An implementation of a block-based hash. From small text strings to large disks, rahash2 supports multiple algorithms, including MD4, MD5, CRC16, CRC32, SHA1, SHA256, SHA384, SHA512, par, xor, xorpair, mod255, hamdist, or entropy.
 
-It can be used to check the integrity of or track changes between big files, memory dumps or disks.
+rahash2 can be used to check the integrity of, or track changes to, big files, memory dumps, and disks.
 
 ###radiff2
 
-Binary diffing utility implementing multiple algorithms. Supports byte-level or delta diffing for binary files and code-analysis diffing to find changes in basic code blocks from radare code analysis or IDA ones using the idc2rdb rsc script.
+A binary diffing utility that implements multiple algorithms. It supports byte-level or delta diffing for binary files, and code-analysis diffing to find changes in basic code blocks from the radare code analysis, or from the IDA analysis using the rsc idc2rdb  script.
 
 ###rafind2
 
-rafind2 is a program to find byte patterns in files
+A program to find byte patterns in a file.
 
 ###ragg2
 
-Ragg2 is a frontend for r_egg. It's used to compile programs into tiny binaries for x86-32/64 and ARM.
+A frontend for r_egg. ragg2 compiles programs into tiny binaries for x86, x86-64, and ARM.
 
 ###rarun2
 
-Rarun2 is used as a launcher for running programs with different environment, arguments, permissions, directories and overridden default file descriptors. It can be useful for :
+A launcher for running programs with a different environment, arguments, permissions, directories, and overridden, default file descriptors. rarun2 is useful for:
 
-* Crackme
+* Crackmes
 * Fuzzing
-* Test suite
+* Test suites
