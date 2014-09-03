@@ -1,17 +1,19 @@
 ## Compilation and portability
 
-Currently the core of radare2 can be compiled on many systems and architectures but the main development is done on GNU/Linux and GCC. But it is known to compile with TCC and SunStudio.
+The main radare2 development is performed with GNU/Linux and GCC; however, the core of radare2 can be compiled on many systems and architectures (including TCC and Sun Studio).
 
-People usually wants to use radare as a debugger for reverse engineering, and this is a bit more restrictive portability issue, so if the debugger is not ported to your favorite platform, please, notify it to me or just disable the debugger layer with --without-debugger in the ./configure stage.
+People often want to use radare as a debugger for reverse engineering. Currently, the debugger layer can be used on Windows, GNU/Linux (Intel x86 and x86-64, MIPS, and ARM), FreeBSD, NetBSD, and OpenBSD (Intel x86 and x86-64). There are plans for supporting Solaris and Mac OS X.
 
-Nowadays the debugger layer can be used on Windows, GNU/Linux (intel32, intel64, mips, arm), FreeBSD, NetBSD, OpenBSD (intel32, intel64) and there are plans for Solaris and OSX. And there are some IO plugins to use gdb, gdbremote or wine as backends.
+The debugger feature is more restrictive portability wise. If the debugger has not been ported to your favorite platform, please notify me or disable the debugger layer with the --without-debugger configure script option when compiling radare2.
 
-The build system based on ACR/GMAKE.
+Note that there are some I/O plug-ins to use GDB, GDB Remote, or Wine as back-ends.
+
+To build on a system using ACR/GMAKE:
 
     $ ./configure --prefix=/usr
     $ gmake
     $ sudo gmake install
     
-But there is a simple script to do that automatically:
+There is also a simple script to do this automatically:
 
     $ sys/install.sh
