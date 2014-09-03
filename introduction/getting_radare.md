@@ -1,20 +1,18 @@
 ## Getting radare2
 
-You can get radare from the website http://radare.org/ or Github repo https://github.com/radare/radare2
+You can get radare from the website, [http://radare.org/](http://radare.org/), or the GitHub repository, [https://github.com/radare/radare2](https://github.com/radare/radare2).
 
-There are binary packages for multiple operating systems and GNU/Linux distributions (Ubuntu, Maemo, Gentoo, Windows, iPhone, etc..) But I hardly encourage you to get the sources and compile them yourself to better understand the dependencies and have the source code and examples more accessible.
+Binary packages are available for a number of operating systems (Ubuntu, Maemo, Gentoo, Windows, iPhone, and so on). I highly encourage you to get the source and compile it yourself, to better understand the dependencies and make the examples more accessible.
 
-I try to publish a new stable release every month and sometimes publish nightly tarballs.
+A new stable release is typically published every month. Nightly tarballs are sometimes available.
 
-But as always the best way to use a software is to go upstream and pull the development repository which in the case of radare is commonly more stable than the 'stable' releases O:)
-
-To do this you will need Git and type:
+The radare development repository is often more stable than the 'stable' releases. To obtain the latest version:
 
     $ git clone https://github.com/radare/radare2.git
 
 This will probably take a while, so take a coffee break and continue reading this paper.
 
-To update your local copy of the repository you will have to type the following command in the root of the recently created 'radare2' directory.
+To update your local copy of the repository, use git pull in the root of the radare2 directory:
 
     $ git pull
 
@@ -22,7 +20,7 @@ If you have local modifications of the source, you can revert them with:
 
     $ git reset --hard HEAD
 
-Or just feed me with a patch
+Or send me a patch:
 
     $ git diff > radare-foo.patch
 
