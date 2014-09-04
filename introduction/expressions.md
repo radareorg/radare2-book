@@ -1,6 +1,6 @@
 ## Expressions
 
-Expressions are mathematical representations of a 64 bit numeric value which can be displayed in different formats, compared or used with all commands as a numeric argument. Expressions support multiple basic arithmetic operations as well as some binary and boolean ones. The command used to evaluate these mathematical expressions is `?`. Here are some examples:
+Expressions are mathematical representations of a 64-bit numerical value which can be displayed in different formats, compared or used with all commands as a numeric argument. Expressions support multiple, basic arithmetic operations as well as some binary and boolean ones. The command used to evaluate these mathematical expressions is `?`. For example:
 
     [0xB7F9D810]> ? 0x8048000
     134512640 0x8048000 01001100000 128.0M 804000:0000 134512640 00000000 134512640.0 0.000000  
@@ -34,18 +34,18 @@ Values are numbers expressable in various formats:
     10K     : KBytes  10*1024
     10M     : MBytes  10*1024*1024
 
-You can also use variables and seeks to build more complex expressions. Here are a few examples:
+You can also use variables and seeks to build more complex expressions. For example:
 
     ?@?    or stype @@?      ; misc help for '@' (seek), '~' (grep) (see ~??)
     ?$?           ; show available '$' variables
-    $$            ; here (current virtual seek)
+    $$            ; here (the current virtual seek)
     $l            ; opcode length
     $s            ; file size
     $j            ; jump address (e.g. jmp 0x10, jz 0x10 => 0x10)
     $f            ; jump fail address (e.g. jz 0x10 => next instruction)
     $m            ; opcode memory reference (e.g. mov eax,[0x10] => 0x10)
 
-For example:
+Some more examples:
 
     [0x4A13B8C0]> :? $m + $l
     140293837812900 0x7f98b45df4a4 03771426427372244 130658.0G 8b45d000:04a4 140293837812900 10100100 140293837812900.0 -0.000000
