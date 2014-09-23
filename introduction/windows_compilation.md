@@ -12,3 +12,22 @@ The following is an example of compiling with MinGW32 (you need to have installe
 This generates a native, 32-bit console application for Windows.
 
 Cygwin is another possibility; however, issues relating to Cygwin libraries can make debugging difficult in case of problems.
+
+## Bindings
+
+To build radare2 bindings you will need to install [Vala (valac) for Windows](https://wiki.gnome.org/Projects/Vala/ValaOnWindows)
+
+Then download [valabind](https://github.com/radare/valabind) and build it:
+
+    $ git clone https://github.com/radare/valabind.git valabind
+    $ cd valabind
+    $ make
+    $ make install
+
+After you installed valabind, you can build radare2-bindings, for example for Python and Perl:
+
+    $ git clone https://github.com/radare/radare2-bindings.git radare2-bindings
+    $ cd radare2-bindings
+    $ ./configure --enable=python,perl
+    $ make
+    $ make install
