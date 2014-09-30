@@ -19,20 +19,23 @@ The 'pD' command works like 'pd' but gets the number of bytes instead of the num
 
 The 'pseudo' syntax is closer to the humans, but it can be anoying if you are reading lot of code:
 
-    [0xB7FB8810]> e asm.pseudo = true
-    [0xB7FB8810]> pd 3
-    0x00404888    31ed         ebp = 0
-    0x0040488a    4989d1       r9 = rdx
-    0x0040488d    5e           pop rsi   
-
-    [0xB7FB8810]> e asm.syntax=intel
-    [0xB7FB8810]> pd 3
-    0xB7FB8810,  mov eax, esp        
-    0xB7FB8812   call 0xb7fb8a60
-    0xB7FB8817   add edi, eax        
-
-    [0xB7FB8810]> e asm.syntax=att
-    [0xB7FB8810]> pd 3
-    0xB7FB8810,  mov %esp, %eax          
-    0xB7FB8812   call 0xb7fb8a60
-    0xB7FB8817   add %eax, %edi          
+    [0x00405e1c]> e asm.pseudo = true
+    [0x00405e1c]> pd 3
+              ; JMP XREF from 0x00405dfa (fcn.00404531)
+              0x00405e1c    488b9424a80. rdx = [rsp+0x2a8]
+              0x00405e24    64483314252. rdx ^= [fs:0x28]
+              0x00405e2d    4889d8       rax = rbx
+    
+    [0x00405e1c]> e asm.syntax = intel
+    [0x00405e1c]> pd 3
+              ; JMP XREF from 0x00405dfa (fcn.00404531)
+              0x00405e1c    488b9424a80. mov rdx, [rsp+0x2a8]
+              0x00405e24    64483314252. xor rdx, [fs:0x28]
+              0x00405e2d    4889d8       mov rax, rbx
+    
+    [0x00405e1c]> e asm.syntax=att
+    [0x00405e1c]> pd 3
+              ; JMP XREF from 0x00405dfa (fcn.00404531)
+              0x00405e1c    488b9424a80. mov 0x2a8(%rsp), %rdx
+              0x00405e24    64483314252. xor %fs:0x28, %rdx
+              0x00405e2d    4889d8       mov %rbx, %rax
