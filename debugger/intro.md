@@ -35,4 +35,9 @@ To get the basic help of the debugger you can just type 'd?':
     dm[?*]         show memory maps
     dw [pid]       block prompt until pid dies
 
+To restart your debugging session, you can type `oo` or `oo+` depending on your desired behavior.
 
+    oo                 reopen current file (kill+fork in debugger)
+    oo+                reopen current file in read-write          
+    
+    
