@@ -1,6 +1,6 @@
 ## Entrypoint
 
-The flag "-e" lets us know the program entrypoint.
+The flag "-e" lets us know the program entrypoint
 
     $ rabin2 -e /bin/ls
     [Entrypoints]
@@ -12,3 +12,4 @@ The flag "-e" lets us know the program entrypoint.
     fs symbols
     f entry0 @ 0x00004888
     s entry0
+
