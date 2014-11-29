@@ -4,7 +4,7 @@ You can get radare from the website, [http://radare.org/](http://radare.org/), o
 
 Binary packages are available for a number of operating systems (Ubuntu, Maemo, Gentoo, Windows, iPhone, and so on). I highly encourage you to get the source and compile it yourself, to better understand the dependencies and make the examples more accessible.
 
-A new stable release is typically published every month. Nightly tarballs are sometimes available.
+A new stable release is typically published every month. Nightly tarballs are sometimes available [http://bin.rada.re/](http://bin.rada.re/).
 
 The radare development repository is often more stable than the 'stable' releases. To obtain the latest version:
 
