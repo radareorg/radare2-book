@@ -28,13 +28,13 @@ The `~` character enables the internal grep function used to filter the output o
 
 You can either grep for columns or rows:
 
-    pd 20~call:0          ; get first row
-    pd 20~call:1          ; get second row
+    pd 20~call!0          ; get first row
+    pd 20~call!1          ; get second row
     pd 20~call[0]         ; get first column
     pd 20~call[1]         ; get second column
 
 Or even combine them:
 
-    pd 20~call[0]:0       ; grep the first column of the first row matching 'call'
+    pd 20~call[0]!0       ; grep the first column of the first row matching 'call'
 
 The internal grep function is a key feature for scripting radare, because it can be used to iterate over a list of offsets or data processed from disassembly, ranges, or any other command. Refer to the macros section (iterators) for more information.
