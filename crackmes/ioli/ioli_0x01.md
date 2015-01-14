@@ -114,6 +114,6 @@ Password: 0x149a
 Invalid Password!
 ```
 
-It was worth a shot, but it doesn't work. That's because it compares the input to the decimal value of the hex value in the compare function. Assembly stores values in hex, and the hex value of 0x149a is different from the hex value 0x149a. This is a topic for a book on assembly however.
+It was worth a shot, but it doesn't work. That's because scanf will take the 0 in 0x149a to be a zero, rather than accepting the input as actually being the hex value.
 
 And this concludes IOLI 0x01.
