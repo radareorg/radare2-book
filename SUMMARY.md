@@ -58,3 +58,4 @@ This is the summary of radare2 book
 * [Rahash2](rahash2/intro.md)
 	* [Rahash tool](rahash2/rahash_tool.md)
 * [Debugger](debugger/intro.md)
+* [Reference Card](refcard/intro.md)
