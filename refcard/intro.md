@@ -1,519 +1,178 @@
 # Radare2 Reference Card
 
 ## Survival Guide
-<table>
-<tr>
-<td>Command</td>
-<td>Description</td>
-</tr>
-<tr>
-<td>aa</td>
-<td>Auto analyze</td>
-</tr>
-<tr>
-<td>pdf@fcn(Tab)</td>
-<td>Disassemble function</td>
-</tr>
-<tr>
-<td>f fcn(Tab)</td>
-<td>List functions</td>
-</tr>
-<tr>
-<td>f str(Tab)</td>
-<td>List strings</td>
-</tr>
-<tr>
-<td>fr [flagname] [newname]</td>
-<td>Rename flag</td>
-</tr>
-<tr>
-<td>psz [offset]</td>
-<td>Print string</td>
-</tr>
-<tr>
-<td>arf [flag]</td>
-<td>Find cross reference for a flag</td>
-</tr>
-</table>
+
+| Command                 | Description                     |
+|:------------------------|:--------------------------------|
+| aa                      | Auto analyze                    |
+| Content Cell            | Content Cell                    |
+| pdf@fcn(Tab)            | Disassemble function            |
+| f fcn(Tab)              | List functions                  |
+| f str(Tab)              | List strings                    |
+| fr [flagname] [newname] | Rename flag                     |
+| psz [offset]            | Print string                    |
+| arf [flag]              | Find cross reference for a flag |
+
 
 ## Flagspaces
 
-<table>
-<tr>
-<td>Command</td>
-<td>Description</td>
-</tr>
-<tr>
-<td>fs</td>
-<td>Display flagspaces</td>
-</tr>
-<tr>
-<td>fs *</td>
-<td>Select all flagspaces</td>
-</tr>
-<tr>
-<td>fs [sections]</td>
-<td>Select one flagspace</td>
-</tr>
-</table>
+
+
+| Command       | Description           |
+|:--------------|:----------------------|
+| fs            | Display flagspaces    |
+| fs *          | Select all flagspaces |
+| fs [sections] | Select one flagspace  |
 
 
 ## Flags
 
-<table>
-<tr>
-<td>Command</td>
-<td>Description</td>
-</tr>
-<tr>
-<td>f</td>
-<td>List flags</td>
-</tr>
-<tr>
-<td>fj</td>
-<td>Display flags in JSON</td>
-</tr>
-<tr>
-<td>fl</td>
-<td>Show flag length</td>
-</tr>
-<tr>
-<td>fx</td>
-<td>Show hexdump of flag</td>
-</tr>
-<tr>
-<td>fC [name] [comment]</td>
-<td>Set flag comment</td>
-</tr>
-</table>
+
+| Command             | Description           |
+|:--------------------|:----------------------|
+| f                   | List flags            |
+| fs *                | Select all flagspaces |
+| fs [sections]       | Select one flagspace  |
+| fj                  | Display flags in JSON |
+| fl                  | Show flag length      |
+| fx                  | Show hexdump of flag  |
+| fC [name] [comment] | Set flag comment      |
+
 
 
 
 ## Information
 
-<table>
-<tr>
-<td>Command</td>
-<td>Description</td>
-</tr>
-<tr>
-<td>ii</td>
-<td>Info on imports</td>
-</tr>
-<tr>
-<td>iI</td>
-<td>Info on binary</td>
-</tr>
-<tr>
-<td>ie</td>
-<td>Display entrypoint</td>
-</tr>
-<tr>
-<td>iS</td>
-<td>Display sections</td>
-</tr>
-<tr>
-<td>ir</td>
-<td>Display relocations</td>
-</tr>
-</table>
+
+| Command | Description            |
+|:--------|:-----------------------|
+| ii      | Information on imports |
+| iI      | Info on binary         |
+| ie      | Display entrypoint     |
+| iS      | Display sections       |
+| ir      | Display relocations    |
 
 
 
 ## Print string
 
-<table>
-<tr>
-<td>Command</td>
-<td>Description</td>
-</tr>
-<tr>
-<td>psz [offset]</td>
-<td>Print zero terminated string</td>
-</tr>
-<tr>
-<td>psb [offset]</td>
-<td>Print strings in current block</td>
-</tr>
-<tr>
-<td>psx [offset]</td>
-<td>Show string with scaped chars</td>
-</tr>
-<tr>
-<td>psp [offset]</td>
-<td>Print pascal string</td>
-</tr>
-<tr>
-<td>psw [offset]</td>
-<td>Print wide string</td>
-</tr>
-</table>
 
+| Command      | Description                    |
+|:-------------|:-------------------------------|
+| psz [offset] | Print zero terminated string   |
+| psb [offset] | Print strings in current block |
+| psx [offset] | Show string with scaped chars  |
+| psp [offset] | Print pascal string            |
+| psw [offset] | Print wide string              |
 
 
 ## Visual mode
 
-<table>
-<tr>
-<td>Command</td>
-<td>Description</td>
-</tr>
-<tr>
-<td>V</td>
-<td>Enter visual mode</td>
-</tr>
-<tr>
-<td>p/P</td>
-<td>Rotate modes (hex, disasm, debug, words, buf)</td>
-</tr>
-<tr>
-<td>c</td>
-<td>Toggle (c)ursor</td>
-</tr>
-<tr>
-<td>q</td>
-<td>Back to Radare shell</td>
-</tr>
-<tr>
-<td>hjkl</td>
-<td>Move around (or HJKL) (left-down-up-right)</td>
-</tr>
-<tr>
-<td>Enter</td>
-<td>Follow address of jump/call</td>
-</tr>
-<tr>
-<td>sS</td>
-<td>Step/step over</td>
-</tr>
-<tr>
-<td>o</td>
-<td>Go/seek to given offset</td>
-</tr>
-<tr>
-<td>.</td>
-<td>Seek to program counter</td>
-</tr>
-<tr>
-<td>/</td>
-<td>In cursor mode, search in current block</td>
-</tr>
-<tr>
-<td>:cmd</td>
-<td>Run radare command</td>
-</tr>
-<tr>
-<td>;[-]cmt</td>
-<td>Add/remove comment</td>
-</tr>
-<tr>
-<td>/*+-[]</td>
-<td>Change block size, [] = resize hex.cols</td>
-</tr>
-<tr>
-<td>>||<</td>
-<td>Seek aligned to block size</td>
-</tr>
-<tr>
-<td>i/a/A</td>
-<td>(i)nsert hex, (a)ssemble code, visual (A)ssembler</td>
-</tr>
-<tr>
-<td>b/B</td>
-<td>Toggle breakpoint / automatic block size</td>
-</tr>
-<tr>
-<td>d[f?]</td>
-<td>Define function, data, code, ..</td>
-</tr>
-<tr>
-<td>D</td>
-<td>Enter visual diff mode (set diff.from/to)</td>
-</tr>
-<tr>
-<td>e</td>
-<td>Edit eval configuration variables</td>
-</tr>
-<tr>
-<td>f/F</td>
-<td>Set/unset flag</td>
-</tr>
-<tr>
-<td>gG</td>
-<td>Go seek to begin and end of file (0-$s)</td>
-</tr>
-<tr>
-<td>mK/’K</td>
-<td>Mark/go to Key (any key)</td>
-</tr>
-<tr>
-<td>M</td>
-<td>Walk the mounted filesystems</td>
-</tr>
-<tr>
-<td>n/N</td>
-<td>Seek next/prev function/flag/hit (scr.nkey)</td>
-</tr>
-<tr>
-<td>o</td>
-<td>Go/seek to given offset</td>
-</tr>
-<tr>
-<td>C</td>
-<td>Toggle (C)olors</td>
-</tr>
-<tr>
-<td>R</td>
-<td>Randomize color palette (ecr)</td>
-</tr>
-<tr>
-<td>t</td>
-<td>Track flags (browse symbols, functions..)</td>
-</tr>
-<tr>
-<td>T</td>
-<td>Browse anal info and comments</td>
-</tr>
-<tr>
-<td>v</td>
-<td>Visual code analysis menu</td>
-</tr>
-<tr>
-<td>V/W</td>
-<td>(V)iew graph (agv?), open (W)ebUI</td>
-</tr>
-<tr>
-<td>uU</td>
-<td>Undo/redo seek</td>
-</tr>
-<tr>
-<td>x</td>
-<td>Show xrefs to seek between them</td>
-</tr>
-<tr>
-<td>yY</td>
-<td>Copy and paste selection</td>
-</tr>
-<tr>
-<td>z</td>
-<td>Toggle zoom mode</td>
-</tr>
-</table>
+
+| Command        | Description                                       |
+|:---------------|:--------------------------------------------------|
+| V              | Enter visual mode                                 |
+| p/P            | Rotate modes (hex, disasm, debug, words, buf)     |
+| c              | Toggle (c)ursor                                   |
+| q              | Back to Radare shell                              |
+| hjkl           | Move around (or HJKL) (left-down-up-right)        |
+| Enter          | Follow address of jump/call                       |
+| sS             | Step/step over                                    |
+| o              | Go/seek to given offset                           |
+| .              | Seek to program counter                           |
+| /              | In cursor mode, search in current block           |
+| :cmd           | Run radare command                                |
+| ;[-]cmt        | Add/remove comment                                |
+| /*+-[]         | Change block size, [] = resize hex.cols           |
+| >&#124;&#124;< | Seek aligned to block size                        |
+| i/a/A          | (i)nsert hex, (a)ssemble code, visual (A)ssembler |
+| b/B            | Toggle breakpoint / automatic block size          |
+| d[f?]          | Define function, data, code, ..                   |
+| D              | Enter visual diff mode (set diff.from/to)         |
+| e              | Edit eval configuration variables                 |
+| f/F            | Set/unset flag                                    |
+| gG             | Go seek to begin and end of file (0-$s)           |
+| mK/’K          | Mark/go to Key (any key)                          |
+| M              | Walk the mounted filesystems                      |
+| n/N            | Seek next/prev function/flag/hit (scr.nkey)       |
+| o              | Go/seek to given offset                           |
+| C              | Toggle (C)olors                                   |
+| R              | Randomize color palette (ecr)                     |
+| t              | Track flags (browse symbols, functions..)         |
+| T              | Browse anal info and comments                     |
+| v              | Visual code analysis menu                         |
+| V/W            | (V)iew graph (agv?), open (W)ebUI                 |
+| uU             | Undo/redo seek                                    |
+| x              | Show xrefs to seek between them                   |
+| yY             | Copy and paste selection                          |
+| z              | Toggle zoom mode                                  |
 
 
 ## Searching
-<table>
-<tr>
-<td>Command</td>
-<td>Description</td>
-</tr>
-<tr>
-<td>/ foo\00</td>
-<td>Search for string ’foo\0’</td>
-</tr>
-<tr>
-<td>/b</td>
-<td>Search backwards</td>
-</tr>
-<tr>
-<td>//</td>
-<td>Repeat last search</td>
-</tr>
-<tr>
-<td>/w foo</td>
-<td>Search for wide string ’f\0o\0o\0’</td>
-</tr>
-<tr>
-<td>/wi foo</td>
-<td>Search for wide string ignoring case</td>
-</tr>
-<tr>
-<td>/! ff</td>
-<td>Search for first occurrence not matching</td>
-</tr>
-<tr>
-<td>/i foo</td>
-<td>Search for string ’foo’ ignoring case</td>
-</tr>
-<tr>
-<td>/e /E.F/i</td>
-<td>Match regular expression</td>
-</tr>
-<tr>
-<td>/x ff0.23</td>
-<td>Search for hex string</td>
-</tr>
-<tr>
-<td>/x ff..33</td>
-<td>Search for hex string ignoring some nibbles</td>
-</tr>
-<tr>
-<td>/x ff43 ffd0</td>
-<td>Search for hexpair with mask</td>
-</tr>
-<tr>
-<td>/d 101112</td>
-<td>Search for a deltified sequence of bytes</td>
-</tr>
-<tr>
-<td>/!x 00</td>
-<td>Inverse hexa search (find first byte != 0x00)</td>
-</tr>
-<tr>
-<td>/c jmp [esp]</td>
-<td>Search for asm code (see search.asmstr)</td>
-</tr>
-<tr>
-<td>/a jmp eax</td>
-<td>Assemble opcode and search its bytes</td>
-</tr>
-<tr>
-<td>/A</td>
-<td>Search for AES expanded keys</td>
-</tr>
-<tr>
-<td>/r sym.printf</td>
-<td>Analyze opcode reference an offset</td>
-</tr>
-<tr>
-<td>/R</td>
-<td>Search for ROP gadgets</td>
-</tr>
-<tr>
-<td>/P</td>
-<td>Show offset of previous instruction</td>
-</tr>
-<tr>
-<td>/m magicfile</td>
-<td>Search for matching magic file</td>
-</tr>
-<tr>
-<td>/p patternsize</td>
-<td>Search for pattern of given size</td>
-</tr>
-<tr>
-<td>/z min max</td>
-<td>Search for strings of given size</td>
-</tr>
-<tr>
-<td>/v[?248] num</td>
-<td>Look for a asm.bigendian 32bit value</td>
-</tr>
-</table>
 
-
+| Command        | Description                                   |
+|:---------------|:----------------------------------------------|
+| / foo\00       | Search for string ’foo\0’                     |
+| /b             | Search backwards                              |
+| //             | Repeat last search                            |
+| /w foo         | Search for wide string ’f\0o\0o\0’            |
+| /wi foo        | Search for wide string ignoring case          |
+| /! ff          | Search for first occurrence not matching      |
+| /i foo         | Search for string ’foo’ ignoring case         |
+| /e /E.F/i      | Match regular expression                      |
+| /x ff0.23      | Search for hex string                         |
+| /x ff..33      | Search for hex string ignoring some nibbles   |
+| /x ff43 ffd0   | Search for hexpair with mask                  |
+| /d 101112      | Search for a deltified sequence of bytes      |
+| /!x 00         | Inverse hexa search (find first byte != 0x00) |
+| /c jmp [esp]   | Search for asm code (see search.asmstr)       |
+| /a jmp eax     | Assemble opcode and search its bytes          |
+| /A             | Search for AES expanded keys                  |
+| /r sym.printf  | Analyze opcode reference an offset            |
+| /R             | Search for ROP gadgets                        |
+| /P             | Show offset of previous instruction           |
+| /m magicfile   | Search for matching magic file                |
+| /p patternsize | Search for pattern of given size              |
+| /z min max     | Search for strings of given size              |
+| /v[?248] num   | Look for a asm.bigendian 32bit value          |
 
 ## Saving
 
 
-<table>
-<tr>
-<td>Command</td>
-<td>Description</td>
-</tr>
-<tr>
-<td>Po [file]</td>
-<td>Open project</td>
-</tr>
-<tr>
-<td>Ps [file]</td>
-<td>Save project</td>
-</tr>
-<tr>
-<td>Pi [file]</td>
-<td>Show project information</td>
-</tr>
-</table>
+| Command   | Description              |
+|:----------|:-------------------------|
+| Po [file] | Open project             |
+| Ps [file] | Save project             |
+| Pi [file] | Show project information |
+
 
 
 ## Usable variables in expression
 
-<table>
-<tr>
-<td>$$</td>
-<td>Here (current virtual seek)</td>
-</tr>
-<tr>
-<td>$o</td>
-<td>Here (current disk io offset)</td>
-</tr>
-<tr>
-<td>$s</td>
-<td>File size</td>
-</tr>
-<tr>
-<td>$b</td>
-<td>Block size</td>
-</tr>
-<tr>
-<td>$w</td>
-<td>Get word size, 4 if asm.bits=32, 8 if 64</td>
-</tr>
-<tr>
-<td>$c,$r</td>
-<td>Get width and height of terminal</td>
-</tr>
-<tr>
-<td>$S</td>
-<td>Section offset</td>
-</tr>
-<tr>
-<td>$SS</td>
-<td>Section size</td>
-</tr>
-<tr>
-<td>$j</td>
-<td>Jump address (jmp 0x10, jz 0x10 => 0x10)</td>
-</tr>
-<tr>
-<td>$f</td>
-<td>Jump fail address (jz 0x10 => next instruction)</td>
-</tr>
-<tr>
-<td>$I</td>
-<td>Number of instructions of current function</td>
-</tr>
-<tr>
-<td>$F</td>
-<td>Current function size</td>
-</tr>
-<tr>
-<td>$Jn</td>
-<td>Get nth jump of function</td>
-</tr>
-<tr>
-<td>$Cn</td>
-<td>Get nth call of function</td>
-</tr>
-<tr>
-<td>$Dn</td>
-<td>Get nth data reference in function</td>
-</tr>
-<tr>
-<td>$Xn</td>
-<td>Get nth xref of function</td>
-</tr>
-<tr>
-<td>$m</td>
-<td>Opcode memory reference (mov eax,[0x10] => 0x10)</td>
-</tr>
-<tr>
-<td>$l</td>
-<td>Opcode length</td>
-</tr>
-<tr>
-<td>$e</td>
-<td>1 if end of block, else 0</td>
-</tr>
-<tr>
-<td>$ev</td>
-<td>Get value of eval config variable</td>
-</tr>
-<tr>
-<td>$?</td>
-<td>Last comparison value</td>
-</tr>
-</table>
+| Command | Description                                      |
+|:--------|:-------------------------------------------------|
+| $$      | Here (current virtual seek)                      |
+| $o      | Here (current disk io offset)                    |
+| $s      | File size                                        |
+| $b      | Block size                                       |
+| $w      | Get word size, 4 if asm.bits=32, 8 if 64         |
+| $c,$r   | Get width and height of terminal                 |
+| $S      | Section offset                                   |
+| $SS     | Section size                                     |
+| $j      | Jump address (jmp 0x10, jz 0x10 => 0x10)         |
+| $f      | Jump fail address (jz 0x10 => next instruction)  |
+| $I      | Number of instructions of current function       |
+| $F      | Current function size                            |
+| $Jn     | Get nth jump of function                         |
+| $Cn     | Get nth call of function                         |
+| $Dn     | Get nth data reference in function               |
+| $Xn     | Get nth xref of function                         |
+| $m      | Opcode memory reference (mov eax,[0x10] => 0x10) |
+| $l      | Opcode length                                    |
+| $e      | 1 if end of block, else 0                        |
+| $ev     | Get value of eval config variable                |
+| $?      | Last comparison value                            |
+
 
 ## License
 
