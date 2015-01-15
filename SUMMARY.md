@@ -14,6 +14,7 @@ This is the summary of radare2 book
 	* [Expressions](introduction/expressions.md)
 	* [Rax2](introduction/rax2.md)
 	* [Basic debugger session](introduction/basic_debugger_session.md)
+	* [Contributing](introduction/contributing.md)
 * [Configuration](configuration/intro.md)
 	* [Colors](configuration/colors.md)
 	* [Common configuration variables](configuration/common_configuration_variables.md)
