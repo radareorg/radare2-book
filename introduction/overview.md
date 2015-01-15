@@ -54,3 +54,7 @@ A launcher for running programs with a different environment, arguments, permiss
 * Crackmes
 * Fuzzing
 * Test suites
+
+###rax2
+
+A utility that aims to be a minimalistic expression evaluator for the shell. It is useful for making base conversions between floating point values, hexadecimal representations, hexpair strings to ascii, octal to integer. It supports endianness and can be used as a shell if no arguments are given.
