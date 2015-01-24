@@ -40,4 +40,4 @@ In visual mode you can enter commands with `:` to dump buffer contents like
 
 To get help in visual mode press `?`.
 
-At this point the most common commands are !reg which can be used to get or set values of the general purpose registers. You can also manipulate the hardware and extended/floating registers. 
+At this point the most common commands are dr which can be used to get or set values of the general purpose registers. You can also manipulate the hardware and extended/floating registers. 
