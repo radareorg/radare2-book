@@ -1,6 +1,6 @@
 # Configuration
 
-The core reads ~/.radare2rc while starting, so you can setup there some `e` commands to set it up in your favorite way.
+The core reads `~/.radare2rc` while starting, so you can setup there some `e` commands to set it up in your favorite way.
 
 To avoid parsing this file, use `-n` and to get a cleaner output for using radare in batch mode maybe is better to just drop the verbosity with `-v`.
 
@@ -8,7 +8,7 @@ All the configuration of radare is done with the `eval` command which allows the
 
 The most common configuration looks like this:
 
-    $ cat ~/.radarerc
+    $ cat ~/.radare2rc
     e scr.color = true
     e dbg.bep   = loader
     

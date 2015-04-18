@@ -4,7 +4,7 @@ To start debugging a program use the `-d` flag and append the PID or the program
 
     $ r2 -d /bin/ls
 
-The debugger will fork and load the `ls` program in memory stopping the execution in the `ld.so`, so don't expect to see the entrypoint or the mapped libraries at this point. To change this you can define a new 'break entry point' adding `e dbg.bep=entry` or `dbg.bep=main` to your .radarerc.
+The debugger will fork and load the `ls` program in memory stopping the execution in the `ld.so`, so don't expect to see the entrypoint or the mapped libraries at this point. To change this you can define a new 'break entry point' adding `e dbg.bep=entry` or `dbg.bep=main` to your `~/.radare2rc`.
 
 But take care on this, because some malware or programs can execute code before the main.
 
