@@ -48,6 +48,32 @@ A program to find byte patterns in a file.
 
 A frontend for r_egg. ragg2 compiles programs into tiny binaries for x86, x86-64, and ARM.
 
+#### Examples
+
+       $ cat hi.r
+       /* hello world in r_egg */
+       write@syscall(4);
+       exit@syscall(1);
+
+       main@global(128) {
+         .var0 = "hi!\n";
+         write(1,.var0, 4);
+         exit(0);
+       }
+       $ ragg2 -O -F hi.r
+       $ ./hi
+       hi!
+
+       $ cat hi.c
+       main() {
+         write(1, "Hello0, 6);
+         exit(0);
+       }
+       $ ragg2 hi.c
+       $ ./hi.c.bin
+       Hello
+
+
 ###rarun2
 
 A launcher for running programs with a different environment, arguments, permissions, directories, and overridden, default file descriptors. rarun2 is useful for:
