@@ -58,3 +58,21 @@ A launcher for running programs with a different environment, arguments, permiss
 ###rax2
 
 A utility that aims to be a minimalistic expression evaluator for the shell. It is useful for making base conversions between floating point values, hexadecimal representations, hexpair strings to ascii, octal to integer. It supports endianness and can be used as a shell if no arguments are given.
+
+
+    $ rax2 1337
+    0x539
+    
+    $ rax2 0x400000
+    4194304
+    
+    $ rax2 -b 01111001
+    y
+    
+    $ rax2 -S radare2
+    72616461726532
+    
+    $ rax2 -s 617765736f6d65
+    awesome
+    
+    
