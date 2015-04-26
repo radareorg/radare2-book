@@ -1,2 +1,2 @@
-# Binary DIffing
+# Binary Diffing
 
