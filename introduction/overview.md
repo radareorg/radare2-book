@@ -30,7 +30,6 @@ A command line assembler and disassembler for multiple architectures (including 
     $ echo 'push eax;nop;nop' | rasm2 -f -
     5090
 
-
 ###rahash2
 
 An implementation of a block-based hash. From small text strings to large disks, rahash2 supports multiple algorithms, including MD4, MD5, CRC16, CRC32, SHA1, SHA256, SHA384, SHA512, par, xor, xorpair, mod255, hamdist, or entropy.
