@@ -2,6 +2,10 @@
 
 The visual mode is a user-friendlier interface for the commandline prompt of radare which accepts hjkl movement keys, a cursor for selecting bytes and some keybindings to ease the use of the debugger.
 
+
+![Visual Mode](visualmode.png)
+
+
 In this mode you can change the configuration in a easy way using the `e` (eval) key. Or just track the flags and walk thru the flagspaces pressing `t`.
 
 To get a help of all the keybindings hooked in visual mode you can press `?`:
