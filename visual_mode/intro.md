@@ -5,8 +5,7 @@ The visual mode is a user-friendlier interface for the commandline prompt of rad
 
 ![Visual Mode](visualmode.png)
 
-
-In this mode you can change the configuration in a easy way using the `e` (eval) key. Or just track the flags and walk thru the flagspaces pressing `t`.
+## Getting Help
 
 To get a help of all the keybindings hooked in visual mode you can press `?`:
 
