@@ -51,5 +51,3 @@ To get a help of all the keybindings hooked in visual mode you can press `?`:
       F8      step over
       F9      continue
 
-
-From the visual mode you can toggle the insert and cursor modes with the `i` and `c` keys.
