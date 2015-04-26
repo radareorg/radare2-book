@@ -7,7 +7,7 @@
    * [Getting radare](introduction/getting_radare.md)
    * [Compilation and portability](introduction/compilation_portability.md)
    * [Windows compilation](introduction/windows_compilation.md)
-   * Docker
+   * [Docker](docker.md)
    * [Commandline flags](introduction/commandline_flags.md)
    * [Basic usage](introduction/basic_usage.md)
    * [Command format](introduction/command_format.md)
