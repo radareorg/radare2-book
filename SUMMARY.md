@@ -32,7 +32,7 @@
    * [Visual cursor](visual_mode/visual_cursor.md)
    * [Visual inserts](visual_mode/visual_insert.md)
    * [Visual XREFS](visual_mode/visual_xrefs.md)
-   * Visual Configuration editor
+   * [Visual Configuration editor](visual_configuration_editor.md)
 * [Searching bytes](search_bytes/intro.md)
    * [Basic Searches](search_bytes/basic_searches.md)
    * [Configurating the search](search_bytes/configurating_the_search.md)
