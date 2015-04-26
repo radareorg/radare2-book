@@ -1,6 +1,13 @@
 ## Visual cursor
 
-Pressing lowercase `c` makes the cursor appear or disappear. The cursor is used to select a range of bytes or just point to a byte to flag it (press `f` to create a new flag where the cursor points to)
+Pressing lowercase `c` makes the cursor appear or disappear:
+
+
+
+![Cursor at 0x00404896](cursor.png)
+
+
+The cursor is used to select a range of bytes or just point to a byte to flag it (press `f` to create a new flag where the cursor points to)
 
 If you select a range of bytes press `i` and then a byte array to overwrite the selected bytes with the ones you choose in a circular copy way. For example:
 
