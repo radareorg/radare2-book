@@ -14,7 +14,9 @@ Extracts information from executable binaries, such as ELF, PE, Java CLASS, and 
 
 ###rasm2
 
-A command line assembler and disassembler for multiple architectures (including Intel x86 and x86-64, MIPS, ARM, PowerPC, Java, and MSIL):
+A command line assembler and disassembler for multiple architectures (including Intel x86 and x86-64, MIPS, ARM, PowerPC, Java, and MSIL)
+
+#### Examples
 
     $ rasm2 -a java 'nop'
     00
@@ -85,6 +87,7 @@ A launcher for running programs with a different environment, arguments, permiss
 
 A utility that aims to be a minimalistic expression evaluator for the shell. It is useful for making base conversions between floating point values, hexadecimal representations, hexpair strings to ascii, octal to integer. It supports endianness and can be used as a shell if no arguments are given.
 
+#### Examples
 
     $ rax2 1337
     0x539
