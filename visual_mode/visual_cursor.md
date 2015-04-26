@@ -2,8 +2,6 @@
 
 Pressing lowercase `c` makes the cursor appear or disappear:
 
-
-
 ![Cursor at 0x00404896](cursor.png)
 
 
