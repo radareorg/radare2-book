@@ -7,6 +7,7 @@
    * [Getting radare](introduction/getting_radare.md)
    * [Compilation and portability](introduction/compilation_portability.md)
    * [Windows compilation](introduction/windows_compilation.md)
+   * Docker
    * [Commandline flags](introduction/commandline_flags.md)
    * [Basic usage](introduction/basic_usage.md)
    * [Command format](introduction/command_format.md)
@@ -14,7 +15,6 @@
    * [Rax2](introduction/rax2.md)
    * [Basic debugger session](introduction/basic_debugger_session.md)
    * [Contributing](introduction/contributing.md)
-   * Docker
 * [Configuration](configuration/intro.md)
    * [Colors](configuration/colors.md)
    * [Common configuration variables](configuration/common_configuration_variables.md)
