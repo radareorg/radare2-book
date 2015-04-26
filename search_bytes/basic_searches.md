@@ -28,7 +28,13 @@ We can also search wide-char strings (the ones containing zeros between each let
 
     [0x00000000]> /w Hello
     0 results found.
-    
+
+Search for strings ignoring case
+
+    [0x0040488f]> /i Stallman
+    Searching 8 bytes from 0x00400238 to 0x0040488f: 53 74 61 6c 6c 6d 61 6e 
+    [# ]hits: 004138 < 0x0040488f  hits = 0   
+   
 It is also possible to mix hexadecimal scape sequences in the search string:
 
     [0x00000000]> / \x7FELF
