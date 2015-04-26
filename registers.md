@@ -30,7 +30,7 @@ There are different commands to get values of the registers. For the General Pur
     [0x4A13B8C0]> dr eip = esp   ; set 'eip' as esp
     
     
-    The interaction between the plugin and the core is done by commands returning radare instructions. This is used for example to set some flags in the core to set the values of the registers.
+The interaction between the plugin and the core is done by commands returning radare instructions. This is used for example to set some flags in the core to set the values of the registers.
 
     [0x7f0f2dbae630]> dr*      ; Appending '*' will show radare commands
     f r15 1 0x0
