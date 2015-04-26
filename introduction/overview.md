@@ -55,6 +55,32 @@ A launcher for running programs with a different environment, arguments, permiss
 * Fuzzing
 * Test suites
 
+#### Sample rarun2 script
+
+       $ cat foo.rr2
+       #!/usr/bin/rarun2
+       program=./pp400
+       arg0=10
+       stdin=foo.txt
+       chdir=/tmp
+       #chroot=.
+       ./foo.rr2
+
+
+#### Connecting a program to a socket
+
+       $ nc -l 9999
+       $ rarun2 program=/bin/ls connect=localhost:9999
+
+
+#### Debugging a program redirecting io to another terminal
+
+1. open a new terminal and type 'tty' to get
+       $ tty ; clear ; sleep 999999
+       /dev/ttyS010
+2. In another terminal run r2
+        $ r2 -d rarun2 program=/bin/ls stdio=/dev/ttys010
+
 ###rax2
 
 A utility that aims to be a minimalistic expression evaluator for the shell. It is useful for making base conversions between floating point values, hexadecimal representations, hexpair strings to ascii, octal to integer. It supports endianness and can be used as a shell if no arguments are given.
