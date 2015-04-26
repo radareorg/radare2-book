@@ -18,6 +18,11 @@ There is also a simple script to do this automatically:
 
     $ sys/install.sh
 
+## Static build
+
+You can build statically radare2 and all the tools with the command:
+
+    $ sys/static.sh
 
 ## Docker
 
