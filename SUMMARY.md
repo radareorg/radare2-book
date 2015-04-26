@@ -50,6 +50,8 @@
    * [Libraries](rabin2/libraries.md)
    * [Strings](rabin2/strings.md)
    * [Program sections](rabin2/program_sections.md)
+* [Radiff2](radiff2.md)
+   * [Binary Diffing](binary_diffing.md)
 * [Rasm2](rasm2/intro.md)
    * [Assemble](rasm2/assemble.md)
    * [Disassemble](rasm2/disassemble.md)
@@ -63,6 +65,4 @@
        * [IOLI 0x00](crackmes/ioli/ioli_0x00.md)
        * [IOLI 0x01](crackmes/ioli/ioli_0x01.md)
 * [Reference Card](refcard/intro.md)
-* [Radiff2](radiff2.md)
-   * [Binary Diffing](binary_diffing.md)
 
