@@ -64,5 +64,5 @@
        * [IOLI 0x01](crackmes/ioli/ioli_0x01.md)
 * [Reference Card](refcard/intro.md)
 * [Radiff2](radiff2.md)
-   * Binary Diffing
+   * [Binary Diffing](binary_diffing.md)
 
