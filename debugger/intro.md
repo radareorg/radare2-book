@@ -1,6 +1,6 @@
 # Debugger
 
-The debugger in radare is implemented as an IO plugin. It handles two different URIs for creating or attaching to a process: dbg:// and pid://.
+The debugger in radare is implemented as an IO plugin. It handles several URIs for creating or attaching to a process: dbg:// and pid://.
 
 There are different backends for multiple architectures and operating systems like GNU/Linux, Windows, MacOSX, (Net,Free,Open)BSD and Solaris.
 
