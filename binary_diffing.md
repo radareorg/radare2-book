@@ -50,5 +50,11 @@ This is the result:
 
 
 
+The parts in yellow are indicating that some offsets are not matching, the grey one is a perfect match, while the red one highlight a strong difference. If you look closely, you'll see that the left one is `mov edi, 0x1; call sym.imp.exit`, while the right one is xor edi, edi; call sym.imp.exit.
 
+Binary diffing is an important feature for reverse engineering. It can be used to analyze [security updates](https://en.wikipedia.org/wiki/Patch_Tuesday), infected binaries, firmware changes and more..
+
+We have only shown the code analysis diffing functionality, but radare2 supports more sort of diffing between two binaries at byte level, deltified similarities and more to come.
+
+We have plans to implement more kinds of bindiffing functionalities into r2, and why not, add support for ascii art graph diffing and better integration with the rest of the toolkit.
 
