@@ -61,6 +61,7 @@
 * [Rahash2](rahash2/intro.md)
    * [Rahash tool](rahash2/rahash_tool.md)
 * [Debugger](debugger/intro.md)
+   * Registers
 * [Crackmes](crackmes/intro.md)
    * [IOLI](crackmes/ioli/intro.md)
        * [IOLI 0x00](crackmes/ioli/ioli_0x00.md)
