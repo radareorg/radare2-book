@@ -43,7 +43,7 @@
    * [Searching AES Keys](search_bytes/searching_aes_keys.md)
 * [Disassembling](disassembling/intro.md)
    * [Adding metadata](disassembling/adding_metadata.md)
-   * ESIL
+   * [ESIL](esil.md)
 * [Rabin2](rabin2/intro.md)
    * [File identification](rabin2/file_identification.md)
    * [Entrypoint](rabin2/entrypoints.md)
