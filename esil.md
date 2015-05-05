@@ -1,4 +1,6 @@
-#ESIL
+#ESIL 
+
+*From the wiki page of radare2 github*
 
 ESIL stands for 'Evaluable Strings Intermediate Language'. It aims to describe a Forth-like representation for every opcode. Those representations can be evaluated in order to emulate code. Each element of an esil expression is separated by a comma. The VM can be described as this:
 ```
