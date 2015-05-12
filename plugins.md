@@ -2,7 +2,6 @@
 
 ## IO plugins
 
-
 All the access to files, network, debugger, etc.. is wrapped by an IO abstraction layer that allows to interpret all the data as if it was a single file.
 
 IO plugins are the ones used to wrap the open, read, write and 'system' on virtual file systems.You can make radare understand that any thing can be handled as a plain file. A socket connection, a remote radare session, a file, a process, a device, a gdb session, etc..
