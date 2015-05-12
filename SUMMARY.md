@@ -69,4 +69,5 @@
        * [IOLI 0x01](crackmes/ioli/ioli_0x01.md)
 * [Reference Card](refcard/intro.md)
 * Remoting capabilities
+   * Remoting Capabilities
 
