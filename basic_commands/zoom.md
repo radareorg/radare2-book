@@ -1,6 +1,6 @@
 ## Zoom 
 
-The zoom is a print mode that allows you to get a global view of the whole file or memory map in a single screen. Each byte represents `file_size/block_size` bytes of the file. Use the `pO` (zoom out print mode) to use it, or just toggle 'z' in the visual mode to zoom-out/zoom-in.
+The zoom is a print mode that allows you to get a global view of the whole file or memory map in a single screen. Each byte represents `file_size/block_size` bytes of the file. Use the `pO` (zoom out print mode) to use it, or just toggle `z` in the visual mode to zoom-out/zoom-in.
 
 The cursor can be used to scroll faster through the zoom out view and pressing `z` again to zoom-in where the cursor points.
 
