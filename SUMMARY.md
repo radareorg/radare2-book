@@ -65,10 +65,10 @@
    * [Registers](registers.md)
 * Remoting capabilities
    * [Remoting Capabilities](remoting_capabilities.md)
+* Plugins
 * [Crackmes](crackmes/intro.md)
    * [IOLI](crackmes/ioli/intro.md)
        * [IOLI 0x00](crackmes/ioli/ioli_0x00.md)
        * [IOLI 0x01](crackmes/ioli/ioli_0x01.md)
 * [Reference Card](refcard/intro.md)
-* Plugins
 
