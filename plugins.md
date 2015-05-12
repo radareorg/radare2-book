@@ -2,13 +2,12 @@
 
 ## IO plugins
 
-IO plugins are the ones used to wrap the open, read, write and 'system' on virtual file systems.
 
-The cool thing of IO plugins is that you can make radare understand that any thing can be handled as a plain file. A socket connection, a remote radare session, a file, a process, a device, a gdb session, etc..
+All the access to files, network, debugger, etc.. is wrapped by an IO abstraction layer that allows to interpret all the data as if it was a single file.
 
-So, when radare reads a block of bytes, is the task of the IO plugin to get these bytes from any place and put them in the internal buffer.
+IO plugins are the ones used to wrap the open, read, write and 'system' on virtual file systems.You can make radare understand that any thing can be handled as a plain file. A socket connection, a remote radare session, a file, a process, a device, a gdb session, etc..
 
-IO plugins are selected while opening a file by its URI. Here'r some examples:
+So, when radare reads a block of bytes, is the task of the IO plugin to get these bytes from any place and put them in the internal buffer. IO plugins are selected while opening a file by its URI. Here'r some examples:
 
 Debugging URIs
 
@@ -26,7 +25,7 @@ Remote sessions
     shortcut for
     $ r2 -
 
-You can get a list of the radare IO plugins by typing 'radare -L':
+You can get a list of the radare IO plugins by typing `radare -L`:
 
     $ r2 -L
     rw_  zip         Open zip files apk://foo.apk//MANIFEST or zip://foo.apk//theclass/fun.class, show files with: zip://foo.apk/, open all files with zipall:// (BSD)
