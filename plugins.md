@@ -28,8 +28,7 @@ Remote sessions
 
 You can get a list of the radare IO plugins by typing 'radare -L':
 
-$ r2 -L
-    r2 -L
+    $ r2 -L
     rw_  zip         Open zip files apk://foo.apk//MANIFEST or zip://foo.apk//theclass/fun.class, show files with: zip://foo.apk/, open all files with zipall:// (BSD)
     rwd  windbg      Attach to a KD debugger (LGPL3)
     rw_  sparse      sparse buffer allocation (sparse://1024 sparse://) (LGPL3)
