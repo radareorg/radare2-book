@@ -66,7 +66,7 @@
 * Remoting capabilities
    * [Remoting Capabilities](remoting_capabilities.md)
 * Plugins
-   * Plugins
+   * [Plugins](plugins.md)
 * [Crackmes](crackmes/intro.md)
    * [IOLI](crackmes/ioli/intro.md)
        * [IOLI 0x00](crackmes/ioli/ioli_0x00.md)
