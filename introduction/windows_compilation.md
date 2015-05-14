@@ -13,6 +13,8 @@ This generates a native, 32-bit console application for Windows.
 
 Cygwin is another possibility; however, issues relating to Cygwin libraries can make debugging difficult in case of problems.
 
+Please, be sure to build radare2 from that environment you're going to use r2 in. If you're going to use r2 in MinGW32 shell or cmd.exe - you need to build r2 in the MinGW32 environment. And if you're going to use r2 in Cygwin - you need to build from the Cygwin shell as well. Since Cygwin is more UNIX compatible radare2 supports here more colors and unicode symbols.
+
 ## Bindings
 
 To build radare2 bindings you will need to install [Vala (valac) for Windows](https://wiki.gnome.org/Projects/Vala/ValaOnWindows)
