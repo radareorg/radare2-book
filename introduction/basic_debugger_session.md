@@ -8,9 +8,6 @@ The debugger will fork and load the `ls` program in memory stopping the executio
 
 But take care on this, because some malware or programs can execute code before the main.
 
-Now the debugger prompt should appear and if you press `enter` ( null command ) the basic view of the process will be displayed with the stack dump, general purpose registers and disassembly from current program counter (eip on intel).
-
-
 Here's a list of the most common commands for the debugger:
 
     > d?          ; get help on debugger commands
