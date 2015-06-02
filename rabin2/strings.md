@@ -16,7 +16,7 @@ The -z flag is used to list all the strings located in the section .rodata for E
     
 
 With -r all this information is converted to radare2 commands, which will create a flag space called "strings" filled with flags for all those strings. 
-Furtheremore, it will redefine them as strings insted of code.
+Furthermore, it will redefine them as strings instead of code.
 
     $ rabin2 -zr /bin/ls |head
     fs strings
