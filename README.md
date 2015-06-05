@@ -1,6 +1,6 @@
 # R2 "Book"
 
-# Welcome on the Radare2 Book
+# Welcome to the Radare2 Book
 
 * Webpage: https://www.gitbook.com/book/maijin/radare2book/details
 
