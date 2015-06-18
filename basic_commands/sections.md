@@ -22,7 +22,8 @@ Here's the help message:
 
 You can specify a section in a single line in this way:
 
-    S [off] [vaddr] [sz] [vsz] [name] [rwx] ; add new section
+    # Add new section
+    S [off] [vaddr] [sz] [vsz] [name] [rwx]
 
 For example:
 
@@ -30,7 +31,8 @@ For example:
 
 Displaying the section information:
 
-    [0x00404888]> S ; list sections
+    # List sections
+    [0x00404888]> S
     
     [00] . 0x00000238 r-- va=0x00400238 sz=0x0000001c vsz=0000001c .interp
     [01] . 0x00000254 r-- va=0x00400254 sz=0x00000020 vsz=00000020 .note.ABI_tag
@@ -39,7 +41,8 @@ Displaying the section information:
     [04] . 0x00000300 r-- va=0x00400300 sz=0x00000c18 vsz=00000c18 .dynsym
     
     
-    [0xB7EEA810]> S= ; list sections (in nice ascii-art bars)
+    # List sections (in nice ascii-art bars)
+    [0xB7EEA810]> S=
     
     ...
     25  0x0001a600 |-----------------------------#| 0x0001a608 --- .gnu_debuglink

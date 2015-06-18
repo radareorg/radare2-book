@@ -221,14 +221,18 @@ Strings are probably one of the most important entrypoints when starting to reve
 
 Therefore radare supports various string formats:
 
-    [0x00404888]> ps?
-    |Usage: ps[zpw] [N]
-    | ps  = print string
-    | psb = print strings in current block
-    | psx = show string with scaped chars
-    | psz = print zero terminated string
-    | psp = print pascal string
-    | psw = print wide string
+    [0x00000000]> ps?
+    |Usage: ps[zpw] [N]Print String
+    | ps   print string
+    | psi  print string inside curseek
+    | psb  print strings in current block
+    | psx  show string with scaped chars
+    | psz  print zero terminated string
+    | psp  print pascal string
+    | psu  print utf16 unicode (json)
+    | psw  print wide string
+    | psj  print string in JSON format
+
     
 
 Most strings will be zero-terminated. Here's an example by using the debugger to continue the execution of the program until it executes the 'open' syscall. When we recover the control over the process, we get the arguments passed to the syscall, pointed by %ebx. In the case of the 'open' call, this parameter is a zero terminated string which we can inspect using `psz`.
