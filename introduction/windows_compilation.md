@@ -1,17 +1,19 @@
 ## Windows compilation
 
-We recommend using MinGW32 to compile radare for Windows. The 32-bit Windows builds distributed on the radare homepage are generated from a GNU/Linux system using MinGW32. They are tested with Wine.
+The easy way to compile things for Windows is using MinGW32. The w32 builds distributed in the radare homepage are generated from a GNU/Linux box using MinGW32 and they are tested with Wine. Also keep in mind, that MinGW-w64 wan't tested, so no guarantees here.
+
+Be sure to setup your MinGW32 to compile with **thread model: win32**, not **posix**, and target should be **mingw32**.
 
 The following is an example of compiling with MinGW32 (you need to have installed **zip** for Windows):
 
-    $ ./configure
+    $ CC=i486-mingw32-gcc ./configure
     $ make
     $ make w32dist
     $ zip -r w32-build.zip w32-build
 
 This generates a native, 32-bit console application for Windows.
 
-Cygwin is another possibility; however, issues relating to Cygwin libraries can make debugging difficult in case of problems.
+Cygwin is another possibility; however, issues relating to Cygwin libraries can make debugging difficult in case of problems. But using Cygwin compiled binary will allow you to use the Unicode in the console, and to use 256 colors.
 
 Please, be sure to build radare2 from that environment you're going to use r2 in. If you're going to use r2 in MinGW32 shell or cmd.exe - you need to build r2 in the MinGW32 environment. And if you're going to use r2 in Cygwin - you need to build from the Cygwin shell as well. Since Cygwin is more UNIX compatible radare2 supports here more colors and unicode symbols.
 
