@@ -38,7 +38,7 @@ export no_proxy="localhost,127.0.0.1,localaddress,.localdomain.com"
 ```
  - Update the packages:
 ```sh
-pacman --needed -Sy bash pacman pacman-mirrors msys2-runtime
+pacman --needed -Sy bash pacman pacman-mirrors msys2-runtime mingw-w64-x86_64-toolchain
 ```
  - Close MSYS2, run it again from Start menu and update the rest with
 ```sh
