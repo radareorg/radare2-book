@@ -1,3 +1,4 @@
 # Print
 
-This section describes Printing functionnality in detail
+This section describes printing functionality in detail.
+TODO

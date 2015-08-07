@@ -1,24 +1,24 @@
-# Binary Diffing 
+# Binary Diffing
 
-Based on radare.today article "[binary diffing](http://radare.today/binary-diffing/)"
+This section is based on http://radare.today article "[binary diffing](http://radare.today/binary-diffing/)"
 
-Without parameter, `radiff2` will by default show what bytes changed, and the corresponding offsets.
+Without any parameters, `radiff2` by default shows what bytes are changed and their corresponding offsets:
 
     $ radiff2 genuine cracked
     0x000081e0 85c00f94c0 => 9090909090 0x000081e0  
     0x0007c805 85c00f84c0 => 9090909090 0x0007c805
 
     $ rasm2 -d 85c00f94c0
-    test eax, eax  
+    test eax, eax
     sete al
-    
-Notice how the two jumps are noped.
 
-For bulk processing, you may want to have a higher-overview of the differences. This is why radare2 is able to compute the distance and the percentage of similarity between two files with the `-s` option:
+Notice how the two jumps are nop'ed.
+
+For bulk processing, you may want to have a higher-level overview of differences. This is why radare2 is able to compute the distance and the percentage of similarity between two files with the `-s` option:
 
     $ radiff2 -s /bin/true /bin/false
-    similarity: 0.97  
-    distance: 743  
+    similarity: 0.97
+    distance: 743
     
     
 If you want more concrete data, it's also possible to count the differences, with the `-c` option:
@@ -27,7 +27,7 @@ If you want more concrete data, it's also possible to count the differences, wit
     2  
     
     
-If you're unsure about the fact that you're dealing with similar binaries, you can check if some functions are matching with the `-C` option. The columns being: "First file offset", "Percentage of matching" and "Second file offset".
+If you are unsure whether you are dealing with similar binaries, with `-C` flag you can check there are matching functions. It this mode, it will give you three columns for all functions: "First file offset", "Percentage of matching" and "Second file offset".
 
 
     $ radiff2 -C /bin/false /bin/true 
@@ -39,22 +39,17 @@ If you're unsure about the fact that you're dealing with similar binaries, you c
              [...]
 
 
-And now the cool feature : radare2 supports graph-diffing, à la [DarunGrim](http://www.darungrim.org/), with the `-g` option. You can either give a symbol name, of specify two offsets in case the function you want to diff doesn't have the same name in both file.
-
-
-For example, `radiff2 -g main /bin/true /bin/false | xdot -` will show the differences between the main function of true and false. You can compare it to `radiff2 -g main /bin/false /bin/true` (Notice the order of the arguments) to get the two versions.
-
-This is the result: 
+And now a cool feature : radare2 supports graph-diffing, à la [DarunGrim](http://www.darungrim.org/), with the `-g` option. You can either give it a symbol name, of specify two offsets, if the function you want to diff is named differently in compared files. For example, `radiff2 -g main /bin/true /bin/false | xdot -` will show differences in `main()` function of Unix `true` and `false` programs. You can compare it to `radiff2 -g main /bin/false /bin/true` (Notice the order of the arguments) to get the two versions.
+This is the result:
 
 ![/bin/true vs /bin/false](true_false.png)
 
 
+Parts in yellow indicate that some offsets do not match. The grey piece means a perfect match. The red one highlights a strong difference. If you look closely, you will see that the left part of the picture has `mov edi, 0x1; call sym.imp.exit`, while the right one has `xor edi, edi; call sym.imp.exit`.
 
-The parts in yellow are indicating that some offsets are not matching, the grey one is a perfect match, while the red one highlight a strong difference. If you look closely, you'll see that the left one is `mov edi, 0x1; call sym.imp.exit`, while the right one is xor edi, edi; call sym.imp.exit.
+Binary diffing is an important feature for reverse engineering. It can be used to analyze [security updates](https://en.wikipedia.org/wiki/Patch_Tuesday), infected binaries, firmware changes and more...
 
-Binary diffing is an important feature for reverse engineering. It can be used to analyze [security updates](https://en.wikipedia.org/wiki/Patch_Tuesday), infected binaries, firmware changes and more..
+We have only shown the code analysis diffing functionality, but radare2 supports additional types of diffing between two binaries: at byte level, deltified similarities, and more to come.
 
-We have only shown the code analysis diffing functionality, but radare2 supports more sort of diffing between two binaries at byte level, deltified similarities and more to come.
-
-We have plans to implement more kinds of bindiffing functionalities into r2, and why not, add support for ascii art graph diffing and better integration with the rest of the toolkit.
+We have plans to implement more kinds of bindiffing algorithms into r2, and why not, add support for ascii art graph diffing and better integration with the rest of the toolkit.
 

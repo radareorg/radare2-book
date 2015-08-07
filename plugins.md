@@ -4,27 +4,27 @@
 
 All the access to files, network, debugger, etc.. is wrapped by an IO abstraction layer that allows to interpret all the data as if it was a single file.
 
-IO plugins are the ones used to wrap the open, read, write and 'system' on virtual file systems.You can make radare understand that any thing can be handled as a plain file. A socket connection, a remote radare session, a file, a process, a device, a gdb session, etc..
+IO plugins are the ones used to wrap the open, read, write and 'system' on virtual file systems. You can make radare understand anything as a plain file. E.g., a socket connection, a remote radare session, a file, a process, a device, a gdb session, etc..
 
-So, when radare reads a block of bytes, is the task of the IO plugin to get these bytes from any place and put them in the internal buffer. IO plugins are selected while opening a file by its URI. Here'r some examples:
+So, when radare reads a block of bytes, it is the task of an IO plugin to get these bytes from any place and put them into internal buffer. An IO plugin is chosen by a file's URI to be opened. Some examples:
 
-Debugging URIs
+* Debugging URIs
 
     $ r2 dbg:///bin/ls
     $ r2 pid://1927
 
-Remote sessions
+* Remote sessions
 
     $ r2 rap://:1234
     $ r2 rap://<host>:1234//bin/ls
 
-# Virtual buffers
+* Virtual buffers
 
     $ r2 malloc://512
     shortcut for
     $ r2 -
 
-You can get a list of the radare IO plugins by typing `radare -L`:
+You can get a list of the radare IO plugins by typing `radare2 -L`:
 
     $ r2 -L
     rw_  zip         Open zip files apk://foo.apk//MANIFEST or zip://foo.apk//theclass/fun.class, show files with: zip://foo.apk/, open all files with zipall:// (BSD)
@@ -44,4 +44,4 @@ You can get a list of the radare IO plugins by typing `radare -L`:
     rwd  gdb         Attach to gdbserver, 'qemu -s', gdb://localhost:1234 (LGPL3)
     r_d  debug       Debug a program or pid. dbg:///bin/ls, dbg://1388 (LGPL3)
     rw_  bfdbg       BrainFuck Debugger (bfdbg://path/to/file) (LGPL3)
-    
+

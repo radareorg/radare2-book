@@ -1,8 +1,8 @@
 # Registers
 
-The registers are part of the user area stored in the context structure used by the scheduler. This structure can be manipulated to get and set values for those registers, and on intel for example, is possible to directly manipulate the DRx hardware registers to setup hardware breakpoints.
+The registers are part of user area stored in the context structure used by the scheduler. This structure can be manipulated to get and set values of those registers, and, for example, on Intel hosts, it is possible to directly manipulate DR0-DR7 hardware registers to set hardware breakpoints.
 
-There are different commands to get values of the registers. For the General Purpose ones use:
+There are different commands to get values of registers. For the General Purpose ones use:
 
     [0x4A13B8C0]> dr
     r15 = 0x00000000
@@ -28,9 +28,9 @@ There are different commands to get values of the registers. For the General Pur
     0x7f0f2dbae630
 
     [0x4A13B8C0]> dr eip = esp   ; set 'eip' as esp
+
     
-    
-The interaction between the plugin and the core is done by commands returning radare instructions. This is used for example to set some flags in the core to set the values of the registers.
+Interaction between a plugin and the core is done by commands returning radare instructions. This is used, for example, to set flags in the core to set  values of registers.
 
     [0x7f0f2dbae630]> dr*      ; Appending '*' will show radare commands
     f r15 1 0x0
@@ -56,7 +56,7 @@ The interaction between the plugin and the core is done by commands returning ra
 
     [0x4A13B8C0]> .dr*  ; include common register values in flags
 
-An old copy of the registers is stored all the time to keep track of the changes done during the execution of the program. This old copy can be accessed with `oregs`.
+An old copy of registers is stored all the time to keep track of the changes done during execution of a program being analyzed. This old copy can be accessed with `oregs`.
 
       [0x7f1fab84c630]> dro
       r15 = 0x00000000
@@ -101,21 +101,20 @@ An old copy of the registers is stored all the time to keep track of the changes
       rflags = 0x00000202
       rsp = 0x7fff386b5080
 
-The values in eax, oeax and eip has changed.
+Values stored in eax, oeax and eip have changed.
 
-To store and restore the register values you can just dump the output of 'dr*' command to disk and then re-interpret it again:
-
+To store and restore register values you can just dump the output of 'dr*' command to disk and then re-interpret it again:
 
     [0x4A13B8C0]> dr* > regs.saved ; save registers
     [0x4A13B8C0]> drp regs.saved ; restore
 
 
-In the same way the eflags can be altered by the characters given in this way. Setting to '1' the selected flags:
+EFLAGS can be similarly altered. E.g., setting selected flags:
 
     [0x4A13B8C0]> dr eflags = pst
     [0x4A13B8C0]> dr eflags = azsti
 
-You can easily get a string representing the last changes in the registers using the 'drd' command (diff registers):
+You can get a string which represents latest changes of registers using `drd` command (diff registers):
 
     [0x4A13B8C0]> drd
     orax = 0x0000003b was 0x00000000 delta 59

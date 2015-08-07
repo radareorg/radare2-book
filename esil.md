@@ -1,8 +1,8 @@
-#ESIL 
+#ESIL
 
-*From the wiki page of radare2 github*
+*From the wiki page of radare2 at Github*
 
-ESIL stands for 'Evaluable Strings Intermediate Language'. It aims to describe a Forth-like representation for every opcode. Those representations can be evaluated in order to emulate code. Each element of an esil expression is separated by a comma. The VM can be described as this:
+ESIL stands for 'Evaluable Strings Intermediate Language'. It aims to describe a Forth-like representation for every target CPU opcode semantics. ESIL representations can be evaluated (interpreted) in order to emulate individual instructions. Each command of an ESIL expression is separated by a comma. Its virtual machine can be described as this:
 ```
    while ((word=haveCommand())) {
      if (word.isKeyword()) {
@@ -13,64 +13,66 @@ ESIL stands for 'Evaluable Strings Intermediate Language'. It aims to describe a
      nextCommand();
    }
 ```
-The esil commands are operations that pop values from the stack, performs some calculations and pushes the result in the stack (if any). They aim to cover all common operations done by CPUs, permitting to do binary operations, memory peeks and pokes, spawning a syscall, etc.
+ESIL commands are operations that pop values from the stack, perform calculations and push result (if any) to the stack. The aim is to be able to express most of common operations performed by CPUs, like binary arithmetic operations, memory loads and stores, processing syscalls etc.
 
-#### Use ESIL
+##Use ESIL
 ```
 [0x00000000]> e asm.esil = true
 ```
 
-Syntax
+##Syntax and Commands
 ======
-An opcode is translated into a comma separated list of ESIL expressions.
+A target opcode is translated into a comma separated list of ESIL expressions.
 ```
 xor eax, eax    ->    0,eax,=,1,zf,=
 ```
-Memory access is defined by brackets.
+Memory access is defined by brackets operation:
 ```
 mov eax, [0x80480]   ->   0x80480,[],eax,=
+
+
 ```
-Default size is the destination of the operation. In this case 8bits, aka 1 byte.
+Default operand size is determined by size of operation destination.
 ```
 movb $0, 0x80480     ->   0,0x80480,=[1]
 ```
-Conditionals are expressed with the '?' char at the begining of the expression. this checks if the rest of the expression is 0 or not and skips the next expression if doesn't matches. % is the prefix for internal vars.
+The `?` command checks whether the rest of the expression after it evaluates to zero or not. If it is zero, the following expression is skipped, otherwise it is evaluated. `%` prefix indicates internal variables.
 ```
 cmp eax, 123  ->   123,eax,==,%z,zf,=
 jz eax        ->   zf,?{,eax,eip,=,}
 ```
-So.. if you want to run more than one expression under a conditional, you'll have to write it 
+
+If you want to run several expressions under a conditional, put them in curly braces:
 ```
 zf,?{,eip,esp,=[],eax,eip,=,%r,esp,-=,}
 ```
 
-The whitespace, newlines and other chars are ignored in esil, so the first thing to do is:
+Whitespaces, newlines and other chars are ignored. So the first thing when processing a ESIL program is to remove spaces:
 ```
 esil = r_str_replace (esil, " ", "", R_TRUE);
 ```
-Syscalls are specially handled by '$' at the beginning of the expression. After that char you have an optional numeric value that specifies the number of syscall. The emulator must handle those expressions and 'simulate' the syscalls. (r_esil_syscall)
 
-Order of arguments
-==================
-As discussed on irc, current implementation works like this:
+Syscalls need special treatment. They are indicated by '$' at the beginning of an expression. You can pass an optional numeric value to specify a number of syscall. An ESIL emulator must handle syscalls. See (r_esil_syscall).
+
+## Arguments Order for Non-associative Operations
+
+As discussed on IRC, current implementation works like this:
 
 ```
 a,b,-      b - a
 a,b,/=     b /= a
 ```
-This approach is more readable, but it's less stack-friendly
+This approach is more readable, but it is less stack-friendly.
 
-Special instructions
-====================
-NOPs are represented as empty strings. Unknown or invalid instructions
+###Special Instructions
 
-Syscalls are implemented with the '0x80,$' command. It delegates the execution of the esil vm into a callback that implements the syscall for a specific kernel.
+NOPs are represented as empty strings. As it was said previously, syscalls are marked by '$' command. For example, '0x80,$'. It delegates emulation from the ESIL machine to a callback which implements syscalls for a specific OS/kernel.
 
-Traps are implemented with the `<trap>,<code>,$$` command. They are used to throw exceptions like invalid instructions, division by zero, memory read error, etc.
+Traps are implemented with the `<trap>,<code>,$$` command. They are used to throw exceptions for invalid instructions, division by zero, memory read error, etc.
 
-Quick analysis
-==============
-Here's a list of some quick checks to retrieve information from an esil string. Relevant information will be probably found in the first expression of the list.
+###Quick Analysis
+
+Here is a list of some quick checks to retrieve information from an ESIL string. Relevant information will be probably found in the first expression of the list.
 ```
 indexOf('[')       ->    have memory references
 indexOf("=[")      ->    write in memory
@@ -94,18 +96,18 @@ Common operations:
  * Get destinaion
  * Is jump
  * Is conditional
- * Evulate
+ * Evaluate
  * Is syscall
 
-CPU Flags
-=========
-CPU flags are usually defined as 1 bit registers in the RReg profile. and sometimes under the 'flg' register type.
+###CPU Flags
 
-ESIL Flags
-==========
-ESIL VM have an internal state flags that can are read only and can be used to export those values to the underlaying CPU flags. This is because the ESIL vm defines all the flag changes, while the CPUs only update the flags under certain conditions or specific instructions.
+CPU flags are usually defined as single bit registers in the RReg profile. They and sometimes found under the 'flg' register type.
 
-Those internal flags are prefixed by the '%' character.
+###ESIL Flags
+
+ESIL VM has an internal state flags that are read only and can be used to export those values to the underlying target CPU flags. It is because the ESIL VM always calculates all flag changes, while target CPUs only update flags under certain conditions or at specific instructions.
+
+Internal flags are prefixed with '%' character.
 
 ```
 z - zero flag, only set if the result of an operation is 0
@@ -115,20 +117,21 @@ p - parity
 r - regsize ( asm.bits/8 )
 ```
 
-Variables
-=========
-1. No predefined bitness (should be easy to extend them to 128,256 and 512bits, e.g. for MMX, SSE, AVX, Neon)
-2. Infinite number (for SSA-form compatibility)
-3. Register names have no specific syntax. They are just strings
-4. Numbers can be specified in any base supported by RNum (dec, hex, oct, binary ...)
-5. Each ESIL backend should have an associated RReg profile to describe the esil register specs
+###Variables
 
-Bitarrays
-=========
+Properties of the VM variables:
+1. They have no predefined bit width. This way it should be easy to extend them to 128, 256 and 512 bits later, e.g. for MMX, SSE, AVX, Neon SIMD.
+2. There can be unbound number of variables. It is done for SSA-form compatibility.
+3. Register names have no specific syntax. They are just strings.
+4. Numbers can be specified in any base supported by RNum (dec, hex, oct, binary ...)
+5. Each ESIL backend should have an associated RReg profile to describe the ESIL register specs.
+
+###Bit Arrays
+
 What to do with them? What about bit arithmetics if use variables instead of registers?
 
-Arithmetics
-===========
+###Arithmetics
+
 1. ADD ("+")
 2. MUL ("*")
 3. SUB ("-")
@@ -136,8 +139,8 @@ Arithmetics
 5. MOD ("%")
 
 
-Bit arithmetics
-===============
+###Bit Arithmetics
+
 1. AND  "&"
 2. OR   "|"
 3. XOR  "^"
@@ -147,14 +150,14 @@ Bit arithmetics
 7. ROR  ">>>"
 8. NEG  "!"
 
-Floating point
-==============
+###Floating Point Support
+
 
 _TODO_
 
-The x86 REP prefix in ESIL
-==========================
-ESIL specifies that the parsing control-flow commands are in uppercase. Bear in mind that some archs have uppercase register names. The register profile should take care to not reuse any of the following:
+###Handling x86 REP Prefix in ESIL
+
+ESIL specifies that the parsing control-flow commands must be uppercase. Bear in mind that some architectures have uppercase register names. The corresponding register profile should take care not to reuse any of the following:
 ```
 3,SKIP   - skip N instructions. used to make relative forward GOTOs
 3,GOTO   - goto instruction 3
@@ -164,25 +167,23 @@ STACK    - dump stack contents to screen
 CLEAR    - clear stack
 ```
 
-
-Usage example:
+####Usage example:
 
 rep cmpsb
 ---------
 cx,!,?{,BREAK,},esi,[1],edi,[1],==,?{,BREAK,},esi,++,edi,++,cx,--,LOOP
 
 
-Unimplemented/unhandled instructions
-====================================
-Those are expressed with the 'TODO' command. which acts as a 'BREAK', but displaying a warning message describing which instruction is not implemented and will not be emulated.
+###Unimplemented/unhandled Instructions
 
-For example:
+Those are expressed with the 'TODO' command. which acts as a 'BREAK', but displays a warning message describing that an instruction is not implemented and will not be emulated. For example:
+
 ```
 fmulp ST(1), ST(0)      =>      TODO,fmulp ST(1),ST(0)
 ```
 
-Disassembly example:
-====================
+###ESIL Disassembly Example:
+
 ```
 [0x1000010f8]> e asm.esil=true
 [0x1000010f8]> pd $r @ entry0
@@ -211,18 +212,16 @@ Disassembly example:
     │ │││   0x100001147    48394a38     rdx,56,+,[8],rcx,==,cz,?=
 ```
 
-Introspection
-=============
-To ease esil parsing we should have a way to express introspection expressions to extract the data we want. For example. We want to get the target address of a jmp.
+###Introspection
 
-The parser for the esil expressions should be implemented in an API to make it possible to extract information by analyzing the expressions easily.
+To ease ESIL parsing we should have a way to express introspection expressions to extract data we want. For example, we may want to get the target address of a jump. The parser for ESIL expressions should offer API to make it possible to extract information by analyzing the expressions easily.
 
 ```
 >  ao~esil,opcode
 opcode: jmp 0x10000465a
 esil: 0x10000465a,rip,=
 ```
-We need a way to retrieve the numeric value of 'rip'. This is a very simple example, but there will be more complex, like conditional ones and we need expressions to get:
+We need a way to retrieve the numeric value of 'rip'. This is a very simple example, but there are more complex, like conditional ones. We need expressions to be able to get:
 
 - opcode type
 - destination of jump
@@ -230,22 +229,17 @@ We need a way to retrieve the numeric value of 'rip'. This is a very simple exam
 - all regs modified (write)
 - all regs accessed (read)
 
-API HOOKS
-=========
+###API HOOKS
 
-It is important for emulation to be able to setup hooks in the parser, so we can extend the parser to implement the analysis without having to write the parser again and again. This is, every time an operation is going to be executed we call a user hook which can be used to determine if rip is changing or if the instruction updates the stack.
-Later, at this level we can split that callback into several ones to have an event based analysis api that may be extended in js like this:
+It is important for emulation to be able to setup hooks in parser, so we can extend it to implement analysis without having to change parser again and again. That is, every time an operation is about to be executed, a user hook is called. It can be used to determine if rip is going to change, or if the instruction updates stack, etc.
+Later, we can split that callback into several ones to have an event-based analysis API that may be extended in js like this:
 esil.on('regset', function(){..
 esil.on('syscall', function(){esil.regset('rip'
 
-we have already them. see hook_flag_read() hook_execute() hook_mem_read() ...
+For the API, see functions hook_flag_read(), hook_execute(), hook_mem_read(). A callback should return true if you want to override the action taken for a callback. For example, to deny memory reads in a region, or voiding memory writes, effectively making it read-only.
+Return false or 0 if you want to trace ESIL expression parsing.
 
-return true if you want to override the action taken for a callback. for example. avoid mem reads in a region or mem writes to make all memory read only.
-
-return false or 0 if you want to trace esil expression parsing. aka emulation
-..
-
-Other operations that require bindings to external functionalities to work. In this case r_ref and r_io. This must be defined when initializing the esil vm.
+Other operations that require bindings to external functionalities to work. In this case, r_ref and r_io. This must be defined when initializing the esil vm.
 
 * Io Get/Set
     Out ax, 44
@@ -253,3 +247,4 @@ Other operations that require bindings to external functionalities to work. In t
 * Selectors (cs,ds,gs...)
    Mov eax, ds:[ebp+8]
    Ebp,8,+,:ds,eax,=
+   
