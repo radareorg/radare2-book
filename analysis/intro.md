@@ -1,8 +1,7 @@
-# Analysis
+# Data and Code Analysis
 
-There are different commands to perform data and code analysis and extract information like pointers, string references, basic blocks, extract opcode information, jump information, xrefs, etc..
-
-Those operations are handled by the root 'a'nalyze command:
+There are different commands to perform data and code analysis, to extract useful information from a binary, like pointers, string references, basic blocks, opcode data, jump targets, xrefs, etc.
+These operations are handled by the `a` (analyze) command family:
 
     |Usage: a[?adfFghoprsx]
     | a8 [hexpairs]    analyze bytes

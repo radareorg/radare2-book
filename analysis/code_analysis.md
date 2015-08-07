@@ -1,11 +1,9 @@
-## Code analysis
+## Code Analysis
 
-The code analysis is a common technique used to extract information from the assembly code. Radare stores multiple internal data structures to identify basic blocks, function trees, extract opcode-level information and such.
-
-One common radare2 analysis command usage is the following:
+Code analysis is a common technique used to extract information from assembly code. Radare uses internal data structures to identify basic blocks, function trees, to extract opcode-level information etc. The most common radare2 analysis command sequence is:
 
     [0x08048440]> aa
-    [0x08048440]> pdf @ main 
+    [0x08048440]> pdf @ main
     
                ; DATA XREF from 0x08048457 (entry0)
     / (fcn) fcn.08048648 141
@@ -54,3 +52,5 @@ One common radare2 analysis command usage is the following:
     |          0x080486d0    5d           pop ebp
     |          0x080486d1    8d61fc       lea esp, [ecx-0x4]
     \          0x080486d4    c3           ret
+
+In this example, we analyze the whole file (`aa`) and then print disasembly of the `main()` function (`pdf`).
