@@ -1,6 +1,6 @@
-## Block size
+## Block Size
 
-The block size is the default view size for radare. All commands will work with this constraint, but you can always temporally change the block size just giving a numeric argument to the print commands for example (px 20)
+The block size determines how many bytes Radare commands will process. All commands will work with this constraint. You can temporally change the block size by specifying a numeric argument to the print commands. For example `px 20`.
 
     [0xB7F9D810]> b?
     Usage: b[f] [arg]
@@ -18,12 +18,12 @@ The `b` command is used to change the block size:
     [0x00000000]> b +16     ;  ... = 0x110
     [0x00000000]> b -32     ;  ... = 0xf0
     
-The `bf` command is used to change the block size to the one specified by a flag. For example in symbols, the block size of the flag represents the size of the function.
+The `bf` command is used to change the block size to value specified by a flag. For example, in symbols, the block size of the flag represents the size of the function.
 
     [0x00000000]> bf sym.main    ; block size = sizeof(sym.main)
     [0x00000000]> pd @ sym.main  ; disassemble sym.main
     ...
 
-You can perform these two operations in a single one (pdf):
+You can combine two operations in a single one (`pdf`):
 
      [0x00000000]> pdf @ sym.main

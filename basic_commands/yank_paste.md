@@ -1,6 +1,6 @@
 ## Yank/Paste
 
-You can yank/paste bytes in visual mode using the `y` and `Y` key bindings which are alias for the `y` and `yy` commands of the shell. These commands operate on an internal buffer which stores N bytes counted from the current seek. You can write-back to another seek using the `yy` command.
+You can yank/paste bytes in visual mode using the `y` and `Y` key bindings which are aliases for `y` and `yy` commands of command-line interface. These commands operate on an internal buffer which stores copies of bytes taken starting from the current seek position. You can write this buffer back to different seek position using `yy` command:
 
     [0x00000000]> y?
     |Usage: y[ptxy] [len] [[@]addr]
@@ -21,7 +21,6 @@ Sample session:
     [0x00000100]> y 100      ; yanks 100 bytes from here
     [0x00000200]> s 0x200    ; seek 0x200
     [0x00000200]> yy         ; pastes 100 bytes
-    
     
 You can perform a yank and paste in a single line by just using the `yt` command (yank-to). The syntax is as follows:
 

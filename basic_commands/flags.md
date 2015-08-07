@@ -1,14 +1,14 @@
 ## Flags
 
-Flags are similar to bookmarks. They represent a certain offset in the file. Flags can be grouped in 'flag spaces'. A flag space is something like a namespace for flags. They are used to group flags of similar characteristic or type. Some example of flagspaces could be sections, registers, symbols.
+Flags are similar to bookmarks. They represent a certain offset in a file. Flags can be grouped in 'flag spaces'. A flag space is something like a namespace for flags. They are used to group flags of similar characteristic or type. Examples for flag spaces: sections, registers, symbols.
 
-To create a flag just type:
+To create a flag type:
 
      [0x4A13B8C0]> f flag_name @ offset
     
-You can remove a flag by appending the `-` character. Most commands accept `-` as argument-prefix as a way to delete items.
+You can remove a flag by appending the `-` character to command. Most of commands accept `-` as argument-prefix as an indication to delete something.
 
-     [0x4A13B8C0]> f- flag_name 
+     [0x4A13B8C0]> f- flag_name
 
 To switch between or create new flagspaces use the `fs` command:
 
@@ -27,5 +27,5 @@ To switch between or create new flagspaces use the `fs` command:
      [0x4A13B8C0]> fs *       ; select all flagspaces
      [0x4A13B8C0]> f myflag   ; create a new flag called 'myflag'
      [0x4A13B8C0]> f- myflag  ; delete the flag called 'myflag'
-     
+
 You can rename flags with `fr`.

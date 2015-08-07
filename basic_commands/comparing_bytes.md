@@ -1,6 +1,6 @@
-## Comparing bytes
+## Comparing Bytes
 
-You can compare data using the `c` command. It accepts an input in various formats and compares the input against the bytes in the current seek.
+`c` (short for "compare") allows you to compare arrays of bytes from different sources. The command accepts input in a number of formats, and then compares it against values found at current seek position.
 
     [0x00404888]> c?
     |Usage: c[?dfx] [argument]
@@ -17,7 +17,7 @@ You can compare data using the `c` command. It accepts an input in various forma
     | cat  [file]    Show contents of file (see pwd, ls)
     | cl|cls|clear   Clear screen, (clear0 to goto 0, 0 only)
     
-An example of memory comparision:
+To compare memory contents at current seek position against given string of values, use `cx`:
 
     [0x08048000]> p8 4
     7f 45 4c 46 
@@ -27,13 +27,16 @@ An example of memory comparision:
     0x00000002 (byte=03)   90 ' '  ->  4c 'L'
     [0x08048000]> 
 
-Another subcommand of `c` (compare) command is `cc` which stands for 'compare code'.
+Another subcommand of `c` command is `cc` which stands for "compare code".
+To compare a byte sequence with a sequence in memory:
 
     [0x4A13B8C0]> cc 0x39e8e089 @ 0x4A13B8C0
-    
+
+To compare contents of two functions specified by their names:
+
     [0x08049A80]> cc sym.main2 @ sym.main
 
-`c8` compares a quadword from the current seek (0x00000000) from a math expression
+`c8` compares a quadword from the current seek (in the example below, 0x00000000) against a math expression:
 
     [0x00000000]> c8 4
     
@@ -43,7 +46,7 @@ Another subcommand of `c` (compare) command is `cc` which stands for 'compare co
     0x00000002 (byte=03)   4c 'L'  ->  00 ' '
 
 
-The number paramater can of course also be a math expressions using flag names and so on:
+The number parameter can of course also be a math expressions which uses flag names etc:
 
     [0x00000000]> cx 7f469046
     
@@ -53,7 +56,7 @@ The number paramater can of course also be a math expressions using flag names a
 
 
 
-We can use the compare command to compare the current block to a file previously dumped to disk.
+You can use compare command to find differences between a current block and a file previously dumped to a disk:
 
     r2 /bin/true
     [0x08049A80]> s 0

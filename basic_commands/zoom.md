@@ -1,8 +1,8 @@
-## Zoom 
+##Zoom
 
-The zoom is a print mode that allows you to get a global view of the whole file or memory map in a single screen. Each byte represents `file_size/block_size` bytes of the file. Use the `pO` (zoom out print mode) to use it, or just toggle `z` in the visual mode to zoom-out/zoom-in.
+The zoom is a print mode that allows you to get a global view of the whole file or a memory map on a single screen. In this mode, each byte represents `file_size/block_size` bytes of the file. Use the `pO` (zoom out print mode) to enter this mode, or just toggle `z` in the visual mode to zoom-out/zoom-in.
 
-The cursor can be used to scroll faster through the zoom out view and pressing `z` again to zoom-in where the cursor points.
+The cursor can be used to scroll faster through the zoom out view. Pressing `z` again will zoom-in where at new cursor position.
 
     [0x004048c5]> pz?
     |Usage: pz [len] print zoomed blocks (filesize/N)
@@ -18,8 +18,7 @@ The cursor can be used to scroll faster through the zoom out view and pressing `
     | pze           calculate entropy and expand to 0-255 range
     | pzh           head (first byte value); This is the default mode
 
-    
-For example. let's see some examples:
+Let's see some examples:
 
     [0x08049790]> pz // or default pzh
 
@@ -63,10 +62,11 @@ For example. let's see some examples:
     0x00000050  2b30 4741 422f 382a 1e22 0f17 0f10 3913  +0GAB/8*."....9.
 
 
-You can determine the limits for performing a zoom on a range of bytes of the whole bytespace by using the `zoom.from` and `zoom.to` eval variables.
+You can limit zooming to a range of bytes instead of the whole bytespace. Change `zoom.from` and `zoom.to` eval variables:
 
     [0x465D8810]> e zoom.
     zoom.byte = f
     zoom.from = 0
     zoom.maxsz = 512
     zoom.to = 118368???
+

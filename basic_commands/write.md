@@ -1,12 +1,12 @@
-## Write
+##Writing Data
 
-Radare can manipulate a loaded binary file in multiple ways. You can resize the file, move and copy/paste bytes, insert new bytes (shifting data to the end of the block or file) or simply overwrite bytes at a address, contents of a file, a widestring or even inline assembling an opcode.
+Radare can manipulate with a loaded binary file in many ways. You can resize the file, move and copy/paste bytes, insert new bytes (shifting data to the end of the block or file), or simply overwrite bytes. New data may come from another file contents, be a widestring, or even be represented as inline assembler statement.
 
-To resize use the `r` command which accepts a numeric argument. A positive value sets the new size to the file. A negative one will strip N bytes from the current seek, down-sizing the file.
+To resize, use the `r` command. It accepts a numeric argument. A positive value sets new size to a file. A negative one will strip N bytes from the current seek, making the file smaller.
 
     r 1024      ; resize the file to 1024 bytes
     r -10 @ 33  ; strip 10 bytes at offset 33
-To write bytes use the `w` command. It accepts multiple input formats like inline assembly, endian-friendly dwords, files, hexpair files, wide strings:
+To write bytes, use `w` command. It accepts multiple input formats, like inline assembly, endian-friendly dwords, files, hexpair files, wide strings:
 
     [0x00404888]> w?
     |Usage: w[x] [str] [<file] [<<EOF] [@addr]
@@ -38,9 +38,9 @@ Some examples:
 
 
 
-###3.8.1 Write over with operation
+###Write Over
 
-The `wo` command (write operation) accepts multiple kinds of operations that can be applied on the curren block. This is for example a XOR, ADD, SUB, ...
+The `wo` command (write over) has many subcommands. It is applied to the current block. Supported operations: XOR, ADD, SUB...
 
     [0x4A13B8C0]> wo?
     |Usage: wo[asmdxoArl24] [hexpairs] @ addr[:bsize]
@@ -66,9 +66,7 @@ The `wo` command (write operation) accepts multiple kinds of operations that can
     |  wo4  4=  4 byte endian swap
 
 
-This way it is possible to implement cipher-algorithms using radare core primitives.
-
-A sample session doing a xor(90) + addition(01 02):
+It is possible to implement cipher-algorithms using radare core primitives and `wo`. A sample session performing xor(90) + add(01, 02):
 
     [0x7fcd6a891630]> px
     - offset -       0 1  2 3  4 5  6 7  8 9  A B  C D  E F  0123456789ABCDEF

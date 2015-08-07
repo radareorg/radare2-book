@@ -1,8 +1,8 @@
-## Mapping files
+## Mapping Files
 
-Radare IO allows you to virtually map contents of files into the same IO space as you loaded binary at random offsets. This is useful to open multiple files in a single view or to 'emulate' an static environment similar to what you would have using a debugger where the program and all its libraries are loaded in memory and can be accessed.
+Radare IO system allows to map contents of files into the same IO space used to contain loaded binary. New contents can be placed at random offsets. This is useful to open multiple files in a single view or to 'emulate' a static environment similar to what you would have using a debugger where the program and all its libraries are loaded in memory and can be accessed.
 
-Using the `S`ections command you'll be able to define different base addresses for each library loaded.
+Using the `S` (sections) command you can define base address for each library to be loaded.
 
 Mapping files is done using the `o` (open) command. Let's read the help:
 
@@ -20,7 +20,7 @@ Mapping files is done using the `o` (open) command. Let's read the help:
     on /bin/ls 0x4000  map raw file at 0x4000 (no r_bin involved)
     om[?]              create, list, remove IO maps
 
-Let's prepare a simple layout:
+To prepare a simple layout:
 
     $ rabin2 -l /bin/ls
         [Linked libraries]
@@ -31,11 +31,11 @@ Let's prepare a simple layout:
         
         4 libraries
 
-Map a file:
+To map a file:
 
     [0x00001190]> o /bin/zsh 0x499999
 
-Listing mapped files:
+To list mapped files:
 
     [0x00000000]> o
     - 6 /bin/ls @ 0x0 ; r
@@ -43,11 +43,11 @@ Listing mapped files:
     - 14 /bin/zsh @ 0x499999 ; r
 
 
-Print some hexadecimal values from /bin/zsh
+To print hexadecimal values from /bin/zsh:
 
     [0x00000000]> px @ 0x499999
 
 
-To unmap these files simply use the `o-` command giving the file descriptor as argument:
+To unmap files use `o-` command. Pass required file descriptor to it as an argument:
 
     [0x00000000]> o-14
