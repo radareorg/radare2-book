@@ -1,24 +1,23 @@
 # Debugger
 
-The debugger in radare is implemented as an IO plugin. It handles several URIs for creating or attaching to a process. (List can be found on `r2 -L`. For example:
+Debuggers are implemented as IO plugins. Therefore, radare can handle different URI types for spawning, attaching and controlling processes. The complete list of IO plugins can be viewed with `r2 -L`. Those that have "d" in the first column ("rwd") support debugging. For example:
 
     r_d  debug       Debug a program or pid. dbg:///bin/ls, dbg://1388 (LGPL3)
+    rwd  gdb         Attach to gdbserver, 'qemu -s', gdb://localhost:1234 (LGPL3)
 
-There are different backends for multiple architectures and operating systems like GNU/Linux, Windows, MacOSX, (Net,Free,Open)BSD and Solaris.
+There are different backends for many target architectures and operating systems, e.g., GNU/Linux, Windows, MacOS X, (Net,Free,Open)BSD and Solaris.
 
-The process memory is interpreted by radare as a plain file. So all the mapped pages like the program and the libraries can be readed and interpreted as code, structures, etc..
+A process memory is treated as a plain file. All mapped memory pages of a debugged program and its libraries can be readed and interpreted as code, data structures etc.
 
-The rest of the communication between radare and the debugger layer is the wrapped system() call that receives a string as argument and executes the given command. The result of the operation is buffered in the output console and this contents can be handled by a scripting language.
-
-This is the reason why radare can handle single and double exclamation marks for calling system().
+Communication between radare and debugger IO layer is wrapped into `system()` calls, which accepts a string as an argument, and executes it as a command. An answer is then buffered in output console, its contents can be additionally processed by a script. This is how radare handles single `!` and double `!!` exclamation mark commands for calling `system()`:
 
     [0x00000000]> ds
     [0x00000000]> !!ls
-The double exclamation mark tells radare to skip the plugin list to find an IO plugin handling this command to launch it directly to the shell. A single one will walk through the io plugin list.
+The double exclamation mark `!!` tells radare to skip the IO plugin list, and to pass the rest of the command directly to shell. Using the single `!` to prepend a command will cause a walk through the IO plugin list to find one that handles it.
 
-The debugger commands are mostly portable between architectures and operating systems. But radare tries to implement them on all the artchitectures and OSs injecting shellcodes, or handling exceptions in a special way. For example in mips there's no stepping feature by hardware, so radare has an own implementation using a mix of code analysis and software breakpoints to bypass this limitation.
+In general, debugger commands are portable between architectures and operating systems. Still, as radare tries to support the same functionality for all target architectures and operating systems, certain things have to be handled separately. They include injecting shellcodes and handling exceptions. For example, in MIPS targets there is no hardware-supported single-stepping feature. In this case, radare2 provides its own implementation for single-step by using a mix of code analysis and software breakpoints.
 
-To get the basic help of the debugger you can just type 'd?':
+To get the basic help for debugger, type 'd?':
 
     Usage: d[sbhcrbo] [arg]
     dh [handler]   list or set debugger handler
@@ -37,9 +36,8 @@ To get the basic help of the debugger you can just type 'd?':
     dm[?*]         show memory maps
     dw [pid]       block prompt until pid dies
 
-To restart your debugging session, you can type `oo` or `oo+` depending on your desired behavior.
+To restart your debugging session, you can type `oo` or `oo+`, depending on desired behavior.
 
     oo                 reopen current file (kill+fork in debugger)
-    oo+                reopen current file in read-write          
-    
+    oo+                reopen current file in read-write
     
