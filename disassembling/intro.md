@@ -1,23 +1,21 @@
 # Disassembling
 
-Disassembling in radare is just a way to represent a bunch of bytes. So it is handled as a print mode with the 'p' command.
+Disassembling in radare is just a way to represent an array of bytes. It is handled as a special print mode within `p` command.
 
-In the old times when radare core was smaller. The disassembler was handled by an external rsc file, so radare was dumping the current block into a file, and the script was just calling objdump in a proper way to disassemble for intel, arm, etc...
+In the old times, when the radare core was smaller, the disassembler was handled by an external rsc file. That is, radare first dumped current block into a file, and then simply called `objdump` configured to disassemble for Intel, ARM etc...
+It was a working solution, but it was inefficient as it repeated the same actions over and over, because there were no caches. As a result, scrolling was terribly slow.
+Nowadays, the disassembler support is one of the basic features of radare. It now allows many options, including target architecture flavor, disassembler variants, among other things.
 
-Obviously this is a working solution, but takes too much cpu for repeating just the same task so many times, because there are no caches and the scrolling was absolutely slow.
-
-Nowadays, the disassembler is one of the basics in radare allowing you to choose the architecture flavour and some To disassemble use the 'pd' command.
-
-The 'pd' command accepts a numeric argument to specify how many opcodes of the current block do you want to disassemble. Most of the commands in radare are restricted by the block size. So if you want to disassemble more bytes you should use the 'b' command to specify the new block size.
+To see disassembly, use the `pd` command. It accepts a numeric argument to specify how many opcodes of current block you want to see. Most of commands in radare consider current block size as a default limit for data input. If you want to disassemble more bytes, you should use the `b` command to set new block size.
 
     [0x00000000]> b 100    ; set block size to 100
     [0x00000000]> pd       ; disassemble 100 bytes
     [0x00000000]> pd 3     ; disassemble 3 opcodes
     [0x00000000]> pD 30    ; disassemble 30 bytes
 
-The 'pD' command works like 'pd' but gets the number of bytes instead of the number of opcodes.
+The `pD` command works like `pd` but accepts number of input bytes, instead of number of opcodes, as its parameter.
 
-The 'pseudo' syntax is closer to the humans, but it can be anoying if you are reading lot of code:
+The "pseudo" syntax may be somewhat easier for a human to understand than default assembler notations. But it can become annoying if you read lots of code. To play with it:
 
     [0x00405e1c]> e asm.pseudo = true
     [0x00405e1c]> pd 3
@@ -39,3 +37,5 @@ The 'pseudo' syntax is closer to the humans, but it can be anoying if you are re
               0x00405e1c    488b9424a80. mov 0x2a8(%rsp), %rdx
               0x00405e24    64483314252. xor %fs:0x28, %rdx
               0x00405e2d    4889d8       mov %rbx, %rax
+
+

@@ -1,22 +1,16 @@
-##Adding metadata
+##Adding Metadata to Disasembly
 
-The work on binary files makes the task of taking notes and defining information on top of the file quite important. Radare offers multiple ways to retrieve and adquire this information from many kind of file types.
+Typical work of reversing binary files makes the task of taking notes and adding annotations on top of disassembly, data views etc. very important. Radare offers multiple ways to store and retrieve such metadata information.
 
-Following some *nix principles becomes quite easy to write a small utility in shellscript that using objdump, otool, etc.. to get information from a binary and import it into radare just making echo's of the commands script.
-
-You can have a look on one of the many scripts that are distributed with radare like 'idc2r.py':
-
-This script is called with 'idc2r.py file.idc > file.r2'. It reads an IDC file exported from an IDA database and imports the comments and the names of the functions.
-
-We can import the 'file.r2' using the '.' command of radare (similar to the shell):
+By following common basic *NIX principles it is easy to write a small utility in a scripting language which uses `objdump`, `otool`, etc. to obtain information from a binary and to import it into radare. For an example, take a look at one of many scripts that are distributed with radare, e.g., `idc2r.py`. To use it, invoke it as `idc2r.py file.idc > file.r2`. It reads an IDC file exported from an IDA Pro database and produces an r2 script containing the same comments, names of functions etc. You can import resulting 'file.r2' by using the dot `.` command of radare:
      
      [0x00000000]> . file.r2
      
-The command '.' is used to interpret data from external resources like files, programs, etc.. In the same way we can do the same without writing a file.
+The `.` command is used to interpret Radare commands from external sources, including files and program output. For example, to omit generation of an intermediate file and import the script directly you can use this combination:
 
      [0x00000000]> .!idc2r.py < file.idc
 
-The 'C' command is the one used to manage comments and data conversions. So you can define a range of bytes to be interpreted as code, or a string. It is also possible to define flags and execute code in a certain seek to fetch a comment from an external file or database.
+The `C` command is used to manage comments and data conversions. You can define a range of program's bytes to be interpreted either as code, binary data or string. It is possible to define flags and execute external code in certain seek position to fetch a comment from an external file or database.
 
 Here's the help:
 
@@ -46,18 +40,16 @@ Here's the help:
 
   
 
-The 'C' command allows us to change the type of data. The three basic types are: code (disassembly using asm.arch), data (byte array) or string.
+The `C` command allows to change type for a byte range. Three basic types are: code (disassembly is done using asm.arch), data (a byte array) or string.
 
-In visual mode is easier to manage this because it is hooked to the 'd' key trying to mean 'data type change'. Use the cursor to select a range of bytes ('c' key to toggle cursor mode and HJKL to move with selection) and then press 'ds' to convert to string.
-
-You can use the Cs command from the shell also:
+It is easier to manage data types conversion in the visual mode, because the action is bound to "d" key, short for "data type change". Use the cursor to select a range of bytes (press `c` key to toggle cursor mode and use HJKL keys to expand selection) and then press 'ds' to convert it to a string. Alternatively, you can use the `Cs` command from the shell:
 
      [0x00000000]> f string_foo @ 0x800
      [0x00000000]> Cs 10 @ string_foo
 
-The folding/unfolding is quite premature but the idea comes from the 'folder' concepts in vim. So you can select a range of bytes in the disassembly view and press '<' to fold these bytes in a single line or '>' to unfold them. Just to ease the readability of the code.
+The folding/unfolding support is quite premature, but the idea comes from "folder" concept found in Vim editor. You can select a range of bytes in the disassembly view and press '<' to fold them in a single line, or '>' to unfold them. This is used to improve readability by hiding unimportant portions of code/data.
 
-The Cm command is used to define a memory format string (the same used by the pf command). Here's a example:
+The `Cm` command is used to define a memory format string (the same used by the `pf` command). Here's a example:
 
       [0x7fd9f13ae630]> Cf 16 2xi foo bar
       [0x7fd9f13ae630]> pd
@@ -76,8 +68,7 @@ The Cm command is used to define a memory format string (the same used by the pf
                      0x7fd9f13b1fa0() ; rip
                   0x7fd9f13ae638    4989c4       mov r12, rax
 
- 
-This way it is possible to define structures by just using simple oneliners. See 'print memory' for more information.
+It is possible to define structures with simple oneliners. See 'print memory' for more information.
 
-All those C* commands can also be accessed from the visual mode by pressing 'd' (data conversion) key.
+All these "C*" commands can also be accessed from the visual mode by pressing 'd' (data conversion) key.
 
