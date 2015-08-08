@@ -1,8 +1,8 @@
-## Commandline flags
+## Command-line Options
 
-The core accepts multiple flags from the command line to change some configuration or start with different options.
+The radare core accepts many flags from command line.
 
-Here's the help message:
+An excerpt from usage help message:
 
     $ radare2 -h
     Usage: r2 [-dDwntLqv] [-P patch] [-p prj] [-a arch] [-b bits] [-i file] [-s addr] [-B blocksize] [-c cmd] [-e k=v] file|-
@@ -34,25 +34,25 @@ Here's the help message:
        -v, -V       show radare2 version (-V show lib versions)
        -w           open file in write mode
 
-Those are some common usage for the commandline flags:
+Common usage patterns of  command-line options.
 
-Opening a file in write mode without parsing the file format headers.
+* Open a file in write mode without parsing the file format headers.
 
     $ r2 -nw file
 
-Quickly get into an r2 shell without opening any disk file.
+* Quickly get into an r2 shell without opening any file.
 
     $ r2 -
 
-Specify which sub binary you want to select when opening a fatbin file:
+Specify which sub-binary you want to select when opening a fatbin file:
 
     $ r2 -a ppc -b 32 ls.fat
 
-Run a script before showing the promot:
+Run a script before showing interactive command-line prompt:
 
     $ r2 -i patch.r2 target.bin
 
-Execute a command and quit
+Execute a command and quit without entering the interactive mode:
 
     $ r2 -qc ij hi.bin > imports.json
 
@@ -64,6 +64,7 @@ Debug a program:
 
     $ r2 -d ls
 
-Use a project file already created
+Use an existing project file:
 
     $ r2 -p test
+

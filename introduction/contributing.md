@@ -2,7 +2,7 @@
 
 ###Radare2 Book
 
-If you want to contribute to the Radare2 book, you can do so at the [Github repository](https://github.com/Maijin/radare2book). Suggested contributions include:
+If you want to contribute to the Radare2 book, you can do it at the [Github repository](https://github.com/Maijin/radare2book). Suggested contributions include:
 
 * Crackme writeups
 * CTF writeups

@@ -1,6 +1,6 @@
 ## Expressions
 
-Expressions are mathematical representations of a 64-bit numerical value which can be displayed in different formats, compared or used with all commands as a numeric argument. Expressions support multiple, basic arithmetic operations as well as some binary and boolean ones. The command used to evaluate these mathematical expressions is `?`. For example:
+Expressions are mathematical representations of 64-bit numerical values. They can be displayed in different formats, be compared or used with all commands accepting numeric arguments. Expressions can use traditional arithmetic operations, as well as binary and boolean ones. To evaluate mathematical expressions prepend them with command `?`. For example:
 
     [0xB7F9D810]> ? 0x8048000
     134512640 0x8048000 01001100000 128.0M 804000:0000 134512640 00000000 134512640.0 0.000000  
@@ -11,22 +11,22 @@ Expressions are mathematical representations of a 64-bit numerical value which c
     [0xB7F9D810]> ? 1+2+3-4*3
     -6 0xfffffffffffffffa 01777777777777777777772 17179869183.0G fffff000:0ffa -6   
 
-The supported arithmetic operations are:
+Supported arithmetic operations are:
 
-    + : addition
-    - : substraction
-    * : multiplication
-    / : division
-    % : modulus
-    > : shift right
-    < : shift left
+ *   + : addition
+ *   - : substraction
+ *   * : multiplication
+ *   / : division
+ *   % : modulus
+ *   > : shift right
+ *   < : shift left
 
 Binary operations should be escaped:
 
-    \| : logical OR // ("? 0001010 | 0101001")
-    \& : logical AND
+ *   \| : logical OR // ("? 0001010 | 0101001")
+ *   \& : logical AND
 
-Values are numbers expressable in various formats:
+Values are numbers representable in several formats:
 
     0x033   : hexadecimal
     3334    : decimal
@@ -34,7 +34,7 @@ Values are numbers expressable in various formats:
     10K     : KBytes  10*1024
     10M     : MBytes  10*1024*1024
 
-You can also use variables and seeks to build more complex expressions. For example:
+You can also use variables and seek positions to build complex expressions. Available values include:
 
     ?@?    or stype @@?      ; misc help for '@' (seek), '~' (grep) (see ~??)
     ?$?           ; show available '$' variables
@@ -52,4 +52,4 @@ Some more examples:
 
 
     [0x4A13B8C0]> :pd 1 @ +$l
-    0x4A13B8C2   call 0x4a13c000   
+    0x4A13B8C2   call 0x4a13c000
