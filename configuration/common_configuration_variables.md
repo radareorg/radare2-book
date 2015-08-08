@@ -1,61 +1,55 @@
-## Common configuration variables
+## Common Configuration Variables
 
-Here's a list of the most common eval configuration variables, you can get the complete list using the `e` command without arguments or just use `e cfg.` (ending with dot, to list all the configuration variables of the cfg. space). You can get help on any eval configuration variable using : `??e cfg.` for example
+Below is a list of the most frequently used configuration variables. You can get a complete list by issuing `e` command without arguments. For example, to see all variables defined in the "cfg" namespace, issue `e cfg.` (mind the ending dot). You can get help on any eval configuration variable by using `??e cfg.`
 
     asm.arch
-Defines the architecture to be used while disassembling (pd, pD commands) and analyzing code (`a` command). Currently it handles `intel32`, `intel64`, `mips`, `arm16`, `arm` `java`, `csr`, `sparc`, `ppc`, `msil` and `m68k`.
-
-It is quite simple to add new architectures for disassembling and analyzing code, so there is an interface adapted for the GNU disassembler and others for udis86 or handmade ones.
+Defines target CPU architecture used for disassembling (`pd`, `pD` commands) and code analysis (`a` command). Supported values: `intel32`, `intel64`, `mips`, `arm16`, `arm` `java`, `csr`, `sparc`, `ppc`, `msil` and `m68k`.
+It is quite simple to add new architectures for disassembling and analyzing code. There is an interface for that. For x86, it is used to attach a number of third-party disassembler engines, including GNU binutils, Udis86 and a few of handmade ones.
 
     asm.bits
-This variable will change the `asm.arch` one (in radare1) and viceversa (is determined by asm.arch). It determines the size in bits of the registers for the selected architecture. This is 8, 16, 32, 64.
+Determines width in bits of registers for current architecture. Supported values: 8, 16, 32, 64. Note that not all target architectures support all combinations for asm.bits.
 
     asm.syntax
-Defines the syntax flavour to be used while disassembling. This is currently only targeting the udis86 disassembler for the x86 (32/64 bits). The supported values are `intel` or `att`.
+Changes syntax flavor for disassembler between Intel and AT&T. At the moment, this setting affects Udis86 disassembler for Intel 32/Intel 64 targets only. Supported values are `intel` and `att`.
 
     asm.pseudo
-Boolean value that determines which string disassembly engine to use (the native one defined by the architecture) or the one filtered to show pseudocode strings. This is `eax=ebx` instead of a `mov eax, ebx` for example.
+A boolean value to choose a string disassembly engine. "False" indicates a native one, defined by current architecture, "true" activates a pseudocode strings format; for example, it will show `eax=ebx` instead of a `mov eax, ebx`.
 
     asm.os
-Defines the target operating system of the binary to analyze. This is automatically defined by `rabin -rI` and it's useful for switching between the different syscall tables and perform different depending on the OS.
+Selects a target operating system of currently loaded binary. Usually OS is automatically detected by `rabin -rI`. Yet, `asm.os` can be used to switch to a different syscall table employed by another OS.
 
     asm.flags
-If defined to `true` shows the flags column inside the disassembly.
+If defined to "true", disasembler view will have flags column.
 
     asm.linescall
-Draw lines at the left of the offset in the dissassemble print format (pd, pD) to graphically represent jumps and calls inside the current block.
+If set to "true", draw lines at the left of dissassemble output (`pd`, `pD` commands) to graphically represent control flow changes (jumps and calls) that are targeted inside current block. Also, see `asm.linesout`.
 
     asm.linesout
-When defined as `true`, also draws the jump lines in the current block that goes ouside of this block.
+When defined as "true", the disassembly view will also draw control flow lines that go ouside of the block.
 
     asm.linestyle
-Can get `true` or `false` values and makes the line analysis be performed from top to bottom if false or bottom to top if true. `false` is the optimal and default value for readability.
+A boolean value which changes the direction of control flow analysis. If set to "false", it is done from top to bottom of a block; otherwise, it goes from bottom to top. The "false" setting seems to be a better choice for improved readability, and is the default one.
 
     asm.offset
-Boolean value that shows or hides the offset address of the disassembled opcode.
-
-    asm.profile
-Set how much information is showed to the user on disassembly. Can get the values `default`, `simple`, `gas`, `smart`, `debug`, `full`.
-
-This eval will modify other asm. variables to change the visualization properties for the disassembler engine. `simple` asm.profile will show only offset+opcode, and `debug` will show information about traced opcodes, stack pointer delta, etc..
+Boolean value which controls visibility of offsets for individual disasembled instructions.
 
     asm.trace
-Show tracing information at the left of each opcode (sequence number and counter). This is useful to read execution traces of programs.
+A boolean value that controls displaying of tracing information (sequence number and counter) at the left of each opcode. It is used to assist programs trace analysis.
 
     asm.bytes
-Boolean value that shows or hides the bytes of the disassembled opcode.
+A boolean value used to show or hide displaying of raw bytes of instructions.
 
     cfg.bigendian
-Choose the endian flavour `true` for big, `false` for little.
+Change endianness. "true" means big-endian, "false" is for little-endian.
 
     file.analyze
-Runs `.af* @@ sym.` and `.af* @ entrypoint`, after resolving the symbols while loading the binary, to determine the maximum information about the code analysis of the program. This will not be used while opening a project file, so it is preloaded. This option requires file.id and file.flag to be true.
+A boolean value. If set, radare will run `.af* @@ sym.` and `.af* @ entrypoint` after resolving the symbols binary loading time. This way, radare will extract maximum of available information from the binary. Note that this configuration item does not affect type of analysis used when opening a project file. This option requires "file.id" and "file.flag" both to be true.
 
     scr.color
-This boolean variable allows to enable or disable the colorized output
+This boolean variable enables or disables colorized screen output.
 
     scr.seek
-This variable accepts an expression, a pointer (eg. eip), etc. radare will automatically seek to make sure its value is always within the limits of the screen.
+This variable accepts an expression, a pointer (eg. eip), etc. If set, radare will set seek position to its value on startup.
 
     cfg.fortunes
-Enables or disables the 'fortune' message at the begining of the program
+Enables or disables "fortune" messages displayed at each radare start.

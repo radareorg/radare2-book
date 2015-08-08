@@ -1,20 +1,16 @@
 ## Colors
 
-The console access is wrapped by an API that permits to show the output of any command as ANSI, w32 console or HTML (more to come ncurses, pango, ...) this allows the core to be flexible enought to run on limited environments like kernels or embedded devices allowing us to get the feedback from the application in our favourite format.
-
-To start, we'll enable the colors by default in our rc file:
+Console access is wrapped in API that permits to show output of any command as ANSI, w32 console or HTML formats (more to come: ncurses, Pango etc.) This allows radare's core to run inside environments with limited displaying capabilities, like kernels or embedded devices. It is still possible to receive data from it in your favorite format.
+To enable colors support by default, add a corresponding configuration option to the .radare2 configuration file:
 
     $ echo 'e scr.color=true' >> ~/.radare2rc
-You can configure the colors to be used in almost every element in your disassembly.
-r2 supports rgb colors in unix terminals and allows to change the console color paletes using the `ec` command.
 
-Type `ec` to get a list of all the palete elements.
-Type `ecs` to show a color palete to pick colors from:
+It is possible to configure color of almost any element of disassembly output. For *NIX terminals, r2 accepts color specification in RGB format. To change the console color palette use `ec` command. 
+Type `ec` to get a list of all currently used colors. Type `ecs` to show a color palette to pick colors from:
 
 ![img](r2pal.png)
 
 #### xvilka theme
-
 
     ec fname rgb:0cf
     ec label rgb:0f3

@@ -1,29 +1,24 @@
-# Configuration
+#Configuration
 
-The core reads `~/.radare2rc` while starting, so you can setup there some `e` commands to set it up in your favorite way.
+The core reads `~/.radare2rc` while starting. You can add `e` commands to this file to tune radare configuration to your taste.
 
-To avoid parsing this file, use `-n` and to get a cleaner output for using radare in batch mode maybe is better to just drop the verbosity with `-v`.
+To prevent radare from parsing this file at start, pass it `-n` option. To have a less verbose output for batch mode runs, it is also better to decrease verbosity level with `-v` command-line option.
 
-All the configuration of radare is done with the `eval` command which allows the user to change some variables from an internal hashtable containing string pairs.
-
-The most common configuration looks like this:
+All the configuration of radare is done with the `eval` commands. A typical startup configuration file looks like this:
 
     $ cat ~/.radare2rc
     e scr.color = true
     e dbg.bep   = loader
+
+Configuration can also be changed with `-e` <config=value> command-line option. This way you can adjust configuration from the command line, keeping the .radare2rc file intact. For example, to start with empty configuration and then adjust `scr.color` and `asm.syntax` the following line may be used:
+
+    $ radare2 -n -e scr.color=true -e asm.syntax=intel -d /bin/ls
     
-    
-These configurations can be also defined using the `-e` flag of radare while loading it, so you can setup different initial configurations from the commandline without having to change to rc file.
+Internally, the configuration is stored in a hash table. The variables are grouped in namespaces: `cfg.`, `file.`, `dbg.`, `scr.` and so on.
 
-    $ radare -n -e scr.color=true -e asm.syntax=intel -d /bin/ls
-    
-All the configuration is stored in a hash table grouped by different root names (cfg., file., dbg., ..)
+To get a list of all configuration variables just type `e` in the command line prompt. To limit output to a selected namespace, pass it with an ending dot to `e`. For example, `e file.` will display all variables defined inside "file" namespace.
 
-To get a list of the configuration variables just type `e` in the prompt. All the basic commands can be reduced to a single char. You can also list the configuration variables of a single eval configruation group ending the command argument with a dot `.`.
-
-There are two enhanced interfaces to help users to interactively configure this hashtable. One is called `emenu` and provides a shell for walking through the tree and change variables.
-
-To get a help about this command you can type `e?`:
+To get help about `e` command type `e?`:
 
     Usage: e[?] [var[=value]]
     e?              show this help
@@ -39,8 +34,8 @@ To get a help about this command you can type `e?`:
     e a=b           set var 'a' the 'b' value
     env [k[=v]]     get/set environment variable
 
-       
-There is a easier `e` interface accessible from the Visual mode, just typing `Ve` after entering this mode.
+
+A simpler alternative to `e` command is accessible from the visual mode. Type `Ve` to enter it, use arrows (up, down, left, right) to navigate the configuration, and `q` to exit it. The start screen for the visual cofiguration edit looks like this:
 
     Eval spaces:                                                                   
     
@@ -62,9 +57,4 @@ There is a easier `e` interface accessible from the Visual mode, just typing `Ve
        scr                                                                         
        search                                                                      
        io                                                                          
-   
 
-
-Most of the eval tree is quite stable, so don't expect hard changes on this area.
-
-I encourage you to experiment a bit on this to fit the interface to your needs.
