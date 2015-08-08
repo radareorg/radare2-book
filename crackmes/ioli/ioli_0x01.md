@@ -23,7 +23,7 @@ vaddr=0x08048562 paddr=0x00000562 ordinal=003 sz=16 len=15 section=.rodata type=
 This isn't going to be as easy as 0x00. Let's try disassembly with r2.
 
 ```
-$ r2 ./crackme0x01 -- Use 'zoom.byte=printable' in zoom mode ('z' in Visual mode) to find strings
+$ r2 ./crackme0x01 -- Use `zoom.byte=printable` in zoom mode ('z' in Visual mode) to find strings
 [0x08048330]> aa
 [0x08048330]> pdf@main
 / (fcn) main 113
@@ -77,19 +77,19 @@ $ r2 ./crackme0x01 -- Use 'zoom.byte=printable' in zoom mode ('z' in Visual mode
 
 *	Function
 
-This will print the disassembly of the main function, or the main() that everyone knows. You can see several things as well: weird names, arrows, etc.
+This will print the disassembly of the main function, or the `main()` that everyone knows. You can see several things as well: weird names, arrows, etc.
 
-*	imp. stands for imports. Those are imported symbols, like printf()
+*	"imp." stands for imports. Those are imported symbols, like printf()
 
-*	str. stands for strings. Those are strings (obviously).
+*	"str." stands for strings. Those are strings (obviously).
 
-If you look carefully, you'll see a cmp instruction, with a constant, 0x149a. cmp is a compare instruction, and the 0x in front of it specifies it's in base 16, or hex.
+If you look carefully, you'll see a `cmp` instruction, with a constant, 0x149a. `cmp` is an x86 compare instruction, and the 0x in front of it specifies it is in base 16, or hex (hexadecimal).
 
 ```
 0x0804842b    817dfc9a140. cmp dword [ebp + 0xfffffffc], 0x149a
 ```
 
-You can use radare2's ? command to get it in another base.
+You can use radare2's `?` command to get it in another numeric base.
 
 ```
 [0x08048330]> ? 0x149a
@@ -114,6 +114,6 @@ Password: 0x149a
 Invalid Password!
 ```
 
-It was worth a shot, but it doesn't work. That's because scanf will take the 0 in 0x149a to be a zero, rather than accepting the input as actually being the hex value.
+It was worth a shot, but it doesn't work. That's because `scanf()` will take the 0 in 0x149a to be a zero, rather than accepting the input as actually being the hex value.
 
 And this concludes IOLI 0x01.
