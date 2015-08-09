@@ -1,6 +1,6 @@
 # Rasm2
 
-The inline assembler/disassembler. Initially 'rasm' was designed to be used for binary patching, just to get the bytes of a certain opcode. Here's the help
+`rasm2` is an inline assembler/disassembler. Initially, `rasm` tool was designed to be used for binary patching. It is main function is get bytes corresponding to given machine instruction opcode.
 
     $ rasm2 -h
     Usage: rasm2 [-CdDehLBvw] [-a arch] [-b bits] [-o addr] [-s syntax]
@@ -27,8 +27,7 @@ The inline assembler/disassembler. Initially 'rasm' was designed to be used for 
      If '-l' value is greater than output length, output is padded with nops
      If the last argument is '-' reads from stdin
 
-
-Asm supported plugins can be listed with "-L"
+Plugins for supported target architectures can be listed with the `-L` option. Knowing a plugin name, you can use it by specifying its name to the `-a` option
 
     $ rasm2 -L
     _d  16         8051        PD      8051 Intel CPU
@@ -65,3 +64,8 @@ Asm supported plugins can be listed with "-L"
     a_  32 64      x86.nz      LGPL3   x86 handmade assembler
     ad  32         x86.olly    GPL2    OllyDBG X86 disassembler
     ad  8          z80         NC-GPL2 Zilog Z80
+
+Note that "ad" in the first column means both assembler and disasembler are offered by a corresponding  plugin. "_d" indicates disassembler, "a_" means only assembler is available.
+
+
+

@@ -1,6 +1,6 @@
-## Assemble
+## Assembler
 
-It is quite common to use 'rasm2' from the shell. It is a nice utility for copypasting the hexpairs that represent the opcode.
+`rasm2` can be used from the command-line to quickly copy-paste hexpairs that represent a given machine instruction.
 
     $ rasm2 -a x86 -b 32 'mov eax, 33'
     b821000000
@@ -8,11 +8,11 @@ It is quite common to use 'rasm2' from the shell. It is a nice utility for copyp
     $ echo 'push eax;nop;nop' | rasm2 -f -
     5090
 
-Rasm2 is used from radare core to write bytes using 'wa' command. 
+Rasm2 is used by radare2 core to write bytes using `wa` command.
 
-It is possible to assemble for x86 (intel syntax), olly (olly syntax), powerpc, arm and java. For the intel syntax, rasm tries to use NASM or GAS. You can use the SYNTAX environment variable to choose your favorite syntax: intel or att.
+The assembler understands the following input languages and their flavors: x86 (Intel and AT&T variants), olly (OllyDBG syntax), powerpc (PowerPC), arm and java. For Intel syntax, rasm2 tries to mimic NASM or GAS.
 
-There are some examples in rasm's source directory to assemble a raw file using rasm from a file describing these opcodes.
+There are several examples in the rasm2 source code directory. Consult them to understand how you can assemble a raw binary file from a rasm2 description.
 
     $ cat selfstop.rasm
     ;
@@ -43,8 +43,6 @@ There are some examples in rasm's source directory to assemble a raw file using 
     
       ret
       
-      
-     
     [0x00000000]> e asm.bits = 32
     [0x00000000]> wx `!rasm2 -f a.rasm`
     [0x00000000]> pd 20
