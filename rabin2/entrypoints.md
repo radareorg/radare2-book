@@ -1,6 +1,6 @@
-## Entrypoint
+## Code Entrypoints
 
-The flag "-e" lets us know the program entrypoint
+The `-e` option passed to rabin2 will show entrypoints for given binary. Two examples:
 
     $ rabin2 -e /bin/ls
     [Entrypoints]

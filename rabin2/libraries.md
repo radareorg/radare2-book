@@ -1,6 +1,6 @@
-## Libraries
+## List Libraries
 
-Rabin2 can list the libraries used by a binary with the flag -l.
+Rabin2 can list libraries used by a binary with `-l` option:
 
     $ rabin2 -l /bin/ls
     [Linked libraries]
@@ -12,4 +12,4 @@ Rabin2 can list the libraries used by a binary with the flag -l.
     4 libraries
 
     
-If you compare the output of 'rabin2 -l' and 'ldd' you will notice that rabin will list less libraries than 'ldd'. The reason is that rabin will not follow the dependencies of the listed libraries, it will just display the ones listed in the binary itself.
+If you compare outputs of `rabin2 -l` and `ldd`, you will notice that rabin2 lists fewer libraries than `ldd`. The reason is that rabin2 does not follow and does not show dependencies of libraries. Only original binary dependencies are shown.

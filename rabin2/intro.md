@@ -1,8 +1,7 @@
-# Rabin2
+# Rabin2 — Show Properties of a Binary
 
-Under this bunny-arabic-like name, radare hides the power of a wonderful tool to handle binary files and get information to show it in the command line or import it into the core.
-
-Rabin2 is able to handle multiple file formats like Java CLASS, ELF, PE, MACH-O, etc.. and it is able to get symbol import/exports, library dependencies, strings of data sections, xrefs, address of entrypoint, sections, architecture type, etc.
+Under this bunny-arabic-like name, radare hides a powerful tool to handle binary files, to get information on imports, sections, headers etc. Rabin2 can present it in several formats accepted by other tools, including radare2 itself.
+Rabin2 understands many file formats: Java CLASS, ELF, PE, Mach-O, etc., and it is able to obtain symbol import/exports, library dependencies, strings of data sections, xrefs,  entrypoint address, sections, architecture type.
 
     $ rabin2 -h
 

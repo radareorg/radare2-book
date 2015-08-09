@@ -1,6 +1,6 @@
 ## Strings
 
-The -z flag is used to list all the strings located in the section .rodata for ELF binaries, and .text for PE ones.
+The `-z` option is used to list readable strings found in the .rodata section of ELF binaries, or the .text section of PE files. Example:
 
     $ rabin2 -z /bin/ls |head
     addr=0x00012487 off=0x00012487 ordinal=000 sz=9 len=9 section=.rodata type=A string=src/ls.c
@@ -15,8 +15,8 @@ The -z flag is used to list all the strings located in the section .rodata for E
     addr=0x00012502 off=0x00012502 ordinal=009 sz=10 len=10 section=.rodata type=A string=unlabeled
     
 
-With -r all this information is converted to radare2 commands, which will create a flag space called "strings" filled with flags for all those strings. 
-Furthermore, it will redefine them as strings instead of code.
+With `-zr` option, this information is represented as radare2 commands list. It can be used in a radare2 session to automatically create a flag space called "strings" pre-populated with flags for all strings found by rabin2.
+Furthermore, this script will mark corresponding byte ranges as strings instead of code.
 
     $ rabin2 -zr /bin/ls |head
     fs strings

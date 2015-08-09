@@ -1,6 +1,6 @@
-## File identification
+## File Properties Identification
 
-The file identification is done through the -I flag, it will output information regarding binary class, encoding, OS, type, etc.
+File type identification is done using `-I`. With this option, rabin2 prints information on a binary's type, its encoding, endianness, class, operating system, etc.:
 
     $ rabin2 -I /bin/ls
     file    /bin/ls
@@ -23,7 +23,7 @@ The file identification is done through the -I flag, it will output information 
     relocs  false
     rpath   NONE
     
-As it was said we can add the -r flag to use all this information in radare:
+To make rabin2 output information in format that the main program, radare2, can understand, pass `-Ir` option to it:
 
     $ rabin2 -Ir /bin/ls
     e file.type=elf

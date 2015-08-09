@@ -1,6 +1,6 @@
 ## Imports
 
-Rabin2 is able to get all the imported objects, as well as their offset at the PLT, this information is quite useful, for example, to recognize wich function is called by a call instruction.
+Rabin2 is able to find imported objects by an executable, as well as their offsets in its PLT. This information is useful, for example, to understand what external function is invoked by `call` instruction. Pass `-i` flag to rabin to get a list of imports. An example:
 
     $ rabin2 -i /bin/ls |head
     [Imports]
