@@ -1,6 +1,6 @@
-## Rahash2 tool
+## Rahash2
 
-The rahash tool is the used by radare to realize these calculations. It
+The rahash2 tool can be used to calculate checksums and has functions of byte streams, files, text strings.
 
     $ rahash2 -h
     Usage: rahash2 [-rBhLkv] [-b sz] [-a algo] [-s str] [-f from] [-t to] [file] ...
@@ -19,12 +19,14 @@ The rahash tool is the used by radare to realize these calculations. It
     -t to       stop hashing at given address
     -v          show version information
 
-It permits the calculation of the hashes from strings or files.
+To obtain an MD5 hash value of a text string, use the `-s` option:
 
     $ rahash2 -q -a md5 -s 'hello world'
     5eb63bbbe01eeed093cb22bb8f5acdc3
 
-It is possible to hash the full contents of a file . But dont do this for large files like disks or so, because rahash stores the buffer in memory before calculating the checksum instead of doing it progressively.
+It is possible to calculate hash values for contents of files. But do not attempt to do it for large files, like complete disks. Before starting a calculation, rahash2 copies the whole input into a memory buffer.
+
+To apply all algorithms known to rahash2, use `all` as an algorithm name:
 
     $ rahash2 -a all /bin/ls
     /bin/ls: 0x00000000-0x0001ae08 md5: b5607b4dc7d896c0fab5c4a308239161

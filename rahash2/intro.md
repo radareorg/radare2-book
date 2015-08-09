@@ -1,16 +1,14 @@
-# Rahash2
+# Obtaining Hashes within Radare2 Session
 
-The it is quite easy to calculate a hash checksum of the current block using the '#' command.
-
+To calculate a checksum of current block when running rarare2, use the '#' command. Pass an algorithm name to it as a parameter. An example session:
 
     $ radare2 /bin/ls
     [0x08049790]> bf entry0
     [0x08049790]> #md5
     d2994c75adaa58392f953a448de5fba7
 
-In the same way you can also calculate other hashing algorithms that are supported by 'rahash': md4, md5, crc16, crc32, sha1, sha256, sha384, sha512, par, xor, xorpair, mod255, hamdist, entropy, all.
-
-The '#' command can accept a numeric argument to define the length in bytes to be hashed.
+You can use all hashing algorithms supported by `rahash2`: md4, md5, crc16, crc32, sha1, sha256, sha384, sha512, par, xor, xorpair, mod255, hamdist, entropy.
+The `#` command accepts an optional numeric argument to specify length of byte range to be hashed, instead of default block size. For example:
 
     [0x08049A80]> #md5 32
     9b9012b00ef7a94b5824105b7aaad83b
