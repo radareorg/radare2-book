@@ -1,17 +1,16 @@
-## Configurating the searchs
+## Configuring Search Options
 
-The search engine can be configured by the `e` interface:
+The radare2 search engine can be configured through several configuration variables, modifiable with `e` command.
 
-    Configuration:
-    e cmd.hit = x         ; command to execute on every search hit
+    e cmd.hit = x         ; radare2 command to execute on every search hit
     e search.distance = 0 ; search string distance
-    e search.in = [foo]   ; boundaries to raw, block, file, section)
-    e search.align = 4    ; only catch aligned search hits
+    e search.in = [foo]   ; search scope limit. Supported values: raw, block, file, section
+    e search.align = 4    ; only show search results aligned by specified boundary.
     e search.from = 0     ; start address
     e search.to = 0       ; end address
-    e search.asmstr = 0   ; search string instead of assembly
-    e search.flags = true ; if enabled store flags on keyword hits
+    e search.asmstr = 0   ; search for string instead of assembly
+    e search.flags = true ; if enabled, create flags on hits
 
-`search.align` variable is used to determine that the only `valid` search hits must have to fit in this alignement. For example. you can use `e search.align=4` to get only the hits found in 4-byte aligned addresses.
+The `search.align` variable is used to limit valid search hits to certain alignment. For example, with `e search.align=4` you will see only hits found at 4-bytes aligned offsets.
 
-The `search.flag` boolean variable makes the engine setup flags when finding hits. If the search is stopped by the user with a ^C then a `search_stop` flag will be added.
+The `search.flags` boolean variable instructs the search engine to flag hits so that they can be referenced later. If a currently running search is interrupted with `Ctrl-C` keyboard sequence, current search position is flagged with "search_stop".

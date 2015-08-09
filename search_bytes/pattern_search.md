@@ -1,8 +1,8 @@
-## Pattern search
+## Pattern Matching Search
 
-The search command allows you to throw repeated pattern searchs against the IO backend to be able to identify repeated sequences of bytes without specifying them. The only property to perform this search is to manually define the minimum length of these patterns.
-
-Here`s an example:
+The `/p` command allows you to apply repeated pattern searches on IO backend storage. It is possible to identify repeated byte sequences without explicitly specifying them. The only command's parameter sets minimum detectable pattern length.
+Here is an example:
 
     [0x00000000]> /p 10
-The output of the command will show the different patterns found and how many times they are repeated.
+
+This command output will show different patterns found and how many times each of them is encountered.

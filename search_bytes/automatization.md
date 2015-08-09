@@ -1,7 +1,6 @@
-## Automatization
+## Search Automatization
 
-The cmd.hit eval variable is used to define a command that will be executed when a hit is reached by the search engine. If you want to run more than one command use `;` or `. script-file-name` for including a file as a script.
-
+The `cmd.hit` eval variable is used to define a radare2 command to be executed when a matching entry is found by the search engine. If you want to run several commands, separate them with `;`. Alternatively, you can arrange them in a separate script, and then invoke it as a whole with `. script-file-name` command.
 For example:
 
     [0x00404888]> e cmd.hit = p8 8

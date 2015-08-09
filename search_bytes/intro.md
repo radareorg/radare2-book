@@ -1,10 +1,9 @@
-# Searching bytes
+# Searching for Bytes
 
-The search engine of radare is based on the work done by esteve plus multiple features on top of it that allows multiple keyword searching with binary masks and automatic flagging of results.
+The radare2 search engine is based on work done by esteve, plus multiple features implemented on top of it. It supports multiple keyword searches, binary masks, hexadecimal. It automatically flags search hit entries to ease future referencing.
+Search is initiated by `/` command.
 
-This powerful command is `/`.
-
-    [0x00000000]> /
+    [0x00000000]> /?
     Usage: /[amx/] [arg]
     / foo\x00       search for string `foo\0`
     /w foo          search for wide string `f\0o\0o\0`
@@ -30,5 +29,4 @@ This powerful command is `/`.
     //              repeat last search
     /b              search backwards
 
-
-With radare everything is handled as a file, it doesn`t matters if it is a socket, a remote device, the process memory, etc..
+Because everything is treated as a file in radare2, it does not matter whether you search in a socket, a remote device, in  process memory, or a file.

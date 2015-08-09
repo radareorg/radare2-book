@@ -1,3 +1,3 @@
-## Backward search
+## Searching Backwards
 
-To search backward just use `/b`
+To search backwards, just use `/b` command.
