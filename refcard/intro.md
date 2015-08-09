@@ -176,7 +176,7 @@
 
 ## License
 
-Based on the Radare 2 reference card by Thanat0s, which is under the GNU GPL. Original license is as follows:
+This chapter is based on the Radare 2 reference card by Thanat0s, which is under the GNU GPL. Original license is as follows:
 ```
 This card may be freely distributed under the terms of the GNU
 general public licence — Copyright c  by Thanat0s - v0.1 -
