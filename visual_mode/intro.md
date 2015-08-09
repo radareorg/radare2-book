@@ -1,13 +1,13 @@
-# Visual mode
+# Visual Mode
 
-The visual mode is a user-friendlier interface for the commandline prompt of radare which accepts hjkl movement keys, a cursor for selecting bytes and some keybindings to ease the use of the debugger.
-
+The visual mode is a more user-friendly interface alternative to radare2's command-line prompt.  It uses HJKL or arrow keys to move around data and code, has a cursor mode for selecting bytes, and offers numerous key bindings to simplify debugger use.
+To enter visual mode, use `V` command. To exit from it back to command line, press `q`.
 
 ![Visual Mode](visualmode.png)
 
 ## Getting Help
 
-To get a help of all the keybindings hooked in visual mode you can press `?`:
+To see help on all key bindings defined for visual mode, press `?`:
 
     Visual mode help:
      ?        show this help or manpage in cursor mode
@@ -58,6 +58,4 @@ To get a help of all the keybindings hooked in visual mode you can press `?`:
       F7      single step
       F8      step over
       F9      continue
-
-
 

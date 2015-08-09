@@ -1,7 +1,6 @@
-## Visual insert
+## Insert in Visual Mode
 
-The insert mode allows you to write bytes at nibble-level like most common hexadecimal editors. In this mode you can press `<tab>` to switch between the hexa and ascii columns of the hexadecimal dump.
+Remember that, to be able to actually edit files loaded in radare2, you have to start it with `-w` option. Otherwise a file is opened in read-only mode.
 
-To get back to the normal mode, just press `<tab>` to switch to the hexadecimal view and press `q`. (NOTE: if you press `q` in the ascii view...it will insert a `q` instead of quit this mode)
-
-There are other keys for inserting and writing data in visual mode. Basically by pressing `i` key you'll be prompted for an hexpair string or use `a` for writing assembly where the cursor points.
+The cursor mode allows you to manipulate with data at nibble-level (4 bits chunks), like it is done in most of hexadecimal editors. Press `TAB` to switch between hexadecimal and ASCII columns of the hexadecimal dump view.
+After you press `i` key, you are prompted for an hexpair string. If `a` is pressed, enter an assembler expression, which will be translated to machine code and then inseters at the chosen offset.
