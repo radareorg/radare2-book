@@ -1,6 +1,6 @@
 # Radiff2
 
-Radiff2 is a tool designed to compare binaries
+Radiff2 is a tool designed to compare binary files, similar to how regular `diff` compares text files.
 
     $ radiff2 -h
     Usage: radiff2 [-abcCdrspOv] [-g sym] [-t %] [file] [file]
