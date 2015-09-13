@@ -72,8 +72,8 @@ ESIL Opcode | Operands | Name | Operation in C | example
 **+** | src,dst | ADD | stack = dst + src | [0x00000000]> "ae 3,4,+"<br>0x7<br>[0x00000000]> "ae 5,5,+"<br>0xa
 **-** | src,dst | SUB | stack = dst - src | [0x00000000]> "ae 3,4,-"<br>0x1<br>[0x00000000]> "ae 5,5,-"<br>0x0<br>[0x00000000]> "ae 4,3,-"<br>0xffffffffffffffff
 **`*`** | src,dst | MUL | stack = dst * src | [0x00000000]> "ae 3,4,`*`"<br>0xc<br>[0x00000000]> "ae 5,5,`*`"<br>0x19
-**/** | src,dst | DIV | stack = dst / src  |   
-**%** | src,dst | MOD | stack = dst % src |   
+**/** | src,dst | DIV | stack = dst / src  | [0x00000000]> "ae 2,4,/"<br>0x2<br>[0x00000000]> "ae 5,5,/"<br>0x1<br>[0x00000000]> "ae 5,9,/"<br>0x1
+**%** | src,dst | MOD | stack = dst % src | [0x00000000]> "ae 2,4,%"<br>0x0<br>[0x00000000]> "ae 5,5,%"<br>0x0<br>[0x00000000]> "ae 5,9,%"<br>0x4
 **+=** | src,dst | ADD eq | dst = dst + src |   
 **-=** | src,dst | SUB eq | dst = dst - src |   
 **`*=`** | src,dst | MUL eq | dst = dst * src |   
