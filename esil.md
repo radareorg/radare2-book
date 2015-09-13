@@ -19,6 +19,29 @@ ESIL commands are operations that pop values from the stack, perform calculation
 ```
 [0x00000000]> e asm.esil = true
 ```
+##ESIL Commands 
+   * "ae" : Evaluate ESIL expresion.
+   
+   ```
+   [0x00000000]> "ae 1,1,+"
+   0x2
+   [0x00000000]>
+   ```
+   
+   * "aes" : ESIL Step.
+   
+   ```
+   [0x00000000]> aes
+   [0x00000000]>10aes
+   ```
+
+   * "aesu" : ESIL Step Until.
+   
+   ```
+   [0x00001000]> aesu 0x1035
+   ADDR BREAK
+   [0x00001019]>
+   ```
 
 ##Syntax and Commands
 ======
