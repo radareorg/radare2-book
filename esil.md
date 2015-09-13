@@ -53,42 +53,42 @@ ESIL commands are operations that pop values from the stack, perform calculation
 
 Here is the complete instruction set used by the ESIL VM:
 
-ESIL Opcode | Operands | Name | Operation in C
---- | --- | --- | ---
-**$$** | src | Trap | Generate a trap with src code
-**$** | src | Syscall | Generate a sysccall with src code
-**==** | src,dst | Compare | v = dst - src ; update_internal_eflags(v)
-**<** | src,dst | Smaller | stack = (dst < src)
-**<=** | src,dst | Smaller or Equal | stack = (dst <= src)
-**>** | src,dstc | Bigger | stack = (dst > src)
-**>=** | src,dst | Bigger or Equal | stack = (dst > src)
-**<<** | src,dst | Shift Left | stack = dst << src
-**>>** | src,dst | Shift Rigth | stack = dst >> src
-**<<<<** | src,dst | Rotate Left | stack=dst ROL src
-**>>>>** | src,dst | Rotate Rigth | stack=dst ROR src
-**&** | src,dst | AND | stack = dst & src
-**`|`** | src,dst | OR | stack = dst | src
-**^** | src,dst | XOR | stack = dst ^src 
-**`*`** | src,dst | Multiplication | stack = dst * src
-**+** | src,dst | Add | stack = dst + src
-**/** | src,dst | Division | stack = dst / src 
-**%** | src,dst | MOD | stack = dst % src
-**+=** | src,dst | Add eq | dst = dst + src;
-**-=** | src,dst | Sub eq | dst = dst - src;
-**`*=`** | src,dst | Multiplication eq | dst = dst * src
-**/=** | src,dst | Division eq | dst = dst / src
-**%=** | src,dst | MOD eq | dst = dst % src
-**<<=** | src,dst | Shift Left Equal | dst = dst << src
-**>>=** | src,dst | Shift Rigth Equal | dst = dst << src
-**&=** | src,dst | Logic AND eq | dst = dst & src;
-**`|`=** | src,dst | Logic OR eq| dst = dst | src
-**^=** | src,dst | Logic XOR Equal | dst = dst ^ src;
-**++=** | src | Increment eq | src = src + 1
-**--=** | src | Decrement eq | src = src - 1
-**!** | src | NEG | stack = !!!src
-**!=** | src | Logic NOT Equal | src = !src
-**++** | src | Increment | stack = src++;
-**--** | src | Decrement | stack = src--;
+ESIL Opcode | Operands | Name | Operation in C | example
+--- | --- | --- | --- | ---
+**$$** | src | Trap |  trap with src code |   
+**$** | src | Syscall | sysccall with src code |   
+**==** | src,dst | Compare | v = dst - src ; update_internal_eflags(v) |   
+**<** | src,dst | Smaller | stack = (dst < src) | [0x00000000]> "ae 1,5,<" <br>0x0
+**<=** | src,dst | Smaller or Equal | stack = (dst <= src) |   
+**>** | src,dstc | Bigger | stack = (dst > src) |   
+**>=** | src,dst | Bigger or Equal | stack = (dst > src) |   
+**<<** | src,dst | Shift Left | stack = dst << src |   
+**>>** | src,dst | Shift Rigth | stack = dst >> src |   
+**<<<<** | src,dst | Rotate Left | stack=dst ROL src |   
+**>>>>** | src,dst | Rotate Rigth | stack=dst ROR src |   
+**&** | src,dst | AND | stack = dst & src |   
+**`|`** | src,dst | OR | stack = dst | src |   
+**^** | src,dst | XOR | stack = dst ^src  |   
+**`*`** | src,dst | Multiplication | stack = dst * src |   
+**+** | src,dst | Add | stack = dst + src |   
+**/** | src,dst | Division | stack = dst / src  |   
+**%** | src,dst | MOD | stack = dst % src |   
+**+=** | src,dst | Add eq | dst = dst + src |   
+**-=** | src,dst | Sub eq | dst = dst - src |   
+**`*=`** | src,dst | Multiplication eq | dst = dst * src |   
+**/=** | src,dst | Division eq | dst = dst / src |   
+**%=** | src,dst | MOD eq | dst = dst % src |   
+**<<=** | src,dst | Shift Left Equal | dst = dst << src |   
+**>>=** | src,dst | Shift Rigth Equal | dst = dst << src |   
+**&=** | src,dst | Logic AND eq | dst = dst & src |   
+**`|`=** | src,dst | Logic OR eq| dst = dst | src |   
+**^=** | src,dst | Logic XOR Equal | dst = dst ^ src |   
+**++=** | src | Increment eq | src = src + 1 |   
+**--=** | src | Decrement eq | src = src - 1 |   
+**!** | src | NEG | stack = !!!src |   
+**!=** | src | Logic NOT Equal | src = !src |   
+**++** | src | Increment | stack = src++ |   
+**--** | src | Decrement | stack = src-- |   
 
 ###ESIL Flags
 
