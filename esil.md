@@ -53,11 +53,11 @@ ESIL commands are operations that pop values from the stack, perform calculation
 Here is the complete instruction set used by the ESIL VM:
 
 ESIL Opcode | Operands | Name | Operation in C
---- | --- | ---
+--- | --- | --- | ---
 *Still* | `renders` | test | **nicely**
 **$$** | dst,src | Trap | src<dst?1:0
 **$** | dst,src | Syscall | src<dst?1:0
-**==** | dst,src | Compare | src<dst?1:0
+**==** | src,dst | Compare | v=dst - src ; update_internal_eflags(v)
 **<** | dst,src | Smaller | src<dst?1:0
 **<=** | dst,src | Smaller Equal | src<dst?1:0
 **>** | dst,src | Bigger | src<dst?1:0
