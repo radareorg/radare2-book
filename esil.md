@@ -34,6 +34,12 @@ ESIL commands are operations that pop values from the stack, perform calculation
    [0x00000000]> aes
    [0x00000000]>10aes
    ```
+   * "aeso" : ESIL Step Over.
+   
+   ```
+   [0x00000000]> aeso
+   [0x00000000]>10aeso
+   ```
 
    * "aesu" : ESIL Step Until.
    
@@ -42,6 +48,48 @@ ESIL commands are operations that pop values from the stack, perform calculation
    ADDR BREAK
    [0x00001019]>
    ```
+###ESIL Instruction Set
+
+Here is the complete instruction set used by the ESIL VM:
+
+ESIL Opcode | Operands | Operation in C
+--- | --- | ---
+*Still* | `renders` | **nicely**
+**$$** | dst,src | src<dst?1:0
+**$** | dst,src | src<dst?1:0
+**==** | dst,src | src<dst?1:0
+**<** | dst,src | src<dst?1:0
+**<=** | dst,src | src<dst?1:0
+**>** | dst,src | src<dst?1:0
+**>=** | dst,src | src<dst?1:0
+**<<** | dst,src | src<dst?1:0
+**<<=** | dst,src | src<dst?1:0
+**>>** | dst,src | src<dst?1:0
+**>>=** | dst,src | src<dst?1:0
+**<<<<** | dst,src | src<dst?1:0
+**>>>>** | dst,src | src<dst?1:0
+**&** | dst,src | src<dst?1:0
+**&=** | dst,src | src<dst?1:0
+**`|`** | dst,src | src<dst?1:0
+**`|`=** | dst,src | src<dst?1:0
+**!** | dst,src | src<dst?1:0
+**!=** | dst,src | src<dst?1:0
+***** | dst,src | src<dst?1:0
+***=** | dst,src | src<dst?1:0
+
+###ESIL Flags
+
+ESIL VM has an internal state flags that are read only and can be used to export those values to the underlying target CPU flags. It is because the ESIL VM always calculates all flag changes, while target CPUs only update flags under certain conditions or at specific instructions.
+
+Internal flags are prefixed with '%' character.
+
+```
+z - zero flag, only set if the result of an operation is 0
+b - borrow, this requires to specify from which bit (example: %b4 - checks if borrow from bit 4)
+c - carry, same like above (example: %c7 - checks if carry from bit 7)
+p - parity
+r - regsize ( asm.bits/8 )
+```
 
 ##Syntax and Commands
 ======
@@ -125,20 +173,6 @@ Common operations:
 ###CPU Flags
 
 CPU flags are usually defined as single bit registers in the RReg profile. They and sometimes found under the 'flg' register type.
-
-###ESIL Flags
-
-ESIL VM has an internal state flags that are read only and can be used to export those values to the underlying target CPU flags. It is because the ESIL VM always calculates all flag changes, while target CPUs only update flags under certain conditions or at specific instructions.
-
-Internal flags are prefixed with '%' character.
-
-```
-z - zero flag, only set if the result of an operation is 0
-b - borrow, this requires to specify from which bit (example: %b4 - checks if borrow from bit 4)
-c - carry, same like above (example: %c7 - checks if carry from bit 7)
-p - parity
-r - regsize ( asm.bits/8 )
-```
 
 ###Variables
 
