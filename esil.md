@@ -48,13 +48,13 @@ ESIL commands are operations that pop values from the stack, perform calculation
    ADDR BREAK
    [0x00001019]>
    ```
+
 ###ESIL Instruction Set
 
 Here is the complete instruction set used by the ESIL VM:
 
 ESIL Opcode | Operands | Name | Operation in C
 --- | --- | --- | ---
-*Still* | `renders` | test | **nicely**
 **$$** | src | Trap | Generate a trap with src code
 **$** | src | Syscall | Generate a sysccall with src code
 **==** | src,dst | Compare | v = dst - src ; update_internal_eflags(v)
@@ -89,8 +89,6 @@ ESIL Opcode | Operands | Name | Operation in C
 **!=** | src | Logic NOT Equal | src = !src
 **++** | src | Increment | stack = src++;
 **--** | src | Decrement | stack = src--;
-
-
 
 ###ESIL Flags
 
