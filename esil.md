@@ -69,26 +69,26 @@ ESIL Opcode | Operands | Name | Operation in C | example
 **&** | src,dst | AND | stack = dst & src |   
 **`|`** | src,dst | OR | stack = dst | src |   
 **^** | src,dst | XOR | stack = dst ^src  |   
-**`*`** | src,dst | Multiplication | stack = dst * src |   
-**+** | src,dst | Add | stack = dst + src |   
-**/** | src,dst | Division | stack = dst / src  |   
+**`*`** | src,dst | MUL | stack = dst * src |   
+**+** | src,dst | ADD | stack = dst + src |   
+**/** | src,dst | DIV | stack = dst / src  |   
 **%** | src,dst | MOD | stack = dst % src |   
-**+=** | src,dst | Add eq | dst = dst + src |   
-**-=** | src,dst | Sub eq | dst = dst - src |   
-**`*=`** | src,dst | Multiplication eq | dst = dst * src |   
-**/=** | src,dst | Division eq | dst = dst / src |   
+**+=** | src,dst | ADD eq | dst = dst + src |   
+**-=** | src,dst | SUB eq | dst = dst - src |   
+**`*=`** | src,dst | MUL eq | dst = dst * src |   
+**/=** | src,dst | DIV eq | dst = dst / src |   
 **%=** | src,dst | MOD eq | dst = dst % src |   
-**<<=** | src,dst | Shift Left Equal | dst = dst << src |   
-**>>=** | src,dst | Shift Rigth Equal | dst = dst << src |   
-**&=** | src,dst | Logic AND eq | dst = dst & src |   
-**`|`=** | src,dst | Logic OR eq| dst = dst | src |   
-**^=** | src,dst | Logic XOR Equal | dst = dst ^ src |   
-**++=** | src | Increment eq | src = src + 1 |   
-**--=** | src | Decrement eq | src = src - 1 |   
+**<<=** | src,dst | Shift Left eq | dst = dst << src |   
+**>>=** | src,dst | Shift Rigth eq | dst = dst << src |   
+**&=** | src,dst |  AND eq | dst = dst & src |   
+**`|`=** | src,dst | OR eq| dst = dst | src |   
+**^=** | src,dst | XOR eq | dst = dst ^ src |   
+**++=** | src | INC eq | src = src + 1 |   
+**--=** | src | DEC eq | src = src - 1 |   
 **!** | src | NEG | stack = !!!src |   
-**!=** | src | Logic NOT Equal | src = !src |   
-**++** | src | Increment | stack = src++ |   
-**--** | src | Decrement | stack = src-- |   
+**!=** | src | NOT eq | src = !src |   
+**++** | src | INC | stack = src++ |   
+**--** | src | DEC | stack = src-- |   
 
 ###ESIL Flags
 
