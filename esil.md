@@ -69,8 +69,9 @@ ESIL Opcode | Operands | Name | Operation in C | example
 **&** | src,dst | AND | stack = dst & src | [0x00000000]> "ae 1,1,&"<br>0x1<br>[0x00000000]> "ae 1,0,&"<br>0x0<br>[0x00000000]>  "ae 0,1,&"<br>0x0<br>[0x00000000]> "ae 0,0,&"<br>0x0
 **`|`** | src,dst | OR | stack = dst `|` src | [0x00000000]> "ae 1,1,`|`"<br>0x1<br>[0x00000000]> "ae 1,0,`|`"<br>0x1<br>[0x00000000]> "ae 0,1,`|`"<br>0x1<br>[0x00000000]> "ae 0,0,`|`"<br>0x0
 **^** | src,dst | XOR | stack = dst ^src  | [0x00000000]> "ae 1,1,^"<br>0x0<br>[0x00000000]> "ae 1,0,^"<br>0x1<br>[0x00000000]> "ae 0,1,^"<br>0x1<br>[0x00000000]> "ae 0,0,^"<br>0x0
-**`*`** | src,dst | MUL | stack = dst * src |   
-**+** | src,dst | ADD | stack = dst + src |   
+**+** | src,dst | ADD | stack = dst + src | [0x00000000]> "ae 3,4,+"<br>0x7<br>[0x00000000]> "ae 5,5,+"<br>0xa
+**-** | src,dst | SUB | stack = dst - src | [0x00000000]> "ae 3,4,-"<br>0x1<br>[0x00000000]> "ae 5,5,-"<br>0x0<br>[0x00000000]> "ae 4,3,-"<br>0xffffffffffffffff
+**`*`** | src,dst | MUL | stack = dst * src | [0x00000000]> "ae 3,4,`*`"<br>0xc<br>[0x00000000]> "ae 5,5,`*`"<br>0x19
 **/** | src,dst | DIV | stack = dst / src  |   
 **%** | src,dst | MOD | stack = dst % src |   
 **+=** | src,dst | ADD eq | dst = dst + src |   
