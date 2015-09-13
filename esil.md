@@ -52,42 +52,42 @@ ESIL commands are operations that pop values from the stack, perform calculation
 
 Here is the complete instruction set used by the ESIL VM:
 
-ESIL Opcode | Operands | Operation in C
+ESIL Opcode | Operands | Name | Operation in C
 --- | --- | ---
-*Still* | `renders` | **nicely**
-**$$** | dst,src | src<dst?1:0
-**$** | dst,src | src<dst?1:0
-**==** | dst,src | src<dst?1:0
-**<** | dst,src | src<dst?1:0
-**<=** | dst,src | src<dst?1:0
-**>** | dst,src | src<dst?1:0
-**>=** | dst,src | src<dst?1:0
-**<<** | dst,src | src<dst?1:0
-**<<=** | dst,src | src<dst?1:0
-**>>** | dst,src | src<dst?1:0
-**>>=** | dst,src | src<dst?1:0
-**<<<<** | dst,src | src<dst?1:0
-**>>>>** | dst,src | src<dst?1:0
-**&** | dst,src | src<dst?1:0
-**&=** | dst,src | src<dst?1:0
-**`|`** | dst,src | src<dst?1:0
-**`|`=** | dst,src | src<dst?1:0
-**!** | dst,src | src<dst?1:0
-**!=** | dst,src | src<dst?1:0
-**`*`** | dst,src | src<dst?1:0
-**`*=`** | dst,src | src<dst?1:0
-**^** | dst,src | src<dst?1:0
-**^=** | dst,src | src<dst?1:0
-**+=** | dst,src | src<dst?1:0
-**+=** | dst,src | src<dst?1:0
-**++** | dst,src | src<dst?1:0
-**++=** | dst,src | src<dst?1:0
-**--** | dst,src | src<dst?1:0
-**--=** | dst,src | src<dst?1:0
-**/** | dst,src | src<dst?1:0
-**/=** | dst,src | src<dst?1:0
-**%** | dst,src | src<dst?1:0
-**%=** | dst,src | src<dst?1:0
+*Still* | `renders` | test | **nicely**
+**$$** | dst,src | Trap | src<dst?1:0
+**$** | dst,src | Syscall | src<dst?1:0
+**==** | dst,src | Compare | src<dst?1:0
+**<** | dst,src | Smaller | src<dst?1:0
+**<=** | dst,src | Smaller Equal | src<dst?1:0
+**>** | dst,src | Bigger | src<dst?1:0
+**>=** | dst,src | Bigger Equal | src<dst?1:0
+**<<** | dst,src | Shift Left | src<dst?1:0
+**<<=** | dst,src | Shift Left Equal | src<dst?1:0
+**>>** | dst,src | Shift Rigth | src<dst?1:0
+**>>=** | dst,src | Shift Rigth Equal | src<dst?1:0
+**<<<<** | dst,src | Rotate Left | src<dst?1:0
+**>>>>** | dst,src | Rotate Rigth | src<dst?1:0
+**&** | dst,src | Logic AND | src<dst?1:0
+**&=** | dst,src | Logic AND Equal | src<dst?1:0
+**`|`** | dst,src | Logic OR | src<dst?1:0
+**`|`=** | dst,src | Logic OR Equal| src<dst?1:0
+**!** | dst,src | Logic NOT | src<dst?1:0
+**!=** | dst,src | Logic NOT Equal | src<dst?1:0
+**^** | dst,src | Logic XOR | src<dst?1:0
+**^=** | dst,src | Logic XOR Equal | src<dst?1:0
+**`*`** | dst,src | Multiplication | src<dst?1:0
+**`*=`** | dst,src | Multiplication Equal | src<dst?1:0
+**+** | dst,src | Add | src<dst?1:0
+**+=** | dst,src | Add Equal | src<dst?1:0
+**++** | dst,src | Increment | src<dst?1:0
+**++=** | dst,src | Increment Equal | src<dst?1:0
+**--** | dst,src | Decrement | src<dst?1:0
+**--=** | dst,src | Decrement Equal | src<dst?1:0
+**/** | dst,src | Division | src<dst?1:0
+**/=** | dst,src | Division Equal | src<dst?1:0
+**%** | dst,src | MOD | src<dst?1:0
+**%=** | dst,src | MOD Equal | src<dst?1:0
 
 ###ESIL Flags
 
