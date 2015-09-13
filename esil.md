@@ -64,8 +64,8 @@ ESIL Opcode | Operands | Name | Operation in C | example
  **>=** | src,dst | Bigger or Equal | stack = (dst > src) | [0x00000000]> "ae 1,5,>="<br>0x1<br>[0x00000000]> "ae 5,5,>="<br>0x1
  **<<** | src,dst | Shift Left | stack = dst << src | [0x00000000]> "ae 1,1,<<"<br>0x2<br>[0x00000000]> "ae 2,1,<<"<br>0x4
  **>>** | src,dst | Shift Rigth | stack = dst >> src | [0x00000000]> "ae 1,4,>>"<br>0x2<br>[0x00000000]> "ae 2,4,>>"<br>0x1
- **<<<<** | src,dst | Rotate Left | stack=dst ROL src |   
-**>>>>** | src,dst | Rotate Rigth | stack=dst ROR src |   
+ **<<<<** | src,dst | Rotate Left | stack=dst ROL src | [0x00000000]> "ae 31,1,<<<<"<br>0x80000000<br>[0x00000000]> "ae 32,1,<<<<"<br>0x1
+**>>>>** | src,dst | Rotate Rigth | stack=dst ROR src | [0x00000000]> "ae 1,1,>>>>"<br>0x80000000<br>[0x00000000]> "ae 32,1,>>>>"<br>0x1
 **&** | src,dst | AND | stack = dst & src |   
 **`|`** | src,dst | OR | stack = dst | src |   
 **^** | src,dst | XOR | stack = dst ^src  |   
