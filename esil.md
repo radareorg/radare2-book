@@ -66,10 +66,16 @@ ESIL Opcode | Operands | Name | Operation in C
 **>>** | src,dst | Shift Rigth | stack = dst >> src
 **<<<<** | src,dst | Rotate Left | stack=dst ROL src
 **>>>>** | src,dst | Rotate Rigth | stack=dst ROR src
-**&** | src,dst | Logic AND | stack = dst & src
-**`|`** | src,dst | Logic OR | stack = dst | src
-**^** | src,dst | Logic XOR | stack = dst ^src 
-**!** | src |  NEG | stack = !!!src
+**&** | src,dst | AND | stack = dst & src
+**`|`** | src,dst | OR | stack = dst | src
+**^** | src,dst | XOR | stack = dst ^src 
+**!** | src | NEG | stack = !!!src
+**`*`** | src,dst | Multiplication | stack = dst * src
+**+** | src,dst | Add | stack = dst + src
+**/** | src,dst | Division | stack = dst / src 
+**%** | src,dst | MOD | stack = dst % src
+**++** | src | Increment | stack = s++;
+**--** | src | Decrement | stack = s--;
   |   |   |   
 **<<=** | src,dst | Shift Left Equal | 
 **>>=** | src,dst | Shift Rigth Equal |
@@ -77,17 +83,11 @@ ESIL Opcode | Operands | Name | Operation in C
 **`|`=** | dst,src | Logic OR Equal| src<dst?1:0
 **!=** | dst,src | Logic NOT Equal | src<dst?1:0
 **^=** | dst,src | Logic XOR Equal | src<dst?1:0
-**`*`** | dst,src | Multiplication | src<dst?1:0
 **`*=`** | dst,src | Multiplication Equal | src<dst?1:0
-**+** | dst,src | Add | src<dst?1:0
 **+=** | dst,src | Add Equal | src<dst?1:0
-**++** | dst,src | Increment | src<dst?1:0
 **++=** | dst,src | Increment Equal | src<dst?1:0
-**--** | dst,src | Decrement | src<dst?1:0
 **--=** | dst,src | Decrement Equal | src<dst?1:0
-**/** | dst,src | Division | src<dst?1:0
 **/=** | dst,src | Division Equal | src<dst?1:0
-**%** | dst,src | MOD | src<dst?1:0
 **%=** | dst,src | MOD Equal | src<dst?1:0
 
 ###ESIL Flags
