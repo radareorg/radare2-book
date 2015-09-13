@@ -66,10 +66,11 @@ ESIL Opcode | Operands | Name | Operation in C
 **>>** | src,dst | Shift Rigth | stack = dst >> src
 **<<<<** | src,dst | Rotate Left | stack=dst ROL src
 **>>>>** | src,dst | Rotate Rigth | stack=dst ROR src
-**&** | dst,src | Logic AND | stacsrc<dst?1:0
-**`|`** | dst,src | Logic OR | src<dst?1:0
-**!** | dst,src | Logic NOT | src<dst?1:0
-**^** | dst,src | Logic XOR | src<dst?1:0
+**&** | src,dst | Logic AND | stack = dst & src
+**`|`** | src,dst | Logic OR | stack = dst | src
+**^** | src,dst | Logic XOR | stack = dst ^src 
+**!** | src |  NEG | stack = !!!src
+  |   |   |   
 **<<=** | src,dst | Shift Left Equal | 
 **>>=** | src,dst | Shift Rigth Equal |
 **&=** | dst,src | Logic AND Equal | src<dst?1:0
