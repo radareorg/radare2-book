@@ -58,7 +58,7 @@ ESIL Opcode | Operands | Name | Operation in C | example
 **$$** | src | Trap |  trap with src code |   
 **$** | src | Syscall | sysccall with src code |   
 **==** | src,dst | Compare | v = dst - src ; update_eflags(v) |   
-**<** | src,dst | Smaller | stack = (dst < src) | "ae 1,5,<" <br>0x0<br>"ae 5,5"<br>0x0"
+**<** | src,dst | Smaller | stack = (dst < src) | [0x0000000]>"ae 1,5,<" <br>0x0<br>"ae 5,5"<br>0x0"
 **<=** | src,dst | Smaller or Equal | stack = (dst <= src) | "ae 1,5,<" <br>0x0<br>"ae 5,5"<br>0x1"   
 **>** | src,dstc | Bigger | stack = (dst > src) |   
 **>=** | src,dst | Bigger or Equal | stack = (dst > src) |   
