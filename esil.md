@@ -55,8 +55,8 @@ Here is the complete instruction set used by the ESIL VM:
 ESIL Opcode | Operands | Name | Operation in C
 --- | --- | --- | ---
 *Still* | `renders` | test | **nicely**
-**$$** | dst,src | Trap | src<dst?1:0
-**$** | dst,src | Syscall | src<dst?1:0
+**$$** | src | Trap | Generate a trap with src code
+**$** | src | Syscall | Generate a sysccall with src code
 **==** | src,dst | Compare | v = dst - src ; update_internal_eflags(v)
 **<** | src,dst | Smaller | stack = (dst < src)
 **<=** | src,dst | Smaller or Equal | stack = (dst <= src)
@@ -69,26 +69,28 @@ ESIL Opcode | Operands | Name | Operation in C
 **&** | src,dst | AND | stack = dst & src
 **`|`** | src,dst | OR | stack = dst | src
 **^** | src,dst | XOR | stack = dst ^src 
-**!** | src | NEG | stack = !!!src
 **`*`** | src,dst | Multiplication | stack = dst * src
 **+** | src,dst | Add | stack = dst + src
 **/** | src,dst | Division | stack = dst / src 
 **%** | src,dst | MOD | stack = dst % src
-**++** | src | Increment | stack = s++;
-**--** | src | Decrement | stack = s--;
-  |   |   |   
-**<<=** | src,dst | Shift Left Equal | 
-**>>=** | src,dst | Shift Rigth Equal |
-**&=** | dst,src | Logic AND Equal | src<dst?1:0
-**`|`=** | dst,src | Logic OR Equal| src<dst?1:0
-**!=** | dst,src | Logic NOT Equal | src<dst?1:0
-**^=** | dst,src | Logic XOR Equal | src<dst?1:0
-**`*=`** | dst,src | Multiplication Equal | src<dst?1:0
-**+=** | dst,src | Add Equal | src<dst?1:0
-**++=** | dst,src | Increment Equal | src<dst?1:0
-**--=** | dst,src | Decrement Equal | src<dst?1:0
-**/=** | dst,src | Division Equal | src<dst?1:0
-**%=** | dst,src | MOD Equal | src<dst?1:0
+**+=** | src,dst | Add eq | dst = dst + src;
+**-=** | src,dst | Sub eq | dst = dst - src;
+**`*=`** | src,dst | Multiplication eq | dst = dst * src
+**/=** | src,dst | Division eq | dst = dst / src
+**%=** | src,dst | MOD eq | dst = dst % src
+**<<=** | src,dst | Shift Left Equal | dst = dst << src
+**>>=** | src,dst | Shift Rigth Equal | dst = dst << src
+**&=** | src,dst | Logic AND eq | dst = dst & src;
+**`|`=** | src,dst | Logic OR eq| dst = dst | src
+**^=** | src,dst | Logic XOR Equal | dst = dst ^ src;
+**++=** | src | Increment eq | src = src + 1
+**--=** | src | Decrement eq | src = src - 1
+**!** | src | NEG | stack = !!!src
+**!=** | src | Logic NOT Equal | src = !src
+**++** | src | Increment | stack = src++;
+**--** | src | Decrement | stack = src--;
+
+
 
 ###ESIL Flags
 
