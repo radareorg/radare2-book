@@ -57,24 +57,24 @@ ESIL Opcode | Operands | Name | Operation in C
 *Still* | `renders` | test | **nicely**
 **$$** | dst,src | Trap | src<dst?1:0
 **$** | dst,src | Syscall | src<dst?1:0
-**==** | src,dst | Compare | v=dst - src ; update_internal_eflags(v)
-**<** | dst,src | Smaller | src<dst?1:0
-**<=** | dst,src | Smaller Equal | src<dst?1:0
-**>** | dst,src | Bigger | src<dst?1:0
-**>=** | dst,src | Bigger Equal | src<dst?1:0
-**<<** | dst,src | Shift Left | src<dst?1:0
-**<<=** | dst,src | Shift Left Equal | src<dst?1:0
-**>>** | dst,src | Shift Rigth | src<dst?1:0
-**>>=** | dst,src | Shift Rigth Equal | src<dst?1:0
-**<<<<** | dst,src | Rotate Left | src<dst?1:0
-**>>>>** | dst,src | Rotate Rigth | src<dst?1:0
-**&** | dst,src | Logic AND | src<dst?1:0
-**&=** | dst,src | Logic AND Equal | src<dst?1:0
+**==** | src,dst | Compare | v = dst - src ; update_internal_eflags(v)
+**<** | src,dst | Smaller | stack = (dst < src)
+**<=** | src,dst | Smaller or Equal | stack = (dst <= src)
+**>** | src,dstc | Bigger | stack = (dst > src)
+**>=** | src,dst | Bigger or Equal | stack = (dst > src)
+**<<** | src,dst | Shift Left | stack = dst << src
+**>>** | src,dst | Shift Rigth | stack = dst >> src
+**<<<<** | src,dst | Rotate Left | stack=dst ROL src
+**>>>>** | src,dst | Rotate Rigth | stack=dst ROR src
+**&** | dst,src | Logic AND | stacsrc<dst?1:0
 **`|`** | dst,src | Logic OR | src<dst?1:0
-**`|`=** | dst,src | Logic OR Equal| src<dst?1:0
 **!** | dst,src | Logic NOT | src<dst?1:0
-**!=** | dst,src | Logic NOT Equal | src<dst?1:0
 **^** | dst,src | Logic XOR | src<dst?1:0
+**<<=** | src,dst | Shift Left Equal | 
+**>>=** | src,dst | Shift Rigth Equal |
+**&=** | dst,src | Logic AND Equal | src<dst?1:0
+**`|`=** | dst,src | Logic OR Equal| src<dst?1:0
+**!=** | dst,src | Logic NOT Equal | src<dst?1:0
 **^=** | dst,src | Logic XOR Equal | src<dst?1:0
 **`*`** | dst,src | Multiplication | src<dst?1:0
 **`*=`** | dst,src | Multiplication Equal | src<dst?1:0
