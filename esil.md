@@ -74,8 +74,8 @@ ESIL Opcode | Operands | Operation in C
 **`|`=** | dst,src | src<dst?1:0
 **!** | dst,src | src<dst?1:0
 **!=** | dst,src | src<dst?1:0
-***** | dst,src | src<dst?1:0
-***=** | dst,src | src<dst?1:0
+`*` | dst,src | src<dst?1:0
+`*=` | dst,src | src<dst?1:0
 
 ###ESIL Flags
 
