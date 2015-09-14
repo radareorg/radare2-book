@@ -53,10 +53,10 @@ ESIL commands are operations that pop values from the stack, perform calculation
 
 Here is the complete instruction set used by the ESIL VM:
 
-ESIL Opcode | Operands | Name | Operation in C | example
---- | --- | --- | --- | ---
-**$$** | src | Trap |  trap with src code |   
-**$** | src | Syscall | sysccall with src code |   
+ESIL Opcode | Operands | Name | Operation| example
+--- | --- | --- | --- | ----------------------------------------------
+**$$** | src | Trap |  trap  |   
+**$** | src | Syscall | sysccall  |   
 **==** | src,dst | Compare | v = dst - src ; update_eflags(v) |   
 **<** | src,dst | Smaller | stack = (dst < src) | [0x0000000]> "ae 1,5,<" <br>0x0<br>[0x00000000]> "ae 5,5"<br>0x0"
 **<=** | src,dst | Smaller or Equal | stack = (dst <= src) | [0x0000000]> "ae 1,5,<" <br>0x0<br>[0x00000000]> "ae 5,5"<br>0x1"   
