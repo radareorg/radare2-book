@@ -85,8 +85,8 @@ ESIL Opcode | Operands | Name | Operation| example
 **<<=** | src,reg | Shift Left eq | reg = reg << src | [0x00000000]> ar r_00=1;ar r_01=1;ar r_01<br>0x00000001<br>[0x00000000]> "ae r_00,r_01,<<="<br>[0x00000000]> ar r_01<br>0x00000002<br>[0x00000000]> "ae 2,r_01,<<="<br>[0x00000000]> ar r_01<br>0x00000008
 **>>=** | src,reg | Shift Rigth eq | reg = reg << src | [0x00000000]> ar r_00=1;ar r_01=8;ar r_01<br>0x00000008<br>[0x00000000]> "ae r_00,r_01,>>="<br>[0x00000000]> ar r_01<br>0x00000004<br>[0x00000000]> "ae 2,r_01,>>="<br>[0x00000000]> ar r_01<br>0x00000001
 **&=** | src,reg |  AND eq | reg = reg & src | [0x00000000]> ar r_00=2;ar r_01=6;ar r_01<br>0x00000006<br>[0x00000000]> "ae r_00,r_01,&="<br>[0x00000000]> ar r_01<br>0x00000002<br>[0x00000000]> "ae 2,r_01,&="<br>[0x00000000]> ar r_01<br>0x00000002<br>[0x00000000]> "ae 1,r_01,&="<br>[0x00000000]> ar r_01<br>0x00000000
-**`|`=** | src,reg | OR eq| reg = reg `|` src |   
-**^=** | src,reg | XOR eq | reg = reg ^ src |   
+**`|`=** | src,reg | OR eq| reg = reg `|` src | [0x00000000]> ar r_00=2;ar r_01=1;ar r_01<br>0x00000001<br>[0x00000000]> "ae r_00,r_01,|="<br>[0x00000000]> ar r_01<br>0x00000003<br>[0x00000000]> "ae 4,r_01,|="<br>[0x00000000]> ar r_01<br>0x00000007
+ **^=** | src,reg | XOR eq | reg = reg ^ src | [0x00000000]> ar r_00=2;ar r_01=0xab;ar r_01<br>0x000000ab<br>[0x00000000]> "ae r_00,r_01,^="<br>[0x00000000]> ar r_01<br>0x000000a9<br>[0x00000000]> "ae 2,r_01,^="<br>[0x00000000]> ar r_01<br>0x000000ab
 **++=** | reg | INC eq | reg = reg + 1 |   
 **--=** | reg | DEC eq | reg = reg - 1 |   
 **!=** | reg | NOT eq | reg = !reg |   
