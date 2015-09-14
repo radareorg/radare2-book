@@ -195,10 +195,15 @@ CPU flags are usually defined as single bit registers in the RReg profile. They 
 ###Variables
 
 Properties of the VM variables:
+
 1. They have no predefined bit width. This way it should be easy to extend them to 128, 256 and 512 bits later, e.g. for MMX, SSE, AVX, Neon SIMD.
+
 2. There can be unbound number of variables. It is done for SSA-form compatibility.
+
 3. Register names have no specific syntax. They are just strings.
+
 4. Numbers can be specified in any base supported by RNum (dec, hex, oct, binary ...)
+
 5. Each ESIL backend should have an associated RReg profile to describe the ESIL register specs.
 
 ###Bit Arrays
