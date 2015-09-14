@@ -63,9 +63,9 @@ ESIL Opcode | Operands | Name | Operation| example
 **>** | src,dst | Bigger | stack = (dst > src) | [0x00000000]> "ae 1,5,>"<br>0x1<br>[0x00000000]> "ae 5,5,>"<br>0x0
  **>=** | src,dst | Bigger or Equal | stack = (dst > src) | [0x00000000]> "ae 1,5,>="<br>0x1<br>[0x00000000]> "ae 5,5,>="<br>0x1
  **<<** | src,dst | Shift Left | stack = dst << src | [0x00000000]> "ae 1,1,<<"<br>0x2<br>[0x00000000]> "ae 2,1,<<"<br>0x4
- **>>** | src,dst | Shift Rigth | stack = dst >> src | [0x00000000]> "ae 1,4,>>"<br>0x2<br>[0x00000000]> "ae 2,4,>>"<br>0x1
+ **>>** | src,dst | Shift Right | stack = dst >> src | [0x00000000]> "ae 1,4,>>"<br>0x2<br>[0x00000000]> "ae 2,4,>>"<br>0x1
  **<<<<** | src,dst | Rotate Left | stack=dst ROL src | [0x00000000]> "ae 31,1,<<<<"<br>0x80000000<br>[0x00000000]> "ae 32,1,<<<<"<br>0x1
-**>>>>** | src,dst | Rotate Rigth | stack=dst ROR src | [0x00000000]> "ae 1,1,>>>>"<br>0x80000000<br>[0x00000000]> "ae 32,1,>>>>"<br>0x1
+**>>>>** | src,dst | Rotate Right | stack=dst ROR src | [0x00000000]> "ae 1,1,>>>>"<br>0x80000000<br>[0x00000000]> "ae 32,1,>>>>"<br>0x1
 **&** | src,dst | AND | stack = dst & src | [0x00000000]> "ae 1,1,&"<br>0x1<br>[0x00000000]> "ae 1,0,&"<br>0x0<br>[0x00000000]>  "ae 0,1,&"<br>0x0<br>[0x00000000]> "ae 0,0,&"<br>0x0
 **`|`** | src,dst | OR | stack = dst `|` src | [0x00000000]> "ae 1,1,`|`"<br>0x1<br>[0x00000000]> "ae 1,0,`|`"<br>0x1<br>[0x00000000]> "ae 0,1,`|`"<br>0x1<br>[0x00000000]> "ae 0,0,`|`"<br>0x0
 **^** | src,dst | XOR | stack = dst ^src  | [0x00000000]> "ae 1,1,^"<br>0x0<br>[0x00000000]> "ae 1,0,^"<br>0x1<br>[0x00000000]> "ae 0,1,^"<br>0x1<br>[0x00000000]> "ae 0,0,^"<br>0x0
@@ -83,7 +83,7 @@ ESIL Opcode | Operands | Name | Operation| example
  **/=** | src,reg | DIV eq | reg = reg / src | [0x00000000]> ar r_01=3;ar r_00=6;ar r_00<br>0x00000006<br>[0x00000000]> "ae r_01,r_00,/="<br>[0x00000000]> ar r_00<br>0x00000002<br>[0x00000000]> "ae 1,r_00,/="<br>[0x00000000]> ar r_00<br>0x00000002
  **%=** | src,reg | MOD eq | reg = reg % src | [0x00000000]>  ar r_01=3;ar r_00=7;ar r_00<br> 0x00000007<br> [0x00000000]> "ae r_01,r_00,%="<br> [0x00000000]> ar r_00<br> 0x00000001<br> [0x00000000]>  ar r_00=9;ar r_00<br> 0x00000009<br> [0x00000000]> "ae 5,r_00,%="<br> [0x00000000]> ar r_00<br> 0x00000004
 **<<=** | src,reg | Shift Left eq | reg = reg << src | [0x00000000]> ar r_00=1;ar r_01=1;ar r_01<br>0x00000001<br>[0x00000000]> "ae r_00,r_01,<<="<br>[0x00000000]> ar r_01<br>0x00000002<br>[0x00000000]> "ae 2,r_01,<<="<br>[0x00000000]> ar r_01<br>0x00000008
-**>>=** | src,reg | Shift Rigth eq | reg = reg << src | [0x00000000]> ar r_00=1;ar r_01=8;ar r_01<br>0x00000008<br>[0x00000000]> "ae r_00,r_01,>>="<br>[0x00000000]> ar r_01<br>0x00000004<br>[0x00000000]> "ae 2,r_01,>>="<br>[0x00000000]> ar r_01<br>0x00000001
+**>>=** | src,reg | Shift Right eq | reg = reg << src | [0x00000000]> ar r_00=1;ar r_01=8;ar r_01<br>0x00000008<br>[0x00000000]> "ae r_00,r_01,>>="<br>[0x00000000]> ar r_01<br>0x00000004<br>[0x00000000]> "ae 2,r_01,>>="<br>[0x00000000]> ar r_01<br>0x00000001
 **&=** | src,reg |  AND eq | reg = reg & src | [0x00000000]> ar r_00=2;ar r_01=6;ar r_01<br>0x00000006<br>[0x00000000]> "ae r_00,r_01,&="<br>[0x00000000]> ar r_01<br>0x00000002<br>[0x00000000]> "ae 2,r_01,&="<br>[0x00000000]> ar r_01<br>0x00000002<br>[0x00000000]> "ae 1,r_01,&="<br>[0x00000000]> ar r_01<br>0x00000000
 **`|`=** | src,reg | OR eq| reg = reg `|` src | [0x00000000]> ar r_00=2;ar r_01=1;ar r_01<br>0x00000001<br>[0x00000000]> "ae r_00,r_01,|="<br>[0x00000000]> ar r_01<br>0x00000003<br>[0x00000000]> "ae 4,r_01,|="<br>[0x00000000]> ar r_01<br>0x00000007
  **^=** | src,reg | XOR eq | reg = reg ^ src | [0x00000000]> ar r_00=2;ar r_01=0xab;ar r_01<br>0x000000ab<br>[0x00000000]> "ae r_00,r_01,^="<br>[0x00000000]> ar r_01<br>0x000000a9<br>[0x00000000]> "ae 2,r_01,^="<br>[0x00000000]> ar r_01<br>0x000000ab
