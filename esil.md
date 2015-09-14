@@ -91,7 +91,8 @@ ESIL Opcode | Operands | Name | Operation| example
 **--=** | reg | DEC eq | reg = reg - 1 | [0x00000000]> ar r_00=4;ar r_00<br>0x00000004<br>[0x00000000]> "ae r_00,--="<br>[0x00000000]> ar r_00<br>0x00000003
 **!=** | reg | NOT eq | reg = !reg | [0x00000000]> ar r_00=4;ar r_00<br>0x00000004<br>[0x00000000]> "ae r_00,!="<br>[0x00000000]> ar r_00<br>0x00000000<br>[0x00000000]> "ae r_00,!="<br>[0x00000000]> ar r_00<br>0x00000001
 --- | --- | --- | --- | ----------------------------------------------
-**XXX** | reg | nombre | reg = !reg | [0x00000000]> <br>[0x00000000]>
+`|`=[]<br>`|`=[1]<br>`|`=[2]<br>`|`=[4]<br>`|`=[8] | reg | nombre | reg = !reg | [0x00000000]> <br>[0x00000000]>
+
 
 ###ESIL Flags
 
