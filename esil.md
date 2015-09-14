@@ -74,11 +74,11 @@ ESIL Opcode | Operands | Name | Operation| example
 **`*`** | src,dst | MUL | stack = dst * src | [0x00000000]> "ae 3,4,`*`"<br>0xc<br>[0x00000000]> "ae 5,5,`*`"<br>0x19
 **/** | src,dst | DIV | stack = dst / src  | [0x00000000]> "ae 2,4,/"<br>0x2<br>[0x00000000]> "ae 5,5,/"<br>0x1<br>[0x00000000]> "ae 5,9,/"<br>0x1
 **%** | src,dst | MOD | stack = dst % src | [0x00000000]> "ae 2,4,%"<br>0x0<br>[0x00000000]> "ae 5,5,%"<br>0x0<br>[0x00000000]> "ae 5,9,%"<br>0x4
-**!** | src | NEG | stack = !!!src |   
-**++** | src | INC | stack = src++ |   
-**--** | src | DEC | stack = src-- |   
+**!** | src | NEG | stack = !!!src | [0x00000000]> "ae 1,!"<br>0x0<br>[0x00000000]> "ae 4,!"<br>0x0<br>[0x00000000]> "ae 0,!"<br>0x1<br>
+**++** | src | INC | stack = src++ | [0x00000000]> ar r_00=0;ar r_00<br>0x00000000<br>[0x00000000]> "ae r_00,++"<br>0x1<br>[0x00000000]> ar r_00<br>0x00000000<br>[0x00000000]> "ae 1,++"<br>0x2
+**--** | src | DEC | stack = src-- | [0x00000000]> ar r_00=5;ar r_00<br>0x00000005<br>[0x00000000]> "ae r_00,--"<br>0x4<br>[0x00000000]> ar r_00<br>0x00000005<br>[0x00000000]> "ae 5,--"<br>0x4
 **+=** | src,reg | ADD eq | reg = reg + src | [0x00000000]> ar r_01=5;ar r_00=0;ar r_00<br>0x00000000<br>[0x00000000]> "ae r_01,r_00,+="<br>[0x00000000]> ar r_00<br>0x00000005<br>[0x00000000]> "ae 5,r_00,+="<br>[0x00000000]> ar r_00<br>0x0000000a
-**-=** | src,reg | SUB eq | reg = reg - src |   
+**-=** | src,reg | SUB eq | reg = reg - src | 
 **`*=`** | src,reg | MUL eq | reg = reg * src |   
 **/=** | src,reg | DIV eq | reg = reg / src |   
 **%=** | src,reg | MOD eq | reg = reg % src |   
