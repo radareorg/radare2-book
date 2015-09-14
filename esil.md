@@ -74,7 +74,7 @@ ESIL Opcode | Operands | Name | Operation in C | example
 **`*`** | src,dst | MUL | stack = dst * src | [0x00000000]> "ae 3,4,`*`"<br>0xc<br>[0x00000000]> "ae 5,5,`*`"<br>0x19
 **/** | src,dst | DIV | stack = dst / src  | [0x00000000]> "ae 2,4,/"<br>0x2<br>[0x00000000]> "ae 5,5,/"<br>0x1<br>[0x00000000]> "ae 5,9,/"<br>0x1
 **%** | src,dst | MOD | stack = dst % src | [0x00000000]> "ae 2,4,%"<br>0x0<br>[0x00000000]> "ae 5,5,%"<br>0x0<br>[0x00000000]> "ae 5,9,%"<br>0x4
-**+=** | src,dst | ADD eq | dst = dst + src |   
+**+=** | src,dst | ADD eq | dst = dst + src | [0x00000000]> ar r_01=5;ar r_00=0;ar r_00<br>0x00000000<br>[0x00000000]> "ae r_01,r_00,+="<br>[0x00000000]> ar r_00<br>0x00000005<br>[0x00000000]> "ae r_01,r_00,+="<br>[0x00000000]> ar r_00<br>0x0000000a
 **-=** | src,dst | SUB eq | dst = dst - src |   
 **`*=`** | src,dst | MUL eq | dst = dst * src |   
 **/=** | src,dst | DIV eq | dst = dst / src |   
