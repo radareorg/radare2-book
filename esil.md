@@ -92,8 +92,8 @@ ESIL Opcode | Operands | Name | Operation| example
 **!=** | reg | NOT eq | reg = !reg | [0x00000000]> ar r_00=4;ar r_00<br>0x00000004<br>[0x00000000]> "ae r_00,!="<br>[0x00000000]> ar r_00<br>0x00000000<br>[0x00000000]> "ae r_00,!="<br>[0x00000000]> ar r_00<br>0x00000001
 --- | --- | --- | --- | ----------------------------------------------
 `|`=[]<br>`|`=[1]<br>`|`=[2]<br>`|`=[4]<br>`|`=[8] | reg | nombre | reg = !reg | [0x00000000]> <br>[0x00000000]>
-
-
+=[]<br>=[*]<br>=[1]<br>=[2]<br>=[4]<br>=[18] | --- | poke |
+	
 ###ESIL Flags
 
 ESIL VM has an internal state flags that are read only and can be used to export those values to the underlying target CPU flags. It is because the ESIL VM always calculates all flag changes, while target CPUs only update flags under certain conditions or at specific instructions.
