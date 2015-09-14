@@ -84,12 +84,12 @@ ESIL Opcode | Operands | Name | Operation| example
 **&=** | src,dst |  AND eq | dst = dst & src |   
 **`|`=** | src,dst | OR eq| dst = dst `|` src |   
 **^=** | src,dst | XOR eq | dst = dst ^ src |   
-**++=** | src | INC eq | src = src + 1 |   
-**--=** | src | DEC eq | src = src - 1 |   
 **!** | src | NEG | stack = !!!src |   
 **!=** | src | NOT eq | src = !src |   
 **++** | src | INC | stack = src++ |   
 **--** | src | DEC | stack = src-- |   
+**++=** | reg | INC eq | reg = reg + 1 |   
+**--=** | reg | DEC eq | reg = reg - 1 |   
 
 ###ESIL Flags
 
