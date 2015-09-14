@@ -77,7 +77,7 @@ ESIL Opcode | Operands | Name | Operation| example
 **!** | src | NEG | stack = !!!src |   
 **++** | src | INC | stack = src++ |   
 **--** | src | DEC | stack = src-- |   
-**+=** | src,reg | ADD eq | reg = reg + src | [0x00000000]> ar r_01=5;ar r_00=0;ar r_00<br>0x00000000<br>[0x00000000]> "ae r_01,r_00,+="<br>[0x00000000]> ar r_00<br>0x00000005<br>[0x00000000]> "ae r_01,r_00,+="<br>[0x00000000]> ar r_00<br>0x0000000a
+**+=** | src,reg | ADD eq | reg = reg + src | [0x00000000]> ar r_01=5;ar r_00=0;ar r_00<br>0x00000000<br>[0x00000000]> "ae r_01,r_00,+="<br>[0x00000000]> ar r_00<br>0x00000005<br>[0x00000000]> "ae 5,r_00,+="<br>[0x00000000]> ar r_00<br>0x0000000a
 **-=** | src,reg | SUB eq | reg = reg - src |   
 **`*=`** | src,reg | MUL eq | reg = reg * src |   
 **/=** | src,reg | DIV eq | reg = reg / src |   
