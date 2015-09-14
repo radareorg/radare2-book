@@ -78,7 +78,7 @@ ESIL Opcode | Operands | Name | Operation| example
 **++** | src | INC | stack = src++ | [0x00000000]> ar r_00=0;ar r_00<br>0x00000000<br>[0x00000000]> "ae r_00,++"<br>0x1<br>[0x00000000]> ar r_00<br>0x00000000<br>[0x00000000]> "ae 1,++"<br>0x2
 **--** | src | DEC | stack = src-- | [0x00000000]> ar r_00=5;ar r_00<br>0x00000005<br>[0x00000000]> "ae r_00,--"<br>0x4<br>[0x00000000]> ar r_00<br>0x00000005<br>[0x00000000]> "ae 5,--"<br>0x4
 **+=** | src,reg | ADD eq | reg = reg + src | [0x00000000]> ar r_01=5;ar r_00=0;ar r_00<br>0x00000000<br>[0x00000000]> "ae r_01,r_00,+="<br>[0x00000000]> ar r_00<br>0x00000005<br>[0x00000000]> "ae 5,r_00,+="<br>[0x00000000]> ar r_00<br>0x0000000a
-**-=** | src,reg | SUB eq | reg = reg - src | 
+**-=** | src,reg | SUB eq | reg = reg - src | [0x00000000]> "ae r_01,r_00,-="<br>[0x00000000]> ar r_00<br>0x00000004<br>[0x00000000]> "ae 3,r_00,-="<br>[0x00000000]> ar r_00<br>0x00000001
 **`*=`** | src,reg | MUL eq | reg = reg * src |   
 **/=** | src,reg | DIV eq | reg = reg / src |   
 **%=** | src,reg | MOD eq | reg = reg % src |   
