@@ -17,16 +17,22 @@ ESIL commands are operations that pop values from the stack, perform calculation
 
 ##Use ESIL
 
-   Using visual mode its great to inspect the esil evaluations. To do this only its needed set the next enviroment variable: "asm.emu". Ex:
+   Using visual mode its great to inspect the esil evaluations. 
+   
+   To do this only its needed set the next enviroment variable: "asm.emu". Ex:
+   
       ```
       [0x00000000]> e asm.emu = true
       ```
+      
    With this variable activate in visual mode you can see each register associated to current esil expresion.
    
    Another useful variable its "asm.esil"
+   
       ```
       [0x00000000]> e asm.esil = true
       ```
+
 ##ESIL Commands 
    * "ae" : Evaluate ESIL expresion.
    
