@@ -25,7 +25,7 @@ ESIL commands are operations that pop values from the stack, perform calculation
       [0x00000000]> e asm.emu = true
       ```
       
-   With this variable activate in visual mode you can see each register associated to current esil expresion.
+   With this variable enabled, in visual mode you can see each register associated to current esil expresion.
    
    Another useful variable its "asm.esil"
    
