@@ -55,8 +55,9 @@ Here is the complete instruction set used by the ESIL VM:
 
 ESIL Opcode | Operands | Name | Operation| example
 --- | --- | --- | --- | ----------------------------------------------
-**$$** | src | Trap |  trap  |   
-**$** | src | Syscall | sysccall  |   
+**$** | src | Syscall | sysccall  |
+TRAP  | src | Trap | Trap signal |
+**$$** | src | Get address of current instruction | Instruction address  | stack=instruction address
 **==** | src,dst | Compare | v = dst - src ; update_eflags(v) |   
 **<** | src,dst | Smaller | stack = (dst < src) | [0x0000000]> "ae 1,5,<" <br>0x0<br>[0x00000000]> "ae 5,5"<br>0x0"
 **<=** | src,dst | Smaller or Equal | stack = (dst <= src) | [0x0000000]> "ae 1,5,<" <br>0x0<br>[0x00000000]> "ae 5,5"<br>0x1"   
