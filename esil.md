@@ -62,7 +62,8 @@ ESIL commands are operations that pop values from the stack, perform calculation
    ADDR BREAK
    [0x00001019]>
    ```
-  * "ar" : Show/modify ESIL registry
+   
+   * "ar" : Show/modify ESIL registry
    
    ```
    [0x00001ec7]> ar r_00 = 0x1035
@@ -70,6 +71,7 @@ ESIL commands are operations that pop values from the stack, perform calculation
    0x00001035
    [0x00001019]>
    ```
+   
 ###ESIL Instruction Set
 
 Here is the complete instruction set used by the ESIL VM:
