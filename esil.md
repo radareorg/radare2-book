@@ -1,7 +1,5 @@
 #ESIL
 
-*From the wiki page of radare2 at Github*
-
 ESIL stands for 'Evaluable Strings Intermediate Language'. It aims to describe a Forth-like representation for every target CPU opcode semantics. ESIL representations can be evaluated (interpreted) in order to emulate individual instructions. Each command of an ESIL expression is separated by a comma. Its virtual machine can be described as this:
 ```
    while ((word=haveCommand())) {
