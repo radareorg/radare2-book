@@ -127,8 +127,8 @@ Internal flags are prefixed with '$' character.
 
 ```
 z - zero flag, only set if the result of an operation is 0
-b - borrow, this requires to specify from which bit (example: %b4 - checks if borrow from bit 4)
-c - carry, same like above (example: %c7 - checks if carry from bit 7)
+b - borrow, this requires to specify from which bit (example: $b4 - checks if borrow from bit 4)
+c - carry, same like above (example: $c7 - checks if carry from bit 7)
 p - parity
 r - regsize ( asm.bits/8 )
 ```
