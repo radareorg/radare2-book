@@ -21,17 +21,17 @@ ESIL commands are operations that pop values from the stack, perform calculation
    
    To do this only its needed set the next enviroment variable: "asm.emu". Ex:
    
-      ```
-      [0x00000000]> e asm.emu = true
-      ```
+   ```
+   [0x00000000]> e asm.emu = true
+   ```
       
    With this variable enabled, in visual mode you can see each register associated to current esil expresion.
    
    Another useful variable its "asm.esil"
    
-      ```
-      [0x00000000]> e asm.esil = true
-      ```
+   ```
+   [0x00000000]> e asm.esil = true
+   ```
 
 ##ESIL Commands 
    * "ae" : Evaluate ESIL expresion.
