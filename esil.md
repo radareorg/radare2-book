@@ -32,6 +32,8 @@ ESIL commands are operations that pop values from the stack, perform calculation
    ```
    [0x00000000]> e asm.esil = true
    ```
+   
+   It can also be toggled using `O` shortcut within the visual mode.
 
 ##ESIL Commands 
    * "ae" : Evaluate ESIL expresion.
