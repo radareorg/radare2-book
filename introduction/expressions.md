@@ -13,18 +13,18 @@ Expressions are mathematical representations of 64-bit numerical values. They ca
 
 Supported arithmetic operations are:
 
- *   + : addition
- *   - : substraction
- *   * : multiplication
+ *   \+ : addition
+ *   \- : substraction
+ *   \* : multiplication
  *   / : division
  *   % : modulus
- *   > : shift right
+ *   \> : shift right
  *   < : shift left
 
 Binary operations should be escaped:
 
  *   \| : logical OR // ("? 0001010 | 0101001")
- *   \& : logical AND
+ *   & : logical AND
 
 Values are numbers representable in several formats:
 
