@@ -26,9 +26,9 @@ Binary operations should be escaped:
  *   \| : logical OR // ("? 0001010 | 0101001")
  *   & : logical AND
 
-Values are numbers representable in several formats:
+Values are numbers can be displayed in several formats:
 
-    0x033   : hexadecimal
+    0x033   : hexadecimalcan be displayed
     3334    : decimal
     sym.fo  : resolve flag offset
     10K     : KBytes  10*1024
