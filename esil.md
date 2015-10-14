@@ -123,7 +123,7 @@ TRAP  | src | Trap | Trap signal |
 
 ESIL VM has an internal state flags that are read only and can be used to export those values to the underlying target CPU flags. It is because the ESIL VM always calculates all flag changes, while target CPUs only update flags under certain conditions or at specific instructions.
 
-Internal flags are prefixed with '$' character.
+Internal flags are prefixed with `$` character.
 
 ```
 z - zero flag, only set if the result of an operation is 0
