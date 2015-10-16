@@ -37,7 +37,7 @@ Values are numbers can be displayed in several formats:
 
 You can also use variables and seek positions to build complex expressions. Available values include:
 
-    ?@?    or stype @@?      ; misc help for '@' (seek), '~' (grep) (see ~??)
+    ?@?    or type @@?      ; misc help for '@' (seek), '~' (grep) (see ~??)
     ?$?           ; show available '$' variables
     $$            ; here (the current virtual seek)
     $l            ; opcode length
