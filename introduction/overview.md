@@ -117,7 +117,7 @@ A launcher for running programs within different environments, with different ar
 
 ### rax2
 
-An utility that aims to be a minimalistic mathematical expression evaluator for the shell. It is useful for making base conversions between floating point values, hexadecimal representations, hexpair strings to ASCII, octal to integer, etc. It supports both endianness settings and can be used as an interactive shell if no arguments are given.
+A minimalistic mathematical expression evaluator for the shell that is useful for making base conversions between floating point values, hexadecimal representations, hexpair strings to ASCII, octal to integer, etc. It also supports endianness settings and can be used as an interactive shell if no arguments are given.
 
 #### Examples
 
