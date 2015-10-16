@@ -23,7 +23,7 @@ Supported arithmetic operations are:
 
 Binary operations should be escaped:
 
- *   \| : logical OR // ("? 0001010b | 0101001b")
+ *   \| : logical OR // ("? 0001010b | 0101001b ")
  *   & : logical AND
 
 Values are numbers can be displayed in several formats:
