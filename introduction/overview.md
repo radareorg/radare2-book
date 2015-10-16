@@ -16,14 +16,14 @@ A program to extract information from executable binaries, such as ELF, PE, Java
 
 A command line assembler and disassembler for multiple architectures (including Intel x86 and x86-64, MIPS, ARM, PowerPC, Java, and MSIL).
 
-#### rasm2 Examples
+#### Examples
 
     $ rasm2 -a java 'nop'
     00
-    
+
     $ rasm2 -a x86 -d '90'
     nop
-    
+
     $ rasm2 -a x86 -b 32 'mov eax, 33'
     b821000000
     
@@ -34,6 +34,13 @@ A command line assembler and disassembler for multiple architectures (including 
 
 An implementation of a block-based hash tool. From small text strings to large disks, rahash2 supports multiple algorithms, including MD4, MD5, CRC16, CRC32, SHA1, SHA256, SHA384, SHA512, par, xor, xorpair, mod255, hamdist, or entropy.
 rahash2 can be used to check the integrity of, or track changes to, big files, memory dumps, and disks.
+
+### Examples
+
+    $ rahash2 file
+    file: 0x00000000-0x00000007 sha256: 887cfbd0d44aaff69f7bdbedebd282ec96191cce9d7fa7336298a18efc3c7a5a
+    $ rahash2 file -a md5
+    file: 0x00000000-0x00000007 md5: d1833805515fc34b46c2b9de553f599d
 
 ###radiff2
 
@@ -115,16 +122,15 @@ An utility that aims to be a minimalistic mathematical expression evaluator for 
 
     $ rax2 1337
     0x539
-    
+
     $ rax2 0x400000
     4194304
-    
+
     $ rax2 -b 01111001
     y
-    
+
     $ rax2 -S radare2
     72616461726532
-    
+
     $ rax2 -s 617765736f6d65
     awesome
-    
