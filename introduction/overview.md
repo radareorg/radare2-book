@@ -2,17 +2,17 @@
 
 The Radare2 project is a set of small command-line utilities that can be used together or independently.
 
-###radare2
+### radare2
 
 The core of the hexadecimal editor and debugger. radare2 allows you to open a number of input/output sources as if they were simple, plain files, including disks, network connections, kernel drivers, processes under debugging, and so on.
 
 It implements an advanced command line interface for moving around a file, analyzing data, disassembling, binary patching, data comparison, searching, replacing, visualizing. It can be scripted with a variety of languages, including Ruby, Python, Lua, and Perl.
 
-###rabin2
+### rabin2
 
 A program to extract information from executable binaries, such as ELF, PE, Java CLASS, and Mach-O. rabin2 is used by the core to get exported symbols, imports, file information, cross references (xrefs), library dependencies, sections, etc.
 
-###rasm2
+### rasm2
 
 A command line assembler and disassembler for multiple architectures (including Intel x86 and x86-64, MIPS, ARM, PowerPC, Java, and MSIL).
 
@@ -26,11 +26,11 @@ A command line assembler and disassembler for multiple architectures (including 
 
     $ rasm2 -a x86 -b 32 'mov eax, 33'
     b821000000
-    
+
     $ echo 'push eax;nop;nop' | rasm2 -f -
     5090
 
-###rahash2
+### rahash2
 
 An implementation of a block-based hash tool. From small text strings to large disks, rahash2 supports multiple algorithms, including MD4, MD5, CRC16, CRC32, SHA1, SHA256, SHA384, SHA512, par, xor, xorpair, mod255, hamdist, or entropy.
 rahash2 can be used to check the integrity of, or track changes to, big files, memory dumps, and disks.
@@ -39,18 +39,19 @@ rahash2 can be used to check the integrity of, or track changes to, big files, m
 
     $ rahash2 file
     file: 0x00000000-0x00000007 sha256: 887cfbd0d44aaff69f7bdbedebd282ec96191cce9d7fa7336298a18efc3c7a5a
+
     $ rahash2 file -a md5
     file: 0x00000000-0x00000007 md5: d1833805515fc34b46c2b9de553f599d
 
-###radiff2
+### radiff2
 
 A binary diffing utility that implements multiple algorithms. It supports byte-level or delta diffing for binary files, and code-analysis diffing to find changes in basic code blocks obtained from the radare code analysis, or from the IDA analysis using the rsc idc2rdb  script.
 
-###rafind2
+### rafind2
 
 A program to find byte patterns in files.
 
-###ragg2
+### ragg2
 
 A frontend for r_egg. ragg2 compiles programs written in a simple high-level language into tiny binaries for x86, x86-64, and ARM.
 
@@ -80,7 +81,7 @@ A frontend for r_egg. ragg2 compiles programs written in a simple high-level lan
        Hello
 
 
-###rarun2
+### rarun2
 
 A launcher for running programs within different environments, with different arguments, permissions, directories, and overridden default file descriptors. rarun2 is useful for:
 
@@ -114,7 +115,7 @@ A launcher for running programs within different environments, with different ar
 2. In another terminal, run `r2`:
         $ r2 -d rarun2 program=/bin/ls stdio=/dev/ttys010
 
-###rax2
+### rax2
 
 An utility that aims to be a minimalistic mathematical expression evaluator for the shell. It is useful for making base conversions between floating point values, hexadecimal representations, hexpair strings to ASCII, octal to integer, etc. It supports both endianness settings and can be used as an interactive shell if no arguments are given.
 
