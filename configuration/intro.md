@@ -1,4 +1,4 @@
-#Configuration
+# Configuration
 
 The core reads `~/.radare2rc` while starting. You can add `e` commands to this file to tune radare configuration to your taste.
 
@@ -13,7 +13,7 @@ All the configuration of radare is done with the `eval` commands. A typical star
 Configuration can also be changed with `-e` <config=value> command-line option. This way you can adjust configuration from the command line, keeping the .radare2rc file intact. For example, to start with empty configuration and then adjust `scr.color` and `asm.syntax` the following line may be used:
 
     $ radare2 -n -e scr.color=true -e asm.syntax=intel -d /bin/ls
-    
+
 Internally, the configuration is stored in a hash table. The variables are grouped in namespaces: `cfg.`, `file.`, `dbg.`, `scr.` and so on.
 
 To get a list of all configuration variables just type `e` in the command line prompt. To limit output to a selected namespace, pass it with an ending dot to `e`. For example, `e file.` will display all variables defined inside "file" namespace.
@@ -38,7 +38,7 @@ To get help about `e` command type `e?`:
 A simpler alternative to `e` command is accessible from the visual mode. Type `Ve` to enter it, use arrows (up, down, left, right) to navigate the configuration, and `q` to exit it. The start screen for the visual cofiguration edit looks like this:
 
     Eval spaces:                                                                   
-    
+
     >  anal                                                                        
        asm                                                                         
        scr                                                                         
@@ -57,4 +57,3 @@ A simpler alternative to `e` command is accessible from the visual mode. Type `V
        scr                                                                         
        search                                                                      
        io                                                                          
-

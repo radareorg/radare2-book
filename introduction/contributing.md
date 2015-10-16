@@ -1,6 +1,6 @@
 ## Contributing
 
-###Radare2 Book
+### Radare2 Book
 
 If you want to contribute to the Radare2 book, you can do it at the [Github repository](https://github.com/radare/radare2book). Suggested contributions include:
 

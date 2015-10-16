@@ -1,4 +1,4 @@
-##Writing Data
+## Writing Data
 
 Radare can manipulate with a loaded binary file in many ways. You can resize the file, move and copy/paste bytes, insert new bytes (shifting data to the end of the block or file), or simply overwrite bytes. New data may come from another file contents, be a widestring, or even be represented as inline assembler statement.
 
@@ -28,7 +28,7 @@ To write bytes, use `w` command. It accepts multiple input formats, like inline 
     | wF -|file    write contents of hexpairs file here
     | wp -|file    apply radare patch file. See wp? fmi
     | wt file [sz] write to file (from current seek, blocksize or sz bytes)
-    
+
 Some examples:
 
      [0x00000000]> wx 123456 @ 0x8048300
@@ -38,7 +38,7 @@ Some examples:
 
 
 
-###Write Over
+### Write Over
 
 The `wo` command (write over) has many subcommands. It is applied to the current block. Supported operations: XOR, ADD, SUB...
 
@@ -74,8 +74,8 @@ It is possible to implement cipher-algorithms using radare core primitives and `
     0x7fcd6a891640  005a 488d 24c4 29c2 5248 89d6 4989 e548  .ZH.$.).RH..I..H
     0x7fcd6a891650  83e4 f048 8b3d 061a 2200 498d 4cd5 1049  ...H.=..".I.L..I
     0x7fcd6a891660  8d55 0831 ede8 06e2 0000 488d 15cf e600  .U.1......H.....
-    
-    
+
+
     [0x7fcd6a891630]> wox 90
     [0x7fcd6a891630]> px
     - offset -       0 1  2 3  4 5  6 7  8 9  A B  C D  E F  0123456789ABCDEF
@@ -83,8 +83,8 @@ It is possible to implement cipher-algorithms using radare core primitives and `
     0x7fcd6a891640  1374 60d8 b290 d91d 1dc5 98a1 9090 d81d  .t`.............
     0x7fcd6a891650  90dc 197c 9f8f 1490 d81d 95d9 9f8f 1490  ...|............
     0x7fcd6a891660  13d7 9491 9f8f 1490 13ff 9491 9f8f 1490  ................
-    
-    
+
+
     [0x7fcd6a891630]> woa 01 02
     [0x7fcd6a891630]> px
     - offset -       0 1  2 3  4 5  6 7  8 9  A B  C D  E F  0123456789ABCDEF

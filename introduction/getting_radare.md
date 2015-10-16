@@ -28,7 +28,7 @@ The most common way to get r2 updated and installed system wide is by using:
 
     $ sys/install.sh
 
-###Helper Scripts
+### Helper Scripts
 
 Take a look at the sys/* scripts, those are used to automatize stuff related to syncing, building and installing r2 and its bindings.
 
@@ -40,7 +40,7 @@ By default it will be installed in /usr, but you can define a new prefix as argu
 
 This is useful for developers, because it permits them to just run 'make' and try changes without having to run make install again.
 
-###Cleaning Up
+### Cleaning Up
 
 Cleaning up the source tree is important to avoid problems like linking to old objects files or not updating objects after an ABI change.
 
