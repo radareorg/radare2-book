@@ -1,4 +1,4 @@
-##Print Modes
+## Print Modes
 
 One of the key features of radare is displaying information in many formats. The goal is to offer a selection of displaying choices to best interpret binary data.
 
@@ -16,7 +16,7 @@ Below is a list of available print modes listed by `p?`:
     p[bB] [len]      bitstream of N bytes
     pc[p] [len]      output C (or python) format
     p[dD][lf] [l]    disassemble N opcodes/bytes (see pd?)
-    pf[?|.nam] [fmt] print formatted data (pf.name, pf.name $<expr>) 
+    pf[?|.nam] [fmt] print formatted data (pf.name, pf.name $<expr>)
     p[iI][df] [len]  print N instructions/bytes (f=func) (see pi? and pdi)
     pm [magic]       print libmagic data (pm? for more information)
     pr [len]         print N raw bytes
@@ -28,7 +28,7 @@ Below is a list of available print modes listed by `p?`:
     p[xX][owq] [len] hexdump of N bytes (o=octal, w=32bit, q=64bit)
     pz [len]         print zoom view (see pz? for help)
     pwd              display current working directory
-    
+
 ### Hexadecimal View
 
 `px` gives a user-friendly output showing 16 pairs of numbers per row with offsets and raw representations:
@@ -45,33 +45,33 @@ Below is a list of available print modes listed by `p?`:
     0x00404888  0x8949ed31 0x89485ed1 0xe48348e2 0x495450f0  1.I..^H..H...PTI
     0x00404898  0x2440c0c7 0xc7480041 0x4123b0c1 0xc7c74800  ..@$A.H...#A.H..
     0x004048a8  0x004028d0 0xffdc3fe8 0x9066f4ff 0x1f0f2e66  .(@..?....f.f...
-    
+
     [0x00404888]> e cfg.bigendian
     false
-    
+
     [0x00404888]> e cfg.bigendian = true
-    
+
     [0x00404888]> pxw
     0x00404888  0x31ed4989 0xd15e4889 0xe24883e4 0xf0505449  1.I..^H..H...PTI
     0x00404898  0xc7c04024 0x410048c7 0xc1b02341 0x0048c7c7  ..@$A.H...#A.H..
     0x004048a8  0xd0284000 0xe83fdcff 0xfff46690 0x662e0f1f  .(@..?....f.f...
-    
+
 
 #### 8 bits Hexpair List of Bytes
 
     [0x00404888]> p8 16
     31ed4989d15e4889e24883e4f0505449
 
-####Show Hexadecimal Quad-words Dump (64 bits)
+#### Show Hexadecimal Quad-words Dump (64 bits)
 
     [0x08049A80]> pxq
     0x00001390  0x65625f6b63617473  0x646e6962006e6967   stack_begin.bind
     0x000013a0  0x616d6f6474786574  0x7469727766006e69   textdomain.fwrit
     0x000013b0  0x6b636f6c6e755f65  0x6d63727473006465   e_unlocked.strcm
     ...
-    
 
-###Date/Time Formats
+
+### Date/Time Formats
 
 Currently supported timestamp output modes are:
 
@@ -97,7 +97,7 @@ As you can see, the endianness affects the result. Once you have printed a times
     15
     [0x08048000]> pt | grep 2022
     27:04:2022 16:15:43 +0000
-    
+
 The default date format can be configured using the `cfg.datefmt` variable. Formatting rules for it follow the well known strftime(3) format. An excerpt from the strftime(3) manpage:
 
     %a  The abbreviated name of the day of the week according to the current locale.
@@ -144,9 +144,9 @@ The default date format can be configured using the `cfg.datefmt` variable. Form
     %Z  The timezone name or abbreviation.
     %+  The date and time in date(1) format. (TZ) (Not supported in glibc2.)
     %%  A literal '%' character.
-    
 
-###Basic Types
+
+### Basic Types
 
 There are print modes available for all basic types. If you are interested in a more complex structure, just type : `pf?`. The list of the print modes for basic types (`pf?`):
 
@@ -185,11 +185,11 @@ Some examples are below:
 
     [0x4A13B8C0]> pf i
     0x00404888 = 837634441
-    
+
     [0x4A13B8C0]> pf
     0x00404888 = 837634432.000000
 
-###High-level Languages Views
+### High-level Languages Views
 
 Valid print code formats for human-readable languages are:
 
@@ -210,7 +210,7 @@ Valid print code formats for human-readable languages are:
     [0x7fcd6a891630]> pcs
     "\x48\x89\xe7\xe8\x68\x39\x00\x00\x49\x89\xc4\x8b\x05\xef\x16\x22\x00\x5a\x48\x8d\x24\xc4\x29\xc2\x52\x48\x89\xd6\x49\x89\xe5\x48\x83\xe4\xf0\x48\x8b\x3d\x06\x1a
 
-###Strings
+### Strings
 
 Strings are probably one of the most important entrypoints when starting to reverse engineer a program, because they usually reference information about functions' actions (asserts, debug or info messages...) Therefore radare supports various string formats:
 
@@ -235,31 +235,31 @@ Most strings are zero-terminated. Here is an example by using the debugger to co
       ebx  0x4a151c91    edi  0x4a151be1    oeax   0x00000005
       ecx  0x00000000    esp  0xbfbedb1c    eflags 0x200246  
       edx  0x00000000    ebp  0xbfbedbb0    cPaZstIdor0 (PZI)
-    [0x4A13B8C0]> 
+    [0x4A13B8C0]>
     [0x4A13B8C0]> psz @ 0x4a151c91
     /etc/ld.so.cache
-    
 
-###Print Memory Contents
+
+### Print Memory Contents
 
 It is also possible to print various packed data types using the `pf` command:
 
     [0xB7F08810]> pf xxS @ rsp
-    0x7fff0d29da30 = 0x00000001 
-    0x7fff0d29da34 = 0x00000000 
+    0x7fff0d29da30 = 0x00000001
+    0x7fff0d29da34 = 0x00000000
     0x7fff0d29da38 = 0x7fff0d29da38 -> 0x0d29f7ee /bin/ls
 
 This can be used to look at the arguments passed to a function. To achive this, simply pass a 'format memory string' as an argument to `pf`, and temporally change current seek position / offset using `@`. It is also possible to define arrays of structures with `pf`. To do this, prefix the format string with a numeric value. You can also define a name for each field of the structure by appending them as a space-separated arguments list.
-    
+
     [0x4A13B8C0]> pf 2*xw pointer type @ esp
     0x00404888 [0] {
-       pointer : 
-    (*0xffffffff8949ed31)      type : 0x00404888 = 0x8949ed31 
-       0x00404890 = 0x48e2 
+       pointer :
+    (*0xffffffff8949ed31)      type : 0x00404888 = 0x8949ed31
+       0x00404890 = 0x48e2
     }
     0x00404892 [1] {
-    (*0x50f0e483)    pointer : 0x00404892 = 0x50f0e483 
-         type : 0x0040489a = 0x2440 
+    (*0x50f0e483)    pointer : 0x00404892 = 0x50f0e483
+         type : 0x0040489a = 0x2440
     }
 
 A practical example for using `pf` on a binary of a GStreamer plugin:
@@ -270,26 +270,26 @@ A practical example for using `pf` on a binary of a GStreamer plugin:
      license source package origin
          major : 0x000185e0 = 0
          minor : 0x000185e4 = 10
-          name : 0x000185e8 = 0x000185e8 flumms 
-          desc : 0x000185ec = 0x000185ec Fluendo MMS source 
-         _init : 0x000185f0 = 0x00002940 
-       version : 0x000185f4 = 0x000185f4 0.10.15.1 
-       license : 0x000185f8 = 0x000185f8 unknown 
-        source : 0x000185fc = 0x000185fc gst-fluendo-mms 
-       package : 0x00018600 = 0x00018600 Fluendo MMS source 
-        origin : 0x00018604 = 0x00018604 http://www.fluendo.com 
-    
-###Disassembly
+          name : 0x000185e8 = 0x000185e8 flumms
+          desc : 0x000185ec = 0x000185ec Fluendo MMS source
+         _init : 0x000185f0 = 0x00002940
+       version : 0x000185f4 = 0x000185f4 0.10.15.1
+       license : 0x000185f8 = 0x000185f8 unknown
+        source : 0x000185fc = 0x000185fc gst-fluendo-mms
+       package : 0x00018600 = 0x00018600 Fluendo MMS source
+        origin : 0x00018604 = 0x00018604 http://www.fluendo.com
+
+### Disassembly
 
 The `pd` command is used to disassemble code. It accepts a numeric value to specify how many instructions should be disassembled. The `pD` command is similar but instead of a number of instructions, it decompiles a given number of bytes.
 
      d : disassembly N opcodes   count of opcodes
      D : asm.arch disassembler   bsize bytes
- 
+
      [0x00404888]> pd 1
                 ;-- entry0:
                 0x00404888    31ed         xor ebp, ebp
-    
+
 ### Selecting Target Architecture
 
 The architecture flavor for disassembler is defined by the `asm.arch` eval variable. You can use `e asm.arch = ?` to list all available architectures.
@@ -330,9 +330,9 @@ The architecture flavor for disassembler is defined by the `asm.arch` eval varia
     a_  32 64      x86.nz      LGPL3   x86 handmade assembler
     ad  32         x86.olly    GPL2    OllyDBG X86 disassembler
     ad  8          z80         NC-GPL2 Zilog Z80
-    
-    
-###Configuring the Disassembler
+
+
+### Configuring the Disassembler
 
 There are multiple options which can be used to configure the output of disassembler. All these options are described in `e? asm.`
 
@@ -376,7 +376,7 @@ There are multiple options which can be used to configure the output of disassem
                 asm.bits: Word size in bits at assembler
           asm.lineswidth: Number of columns for program flow arrows
 
-###Disassembly Syntax
+### Disassembly Syntax
 
 The `asm.syntax` variable is used to change flavor of assembly syntax used by a disassembler engine. To switch between Intel and AT&T representations:
 

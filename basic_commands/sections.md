@@ -1,4 +1,4 @@
-##Sections
+## Sections
 
 Firmware images, bootloaders and binary files usually place various sections of a binary at different addresses in memory. To represent this behavior, radare offers the `S` command.
 
@@ -31,24 +31,24 @@ Displaying information about sections:
 
     # List sections
     [0x00404888]> S
-    
+
     [00] . 0x00000238 r-- va=0x00400238 sz=0x0000001c vsz=0000001c .interp
     [01] . 0x00000254 r-- va=0x00400254 sz=0x00000020 vsz=00000020 .note.ABI_tag
     [02] . 0x00000274 r-- va=0x00400274 sz=0x00000024 vsz=00000024 .note.gnu.build_id
     [03] . 0x00000298 r-- va=0x00400298 sz=0x00000068 vsz=00000068 .gnu.hash
     [04] . 0x00000300 r-- va=0x00400300 sz=0x00000c18 vsz=00000c18 .dynsym
-    
-    
+
+
     # List sections (in nice ascii-art bars)
     [0xB7EEA810]> S=
-    
+
     ...
     25  0x0001a600 |-----------------------------#| 0x0001a608 --- .gnu_debuglink
     26  0x0001a608 |-----------------------------#| 0x0001a706 --- .shstrtab
     27* 0x00000000 |##############################| 0x0001ae08 rwx ehdr
     =>  0x00004888 |-----^------------------------| 0x00004988
-    
-    
+
+
 The first three lines are sections and the last one (prefixed by `=>`) is the current seek location.
 
 To remove a section definition, simply prefix the name of the section with `-`:

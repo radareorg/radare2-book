@@ -1,4 +1,4 @@
-#ESIL
+# ESIL
 
 ESIL stands for 'Evaluable Strings Intermediate Language'. It aims to describe a Forth-like representation for every target CPU opcode semantics. ESIL representations can be evaluated (interpreted) in order to emulate individual instructions. Each command of an ESIL expression is separated by a comma. Its virtual machine can be described as this:
 ```
@@ -13,66 +13,66 @@ ESIL stands for 'Evaluable Strings Intermediate Language'. It aims to describe a
 ```
 ESIL commands are operations that pop values from the stack, perform calculations and push result (if any) to the stack. The aim is to be able to express most of common operations performed by CPUs, like binary arithmetic operations, memory loads and stores, processing syscalls etc.
 
-##Use ESIL
+## Use ESIL
 
-   Using visual mode its great to inspect the esil evaluations. 
-   
+   Using visual mode its great to inspect the esil evaluations.
+
    To do this only its needed set the next enviroment variable: "asm.emu". Ex:
-   
+
    ```
    [0x00000000]> e asm.emu = true
    ```
-      
+
    With this variable enabled, in visual mode you can see each register associated to current esil expresion.
-   
+
    Another useful variable its "asm.esil"
-   
+
    ```
    [0x00000000]> e asm.esil = true
    ```
-   
+
    It can also be toggled using `O` shortcut within the visual mode.
 
-##ESIL Commands 
+## ESIL Commands
    * "ae" : Evaluate ESIL expresion.
-   
+
    ```
    [0x00000000]> "ae 1,1,+"
    0x2
    [0x00000000]>
    ```
-   
+
    * "aes" : ESIL Step.
-   
+
    ```
    [0x00000000]> aes
    [0x00000000]>10aes
    ```
    * "aeso" : ESIL Step Over.
-   
+
    ```
    [0x00000000]> aeso
    [0x00000000]>10aeso
    ```
 
    * "aesu" : ESIL Step Until.
-   
+
    ```
    [0x00001000]> aesu 0x1035
    ADDR BREAK
    [0x00001019]>
    ```
-   
+
    * "ar" : Show/modify ESIL registry
-   
+
    ```
    [0x00001ec7]> ar r_00 = 0x1035
    [0x00001ec7]> ar r_00
    0x00001035
    [0x00001019]>
    ```
-   
-###ESIL Instruction Set
+
+### ESIL Instruction Set
 
 Here is the complete instruction set used by the ESIL VM:
 
@@ -80,7 +80,7 @@ ESIL Opcode | Operands | Name | Operation| example
 --- | --- | --- | --- | ----------------------------------------------
 TRAP  | src | Trap | Trap signal |
 **$** | src | Syscall | sysccall  |
-**$$** | src | Instruction address | Get address of current instruction<br>stack=instruction address | 
+**$$** | src | Instruction address | Get address of current instruction<br>stack=instruction address |
 **==** | src,dst | Compare | v = dst - src ; update_eflags(v) |   
 **<** | src,dst | Smaller | stack = (dst < src) | [0x0000000]> "ae 1,5,<" <br>0x0<br>[0x00000000]> "ae 5,5"<br>0x0"
 **<=** | src,dst | Smaller or Equal | stack = (dst <= src) | [0x0000000]> "ae 1,5,<" <br>0x0<br>[0x00000000]> "ae 5,5"<br>0x1"   
@@ -118,8 +118,8 @@ TRAP  | src | Trap | Trap signal |
 =[]<br>=[*]<br>=[1]<br>=[2]<br>=[4]<br>=[8] | src,dst | poke |*dst=src | [0x00010000]> "ae 0xdeadbeef,0x10000,=[4],"<br>[0x00010000]> pxw 4@0x10000<br>0x00010000  0xdeadbeef                                ....<br>[0x00010000]> "ae 0x0,0x10000,=[4],"<br>[0x00010000]> pxw 4@0x10000<br>0x00010000  0x00000000                  
 []<br>[*]<br>[1]<br>[2]<br>[4]<br>[8] | src | peek | stack=*src | [0x00010000]> w test@0x10000<br>[0x00010000]> "ae 0x10000,[4],"<br>0x74736574<br>[0x00010000]> ar r_00=0x10000<br>[0x00010000]> "ae r_00,[4],"<br>0x74736574
 `|`=[]<br>`|`=[1]<br>`|`=[2]<br>`|`=[4]<br>`|`=[8] | reg | nombre | code | [0x00000000]> <br>[0x00000000]>
-	
-###ESIL Flags
+
+### ESIL Flags
 
 ESIL VM has an internal state flags that are read only and can be used to export those values to the underlying target CPU flags. It is because the ESIL VM always calculates all flag changes, while target CPUs only update flags under certain conditions or at specific instructions.
 
@@ -133,8 +133,7 @@ p - parity
 r - regsize ( asm.bits/8 )
 ```
 
-##Syntax and Commands
-======
+## Syntax and Commands
 A target opcode is translated into a comma separated list of ESIL expressions.
 ```
 xor eax, eax    ->    0,eax,=,1,zf,=
@@ -177,13 +176,13 @@ a,b,/=     b /= a
 ```
 This approach is more readable, but it is less stack-friendly.
 
-###Special Instructions
+### Special Instructions
 
 NOPs are represented as empty strings. As it was said previously, syscalls are marked by '$' command. For example, '0x80,$'. It delegates emulation from the ESIL machine to a callback which implements syscalls for a specific OS/kernel.
 
 Traps are implemented with the `<code>,TRAP` command. They are used to throw exceptions for invalid instructions, division by zero, memory read error, etc.
 
-###Quick Analysis
+### Quick Analysis
 
 Here is a list of some quick checks to retrieve information from an ESIL string. Relevant information will be probably found in the first expression of the list.
 ```
@@ -193,7 +192,7 @@ indexOf("pc,=")    ->    modifies program counter (branch, jump, call)
 indexOf("sp,=")    ->    modifies the stack (what if we found sp+= or sp-=?)
 indexOf("=")       ->    retrieve src and dst
 indexOf(":")       ->    unknown esil, raw opcode ahead
-indexOf("$")       ->    accesses internal esil vm flags ex: $z 
+indexOf("$")       ->    accesses internal esil vm flags ex: $z
 indexOf("$")       ->    syscall ex: 1,$
 indexOf("TRAP")    ->    can trap
 indexOf('++')      ->    has iterator
@@ -211,11 +210,11 @@ Common operations:
  * Evaluate
  * Is syscall
 
-###CPU Flags
+### CPU Flags
 
 CPU flags are usually defined as single bit registers in the RReg profile. They and sometimes found under the 'flg' register type.
 
-###Variables
+### Variables
 
 Properties of the VM variables:
 
@@ -229,11 +228,11 @@ Properties of the VM variables:
 
 5. Each ESIL backend should have an associated RReg profile to describe the ESIL register specs.
 
-###Bit Arrays
+### Bit Arrays
 
 What to do with them? What about bit arithmetics if use variables instead of registers?
 
-###Arithmetics
+### Arithmetics
 
 1. ADD ("+")
 2. MUL ("*")
@@ -242,7 +241,7 @@ What to do with them? What about bit arithmetics if use variables instead of reg
 5. MOD ("%")
 
 
-###Bit Arithmetics
+### Bit Arithmetics
 
 1. AND  "&"
 2. OR   "|"
@@ -253,12 +252,12 @@ What to do with them? What about bit arithmetics if use variables instead of reg
 7. ROR  ">>>"
 8. NEG  "!"
 
-###Floating Point Support
+### Floating Point Support
 
 
 _TODO_
 
-###Handling x86 REP Prefix in ESIL
+### Handling x86 REP Prefix in ESIL
 
 ESIL specifies that the parsing control-flow commands must be uppercase. Bear in mind that some architectures have uppercase register names. The corresponding register profile should take care not to reuse any of the following:
 ```
@@ -270,14 +269,14 @@ STACK    - dump stack contents to screen
 CLEAR    - clear stack
 ```
 
-####Usage example:
+#### Usage example:
 
 rep cmpsb
 ---------
 cx,!,?{,BREAK,},esi,[1],edi,[1],==,?{,BREAK,},esi,++,edi,++,cx,--,0,GOTO
 
 
-###Unimplemented/unhandled Instructions
+### Unimplemented/unhandled Instructions
 
 Those are expressed with the 'TODO' command. which acts as a 'BREAK', but displays a warning message describing that an instruction is not implemented and will not be emulated. For example:
 
@@ -285,7 +284,7 @@ Those are expressed with the 'TODO' command. which acts as a 'BREAK', but displa
 fmulp ST(1), ST(0)      =>      TODO,fmulp ST(1),ST(0)
 ```
 
-###ESIL Disassembly Example:
+### ESIL Disassembly Example:
 
 ```
 [0x1000010f8]> e asm.esil=true
@@ -315,7 +314,7 @@ fmulp ST(1), ST(0)      =>      TODO,fmulp ST(1),ST(0)
     │ │││   0x100001147    48394a38     rdx,56,+,[8],rcx,==,cz,?=
 ```
 
-###Introspection
+### Introspection
 
 To ease ESIL parsing we should have a way to express introspection expressions to extract data we want. For example, we may want to get the target address of a jump. The parser for ESIL expressions should offer API to make it possible to extract information by analyzing the expressions easily.
 
@@ -332,7 +331,7 @@ We need a way to retrieve the numeric value of 'rip'. This is a very simple exam
 - all regs modified (write)
 - all regs accessed (read)
 
-###API HOOKS
+### API HOOKS
 
 It is important for emulation to be able to setup hooks in parser, so we can extend it to implement analysis without having to change parser again and again. That is, every time an operation is about to be executed, a user hook is called. It can be used to determine if rip is going to change, or if the instruction updates stack, etc.
 Later, we can split that callback into several ones to have an event-based analysis API that may be extended in js like this:
@@ -350,4 +349,3 @@ Other operations that require bindings to external functionalities to work. In t
 * Selectors (cs,ds,gs...)
    Mov eax, ds:[ebp+8]
    Ebp,8,+,:ds,eax,=
-   
