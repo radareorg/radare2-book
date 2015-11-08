@@ -28,7 +28,7 @@ A command line assembler and disassembler for multiple architectures (including 
     b821000000
 
     $ echo 'push eax;nop;nop' | rasm2 -f -
-    5090
+    509090
 
 ### rahash2
 
