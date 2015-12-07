@@ -14,10 +14,13 @@ Seek back to the previous location using `u`, `U` will allow you to redo the see
 ## `d` as define
 
 To improve code readability change how radare2 presents numerical values in disassembly, 
-By default most of disassembly display numerical value as hexadecimal. Sometimes you would like to view it as a decimal, binary or even custom defined constant. To change value format you can use `d` following by `i` then choose what base to work in:
+By default most of disassembly display numerical value as hexadecimal. Sometimes you would like to view it as a decimal, binary or even custom defined constant. To change value format you can use `d` following by `i` then choose what base to work in, this is the equivalent to `ahi`:
 
 ```
-d 
+0x004048f7      48c1e83f       shr rax, 0x3f                                                 
+d → i →  10
+0x004048f7      48c1e83f       shr rax, 63                                                   
+d → i →  2
 0x004048f7      48c1e83f       shr rax, '?'
 ```
 
