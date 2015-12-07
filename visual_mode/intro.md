@@ -5,6 +5,22 @@ To enter visual mode, use `V` command. To exit from it back to command line, pre
 
 ![Visual Mode](visualmode.png)
 
+
+## print modes aka Panels
+
+The Visual mode uses "print modes" which are basically different panel that you can rotate. By default those are:
+
+↻ **Hexdump panel** -> **Disassembly panel** → **Debugger panel** → **Hexadecimal words dump panel** → **Output C format panel** → **Op analysis color map panel** → **Annotated hexdump panel** ↺.
+
+Notice that the top of the panel contains the commands which is used, for example for the disassembly panel:
+
+```
+[0x00404890 16% 120 /bin/ls]> pd $r @ entry0
+```
+
+
+
+
 ## Getting Help
 
 To see help on all key bindings defined for visual mode, press `?`:
