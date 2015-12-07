@@ -33,6 +33,7 @@
    * [Visual Inserts](visual_mode/visual_insert.md)
    * [Visual XREFS](visual_mode/visual_xrefs.md)
    * [Visual Configuration Editor](visual_configuration_editor.md)
+   * Visual Disassembly
 * [Searching bytes](search_bytes/intro.md)
    * [Basic Searches](search_bytes/basic_searches.md)
    * [Configurating the Search](search_bytes/configurating_the_search.md)
