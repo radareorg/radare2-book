@@ -13,10 +13,26 @@ Seek back to the previous location using `u`, `U` will allow you to redo the see
 
 ## `d` as define
 
+`d` can be used to change the type of data of the current block, several basic types/structures are available as well as more advanced one using `pf` template:
+
+```
+d → ...
+0x004048f7      48c1e83f       shr rax, 0x3f                                                 
+d → b
+0x004048f7 .byte 0x48     
+d → B
+0x004048f7 .word 0xc148                                                                      
+d → d
+0x004048f7 hex length=165 delta=0                                                            
+0x004048f7  48c1 e83f 4801 c648 d1fe 7415 b800 0000  H..?H..H..t.....                                    
+...
+```
+
 To improve code readability change how radare2 presents numerical values in disassembly, 
 By default most of disassembly display numerical value as hexadecimal. Sometimes you would like to view it as a decimal, binary or even custom defined constant. To change value format you can use `d` following by `i` then choose what base to work in, this is the equivalent to `ahi`:
 
 ```
+d → i → ...
 0x004048f7      48c1e83f       shr rax, 0x3f                                                 
 d → i →  10
 0x004048f7      48c1e83f       shr rax, 63                                                   
