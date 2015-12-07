@@ -31,7 +31,7 @@
 * [Visual mode](visual_mode/intro.md)
    * [Visual Disassembly](visual_mode/visual_disassembly.md)
    * [Visual Cursor](visual_mode/visual_cursor.md)
-   * [Visual Configuration Editor](visual_configuration_editor.md)
+   * [Visual Configuration Editor](visual_editor.md)
    * [Visual Inserts](visual_mode/visual_insert.md)
    * [Visual XREFS](visual_mode/visual_xrefs.md)
 * [Searching bytes](search_bytes/intro.md)
