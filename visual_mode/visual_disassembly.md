@@ -38,6 +38,19 @@ d → i →  10
 d → i →  2
 0x004048f7      48c1e83f       shr rax, '?'
 ```
+##XREF
+
+When radare2 has discovered a XREF during the analysis, it will show you the information in the Visual Disassembly using `XREF` tag:
+
+```
+            ; DATA XREF from 0x00402e0e (unk)                        
+            str.David_MacKenzie:       
+```
+
+To see where this string is called press on `x`, if you want to jump to the location where the data is used then press the corresponding number [0-9] on your keyboard. (This functionnality is similar to `axt`)
+
+`X` corresponds to the reverse operation aka `axf`.
+
 
 ## Tweaking the Disassembly
 
