@@ -47,9 +47,15 @@ When radare2 has discovered a XREF during the analysis, it will show you the inf
             str.David_MacKenzie:       
 ```
 
-To see where this string is called press on `x`, if you want to jump to the location where the data is used then press the corresponding number [0-9] on your keyboard. (This functionnality is similar to `axt`)
+To see where this string is called press on `x`, if you want to jump to the location where the data is used then press the corresponding number [0-9] on your keyboard. (This functionality is similar to `axt`)
 
 `X` corresponds to the reverse operation aka `axf`.
+
+## Add a comment
+
+To add a comment just press `;` 
+
+
 
 
 ## Tweaking the Disassembly
