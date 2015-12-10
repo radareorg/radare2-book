@@ -57,7 +57,6 @@ To add a comment just press `;`.
 
 
 
-
 ## Tweaking the Disassembly
 
 You can change the disassembly look and feel by using the [Visual Configuration Editor](visual_configuration_editor.md).
