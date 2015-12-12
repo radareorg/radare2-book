@@ -103,6 +103,11 @@ After you press `i` key, you are prompted for an hexpair string. If `a` is press
 
 You can use the Visual Assembler using `A`, this will give you a live-preview of the change you want to do in the disassembly.
 
+## HUD
+
+Using `??` the HUD is displayed. It can be seen as an interactive Cheat sheet that one can complete with its own set of command. The HUD is convenient for new-comers. For experienced user, a HUD per type of activity could also be interesting when dealing with a lot of command within radare2.
+
+
 ## Tweaking the Disassembly
 
 You can change the disassembly look and feel by using the Visual Configuration Editor.
