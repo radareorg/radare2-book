@@ -27,7 +27,7 @@ Contributors:
 * hdznrrd
 * Jeffrey Crowell
 * John
-* Judge Dredd (key 6E23685A)
+* Judge Dredd
 * jvoisin
 * Kevin Grandemange
 * muzlightbeer
