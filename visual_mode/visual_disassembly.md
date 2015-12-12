@@ -96,7 +96,12 @@ In cursor mode, you can set a block size by simply moving cursor to position you
 
 ## Inserting/Patching...
 
+Remember that, to be able to actually edit files loaded in radare2, you have to start it with `-w` option. Otherwise a file is opened in read-only mode.
 
+The cursor mode allows you to manipulate with data at nibble-level (4 bits chunks), like it is done in most of hexadecimal editors. Press `TAB` to switch between hexadecimal and ASCII columns of the hexadecimal dump view.
+After you press `i` key, you are prompted for an hexpair string. If `a` is pressed, enter an assembler expression, which will be translated to machine code and then inseters at the chosen offset.
+
+You can use the Visual Assembler using `A`, this will give you a live-preview of the change you want to do in the disassembly.
 
 ## Tweaking the Disassembly
 
