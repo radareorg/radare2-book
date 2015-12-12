@@ -98,9 +98,27 @@ In cursor mode, you can set a block size by simply moving cursor to position you
 
 ## Tweaking the Disassembly
 
-You can change the disassembly look and feel by using the [Visual Configuration Editor](visual_configuration_editor.md).
+You can change the disassembly look and feel by using the Visual Configuration Editor.
+
+## Visual Configuration Editor
+
+`Ve` or `e` in visual mode allows you to edit radare2 configuration visually.
+For example, if you want to change the assembly display just select `asm` in the list and choose your assembly display flavor.
+
+
+![First Select asm](select_asm.png)
+
+
+Example switch to pseudo disassembly:
+
+![Pseudo disassembly disabled](pseudo_disable.png)
+
+
+![Pseudo disassembly enabled](pseudo_enable.png)
 
 Following are some example of eval variable related to disassembly.
+
+## Examples
 
 #### asm.arch: Change Architecture && asm.bits: Word size in bits at assembler
 
