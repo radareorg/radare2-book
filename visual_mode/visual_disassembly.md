@@ -55,6 +55,9 @@ To see where this string is called press on `x`, if you want to jump to the loca
 
 To add a comment just press `;`.
 
+## Cursor
+
+
 
 
 ## Tweaking the Disassembly
