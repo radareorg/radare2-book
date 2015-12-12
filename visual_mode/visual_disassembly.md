@@ -159,7 +159,7 @@ e asm.bits = 16
             0000:4876      48             dec ax 
             0000:4877      89e2           mov dx, sp
 ```
-
+This latest operation can also be done using `&` in Visual mode.
 
 
 #### asm.pseudo: Enable pseudo syntax
