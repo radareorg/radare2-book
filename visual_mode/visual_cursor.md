@@ -1,2 +1,0 @@
-## Visual Cursor Mode
-
