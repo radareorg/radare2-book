@@ -109,6 +109,9 @@ You can use the Visual Assembler using `A`, this will give you a live-preview of
 
 Using `??` the "UserFriendly HUD" is displayed. It can be seen as an interactive Cheat sheet that one can complete with its own set of command. This HUD is convenient for new-comers. For experienced user, a HUD per type of activity could also be interesting when dealing with a lot of command within radare2.
 
+### The "flag/comment/functions/.. HUD" 
+
+This HUD can be displayed using `_`, it basically shows a list of all the flags and will allow you to jump to it. Using the keyboard you can quickly filter flag that contain a specific patern.
 
 ## Tweaking the Disassembly
 
