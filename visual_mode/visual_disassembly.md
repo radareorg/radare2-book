@@ -107,7 +107,7 @@ You can use the Visual Assembler using `A`, this will give you a live-preview of
 
 ### The "UserFriendly HUD"
 
-Using `??` the "UserFriendly HUD" is displayed. It can be seen as an interactive Cheat sheet that one can complete with its own set of command. The HUD is convenient for new-comers. For experienced user, a HUD per type of activity could also be interesting when dealing with a lot of command within radare2.
+Using `??` the "UserFriendly HUD" is displayed. It can be seen as an interactive Cheat sheet that one can complete with its own set of command. This HUD is convenient for new-comers. For experienced user, a HUD per type of activity could also be interesting when dealing with a lot of command within radare2.
 
 
 ## Tweaking the Disassembly
