@@ -59,7 +59,7 @@
 * [Rahash2](rahash2/intro.md)
    * [Rahash Tool](rahash2/rahash_tool.md)
 * [Debugger](debugger/intro.md)
-   * Getting Started
+   * [Getting Started](debugger/getting_started.md)
    * [Registers](registers.md)
 * Remote Access Capabilities
    * [Remoting Capabilities](remoting_capabilities.md)
