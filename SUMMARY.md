@@ -30,7 +30,6 @@
    * [Comparing Bytes](basic_commands/comparing_bytes.md)
 * [Visual mode](visual_mode/intro.md)
    * [Visual Disassembly](visual_mode/visual_disassembly.md)
-   * [Visual Cursor](visual_mode/visual_cursor.md)
    * [Visual Configuration Editor](visual_editor.md)
    * [Visual Inserts](visual_mode/visual_insert.md)
 * [Searching bytes](search_bytes/intro.md)
