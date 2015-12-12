@@ -14,7 +14,7 @@
 
 ### The radare2 book
 
-Rework by @Maijin on the original radare book
+Rework by maijin on the original radare book
 
 Contributors: 
 
@@ -39,7 +39,7 @@ Contributors:
 
 ### The original radare book
 
-Original author and greetings from [The radare book](http://www.radare.org/get/radare.pdf) : @pancake
+Original author and greetings from [The radare book](http://www.radare.org/get/radare.pdf) : pancake
 
 - God. aka Flying Spaguetti Monster
 - Nibble (ELF32/64 and PE parser+lot of bugfixes and core work)
