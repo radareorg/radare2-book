@@ -39,7 +39,9 @@ d → i →  2
 0x004048f7      48c1e83f       shr rax, '?'
 ```
 
-### Usage of the Cursor
+### Usage of the Cursor for Inserting/Patching...
+
+Remember that, to be able to actually edit files loaded in radare2, you have to start it with `-w` option. Otherwise a file is opened in read-only mode.
 
 Pressing lowercase `c` toggles the cursor mode. When this mode is active, currently selected byte (or byte range) is highlighted by having a highlighted background.
 
@@ -52,6 +54,9 @@ If you select a range of bytes (with HJKL and SHIFT key pressed), and file write
     <press 'i' and then enter '12 34'>
     
 10 bytes you have selected will be changed to "12 34" repeated in a circular manner: 12 34 12 34 12 34 12 34 12 34.
+
+
+The Visual Assembler using `A`, this will give you a live-preview of the change you want to do in the disassembly.
 
 
 ##XREF
@@ -80,15 +85,6 @@ Quickly type commands using `:`.
 `/`: allows highlighting in the current display.
 Using the `:` will give you more search possibility.
 
-
-## Inserting/Patching...
-
-Remember that, to be able to actually edit files loaded in radare2, you have to start it with `-w` option. Otherwise a file is opened in read-only mode.
-
-The cursor mode allows you to manipulate with data at nibble-level (4 bits chunks), like it is done in most of hexadecimal editors. Press `TAB` to switch between hexadecimal and ASCII columns of the hexadecimal dump view.
-After you press `i` key, you are prompted for an hexpair string. If `a` is pressed, enter an assembler expression, which will be translated to machine code and then inseters at the chosen offset.
-
-You can use the Visual Assembler using `A`, this will give you a live-preview of the change you want to do in the disassembly.
 
 ## The HUDS
 
