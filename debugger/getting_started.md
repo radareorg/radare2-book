@@ -10,6 +10,6 @@
 
 * `dc`: run the program
 
-* `dr`: display state of the registers
+* `dr`: Show registers state
 
 * `drr` Show registers references (telescoping) (like peda)  
