@@ -53,8 +53,6 @@ If you select a range of bytes (with HJKL and SHIFT key pressed), and file write
     
 10 bytes you have selected will be changed to "12 34" repeated in a circular manner: 12 34 12 34 12 34 12 34 12 34.
 
-This can be used to enhance disassembly view, to add metadata or to set code boundaries for cases when instructions are intermixed with data.
-In cursor mode, you can set a block size by simply moving cursor to position you want and then pressing `_` to invoke HUD menu. Then change block size.
 
 ##XREF
 
