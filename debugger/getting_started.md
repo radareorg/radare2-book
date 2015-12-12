@@ -23,3 +23,4 @@
 * `dm`: Show memory maps 
 
 * `dk <signal>`: Send KILL signal to child
+
