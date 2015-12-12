@@ -55,6 +55,15 @@ To see where this string is called press on `x`, if you want to jump to the loca
 
 To add a comment just press `;`.
 
+## Type other commands
+
+Quickly type commands using `:`. 
+
+## Search 
+
+`/`: allows highlighting in the current display.
+Using the `:` will give you more search possibility.
+
 ## Cursor
 
 Pressing lowercase `c` toggles the cursor mode. When this mode is active, currently selected byte (or byte range) is highlighted by having a highlighted background.
