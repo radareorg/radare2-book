@@ -38,33 +38,8 @@ d → i →  10
 d → i →  2
 0x004048f7      48c1e83f       shr rax, '?'
 ```
-##XREF
 
-When radare2 has discovered a XREF during the analysis, it will show you the information in the Visual Disassembly using `XREF` tag:
-
-```
-            ; DATA XREF from 0x00402e0e (unk)                        
-            str.David_MacKenzie:       
-```
-
-To see where this string is called press on `x`, if you want to jump to the location where the data is used then press the corresponding number [0-9] on your keyboard. (This functionality is similar to `axt`)
-
-`X` corresponds to the reverse operation aka `axf`.
-
-## Add a comment
-
-To add a comment just press `;`.
-
-## Type other commands
-
-Quickly type commands using `:`. 
-
-## Search 
-
-`/`: allows highlighting in the current display.
-Using the `:` will give you more search possibility.
-
-## Cursor
+### Usage of the Cursor
 
 Pressing lowercase `c` toggles the cursor mode. When this mode is active, currently selected byte (or byte range) is highlighted by having a highlighted background.
 
@@ -102,6 +77,33 @@ A byte range selection can be used together with the `d` key to set associated d
 
 This can be used to enhance disassembly view, to add metadata or to set code boundaries for cases when instructions are intermixed with data.
 In cursor mode, you can set a block size by simply moving cursor to position you want and then pressing `_` to invoke HUD menu. Then change block size.
+
+##XREF
+
+When radare2 has discovered a XREF during the analysis, it will show you the information in the Visual Disassembly using `XREF` tag:
+
+```
+            ; DATA XREF from 0x00402e0e (unk)                        
+            str.David_MacKenzie:       
+```
+
+To see where this string is called press on `x`, if you want to jump to the location where the data is used then press the corresponding number [0-9] on your keyboard. (This functionality is similar to `axt`)
+
+`X` corresponds to the reverse operation aka `axf`.
+
+## Add a comment
+
+To add a comment just press `;`.
+
+## Type other commands
+
+Quickly type commands using `:`. 
+
+## Search 
+
+`/`: allows highlighting in the current display.
+Using the `:` will give you more search possibility.
+
 
 ## Inserting/Patching...
 
