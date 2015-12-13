@@ -24,3 +24,6 @@
 
 * `dk <signal>`: Send KILL signal to child
 
+* `ood`: reopen in debug mode
+
+* `ood arg1 arg2`: reopen in debug mode with arg1 and arg2
