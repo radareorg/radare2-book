@@ -1,8 +1,15 @@
 ## Compilation on Windows
 
+### MinGW32
+
 The easy way to compile things for Windows is using MinGW32. The w32 builds distributed from the radare homepage are generated from a GNU/Linux box using MinGW32 and they are tested with Wine. Also keep in mind, that MinGW-w64 wan't tested, so no guarantees here.
 
 Be sure to setup your MinGW32 to compile with **thread model: win32**, not **posix**, and target should be **mingw32**.
+Before the starting of compilation you need to setup git first, for a proper automatic fetching of capstone:
+```sh
+git config --global core.autocrlf=true
+git config --global core.filemode=false
+```
 
 The following is an example of compiling with MinGW32 (you need to have installed **zip** for Windows):
 ```sh
@@ -13,6 +20,8 @@ zip -r w32-build.zip w32-build
 ```
 This generates a native, 32-bit console application for Windows.
 The 'i486-mingw32-gcc' compiler is the one I have in my box, you will probably need to change this.
+
+### Cygwin
 
 Cygwin is another possibility; however, issues related to Cygwin libraries can make debugging difficult. But using binary compiled for Cygwin will allow you to use Unicode in the Windows console, and to have 256 colors.
 
