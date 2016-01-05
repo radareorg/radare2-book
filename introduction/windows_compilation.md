@@ -7,8 +7,8 @@ The easy way to compile things for Windows is using MinGW32. The w32 builds dist
 Be sure to setup your MinGW32 to compile with **thread model: win32**, not **posix**, and target should be **mingw32**.
 Before the starting of compilation you need to setup git first, for a proper automatic fetching of capstone:
 ```sh
-git config --global core.autocrlf=true
-git config --global core.filemode=false
+git config --global core.autocrlf true
+git config --global core.filemode false
 ```
 
 The following is an example of compiling with MinGW32 (you need to have installed **zip** for Windows):
