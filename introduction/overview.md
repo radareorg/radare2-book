@@ -59,8 +59,8 @@ A frontend for r_egg. ragg2 compiles programs written in a simple high-level lan
 
        $ cat hi.r
        /* hello world in r_egg */
-       write@syscall(4);
-       exit@syscall(1);
+       write@syscall(4); //x64 write@syscall(1);
+       exit@syscall(1); //x64 exit@syscall(60);
 
        main@global(128) {
          .var0 = "hi!\n";
@@ -79,7 +79,6 @@ A frontend for r_egg. ragg2 compiles programs written in a simple high-level lan
        $ ragg2 hi.c
        $ ./hi.c.bin
        Hello
-
 
 ### rarun2
 
