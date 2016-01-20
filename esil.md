@@ -6,7 +6,7 @@ ESIL stands for 'Evaluable Strings Intermediate Language'. It aims to describe a
      if (word.isKeyword()) {
        esilCommands[word](esil);
      } else {
-       esil.push (evaluateToNumber(word));
+       esil.push (word);
      }
      nextCommand();
    }
