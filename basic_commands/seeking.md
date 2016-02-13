@@ -38,7 +38,7 @@ If you want to inspect the result of a math expression, you can evaluate it usin
 
 In the visual mode you can press `u` (undo) or `U` (redo) inside the seek history to return back to previous or forward to the next location.
 
-## Open test file
+## Open file
 
 As test file lets use some simple hello_world.c compiled in Linux ELF format.
 After we compiled it lets open it with radare2
