@@ -91,3 +91,13 @@ to searched string position. But we always can go back with `s-`.
     0x004005b4 hit0_0 "Hello"
     [0x004005b4]>s-
     [0x00400410]>
+
+There is history command to see all our changes
+
+    [0x00400410]> s*
+    f undo_3 @ 0x400410
+    f undo_2 @ 0x40041a
+    f undo_1 @ 0x400410
+    f undo_0 @ 0x400411
+    # Current undo/redo position.
+    f redo_0 @ 0x4005b4
