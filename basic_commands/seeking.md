@@ -37,3 +37,68 @@ If you want to inspect the result of a math expression, you can evaluate it usin
 
 
 In the visual mode you can press `u` (undo) or `U` (redo) inside the seek history to return back to previous or forward to the next location.
+
+## Open file
+
+As test file lets use some simple hello_world.c compiled in Linux ELF format.
+After we compiled it lets open it with radare2
+
+    r2 hello_world
+
+Now we have command prompt
+
+    [0x00400410]>
+
+Now we are ready to go deeper. 
+
+## Seeking at any position
+
+All seeking commands that have adress in command parametrs  can use any base 
+such as hex/octal/binary or decimal.
+
+Seek to address 0x0, alternative command is just `0x0`
+
+    [0x00400410]> s 0x0
+    [0x00000000]>
+
+Print current address 
+
+    [0x00000000]> s
+    0x0
+    [0x00000000]>
+
+there is alternate way how to print current position `?v $$`
+
+Seek N positions forward, space is optional
+
+    [0x00000000]> s+ 128
+    [0x00000080]>
+
+Lets undo last two seeks to beginning
+
+    [0x00000080]> s-
+    [0x00000000]> s-
+    [0x00400410]>
+
+Now we are at same position as at beginning _0x00400410_.
+
+Lets search in hello_world ELF file 'Hello'. After search our position will set
+to searched string position. But we always can go back with `s-`.
+
+    [0x00400410]> s/ Hello
+    Searching 5 bytes from 0x00400411 to 0x00600928: 48 65 6c 6c 6f 
+    Searching 5 bytes in [0x400411-0x600928]
+    hits: 1  hit0_0 .. hit0_0
+    0x004005b4 hit0_0 "Hello"
+    [0x004005b4]>s-
+    [0x00400410]>
+
+There is history command to see all our changes
+
+    [0x00400410]> s*
+    f undo_3 @ 0x400410
+    f undo_2 @ 0x40041a
+    f undo_1 @ 0x400410
+    f undo_0 @ 0x400411
+    # Current undo/redo position.
+    f redo_0 @ 0x4005b4
