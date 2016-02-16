@@ -69,14 +69,10 @@ Print current address
 
 there is alternate way how to print current position `?v $$`
 
-Seek N positions forward
+Seek N positions forward, space is optional
 
     [0x00000000]> s+ 128
     [0x00000080]>
-
-Undo/Redo seek. Lets see with positions we where seeking
-
-    [0x00400410] [0x00000000] [0x00000080]
 
 Lets undo last two seeks to beginning
 
