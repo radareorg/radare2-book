@@ -43,7 +43,7 @@ In the visual mode you can press `u` (undo) or `U` (redo) inside the seek histor
 As test file lets use some simple hello_world.c compiled in Linux ELF format.
 After we compiled it lets open it with radare2
 
-    r2 ./hello_world
+    r2 hello_world
 
 Now we have command prompt
 
@@ -53,7 +53,10 @@ Now we are ready to go deeper.
 
 ## Seeking at any position
 
-Seek to address 0x0
+All seeking commands that have adress in command parametrs  can use any base 
+such as hex/octal/binary or decimal.
+
+Seek to address 0x0, alternative command is just `0x0`
 
     [0x00400410]> s 0x0
     [0x00000000]>
@@ -63,6 +66,8 @@ Print current address
     [0x00000000]> s
     0x0
     [0x00000000]>
+
+there is alternate way how to print current position `?v $$`
 
 Seek N positions forward
 
@@ -81,7 +86,7 @@ Lets undo last two seeks to beginning
 
 Now we are at same position as at beginning _0x00400410_.
 
-Lets search in hellow_world ELF file 'Hello'. After search our position will set
+Lets search in hello_world ELF file 'Hello'. After search our position will set
 to searched string position. But we always can go back with `s-`.
 
     [0x00400410]> s/ Hello
