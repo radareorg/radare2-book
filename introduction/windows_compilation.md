@@ -55,7 +55,7 @@ pacman -Su
 ```
  - Install the building essentials:
 ```sh
-pacman -S git make zip gcc
+pacman -S git make zip gcc patch
 ```
  - Compile the radare2:
 ```sh
