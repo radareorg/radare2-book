@@ -72,8 +72,8 @@ A frontend for r_egg. ragg2 compiles programs written in a simple high-level lan
        hi!
 
        $ cat hi.c
-       main() {
-         write(1, "Hello0, 6);
+       main@global(0,6) {
+         write(1, "Hello0", 6);
          exit(0);
        }
        $ ragg2 hi.c
