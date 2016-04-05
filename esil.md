@@ -150,10 +150,8 @@ movb $0, 0x80480     ->   0,0x80480,=[1]
 ```
 
 The `?` operator uses the value of its argument to decide whether to evaluate the expression in curly braces.
-
-Is the value zero?      -> Skip it.
-
-Is the value non-zero?  -> Evaluate it.
+1. Is the value zero?      -> Skip it.
+2. Is the value non-zero?  -> Evaluate it.
 
 ```
 cmp eax, 123  ->   123,eax,==,$z,zf,=
