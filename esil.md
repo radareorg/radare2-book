@@ -148,11 +148,15 @@ Default operand size is determined by size of operation destination.
 ```
 movb $0, 0x80480     ->   0,0x80480,=[1]
 ```
-The `?` command checks whether the rest of the expression after it evaluates to zero or not. If it is zero, the following expression is skipped, otherwise it is evaluated. `%` prefix indicates internal variables.
+
+The `?` operator uses the value of its argument to decide whether to evaluate the expression in curly braces.
+Is the value zero?      -> Skip it
+Is the value non-zero?  -> Evaluate
 ```
 cmp eax, 123  ->   123,eax,==,$z,zf,=
 jz eax        ->   zf,?{,eax,eip,=,}
 ```
+
 
 If you want to run several expressions under a conditional, put them in curly braces:
 ```
