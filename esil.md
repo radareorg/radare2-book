@@ -150,6 +150,7 @@ movb $0, 0x80480     ->   0,0x80480,=[1]
 ```
 
 The `?` operator uses the value of its argument to decide whether to evaluate the expression in curly braces.
+
 1. Is the value zero?      -> Skip it.
 2. Is the value non-zero?  -> Evaluate it.
 
