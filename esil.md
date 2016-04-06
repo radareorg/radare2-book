@@ -1,37 +1,50 @@
 # ESIL
 
-ESIL stands for 'Evaluable Strings Intermediate Language'. It aims to describe a Forth-like representation for every target CPU opcode semantics. ESIL representations can be evaluated (interpreted) in order to emulate individual instructions. Each command of an ESIL expression is separated by a comma. Its virtual machine can be described as this:
+ESIL stands for 'Evaluable Strings Intermediate Language'. It aims to describe a <a href="https://en.wikipedia.org/wiki/Forth_(programming_language)">Forth</a>-like representation for every target CPU opcode semantics. ESIL representations can be evaluated (interpreted) in order to emulate individual instructions. Each command of an ESIL expression is separated by a comma. Its virtual machine can be described as this:
 ```
    while ((word=haveCommand())) {
-     if (word.isKeyword()) {
-       esilCommands[word](esil);
+     if (word.isOperator()) {
+       esilOperators[word](esil);
      } else {
        esil.push (word);
      }
      nextCommand();
    }
 ```
-ESIL commands are operations that pop values from the stack, perform calculations and push result (if any) to the stack. The aim is to be able to express most of common operations performed by CPUs, like binary arithmetic operations, memory loads and stores, processing syscalls etc.
+As we can see ESIL uses a stack-based interpreter similar to what is commonly used for calculators. You have two categories of inputs: values and operators. A value simply gets pushed on the stack, an operator then pops values (its arguments if you will) off the stack, performs its operation and pushes its results (if any) back on. We can think of ESIL as a post-fix notation of the operations we want to do.
+
+So let's see an example:
+```
+4,esp,-=,ebp,esp,=[4]
+```
+Can you guess what this is? If we take this post-fix notation and transform it back to in-fix we get
+```
+esp -= 4
+4bytes(dword) [esp] = ebp
+```
+We can see that this corresponds to the x86 instruction ```push ebp```! Isn't that cool?
+The aim is to be able to express most of the common operations performed by CPUs, like binary arithmetic operations, memory loads and stores, processing syscalls etc. This way if we can transform the instructions to ESIL we can see what a programming does while its running even for the most cryptic architectures you definitely don't have a device to debug on for.
 
 ## Use ESIL
 
-   Using visual mode its great to inspect the esil evaluations.
+   Using visual mode is great to inspect the esil evaluations.
 
-   To do this only its needed set the next enviroment variable: "asm.emu". Ex:
-
+   There are 2 environment variables that are important for watching what a program does:
    ```
    [0x00000000]> e asm.emu = true
+   [0x00000000]> e asm.emustr = true
    ```
-
-   With this variable enabled, in visual mode you can see each register associated to current esil expresion.
-
-   Another useful variable its "asm.esil"
-
+   
+   "asm.emu" tells r2 if you want ESIL information to be displayed. If it is set to true you will see comments appear to the right of your disassembly that tell you how the contents of registers and memory addresses are changed by the current instruction. For example if you have an instruction that subtracts a value from a register it tells you what the value was before and what it becomes after. This is super useful so you don't have to sit there yourself and track which value goes where. 
+   
+   One problem with this is that it is a lot of information to take in at once and sometimes you simply don't need it. r2 has a nice compromise for this. That is what the "asm.emustr" variable is for. Instead of this super verbose output with every register value, this only adds really useful information to the output, e.g., strings that are found at addresses a program uses or whether a jump is likely to be taken or not.
+   
+   The third important variable is "asm.esil". This switches your disassembly to no longer show you the actual disassembled instructions, but instead now shows you corresponding ESIL expressions that describe what the instruction does.
+So if you want to take a look at how instructions are expressed in ESIL simply set "asm.esil" to true.
    ```
    [0x00000000]> e asm.esil = true
    ```
-
-   It can also be toggled using `O` shortcut within the visual mode.
+   In visual mode you can also toggle this by simply typing `O`.
 
 ## ESIL Commands
    * "ae" : Evaluate ESIL expresion.
