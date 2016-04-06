@@ -4,7 +4,9 @@
 
 * `r2 -d /bin/ls`: Opens radare2 with file `/bin/ls` in debugger mode using the radare2 native debugger, but does not run the program. You’ll see a prompt (radare2) - all examples are from this prompt.
 
-* `db flag`: place breakpoint on flag
+* `db flag`: place a breakpoint at flag, where flag can be either an address or a function name
+
+* `db - flag`: remove the breakpoint at flag, where flag can be either an address or a function name
 
 * `db`: show list of breakpoint
 
