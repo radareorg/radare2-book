@@ -23,7 +23,7 @@ esp -= 4
 4bytes(dword) [esp] = ebp
 ```
 We can see that this corresponds to the x86 instruction ```push ebp```! Isn't that cool?
-The aim is to be able to express most of the common operations performed by CPUs, like binary arithmetic operations, memory loads and stores, processing syscalls etc. This way if we can transform the instructions to ESIL we can see what a programming does while its running even for the most cryptic architectures you definitely don't have a device to debug on for.
+The aim is to be able to express most of the common operations performed by CPUs, like binary arithmetic operations, memory loads and stores, processing syscalls etc. This way if we can transform the instructions to ESIL we can see what a program does while it is running even for the most cryptic architectures you definitely don't have a device to debug on for.
 
 ## Use ESIL
 
