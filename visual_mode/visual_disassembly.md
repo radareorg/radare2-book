@@ -83,7 +83,7 @@ Quickly type commands using `:`.
 ## Search 
 
 `/`: allows highlighting in the current display.
-Using the `:` will give you more search possibility.
+`:cmd` allows you to type r2 command which can give you more search possibility.
 
 
 ## The HUDS
