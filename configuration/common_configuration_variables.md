@@ -41,9 +41,7 @@ A boolean value used to show or hide displaying of raw bytes of instructions.
 
     cfg.bigendian
 Change endianness. "true" means big-endian, "false" is for little-endian.
-
-    file.analyze
-A boolean value. If set, radare will run `.af* @@ sym.` and `.af* @ entrypoint` after resolving the symbols binary loading time. This way, radare will extract maximum of available information from the binary. Note that this configuration item does not affect type of analysis used when opening a project file. This option requires "file.id" and "file.flag" both to be true.
+"file.id" and "file.flag" both to be true.
 
     scr.color
 This boolean variable enables or disables colorized screen output.
