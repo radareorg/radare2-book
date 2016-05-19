@@ -54,3 +54,5 @@ Code analysis is a common technique used to extract information from assembly co
     \          0x080486d4    c3           ret
 
 In this example, we analyze the whole file (`aa`) and then print disasembly of the `main()` function (`pdf`).
+
+Functions (fcn.) are referenced by call , (sub.) subroutines use to be just part of a function, sometimes referenced by pointer tables, etc, (loc.) is for local.
