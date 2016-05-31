@@ -117,7 +117,7 @@ EFLAGS can be similarly altered. E.g., setting selected flags:
 You can get a string which represents latest changes of registers using `drd` command (diff registers):
 
     [0x4A13B8C0]> drd
-    orax = 0x0000003b was 0x00000000 delta 59
+    oeax = 0x0000003b was 0x00000000 delta 59
     rip = 0x7f00e71282d0 was 0x00000000 delta -418217264
     rflags = 0x00000200 was 0x00000000 delta 512
     rsp = 0x7fffe85a09c0 was 0x00000000 delta -396752448

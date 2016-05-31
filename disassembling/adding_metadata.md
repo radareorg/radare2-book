@@ -1,4 +1,4 @@
-## Adding Metadata to Disasembly
+## Adding Metadata to Disassembly
 
 Typical work of reversing binary files makes the task of taking notes and adding annotations on top of disassembly, data views etc. very important. Radare offers multiple ways to store and retrieve such metadata information.
 

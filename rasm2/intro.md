@@ -65,7 +65,7 @@ Plugins for supported target architectures can be listed with the `-L` option. K
     ad  32         x86.olly    GPL2    OllyDBG X86 disassembler
     ad  8          z80         NC-GPL2 Zilog Z80
 
-Note that "ad" in the first column means both assembler and disasembler are offered by a corresponding  plugin. "_d" indicates disassembler, "a_" means only assembler is available.
+Note that "ad" in the first column means both assembler and disassembler are offered by a corresponding  plugin. "_d" indicates disassembler, "a_" means only assembler is available.
 
 
 

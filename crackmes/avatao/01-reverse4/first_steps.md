@@ -62,8 +62,7 @@ asm we trust!
 
 > ***r2 tip:*** The -A switch runs *aa* command at start to analyze all
 > referenced code, so we will have functions, strings, XREFS, etc. right at the
-> beginning. You can also put *e file.analyze* into your .radare2rc, so that all
-> opened executables will be analyzed. As usual, you can get help with *?*.
+> beginning. As usual, you can get help with *?*.
 
 It is a good practice to create a project, so we can save our progress, and we
 can come back at a later time:
@@ -121,7 +120,7 @@ d 0x400dd2 mov edi, str.Your_getting_closer_
 
 > ***r2 tip***: We can list crossreferences to addresses using the *axt [addr]*
 > command (similarly, we can use *axf* to list references from the address).
-> The *@@* is an iterator, it just runs the command once for every arguments 
+> The *@@* is an iterator, it just runs the command once for every arguments
 > listed.
 >
 > The argument list in this case comes from the command *f~[0]*. It lists the

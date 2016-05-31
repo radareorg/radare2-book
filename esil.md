@@ -94,11 +94,11 @@ ESIL Opcode | Operands | Name | Operation| example
 TRAP  | src | Trap | Trap signal |
 **$** | src | Syscall | sysccall  |
 **$$** | src | Instruction address | Get address of current instruction<br>stack=instruction address |
-**==** | src,dst | Compare | v = dst - src ; update_eflags(v) |   
-**<** | src,dst | Smaller | stack = (dst < src) | [0x0000000]> "ae 1,5,<" <br>0x0<br>[0x00000000]> "ae 5,5"<br>0x0"
-**<=** | src,dst | Smaller or Equal | stack = (dst <= src) | [0x0000000]> "ae 1,5,<" <br>0x0<br>[0x00000000]> "ae 5,5"<br>0x1"   
-**>** | src,dst | Bigger | stack = (dst > src) | [0x00000000]> "ae 1,5,>"<br>0x1<br>[0x00000000]> "ae 5,5,>"<br>0x0
- **>=** | src,dst | Bigger or Equal | stack = (dst > src) | [0x00000000]> "ae 1,5,>="<br>0x1<br>[0x00000000]> "ae 5,5,>="<br>0x1
+**==** | src,dst | Compare | stack = (dst == src) ; update_eflags(dst - src) |   
+**<** | src,dst | Smaller (signed comparison) | stack = (dst < src) ; update_eflags(dst - src) | [0x0000000]> "ae 1,5,<" <br>0x0<br>[0x00000000]> "ae 5,5"<br>0x0"
+**<=** | src,dst | Smaller or Equal (signed comparison) | stack = (dst <= src) ; update_eflags(dst - src) | [0x0000000]> "ae 1,5,<" <br>0x0<br>[0x00000000]> "ae 5,5"<br>0x1"   
+**>** | src,dst | Bigger (signed comparison) | stack = (dst > src) ; update_eflags(dst - src) | [0x00000000]> "ae 1,5,>"<br>0x1<br>[0x00000000]> "ae 5,5,>"<br>0x0
+ **>=** | src,dst | Bigger or Equal (signed comparison) | stack = (dst >= src) ; update_eflags(dst - src) | [0x00000000]> "ae 1,5,>="<br>0x1<br>[0x00000000]> "ae 5,5,>="<br>0x1
  **<<** | src,dst | Shift Left | stack = dst << src | [0x00000000]> "ae 1,1,<<"<br>0x2<br>[0x00000000]> "ae 2,1,<<"<br>0x4
  **>>** | src,dst | Shift Right | stack = dst >> src | [0x00000000]> "ae 1,4,>>"<br>0x2<br>[0x00000000]> "ae 2,4,>>"<br>0x1
  **<<<** | src,dst | Rotate Left | stack=dst ROL src | [0x00000000]> "ae 31,1,<<<"<br>0x80000000<br>[0x00000000]> "ae 32,1,<<<"<br>0x1
@@ -139,11 +139,14 @@ ESIL VM has an internal state flags that are read only and can be used to export
 Internal flags are prefixed with `$` character.
 
 ```
-z - zero flag, only set if the result of an operation is 0
-b - borrow, this requires to specify from which bit (example: $b4 - checks if borrow from bit 4)
-c - carry, same like above (example: $c7 - checks if carry from bit 7)
-p - parity
-r - regsize ( asm.bits/8 )
+z      - zero flag, only set if the result of an operation is 0
+b      - borrow, this requires to specify from which bit (example: $b4 - checks if borrow from bit 4)
+c      - carry, same like above (example: $c7 - checks if carry from bit 7)
+p      - parity
+r      - regsize ( asm.bits/8 )
+[0-9]* - Used to set flags and registers without having any side effects,
+         i.e. setting esil_cur, esil_old and esil_lastsz.
+         (example: "$0,of,=" to reset the overflow flag)
 ```
 
 ## Syntax and Commands

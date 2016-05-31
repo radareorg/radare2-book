@@ -137,7 +137,7 @@ Well, with that information in mind, one can guess that this function will be
 the VM's main loop, and the input data is the instructions the VM will execute.
 Based on this hunch, I've named this function *vmloop*, and renamed
 *input_data* to *bytecode* and *input_size* to *bytecode_length*. This is not
-really necessery in a small project like this, but it's a good practice to name
+really necessary in a small project like this, but it's a good practice to name
 stuff according to their purpose (just like when you are writing programs).
 
 ```

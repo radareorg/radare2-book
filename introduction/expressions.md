@@ -14,7 +14,7 @@ Expressions are mathematical representations of 64-bit numerical values. They ca
 Supported arithmetic operations are:
 
  *   \+ : addition
- *   \- : substraction
+ *   \- : subtraction
  *   \* : multiplication
  *   / : division
  *   % : modulus
@@ -29,7 +29,7 @@ Binary operations should be escaped:
 
 Values are numbers can be displayed in several formats:
 
-    0x033   : hexadecimalcan be displayed
+    0x033   : hexadecimal can be displayed
     3334    : decimal
     sym.fo  : resolve flag offset
     10K     : KBytes  10*1024

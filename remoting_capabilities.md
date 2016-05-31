@@ -1,6 +1,6 @@
 # Remote Access Capabilities
 
-Radare can be run locally, or it can be started remotely just the same. It is possiblr because everything uses radare's IO subsystem that abstracts access to system(), cmd() and all basic IO operations through the network.
+Radare can be run locally, or it can be started remotely just the same. It is possible because everything uses radare's IO subsystem that abstracts access to system(), cmd() and all basic IO operations through the network.
 
 Help for commands useful for remote access to radare:
     

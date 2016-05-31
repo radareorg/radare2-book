@@ -19,10 +19,10 @@ A boolean value to choose a string disassembly engine. "False" indicates a nativ
 Selects a target operating system of currently loaded binary. Usually OS is automatically detected by `rabin -rI`. Yet, `asm.os` can be used to switch to a different syscall table employed by another OS.
 
     asm.flags
-If defined to "true", disasembler view will have flags column.
+If defined to "true", disassembler view will have flags column.
 
     asm.linescall
-If set to "true", draw lines at the left of dissassemble output (`pd`, `pD` commands) to graphically represent control flow changes (jumps and calls) that are targeted inside current block. Also, see `asm.linesout`.
+If set to "true", draw lines at the left of disassemble output (`pd`, `pD` commands) to graphically represent control flow changes (jumps and calls) that are targeted inside current block. Also, see `asm.linesout`.
 
     asm.linesout
 When defined as "true", the disassembly view will also draw control flow lines that go ouside of the block.
@@ -31,7 +31,7 @@ When defined as "true", the disassembly view will also draw control flow lines t
 A boolean value which changes the direction of control flow analysis. If set to "false", it is done from top to bottom of a block; otherwise, it goes from bottom to top. The "false" setting seems to be a better choice for improved readability, and is the default one.
 
     asm.offset
-Boolean value which controls visibility of offsets for individual disasembled instructions.
+Boolean value which controls visibility of offsets for individual disassembled instructions.
 
     asm.trace
 A boolean value that controls displaying of tracing information (sequence number and counter) at the left of each opcode. It is used to assist programs trace analysis.
@@ -41,9 +41,7 @@ A boolean value used to show or hide displaying of raw bytes of instructions.
 
     cfg.bigendian
 Change endianness. "true" means big-endian, "false" is for little-endian.
-
-    file.analyze
-A boolean value. If set, radare will run `.af* @@ sym.` and `.af* @ entrypoint` after resolving the symbols binary loading time. This way, radare will extract maximum of available information from the binary. Note that this configuration item does not affect type of analysis used when opening a project file. This option requires "file.id" and "file.flag" both to be true.
+"file.id" and "file.flag" both to be true.
 
     scr.color
 This boolean variable enables or disables colorized screen output.
