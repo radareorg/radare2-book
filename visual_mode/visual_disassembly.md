@@ -94,7 +94,7 @@ Using `??` the "UserFriendly HUD" is displayed. It can be seen as an interactive
 
 ### The "flag/comment/functions/.. HUD" 
 
-This HUD can be displayed using `_`, it basically shows a list of all the flags and will allow you to jump to it. Using the keyboard you can quickly filter flag that contain a specific patern.
+This HUD can be displayed using `_`, it basically shows a list of all the flags and will allow you to jump to it. Using the keyboard you can quickly filter flag that contain a specific pattern.
 
 ## Tweaking the Disassembly
 

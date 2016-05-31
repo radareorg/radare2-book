@@ -22,7 +22,7 @@ wisdom as possible, I'm going to show you how to define basic blocks.
 
 But first, lets analyze what we already have! First, *rdi* is put into local_3.
 Since the application is a 64bit Linux executable, we know that *rdi* is the
-first function argument (as you may have recognized, the automatoc analysis of
+first function argument (as you may have recognized, the automatic analysis of
 arguments and local variables was not entirely correct), and we also know that
 *vmloop*'s first argument is the bytecode. So lets rename local_3:
 
@@ -64,7 +64,7 @@ series of qwords:
 
 > ***r2 tip***: Except for the *?s*, all parts of this command should be
 > familiar now, but lets recap it! *Cd* defines a memory area as data, and 8 is
-> the size of that memory area. *@@* is an iterator that make the preceeding
+> the size of that memory area. *@@* is an iterator that make the preceding
 > command run for every element that *@@* holds. In this example it holds a
 > series generated using the *?s* command. *?s* simply generates a series from
 > the current seek (*$$*) to current seek + 8*0x17 (*$$+8*0x17*) with a step

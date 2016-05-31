@@ -2,7 +2,7 @@
 
 ### MinGW32
 
-The easy way to compile things for Windows is using MinGW32. The w32 builds distributed from the radare homepage are generated from a GNU/Linux box using MinGW32 and they are tested with Wine. Also keep in mind, that MinGW-w64 wan't tested, so no guarantees here.
+The easy way to compile things for Windows is using MinGW32. The w32 builds distributed from the radare homepage are generated from a GNU/Linux box using MinGW32 and they are tested with Wine. Also keep in mind, that MinGW-w64 isn't tested, so no guarantees here.
 
 Be sure to setup your MinGW32 to compile with **thread model: win32**, not **posix**, and target should be **mingw32**.
 Before the starting of compilation you need to setup git first, for a proper automatic fetching of capstone:

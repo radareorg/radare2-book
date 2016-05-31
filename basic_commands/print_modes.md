@@ -219,7 +219,7 @@ Strings are probably one of the most important entrypoints when starting to reve
     | ps   print string
     | psi  print string inside curseek
     | psb  print strings in current block
-    | psx  show string with scaped chars
+    | psx  show string with escaped chars
     | psz  print zero terminated string
     | psp  print pascal string
     | psu  print utf16 unicode (json)
@@ -249,7 +249,7 @@ It is also possible to print various packed data types using the `pf` command:
     0x7fff0d29da34 = 0x00000000
     0x7fff0d29da38 = 0x7fff0d29da38 -> 0x0d29f7ee /bin/ls
 
-This can be used to look at the arguments passed to a function. To achive this, simply pass a 'format memory string' as an argument to `pf`, and temporally change current seek position / offset using `@`. It is also possible to define arrays of structures with `pf`. To do this, prefix the format string with a numeric value. You can also define a name for each field of the structure by appending them as a space-separated arguments list.
+This can be used to look at the arguments passed to a function. To achieve this, simply pass a 'format memory string' as an argument to `pf`, and temporally change current seek position / offset using `@`. It is also possible to define arrays of structures with `pf`. To do this, prefix the format string with a numeric value. You can also define a name for each field of the structure by appending them as a space-separated arguments list.
 
     [0x4A13B8C0]> pf 2*xw pointer type @ esp
     0x00404888 [0] {

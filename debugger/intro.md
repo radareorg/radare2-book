@@ -7,7 +7,7 @@ Debuggers are implemented as IO plugins. Therefore, radare can handle different 
 
 There are different backends for many target architectures and operating systems, e.g., GNU/Linux, Windows, MacOS X, (Net,Free,Open)BSD and Solaris.
 
-A process memory is treated as a plain file. All mapped memory pages of a debugged program and its libraries can be readed and interpreted as code, data structures etc.
+A process memory is treated as a plain file. All mapped memory pages of a debugged program and its libraries can be read and interpreted as code, data structures etc.
 
 Communication between radare and debugger IO layer is wrapped into `system()` calls, which accepts a string as an argument, and executes it as a command. An answer is then buffered in output console, its contents can be additionally processed by a script. This is how radare handles single `!` and double `!!` exclamation mark commands for calling `system()`:
 

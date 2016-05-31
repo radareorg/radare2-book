@@ -53,7 +53,7 @@ Now we are ready to go deeper.
 
 ## Seeking at any position
 
-All seeking commands that have adress in command parametrs  can use any base 
+All seeking commands that have address in command parameters  can use any base 
 such as hex/octal/binary or decimal.
 
 Seek to address 0x0, alternative command is just `0x0`

@@ -28,7 +28,7 @@ Maybe a simpler method to use debugger in radare is to switch it to visual mode.
     [0xB7F0C8C0]> V
 
 The initial view after entering visual mode is a hexdump view of current target program counter (e.g., EIP for x86). Pressing `p` will allow you to cycle through the rest of visual mode views. You can press `p` and `P` to rotate through the most commonly used print modes.
-Use F7 or `s` to step into and F8 or `S` to step over current instruction. With the `c` key you can toggle the cursor mode to mark a byte range selection (for example, to later overwirte them with nop). You can set breakpoints with `F2` key.
+Use F7 or `s` to step into and F8 or `S` to step over current instruction. With the `c` key you can toggle the cursor mode to mark a byte range selection (for example, to later overwrite them with nop). You can set breakpoints with `F2` key.
 
 In visual mode you can enter regular radare commands by prepending them with `:`. For example, to dump a one block of memory contents at ESI:
     <Press ':'>

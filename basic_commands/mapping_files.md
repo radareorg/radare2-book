@@ -12,7 +12,7 @@ Mapping files is done using the `o` (open) command. Let's read the help:
     oc [file]          open core file, like relaunching r2
     oo                 reopen current file (kill+fork in debugger)
     oo+                reopen current file in read-write
-    o 4                priorize io on fd 4 (bring to front)
+    o 4                prioritize io on fd 4 (bring to front)
     o-1                close file index 1
     o /bin/ls          open /bin/ls file in read-only
     o+/bin/ls          open /bin/ls file in read-write mode
