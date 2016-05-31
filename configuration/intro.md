@@ -35,7 +35,7 @@ To get help about `e` command type `e?`:
     env [k[=v]]     get/set environment variable
 
 
-A simpler alternative to `e` command is accessible from the visual mode. Type `Ve` to enter it, use arrows (up, down, left, right) to navigate the configuration, and `q` to exit it. The start screen for the visual cofiguration edit looks like this:
+A simpler alternative to `e` command is accessible from the visual mode. Type `Ve` to enter it, use arrows (up, down, left, right) to navigate the configuration, and `q` to exit it. The start screen for the visual configuration edit looks like this:
 
     Eval spaces:                                                                   
 
