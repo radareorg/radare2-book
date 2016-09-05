@@ -1,10 +1,10 @@
 ## Compilation on Windows
 
-### MinGW32
+### Mingw32
 
-The easy way to compile things for Windows is using MinGW32. The w32 builds distributed from the radare homepage are generated from a GNU/Linux box using MinGW32 and they are tested with Wine. Also keep in mind, that MinGW-w64 isn't tested, so no guarantees here.
+The easy way to compile things for Windows is using Mingw32. The w32 builds distributed from the radare homepage are generated from a GNU/Linux box using Mingw32 and they are tested with Wine. Also keep in mind, that Mingw-w64 isn't tested, so no guarantees here.
 
-Be sure to setup your MinGW32 to compile with **thread model: win32**, not **posix**, and target should be **mingw32**.
+Be sure to setup your Mingw32 to compile with **thread model: win32**, not **posix**, and target should be **mingw32**.
 Before the starting of compilation you need to setup git first, for a proper automatic fetching of capstone:
 ```sh
 git config --global core.autocrlf true
@@ -20,6 +20,9 @@ zip -r w32-build.zip w32-build
 ```
 This generates a native, 32-bit console application for Windows.
 The 'i486-mingw32-gcc' compiler is the one I have in my box, you will probably need to change this.
+
+To simplify the building under Windows/Mingw32 there is a script in radare2 sources:
+`sys/mingw32.bat`. Simply run it from the cmd.exe (or ConEmu/cmd.exe).
 
 ### Cygwin
 
