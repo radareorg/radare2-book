@@ -74,6 +74,57 @@ family: cpu
 Note, we're using `$$` variable which evaluates in the current offset. Also note,
 that `$$+2` evaluates before looping, so we can use the simple arithmetic expressions.
 
+Also, those offsets can be loaded from some file. This file should be formatted
+with one offset per line.
+```
+[0x004047d0]> ?X $$ > offsets.txt
+[0x004047d0]> ?X $$+2 >> offsets.txt
+[0x004047d0]> !cat offsets.txt
+4047d0
+4047d2
+[0x004047d0]> pi @@.offsets.txt
+xor ebp, ebp
+mov r9, rdx
+```
+
+There are different `foreach` types. One of the most useful - looping through instructions
+of the selected function:
+```
+[0x004047d0]> pdf
+╒ (fcn) entry0 42
+│                ; UNKNOWN XREF from 0x00400018 (unk)
+│                ; DATA XREF from 0x004064bf (sub.strlen_460)
+│                ; DATA XREF from 0x00406511 (sub.strlen_460)
+│                ; DATA XREF from 0x0040b080 (unk)
+│                ; DATA XREF from 0x0040b0ef (unk)
+│                0x004047d0      31ed           xor ebp, ebp
+│                0x004047d2      4989d1         mov r9, rdx
+│                0x004047d5      5e             pop rsi
+│                0x004047d6      4889e2         mov rdx, rsp
+│                0x004047d9      4883e4f0       and rsp, 0xfffffffffffffff0
+│                0x004047dd      50             push rax
+│                0x004047de      54             push rsp
+│                0x004047df      49c7c0c03641.  mov r8, 0x4136c0
+│                0x004047e6      48c7c1603641.  mov rcx, 0x413660      ; "AWA..AVI..AUI..ATL.%.. "
+0x00413660  ; "AWA..AVI..AUI..ATL.%.. "
+│                0x004047ed      48c7c7e02740.  mov rdi, main          ; "AWAVAUATUH..S..H...." @
+0x4027e0
+│                0x004047f4      e857dcffff     call sym.imp.__libc_start_main
+╘                0x004047f9      f4             hlt
+[0x004047d0]> pi 1 @@i
+mov r9, rdx
+pop rsi
+mov rdx, rsp
+and rsp, 0xfffffffffffffff0
+push rax
+push rsp
+mov r8, 0x4136c0
+mov rcx, 0x413660
+mov rdi, main
+call sym.imp.__libc_start_main
+hlt
+```
+In this example command `pi 1` runs over all instructions in the current function (entry0).
 
 The third way to use loops less flexible but still useful - we can loop through
 predefined iterator types:
