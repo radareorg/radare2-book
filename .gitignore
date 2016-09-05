@@ -1,3 +1,7 @@
 publish.sh
 _book/
 _book/*
+.*.swp
+.*.swo
+*.un~
+
