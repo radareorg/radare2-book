@@ -77,12 +77,12 @@ that `$$+2` evaluates before looping, so we can use the simple arithmetic expres
 Also, those offsets can be loaded from some file. This file should be formatted
 with one offset per line.
 ```
-[0x004047d0]> ?X $$ > offsets.txt
-[0x004047d0]> ?X $$+2 >> offsets.txt
+[0x004047d0]> ?v $$ > offsets.txt
+[0x004047d0]> ?v $$+2 >> offsets.txt
 [0x004047d0]> !cat offsets.txt
 4047d0
 4047d2
-[0x004047d0]> pi @@.offsets.txt
+[0x004047d0]> pi 1 @@.offsets.txt
 xor ebp, ebp
 mov r9, rdx
 ```
