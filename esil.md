@@ -118,6 +118,15 @@ TRAP  | src | Trap | Trap signal |
 =[]<br>=[*]<br>=[1]<br>=[2]<br>=[4]<br>=[8] | src,dst | poke |*dst=src | [0x00010000]> "ae 0xdeadbeef,0x10000,=[4],"<br>[0x00010000]> pxw 4@0x10000<br>0x00010000  0xdeadbeef                                ....<br>[0x00010000]> "ae 0x0,0x10000,=[4],"<br>[0x00010000]> pxw 4@0x10000<br>0x00010000  0x00000000                  
 []<br>[*]<br>[1]<br>[2]<br>[4]<br>[8] | src | peek | stack=*src | [0x00010000]> w test@0x10000<br>[0x00010000]> "ae 0x10000,[4],"<br>0x74736574<br>[0x00010000]> ar r_00=0x10000<br>[0x00010000]> "ae r_00,[4],"<br>0x74736574
 `|`=[]<br>`|`=[1]<br>`|`=[2]<br>`|`=[4]<br>`|`=[8] | reg | nombre | code | [0x00000000]> <br>[0x00000000]>
+SWAP |  | Swap | Swap two top elements | SWAP
+PICK | n | Pick | Pick nth element from the top of the stack | 2,PICK
+RPICK | m | Reverse Pick | Pick nth element from the base of the stack | 0,RPICK
+DUP | | Duplicate | Duplicate top element in stack | DUP
+NUM | | Numeric | If top element is a reference (register name, label, etc), dereference it and push its real value | NUM
+CLEAR | | Clear | Clear stack | CLEAR
+BREAK | | Break | Stops ESIL emulation | BREAK
+GOTO | n | Goto | Jumps to Nth ESIL word | GOTO 5
+TODO | | To Do | Stops execution (reason: ESIL expression not completed) | TODO
 
 ### ESIL Flags
 
