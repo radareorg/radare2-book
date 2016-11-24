@@ -79,7 +79,7 @@ Here is the complete instruction set used by the ESIL VM:
 ESIL Opcode | Operands | Name | Operation| example
 --- | --- | --- | --- | ----------------------------------------------
 TRAP  | src | Trap | Trap signal |
-**$** | src | Syscall | sysccall  |
+**$** | src | Syscall | syscall  |
 **$$** | src | Instruction address | Get address of current instruction<br>stack=instruction address |
 **==** | src,dst | Compare | stack = (dst == src) ; update_eflags(dst - src) |   
 **<** | src,dst | Smaller (signed comparison) | stack = (dst < src) ; update_eflags(dst - src) | [0x0000000]> "ae 1,5,<" <br>0x0<br>[0x00000000]> "ae 5,5"<br>0x0"
