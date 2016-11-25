@@ -23,6 +23,13 @@ The 'i486-mingw32-gcc' compiler is the one I have in my box, you will probably n
 
 To simplify the building under Windows/Mingw32 there is a script in radare2 sources:
 `sys/mingw32.bat`. Simply run it from the cmd.exe (or ConEmu/cmd.exe).
+It assumes that you have Mingw32 installed in `C:\Mingw` and Git in `C:\Program Files (x86)\Git`. If you want to
+use another installations, just set `MINGW_PATH` and `GIT_PATH` variables correspondingly:
+```
+set MINGW_PATH=D:\Mingw32
+set "GIT_PATH=E:\Program and Stuff\Git"
+sys\mingw32.bat
+```
 
 ### Cygwin
 
