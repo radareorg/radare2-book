@@ -47,7 +47,7 @@ So if you want to take a look at how instructions are expressed in ESIL simply s
    In visual mode you can also toggle this by simply typing `O`.
 
 ## ESIL Commands
-   * "ae" : Evaluate ESIL expresion.
+   * "ae" : Evaluate ESIL expression.
 
    ```
    [0x00000000]> "ae 1,1,+"
