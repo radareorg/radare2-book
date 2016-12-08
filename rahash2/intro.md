@@ -1,6 +1,6 @@
 # Obtaining Hashes within Radare2 Session
 
-To calculate a checksum of current block when running rarare2, use the '#' command. Pass an algorithm name to it as a parameter. An example session:
+To calculate a checksum of current block when running radare2, use the '#' command. Pass an algorithm name to it as a parameter. An example session:
 
     $ radare2 /bin/ls
     [0x08049790]> bf entry0
