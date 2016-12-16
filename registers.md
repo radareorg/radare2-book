@@ -24,10 +24,10 @@ There are different commands to get values of registers. For the General Purpose
     rip = 0x7f20bf5df630
     rsp = 0x7fff515923c0
 
-    [0x7f0f2dbae630]> dr?rip ; get value of 'eip'
+    [0x7f0f2dbae630]> dr?rip ; get value of 'rip'
     0x7f0f2dbae630
 
-    [0x4A13B8C0]> dr eip = esp   ; set 'eip' as esp
+    [0x4A13B8C0]> dr rip = esp   ; set 'rip' as esp
 
     
 Interaction between a plugin and the core is done by commands returning radare instructions. This is used, for example, to set flags in the core to set  values of registers.
