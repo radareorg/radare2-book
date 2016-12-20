@@ -31,6 +31,8 @@ set "GIT_PATH=E:\Program and Stuff\Git"
 sys\mingw32.bat
 ```
 
+Please, note, that this script should be run from radare2 directory.
+
 ### Cygwin
 
 Cygwin is another possibility; however, issues related to Cygwin libraries can make debugging difficult. But using binary compiled for Cygwin will allow you to use Unicode in the Windows console, and to have 256 colors.
@@ -47,6 +49,7 @@ There is a script that automates process of detecting the crosscompiler toolchai
 ```sh
 sys/mingw32.sh
 ```
+
 
 ### Mingw-W64
 
