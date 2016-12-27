@@ -115,7 +115,7 @@ $ tty ; clear ; sleep 999999
 /dev/ttyS010
 ```
 
-2 - Create a new file containing the following rarun2 profile named foo.r2:
+2 - Create a new file containing the following rarun2 profile named foo.rr2:
 ```
 #!/usr/bin/rarun2
 program=/bin/ls 
