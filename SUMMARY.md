@@ -58,6 +58,7 @@
 * [Rasm2](rasm2/intro.md)
    * [Assemble](rasm2/assemble.md)
    * [Disassemble](rasm2/disassemble.md)
+* [Ragg2(ragg2/ragg2.md)
 * [Analysis](analysis/intro.md)
    * [Code Analysis](analysis/code_analysis.md)
 * [Rahash2](rahash2/intro.md)
