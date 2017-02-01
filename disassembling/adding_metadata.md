@@ -1,8 +1,9 @@
 ## Adding Metadata to Disassembly
 
-Typical work of reversing binary files makes the task of taking notes and adding annotations on top of disassembly, data views etc. very important. Radare offers multiple ways to store and retrieve such metadata information.
+The typical work involved in reversing binary files makes powerful annotation capabailities essential.
+Radare offers multiple ways to store and retrieve such metadata.
 
-By following common basic *NIX principles it is easy to write a small utility in a scripting language which uses `objdump`, `otool`, etc. to obtain information from a binary and to import it into radare. For an example, take a look at one of many scripts that are distributed with radare, e.g., `idc2r.py`. To use it, invoke it as `idc2r.py file.idc > file.r2`. It reads an IDC file exported from an IDA Pro database and produces an r2 script containing the same comments, names of functions etc. You can import resulting 'file.r2' by using the dot `.` command of radare:
+By following common basic *NIX principles, it is easy to write a small utility in a scripting language which uses `objdump`, `otool`, etc. to obtain information from a binary and to import it into radare. For example, take a look at one of many scripts that are distributed with radare, e.g., `idc2r.py`. To use it, invoke it as `idc2r.py file.idc > file.r2`. It reads an IDC file exported from an IDA Pro database and produces an r2 script containing the same comments, names of functions etc. You can import the resulting 'file.r2' by using the dot `.` command of radare:
 
      [0x00000000]> . file.r2
 
@@ -10,7 +11,7 @@ The `.` command is used to interpret Radare commands from external sources, incl
 
      [0x00000000]> .!idc2r.py < file.idc
 
-The `C` command is used to manage comments and data conversions. You can define a range of program's bytes to be interpreted either as code, binary data or string. It is possible to define flags and execute external code in certain seek position to fetch a comment from an external file or database.
+The `C` command is used to manage comments and data conversions. You can define a range of program's bytes to be interpreted as either code, binary data or string. It is also possible to execute external code at every specified flag location in order to fetch some metadata, such as a comment, from an external file or database.
 
 Here's the help:
 
