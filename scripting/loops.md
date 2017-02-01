@@ -1,6 +1,7 @@
-One of the most common task in automation is looping through something.
-There are multiple ways to loop over something. First, most known one - loop
-over flags:
+One of the most common task in automation is looping through something,
+there are multiple ways to do this in radare2.
+
+We can loop over flags:
 ```
 @@ flagname-regex
 ```
@@ -30,19 +31,18 @@ args: 0
 diff: type: new
 [0x004047d6]>
 ```
-But we need to see some field of it for all functions found by analysis, for example.
-We can do that with loop:
+Now let's say, for example, that we'd like see a particular field from this output for all functions found by analysis. We can do that with a loop over all function flags (whose names begin with `fcn.`):
 ```
 [0x004047d6]> afi @@ fcn.* ~name
 ```
-This command will extract `name` field from `afi` output of every flag with name
-matching regexp `fcn.*`.
+This command will extract the `name` field from the `afi` output of every flag with a name
+matching the regexp `fcn.*`.
 
-The second way to use loops - is to set array of the offsets, using syntax
+We can also loop over a list of offsets, using the following syntax:
 ```
 @@=1 2 3 ... N
 ```
-For example we want to see opcode information for 2 offsets: current one, and current + 2:
+For example, say we want to see the opcode information for 2 offsets: the current one, and at current + 2:
 
 ```
 [0x004047d6]> ao @@=$$ $$+2
@@ -71,11 +71,11 @@ cond: al
 family: cpu
 [0x004047d6]>
 ```
-Note, we're using `$$` variable which evaluates in the current offset. Also note,
-that `$$+2` evaluates before looping, so we can use the simple arithmetic expressions.
+Note we're using the `$$` variable which evaluates to the current offset. Also note
+that `$$+2` is evaluated before looping, so we can use the simple arithmetic expressions.
 
-Also, those offsets can be loaded from some file. This file should be formatted
-with one offset per line.
+A third way to loop is by having the offsets be loaded from a file. This file should contain
+one offset per line.
 ```
 [0x004047d0]> ?v $$ > offsets.txt
 [0x004047d0]> ?v $$+2 >> offsets.txt
@@ -87,8 +87,7 @@ xor ebp, ebp
 mov r9, rdx
 ```
 
-There are different `foreach` types. One of the most useful - looping through instructions
-of the selected function:
+radare2 also offers various `foreach` constructs for looping. One of the most useful is for looping through all the instructions of a function:
 ```
 [0x004047d0]> pdf
 ╒ (fcn) entry0 42
@@ -124,10 +123,9 @@ mov rdi, main
 call sym.imp.__libc_start_main
 hlt
 ```
-In this example command `pi 1` runs over all instructions in the current function (entry0).
+In this example the command `pi 1` runs over all the instructions in the current function (entry0).
 
-The third way to use loops less flexible but still useful - we can loop through
-predefined iterator types:
+The last kind of looping lets you loop through predefined iterator types:
 
  - symbols
  - imports
@@ -137,14 +135,13 @@ predefined iterator types:
  - functions
  - flags
 
-This is possible with `@@@` command. E.g., the previous example of listing
-information about functions can be done with it:
+This is done using the `@@@` command. The previous example of listing information about functions can also be done using the `@@@` command:
 
 ```
 [0x004047d6]> afi @@@ functions ~name
 ```
-This will extract `name` field from `afi` output and will output the huge list of
-function names. We can choose only second column, to remove redundant `name:` on every line:
+This will extract `name` field from `afi` output and will output a huge list of
+function names. We can choose only the second column, to remove the redundant `name:` on every line:
 ```
 [0x004047d6]> afi @@@ functions ~name[1]
 ```
