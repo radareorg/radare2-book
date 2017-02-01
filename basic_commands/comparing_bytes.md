@@ -49,14 +49,14 @@ To compare contents of two functions specified by their names:
 The number parameter can of course also be a math expressions which uses flag names etc:
 
     [0x00000000]> cx 7f469046
-    
+
     Compare 2/4 equal bytes
     0x00000001 (byte=02)   45 'E'  ->  46 'F'
     0x00000002 (byte=03)   4c 'L'  ->  90 ' '
 
 
 
-You can use compare command to find differences between a current block and a file previously dumped to a disk:
+You can use the compare command to find differences between a current block and a file previously dumped to a disk:
 
     r2 /bin/true
     [0x08049A80]> s 0
