@@ -15,7 +15,7 @@ The `-z` option is used to list readable strings found in the .rodata section of
     addr=0x00012502 off=0x00012502 ordinal=009 sz=10 len=10 section=.rodata type=A string=unlabeled
 
 
-With the `-zr` option, this information is represented as radare2 commands list. It can be used in a radare2 session to automatically create a flag space called "strings" pre-populated with flags for all strings found by rabin2.
+With the `-zr` option, this information is represented as a radare2 commands list. It can be used in a radare2 session to automatically create a flag space called "strings" pre-populated with flags for all strings found by rabin2.
 Furthermore, this script will mark corresponding byte ranges as strings instead of code.
 
     $ rabin2 -zr /bin/ls |head
