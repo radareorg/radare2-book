@@ -1,6 +1,6 @@
 ## Seeking
 
-Current seek position is changed with `s` command. It accepts a math expression as argument. The expression can be composed of shift operations, basic math operations, or memory access operations.
+The current seek position is changed with `s` command. It accepts a math expression as argument. The expression can be composed of shift operations, basic math operations, or memory access operations.
 
 
     [0x00000000]> s?
