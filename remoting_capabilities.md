@@ -1,6 +1,7 @@
 # Remote Access Capabilities
 
-Radare can be run locally, or it can be started remotely just the same. It is possible because everything uses radare's IO subsystem that abstracts access to system(), cmd() and all basic IO operations through the network.
+Radare can be run locally, or it can be started as a server process which is controlled by a local
+radare2 process. This is possible because everything uses radare's IO subsystem which abstracts access to system(), cmd() and all basic IO operations so to work over a network.
 
 Help for commands useful for remote access to radare:
     
@@ -30,7 +31,7 @@ Help for commands useful for remote access to radare:
 
 You can learn radare2 remote capabilities by displaying the list of supported IO plugins: `radare2 -L`.
 
-A little example should help understanding. A typical remote session can be like this:
+A little example should make this clearer. A typical remote session might look like this:
 
 At the remote host1:
 
@@ -77,11 +78,11 @@ To remove hosts (and close connections):
     
     [0x004048c5]> =-
 
-If you can initialize a TCP or UDP server, add it with '=+ tcp://' or '=+ udp://'. Then redirect radare output to them. For instance:
+You can also redirect radare output to a TCP or UDP server (such as `nc -l`). First, Add the server with '=+ tcp://' or '=+ udp://', then you can redirect the output of a command to be sent to the server:
 
      [0x004048c5]> =+ tcp://<host>:<port>/
     Connected to: <host> at port <port>
     5 - tcp://<host>:<port>/
     [0x004048c5]> =<5 cmd...
-    
-The `=<' command will send result of a command's execution at the right to the remote connection number N (or the last one used if no id specified).
+
+The `=<' command will send the output from the execution of `cmd` to the remote connection number N (or the last one used if no id specified).
