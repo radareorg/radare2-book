@@ -2,7 +2,7 @@
 
 The core reads `~/.radare2rc` while starting. You can add `e` commands to this file to tune radare configuration to your taste.
 
-To prevent radare from parsing this file at start, pass it `-n` option. To have a less verbose output for batch mode runs, it is also better to decrease verbosity level with `-v` command-line option.
+To prevent radare from parsing this file at start, pass it `-n` option.
 
 All the configuration of radare is done with the `eval` commands. A typical startup configuration file looks like this:
 
