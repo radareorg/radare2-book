@@ -1,12 +1,12 @@
 ## Flags
 
-Flags are similar to bookmarks. They represent a certain offset in a file. Flags can be grouped in 'flag spaces'. A flag space is something like a namespace for flags. They are used to group flags of similar characteristic or type. Examples for flag spaces: sections, registers, symbols.
+Flags are conceptually similar to bookmarks. They associate a name with a given offset in a file. Flags can be grouped into 'flag spaces'. A flag space is a namespace for flags, grouping together flags of similar characteristics or type. Examples for flag spaces: sections, registers, symbols.
 
 To create a flag type:
 
      [0x4A13B8C0]> f flag_name @ offset
-    
-You can remove a flag by appending the `-` character to command. Most of commands accept `-` as argument-prefix as an indication to delete something.
+
+You can remove a flag by appending the `-` character to command. Most commands accept `-` as argument-prefix as an indication to delete something.
 
      [0x4A13B8C0]> f- flag_name
 
