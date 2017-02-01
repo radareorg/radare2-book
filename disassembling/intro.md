@@ -4,18 +4,18 @@ Disassembling in radare is just a way to represent an array of bytes. It is hand
 
 In the old times, when the radare core was smaller, the disassembler was handled by an external rsc file. That is, radare first dumped current block into a file, and then simply called `objdump` configured to disassemble for Intel, ARM etc...
 It was a working solution, but it was inefficient as it repeated the same actions over and over, because there were no caches. As a result, scrolling was terribly slow.
-Nowadays, the disassembler support is one of the basic features of radare. It now allows many options, including target architecture flavor, disassembler variants, among other things.
+Nowadays, the disassembler support is one of the basic features of radare. It now has many options, including target architecture flavor and disassembler variants, among other things.
 
-To see disassembly, use the `pd` command. It accepts a numeric argument to specify how many opcodes of current block you want to see. Most of commands in radare consider current block size as a default limit for data input. If you want to disassemble more bytes, you should use the `b` command to set new block size.
+To see the disassembly, use the `pd` command. It accepts a numeric argument to specify how many opcodes of current block you want to see. Most of the commands in radare consider the current block size as the default limit for data input. If you want to disassemble more bytes, set a new block size using the `b` command.
 
     [0x00000000]> b 100    ; set block size to 100
     [0x00000000]> pd       ; disassemble 100 bytes
     [0x00000000]> pd 3     ; disassemble 3 opcodes
     [0x00000000]> pD 30    ; disassemble 30 bytes
 
-The `pD` command works like `pd` but accepts number of input bytes, instead of number of opcodes, as its parameter.
+The `pD` command works like `pd` but accepts the number of input bytes as its argument, instead of the number of opcodes.
 
-The "pseudo" syntax may be somewhat easier for a human to understand than default assembler notations. But it can become annoying if you read lots of code. To play with it:
+The "pseudo" syntax may be somewhat easier for a human to understand than the default assembler notations. But it can become annoying if you read lots of code. To play with it:
 
     [0x00405e1c]> e asm.pseudo = true
     [0x00405e1c]> pd 3
