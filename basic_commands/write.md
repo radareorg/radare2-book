@@ -1,12 +1,13 @@
 ## Writing Data
 
-Radare can manipulate with a loaded binary file in many ways. You can resize the file, move and copy/paste bytes, insert new bytes (shifting data to the end of the block or file), or simply overwrite bytes. New data may come from another file contents, be a widestring, or even be represented as inline assembler statement.
+Radare can manipulate a loaded binary file in many ways. You can resize the file, move and copy/paste bytes, insert new bytes (shifting data to the end of the block or file), or simply overwrite bytes. New data may be give as a widestring, as assembler instructions, or the data may be read in from another file.
 
-To resize, use the `r` command. It accepts a numeric argument. A positive value sets new size to a file. A negative one will strip N bytes from the current seek, making the file smaller.
+Resize the file using the `r` command. It accepts a numeric argument. A positive value sets a new size for the file. A negative one will truncate the file to the current seek position minus N bytes.
 
     r 1024      ; resize the file to 1024 bytes
     r -10 @ 33  ; strip 10 bytes at offset 33
-To write bytes, use `w` command. It accepts multiple input formats, like inline assembly, endian-friendly dwords, files, hexpair files, wide strings:
+
+Write bytes using the `w` command. It accepts multiple input formats like inline assembly, endian-friendly dwords, files, hexpair files, wide strings:
 
     [0x00404888]> w?
     |Usage: w[x] [str] [<file] [<<EOF] [@addr]
@@ -40,7 +41,8 @@ Some examples:
 
 ### Write Over
 
-The `wo` command (write over) has many subcommands. It is applied to the current block. Supported operations: XOR, ADD, SUB...
+The `wo` command (write over) has many subcommands, each combines the existing data with the new data using
+an operator. The command is applied to the current block. Supported operators include: XOR, ADD, SUB...
 
     [0x4A13B8C0]> wo?
     |Usage: wo[asmdxoArl24] [hexpairs] @ addr[:bsize]
