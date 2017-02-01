@@ -66,5 +66,5 @@ commands
 
 The `?$?` command describes several helpful variables you can use to do similar actions even more
 easily, like the `$v` "immediate value" variable, or the `$m` opcode memory reference variable.
-
+(Note: If, Like, they actually worked instead of always returning -1.)
 
