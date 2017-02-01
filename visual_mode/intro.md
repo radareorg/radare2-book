@@ -12,7 +12,7 @@ The Visual mode uses "print modes" which are basically different panel that you 
 
 ↻ **Hexdump panel** -> **Disassembly panel** → **Debugger panel** → **Hexadecimal words dump panel** → **Output C format panel** → **Op analysis color map panel** → **Annotated hexdump panel** ↺.
 
-Notice that the top of the panel contains the commands which is used, for example for the disassembly panel:
+Notice that the top of the panel contains the command which is used, for example for the disassembly panel:
 
 ```
 [0x00404890 16% 120 /bin/ls]> pd $r @ entry0
