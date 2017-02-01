@@ -34,7 +34,7 @@
    * [Basic Searches](search_bytes/basic_searches.md)
    * [Configurating the Search](search_bytes/configurating_the_search.md)
    * [Pattern Search](search_bytes/pattern_search.md)
-   * [Automatization](search_bytes/automatization.md)
+   * [Automation](search_bytes/automation.md)
    * [Backward Search](search_bytes/backward_search.md)
    * [Search in Assembly](search_bytes/search_in_assembly.md)
    * [Searching for AES Keys](search_bytes/searching_aes_keys.md)

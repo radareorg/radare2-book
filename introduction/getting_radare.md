@@ -30,7 +30,7 @@ The most common way to get r2 updated and installed system wide is by using:
 
 ### Helper Scripts
 
-Take a look at the sys/* scripts, those are used to automatize stuff related to syncing, building and installing r2 and its bindings.
+Take a look at the sys/* scripts, those are used to automate stuff related to syncing, building and installing r2 and its bindings.
 
 The most important one is sys/install.sh. It will pull, clean, build and symstall r2 system wide.
 

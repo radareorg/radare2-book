@@ -1,4 +1,4 @@
-One of the most common task in automatization is looping through something.
+One of the most common task in automation is looping through something.
 There are multiple ways to loop over something. First, most known one - loop
 over flags:
 ```
