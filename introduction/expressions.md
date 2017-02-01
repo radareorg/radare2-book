@@ -23,7 +23,7 @@ Supported arithmetic operations are:
 
 Binary operations should be escaped:
 
- *   \| : logical OR // ("? 0001010b | 0101001b ")
+ *   \| : logical OR // ("? 0001010b | 0101001b ") FIXME: this doesn't work
  *   & : logical AND
  *   ^ : logical XOR
 
