@@ -43,7 +43,7 @@
    * [ESIL](esil.md)
 * [Scripting](scripting/intro.md)
    * [Loops](scripting/loops.md)
-   * [Macroses](scripting/macroses.md)
+   * [Macros](scripting/macros.md)
    * [R2pipe](scripting/r2pipe.md)
 * [Rabin2](rabin2/intro.md)
    * [File Identification](rabin2/file_identification.md)
