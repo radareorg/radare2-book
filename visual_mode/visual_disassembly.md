@@ -28,7 +28,7 @@ d → d
 ...
 ```
 
-To improve code readability change how radare2 presents numerical values in disassembly, by default most of disassembly display numerical value as hexadecimal. Sometimes you would like to view it as a decimal, binary or even custom defined constant. To change value format you can use `d` following by `i` then choose what base to work in, this is the equivalent to `ahi`:
+To improve code readability you can change how radare2 presents numerical values in disassembly, by default most of disassembly display numerical value as hexadecimal. Sometimes you would like to view it as a decimal, binary or even custom defined constant. To change value format you can use `d` following by `i` then choose what base to work in, this is the equivalent to `ahi`:
 
 ```
 d → i → ...
@@ -43,67 +43,67 @@ d → i →  2
 
 Remember that, to be able to actually edit files loaded in radare2, you have to start it with `-w` option. Otherwise a file is opened in read-only mode.
 
-Pressing lowercase `c` toggles the cursor mode. When this mode is active, currently selected byte (or byte range) is highlighted by having a highlighted background.
+Pressing lowercase `c` toggles the cursor mode. When this mode is active, the currently selected byte (or byte range) is highlighted.
 
 ![Cursor at 0x00404896](cursor.png)
 
-The cursor is used to select a range of bytes or simply to point to a byte. You can use the latter to create a named flag. Seek to required position, then press `f` and enter a name for a flag.
-If you select a range of bytes (with HJKL and SHIFT key pressed), and file write mode has been enabled with `-w` radare2 option, you can press `i` and then enter a byte array to overwrite selected range with new values, used as circular buffer. For example:
+The cursor is used to select a range of bytes or simply to point to a byte. You can use the cursor to create a named flag at specifc location. To do so, seek to the required position, then press `f` and enter a name for a flag.
+If the file was opened in write mode using the `-w` flag or the `o+` command, you can also use the cursor to overwrite a selected range with new values. To do so, select a range of bytes (with HJKL and SHIFT key pressed), then press `i` and enter the hexpair values for the new data. The data will be repeated as needed to fill the range selected. For example:
 
     <select 10 bytes in visual mode using SHIFT+HJKL>
     <press 'i' and then enter '12 34'>
-    
-10 bytes you have selected will be changed to "12 34" repeated in a circular manner: 12 34 12 34 12 34 12 34 12 34.
+
+The 10 bytes you have selected will be changed to "12 34 12 34 12 ...".
 
 
-The Visual Assembler using `A`, this will give you a live-preview of the change you want to do in the disassembly.
-
+The Visual Assembler is a feature that provides a live-preview while you type in new opcodes to patch
+into the disassembly. To use it, seek or place the cursor at the wanted location and hit the 'A' key. To provide multiple opcodes, seperate them with a semicolon, `;`.
 
 ##XREF
 
 When radare2 has discovered a XREF during the analysis, it will show you the information in the Visual Disassembly using `XREF` tag:
 
 ```
-            ; DATA XREF from 0x00402e0e (unk)                        
-            str.David_MacKenzie:       
+            ; DATA XREF from 0x00402e0e (unk)
+            str.David_MacKenzie:
 ```
 
-To see where this string is called press on `x`, if you want to jump to the location where the data is used then press the corresponding number [0-9] on your keyboard. (This functionality is similar to `axt`)
+To see where this string is called press `x`, if you want to jump to the location where the data is used then press the corresponding number [0-9] on your keyboard. (This functionality is similar to `axt`)
 
 `X` corresponds to the reverse operation aka `axf`.
 
 ## Add a comment
 
-To add a comment just press `;`.
+To add a comment press `;`.
 
 ## Type other commands
 
-Quickly type commands using `:`. 
+Quickly type commands using `:`.
 
-## Search 
+## Search
 
-`/`: allows highlighting in the current display.
-`:cmd` allows you to type r2 command which can give you more search possibility.
-
+`/`: allows highlighting of strings in the current display.
+`:cmd` allows you to use one of the "/?" commands that perform more specialized searches.
 
 ## The HUDS
 
 ### The "UserFriendly HUD"
 
-Using `??` the "UserFriendly HUD" is displayed. It can be seen as an interactive Cheat sheet that one can complete with its own set of command. This HUD is convenient for new-comers. For experienced user, a HUD per type of activity could also be interesting when dealing with a lot of command within radare2.
+The "UserFriendly HUD" can be accessed using the `??` key-combination. This HUD acts as an interactive Cheat Sheet that one can use to more easily find and execute commands. This HUD is particularly useful for new-comers. For experienced users, the other HUDS which are more activity-specific may be more useful.
 
-### The "flag/comment/functions/.. HUD" 
+### The "flag/comment/functions/.. HUD"
 
-This HUD can be displayed using `_`, it basically shows a list of all the flags and will allow you to jump to it. Using the keyboard you can quickly filter flag that contain a specific pattern.
+This HUD can be displayed using the `_` key, it shows a list of all the flags defined and lets you jump to them. Using the keyboard you can quickly filter the list down to a flag that contains a specific pattern.
 
 ## Tweaking the Disassembly
 
-You can change the disassembly look and feel by using the Visual Configuration Editor.
+The disassembly's look-and-feel is controlled using the "asm.* configuration keys, which can be
+changed using the `e` command. All configuration keys can also be edited through the Visual Configuration Editor.
 
 ## Visual Configuration Editor
 
-`Ve` or `e` in visual mode allows you to edit radare2 configuration visually.
-For example, if you want to change the assembly display just select `asm` in the list and choose your assembly display flavor.
+This HUD can be accessed using the `e` key in visual mode. The editor allows you to easily examine and change radare2's configuration. For example, if you want to change something about the disassembly display, select `asm` from the list, navigate to the item you wish to modify it, then select it by hitting `Enter`.
+If the item is a boolean variable, it will toggle, otherwise you will be prompted to provide a new value.
 
 
 ![First Select asm](select_asm.png)
