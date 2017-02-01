@@ -41,7 +41,7 @@ Contributors:
 
 Original author and greetings from [The radare book](http://www.radare.org/get/radare.pdf) : pancake
 
-- God. aka Flying Spaguetti Monster
+- God. aka Flying Spaghetti Monster
 - Nibble (ELF32/64 and PE parser+lot of bugfixes and core work)
 - ora8 (w32 port debugger, syscallproxying, hw breakpoints..)
 - nopcode guys (for the cons and
