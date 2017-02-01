@@ -40,17 +40,15 @@ Here's the help:
                0x00000002    0000         add [rax], al
 
 
+The `C?` family of commands lets you mark a range as one of several kinds of types. Three basic types are: code (disassembly is done using asm.arch), data (an array of data elements) or string. Use the `Cs` comand to define a string, use the `Cd` command for defining an array of data elements, and use the `Cf` command to define more complex data structures like structs.
 
-The `C` command allows to change type for a byte range. Three basic types are: code (disassembly is done using asm.arch), data (a byte array) or string.
-
-It is easier to manage data types conversion in the visual mode, because the action is bound to "d" key, short for "data type change". Use the cursor to select a range of bytes (press `c` key to toggle cursor mode and use HJKL keys to expand selection) and then press 'ds' to convert it to a string. Alternatively, you can use the `Cs` command from the shell:
+Annotating data types is most easily done in visual mode, using the "d" key, short for "data type change". To First, use the cursor to select a range of bytes (press `c` key to toggle cursor mode and use HJKL keys to expand selection), then press 'd' to get a menu of possible actions/types. For example, to mark the range as a string, use the 's' option from the menu. You can achieve the same result from the shell using the `Cs` command:
 
      [0x00000000]> f string_foo @ 0x800
      [0x00000000]> Cs 10 @ string_foo
 
-The folding/unfolding support is quite premature, but the idea comes from "folder" concept found in Vim editor. You can select a range of bytes in the disassembly view and press '<' to fold them in a single line, or '>' to unfold them. This is used to improve readability by hiding unimportant portions of code/data.
 
-The `Cm` command is used to define a memory format string (the same used by the `pf` command). Here's a example:
+The `Cf` command is used to define a memory format string (the same used by the `pf` command). Here's a example:
 
       [0x7fd9f13ae630]> Cf 16 2xi foo bar
       [0x7fd9f13ae630]> pd
