@@ -48,9 +48,9 @@ You can also use variables and seek positions to build complex expressions. Avai
 
 Some more examples:
 
-    [0x4A13B8C0]> :? $m + $l
+    [0x4A13B8C0]> ? $m + $l
     140293837812900 0x7f98b45df4a4 03771426427372244 130658.0G 8b45d000:04a4 140293837812900 10100100 140293837812900.0 -0.000000
 
 
-    [0x4A13B8C0]> :pd 1 @ +$l
+    [0x4A13B8C0]> pd 1 @ +$l
     0x4A13B8C2   call 0x4a13c000
