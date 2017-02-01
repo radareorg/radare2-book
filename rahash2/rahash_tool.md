@@ -24,7 +24,7 @@ To obtain an MD5 hash value of a text string, use the `-s` option:
     $ rahash2 -q -a md5 -s 'hello world'
     5eb63bbbe01eeed093cb22bb8f5acdc3
 
-It is possible to calculate hash values for contents of files. But do not attempt to do it for large files, like complete disks. Before starting a calculation, rahash2 copies the whole input into a memory buffer.
+It is possible to calculate hash values for contents of files. But do not attempt to do it for very large files because rahash2 buffers the whole input in memory before computing the hash.
 
 To apply all algorithms known to rahash2, use `all` as an algorithm name:
 
