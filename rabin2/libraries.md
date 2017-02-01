@@ -1,6 +1,6 @@
 ## List Libraries
 
-Rabin2 can list libraries used by a binary with `-l` option:
+Rabin2 can list libraries used by a binary with the `-l` option:
 
     $ rabin2 -l /bin/ls
     [Linked libraries]
