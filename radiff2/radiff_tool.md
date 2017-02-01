@@ -4,7 +4,7 @@ This chapter is based on the radare.today article "[binary diffing](http://radar
 
 Binary diffing is an important part of reverse engineering process. It can be used to analyze [security updates](https://en.wikipedia.org/wiki/Patch_Tuesday), infected binaries, firmware changes, and many more.
 
-`radiff2` takes names of two files to be compared. Without any options, `radiff2` will show what bytes have changed at which offsets. For example:
+`radiff2` takes the names of two files to be compared. Without any options, `radiff2` will show what bytes have changed at which offsets. For example:
 
     $ radiff2 genuine cracked 
     0x00000504 85c07507 => 90909090 0x00000504
@@ -38,7 +38,7 @@ To make sure that you are working with similar, not completely unrelated, binari
 
 
 And here comes the cool feature : radiff2 supports graphical diffing, à la [DarunGrim](http://www.darungrim.org/). You can see it using `-g` option. This option requires either a symbol name as a parameter, or two offsets for corresponding files. The second variant is useful if a function you want to diff does not have the same name in both files.
-The output is in [Graphviz](http://graphviz.org/) graph description language. You can convert it to a picture with `dot` program from the Graphviz package.
+The output is in [Graphviz](http://graphviz.org/) graph description language. You can convert it into a graphic with the `dot` program from the Graphviz package.
 For example, `radiff2 -g main /bin/true /bin/false | xdot -` will show differences between `main()` functions of `true` and `false` programs. You can also compare the picture against `radiff2 -g main /bin/false /bin/true |xdot -` result (notice a changed order of radiff2 options).
 
 This is the result:
