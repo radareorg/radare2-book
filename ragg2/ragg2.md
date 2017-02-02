@@ -1,3 +1,9 @@
+# Purpose
+
+ragg2 compiles programs written in a simple high-level language into
+tiny binaries for x86, x86-64, and ARM.
+
+
 # Syntax of the language
 
 The code of r\_egg is compiled as in a flow. It is a one-pass compiler;

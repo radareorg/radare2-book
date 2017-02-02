@@ -1,6 +1,6 @@
 ## Seeking
 
-Current seek position is changed with `s` command. It accepts a math expression as argument. The expression can be composed of shift operations, basic math operations, or memory access operations.
+The current seek position is changed with `s` command. It accepts a math expression as argument. The expression can be composed of shift operations, basic math operations, or memory access operations.
 
 
     [0x00000000]> s?
@@ -49,11 +49,11 @@ Now we have command prompt
 
     [0x00400410]>
 
-Now we are ready to go deeper. 
+Now we are ready to go deeper.
 
 ## Seeking at any position
 
-All seeking commands that have address in command parameters  can use any base 
+All seeking commands that have address in command parameters can use any base
 such as hex/octal/binary or decimal.
 
 Seek to address 0x0, alternative command is just `0x0`
@@ -61,29 +61,29 @@ Seek to address 0x0, alternative command is just `0x0`
     [0x00400410]> s 0x0
     [0x00000000]>
 
-Print current address 
+Print current address
 
     [0x00000000]> s
     0x0
     [0x00000000]>
 
-there is alternate way how to print current position `?v $$`
+there is an alternate way to print current position: `?v $$`.
 
 Seek N positions forward, space is optional
 
     [0x00000000]> s+ 128
     [0x00000080]>
 
-Lets undo last two seeks to beginning
+Undo last two seeks to return to the initial address
 
     [0x00000080]> s-
     [0x00000000]> s-
     [0x00400410]>
 
-Now we are at same position as at beginning _0x00400410_.
+we are back at _0x00400410_.
 
-Lets search in hello_world ELF file 'Hello'. After search our position will set
-to searched string position. But we always can go back with `s-`.
+Let's search in the hello_world ELF file 'Hello'. After the search our position will
+be set at the position of the found string. Remember we can always go back with `s-`.
 
     [0x00400410]> s/ Hello
     Searching 5 bytes from 0x00400411 to 0x00600928: 48 65 6c 6c 6f 
@@ -93,7 +93,7 @@ to searched string position. But we always can go back with `s-`.
     [0x004005b4]>s-
     [0x00400410]>
 
-There is history command to see all our changes
+There's also a command for showing the seek history:
 
     [0x00400410]> s*
     f undo_3 @ 0x400410

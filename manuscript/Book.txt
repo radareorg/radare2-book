@@ -32,7 +32,7 @@
 ../search_bytes/basic_searches.md
 ../search_bytes/configurating_the_search.md
 ../search_bytes/pattern_search.md
-../search_bytes/automatization.md
+../search_bytes/automation.md
 ../search_bytes/backward_search.md
 ../search_bytes/search_in_assembly.md
 ../search_bytes/searching_aes_keys.md

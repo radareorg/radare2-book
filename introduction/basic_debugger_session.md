@@ -1,6 +1,6 @@
 ## Basic Debugger Session
 
-To debug a program, start radare with `-d` option. You can attach to a running process by specifying its PID, or you can start a new program by specifying its name and parameters:
+To debug a program, start radare with the `-d` option. You can attach to a running process by specifying its PID, or you can start a new program by specifying its name and parameters:
 
     $ pidof mc
     32220

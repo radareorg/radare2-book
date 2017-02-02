@@ -1,6 +1,6 @@
 ## Program Sections
 
-Rabin2 called with `-S` option gives complete information about sections of an executable. For each section its index, offset, size, alignment, type and permissions, are shown. The next example demonstrates it.
+Rabin2 called with the `-S` option gives complete information about the sections of an executable. For each section the index, offset, size, alignment, type and permissions, are shown. The next example demonstrates this:
 
     $ rabin2 -S /bin/ls
      [Sections]
@@ -34,7 +34,7 @@ Rabin2 called with `-S` option gives complete information about sections of an e
     
     27 sections
 
-With `-Sr` option, rabin2 will flag start/end of every section, and will pass the rest of information as a comment.
+With the `-Sr` option, rabin2 will flag the start/end of every section, and will pass the rest of information as a comment.
 
     $ rabin2 -Sr /bin/ls
     fs sections

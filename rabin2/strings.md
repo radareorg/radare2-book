@@ -7,15 +7,15 @@ The `-z` option is used to list readable strings found in the .rodata section of
     addr=0x00012490 off=0x00012490 ordinal=001 sz=26 len=26 section=.rodata type=A string=sort_type != sort_version
     addr=0x000124aa off=0x000124aa ordinal=002 sz=5 len=5 section=.rodata type=A string= %lu
     addr=0x000124b0 off=0x000124b0 ordinal=003 sz=7 len=14 section=.rodata type=W string=%*lu ?
-    addr=0x000124ba off=0x000124ba ordinal=004 sz=8 len=8 section=.rodata type=A string=%s %*s 
-    addr=0x000124c5 off=0x000124c5 ordinal=005 sz=10 len=10 section=.rodata type=A string=%*s, %*s 
-    addr=0x000124cf off=0x000124cf ordinal=006 sz=5 len=5 section=.rodata type=A string= -> 
+    addr=0x000124ba off=0x000124ba ordinal=004 sz=8 len=8 section=.rodata type=A string=%s %*s
+    addr=0x000124c5 off=0x000124c5 ordinal=005 sz=10 len=10 section=.rodata type=A string=%*s, %*s
+    addr=0x000124cf off=0x000124cf ordinal=006 sz=5 len=5 section=.rodata type=A string= ->
     addr=0x000124d4 off=0x000124d4 ordinal=007 sz=17 len=17 section=.rodata type=A string=cannot access %s
     addr=0x000124e5 off=0x000124e5 ordinal=008 sz=29 len=29 section=.rodata type=A string=cannot read symbolic link %s
     addr=0x00012502 off=0x00012502 ordinal=009 sz=10 len=10 section=.rodata type=A string=unlabeled
-    
 
-With `-zr` option, this information is represented as radare2 commands list. It can be used in a radare2 session to automatically create a flag space called "strings" pre-populated with flags for all strings found by rabin2.
+
+With the `-zr` option, this information is represented as a radare2 commands list. It can be used in a radare2 session to automatically create a flag space called "strings" pre-populated with flags for all strings found by rabin2.
 Furthermore, this script will mark corresponding byte ranges as strings instead of code.
 
     $ rabin2 -zr /bin/ls |head

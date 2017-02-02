@@ -1,5 +1,5 @@
 Apart from simple sequencing and looping, radare2 allows to write
-simple macroses, using this construction:
+simple macros, using this construction:
 ```
 [0x00404800]> (qwe, pd 4, ao)
 ```
@@ -42,9 +42,8 @@ Macro 'qwe' removed.
 [0x00404800]>
 ```
 
-Moreover, it's possible to create macro with arguments, which come in handy in some
-simple scripting. To create macro with arguments you need simply add them to macro definition.
-Be sure, if you're using characters like ';' quote the whole command for proper parsing.
+Moreover, it's possible to create a macro that takes arguments, which comes in handy in some
+simple scripting situations. To create a macro that takes arguments you simply add them to macro definition. Be sure, if you're using characters like ';', to quote the whole command for proper parsing.
 
 ```
 [0x00404800]
@@ -58,5 +57,5 @@ Be sure, if you're using characters like ';' quote the whole command for proper 
 		0x004047d9		4883e4f0       and rsp, 0xfffffffffffffff0
 [0x004047d6]>
 ```
-As you can see, arguments named by index, starting from 0: $0, $1, ...
+As you can see, the arguments are named by index, starting from 0: $0, $1, ...
 

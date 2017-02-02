@@ -1,6 +1,6 @@
 ## Symbols (Exports)
 
-With rabin2, generated symbols list format is similar to imports list. Use `-s` option to get it:
+With rabin2, the generated symbols list format is similar to the imports list. Use the `-s` option to get it:
 
     $ rabin2 -s /bin/ls | head
     [Symbols]
@@ -14,8 +14,8 @@ With rabin2, generated symbols list format is similar to imports list. Use `-s` 
     addr=0x0021a600 off=0x0021a600 ord=123 fwd=NONE sz=8 bind=UNKNOWN type=OBJECT name=program_invocation_short_name
     addr=0x00002178 off=0x00002178 ord=124 fwd=NONE sz=0 bind=GLOBAL type=FUNC name=_init
 
-With `-sr` option rabin2 produces a radare2 script instead. It can be later passed to the core to automatically flag all symbols and to define corresponding byte ranges as functions and data blocks.
-    
+With the `-sr` option rabin2 produces a radare2 script instead. It can later be passed to the core to automatically flag all symbols and to define corresponding byte ranges as functions and data blocks.
+
     $ rabin2 -sr /bin/ls
     
     fs symbols

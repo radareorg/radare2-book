@@ -1,6 +1,6 @@
 ## Configuring Search Options
 
-The radare2 search engine can be configured through several configuration variables, modifiable with `e` command.
+The radare2 search engine can be configured through several configuration variables, modifiable with the `e` command.
 
     e cmd.hit = x         ; radare2 command to execute on every search hit
     e search.distance = 0 ; search string distance

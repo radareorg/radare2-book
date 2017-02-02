@@ -2,7 +2,7 @@
 
 If you want to search for a certain assembler opcodes, you can either use `/c` or `/a` commands.
 
-*    `/c jmp [esp]` - search for specified asm mnemonics
+The command `/c jmp [esp]` searches for the specified asm mnemonic:
 
     [0x00404888]> /c jmp qword [rdx]
     f hit_0 @ 0x0040e50d   # 2: jmp qword [rdx]
@@ -13,7 +13,7 @@ If you want to search for a certain assembler opcodes, you can either use `/c` o
     f hit_5 @ 0x00419c1b   # 3: jmp qword [rdx]
     f hit_6 @ 0x00419c43   # 3: jmp qword [rdx]
 
-* `/a jmp eax` - assemble string to machine code, and then search for resulting bytes.
+The command `/a jmp eax` assembles a string to machine code, and then searches for the resulting bytes:
 
     [0x00404888]> /a jmp eax
     hits: 1

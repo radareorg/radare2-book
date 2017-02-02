@@ -7,17 +7,18 @@ Debuggers are implemented as IO plugins. Therefore, radare can handle different 
 
 There are different backends for many target architectures and operating systems, e.g., GNU/Linux, Windows, MacOS X, (Net,Free,Open)BSD and Solaris.
 
-A process memory is treated as a plain file. All mapped memory pages of a debugged program and its libraries can be read and interpreted as code, data structures etc.
+Process memory is treated as a plain file. All mapped memory pages of a debugged program and its libraries can be read and interpreted as code, data structures etc.
 
-Communication between radare and debugger IO layer is wrapped into `system()` calls, which accepts a string as an argument, and executes it as a command. An answer is then buffered in output console, its contents can be additionally processed by a script. This is how radare handles single `!` and double `!!` exclamation mark commands for calling `system()`:
+Communication between radare and the debugger IO layer is wrapped into `system()` calls, which accept a string as an argument, and executes it as a command. An answer is then buffered in the output console, its contents can be additionally processed by a script. This is how radare handles single `!` and double `!!` exclamation mark commands for calling `system()`:
 
     [0x00000000]> ds
     [0x00000000]> !!ls
+
 The double exclamation mark `!!` tells radare to skip the IO plugin list, and to pass the rest of the command directly to shell. Using the single `!` to prepend a command will cause a walk through the IO plugin list to find one that handles it.
 
 In general, debugger commands are portable between architectures and operating systems. Still, as radare tries to support the same functionality for all target architectures and operating systems, certain things have to be handled separately. They include injecting shellcodes and handling exceptions. For example, in MIPS targets there is no hardware-supported single-stepping feature. In this case, radare2 provides its own implementation for single-step by using a mix of code analysis and software breakpoints.
 
-To get the basic help for debugger, type 'd?':
+To get basic help for the debugger, type 'd?':
 
     Usage: d[sbhcrbo] [arg]
     dh [handler]   list or set debugger handler

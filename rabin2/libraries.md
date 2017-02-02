@@ -1,6 +1,6 @@
 ## List Libraries
 
-Rabin2 can list libraries used by a binary with `-l` option:
+Rabin2 can list libraries used by a binary with the `-l` option:
 
     $ rabin2 -l /bin/ls
     [Linked libraries]
@@ -11,5 +11,5 @@ Rabin2 can list libraries used by a binary with `-l` option:
     
     4 libraries
 
-    
-If you compare outputs of `rabin2 -l` and `ldd`, you will notice that rabin2 lists fewer libraries than `ldd`. The reason is that rabin2 does not follow and does not show dependencies of libraries. Only original binary dependencies are shown.
+
+If you compare the outputs of `rabin2 -l` and `ldd`, you will notice that rabin2 lists fewer libraries than `ldd`. The reason is that rabin2 does not follow and does not show dependencies of libraries. Only direct binary dependencies are shown.

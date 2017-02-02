@@ -1,6 +1,6 @@
 # Binary Diffing
 
-This section is based on http://radare.today article "[binary diffing](http://radare.today/binary-diffing/)"
+This section is based on the http://radare.today article "[binary diffing](http://radare.today/binary-diffing/)"
 
 Without any parameters, `radiff2` by default shows what bytes are changed and their corresponding offsets:
 

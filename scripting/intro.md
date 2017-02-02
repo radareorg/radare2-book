@@ -20,20 +20,20 @@ stack: null
 family: cpu
 [0x00404800]>
 ```
-It simply runs second command after finishing the first one, like in shell.
+It simply runs the second command after finishing the first one, like in a shell.
 
-The second important way to sequence the commands is simple pipe `|`
+The second important way to sequence the commands is with a simple pipe `|`
 ```
 ao|grep address
 ```
 Note, the `|` pipe only can pipe output of r2 commands to external (shell)
 commands, like system programs or builtin shell commands.
-And for providing the similar way to sequence r2 commands, there is
-backtick operator `\`` as well, working exactly the same way it works in shell.
+There is a similar way to sequence r2 commands, using the backtick operator `\``,
+which works in the same way it does in a shell.
 
-For example we want to see a few bytes of the memory at the address, referred
-by 'mov eax, addr' instruction for further call. We can do that without jumping to it,
-we just need to sequence a couple of commands:
+For example, we want to see a few bytes of the memory at the address referred to
+by the 'mov eax, addr' instruction. We can do that without jumping to it, using
+a sequence of commands:
 ```
 [0x00404800]> pd 1
               0x00404800      b827e66100     mov eax, 0x61e627      ; "tab"
@@ -57,12 +57,14 @@ family: cpu
 0x0061e627  7461 6200 2e69 6e74 6572                 tab..inter
 [0x00404800]>
 ```
-And of course it's possible to redirect the output of r2 command into file, using `>` and `>>`
+And of course it's possible to redirect the output of an r2 command into a file, using the `>` and `>>`
 commands
 ```
 [0x00404800]> px 10 @ `ao~ptr[1]` > example.txt
 [0x00404800]> px 10 @ `ao~ptr[1]` >> example.txt
 ```
 
-
+The `?$?` command describes several helpful variables you can use to do similar actions even more
+easily, like the `$v` "immediate value" variable, or the `$m` opcode memory reference variable.
+(Note: If, Like, they actually worked instead of always returning -1.)
 
