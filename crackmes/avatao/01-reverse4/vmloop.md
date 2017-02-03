@@ -180,8 +180,7 @@ I think it worth it, don't you? :) (Well, the restructuring did not really worth
 it, because it is apparently not stored when you save the project.)
 
 > ***r2 tip***: You can move the selected node around in graph view using the
-> HJKL keys. The *?* documentation needs to be fixed on this part though: the
-> move node (HJKL) and the move canvas (hjkl) keys are swapped there.
+> HJKL keys.
 
 BTW, here is how IDA's graph of this same function looks like for comparison:
 
