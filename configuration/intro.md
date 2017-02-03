@@ -39,21 +39,28 @@ A simpler alternative to `e` command is accessible from the visual mode. Type `V
 
     Eval spaces:                                                                   
 
-    >  anal                                                                        
-       asm                                                                         
-       scr                                                                         
-       asm                                                                         
-       bin                                                                         
-       cfg                                                                         
-       diff                                                                        
-       dir                                                                         
-       dbg                                                                         
-       cmd                                                                         
-       fs                                                                          
-       hex                                                                         
-       http                                                                        
-       graph                                                                       
-       hud                                                                         
-       scr                                                                         
-       search                                                                      
-       io                                                                          
+    >  anal
+       asm
+       scr
+       asm
+       bin
+       cfg
+       diff
+       dir
+       dbg
+       cmd
+       fs
+       hex
+       http
+       graph
+       hud
+       scr
+       search
+       io
+
+
+For configuration values that can take one of several values, you can use the `=?` operator to get a list
+of valid values:
+
+    [0x00000000]> e scr.nkey =?
+    scr.nkey = fun, hit, flag
