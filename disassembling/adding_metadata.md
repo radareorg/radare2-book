@@ -48,7 +48,7 @@ Annotating data types is most easily done in visual mode, using the "d" key, sho
      [0x00000000]> Cs 10 @ string_foo
 
 
-The `Cf` command is used to define a memory format string (the same used by the `pf` command). Here's a example:
+The `Cf` command is used to define a memory format string (the same syntax used by the `pf` command). Here's an example:
 
       [0x7fd9f13ae630]> Cf 16 2xi foo bar
       [0x7fd9f13ae630]> pd
@@ -67,6 +67,7 @@ The `Cf` command is used to define a memory format string (the same used by the 
                      0x7fd9f13b1fa0() ; rip
                   0x7fd9f13ae638    4989c4       mov r12, rax
 
-It is possible to define structures with simple oneliners. See 'print memory' for more information.
+The `[sz]` argument to Cf is used to define how many bytes the struct should take up in the disassembly, and is completely independent from the size of the dat structure define by the format string. This may seem confusing, but has several uses. For example, you may want to see the formatted structue displayed in the disassembly, but still have those locations be visible as offsets and with raw bytes. Sometimes, you find large structures, but only identified a few fields, or only interested in specific fields. Then, you can tell r2 to display only those fields, using the format string and using 'skip' fields, and also have the disassembly continue after the entire structure, by giving it full size using the `sz` argument.
 
-All these "C*" commands can also be accessed from the visual mode by pressing 'd' (data conversion) key.
+Using Cf, it's easy to define to define complex structures with simple oneliners. See 'pf?' for more information.
+Remember that all these "C*" commands can also be accessed from the visual mode by pressing the 'd' (data conversion) key.
