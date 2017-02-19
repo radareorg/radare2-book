@@ -60,7 +60,7 @@ asm we trust!
 [0x00400720]>
 ```
 
-> ***r2 tip:*** The -A switch runs *aa* command at start to analyze all
+> ***r2 tip:*** The -A switch runs *aaa* command at start to analyze all
 > referenced code, so we will have functions, strings, XREFS, etc. right at the
 > beginning. As usual, you can get help with *?*.
 
