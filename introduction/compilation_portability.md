@@ -26,7 +26,7 @@ You can build statically radare2 and all the tools with the command:
 
 ### Docker
 
-Radare2 repository ships a [Dockerfile](https://github.com/radare/radare2/blob/master/doc/Dockerfile) that you can use with Docker.
+Radare2 repository ships a [Dockerfile](https://github.com/radare/radare2/blob/master/Dockerfile) that you can use with Docker.
 
 This dockerfile is also used by Remnux distribution from SANS, and is available on the docker [registryhub](https://registry.hub.docker.com/u/remnux/radare2/).
 
