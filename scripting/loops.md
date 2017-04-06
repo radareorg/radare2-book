@@ -124,6 +124,11 @@ call sym.imp.__libc_start_main
 hlt
 ```
 In this example the command `pi 1` runs over all the instructions in the current function (entry0).
+There are other options too (not complete list, check `@@?` for more information):
+ - `@@k sdbquery` - iterate over all offsets returned by that sdbquery
+ - `@@t`- iterate over on all threads (see dp)
+ - `@@b` - iterate over all basic blocks of current function (see afb)
+ - `@@f` - iterate over all functions (see aflq)
 
 The last kind of looping lets you loop through predefined iterator types:
 
