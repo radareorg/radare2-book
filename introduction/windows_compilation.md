@@ -33,6 +33,13 @@ sys\mingw32.bat
 
 Please, note, that this script should be run from radare2 directory.
 
+
+There is a script that automates process of detecting the crosscompiler toolchain configuration, and builds a zip file containing r2 programs and libraries that can be deployed on Windows or Wine:
+
+```sh
+sys/mingw32.sh
+```
+
 ### Cygwin
 
 Cygwin is another possibility; however, issues related to Cygwin libraries can make debugging difficult. But using binary compiled for Cygwin will allow you to use Unicode in the Windows console, and to have 256 colors.
@@ -44,11 +51,6 @@ git config --global core.autocrlf false
 
 Please, be sure to build radare2 from the same environment you're going to use r2 in. If you are going to use r2 in MinGW32 shell or cmd.exe — you should build r2 in the MinGW32 environment. And if you are going to use r2 in Cygwin — you have to build r2 from the Cygwin shell. Since Cygwin is more UNIX-compatible than MinGW, the radare2 supports more colors and Unicode symbols if build using the former one.
 
-There is a script that automates process of detecting the crosscompiler toolchain configuration, and builds a zip file containing r2 programs and libraries that can be deployed on Windows or Wine:
-
-```sh
-sys/mingw32.sh
-```
 
 
 ### Mingw-W64
