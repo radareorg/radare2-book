@@ -65,9 +65,10 @@
    * [Rahash Tool](rahash2/rahash_tool.md)
 * [Debugger](debugger/intro.md)
    * [Getting Started](debugger/getting_started.md)
-   * [Registers](registers.md)
+   * [Getting Started](debugger/migration.md)
+   * [Registers](debugger/registers.md)
 * Remote Access Capabilities
-   * [Remoting Capabilities](remoting_capabilities.md)
+   * [Remoting Capabilities](debugger/remoting_capabilities.md)
 * Plugins
    * [Plugins](plugins.md)
 * [Crackmes](crackmes/intro.md)
