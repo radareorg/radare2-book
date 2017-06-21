@@ -48,16 +48,6 @@ language. This is just an assembler-level keyword redefinition.
 
 Use `cat(1)` or the preprocessor to concatenate multiple files to be compiled.
 
-It's not a task of a compiler to look for external sources, so it's a
-
-delegated task right now.. but we will probably add native support for
-
-spp \(merge into\)
-
-
-
-**TODO: this is not yet implemented**
-
 ` INCDIR@alias("/usr/include/ragg2");`
 
 ` sys-osx.r@include(INCDIR);`
@@ -190,6 +180,10 @@ There's a work-in-progress libc-like library written completely in r\_egg
 
 `.sp`
 
+__Attention:__ All the numbers after `.var` and `.arg` mean the offset with the 
+
+top of stack, not variable symbols. 
+
 ### Arrays
 
 Supported as raw pointers. TODO: enhance this feature
@@ -209,6 +203,14 @@ TODO: Theorically '\*' is used to get contents of a memory pointer.
 ### Virtual registers
 
 TODO: a0, a1, a2, a3, sp, fp, bp, pc
+
+### Math operations
+
+Ragg2 supports local variables assignment by math operating, including
+
+the following operators:
+
+`+` `-` `*` `/` `&` `|` `^`
 
 ### Return values
 
@@ -284,6 +286,8 @@ You can define labels using the `:` keyword like this:
 ` while (cond)`
 
 ` if (cond)`
+
+` if (cond) { body } else { body }`
 
 ` break ()` -- executes a trap instruction
 
