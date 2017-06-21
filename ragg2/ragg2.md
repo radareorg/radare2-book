@@ -180,7 +180,7 @@ There's a work-in-progress libc-like library written completely in r\_egg
 
 `.sp`
 
-__Attention:__ All the numbers before `.var` and `.arg` mean the offset with the 
+__Attention:__ All the numbers after `.var` and `.arg` mean the offset with the 
 
 top of stack, not variable symbols. 
 
