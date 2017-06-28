@@ -26,7 +26,7 @@ Use `rarun2` (`libpath=$PWD:/tmp/lib`, `arg2=hello`, `setenv=FOO=BAR` ...) see `
 
 `[0x80480423]> . scriptfile` - interpret this file => [[video](http://asciinema.org/a/12017)]
 
-`[0x80480423]> #!c` - enter C repl  (see `#!` to list all available RLang plugins)  => [[video](http://asciinema.org/a/12019)]
+`[0x80480423]> #!c` - enter C repl  (see `#!` to list all available RLang plugins)  => [[video](http://asciinema.org/a/12019)], everything have to be done in a oneliner or a .c file must be passed as an argument.
 
 To get `#!python` and much more, just build [radare2-bindings](https://github.com/radare/radare2-bindings)
 
