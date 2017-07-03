@@ -128,4 +128,4 @@ This can be done using 2 commands:
 - r2 can connect GDB and WinDbg
 - r2 can write/patch in place
 - r2 have fortunes and [s]easter eggs[/s]balls of steel.
-- r2 can't analyse a core file yet -> https://github.com/radare/radare2/issues/152
+- r2 can do basic loading of ELF core files from the box and MDMP with `mdmp` plugin
