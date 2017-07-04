@@ -261,6 +261,7 @@ def mycpu(a):
             return [4, "unknown"]
 ```
 3. This structure should contain a pointers to these 2 functions - `assemble` and `disassemble`
+
 ```python
     return {
             "name" : "mycpu",
@@ -315,6 +316,7 @@ def mycpu_anal(a):
 
 ```
 5. This structure should contain a pointers to these 2 functions - `set_reg_profile` and `op`
+
 ```python
     return {
             "name" : "mycpu",
