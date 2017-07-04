@@ -276,7 +276,6 @@ def mycpu(a):
 4. Make a function with 2 subfunctions - `set_reg_profile` and `op` and returning plugin structure - for RAnal plugin
 ```python
 def mycpu_anal(a):
-    # TODO: Think about using the same enums as in C?
     analop = {
             "type" : 0,
             "cycles" : 0,
