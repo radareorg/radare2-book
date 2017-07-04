@@ -275,6 +275,7 @@ def mycpu(a):
     }
 ```
 4. Make a function with 2 subfunctions - `set_reg_profile` and `op` and returning plugin structure - for RAnal plugin
+
 ```python
 def mycpu_anal(a):
     analop = {
@@ -328,9 +329,9 @@ def mycpu_anal(a):
             "set_reg_profile" : set_reg_profile,
             "op" : op,
     }
-
 ```
 6. Then register those using `r2lang.plugin("asm")` and `r2lang.plugin("anal")` respectively
+
 ```python
 print("Registering MYCPU disasm plugin...")
 print(r2lang.plugin("asm", mycpu))
