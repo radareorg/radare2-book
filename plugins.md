@@ -61,10 +61,7 @@ Bear in mind that plugins can be compiled static or dynamically, this means that
 
 To configure which plugins you want to compile use the `./configure-plugins` script which accepts the flags --shared and --static to specify them. You can also add it manually inside the `plugins.def.cfg` and then remove the `plugins.cfg` and run `./configure-plugins` again to update the `libr/config.mk` and `libr/config.h`.
 
-You may find some examples of external plugins in the `radare2-capstone` and `radare2-extras` repositories:
-
-1. https://github.com/radare/radare2-capstone
-2. https://github.com/radare/radare2-extras
+You may find some examples of external plugins in [radare2-extras](https://github.com/radare/radare2-extras) repository.
 
 ## Writing the r_asm plugin
 
@@ -125,6 +122,7 @@ static const char *ops[OPS*2] = {
 	"sys", "i"
 };
 
+/* Main function for disassembly */
 //b for byte, l for length
 static int disassemble (RAsm *a, RAsmOp *op, const ut8 *b, int l) {
 	char arg[32];
@@ -158,6 +156,7 @@ static int disassemble (RAsm *a, RAsmOp *op, const ut8 *b, int l) {
 	return op->size;
 }
 
+/* Structure of exported functions and data */
 RAsmPlugin r_asm_plugin_mycpu = {
         .name = "mycpu",
         .arch = "mycpu",
@@ -215,6 +214,10 @@ Yay! it works.. and the mandatory oneliner too!
 r2 -nqamycpu -cwoR -cpd' 10' -
 ```
 
+## Writing the r_anal plugin
+
+Then it's time for analysis plugin
+
 ## Static plugins in core
 
 Pushing a new architecture into the main branch of r2 requires to modify several files in order to make it fit into the way the rest of plugins are built.
@@ -236,6 +239,108 @@ https://github.com/radare/radare2/commit/ad430f0d52fbe933e0830c49ee607e9b0e4ac8f
 
 ## Write a disassembler plugin with another programming language
 
+### Python
+
+Note - in the following examples there are missing functions of the actual decoding
+for the sake of readability!
+
+For this you need to do this:
+1. `import r2lang`
+2. Make a function with 2 subfunctions - `assemble` and `disassemble` and returning plugin structure - for RAsm plugin
+```python
+def mycpu(a):
+    def assemble(s):
+        return [1, 2, 3, 4]
+
+    def disassemble(buf):
+        try:
+            opcode = get_opcode(buf)
+            opstr = optbl[opcode][1]
+            return [4, opstr]
+        except:
+            return [4, "unknown"]
+```
+3. This structure should contain a pointers to these 2 functions - `assemble` and `disassemble`
+```python
+    return {
+            "name" : "mycpu",
+            "arch" : "mycpu",
+            "bits" : 32,
+            "endian" : "little",
+            "license" : "GPL",
+            "desc" : "MYCPU disasm",
+            "assemble" : assemble,
+            "disassemble" : disassemble,
+    }
+```
+4. Make a function with 2 subfunctions - `set_reg_profile` and `op` and returning plugin structure - for RAnal plugin
+```python
+def mycpu_anal(a):
+    # TODO: Think about using the same enums as in C?
+    analop = {
+            "type" : 0,
+            "cycles" : 0,
+            "stackop" : 0,
+            "stackptr" : 0,
+            "jump" : 0,
+            "addr" : 0,
+            "eob" : 0,
+            "esil" : "",
+            }
+
+    def set_reg_profile():
+        profile = "=PC	pc\n" + \
+		"=SP	sp\n" + \
+		"gpr	r0	.32	0	0\n" + \
+		"gpr	r1	.32	4	0\n" + \
+		"gpr	r2	.32	8	0\n" + \
+		"gpr	r3	.32	12	0\n" + \
+		"gpr	r4	.32	16	0\n" + \
+		"gpr	r5	.32	20	0\n" + \
+		"gpr	sp	.32	24	0\n" + \
+		"gpr	pc	.32	28	0\n"
+        return profile
+
+    def op(addr, buf):
+        try:
+            opcode = get_opcode(buf)
+            esilstr = optbl[opcode][2]
+            if optbl[opcode][0] == "J": # it's jump
+                analop["type"] = 1
+                analop["jump"] = decode_jump(opcode, j_mask)
+                esilstr = jump_esil(esilstr, opcode, j_mask)
+
+        except:
+            result = analop
+        return [4, result]
+
+```
+5. This structure should contain a pointers to these 2 functions - `set_reg_profile` and `op`
+```python
+    return {
+            "name" : "mycpu",
+            "arch" : "mycpu",
+            "bits" : 32,
+            "license" : "GPL",
+            "desc" : "MYCPU anal",
+            "esil" : 1,
+            "set_reg_profile" : set_reg_profile,
+            "op" : op,
+    }
+
+```
+6. Then register those using `r2lang.plugin("asm")` and `r2lang.plugin("anal")` respectively
+```python
+print("Registering MYCPU disasm plugin...")
+print(r2lang.plugin("asm", mycpu))
+print("Registering MYCPU analysis plugin...")
+print(r2lang.plugin("anal", mycpu_anal))
+```
+
+You can combine everything in one file.
+
+See also:
+
 * [Python](https://github.com/radare/radare2-bindings/blob/master/libr/lang/p/test-py-asm.py)
 * [Javascript](https://github.com/radare/radare2-bindings/blob/master/libr/lang/p/dukasm.js)
 
@@ -251,11 +356,7 @@ If you want to add support for the gdb, you can see the register profile in the 
 
 ## More to come..
 
-The next logic step would be to implement and analysis plugin.
-
-...
-
-* Related article: http://radare.today/extending-r2-with-new-plugins/
+* Related article: http://radare.today/posts/extending-r2-with-new-plugins/
 
 Some commits related to "Implementing a new architecture"
 
@@ -271,8 +372,6 @@ Some commits related to "Implementing a new architecture"
 * HP PA-RISC: https://github.com/radare/radare2/commit/f8384feb6ba019b91229adb8fd6e0314b0656f7b
 * V810: https://github.com/radare/radare2/pull/2899
 * TMS320: https://github.com/radare/radare2/pull/596
-
-
 
 ## Implementing a new pseudo architecture
 
