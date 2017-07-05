@@ -339,7 +339,11 @@ print("Registering MYCPU analysis plugin...")
 print(r2lang.plugin("anal", mycpu_anal))
 ```
 
-You can combine everything in one file.
+You can combine everything in one file and load it using `-i` option:
+```
+r2 -i mycpu.py some_file.bin
+```
+Or you can load it from the r2 shell: `#!python mycpu.py`
 
 See also:
 
