@@ -580,7 +580,6 @@ struct r_lib_struct_t radare_plugin = {
 
 ```
 
-
 ### Some Examples
 
 * XBE - https://github.com/radare/radare2/pull/972
@@ -588,3 +587,88 @@ struct r_lib_struct_t radare_plugin = {
 * TE - https://github.com/radare/radare2/pull/61
 * Zimgz - https://github.com/radare/radare2/commit/d1351cf836df3e2e63043a6dc728e880316f00eb
 * OMF - https://github.com/radare/radare2/commit/44fd8b2555a0446ea759901a94c06f20566bbc40
+
+### Implementing new format plugin in Python
+
+Note - in the following examples there are missing functions of the actual decoding
+for the sake of readability!
+
+For this you need to do this:
+1. `import r2lang`
+2. Make a function with  subfunctions:
+   - `load`
+   - `load_bytes`
+   - `destroy`
+   - `check_bytes`
+   - `baddr`
+   - `entries`
+   - `sections`
+   - `imports`
+   - `relocs`
+   - `binsym`
+   - `info`
+   
+   and returning plugin structure - for RAsm plugin
+```python
+def le_format(a):
+    def load(binf):
+        return [0]
+
+    def check_bytes(buf):
+        try:
+			if buf[0] == 77 and buf[1] == 90:
+                lx_off, = struct.unpack("<I", buf[0x3c:0x40])
+                if buf[lx_off] == 76 and buf[lx_off+1] == 88:
+                    return [1]
+            return [0]
+        except:
+            return [0]
+```
+and so on. Please be sure of the parameters for each function and format of returns.
+Note, that functions `entries`, `sections`, `imports`, `relocs` returns a list of special
+formed dictionaries - each with a different type.
+There is a special function, which returns information about the file - `info`:
+```python
+    def info(binf):
+        return [{
+                "type" : "le",
+                "bclass" : "le",
+                "rclass" : "le",
+                "os" : "OS/2",
+                "subsystem" : "CLI",
+                "machine" : "IBM",
+                "arch" : "x86",
+                "has_va" : 0,
+                "bits" : 32,
+                "big_endian" : 0,
+                "dbg_info" : 0,
+                }]
+```
+
+3. This structure should contain a pointers to these 2 functions - `assemble` and `disassemble`
+
+```python
+    return {
+            "name" : "le",
+            "desc" : "OS/2 LE/LX format",
+            "license" : "GPL",
+            "load" : load,
+            "load_bytes" : load_bytes,
+            "destroy" : destroy,
+            "check_bytes" : check_bytes,
+            "baddr" : baddr,
+            "entries" : entries,
+            "sections" : sections,
+            "imports" : imports,
+            "symbols" : symbols,
+            "relocs" : relocs,
+            "binsym" : binsym,
+            "info" : info,
+    }
+```
+4. Then you need to register it as a file format plugin:
+
+```python
+print("Registering OS/2 LE/LX plugin...")
+print(r2lang.plugin("bin", le_format))
+```
