@@ -4,12 +4,11 @@
 
 | Command                 | Description                     |
 |:------------------------|:--------------------------------|
-| aa                      | Auto analyze                    |
-| Content Cell            | Content Cell                    |
-| pdf@fcn(Tab)            | Disassemble function            |
-| f fcn(Tab)              | List functions                  |
-| f str(Tab)              | List strings                    |
-| fr [flagname] [newname] | Rename flag                     |
+| aa                      | Auto analyze                    |
+| pdf@fcn(Tab)            | Disassemble function            |
+| f fcn(Tab)              | List functions                  |
+| f str(Tab)              | List strings                    |
+| fr [flagname] [newname] | Rename flag                     |
 | psz [offset]            | Print string                    |
 | arf [flag]              | Find cross reference for a flag |
 
