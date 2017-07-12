@@ -17,6 +17,7 @@ Rabin2 understands many file formats: Java CLASS, ELF, PE, Mach-O, etc., and it 
      -C              list classes
      -d              show debug/dwarf information
      -e              entrypoint
+     -E              globally exportable symbols
      -f [str]        select sub-bin named str
      -g              same as -SMRevsiz (show all info)
      -h              this help
@@ -35,7 +36,7 @@ Rabin2 understands many file formats: Java CLASS, ELF, PE, Mach-O, etc., and it 
      -q              be quiet, just show fewer data
      -r              radare output
      -R              relocations
-     -s              symbols (exports)
+     -s              symbols
      -S              sections
      -v              use vaddr in radare output (or show version if no file)
      -x              extract bins contained in file
