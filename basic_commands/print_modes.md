@@ -29,6 +29,26 @@ Below is a list of available print modes listed by `p?`:
     pz [len]         print zoom view (see pz? for help)
     pwd              display current working directory
 
+
+Tip: when using json output, you can append the `~{}` to the command to get a pretty-printed version of the output:
+
+    [0x00000000]> oj
+    [{"raised":false,"fd":563280,"uri":"malloc://512","from":0,"writable":true,"size":512,"overlaps":false}]
+    [0x00000000]> oj | json_reformat
+    [
+        {
+            "raised": false,
+            "fd": 563280,
+            "uri": "malloc://512",
+            "from": 0,
+            "writable": true,
+            "size": 512,
+            "overlaps": false
+        }
+    ]
+
+For more on the magical powers of `~` see the help in `?@?`, and the "Command Format" chapter earlier in the book.
+
 ### Hexadecimal View
 
 `px` gives a user-friendly output showing 16 pairs of numbers per row with offsets and raw representations:
