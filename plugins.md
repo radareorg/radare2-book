@@ -241,6 +241,8 @@ https://github.com/radare/radare2/commit/ad430f0d52fbe933e0830c49ee607e9b0e4ac8f
 
 ### Python
 
+At first, to be able to write a plugins in Python for radare2 you need to install
+r2lang plugin. If you're going to use Python 2, then use `r2pm -i lang-python2`, otherwise (and recommended) - install the Python 3 version: `r2pm -i lang-python2`.
 Note - in the following examples there are missing functions of the actual decoding
 for the sake of readability!
 
@@ -505,7 +507,7 @@ install:
 
 uninstall:
 	rm -f $(R2_PLUGIN_PATH)/$(NAME).$(SO_EXT)
- 
+
 ```
 
 **bin_nes.c:**
@@ -607,7 +609,7 @@ For this you need to do this:
    - `relocs`
    - `binsym`
    - `info`
-   
+
    and returning plugin structure - for RAsm plugin
 ```python
 def le_format(a):
