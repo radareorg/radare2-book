@@ -8,29 +8,41 @@ Using the `S` (sections) command you can define base address for each library to
 Mapping files is done using the `o` (open) command. Let's read the help:
 
     [0x00000000]> o?
-    Usage: o[com- ] [file] ([offset])
-    o                  list opened files
-    oc [file]          open core file, like relaunching r2
-    oo                 reopen current file (kill+fork in debugger)
-    oo+                reopen current file in read-write
-    o 4                prioritize io on fd 4 (bring to front)
-    o-1                close file index 1
-    o /bin/ls          open /bin/ls file in read-only
-    o+/bin/ls          open /bin/ls file in read-write mode
-    o /bin/ls 0x4000   map file at 0x4000
-    on /bin/ls 0x4000  map raw file at 0x4000 (no r_bin involved)
-    om[?]              create, list, remove IO maps
+    |Usage: o [com- ] [file] ([offset])
+    | o                    list opened files
+    | o=                   list opened files (ascii-art bars)
+    | o*                   list opened files in r2 commands
+    | oa[?] [addr]         Open bin info from the given address
+    | ob[?] [lbdos] [...]  list open binary files backed by fd
+    | oc [file]            open core file, like relaunching r2
+    | oi[-|idx]            alias for o, but using index instead of fd
+    | oj[?]                list opened files in JSON format
+    | oL                   list all IO plugins registered
+    | om[?]                create, list, remove IO maps
+    | on [file] 0x4000     map raw file at 0x4000 (no r_bin involved)
+    | oo[?]                reopen current file (kill+fork in debugger)
+    | oo+                  reopen current file in read-write
+    | ood [args]           reopen in debugger mode (with args)
+    | oo[bnm] [...]        see oo? for help
+    | op [so]              open r2 native plugin (asm, bin, core, ..)
+    | o 4                  Switch to open file on fd 4
+    | o-1                  close file descriptor 1
+    | o-*                  close all opened files
+    | o--                  close all files, analysis, binfiles, flags, same as !r2 --
+    | o [file]             open [file] file in read-only
+    | o+ [file]            open file in read-write mode
+    | o [file] 0x4000      map file at 0x4000
 
 Prepare a simple layout:
 
     $ rabin2 -l /bin/ls
-        [Linked libraries]
-        libselinux.so.1
-        librt.so.1
-        libacl.so.1
-        libc.so.6
+    [Linked libraries]
+    libselinux.so.1
+    librt.so.1
+    libacl.so.1
+    libc.so.6
 
-        4 libraries
+    4 libraries
 
 Map a file:
 

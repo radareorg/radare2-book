@@ -9,7 +9,7 @@ The general format for a valid command (as explained in the 'Command Format' cha
 For example,
 
     > 3s +1024    ; seeks three times 1024 from the current seek
-    
+
 If a command starts with `!`, the rest of the string is passed to currently loaded IO plugin (a debugger, for example). If no plugin can handle the command, posix_system() is called to pass the command to your shell. To make sure your command is directly passed to the shell, prefix it with two exclamation signs `!!`.
 
     > !help       ; handled by the debugger or shell

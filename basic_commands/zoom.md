@@ -1,6 +1,6 @@
 ## Zoom
 
-The zoom is a print mode that allows you to get a global view of the whole file or a memory map on a single screen. In this mode, each byte represents `file_size/block_size` bytes of the file. Use the `pO` (zoom out print mode) to enter this mode, or just toggle `z` in the visual mode to zoom-out/zoom-in.
+The zoom is a print mode that allows you to get a global view of the whole file or a memory map on a single screen. In this mode, each byte represents `file_size/block_size` bytes of the file. Use the `pz` command, or just use `Z` in the visual mode to toggle the zoom mode.
 
 The cursor can be used to scroll faster through the zoom out view. Pressing `z` again will zoom-in where at new cursor position.
 
@@ -31,7 +31,7 @@ Let's see some examples:
 
 
     [0x08049790]> e zoom.byte=p
-    [0x08049790]> pO // or pzp
+    [0x08049790]> pz // or pzp
 
     0x00000000  2f47 0609 070a 0917 1e9e a4bd 2a1b 2c27  /G..........*.,'
     0x00000010  322d 5671 8788 8182 5679 7568 82a2 7d89  2-Vq....Vyuh..}.
@@ -41,7 +41,7 @@ Let's see some examples:
     0x00000050  7d66 625f 7ea4 7ea6 b4b6 8b57 a19f 71a2  }fb_~.~....W..q.
 
     [0x08049790]> eval zoom.byte = flags
-    [0x08049790]> pO // or pzf
+    [0x08049790]> pz // or pzf
 
     0x00406e65  48d0 80f9 360f 8745 ffff ffeb ae66 0f1f  H...6..E.....f..
     0x00406e75  4400 0083 f801 0f85 3fff ffff 410f b600  D.......?...A...

@@ -1,6 +1,6 @@
 ## Common Configuration Variables
 
-Below is a list of the most frequently used configuration variables. You can get a complete list by issuing `e` command without arguments. For example, to see all variables defined in the "cfg" namespace, issue `e cfg.` (mind the ending dot). You can get help on any eval configuration variable by using `??e cfg.`
+Below is a list of the most frequently used configuration variables. You can get a complete list by issuing `e` command without arguments. For example, to see all variables defined in the "cfg" namespace, issue `e cfg.` (mind the ending dot). You can get help on any eval configuration variable by using `e? cfg.`
 
     asm.arch
 Defines target CPU architecture used for disassembling (`pd`, `pD` commands) and code analysis (`a` command). You can find the list of possible value by looking at the result of `e asm.arch=?` or `rasm2 -L`.
@@ -21,7 +21,7 @@ Selects a target operating system of currently loaded binary. Usually OS is auto
     asm.flags
 If defined to "true", disassembler view will have flags column.
 
-    asm.linescall
+    asm.lines.call
 If set to "true", draw lines at the left of disassemble output (`pd`, `pD` commands) to graphically represent control flow changes (jumps and calls) that are targeted inside current block. Also, see `asm.linesout`.
 
     asm.linesout

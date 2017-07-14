@@ -16,19 +16,24 @@ The `C` command is used to manage comments and data conversions. You can define 
 Here's the help:
 
     [0x00404cc0]> C?
-    |Usage: C[-LCvsdfm?] [...]
-    | C*                              List meta info in r2 commands
-    | C- [len] [@][ addr]             delete metadata at given address range
-    | CL[-] [addr|file:line [addr] ]  show 'code line' information (bininfo)
-    | Cl  file:line [addr]            add comment with line information
-    | CC[-] [comment-text]    add/remove comment. Use CC! to edit with $EDITOR
-    | CCa[-at]|[at] [text]    add/remove comment at given address
-    | Cv[-] offset reg name   add var substitution
-    | Cs[-] [size] [[addr]]   add string
-    | Ch[-] [size] [@addr]    hide data
-    | Cd[-] [size]            hexdump data
-    | Cf[-] [sz] [fmt..]      format memory (see pf?)
-    | Cm[-] [sz] [fmt..]      magic parse (see pm?)
+    |Usage: C[-LCvsdfm*?][*?] [...] # Metadata management
+    | C*                                             list meta info in r2 commands
+    | C- [len] [[@]addr]                             delete metadata at given address range
+    | CL[-][*] [file:line] [addr]                    show or add 'code line' information (bininfo)
+    | CS[-][space]                                   manage meta-spaces to filter comments, etc..
+    | CC[?] [-] [comment-text] [@addr]               add/remove comment
+    | CC.[addr]                                      show comment in current address
+    | CC! [@addr]                                    edit comment with $EDITOR
+    | CCa[-at]|[at] [text] [@addr]                   add/remove comment at given address
+    | CCu [comment-text] [@addr]                     add unique comment
+    | Cv[bsr][?]                                     add comments to args
+    | Cs[?] [-] [size] [@addr]                       add string
+    | Cz[@addr]                                      add zero-terminated string
+    | Ch[-] [size] [@addr]                           hide data
+    | Cd[-] [size] [repeat] [@addr]                  hexdump data array (Cd 4 10 == dword [10])
+    | Cf[?][-] [sz] [0|cnt][fmt] [a0 a1...] [@addr]  format memory (see pf?)
+    | CF[sz] [fcn-sign..] [@addr]                    function signature
+    | Cm[-] [sz] [fmt..] [@addr]                     magic parse (see pm?)
     [0x00404cc0]>
 
 

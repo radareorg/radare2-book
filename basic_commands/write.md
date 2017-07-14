@@ -11,24 +11,33 @@ Write bytes using the `w` command. It accepts multiple input formats like inline
 
     [0x00404888]> w?
     |Usage: w[x] [str] [<file] [<<EOF] [@addr]
-    | w foobar     write string 'foobar'
-    | wh r2        whereis/which shell command
-    | wr 10        write 10 random bytes
-    | ww foobar    write wide string 'f\x00o\x00o\x00b\x00a\x00r\x00'
-    | wa push ebp  write opcode, separated by ';' (use '"' around the command)
-    | waf file     assemble file and write bytes
-    | wA r 0       alter/modify opcode at current seek (see wA?)
-    | wb 010203    fill current block with cyclic hexpairs
-    | wc[ir*?]     write cache undo/commit/reset/list (io.cache)
-    | wx 9090      write two intel nops
-    | wv eip+34    write 32-64 bit value
-    | wo? hex      write in block with operation. 'wo?' fmi
-    | wm f0ff      set binary mask hexpair to be used as cyclic write mask
-    | ws pstring   write 1 byte for length and then the string
-    | wf -|file    write contents of file at current offset
-    | wF -|file    write contents of hexpairs file here
-    | wp -|file    apply radare patch file. See wp? fmi
-    | wt file [sz] write to file (from current seek, blocksize or sz bytes)
+    | w[1248][+-][n]       increment/decrement byte,word..
+    | w foobar             write string 'foobar'
+    | w0 [len]             write 'len' bytes with value 0x00
+    | w6[de] base64/hex    write base64 [d]ecoded or [e]ncoded string
+    | wa[?] push ebp       write opcode, separated by ';' (use '"' around the command)
+    | waf file             assemble file and write bytes
+    | wao[?] op            modify opcode (change conditional of jump. nop, etc)
+    | wA[?] r 0            alter/modify opcode at current seek (see wA?)
+    | wb 010203            fill current block with cyclic hexpairs
+    | wB[-]0xVALUE         set or unset bits with given value
+    | wc                   list all write changes
+    | wc[?][ir*?]          write cache undo/commit/reset/list (io.cache)
+    | wd [off] [n]         duplicate N bytes from offset at current seek (memcpy) (see y?)
+    | we[?] [nNsxX] [arg]  extend write operations (insert instead of replace)
+    | wf -|file            write contents of file at current offset
+    | wh r2                whereis/which shell command
+    | wm f0ff              set binary mask hexpair to be used as cyclic write mask
+    | wo[?] hex            write in block with operation. 'wo?' fmi
+    | wp[?] -|file         apply radare patch file. See wp? fmi
+    | wr 10                write 10 random bytes
+    | ws pstring           write 1 byte for length and then the string
+    | wt[f][?] file [sz]   write to file (from current seek, blocksize or sz bytes)
+    | wts host:port [sz]   send data to remote host:port via tcp://
+    | ww foobar            write wide string 'f\x00o\x00o\x00b\x00a\x00r\x00'
+    | wx[?][fs] 9090       write two intel nops (from wxfile or wxseek)
+    | wv[?] eip+34         write 32-64 bit value
+    | wz string            write zero terminated string (like w + \x00)
 
 Some examples:
 
