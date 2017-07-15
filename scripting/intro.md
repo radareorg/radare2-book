@@ -28,8 +28,7 @@ ao|grep address
 ```
 Note, the `|` pipe only can pipe output of r2 commands to external (shell)
 commands, like system programs or builtin shell commands.
-There is a similar way to sequence r2 commands, using the backtick operator `\``,
-which works in the same way it does in a shell.
+There is a similar way to sequence r2 commands, using the backtick operator `` `command` ``. The quoted part will undergo command substitution and the output will be used as an argument of the command line.
 
 For example, we want to see a few bytes of the memory at the address referred to
 by the 'mov eax, addr' instruction. We can do that without jumping to it, using

@@ -43,7 +43,6 @@
    * [Adding Metadata](disassembling/adding_metadata.md)
    * [ESIL](esil.md)
 * [Scripting](scripting/intro.md)
-   * [R2pipe](scripting/r2pipe.md)
    * [Loops](scripting/loops.md)
    * [Macros](scripting/macros.md)
    * [R2pipe](scripting/r2pipe.md)
