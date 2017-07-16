@@ -8,7 +8,7 @@ To create a flag type:
 
 You can remove a flag by appending the `-` character to command. Most commands accept `-` as argument-prefix as an indication to delete something.
 
-     [0x4A13B8C0]> f- flag_name
+     [0x4A13B8C0]> f-flag_name
 
 To switch between or create new flagspaces use the `fs` command:
 
@@ -26,6 +26,6 @@ To switch between or create new flagspaces use the `fs` command:
      [0x4A13B8C0]> f          ; list only flags in symbols flagspace
      [0x4A13B8C0]> fs *       ; select all flagspaces
      [0x4A13B8C0]> f myflag   ; create a new flag called 'myflag'
-     [0x4A13B8C0]> f- myflag  ; delete the flag called 'myflag'
+     [0x4A13B8C0]> f-myflag  ; delete the flag called 'myflag'
 
 You can rename flags with `fr`.
