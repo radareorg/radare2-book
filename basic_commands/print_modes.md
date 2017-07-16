@@ -40,7 +40,7 @@ Tip: when using json output, you can append the `~{}` to the command to get a pr
 
     [0x00000000]> oj
     [{"raised":false,"fd":563280,"uri":"malloc://512","from":0,"writable":true,"size":512,"overlaps":false}]
-    [0x00000000]> oj | json_reformat
+    [0x00000000]> oj~{}
     [
         {
             "raised": false,
