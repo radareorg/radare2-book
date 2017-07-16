@@ -56,8 +56,8 @@ If the file was opened in write mode using the `-w` flag or the `o+` command, yo
 The 10 bytes you have selected will be changed to "12 34 12 34 12 ...".
 
 
-The Visual Assembler is a feature that provides a live-preview while you type in new opcodes to patch
-into the disassembly. To use it, seek or place the cursor at the wanted location and hit the 'A' key. To provide multiple opcodes, seperate them with a semicolon, `;`.
+The Visual Assembler is a feature that provides a live-preview while you type in new instructions to patch
+into the disassembly. To use it, seek or place the cursor at the wanted location and hit the 'A' key. To provide multiple instructions, seperate them with semicolons, `;`.
 
 ##XREF
 
@@ -68,7 +68,7 @@ When radare2 has discovered a XREF during the analysis, it will show you the inf
             str.David_MacKenzie:
 ```
 
-To see where this string is called press `x`, if you want to jump to the location where the data is used then press the corresponding number [0-9] on your keyboard. (This functionality is similar to `axt`)
+To see where this string is called, press `x`, if you want to jump to the location where the data is used then press the corresponding number [0-9] on your keyboard. (This functionality is similar to `axt`)
 
 `X` corresponds to the reverse operation aka `axf`.
 

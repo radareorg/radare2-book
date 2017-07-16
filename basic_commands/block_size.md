@@ -3,14 +3,15 @@
 The block size determines how many bytes Radare commands will process when not given an explicit size argument. You can temporally change the block size by specifying a numeric argument to the print commands. For example `px 20`.
 
     [0xB7F9D810]> b?
-    Usage: b[f] [arg]
-    b         display current block size
-    b+3       increase blocksize by 3
-    b-16      decrement blocksize by 16
-    b 33      set block size to 33
-    b eip+4   numeric argument can be an expression
-    bf foo    set block size to flag size
-    bm 1M     set max block size
+    |Usage: b[f] [arg]
+    Get/Set block size
+    | b        display current block size
+    | b 33     set block size to 33
+    | b+3      increase blocksize by 3
+    | b-16     decrease blocksize by 16
+    | b eip+4  numeric argument can be an expression
+    | bf foo   set block size to flag size
+    | bm 1M    set max block size
 
 The `b` command is used to change the block size:
 

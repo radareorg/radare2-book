@@ -10,7 +10,7 @@ To enter visual mode, use `V` command. To exit from it back to command line, pre
 
 The Visual mode uses "print modes" which are basically different panel that you can rotate. By default those are:
 
-↻ **Hexdump panel** -> **Disassembly panel** → **Debugger panel** → **Hexadecimal words dump panel** → **Output C format panel** → **Op analysis color map panel** → **Annotated hexdump panel** ↺.
+↻ **Hexdump panel** -> **Disassembly panel** → **Debugger panel** → **Hexadecimal words dump panel** → **Hex-less hexdump panel** → **Op analysis color map panel** → **Annotated hexdump panel** ↺.
 
 Notice that the top of the panel contains the command which is used, for example for the disassembly panel:
 
@@ -26,22 +26,28 @@ Notice that the top of the panel contains the command which is used, for example
 To see help on all key bindings defined for visual mode, press `?`:
 
     Visual mode help:
-     ?        show this help or manpage in cursor mode
-     &        rotate asm.bits between supported 8, 16, 32, 64
+    ?        show this help
+     ??       show the user-friendly hud
+     $        toggle asm.pseudo
      %        in cursor mode finds matching pair, otherwise toggle autoblocksz
-     @        set cmd.vprompt to run commands before the visual prompt
+     @        redraw screen every 1s (multi-user view), in cursor set position
      !        enter into the visual panels mode
-     _        enter the hud
+     _        enter the flag/comment/functions/.. hud (same as VF_)
      =        set cmd.vprompt (top row)
      |        set cmd.cprompt (right column)
      .        seek to program counter
+     "        toggle the column mode (uses pC..)
      /        in cursor mode search in current block
      :cmd     run radare command
      ;[-]cmt  add/remove comment
+     0        seek to beginning of current function
+     [1-9]    follow jmp/call identified by shortcut (like ;[1])
+     ,file    add a link to the text file
      /*+-[]   change block size, [] = resize hex.cols
-     >||<     seek aligned to block size
+     </>      seek aligned to block size (seek cursor in cursor mode)
      a/A      (a)ssemble code, visual (A)ssembler
      b        toggle breakpoint
+     B        enumerate and inspect classes
      c/C      toggle (c)ursor and (C)olors
      d[f?]    define function, data, code, ..
      D        enter visual diff mode (set diff.from/to)
@@ -57,21 +63,23 @@ To see help on all key bindings defined for visual mode, press `?`:
      O        toggle asm.esil
      p/P      rotate print modes (hex, disasm, debug, words, buf)
      q        back to radare shell
-     r        browse anal info and comments
+     r        refresh screen / in cursor mode browse comments // browse anal info and comments / in cursor mode = remove byte
      R        randomize color palette (ecr)
      sS       step / step over
+     t        browse types
      T        enter textlog chat console (TT)
      uU       undo/redo seek
-     v        visual code analysis menu
+     v        visual function/vars code analysis menu
      V        (V)iew graph using cmd.graph (agv?)
      wW       seek cursor to next/prev word
      xX       show xrefs/refs of current function from/to data/code
      yY       copy and paste selection
-     z        toggle zoom mode
+     z        fold/unfold comments in disassembly
+     Z        toggle zoom mode
      Enter    follow address of jump/call
     Function Keys: (See 'e key.'), defaults to:
       F2      toggle breakpoint
+      F4      run to cursor
       F7      single step
       F8      step over
-      F9      continue
-
+      F9      continue,

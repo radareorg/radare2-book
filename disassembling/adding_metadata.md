@@ -3,7 +3,7 @@
 The typical work involved in reversing binary files makes powerful annotation capabailities essential.
 Radare offers multiple ways to store and retrieve such metadata.
 
-By following common basic *NIX principles, it is easy to write a small utility in a scripting language which uses `objdump`, `otool`, etc. to obtain information from a binary and to import it into radare. For example, take a look at one of many scripts that are distributed with radare, e.g., `idc2r.py`. To use it, invoke it as `idc2r.py file.idc > file.r2`. It reads an IDC file exported from an IDA Pro database and produces an r2 script containing the same comments, names of functions etc. You can import the resulting 'file.r2' by using the dot `.` command of radare:
+By following common basic *NIX principles, it is easy to write a small utility in a scripting language which uses `objdump`, `otool`, etc. to obtain information from a binary and to import it into radare. For example, take a look at `idc2r.py` shipped with [radare2ida](https://github.com/radare/radare2ida). To use it, invoke it as `idc2r.py file.idc > file.r2`. It reads an IDC file exported from an IDA Pro database and produces an r2 script containing the same comments, names of functions etc. You can import the resulting 'file.r2' by using the dot `.` command of radare:
 
      [0x00000000]> . file.r2
 
@@ -16,19 +16,24 @@ The `C` command is used to manage comments and data conversions. You can define 
 Here's the help:
 
     [0x00404cc0]> C?
-    |Usage: C[-LCvsdfm?] [...]
-    | C*                              List meta info in r2 commands
-    | C- [len] [@][ addr]             delete metadata at given address range
-    | CL[-] [addr|file:line [addr] ]  show 'code line' information (bininfo)
-    | Cl  file:line [addr]            add comment with line information
-    | CC[-] [comment-text]    add/remove comment. Use CC! to edit with $EDITOR
-    | CCa[-at]|[at] [text]    add/remove comment at given address
-    | Cv[-] offset reg name   add var substitution
-    | Cs[-] [size] [[addr]]   add string
-    | Ch[-] [size] [@addr]    hide data
-    | Cd[-] [size]            hexdump data
-    | Cf[-] [sz] [fmt..]      format memory (see pf?)
-    | Cm[-] [sz] [fmt..]      magic parse (see pm?)
+    |Usage: C[-LCvsdfm*?][*?] [...] # Metadata management
+    | C*                                             list meta info in r2 commands
+    | C- [len] [[@]addr]                             delete metadata at given address range
+    | CL[-][*] [file:line] [addr]                    show or add 'code line' information (bininfo)
+    | CS[-][space]                                   manage meta-spaces to filter comments, etc..
+    | CC[?] [-] [comment-text] [@addr]               add/remove comment
+    | CC.[addr]                                      show comment in current address
+    | CC! [@addr]                                    edit comment with $EDITOR
+    | CCa[-at]|[at] [text] [@addr]                   add/remove comment at given address
+    | CCu [comment-text] [@addr]                     add unique comment
+    | Cv[bsr][?]                                     add comments to args
+    | Cs[?] [-] [size] [@addr]                       add string
+    | Cz[@addr]                                      add zero-terminated string
+    | Ch[-] [size] [@addr]                           hide data
+    | Cd[-] [size] [repeat] [@addr]                  hexdump data array (Cd 4 10 == dword [10])
+    | Cf[?][-] [sz] [0|cnt][fmt] [a0 a1...] [@addr]  format memory (see pf?)
+    | CF[sz] [fcn-sign..] [@addr]                    function signature
+    | Cm[-] [sz] [fmt..] [@addr]                     magic parse (see pm?)
     [0x00404cc0]>
 
 
@@ -67,7 +72,7 @@ The `Cf` command is used to define a memory format string (the same syntax used 
                      0x7fd9f13b1fa0() ; rip
                   0x7fd9f13ae638    4989c4       mov r12, rax
 
-The `[sz]` argument to Cf is used to define how many bytes the struct should take up in the disassembly, and is completely independent from the size of the dat structure define by the format string. This may seem confusing, but has several uses. For example, you may want to see the formatted structue displayed in the disassembly, but still have those locations be visible as offsets and with raw bytes. Sometimes, you find large structures, but only identified a few fields, or only interested in specific fields. Then, you can tell r2 to display only those fields, using the format string and using 'skip' fields, and also have the disassembly continue after the entire structure, by giving it full size using the `sz` argument.
+The `[sz]` argument to `Cf` is used to define how many bytes the struct should take up in the disassembly, and is completely independent from the size of the dat structure define by the format string. This may seem confusing, but has several uses. For example, you may want to see the formatted structue displayed in the disassembly, but still have those locations be visible as offsets and with raw bytes. Sometimes, you find large structures, but only identified a few fields, or only interested in specific fields. Then, you can tell r2 to display only those fields, using the format string and using 'skip' fields, and also have the disassembly continue after the entire structure, by giving it full size using the `sz` argument.
 
-Using Cf, it's easy to define to define complex structures with simple oneliners. See 'pf?' for more information.
-Remember that all these "C*" commands can also be accessed from the visual mode by pressing the 'd' (data conversion) key.
+Using `Cf`, it's easy to define to define complex structures with simple oneliners. See `pf?` for more information.
+Remember that all these `C` commands can also be accessed from the visual mode by pressing the `d` (data conversion) key.

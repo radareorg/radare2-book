@@ -364,19 +364,26 @@ We need a way to retrieve the numeric value of 'rip'. This is a very simple exam
 
 ### API HOOKS
 
-It is important for emulation to be able to setup hooks in parser, so we can extend it to implement analysis without having to change parser again and again. That is, every time an operation is about to be executed, a user hook is called. It can be used to determine if rip is going to change, or if the instruction updates stack, etc.
+It is important for emulation to be able to setup hooks in parser, so we can extend it to implement analysis without having to change parser again and again. That is, every time an operation is about to be executed, a user hook is called. It can be used to determine if `RIP` is going to change, or if the instruction updates stack, etc.
 Later, we can split that callback into several ones to have an event-based analysis API that may be extended in js like this:
+
+```
 esil.on('regset', function(){..
 esil.on('syscall', function(){esil.regset('rip'
+```
 
-For the API, see functions hook_flag_read(), hook_execute(), hook_mem_read(). A callback should return true if you want to override the action taken for a callback. For example, to deny memory reads in a region, or voiding memory writes, effectively making it read-only.
+For the API, see functions `hook_flag_read()`, `hook_execute()`, `hook_mem_read()`. A callback should return true if you want to override the action taken for a callback. For example, to deny memory reads in a region, or voiding memory writes, effectively making it read-only.
 Return false or 0 if you want to trace ESIL expression parsing.
 
-Other operations that require bindings to external functionalities to work. In this case, r_ref and r_io. This must be defined when initializing the esil vm.
+Other operations that require bindings to external functionalities to work. In this case, `r_ref` and `r_io`. This must be defined when initializing the esil vm.
 
 * Io Get/Set
-    Out ax, 44
-    44,ax,:ou
+  ```
+  Out ax, 44
+  44,ax,:ou
+  ```
 * Selectors (cs,ds,gs...)
-   Mov eax, ds:[ebp+8]
-   Ebp,8,+,:ds,eax,=
+  ```
+  Mov eax, ds:[ebp+8]
+  Ebp,8,+,:ds,eax,=
+  ```
