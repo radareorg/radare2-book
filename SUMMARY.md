@@ -56,7 +56,7 @@
    * [Strings](rabin2/strings.md)
    * [Program Sections](rabin2/program_sections.md)
 * [Radiff2](radiff2.md)
-   * [Binary Diffing](binary_diffing.md)
+   * [Binary Diffing](radiff2/binary_diffing.md)
 * [Rasm2](rasm2/intro.md)
    * [Assemble](rasm2/assemble.md)
    * [Disassemble](rasm2/disassemble.md)
