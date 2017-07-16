@@ -41,7 +41,7 @@
    * [Searching for AES Keys](search_bytes/searching_aes_keys.md)
 * [Disassembling](disassembling/intro.md)
    * [Adding Metadata](disassembling/adding_metadata.md)
-   * [ESIL](esil.md)
+   * [ESIL](disassembling/esil.md)
 * [Scripting](scripting/intro.md)
    * [Loops](scripting/loops.md)
    * [Macros](scripting/macros.md)
@@ -72,7 +72,7 @@
 * Remote Access Capabilities
    * [Remoting Capabilities](debugger/remoting_capabilities.md)
 * Plugins
-   * [Plugins](plugins.md)
+   * [Plugins](plugins/plugins.md)
 * [Crackmes](crackmes/intro.md)
    * [IOLI](crackmes/ioli/intro.md)
        * [IOLI 0x00](crackmes/ioli/ioli_0x00.md)

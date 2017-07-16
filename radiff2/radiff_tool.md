@@ -43,7 +43,7 @@ For example, `radiff2 -g main /bin/true /bin/false | xdot -` will show differenc
 
 This is the result:
 
-![/bin/true vs /bin/false](true_false.png)
+![/bin/true vs /bin/false](pics/true_false.png)
 
 Yellow color indicates that some offsets inside of corresponding blocks being compared do not match. Grey-colored block is a perfect match. Red block highlights a huge difference of two compared blocks. If you look closely, you will see that the left red block has `mov edi, 0x1; call sym.imp.exit`, while the right one has `xor edi, edi; call sym.imp.exit`. Obviously that is because `true` always returns zero, and `false` always returns one.
 
