@@ -1,4 +1,4 @@
-## Imports
+## Exports
 
 Rabin2 is able to find Exports. An example:
 
