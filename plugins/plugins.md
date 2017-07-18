@@ -280,18 +280,7 @@ def mycpu(a):
 
 ```python
 def mycpu_anal(a):
-    analop = {
-            "type" : 0,
-            "cycles" : 0,
-            "stackop" : 0,
-            "stackptr" : 0,
-            "jump" : 0,
-            "addr" : 0,
-            "eob" : 0,
-            "esil" : "",
-            }
-
-    def set_reg_profile():
+       def set_reg_profile():
         profile = "=PC	pc\n" + \
 		"=SP	sp\n" + \
 		"gpr	r0	.32	0	0\n" + \
@@ -305,6 +294,17 @@ def mycpu_anal(a):
         return profile
 
     def op(addr, buf):
+		analop = {
+            "type" : 0,
+            "cycles" : 0,
+            "stackop" : 0,
+            "stackptr" : 0,
+			"ptr" : -1,
+            "jump" : -1,
+            "addr" : 0,
+            "eob" : 0,
+            "esil" : "",
+        }
         try:
             opcode = get_opcode(buf)
             esilstr = optbl[opcode][2]
@@ -315,6 +315,7 @@ def mycpu_anal(a):
 
         except:
             result = analop
+		# Don't forget to return proper instruction size!
         return [4, result]
 
 ```
