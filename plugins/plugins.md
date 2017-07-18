@@ -247,7 +247,7 @@ Note - in the following examples there are missing functions of the actual decod
 for the sake of readability!
 
 For this you need to do this:
-1. `import r2lang`
+1. `import r2lang` and `from r2lang import R`
 2. Make a function with 2 subfunctions - `assemble` and `disassemble` and returning plugin structure - for RAsm plugin
 ```python
 def mycpu(a):
@@ -309,7 +309,7 @@ def mycpu_anal(a):
             opcode = get_opcode(buf)
             esilstr = optbl[opcode][2]
             if optbl[opcode][0] == "J": # it's jump
-                analop["type"] = 1
+                analop["type"] = R.R_ANAL_OP_TYPE_JMP
                 analop["jump"] = decode_jump(opcode, j_mask)
                 esilstr = jump_esil(esilstr, opcode, j_mask)
 
