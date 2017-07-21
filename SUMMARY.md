@@ -41,6 +41,8 @@
    * [Backward Search](search_bytes/backward_search.md)
    * [Search in Assembly](search_bytes/search_in_assembly.md)
    * [Searching for AES Keys](search_bytes/searching_aes_keys.md)
+* Signatures
+   * [Signatures](signatures/zignatures.md)
 * [Disassembling](disassembling/intro.md)
    * [Adding Metadata](disassembling/adding_metadata.md)
    * [ESIL](disassembling/esil.md)
