@@ -50,7 +50,6 @@ Plugins for supported target architectures can be listed with the `-L` option. K
     _d  32         malbolge    LGPL3   Malbolge Ternary VM
     ad  32 64      mips        GPL3    MIPS CPU
     _d  16 32 64   mips.cs     BSD     Capstone MIPS disassembler
-    _d  16 32 64   msil        PD      .NET Microsoft Intermediate Language
     _d  32         nios2       GPL3    NIOS II Embedded Processor
     _d  32 64      ppc         GPL3    PowerPC
     _d  32 64      ppc.cs      BSD     Capstone PowerPC disassembler
