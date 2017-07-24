@@ -1,6 +1,7 @@
 # Migration from ida, GDB or WinDBG
 
 ## How to run the program using the debugger ##
+
 `r2 -d /bin/ls` - start in debugger mode => [[video](http://asciinema.org/a/12022)]
 
 ## How do I attach/detach to running process ? (gdb -p) ##
@@ -13,16 +14,17 @@
 
 `r2 -D gdb gdb://localhost:1234` - attach to gdbserver
 
-
 ## How to set args/environnement variable/load a specific libraries for the debugging session of radare
 
 Use `rarun2` (`libpath=$PWD:/tmp/lib`, `arg2=hello`, `setenv=FOO=BAR` ...) see `rarun2 -h` / `man rarun2`
 
 ## How to script radare2 ?
 
-`r2 -i <scriptfile> ...` - run a script after loading the file => [[video](http://asciinema.org/a/12020)]
+`r2 -i <scriptfile> ...` - run a script **after** loading the file => [[video](http://asciinema.org/a/12020)]
 
- r2 -c $@ | awk $@       - run thru awk get asm from function => [[link](http://sprunge.us/dEOK)]
+`r2 -I <scriptfile> ...` - run a script **before** loading the file
+
+`r2 -c $@ | awk $@`  - run thru awk get asm from function => [[link](http://sprunge.us/dEOK)]
 
 `[0x80480423]> . scriptfile` - interpret this file => [[video](http://asciinema.org/a/12017)]
 
@@ -33,7 +35,6 @@ To get `#!python` and much more, just build [radare2-bindings](https://github.co
 ## How to list Source code as in gdb list ?
 
 CL TODO, see [#1783](https://github.com/radare/radare2/issues/1783)
-
 
 # shortcuts
 
@@ -121,11 +122,11 @@ CL TODO, see [#1783](https://github.com/radare/radare2/issues/1783)
 This can be done using 2 commands:
 
 1. `dcf` - until a fork happen
-2. then use `dp` to select what process you want to debug. 
+2. then use `dp` to select what process you want to debug.
 
 # Common features
-- r2 accepts FLIRT signatures
+- r2 accepts FLIRT signatures (before IDA 6.8 version)
 - r2 can connect GDB and WinDbg
 - r2 can write/patch in place
 - r2 have fortunes and [s]easter eggs[/s]balls of steel.
-- r2 can do basic loading of ELF core files from the box and MDMP with `mdmp` plugin
+- r2 can do basic loading of ELF core files from the box and MDMP with `mdmp` plugin (`r2pm -i mdmp`)
