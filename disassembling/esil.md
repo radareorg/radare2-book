@@ -108,7 +108,7 @@ TRAP  | src | Trap | Trap signal |
 **^** | src,dst | XOR | stack = dst ^src  | [0x00000000]> "ae 1,1,^"<br>0x0<br>[0x00000000]> "ae 1,0,^"<br>0x1<br>[0x00000000]> "ae 0,1,^"<br>0x1<br>[0x00000000]> "ae 0,0,^"<br>0x0
 **+** | src,dst | ADD | stack = dst + src | [0x00000000]> "ae 3,4,+"<br>0x7<br>[0x00000000]> "ae 5,5,+"<br>0xa
 **-** | src,dst | SUB | stack = dst - src | [0x00000000]> "ae 3,4,-"<br>0x1<br>[0x00000000]> "ae 5,5,-"<br>0x0<br>[0x00000000]> "ae 4,3,-"<br>0xffffffffffffffff
-**`*`** | src,dst | MUL | stack = dst * src | [0x00000000]> "ae 3,4,`*`"<br>0xc<br>[0x00000000]> "ae 5,5,`*`"<br>0x19
+**\*** | src,dst | MUL | stack = dst * src | [0x00000000]> "ae 3,4,\*"<br>0xc<br>[0x00000000]> "ae 5,5,\*"<br>0x19
 **/** | src,dst | DIV | stack = dst / src  | [0x00000000]> "ae 2,4,/"<br>0x2<br>[0x00000000]> "ae 5,5,/"<br>0x1<br>[0x00000000]> "ae 5,9,/"<br>0x1
 **%** | src,dst | MOD | stack = dst % src | [0x00000000]> "ae 2,4,%"<br>0x0<br>[0x00000000]> "ae 5,5,%"<br>0x0<br>[0x00000000]> "ae 5,9,%"<br>0x4
 **!** | src | NEG | stack = !!!src | [0x00000000]> "ae 1,!"<br>0x0<br>[0x00000000]> "ae 4,!"<br>0x0<br>[0x00000000]> "ae 0,!"<br>0x1<br>
@@ -116,7 +116,7 @@ TRAP  | src | Trap | Trap signal |
 **--** | src | DEC | stack = src-- | [0x00000000]> ar r_00=5;ar r_00<br>0x00000005<br>[0x00000000]> "ae r_00,--"<br>0x4<br>[0x00000000]> ar r_00<br>0x00000005<br>[0x00000000]> "ae 5,--"<br>0x4
 **+=** | src,reg | ADD eq | reg = reg + src | [0x00000000]> ar r_01=5;ar r_00=0;ar r_00<br>0x00000000<br>[0x00000000]> "ae r_01,r_00,+="<br>[0x00000000]> ar r_00<br>0x00000005<br>[0x00000000]> "ae 5,r_00,+="<br>[0x00000000]> ar r_00<br>0x0000000a
 **-=** | src,reg | SUB eq | reg = reg - src | [0x00000000]> "ae r_01,r_00,-="<br>[0x00000000]> ar r_00<br>0x00000004<br>[0x00000000]> "ae 3,r_00,-="<br>[0x00000000]> ar r_00<br>0x00000001
-**`*=`** | src,reg | MUL eq | reg = reg * src | [0x00000000]> ar r_01=3;ar r_00=5;ar r_00<br>0x00000005<br>[0x00000000]> "ae r_01,r_00,`*`="<br>[0x00000000]> ar r_00<br>0x0000000f<br>[0x00000000]> "ae 2,r_00,`*`="<br>[0x00000000]> ar r_00<br>0x0000001e
+**\*=** | src,reg | MUL eq | reg = reg * src | [0x00000000]> ar r_01=3;ar r_00=5;ar r_00<br>0x00000005<br>[0x00000000]> "ae r_01,r_00,\*="<br>[0x00000000]> ar r_00<br>0x0000000f<br>[0x00000000]> "ae 2,r_00,\*="<br>[0x00000000]> ar r_00<br>0x0000001e
  **/=** | src,reg | DIV eq | reg = reg / src | [0x00000000]> ar r_01=3;ar r_00=6;ar r_00<br>0x00000006<br>[0x00000000]> "ae r_01,r_00,/="<br>[0x00000000]> ar r_00<br>0x00000002<br>[0x00000000]> "ae 1,r_00,/="<br>[0x00000000]> ar r_00<br>0x00000002
  **%=** | src,reg | MOD eq | reg = reg % src | [0x00000000]>  ar r_01=3;ar r_00=7;ar r_00<br> 0x00000007<br> [0x00000000]> "ae r_01,r_00,%="<br> [0x00000000]> ar r_00<br> 0x00000001<br> [0x00000000]>  ar r_00=9;ar r_00<br> 0x00000009<br> [0x00000000]> "ae 5,r_00,%="<br> [0x00000000]> ar r_00<br> 0x00000004
 **<<=** | src,reg | Shift Left eq | reg = reg << src | [0x00000000]> ar r_00=1;ar r_01=1;ar r_01<br>0x00000001<br>[0x00000000]> "ae r_00,r_01,<<="<br>[0x00000000]> ar r_01<br>0x00000002<br>[0x00000000]> "ae 2,r_01,<<="<br>[0x00000000]> ar r_01<br>0x00000008
@@ -128,8 +128,8 @@ TRAP  | src | Trap | Trap signal |
 **--=** | reg | DEC eq | reg = reg - 1 | [0x00000000]> ar r_00=4;ar r_00<br>0x00000004<br>[0x00000000]> "ae r_00,--="<br>[0x00000000]> ar r_00<br>0x00000003
 **!=** | reg | NOT eq | reg = !reg | [0x00000000]> ar r_00=4;ar r_00<br>0x00000004<br>[0x00000000]> "ae r_00,!="<br>[0x00000000]> ar r_00<br>0x00000000<br>[0x00000000]> "ae r_00,!="<br>[0x00000000]> ar r_00<br>0x00000001
 --- | --- | --- | --- | ----------------------------------------------
-=[]<br>=[*]<br>=[1]<br>=[2]<br>=[4]<br>=[8] | src,dst | poke |*dst=src | [0x00010000]> "ae 0xdeadbeef,0x10000,=[4],"<br>[0x00010000]> pxw 4@0x10000<br>0x00010000  0xdeadbeef                                ....<br>[0x00010000]> "ae 0x0,0x10000,=[4],"<br>[0x00010000]> pxw 4@0x10000<br>0x00010000  0x00000000                  
-[]<br>[*]<br>[1]<br>[2]<br>[4]<br>[8] | src | peek | stack=*src | [0x00010000]> w test@0x10000<br>[0x00010000]> "ae 0x10000,[4],"<br>0x74736574<br>[0x00010000]> ar r_00=0x10000<br>[0x00010000]> "ae r_00,[4],"<br>0x74736574
+=[]<br>=[\*]<br>=[1]<br>=[2]<br>=[4]<br>=[8] | src,dst | poke |\*dst=src | [0x00010000]> "ae 0xdeadbeef,0x10000,=[4],"<br>[0x00010000]> pxw 4@0x10000<br>0x00010000  0xdeadbeef                                ....<br>[0x00010000]> "ae 0x0,0x10000,=[4],"<br>[0x00010000]> pxw 4@0x10000<br>0x00010000  0x00000000                  
+[]<br>[\*]<br>[1]<br>[2]<br>[4]<br>[8] | src | peek | stack=\*src | [0x00010000]> w test@0x10000<br>[0x00010000]> "ae 0x10000,[4],"<br>0x74736574<br>[0x00010000]> ar r_00=0x10000<br>[0x00010000]> "ae r_00,[4],"<br>0x74736574
 &#x7c;=[]<br>&#x7c;=[1]<br>&#x7c;=[2]<br>&#x7c;=[4]<br>&#x7c;=[8] | reg | nombre | code | [0x00000000]> <br>[0x00000000]>
 SWAP |  | Swap | Swap two top elements | SWAP
 PICK | n | Pick | Pick nth element from the top of the stack | 2,PICK
