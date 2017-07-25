@@ -14,7 +14,7 @@ A program to extract information from executable binaries, such as ELF, PE, Java
 
 ### rasm2
 
-A command line assembler and disassembler for multiple architectures (including Intel x86 and x86-64, MIPS, ARM, PowerPC, Java, and MSIL).
+A command line assembler and disassembler for multiple architectures (including Intel x86 and x86-64, MIPS, ARM, PowerPC and Java).
 
 #### Examples
 
