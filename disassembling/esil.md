@@ -104,7 +104,7 @@ TRAP  | src | Trap | Trap signal |
  **<<<** | src,dst | Rotate Left | stack=dst ROL src | [0x00000000]> "ae 31,1,<<<"<br>0x80000000<br>[0x00000000]> "ae 32,1,<<<"<br>0x1
 **>>>** | src,dst | Rotate Right | stack=dst ROR src | [0x00000000]> "ae 1,1,>>>"<br>0x80000000<br>[0x00000000]> "ae 32,1,>>>"<br>0x1
 **&** | src,dst | AND | stack = dst & src | [0x00000000]> "ae 1,1,&"<br>0x1<br>[0x00000000]> "ae 1,0,&"<br>0x0<br>[0x00000000]>  "ae 0,1,&"<br>0x0<br>[0x00000000]> "ae 0,0,&"<br>0x0
-**`\|`** | src,dst | OR | stack = dst `|` src | [0x00000000]> "ae 1,1,`|`"<br>0x1<br>[0x00000000]> "ae 1,0,`|`"<br>0x1<br>[0x00000000]> "ae 0,1,`|`"<br>0x1<br>[0x00000000]> "ae 0,0,`|`"<br>0x0
+**&#x7c;** | src,dst | OR | stack = dst &#x7c; src | [0x00000000]> "ae 1,1,&#x7c;"<br>0x1<br>[0x00000000]> "ae 1,0,&#x7c;"<br>0x1<br>[0x00000000]> "ae 0,1,&#x7c;"<br>0x1<br>[0x00000000]> "ae 0,0,&#x7c;"<br>0x0
 **^** | src,dst | XOR | stack = dst ^src  | [0x00000000]> "ae 1,1,^"<br>0x0<br>[0x00000000]> "ae 1,0,^"<br>0x1<br>[0x00000000]> "ae 0,1,^"<br>0x1<br>[0x00000000]> "ae 0,0,^"<br>0x0
 **+** | src,dst | ADD | stack = dst + src | [0x00000000]> "ae 3,4,+"<br>0x7<br>[0x00000000]> "ae 5,5,+"<br>0xa
 **-** | src,dst | SUB | stack = dst - src | [0x00000000]> "ae 3,4,-"<br>0x1<br>[0x00000000]> "ae 5,5,-"<br>0x0<br>[0x00000000]> "ae 4,3,-"<br>0xffffffffffffffff
@@ -122,7 +122,7 @@ TRAP  | src | Trap | Trap signal |
 **<<=** | src,reg | Shift Left eq | reg = reg << src | [0x00000000]> ar r_00=1;ar r_01=1;ar r_01<br>0x00000001<br>[0x00000000]> "ae r_00,r_01,<<="<br>[0x00000000]> ar r_01<br>0x00000002<br>[0x00000000]> "ae 2,r_01,<<="<br>[0x00000000]> ar r_01<br>0x00000008
 **>>=** | src,reg | Shift Right eq | reg = reg << src | [0x00000000]> ar r_00=1;ar r_01=8;ar r_01<br>0x00000008<br>[0x00000000]> "ae r_00,r_01,>>="<br>[0x00000000]> ar r_01<br>0x00000004<br>[0x00000000]> "ae 2,r_01,>>="<br>[0x00000000]> ar r_01<br>0x00000001
 **&=** | src,reg |  AND eq | reg = reg & src | [0x00000000]> ar r_00=2;ar r_01=6;ar r_01<br>0x00000006<br>[0x00000000]> "ae r_00,r_01,&="<br>[0x00000000]> ar r_01<br>0x00000002<br>[0x00000000]> "ae 2,r_01,&="<br>[0x00000000]> ar r_01<br>0x00000002<br>[0x00000000]> "ae 1,r_01,&="<br>[0x00000000]> ar r_01<br>0x00000000
-**`\|`=** | src,reg | OR eq| reg = reg `|` src | [0x00000000]> ar r_00=2;ar r_01=1;ar r_01<br>0x00000001<br>[0x00000000]> "ae r_00,r_01,|="<br>[0x00000000]> ar r_01<br>0x00000003<br>[0x00000000]> "ae 4,r_01,|="<br>[0x00000000]> ar r_01<br>0x00000007
+**&#x7c;=** | src,reg | OR eq| reg = reg &#x7c; src | [0x00000000]> ar r_00=2;ar r_01=1;ar r_01<br>0x00000001<br>[0x00000000]> "ae r_00,r_01,&#x7c;="<br>[0x00000000]> ar r_01<br>0x00000003<br>[0x00000000]> "ae 4,r_01,&#x7c;="<br>[0x00000000]> ar r_01<br>0x00000007
  **^=** | src,reg | XOR eq | reg = reg ^ src | [0x00000000]> ar r_00=2;ar r_01=0xab;ar r_01<br>0x000000ab<br>[0x00000000]> "ae r_00,r_01,^="<br>[0x00000000]> ar r_01<br>0x000000a9<br>[0x00000000]> "ae 2,r_01,^="<br>[0x00000000]> ar r_01<br>0x000000ab
 **++=** | reg | INC eq | reg = reg + 1 | [0x00000000]> ar r_00=4;ar r_00<br>0x00000004<br>[0x00000000]> "ae r_00,++="<br>[0x00000000]> ar r_00<br>0x00000005
 **--=** | reg | DEC eq | reg = reg - 1 | [0x00000000]> ar r_00=4;ar r_00<br>0x00000004<br>[0x00000000]> "ae r_00,--="<br>[0x00000000]> ar r_00<br>0x00000003
@@ -130,7 +130,7 @@ TRAP  | src | Trap | Trap signal |
 --- | --- | --- | --- | ----------------------------------------------
 =[]<br>=[*]<br>=[1]<br>=[2]<br>=[4]<br>=[8] | src,dst | poke |*dst=src | [0x00010000]> "ae 0xdeadbeef,0x10000,=[4],"<br>[0x00010000]> pxw 4@0x10000<br>0x00010000  0xdeadbeef                                ....<br>[0x00010000]> "ae 0x0,0x10000,=[4],"<br>[0x00010000]> pxw 4@0x10000<br>0x00010000  0x00000000                  
 []<br>[*]<br>[1]<br>[2]<br>[4]<br>[8] | src | peek | stack=*src | [0x00010000]> w test@0x10000<br>[0x00010000]> "ae 0x10000,[4],"<br>0x74736574<br>[0x00010000]> ar r_00=0x10000<br>[0x00010000]> "ae r_00,[4],"<br>0x74736574
-`|`=[]<br>`|`=[1]<br>`|`=[2]<br>`|`=[4]<br>`|`=[8] | reg | nombre | code | [0x00000000]> <br>[0x00000000]>
+&#x7c;=[]<br>&#x7c;=[1]<br>&#x7c;=[2]<br>&#x7c;=[4]<br>&#x7c;=[8] | reg | nombre | code | [0x00000000]> <br>[0x00000000]>
 SWAP |  | Swap | Swap two top elements | SWAP
 PICK | n | Pick | Pick nth element from the top of the stack | 2,PICK
 RPICK | m | Reverse Pick | Pick nth element from the base of the stack | 0,RPICK
