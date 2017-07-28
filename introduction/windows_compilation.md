@@ -1,5 +1,37 @@
 ## Compilation on Windows
 
+### Meson (MSVC)
+
+**WARNING: This build is not being tested for the moment. Note that it does not compile every plugins available in radare2 yet. Refer to the [Mingw32](#mingw32) build below for a more stable and complete build.**
+
+The most native way to compile radare2 under Windows is to use meson + msvc. First you need **python3** to be installed on your computer. Once this is done, you can install the meson build system using `pip3 install meson`.
+Now navigate to your Python installation folder, and copy the `meson.py` from `.\Scripts` subfolder into your radare2 folder.
+
+Meson also requires Ninja. You can download it from [here](https://ninja-build.org/). Copy `ninja.exe` binary into your radare2 folder. Then run `meson.bat` and wait until compilation is done.
+
+#### Compiling
+
+* Using **Ninja build system**: This is the easiest, simply run `meson.bat` and wait until the compilation is complete.
+
+* Using **Visual Studio**: If you want to work on radare2 in Visual Studio, you can simply run the command `meson.bat -p` which will generate a Visual Studio 2015 project. Then you can load it from `build\radare2.sln`.
+
+* Using **MSBuild**: Call `meson.bat --msbuild`
+
+In any case, everything is generated in the `build` folder by default, except for the sdb files generation process.
+
+#### Installing
+
+Now that you successfully compiled radare2, you might want to gather every executables and requirements into the same place. The command below will collect everything and put it into the `dist` folder.
+```bat
+E:\radare2>sys\meson_install.bat dist
+```
+
+You can now test your newly crafted radare2 binary easily:
+```bat
+E:\radare2>cd dist
+E:\radare2\dist>radare2.exe -v
+```
+
 ### Mingw32
 
 The easy way to compile things for Windows is using Mingw32. The w32 builds distributed from the radare homepage are generated from a GNU/Linux box using Mingw32 and they are tested with Wine. Also keep in mind, that Mingw-w64 isn't tested, so no guarantees here.
