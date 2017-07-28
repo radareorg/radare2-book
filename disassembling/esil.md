@@ -151,8 +151,13 @@ Internal flags are prefixed with `$` character.
 z      - zero flag, only set if the result of an operation is 0
 b      - borrow, this requires to specify from which bit (example: $b4 - checks if borrow from bit 4)
 c      - carry, same like above (example: $c7 - checks if carry from bit 7)
+o      - overflow
 p      - parity
 r      - regsize ( asm.bits/8 )
+s      - sign
+ds     - delay slot state
+jt     - jump target
+js     - jump target set
 [0-9]* - Used to set flags and registers without having any side effects,
          i.e. setting esil_cur, esil_old and esil_lastsz.
          (example: "$0,of,=" to reset the overflow flag)
