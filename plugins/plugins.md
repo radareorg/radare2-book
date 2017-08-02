@@ -247,7 +247,7 @@ Note - in the following examples there are missing functions of the actual decod
 for the sake of readability!
 
 For this you need to do this:
-1. `import r2lang` and `from r2lang import R`
+1. `import r2lang` and `from r2lang import R` (for constants)
 2. Make a function with 2 subfunctions - `assemble` and `disassemble` and returning plugin structure - for RAsm plugin
 ```python
 def mycpu(a):
@@ -295,14 +295,14 @@ def mycpu_anal(a):
 
     def op(addr, buf):
 		analop = {
-            "type" : 0,
+            "type" : R.R_ANAL_OP_TYPE_NULL,
             "cycles" : 0,
             "stackop" : 0,
             "stackptr" : 0,
 			"ptr" : -1,
             "jump" : -1,
             "addr" : 0,
-            "eob" : 0,
+            "eob" : False,
             "esil" : "",
         }
         try:
