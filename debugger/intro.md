@@ -9,36 +9,43 @@ There are different backends for many target architectures and operating systems
 
 Process memory is treated as a plain file. All mapped memory pages of a debugged program and its libraries can be read and interpreted as code, data structures etc.
 
-Communication between radare and the debugger IO layer is wrapped into `system()` calls, which accept a string as an argument, and executes it as a command. An answer is then buffered in the output console, its contents can be additionally processed by a script. This is how radare handles single `!` and double `!!` exclamation mark commands for calling `system()`:
+Communication between radare and the debugger IO layer is wrapped into `system()` calls, which accept a string as an argument, and executes it as a command. An answer is then buffered in the output console, its contents can be additionally processed by a script. Access to the IO system is achieved with `=!`. Most IO plugins provide help with `=!?` or `=!help`. For example:
 
-    [0x00000000]> ds
-    [0x00000000]> !!ls
-
-The double exclamation mark `!!` tells radare to skip the IO plugin list, and to pass the rest of the command directly to shell. Using the single `!` to prepend a command will cause a walk through the IO plugin list to find one that handles it.
+    $ r2 -d /bin/ls
+    ...
+    [0x7fc15afa3cc0]> =!help
+    Usage: =!cmd args
+     =!ptrace   - use ptrace io
+     =!mem      - use /proc/pid/mem io if possible
+     =!pid      - show targeted pid
+     =!pid <#>  - select new pid
 
 In general, debugger commands are portable between architectures and operating systems. Still, as radare tries to support the same functionality for all target architectures and operating systems, certain things have to be handled separately. They include injecting shellcodes and handling exceptions. For example, in MIPS targets there is no hardware-supported single-stepping feature. In this case, radare2 provides its own implementation for single-step by using a mix of code analysis and software breakpoints.
 
 To get basic help for the debugger, type 'd?':
 
-    Usage: d[sbhcrbo] [arg]
-    dh [handler]   list or set debugger handler
-    dH [handler]   transplant process to a new handler
-    dd             file descriptors (!fd in r1)
-    ds[ol] N       step, over, source line
-    do             open process (reload, alias for 'oo')
-    dk [sig][=act] list, send, get, set, signal handlers of child
-    di[s] [arg..]  inject code on running process and execute it (See gs)
-    dp[=*?t][pid]  list, attach to process or thread id
-    dc[?]          continue execution. dc? for more
-    dr[?]          cpu registers, dr? for extended help
-    db[?]          breakpoints
-    dbt            display backtrace
-    dt[?r] [tag]   display instruction traces (dtr=reset)
-    dm[?*]         show memory maps
-    dw [pid]       block prompt until pid dies
+    Usage: d # Debug commands
+    db[?]                   Breakpoints commands
+    dbt[?]                  Display backtrace based on dbg.btdepth and dbg.btalgo
+    dc[?]                   Continue execution
+    dd[?]                   File descriptors (!fd in r1)
+    de[-sc] [rwx] [rm] [e]  Debug with ESIL (see de?)
+    dg <file>               Generate a core-file (WIP)
+    dH [handler]            Transplant process to a new handler
+    di[?]                   Show debugger backend information (See dh)
+    dk[?]                   List, send, get, set, signal handlers of child
+    dL [handler]            List or set debugger handler
+    dm[?]                   Show memory maps
+    do[?]                   Open process (reload, alias for 'oo')
+    doo[args]               Reopen in debugger mode with args (alias for 'ood')
+    dp[?]                   List, attach to process or thread id
+    dr[?]                   Cpu registers
+    ds[?]                   Step, over, source line
+    dt[?]                   Display instruction traces (dtr=reset)
+    dw <pid>                Block prompt until pid dies
+    dx[?]                   Inject and run code on target process (See gs)
 
 To restart your debugging session, you can type `oo` or `oo+`, depending on desired behavior.
 
     oo                 reopen current file (kill+fork in debugger)
     oo+                reopen current file in read-write
-    
