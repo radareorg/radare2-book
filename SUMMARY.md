@@ -75,6 +75,7 @@
    * [Registers](debugger/registers.md)
 * Remote Access Capabilities
    * [Remoting Capabilities](debugger/remoting_capabilities.md)
+   * [Remote GDB](debugger/remote_gdb.md)
 * Plugins
    * [Plugins](plugins/plugins.md)
 * [Crackmes](crackmes/intro.md)
@@ -92,4 +93,3 @@
            * [.bytecode](crackmes/avatao/01-reverse4/bytecode.md)
            * [.outro](crackmes/avatao/01-reverse4/outro.md)
 * [Reference Card](refcard/intro.md)
-
