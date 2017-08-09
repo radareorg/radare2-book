@@ -10,10 +10,14 @@ For example,
 
     > 3s +1024    ; seeks three times 1024 from the current seek
 
-If a command starts with `!`, the rest of the string is passed to currently loaded IO plugin (a debugger, for example). If no plugin can handle the command, posix_system() is called to pass the command to your shell. To make sure your command is directly passed to the shell, prefix it with two exclamation signs `!!`.
+If a command starts with `=!`, the rest of the string is passed to currently loaded IO plugin (a debugger, for example). Most plugins provide help messages with `=!?` or `=!help`.
 
-    > !help       ; handled by the debugger or shell
-    > !!ls        ; run `ls` in the shell
+    $ r2 -d /bin/ls
+    > =!help      ; handled by the IO plugin
+
+If a commands starts with `!`, posix_system() is called to pass the command to your shell. Check `!?` for more options and usage examples.
+
+    > !ls         ; run `ls` in the shell
 
 The meaning of arguments (iter, addr, size) depends on the specific command. As a rule of thumb, most commands take a number as an argument to specify number of bytes to work with, instead of currently defined block size. Some commands accept math expressions, or strings.
 
@@ -29,18 +33,18 @@ Using `@@` you can execute a single command on a list of flags matching the glob
     > s 0
     > / lib             ; search 'lib' string
     > p8 20 @@ hit0_*   ; show 20 hexpairs at each search hit
-    
+
 The `>` operation is used to redirect output of a command into a file (overwriting it if it already exists).
 
     > pr > dump.bin   ; dump 'raw' bytes of current block to file named 'dump.bin'
     > f  > flags.txt  ; dump flag list to 'flags.txt'
-    
+
 The `|` operation (pipe) is similar to what you are used to expect from it in a *NIX shell: us output of one command as input to another.
 
     [0x4A13B8C0]> f | grep section | grep text
     0x0805f3b0 512 section._text
     0x080d24b0 512 section._text_end
-    
+
 You can pass several commands in a single line by separating them with semicolon `;`:
 
     > px ; dr

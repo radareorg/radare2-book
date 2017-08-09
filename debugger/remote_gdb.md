@@ -41,18 +41,18 @@ the max packet size during a session with the IO system, `=!`.
 
 The gdb IO system provides useful commands which might not fit into any
 standard radare2 commands. You can get a list of these commands with
-`=!?`. (Remember, `=!` accesses the underlying IO plugin's system()).
+`=!?`. (Remember, `=!` accesses the underlying IO plugin's `system()`).
 
     [0x7ff659d9fcc0]> =!?
     Usage: =!cmd args
-    =!pid             - show targeted pid
-    =!pkt s           - send packet 's'
-    =!monitor cmd     - hex-encode monitor command and pass to target interpreter
-    =!detach [pid]    - detach from remote/detach specific pid
-    =!inv.reg         - invalidate reg cache
-    =!pktsz           - get max packet size used
-    =!pktsz bytes     - set max. packet size as 'bytes' bytes
-    =!exec_file [pid] - get file which was executed for current/specified pid
+     =!pid             - show targeted pid
+     =!pkt s           - send packet 's'
+     =!monitor cmd     - hex-encode monitor command and pass to target interpreter
+     =!detach [pid]    - detach from remote/detach specific pid
+     =!inv.reg         - invalidate reg cache
+     =!pktsz           - get max packet size used
+     =!pktsz bytes     - set max. packet size as 'bytes' bytes
+     =!exec_file [pid] - get file which was executed for current/specified pid
 
 radare2 also provides its own gdbserver implementation:
 
@@ -66,7 +66,7 @@ radare2 also provides its own gdbserver implementation:
 So you can start it as:
 
     $ r2 -
-    [0x00000000]> =g /bin/radare2 -
+    [0x00000000]> =g 8000 /bin/radare2 -
 
 And then connect to it like you would to any gdbserver. For example, with radare2:
 
