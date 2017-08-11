@@ -33,13 +33,18 @@ Or you can also try continue back:
     [0x004028a0]> dr rip
     0x004028a2
 
-`dcb` seek program counter until hit the latest breakpoint.
+`dcb` seeks program counter until hit the latest breakpoint.
+So once set a breakpoint, you can back to it any time.
 
-You can see current recorded program states by `dts`:
+You can see current recorded program states using `dts`:
 
     [0x004028a0]> dts
     session: 0   at:0x004028a0   ""
     session: 1   at:0x004028c2   ""
+
+NOTE: Program records can be saved at any moments. These are diff style format
+that save only different memory area from previous. It saves memory space rather
+than entire dump.
 
 And also can add comment:
 
@@ -56,3 +61,20 @@ Export/Import records to/from file:
     [0x004028c2]> dtsf records_for_test
     session: 0, 0x4028a0 diffs: 0
     session: 1, 0x4028c2 diffs: 0
+
+Moreover, you can do reverse debugging in ESIL mode.
+In ESIL mode, program state can be managed by `aets` commands.
+
+    [0x00404870]> aets+
+
+And step back by `aesb`:
+
+    [0x00404870]> aer rip
+    0x00404870
+    [0x00404870]> 5aeso
+    [0x00404870]> aer rip
+    0x0040487d
+    [0x00404870]> aesb
+    [0x00404870]> aer rip
+    0x00404879
+    
