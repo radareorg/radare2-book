@@ -54,6 +54,11 @@ And also can add comment:
     session: 0   at:0x004028a0   "program start"
     session: 1   at:0x004028c2   "decryption start"
 
+You can leave notes for each records to keep in your mind.
+`dsb` and `dcb` commands restore the program state from latest record if there are
+many records.
+
+Program records can exported to file and of course import it.
 Export/Import records to/from file:
 
     [0x004028c2]> dtst records_for_test
@@ -77,4 +82,3 @@ And step back by `aesb`:
     [0x00404870]> aesb
     [0x00404870]> aer rip
     0x00404879
-    
