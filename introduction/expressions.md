@@ -23,7 +23,8 @@ Supported arithmetic operations are:
 
 Use of logical OR should be escaped using quotes, or it will be mistaken for a pipe opeator:
 
-    [0x00000000]> "? 1 | 2" 3 0x3 03 3 0000:0003 3 "\x03" 00000011 2.0 2.000000f 2.000000
+    [0x00000000]> "? 1 | 2"
+    3 0x3 03 3 0000:0003 3 "\x03" 00000011 2.0 2.000000f 2.000000
 
 Numbers can be displayed in several formats:
 
