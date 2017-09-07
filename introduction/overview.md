@@ -93,11 +93,11 @@ A launcher for running programs within different environments, with different ar
        $ cat foo.rr2
        #!/usr/bin/rarun2
        program=./pp400
-       arg0=10
+       arg1=10
        stdin=foo.txt
        chdir=/tmp
        #chroot=.
-       ./foo.rr2
+       $ rarun2 ./foo.rr2
 
 
 #### Connecting a Program to a Socket
