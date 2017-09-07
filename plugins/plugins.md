@@ -242,7 +242,7 @@ https://github.com/radare/radare2/commit/ad430f0d52fbe933e0830c49ee607e9b0e4ac8f
 ### Python
 
 At first, to be able to write a plugins in Python for radare2 you need to install
-r2lang plugin. If you're going to use Python 2, then use `r2pm -i lang-python2`, otherwise (and recommended) - install the Python 3 version: `r2pm -i lang-python2`.
+r2lang plugin. If you're going to use Python 2, then use `r2pm -i lang-python2`, otherwise (and recommended) - install the Python 3 version: `r2pm -i lang-python3`.
 Note - in the following examples there are missing functions of the actual decoding
 for the sake of readability!
 
