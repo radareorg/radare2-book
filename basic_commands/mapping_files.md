@@ -10,10 +10,10 @@ Mapping files is done using the `o` (open) command. Let's read the help:
     [0x00000000]> o?
     |Usage: o [com- ] [file] ([offset])
     | o                    list opened files
-    | o=                   list opened files (ascii-art bars)
+    | oq                   list all open files
     | o*                   list opened files in r2 commands
-    | oa[?] [addr]         Open bin info from the given address
-    | ob[?] [lbdos] [...]  list open binary files backed by fd
+    | o=                   list opened files (ascii-art bars)
+    | ob[?] [lbdos] [...]  list opened binary files backed by fd
     | oc [file]            open core file, like relaunching r2
     | oi[-|idx]            alias for o, but using index instead of fd
     | oj[?]                list opened files in JSON format
@@ -24,7 +24,7 @@ Mapping files is done using the `o` (open) command. Let's read the help:
     | oo+                  reopen current file in read-write
     | ood [args]           reopen in debugger mode (with args)
     | oo[bnm] [...]        see oo? for help
-    | op [so]              open r2 native plugin (asm, bin, core, ..)
+    | op [fd]              priorize given fd (see also ob)
     | o 4                  Switch to open file on fd 4
     | o-1                  close file descriptor 1
     | o-*                  close all opened files
@@ -32,6 +32,7 @@ Mapping files is done using the `o` (open) command. Let's read the help:
     | o [file]             open [file] file in read-only
     | o+ [file]            open file in read-write mode
     | o [file] 0x4000      map file at 0x4000
+    | ox fd fdx            exchange the descs of fd and fdx and keep the mapping
 
 Prepare a simple layout:
 
