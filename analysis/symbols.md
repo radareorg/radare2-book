@@ -1,6 +1,9 @@
 Radare2 automatically parsing available imports and exports sections in the binary,
 but moreover it can load additional debugging information, if presented.
 Two main formats are supported: DWARF and PDB (for Windows binaries).
+Note, that unlike many tools radare2 doesn't rely on Windows API to parse
+PDB files, thus they can be loaded on any other supported platform - e.g.
+Linux or OS X.
 
 DWARF debuginfo loads automatically by default, because usually it's stored
 right in the executable file. PDB is a bit of different beast - it is always
