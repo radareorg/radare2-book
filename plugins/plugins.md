@@ -344,7 +344,7 @@ print(r2lang.plugin("anal", mycpu_anal))
 
 You can combine everything in one file and load it using `-i` option:
 ```
-r2 -i mycpu.py some_file.bin
+r2 -I mycpu.py some_file.bin
 ```
 Or you can load it from the r2 shell: `#!python mycpu.py`
 
@@ -648,7 +648,8 @@ There is a special function, which returns information about the file - `info`:
                 }]
 ```
 
-3. This structure should contain a pointers to these 2 functions - `assemble` and `disassemble`
+3. This structure should contain a pointers to the most important functions like
+`check_bytes`, `load` and `load_bytes`, `entries`, `relocs`, `imports`, etc.
 
 ```python
     return {
