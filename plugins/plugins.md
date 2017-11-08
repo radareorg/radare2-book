@@ -630,6 +630,7 @@ def le_format(a):
 and so on. Please be sure of the parameters for each function and format of returns.
 Note, that functions `entries`, `sections`, `imports`, `relocs` returns a list of special
 formed dictionaries - each with a different type.
+Other functions return just a list of numerical values, even if single element one.
 There is a special function, which returns information about the file - `info`:
 ```python
     def info(binf):
