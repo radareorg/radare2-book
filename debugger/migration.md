@@ -125,8 +125,8 @@ This can be done using 2 commands:
 2. then use `dp` to select what process you want to debug.
 
 # Common features
-- r2 accepts FLIRT signatures (before IDA 6.8 version)
-- r2 can connect GDB and WinDbg
+- r2 accepts FLIRT signatures
+- r2 can connect to GDB, LLVM and WinDbg
 - r2 can write/patch in place
-- r2 have fortunes and [s]easter eggs[/s]balls of steel.
-- r2 can do basic loading of ELF core files from the box and MDMP with `mdmp` plugin (`r2pm -i mdmp`)
+- r2 have fortunes and [s]easter eggs[/s]balls of steel
+- r2 can do basic loading of ELF core files from the box and MDMP (Windows minidumps)
