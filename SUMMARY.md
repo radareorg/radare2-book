@@ -79,6 +79,7 @@
 * Remote Access Capabilities
    * [Remoting Capabilities](debugger/remoting_capabilities.md)
    * [Remote GDB](debugger/remote_gdb.md)
+   * [Remote WinDbg](debugger/windbg.md)
 * Plugins
    * [Plugins](plugins/plugins.md)
 * [Crackmes](crackmes/intro.md)
