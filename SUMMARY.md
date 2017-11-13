@@ -54,7 +54,7 @@
    * [File Identification](rabin2/file_identification.md)
    * [Entrypoint](rabin2/entrypoints.md)
    * [Imports](rabin2/imports.md)
-   * [Imports](rabin2/exports.md)
+   * [Exports](rabin2/exports.md)
    * [Symbols (exports)](rabin2/symbols.md)
    * [Libraries](rabin2/libraries.md)
    * [Strings](rabin2/strings.md)
