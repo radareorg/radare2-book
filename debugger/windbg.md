@@ -15,6 +15,13 @@ Enable WinDBG support on Windows Vista and higher like this:
 bcdedit /debug on
 bcdedit /dbgsettings serial debugport:1 baudrate:115200
 ```
+Starting from Windows 8 there is no way to enforce debugging
+for every boot, but it is possible to always show the advanced boot options,
+which allows to enable kernel debugging:
+```
+bcedit /set {globalsettings} advancedoptions true
+```
+
 Or like this for Windows XP:
 	Open boot.ini and add /debug /debugport=COM1 /baudrate=115200:
 ```
