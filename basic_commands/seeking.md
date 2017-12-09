@@ -82,17 +82,6 @@ Undo last two seeks to return to the initial address
 
 we are back at _0x00400410_.
 
-Let's search in the hello_world ELF file 'Hello'. After the search our position will
-be set at the position of the found string. Remember we can always go back with `s-`.
-
-    [0x00400410]> s/ Hello
-    Searching 5 bytes from 0x00400411 to 0x00600928: 48 65 6c 6c 6f 
-    Searching 5 bytes in [0x400411-0x600928]
-    hits: 1  hit0_0 .. hit0_0
-    0x004005b4 hit0_0 "Hello"
-    [0x004005b4]>s-
-    [0x00400410]>
-
 There's also a command for showing the seek history:
 
     [0x00400410]> s*
