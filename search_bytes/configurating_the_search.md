@@ -4,7 +4,7 @@ The radare2 search engine can be configured through several configuration variab
 
     e cmd.hit = x         ; radare2 command to execute on every search hit
     e search.distance = 0 ; search string distance
-    e search.in = [foo]   ; search scope limit. Supported values: raw, block, file, section
+    e search.in = [foo]   ; pecify search boundarie. Supported values are listed under e search.in=??
     e search.align = 4    ; only show search results aligned by specified boundary.
     e search.from = 0     ; start address
     e search.to = 0       ; end address
