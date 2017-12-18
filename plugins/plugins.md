@@ -1,5 +1,37 @@
 # Plugins
 
+It is common to have an issues when you write a plugin, especially if you do this for the first
+time. This is why debugging them is very important. The first step for debugging is
+to set an environment variable when running radare2 instance:
+```
+R_DEBUG=yes r2 /bin/ls
+Loading /usr/local/lib/radare2/2.2.0-git//bin_xtr_dyldcache.so
+Cannot find symbol 'radare_plugin' in library '/usr/local/lib/radare2/2.2.0-git//bin_xtr_dyldcache.so'
+Cannot open /usr/local/lib/radare2/2.2.0-git//2.2.0-git
+Loading /home/user/.config/radare2/plugins/asm_mips_ks.so
+PLUGIN OK 0x55b205ea6070 fcn 0x7f298de08762
+Loading /home/user/.config/radare2/plugins/asm_sparc_ks.so
+PLUGIN OK 0x55b205ea6070 fcn 0x7f298de08762
+Cannot open /home/user/.config/radare2/plugins/pimp
+Cannot open /home/user/.config/radare2/plugins/yara
+Loading /home/user/.config/radare2/plugins/asm_arm_ks.so
+PLUGIN OK 0x55b205ea6070 fcn 0x7f298de08762
+Loading /home/user/.config/radare2/plugins/core_yara.so
+Module version mismatch /home/user/.config/radare2/plugins/core_yara.so (2.1.0) vs (2.2.0-git)
+Loading /home/user/.config/radare2/plugins/asm_ppc_ks.so
+PLUGIN OK 0x55b205ea6070 fcn 0x7f298de08762
+Loading /home/user/.config/radare2/plugins/lang_python3.so
+PLUGIN OK 0x55b205ea5ed0 fcn 0x7f298de08692
+Loading /usr/local/lib/radare2/2.2.0-git/bin_xtr_dyldcache.so
+Cannot find symbol 'radare_plugin' in library '/usr/local/lib/radare2/2.2.0-git/bin_xtr_dyldcache.so'
+Cannot open /usr/local/lib/radare2/2.2.0-git/2.2.0-git
+Cannot open directory '/usr/local/lib/radare2-extras/2.2.0-git'
+Cannot open directory '/usr/local/lib/radare2-bindings/2.2.0-git'
+USER CONFIG loaded from /home/user/.config/radare2/radare2rc
+ -- In visual mode press 'c' to toggle the cursor mode. Use tab to navigate
+[0x00005520]>
+```
+
 ## IO plugins
 
 All access to files, network, debugger, etc. is wrapped by an IO abstraction layer that allows radare to treat all data as if it were just a file.
@@ -377,7 +409,7 @@ Some commits related to "Implementing a new architecture"
 * CR16: https://github.com/radare/radare2/pull/721/ && https://github.com/radare/radare2/pull/726
 * XCore: https://github.com/radare/radare2/commit/bb16d1737ca5a471142f16ccfa7d444d2713a54d
 * Sharp LH5801: https://github.com/neuschaefer/radare2/commit/f4993cca634161ce6f82a64596fce45fe6b818e7
-* MSP430: https://github.com/radare/radare2/pull/1426 
+* MSP430: https://github.com/radare/radare2/pull/1426
 * HP PA-RISC: https://github.com/radare/radare2/commit/f8384feb6ba019b91229adb8fd6e0314b0656f7b
 * V810: https://github.com/radare/radare2/pull/2899
 * TMS320: https://github.com/radare/radare2/pull/596
