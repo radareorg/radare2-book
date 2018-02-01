@@ -68,23 +68,23 @@ CL TODO, see [#1783](https://github.com/radare/radare2/issues/1783)
 |Start Process/ Continue execution|`F9`    |`dc` | `F9`             | `r` and `c`             | `g`
 |Terminate Process|`Ctrl+F2`    |`dk 9`          | ?                | `kill`             | `q`
 |Detach         |`?`            | `o-`           | ?                | `detach`             |
-|step into      |`F7`           |`ds`            | `s`              | `n`             |
-|step into 4 instructions | ?   | `ds 4`         | F7               | `n 4`             |
-|step over      |`F8`           |`dso`           | `S`              | `s`             |
-|step until a specific address|?|`dsu <addr>`    | ?                | `s`             |
-|Run until return|`Ctrl+F7`     |`dcr`           | ?                | `finish`             |
+|step into      |`F7`           |`ds`            | `s`              | `n`             | `t`
+|step into 4 instructions | ?   | `ds 4`         | F7               | `n 4`             | `t 4`
+|step over      |`F8`           |`dso`           | `S`              | `s`             | `p` 
+|step until a specific address|?|`dsu <addr>`    | ?                | `s`             | `g <addr>`
+|Run until return|`Ctrl+F7`     |`dcr`           | ?                | `finish`             | `gu`
 |Run until cursor|`F4`          |[#249](https://github.com/radare/radare2/issues/249)| [#249](https://github.com/radare/radare2/issues/249) | N/A             | N/A
 |Show Backtrace |`?`            |`dbt`           | ?                | `bt`             |
-|display Register|On register Windows|`dr all`   | Shown in Visual mode | `info registers`             |
-|display eax    |On register Windows |`dr?eax`   | Shown in Visual mode | `info registers eax`             |
+|display Register|On register Windows|`dr all`   | Shown in Visual mode | `info registers`             | `r`
+|display eax    |On register Windows |`dr?eax`   | Shown in Visual mode | `info registers eax`             | `r rax`
 |display old state of all registers |? |`dro`    | ?                | ?             | ?
 |display function addr + N  |?  |`afi $$` - display function information of current offset (`$$`) | ?               | ?             | ?
 |display frame state     |?     |`pxw rbp-rsp@rsp`| ?               | `i f`             | ?
 |How to step until condition is true |?  |`dsi`  | ?                | ?             | ?
-|Update a register value |?     |`dr rip=0x456`  | ?                | `set $rip=0x456`             | ?
+|Update a register value |?     |`dr rip=0x456`  | ?                | `set $rip=0x456`             | `r rip=456`
 |**Disassembly**   |            |                |                  |
 |disassembly forward   | N/A           | `pd`               | `Vp`                 | `disas` | `uf`, `u`
-|disassembly N instructions   | N/A           | `pd X`               | Vp                 | x/<N>i | 
+|disassembly N instructions   | N/A           | `pd X`               | Vp                 | x/<N>i | `u <addr> LX`
 |disassembly N (backward)   | N/A           | `pd -X`               | `Vp`                 | `disas <a-o> <a>` | `ub`
 |**Information on the bin**   |            |                |                  |
 |Sections/regions   | `Menu sections`           | `iS` or `S` (append j for json)               | N/A                 | maint info sections | !address
@@ -95,9 +95,9 @@ CL TODO, see [#1783](https://github.com/radare/radare2/issues/1783)
 |Stack Trace in Json   | N/A           | `dbtj`               | N/A                 |  | 
 |Partial Backtrace (innermost)  | N/A           | `dbt` (`dbg.btdepth` `dbg.btalgo`)               | N/A                 | bt <N> | k <N>
 |Partial Backtrace (outermost)  | N/A           | `dbt` (`dbg.btdepth` `dbg.btalgo`)               | N/A                 | bt -<N> |
-|Stacktrace for all threads  | N/A           | `dbt@t`               | N/A                 | `thread apply all bt` | `~*`
+|Stacktrace for all threads  | N/A           | `dbt@t`               | N/A                 | `thread apply all bt` | `~* k`
 |**Breakpoints**   |            |                |                  | |
-|Breakpoint list |`Ctrl+Alt+B`  |`db`            | ?                | `info breakpoints` |
+|Breakpoint list |`Ctrl+Alt+B`  |`db`            | ?                | `info breakpoints` | `bl`
 |add breakpoint |`F2`           |`db [offset]`   |`F2`              | `break`| `bp`
 |**Threads**   |        |                |                  |                  |
 |Switch to thread |`Thread menu`           |`dp`   | N/A              | `thread <N>`| `~<N>s`
@@ -116,7 +116,7 @@ CL TODO, see [#1783](https://github.com/radare/radare2/issues/1783)
 |**Miscellaneous**   |               |                |             |
 |Dump byte char array        | `N/A`    |`pc?` (json, C, char, etc.)            | Vpppp              | x/<N>bc | db
 |options        |option menu    |`e?`            | `e`              |
-|search         |search menu    |`/?`            | Select the zone with the cursor `c` then `/`              |
+|search         |search menu    |`/?`            | Select the zone with the cursor `c` then `/`              | | `s`
 
 ## Equivalent of "set-follow-fork-mode" gdb command
 This can be done using 2 commands:
