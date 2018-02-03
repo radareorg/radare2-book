@@ -40,12 +40,12 @@ In the visual mode you can press `u` (undo) or `U` (redo) inside the seek histor
 
 ## Open file
 
-As test file lets use some simple hello_world.c compiled in Linux ELF format.
-After we compiled it lets open it with radare2
+As test file let's use a simple hello_world.c compiled in Linux ELF format.
+After we compile it let's open it with radare2:
 
     r2 hello_world
 
-Now we have command prompt
+Now we have the command prompt:
 
     [0x00400410]>
 
