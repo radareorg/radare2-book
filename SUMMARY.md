@@ -82,6 +82,8 @@
    * [Remote WinDbg](debugger/windbg.md)
 * Plugins
    * [Plugins](plugins/plugins.md)
+* [Architectures](arch/intro.md)
+   * [8051](arch/8051.md)
 * [Crackmes](crackmes/intro.md)
    * [IOLI](crackmes/ioli/intro.md)
        * [IOLI 0x00](crackmes/ioli/ioli_0x00.md)
