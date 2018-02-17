@@ -18,6 +18,7 @@ To be allowed to write files, specify the `-w` option to radare when opening a f
     > wf inline.bin         ; write contents of file
 
 Appending a `?` to a command will show its help message, for example, `p?`.
+Appending `?*` will show commands starting with the given string, e.g. `p?*`.
 
 To enter visual mode, press `V<enter>`. Use `q` to quit visual mode and return to the prompt.
 In visual mode you can use HJKL keys to navigate (left, down, up, and right, respectively). You can use these keys in cursor mode toggled by `c` key. To select a byte range in cursor mode, hold down `SHIFT` key, and press navigation keys HJKL to mark your selection.

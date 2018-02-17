@@ -12,3 +12,5 @@ If you want to contribute to the Radare2 book, you can do it at the [Github repo
 * Missing content from the Radare1 book updated to Radare2
 
 Please get permission to port any content you do not own/did not create before you put it in the Radare2 book.
+
+See <https://github.com/radare/radare2/blob/master/DEVELOPERS.md> for tips contributing to radare2.

@@ -43,6 +43,9 @@ A boolean value used to show or hide displaying of raw bytes of instructions.
 Change endianness. "true" means big-endian, "false" is for little-endian.
 "file.id" and "file.flag" both to be true.
 
+    cfg.newtab
+If this variable is enabled, help messages will be displayed along with command names in tab completion for commands.
+
     scr.color
 This boolean variable enables or disables colorized screen output.
 
