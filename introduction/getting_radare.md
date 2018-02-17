@@ -16,7 +16,7 @@ To update your local copy of the repository, use `git pull` anywhere in the rada
 
     $ git pull
 
-If you have local modifications of the source, you can revert them (and loose them!) with:
+If you have local modifications of the source, you can revert them (and lose them!) with:
 
     $ git reset --hard HEAD
 
@@ -28,11 +28,22 @@ The most common way to get r2 updated and installed system wide is by using:
 
     $ sys/install.sh
 
+### Build with meson + ninja
+
+There is also a work-in-progress support for Meson.
+
+Using clang and ld.gold makes the build faster:
+```bash
+CC=clang LDFLAGS=-fuse-ld=gold meson . release --buildtype=release --prefix ~/.local/stow/radare2/release
+ninja -C release
+# ninja -C release install
+```
+
 ### Helper Scripts
 
-Take a look at the sys/* scripts, those are used to automate stuff related to syncing, building and installing r2 and its bindings.
+Take a look at the `sys/*` scripts, those are used to automate stuff related to syncing, building and installing r2 and its bindings.
 
-The most important one is sys/install.sh. It will pull, clean, build and symstall r2 system wide.
+The most important one is `sys/install.sh`. It will pull, clean, build and symstall r2 system wide.
 
 Symstalling is the process of installing all the programs, libraries, documentation and data files using symlinks instead of copying the files.
 
