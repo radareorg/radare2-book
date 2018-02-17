@@ -118,10 +118,10 @@ $ tty ; clear ; sleep 999999
 2 - Create a new file containing the following rarun2 profile named foo.rr2:
 ```
 #!/usr/bin/rarun2
-program=/bin/ls 
+program=/bin/ls
 stdio=/dev/ttys010
 ```
-3 - Launch the following radare2 command: r2 -R foo.rr2 -d ls
+3 - Launch the following radare2 command: r2 -R foo.rr2 -d /bin/ls
 
 ### rax2
 
