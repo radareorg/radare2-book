@@ -115,6 +115,7 @@ TRAP  | src | Trap | Trap signal |
 **!** | src | NEG | stack = !!!src | [0x00000000]> "ae 1,!"<br>0x0<br>[0x00000000]> "ae 4,!"<br>0x0<br>[0x00000000]> "ae 0,!"<br>0x1<br>
 **++** | src | INC | stack = src++ | [0x00000000]> ar r_00=0;ar r_00<br>0x00000000<br>[0x00000000]> "ae r_00,++"<br>0x1<br>[0x00000000]> ar r_00<br>0x00000000<br>[0x00000000]> "ae 1,++"<br>0x2
 **--** | src | DEC | stack = src-- | [0x00000000]> ar r_00=5;ar r_00<br>0x00000005<br>[0x00000000]> "ae r_00,--"<br>0x4<br>[0x00000000]> ar r_00<br>0x00000005<br>[0x00000000]> "ae 5,--"<br>0x4
+**=** | src,reg | EQU | reg = src | [0x00000000]> "ae 3,r_00,="<br>[0x00000000]> aer r_00<br>0x00000003<br>[0x00000000]> "ae r_00,r_01,="<br>[0x00000000]> aer r_01<br>0x00000003
 **+=** | src,reg | ADD eq | reg = reg + src | [0x00000000]> ar r_01=5;ar r_00=0;ar r_00<br>0x00000000<br>[0x00000000]> "ae r_01,r_00,+="<br>[0x00000000]> ar r_00<br>0x00000005<br>[0x00000000]> "ae 5,r_00,+="<br>[0x00000000]> ar r_00<br>0x0000000a
 **-=** | src,reg | SUB eq | reg = reg - src | [0x00000000]> "ae r_01,r_00,-="<br>[0x00000000]> ar r_00<br>0x00000004<br>[0x00000000]> "ae 3,r_00,-="<br>[0x00000000]> ar r_00<br>0x00000001
 **\*=** | src,reg | MUL eq | reg = reg * src | [0x00000000]> ar r_01=3;ar r_00=5;ar r_00<br>0x00000005<br>[0x00000000]> "ae r_01,r_00,\*="<br>[0x00000000]> ar r_00<br>0x0000000f<br>[0x00000000]> "ae 2,r_00,\*="<br>[0x00000000]> ar r_00<br>0x0000001e
