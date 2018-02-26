@@ -26,16 +26,17 @@ Notice that the top of the panel contains the command which is used, for example
 To see help on all key bindings defined for visual mode, press `?`:
 
     Visual mode help:
-    ?        show this help
+     ?        show this help
      ??       show the user-friendly hud
-     $        toggle asm.pseudo
      %        in cursor mode finds matching pair, otherwise toggle autoblocksz
      @        redraw screen every 1s (multi-user view), in cursor set position
+     ^        seek to the begining of the function
      !        enter into the visual panels mode
      _        enter the flag/comment/functions/.. hud (same as VF_)
      =        set cmd.vprompt (top row)
      |        set cmd.cprompt (right column)
      .        seek to program counter
+     \        toggle visual split mode
      "        toggle the column mode (uses pC..)
      /        in cursor mode search in current block
      :cmd     run radare command
@@ -46,11 +47,11 @@ To see help on all key bindings defined for visual mode, press `?`:
      /*+-[]   change block size, [] = resize hex.cols
      </>      seek aligned to block size (seek cursor in cursor mode)
      a/A      (a)ssemble code, visual (A)ssembler
-     b        toggle breakpoint
-     B        enumerate and inspect classes
+     b        browse symbols, flags, configurations, classes, ...
+     B        toggle breakpoint
      c/C      toggle (c)ursor and (C)olors
      d[f?]    define function, data, code, ..
-     D        enter visual diff mode (set diff.from/to)
+     D        enter visual diff mode (set diff.from/to
      e        edit eval configuration variables
      f/F      set/unset or browse flags. f- to unset, F to browse, ..
      gG       go seek to begin and end of file (0-$s)
@@ -60,10 +61,10 @@ To see help on all key bindings defined for visual mode, press `?`:
      M        walk the mounted filesystems
      n/N      seek next/prev function/flag/hit (scr.nkey)
      o        go/seek to given offset
-     O        toggle asm.esil
+     O        toggle asm.pseudo and asm.esil
      p/P      rotate print modes (hex, disasm, debug, words, buf)
      q        back to radare shell
-     r        refresh screen / in cursor mode browse comments // browse anal info and comments / in cursor mode = remove byte
+     r        refresh screen / in cursor mode browse comments
      R        randomize color palette (ecr)
      sS       step / step over
      t        browse types
@@ -82,4 +83,4 @@ To see help on all key bindings defined for visual mode, press `?`:
       F4      run to cursor
       F7      single step
       F8      step over
-      F9      continue,
+      F9      continue
