@@ -86,7 +86,7 @@ In visual mode just press `u` or `U` to undo or redo inside the seek history.
 
 ##3.2 Block size
 
-The block size is the default view size for radare. All commands will work with this constraint, but you can always temporally change the block size just giving a numeric argument to the print commands for example (px 20)
+The block size is the default view size for radare. All commands will work with this constraint, but you can always temporarily change the block size just giving a numeric argument to the print commands for example (px 20)
 
     [0xB7F9D810]> b?
     Usage: b[f] [arg]
@@ -394,7 +394,7 @@ Here's the list of the print (pf?) modes for basic types:
       pf.obj.name     # show string inside object
       pf.obj.size=33  # set new size
      Format chars:
-      e - temporally swap endian
+      e - temporarily swap endianness
       f - float value (4 bytes)
       c - char (signed byte)
       b - byte (unsigned)
@@ -484,7 +484,7 @@ It is also possible to print various packed data types in a single line using th
     0x7fff0d29da38 = 0x7fff0d29da38 -> 0x0d29f7ee /bin/ls
     
 
-This is sometimes useful for looking at the arguments passed to a function, by just giving the 'format memory string' as argument and temporally changing the current seek with the `@` token.
+This is sometimes useful for looking at the arguments passed to a function, by just giving the 'format memory string' as argument and temporarily changing the current seek with the `@` token.
 
 It is also possible to define arrays of structures with `pf`. Just prefix the format string with a numeric value.
 
