@@ -1,6 +1,6 @@
 ## Block Size
 
-The block size determines how many bytes Radare commands will process when not given an explicit size argument. You can temporally change the block size by specifying a numeric argument to the print commands. For example `px 20`.
+The block size determines how many bytes Radare commands will process when not given an explicit size argument. You can temporarily change the block size by specifying a numeric argument to the print commands. For example `px 20`.
 
     [0xB7F9D810]> b?
     |Usage: b[f] [arg]
