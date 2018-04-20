@@ -187,6 +187,7 @@ There are print modes available for all basic types. If you are interested in a 
     |  e       temporally swap endian
     |  E       resolve enum name (see t?)
     |  f       float value (4 bytes)
+    |  F       double value (8 bytes)
     |  i       %%i signed integer value (4 bytes) (see %%d and %%x)
     |  n       next char specifies size of signed value (1, 2, 4 or 8 byte(s))
     |  N       next char specifies size of unsigned value (1, 2, 4 or 8 byte(s))
