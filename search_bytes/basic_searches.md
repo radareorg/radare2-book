@@ -15,7 +15,7 @@ A basic search for a plain text string in a file would be something like:
     0x00417160 hit0_7 "lib/xstrtol.c"
     0x00417578 hit0_8 "lib"
 
-As can be seen from the output above, radare2 generates a "hit" flag for every entry found. You can then use the `ps` command to see the strings stored at the offsets marked by the flags in this group, athey ll haves names of the form `hit0_<index>`:
+As can be seen from the output above, radare2 generates a "hit" flag for every entry found. You can then use the `ps` command to see the strings stored at the offsets marked by the flags in this group, and they will have names of the form `hit0_<index>`:
 
     [0x00404888]> / ls
     ...

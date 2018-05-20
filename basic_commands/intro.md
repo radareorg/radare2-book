@@ -4,7 +4,7 @@ Most command names in radare are derived from action names. They should be easy 
 
 The general format for a valid command (as explained in the 'Command Format' chapter) looks like this:
 
-    [[.][times][cmd][~grep][@[@iter]addr!size][|>pipe] ; ...
+    [.][times][cmd][~grep][@[@iter]addr!size][|>pipe] ; ...
 
 For example,
 
@@ -21,7 +21,7 @@ If a commands starts with `!`, posix_system() is called to pass the command to y
 
 The meaning of arguments (iter, addr, size) depends on the specific command. As a rule of thumb, most commands take a number as an argument to specify number of bytes to work with, instead of currently defined block size. Some commands accept math expressions, or strings.
 
-    > px 0x17     ; show 0x17 bytes in hexa at current seek
+    > px 0x17     ; show 0x17 bytes in hexs at current seek
     > s base+0x33 ; seeks to flag 'base' plus 0x33
     > / lib       ; search for 'lib' string.
 The `@` sign is used to specify a temporary offset location or seek position at which the command is executed, instead of current seek position. This is quite useful as you don't have to seek around all the time.
@@ -39,7 +39,7 @@ The `>` operation is used to redirect output of a command into a file (overwriti
     > pr > dump.bin   ; dump 'raw' bytes of current block to file named 'dump.bin'
     > f  > flags.txt  ; dump flag list to 'flags.txt'
 
-The `|` operation (pipe) is similar to what you are used to expect from it in a *NIX shell: us output of one command as input to another.
+The `|` operation (pipe) is similar to what you are used to expect from it in a *NIX shell: an output of one command as input to another.
 
     [0x4A13B8C0]> f | grep section | grep text
     0x0805f3b0 512 section._text

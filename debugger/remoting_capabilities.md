@@ -52,7 +52,7 @@ At localhost:
 
     $ radare2 -
 
-; Add hosts
+Add hosts
 
     [0x004048c5]> =+ rap://<host1>:1234//bin/ls
     Connected to: <host1> at port 1234
@@ -92,4 +92,4 @@ You can also redirect radare output to a TCP or UDP server (such as `nc -l`). Fi
     5 - tcp://<host>:<port>/
     [0x004048c5]> =<5 cmd...
 
-The `=<' command will send the output from the execution of `cmd` to the remote connection number N (or the last one used if no id specified).
+The `=<` command will send the output from the execution of `cmd` to the remote connection number N (or the last one used if no id specified).
