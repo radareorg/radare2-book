@@ -23,7 +23,8 @@ vaddr=0x08048562 paddr=0x00000562 ordinal=003 sz=16 len=15 section=.rodata type=
 This isn't going to be as easy as 0x00. Let's try disassembly with r2.
 
 ```
-$ r2 ./crackme0x01 -- Use `zoom.byte=printable` in zoom mode ('z' in Visual mode) to find strings
+$ r2 ./crackme0x01 
+-- Use `zoom.byte=printable` in zoom mode ('z' in Visual mode) to find strings
 [0x08048330]> aa
 [0x08048330]> pdf@main
 / (fcn) main 113

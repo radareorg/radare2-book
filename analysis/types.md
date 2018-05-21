@@ -209,7 +209,7 @@ there are basically 3 mandatory keys for defining basic data types:
 `X=type`
 `type.X=format_specifier`
 `type.X.size=size_in_bits`
-For example, lets define `UNIT`, according to [Microsoft documentation](https://msdn.microsoft.com/en-us/library/windows/desktop/aa383751(v=vs.85).aspx#UINT)
+For example, lets define `UNIT`, according to [Microsoft documentation](https://msdn.microsoft.com/en-us/library/windows/desktop/aa383751(v=vs.85).aspx#UINT )
 `UINT` is just equivalent of standard C `unsigned int` (or `uint32_t` in terms of TCC engine).
 It will be defined as:
 ```
@@ -290,7 +290,7 @@ func.X.cc=calling_convention
 ```
 It should be self explanatory lets do strncasecmp as an example for x86 arch for linux machines According to man pages, strncasecmp is defined as the following:
 ```
-int strcasecmp(const char *s1, const char *s2);
+int strcasecmp(const char *s1, const char *s2, size_t n);
 ```
 When converting it into its sdb representation it will looks like the following:
 ```

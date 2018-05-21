@@ -42,17 +42,17 @@ So, when radare reads a block of bytes, it is the task of an IO plugin to get th
 
 * Debugging URIs
 
-    $ r2 dbg:///bin/ls
+    $ r2 dbg:///bin/ls<br />
     $ r2 pid://1927
 
 * Remote sessions
 
-    $ r2 rap://:1234
+    $ r2 rap://:1234<br />
     $ r2 rap://<host>:1234//bin/ls
 
 * Virtual buffers
 
-    $ r2 malloc://512
+    $ r2 malloc://512<br />
     shortcut for
     $ r2 -
 
