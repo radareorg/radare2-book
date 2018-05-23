@@ -69,6 +69,7 @@
    * [Code Analysis](analysis/code_analysis.md)
    * [Symbols information](analysis/symbols.md)
    * [Types](analysis/types.md)
+   * [Graph commands](analysis/graphs.md)
 * [Rahash2](rahash2/intro.md)
    * [Rahash Tool](rahash2/rahash_tool.md)
 * [Debugger](debugger/intro.md)
