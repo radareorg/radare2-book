@@ -1,5 +1,7 @@
 # R2 "Book"
 
+* Proselint: [![Build Status](https://travis-ci.org/radare/radare2book.svg?branch=master)](https://travis-ci.org/radare/radare2book)
+
 # Welcome to the Radare2 Book
 
 * Webpage: https://www.gitbook.com/book/radare/radare2book/details

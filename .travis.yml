@@ -1,0 +1,5 @@
+install:
+    - sudo pip install proselint
+
+script:
+    - proselint .
