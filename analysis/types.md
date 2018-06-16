@@ -54,7 +54,7 @@ long long
 ```
 ### Loading types
 
-There are three easy ways to define a new types: 
+There are three easy ways to define a new type: 
 * Directly from the string using `td` command
 * From the file using `to <filename>` command 
 * Open  an `$EDITOR` to type the definitions in place using `to -`
@@ -82,6 +82,12 @@ dir.types: Default path to look for cparse type files
 
 ### Printing types
 
+Notice below we have used `ts` command, which basically converts
+the C type description (or to be precise it's SDB representation)
+into the the sequence of `pf` commands. See more about [print format](basic_commands/print_modes.md).
+
+The `tp` command uses the `pf` string to print all the members of type at current offset/given address
+
 ```
 [0x000051c0]> ts foo
 pf zd a b
@@ -92,12 +98,6 @@ pf zd a b
  a : 0x000053c0 = 'world'
  b : 0x000053cc = 20
 ```
-
-Notice here we used `ts` command, which basically converts
-the C type description (or to be precise it's SDB representation)
-into the the sequence of `pf` commands. See more about [print format](basic_commands/print_modes.md).
-
-The `tp` command uses the `pf` string to print all the members of type at current offset/given address
 
 Also you could fill your own data into struct and print it using `tpx` command 
 
@@ -141,8 +141,7 @@ Moreover, the link will be shown in the disassembly output or visual mode:
             0x000051ff      4839f8         cmp rax, rdi
             0x00005202      4889e5         mov rbp, rsp
 ```
-
-Also once the struct is linked , radare2 tries to propagate structure offset in the function at current offset , to run this analysis on whole program or at any targeted functions after all structs is linked you have `taa` command :
+Once the struct is linked , radare2 tries to propagate structure offset in the function at current offset , to run this analysis on whole program or at any targeted functions after all structs is linked you have `taa` command :
 
 ```
 [0x00000000]> ta?
@@ -161,6 +160,7 @@ Note sometimes the emulation may not be accurate , for example as below :
 |           0x000006f0      488b45f8       mov rax, qword [local_8h]
 
 ````
+
 The return value of `malloc` may differ between two emulation , so you have to set the hint for return value manually using `ahr` command , so run `tl` or `taa` command after setting up the return value hint .
 
 ```
