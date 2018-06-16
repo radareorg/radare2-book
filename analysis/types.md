@@ -71,6 +71,14 @@ struct S1 {
 foo
 S1
 ```
+Also note there is a config option to specify include directories for types parsing
+
+```
+[0x00000000]> e??~dir.type
+dir.types: Default path to look for cparse type files
+[0x00000000]> e dir.types
+/usr/include
+```
 
 ### Printing types
 
@@ -132,6 +140,32 @@ Moreover, the link will be shown in the disassembly output or visual mode:
             0x000051f8      488d0549a021.  lea rax, loc._edata         ; 0x21f248
             0x000051ff      4839f8         cmp rax, rdi
             0x00005202      4889e5         mov rbp, rsp
+```
+
+Also once the struct is linked , radare2 tries to propagate structure offset in the function at current offset , to run this analysis on whole program or at any targeted functions after all structs is linked you have `taa` command :
+
+```
+[0x00000000]> ta?
+| taa [fcn]           Analyze all/given function to convert immediate to linked structure offsets (see tl?)
+```
+
+Note sometimes the emulation may not be accurate , for example as below :
+
+````
+|           0x000006da      55             push rbp
+|           0x000006db      4889e5         mov rbp, rsp
+|           0x000006de      4883ec10       sub rsp, 0x10
+|           0x000006e2      bf20000000     mov edi, 0x20               ; "@"
+|           0x000006e7      e8c4feffff     call sym.imp.malloc         ;  void *malloc(size_t size)
+|           0x000006ec      488945f8       mov qword [local_8h], rax
+|           0x000006f0      488b45f8       mov rax, qword [local_8h]
+
+````
+The return value of `malloc` may differ between two emulation , so you have to set the hint for return value manually using `ahr` command , so run `tl` or `taa` command after setting up the return value hint .
+
+```
+[0x000006da]> ah?
+| ahr val            set hint for return value of a function
 ```
 
 ### Structure Immediates 
