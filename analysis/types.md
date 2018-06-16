@@ -6,28 +6,28 @@ Most of the related commands are located in `t` namespace:
 ```
 [0x000051c0]> t?
 |Usage: t # cparse types commands
-| t                       List all loaded types
-| t <type>                Show type in 'pf' syntax
-| t*                      List types info in r2 commands
-| t- <name>               Delete types by its name
-| t-*                     Remove all types
-| ta <type>               Mark immediate as a type offset
-| tb <enum> <value>       Show matching enum bitfield for given number
-| tc ([cctype])           calling conventions listing and manipulations
-| te[?]                   List all loaded enums
-| te <enum> <value>       Show name for given enum number
-| td[?] <string>          Load types from string
-| tf                      List all loaded functions signatures
-| tk <sdb-query>          Perform sdb query
-| tl[?]                   Show/Link type to an address
-| tn[?] [-][addr]         manage noreturn function attributes and marks
-| to -                    Open cfg.editor to load types
-| to <path>               Load types from C header file
-| tos <path>              Load types from parsed Sdb database
-| tp <type>  = <address>  cast data at <address> to <type> and print it
-| ts[?]                   print loaded struct types
-| tu[?]                   print loaded union types
-[0x000051c0]>
+| t                          List all loaded types
+| tj                         List all loaded types as json
+| t <type>                   Show type in 'pf' syntax
+| t*                         List types info in r2 commands
+| t- <name>                  Delete types by its name
+| t-*                        Remove all types
+| ta <type>                  Mark immediate as a type offset
+| tc ([cctype])              calling conventions listing and manipulations
+| te[?]                      List all loaded enums
+| td[?] <string>             Load types from string
+| tf                         List all loaded functions signatures
+| tk <sdb-query>             Perform sdb query
+| tl[?]                      Show/Link type to an address
+| tn[?] [-][addr]            manage noreturn function attributes and marks
+| to -                       Open cfg.editor to load types
+| to <path>                  Load types from C header file
+| tos <path>                 Load types from parsed Sdb database
+| tp  <type> [addr|varname]  cast data at <address> to <type> and print it
+| tpx <type> <hexpairs>      Show value for type with specified byte sequence
+| ts[?]                      print loaded struct types
+| tu[?]                      print loaded union types
+| tt[?]                      List all loaded typedefs
 ```
 
 Note, that the basic (atomic) types are not those from C standard -
@@ -51,15 +51,15 @@ int8_t
 long
 long long
 ...
-[0x000051c0]> ts
-S1
-[0x000051c0]>
 ```
+### Loading types
 
-There are three easy ways to define a new types: directly from the string
-using `td` command, from the file using `to` command or open an `$EDITOR`
-to type the definitions in place.
+There are three easy ways to define a new type: 
+* Directly from the string using `td` command
+* From the file using `to <filename>` command 
+* Open  an `$EDITOR` to type the definitions in place using `to -`
 ```
+[0x000051c0]> "td struct foo {char* a; int b;}"
 [0x000051c0]> cat ~/radare2-regressions/bins/headers/s3.h
 struct S1 {
     int x[3];
@@ -68,20 +68,50 @@ struct S1 {
 };
 [0x000051c0]> to ~/radare2-regressions/bins/headers/s3.h
 [0x000051c0]> ts
+foo
 S1
-[0x000051c0]> tp S1
- x : 0x000051c0 = [ 2303323441, 2303221457, 3833809122 ]
- y : 0x000051cc = [ 1280594160, 42599821, 2370306049, 16913165 ]
- z : 0x000051dc = 1032669184
-[0x000051c0]>
+```
+Also note there is a config option to specify include directories for types parsing
+
+```
+[0x00000000]> e??~dir.type
+dir.types: Default path to look for cparse type files
+[0x00000000]> e dir.types
+/usr/include
 ```
 
-Notice here we used `tp` command, which is basically converts
+### Printing types
+
+Notice below we have used `ts` command, which basically converts
 the C type description (or to be precise it's SDB representation)
 into the the sequence of `pf` commands. See more about [print format](basic_commands/print_modes.md).
 
-This command performs just temporary "cast". But if we want to link some address or variable
+The `tp` command uses the `pf` string to print all the members of type at current offset/given address
+
+```
+[0x000051c0]> ts foo
+pf zd a b
+[0x000051c0]> tp foo
+ a : 0x000051c0 = 'hello'
+ b : 0x000051cc = 10
+[0x000051c0]> tp foo 0x000053c0
+ a : 0x000053c0 = 'world'
+ b : 0x000053cc = 20
+```
+
+Also you could fill your own data into struct and print it using `tpx` command 
+
+```
+[0x000051c0]> tpx foo 4141414144141414141442001000000
+ a : 0x000051c0 = AAAAD.....B
+ b : 0x000051cc = 16
+```
+
+### Linking Types
+
+The `tp` command just performs temporary cast. But if we want to link some address or variable
 with the chosen type, we can use `tl` command to store the relationship in SDB.
+
 ```
 [0x000051c0]> tl S1 = 0x51cf
 [0x000051c0]> tl
@@ -89,7 +119,6 @@ with the chosen type, we can use `tl` command to store the relationship in SDB.
  x : 0x000051cf = [ 2315619660, 1207959810, 34803085 ]
  y : 0x000051db = [ 2370306049, 4293315645, 3860201471, 4093649307 ]
  z : 0x000051eb = 4464399
-[0x000051c0]>
 ```
 Moreover, the link will be shown in the disassembly output or visual mode:
 ```
@@ -112,45 +141,41 @@ Moreover, the link will be shown in the disassembly output or visual mode:
             0x000051ff      4839f8         cmp rax, rdi
             0x00005202      4889e5         mov rbp, rsp
 ```
+Once the struct is linked , radare2 tries to propagate structure offset in the function at current offset , to run this analysis on whole program or at any targeted functions after all structs is linked you have `taa` command :
 
-Note, that if you define one of the fields as a `char`, you will get UTF8/ASCII string printed:
 ```
-[0x00000000]> px 32
-- offset -   0 1  2 3  4 5  6 7  8 9  A B  C D  E F  0123456789ABCDEF
-0x00000000  2261 7364 6173 6422 1010 2349 8473 5733  "asdasd"..#I.sW3
-0x00000010  9420 3492 3400 0000 0000 0000 0000 0000  . 4.4...........
-[0x00000000]> "td struct mystruct { char str[6]; int b; void *p; uint64_t l;};"
-[0x00000000]> ts
-mystruct
-[0x00000000]> tp mystruct
- str : 0x00000000 = "asdas
-   b : 0x00000006 = 269492836
-   p : 0x0000000a = (qword)0x2094335773844923
-   l : 0x00000012 = (qword)0x0000000000349234
-[0x00000000]>
+[0x00000000]> ta?
+| taa [fcn]           Analyze all/given function to convert immediate to linked structure offsets (see tl?)
 ```
 
-To see the internal representation of the structure you can use `tk` command:
+Note sometimes the emulation may not be accurate , for example as below :
+
+````
+|           0x000006da      55             push rbp
+|           0x000006db      4889e5         mov rbp, rsp
+|           0x000006de      4883ec10       sub rsp, 0x10
+|           0x000006e2      bf20000000     mov edi, 0x20               ; "@"
+|           0x000006e7      e8c4feffff     call sym.imp.malloc         ;  void *malloc(size_t size)
+|           0x000006ec      488945f8       mov qword [local_8h], rax
+|           0x000006f0      488b45f8       mov rax, qword [local_8h]
+
+````
+
+The return value of `malloc` may differ between two emulation , so you have to set the hint for return value manually using `ahr` command , so run `tl` or `taa` command after setting up the return value hint .
+
 ```
-[0x000051c0]> tk~S1
-S1=struct
-struct.S1=x,y,z
-struct.S1.x=int32_t,0,3
-struct.S1.x.meta=4
-struct.S1.y=int32_t,12,4
-struct.S1.y.meta=4
-struct.S1.z=int32_t,28,0
-struct.S1.z.meta=0
-[0x000051c0]>
+[0x000006da]> ah?
+| ahr val            set hint for return value of a function
 ```
 
-There is one more important aspect of using types in radare2 - it
+### Structure Immediates 
+
+There is one more important aspect of using types in radare2 - using `ta` you
 can change the immediate in the opcode to the structure offset.
 Lets see a simple example of [R]SI-relative addressing
 ```
 [0x000052f0]> pd 1
             0x000052f0      488b4608       mov rax, qword [rsi + 8]    ; [0x8:8]=0
-[0x000052f0]>
 ```
 Here `8` - is some offset in the memory, where `rsi` probably holds
 some structure pointer. Imagine that we have the following structures
@@ -165,7 +190,6 @@ At first we need to list available types matching this offset:
 [0x000052f0]> tas 8
 ms.member1
 ms1.member1
-[0x000052f0]>
 ```
 Note, that `ms2` is not listed, because it has no members with offset `8`.
 After listing available options we can link it to the chosen offset at
@@ -174,10 +198,42 @@ the current address:
 [0x000052f0]> ta ms1.member1
 [0x000052f0]> pd 1
             0x000052f0      488b4608       mov rax, qword [rsi + ms1.member1]    ; [0x8:8]=0
-[0x000052f0]>
+```
+### Managing enums
+
+* Printing all feilds in enum using `te` command
+
+```
+[0x00000000]> "td enum Foo {COW=1,BAR=2};"
+[0x00000000]> te Foo 
+COW = 0x1
+BAR = 0x2
+```
+
+* Finding matching enum member for given bitfield and vice-versa 
+
+```
+[0x00000000]> te Foo 0x1
+COW
+[0x00000000]> teb Foo COW
+0x1
 ```
 
 ## Internal representation
+
+To see the internal representation of the types you can use `tk` command:
+```
+[0x000051c0]> tk~S1
+S1=struct
+struct.S1=x,y,z
+struct.S1.x=int32_t,0,3
+struct.S1.x.meta=4
+struct.S1.y=int32_t,12,4
+struct.S1.y.meta=4
+struct.S1.z=int32_t,28,0
+struct.S1.z.meta=0
+[0x000051c0]>
+```
 
 Defining primitive types requires understanding of basic pf formats,
 you can find the whole list of format specifier in `pf??`:
@@ -310,5 +366,3 @@ Their is one extra optional key
 func.x.noreturn=true/false
 ```
 This key is used to mark functions that will not return once called like `exit` and `_exit`.
-
-
