@@ -12,7 +12,7 @@ All the configuration of radare is done with the `eval` commands. A typical star
 
 Configuration can also be changed with `-e` <config=value> command-line option. This way you can adjust configuration from the command line, keeping the .radare2rc file intact. For example, to start with empty configuration and then adjust `scr.color` and `asm.syntax` the following line may be used:
 
-    $ radare2 -n -e scr.color=true -e asm.syntax=intel -d /bin/ls
+    $ radare2 -N -e scr.color=true -e asm.syntax=intel -d /bin/ls
 
 Internally, the configuration is stored in a hash table. The variables are grouped in namespaces: `cfg.`, `file.`, `dbg.`, `scr.` and so on.
 
