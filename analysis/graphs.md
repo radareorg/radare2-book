@@ -4,7 +4,7 @@ Radare2 supports various types of graph available trough commands starting with 
 ```
 [0x00005000]> ag?
 |Usage: ag<graphtype><format> [addr]
-| Graph commands:         
+| Graph commands:
 | agc[format] [fcn addr]  Function callgraph
 | agf[format] [fcn addr]  Basic blocks function graph
 | agx[format] [addr]      Cross references graph
@@ -19,8 +19,8 @@ Radare2 supports various types of graph available trough commands starting with 
 | ag-                     Clear the custom graph
 | agn[?] title body       Add a node to the custom graph
 | age[?] title1 title2    Add an edge to the custom graph
-|                         
-| Output formats:         
+|
+| Output formats:
 | <blank>                 Ascii art
 | v                       Interactive ascii art
 | t                       Tiny ascii art
@@ -42,8 +42,8 @@ Here's a short description for every output format avaliable:
 - ** Ascii Art ** (e.g. `agf`)
 
 	Displays the graph directly to stdout using ascii art to represent
-	blocks and edges.  
-	
+	blocks and edges.
+
 	_Warning: displaying large graphs directly to stdout
 	might prove to be computationally expensive and will make r2 not
 	responsive for some time. In case of doubt prefer using the interactive
@@ -68,7 +68,7 @@ Here's a short description for every output format avaliable:
 
 - ** JSON ** (e.g. `agfj`)
 
-	Prints a json string representing the graph. 
+	Prints a json string representing the graph.
 	- In case of the `f` format (basic blocks of function), it will have
 	detailed information about the function and will also contain the
 	disassembly of the function (use `J` format for the formatted
@@ -79,7 +79,7 @@ Here's a short description for every output format avaliable:
 
 - ** Graph Modelling Language ** (e.g. `agfg`)
 
-	Prints the gml source code representing the graph, which can be interpreted by programs such as 
+	Prints the gml source code representing the graph, which can be interpreted by programs such as
 	[yEd](https://www.yworks.com/products/yed/download)
 
 - ** SDB key-value ** (e.g. `agfk`)
@@ -93,7 +93,7 @@ Here's a short description for every output format avaliable:
 	to construct the graph are `agn [title] [body]` to add a node and `age
 	[title1] [title2]` to add an edge.  The `[body]` field can be expressed
 	in base64 to include special formatting (such as newlines).
-	
+
 	To easily execute the printed commands, it is possible to prepend a dot
 	to the command (`.agf*`).
 
@@ -101,7 +101,7 @@ Here's a short description for every output format avaliable:
 
 	Radare2 will convert the graph to dot format, use the `dot` program to
 	convert it to a `.gif` image and then try to find an already installed
-	viewer on your system (`xdg-open`, `open`, ...) and display the graph there. 
+	viewer on your system (`xdg-open`, `open`, ...) and display the graph there.
 	The extension of the output image can be set with the `graph.extension` config
 	variable. Available extensions are `png, jpg, gif, pdf, ps`.
 

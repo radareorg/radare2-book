@@ -54,9 +54,9 @@ long long
 ```
 ### Loading types
 
-There are three easy ways to define a new type: 
+There are three easy ways to define a new type:
 * Directly from the string using `td` command
-* From the file using `to <filename>` command 
+* From the file using `to <filename>` command
 * Open  an `$EDITOR` to type the definitions in place using `to -`
 ```
 [0x000051c0]> "td struct foo {char* a; int b;}"
@@ -99,7 +99,7 @@ pf zd a b
  b : 0x000053cc = 20
 ```
 
-Also you could fill your own data into struct and print it using `tpx` command 
+Also you could fill your own data into struct and print it using `tpx` command
 
 ```
 [0x000051c0]> tpx foo 4141414144141414141442001000000
@@ -168,7 +168,7 @@ The return value of `malloc` may differ between two emulation , so you have to s
 | ahr val            set hint for return value of a function
 ```
 
-### Structure Immediates 
+### Structure Immediates
 
 There is one more important aspect of using types in radare2 - using `ta` you
 can change the immediate in the opcode to the structure offset.
@@ -205,12 +205,12 @@ the current address:
 
 ```
 [0x00000000]> "td enum Foo {COW=1,BAR=2};"
-[0x00000000]> te Foo 
+[0x00000000]> te Foo
 COW = 0x1
 BAR = 0x2
 ```
 
-* Finding matching enum member for given bitfield and vice-versa 
+* Finding matching enum member for given bitfield and vice-versa
 
 ```
 [0x00000000]> te Foo 0x1

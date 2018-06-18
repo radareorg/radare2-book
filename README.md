@@ -18,7 +18,7 @@
 
 Rework by maijin on the original radare book
 
-Contributors: 
+Contributors:
 
 * Anton Kochkov
 * aoighost
