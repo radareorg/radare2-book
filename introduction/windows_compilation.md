@@ -2,8 +2,6 @@
 
 ### Meson (MSVC)
 
-**WARNING: This build is not being tested for the moment. Note that it does not compile every plugins available in radare2 yet. Refer to the [Mingw32](#mingw32) build below for a more stable and complete build.**
-
 The most native way to compile radare2 under Windows is to use meson + msvc. First you need **python3** to be installed on your computer. Once this is done, you can install the meson build system using `pip3 install meson` (with Administrator privileges).
 Now navigate to your Python installation folder, and copy the `meson.py` from `.\Scripts` subfolder into your radare2 folder.
 
@@ -26,12 +24,12 @@ In any case, everything is generated in the `build` folder by default, except fo
 #### Installing
 
 Now that you successfully compiled radare2, you might want to gather every executables and requirements into the same place. The command below will collect everything and put it into the `dist` folder.
-```bat
+```
 E:\radare2>sys\meson_install.bat dist
 ```
 
 You can now test your newly crafted radare2 binary easily:
-```bat
+```
 E:\radare2>cd dist
 E:\radare2\dist>radare2.exe -v
 ```
@@ -54,6 +52,7 @@ make
 make w32dist
 zip -r w32-build.zip w32-build
 ```
+
 This generates a native, 32-bit console application for Windows.
 The 'i486-mingw32-gcc' compiler is the one I have in my box, you will probably need to change this.
 
@@ -78,7 +77,7 @@ sys/mingw32.sh
 
 ### Cygwin
 
-Cygwin is another possibility; however, issues related to Cygwin libraries can make debugging difficult. But using binary compiled for Cygwin will allow you to use Unicode in the Windows console, and to have 256 colors.
+Cygwin is another possibility; however, issues related to Cygwin libraries can make debugging difficult. But using binary compiled for Cygwin will allow you to use Unicode in the Windows console, and to have 16 million colors.
 
 Note, Cygwin build require exactly the opposite git configuration, so setup git first, for a proper automatic fetching of capstone:
 ```sh
@@ -86,8 +85,6 @@ git config --global core.autocrlf false
 ```
 
 Please, be sure to build radare2 from the same environment you're going to use r2 in. If you are going to use r2 in MinGW32 shell or cmd.exe — you should build r2 in the MinGW32 environment. And if you are going to use r2 in Cygwin — you have to build r2 from the Cygwin shell. Since Cygwin is more UNIX-compatible than MinGW, the radare2 supports more colors and Unicode symbols if build using the former one.
-
-
 
 ### Mingw-W64
 
