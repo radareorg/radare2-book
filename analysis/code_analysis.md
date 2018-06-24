@@ -352,3 +352,136 @@ the minimap mode type `VV` then press `p` twice:
   ...
 ```
 This mode allows you to see disassembly of each node separately, just navigate between them using `Tab` key.
+
+## Analysis hints
+
+It is not an uncommon case that analysis results are not perfect even after you tried every single
+configuration option. This is where the "analysis hints" radare2 mechanism comes in. It allow
+to override some basic opcode or metainformation properties, or even to rewrite the whole opcode
+string. These commands are located under `ah` namespace:
+
+```
+|Usage: ah[lba-]Analysis Hints
+| ah?                show this help
+| ah? offset         show hint of given offset
+| ah                 list hints in human-readable format
+| ah.                list hints in human-readable format from current offset
+| ah-                remove all hints
+| ah- offset [size]  remove hints at given offset
+| ah* offset         list hints in radare commands format
+| aha ppc 51         set arch for a range of N bytes
+| ahb 16 @ $$        force 16bit for current instruction
+| ahc 0x804804       override call/jump address
+| ahe 3,eax,+=       set vm analysis string
+| ahf 0x804840       override fallback address for call
+| ahh 0x804840       highlight this adrress offset in disasm
+| ahi[?] 10          define numeric base for immediates (1, 8, 10, 16, s)
+| ahj                list hints in JSON
+| aho foo a0,33      replace opcode string
+| ahp addr           set pointer hint
+| ahr val            set hint for return value of a function
+| ahs 4              set opcode size=4
+| ahS jz             set asm.syntax=jz for this opcode
+```
+One of the most common case is to set a particular numeric base for immediates:
+```
+[0x00003d54]> ahi?
+|Usage ahi [sbodh] [@ offset] Define numeric base
+| ahi [base]  set numeric base (1, 2, 8, 10, 16)
+| ahi b       set base to binary (2)
+| ahi d       set base to decimal (10)
+| ahi h       set base to hexadecimal (16)
+| ahi o       set base to octal (8)
+| ahi p       set base to htons(port) (3)
+| ahi i       set base to IP address (32)
+| ahi S       set base to syscall (80)
+| ahi s       set base to string (1)
+[0x00003d54]> pd 2
+│          0x00003d54      0583000000     add eax, 0x83
+│          0x00003d59      3d13010000     cmp eax, 0x113
+[0x00003d54]> ahi d
+[0x00003d54]> pd 2
+│          0x00003d54      0583000000     add eax, 131
+│          0x00003d59      3d13010000     cmp eax, 0x113
+[0x00003d54]> ahi b
+[0x00003d54]> pd 2
+│          0x00003d54      0583000000     add eax, 10000011b
+│          0x00003d59      3d13010000     cmp eax, 0x113
+```
+It is notable that some analysis stages or commands add the internal analysis hints,
+which can be checked with `ah` command:
+```
+[0x00003d54]> ah
+ 0x00003d54 - 0x00003d54 => immbase=2
+[0x00003d54]> ah*
+ ahi 2 @ 0x3d54
+ ```
+
+Sometimes we need to override jump or call address, for example in case of tricky
+relocation, which is unknown for radare2, thus we can change the value manually.
+The current analysis information about particular opcode can be checked with `ao` command.
+We can use `ahc` command for performing such a change:
+```
+[0x00003cee]> pd 2
+│          0x00003cee      e83d080100     call sub.__errno_location_530
+│          0x00003cf3      85c0           test eax, eax
+[0x00003cee]> ao
+address: 0x3cee
+opcode: call 0x14530
+mnemonic: call
+prefix: 0
+id: 56
+bytes: e83d080100
+refptr: 0
+size: 5
+sign: false
+type: call
+cycles: 3
+esil: 83248,rip,8,rsp,-=,rsp,=[],rip,=
+jump: 0x00014530
+direction: exec
+fail: 0x00003cf3
+stack: null
+family: cpu
+stackop: null
+[0x00003cee]> ahc 0x5382
+[0x00003cee]> pd 2
+│          0x00003cee      e83d080100     call sub.__errno_location_530
+│          0x00003cf3      85c0           test eax, eax
+[0x00003cee]> ao
+address: 0x3cee
+opcode: call 0x14530
+mnemonic: call
+prefix: 0
+id: 56
+bytes: e83d080100
+refptr: 0
+size: 5
+sign: false
+type: call
+cycles: 3
+esil: 83248,rip,8,rsp,-=,rsp,=[],rip,=
+jump: 0x00005382
+direction: exec
+fail: 0x00003cf3
+stack: null
+family: cpu
+stackop: null
+[0x00003cee]> ah
+ 0x00003cee - 0x00003cee => jump: 0x5382
+```
+As you can see, despite the unchanged disassembly view the jump address in opcode was changed
+(`jump` option).
+
+If anything of the previously described didn't help, you can simply override shown disassembly with anything you
+like:
+```
+[0x00003d54]> pd 2
+│          0x00003d54      0583000000     add eax, 10000011b
+│          0x00003d59      3d13010000     cmp eax, 0x113
+[0x00003d54]> "aho myopcode bla, foo"
+[0x00003d54]> pd 2
+│          0x00003d54                     myopcode bla, foo
+│          0x00003d55      830000         add dword [rax], 0
+```
+
