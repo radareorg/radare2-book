@@ -1,4 +1,4 @@
-# Introduction
+﻿# Introduction
 
 One of the most important things to remember in reverse engineering is
 a core difference between static analysis and dynamic analysis. As many already
@@ -8,7 +8,7 @@ Thus many professional reverse engineering tools use code emulation while
 performing an analysis of binary code, and radare2 is no difference here.
 
 For partial emulation (or imprecise full emulation) radare2 uses its own
-[ESIL](disassembling/esil.md) intermediate language and virtual machine.
+[ESIL](../disassembling/esil.md) intermediate language and virtual machine.
 
 Radare2 supports this kind of partial emulation for all platforms that
 implements ESIL uplifting (x86/x86_64, ARM, MIPS, AVR, 8051, Gameboy, ...).
@@ -91,7 +91,7 @@ Along with usual emulation there is possibility to record and replay mode:
 - `aets+` to create a new one
 - `aesb` to step back in the current ESIL R&R session
 
-More about this operation mode you can read in [Reverse Debugging](debugger/revdebug.md) chapter.
+More about this operation mode you can read in [Reverse Debugging](../debugger/revdebug.md) chapter.
 
 ## Emulation in analysis loop
 

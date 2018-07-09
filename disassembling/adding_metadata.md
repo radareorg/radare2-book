@@ -83,7 +83,7 @@ The `[sz]` argument to `Cf` is used to define how many bytes the struct should t
 
 Using `Cf`, it's easy to define complex structures with simple oneliners. See `pf?` for more information.
 Remember that all these `C` commands can also be accessed from the visual mode by pressing the `d` (data conversion) key.
-Note that unlike [`t`](analysis/types.md) commands `Cf` doesn't change analysis results. It is only
+Note that unlike [`t`](../analysis/types.md) commands `Cf` doesn't change analysis results. It is only
 a visual boon.
 
 Sometimes just adding a single line of comments is not enough, in this case radare2 allows you to

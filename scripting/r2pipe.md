@@ -69,7 +69,7 @@ r2node.pipe (file, doSomeStuff);
 r2node.launch (file, doSomeStuff);
 ```
 
-**Full API doc:** https://github.com/radare/radare2-bindings/blob/master/r2pipe/nodejs/README.md
+**Full API doc:** https://github.com/radare/radare2-r2pipe/blob/master/nodejs/r2pipe/README.md 
 
 Go
 ```
