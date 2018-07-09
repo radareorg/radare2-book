@@ -39,7 +39,7 @@ can be changed with those arguments/variables control commands. This kind of ana
 relies heavily on preloaded function prototypes and calling convention, thus loading symbols
 can improve it. Moreover, after changing something we can rerun variables analysis with
 `afva` command. Quite often variables analysis is accompanied with
-[types analysis](analysis/types.md), see `afta` command.
+[types analysis](types.md), see `afta` command.
 
 The most important aspect of reverse engineering - naming things. Of course you can rename
 variable too, affecting all places it was referenced. This can be achieved with `afvn` for
