@@ -1,4 +1,4 @@
-# Introduction
+﻿# Introduction
 
 One of the most important things to remember in reverse engineering is
 a core difference between static analysis and dynamic analysis. As many already
