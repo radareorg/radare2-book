@@ -2,12 +2,12 @@
 
 * [Introduction](README.md)
    * [Credits](credits/credits.md)
-* [First Steps](first_steps/intro.md)
    * [History](first_steps/history.md)
    * [Overview](first_steps/overview.md)
    * [Getting radare2](first_steps/getting_radare.md)
    * [Compilation and Portability](first_steps/compilation_portability.md)
    * [Compilation on Windows](first_steps/windows_compilation.md)
+* [First Steps](first_steps/intro.md)
    * [Command-line Flags](first_steps/commandline_flags.md)
    * [Basic Usage](first_steps/basic_usage.md)
    * [Command Format](first_steps/command_format.md)
