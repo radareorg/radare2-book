@@ -1,0 +1,23 @@
+{
+  "name": "radare2book",
+  "version": "1.0.0",
+  "description": "the official radare2 book",
+  "scripts": {
+    "build": "gitbook build . _r2book",
+    "pdf": "gitbook pdf . ./r2book.pdf",
+    "epub": "gitbook epub . ./r2book.epub"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/radare/radare2book.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/radare/radare2book/issues"
+  },
+  "homepage": "https://github.com/radare/radare2book#readme",
+  "dependencies": {
+    "gitbook-cli": "^2.3.2"
+  }
+}
