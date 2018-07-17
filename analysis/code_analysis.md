@@ -225,7 +225,8 @@ In addition to those we can also set `anal.ijmp` to follow the indirect jumps, c
 sequences at a function beginning.
 
 For now radare2 also allows you to change the maximum basic block size with `anal.bb.maxsize` option
-and `anal.bb.split` to split basic blocks over JMP instructions. Beware that some of basic blocks
+. The default value just works in most use cases, but it's useful to increase that for example when 
+dealing with obfuscated code. Beware that some of basic blocks
 control options may disappear in the future in favor of more automated ways to set those.
 
 For some unusual binaries or targets there is an option `anal.noncode`. Radare2 doesn't try
