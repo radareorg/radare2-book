@@ -123,6 +123,8 @@ Another useful command is to list the sections of a specific library. In the fol
     21 0x000293b8  7101 0x00000000  7101 ---- ld-2.27.so..strtab
     22 0x0002af75   215 0x00000000   215 ---- ld-2.27.so..shstrtab
 
+## Memory map of the Heap
+
 radare2's `dm` subcommands can also display a map of the heap which is useful for those who are interesting in inspecting the heap and its content. Simply execute `dmh` to show a map of the heap:
 
     [0x7fae46236ca6]> dmh
@@ -157,6 +159,3 @@ You can also see a graph layout of the heap:
     ╰────────────────────────────────────────────────────╯
 
 Another heap commands can be found under `dmh`, check `dmh?` for the full list.
-
-
-
