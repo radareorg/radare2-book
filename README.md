@@ -32,6 +32,7 @@ Contributors:
 * Judge Dredd
 * jvoisin
 * Kevin Grandemange
+* Megabeets
 * muzlightbeer
 * Peter C
 * sghctoma

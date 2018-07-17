@@ -62,6 +62,7 @@
    * [Getting Started](debugger/getting_started.md)
    * [Migration from ida, GDB or WinDBG](debugger/migration.md)
    * [Registers](debugger/registers.md)
+   * [Memory Maps](debugger/memory_maps.md)
    * [Reverse Debugging](debugger/revdebug.md)
 * Remote Access Capabilities
    * [Remoting Capabilities](debugger/remoting_capabilities.md)
