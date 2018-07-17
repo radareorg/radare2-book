@@ -29,7 +29,7 @@ First, let's see the help message for `dm`, the command which is responsible for
 
 In this chapter, we'll go over some of the most useful subcommands of `dm` using simple examples. For the following examples, we'll use a simple `helloworld` program for Linux but it'll be the same for every binary.
 
-First thing first - open a program in debugging mode:
+First things first - open a program in debugging mode:
 
     $ r2 -d helloworld
     Process with PID 20304 started...
@@ -38,6 +38,8 @@ First thing first - open a program in debugging mode:
     Using 0x56136b475000
     asm.bits 64
     [0x7f133f022fb0]> 
+
+> Note that we passed "helloworld" to radare2 without "./". radare2 will try to find this program in the current directory and then in $PATH, even if no "./" is passed. This is contradictory with UNIX systems, but makes the behaviour consistent for windows users
 
 Let's use `dm` to print the memory maps of the binary we've just opened:
 
@@ -52,11 +54,21 @@ Let's use `dm` to print the memory maps of the binary we've just opened:
     0x00007fffd25f9000 # 0x00007fffd25fb000 - usr     8K s r-x [vdso] [vdso] ; map.vdso_.r_x
     0xffffffffff600000 # 0xffffffffff601000 - usr     4K s r-x [vsyscall] [vsyscall] ; map.vsyscall_.r_x
 
+For those of you who prefer a more visual way, you can use `dm=` to see the memory maps using an ASCII-art bars. This will be handy when you want to see how these maps are located in the memory.
+
+If you want to know the memory-map you are currently in, use `dm.`:
+
+    [0x7f133f022fb0]> dm.
+    0x00007f947eed9000 # 0x00007f947eefe000 * usr   148K s r-x /usr/lib/ld-2.27.so /usr/lib/ld-2.27.so ; map.usr_lib_ld_2.27.so.r_x
+
+
 Using `dmm` we can "List modules (libraries, binaries loaded in memory)", this is quite a handy command to see which modules were loaded.
 
     [0x7fa80a19dfb0]> dmm
     0x55ca23a4a000 /tmp/helloworld
     0x7fa80a19d000 /usr/lib/ld-2.27.so     
+
+> Note that the output of `dm` subcommands, and `dmm` specifically, might be different in various systems and different binaries.
 
 We can see that along with our `helloworld` binary itself, another library was loaded which is `ld-2.27.so`. We don't see `libc` yet and this is because radare2 breaks before `libc` is loaded to memory. Let's use `dcu` (**d**ebug **c**ontinue **u**ntil) to execute our program until the entry point of the program, which radare flags as `entry0`.
 
@@ -80,6 +92,8 @@ Speaking of `libc`, a popular task for binary exploitation is to find the addres
     6427 0x00043d10 0x7fa809e24d10   WEAK   FUNC   45 system
     7094 0x00043d10 0x7fa809e24d10 GLOBAL   FUNC   45 system
     7480 0x001285a0 0x7fa809f095a0 GLOBAL   FUNC  100 svcerr_systemerr
+
+Similar to the `dm.` command, with `dmi.` you can see the closest symbol to the current address.
 
 Another useful command is to list the sections of a specific library. In the following example we'll list the sections of `ld-2.27.so`:
 
