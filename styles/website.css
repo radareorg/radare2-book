@@ -8,6 +8,6 @@ pre {
   text-align: justify;
 }
 
-code {
-  line-height: 0.8em !important;
+.markdown-section code, .markdown-section pre {
+  line-height: 0.9;
 }
