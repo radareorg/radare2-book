@@ -1,4 +1,4 @@
-## Common Configuration Variables
+## Configuration Variables
 
 Below is a list of the most frequently used configuration variables. You can get a complete list by issuing `e` command without arguments. For example, to see all variables defined in the "cfg" namespace, issue `e cfg.` (mind the ending dot). You can get help on any eval configuration variable by using `e? cfg.`
 

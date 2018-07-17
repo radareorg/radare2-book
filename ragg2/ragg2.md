@@ -1,303 +1,78 @@
 # Purpose
 
-ragg2 compiles programs written in a simple high-level language into
-tiny binaries for x86, x86-64, and ARM.
-
-
-# Syntax of the language
-
-The code of r\_egg is compiled as in a flow. It is a one-pass compiler;
-
-this means that you have to define the proper stackframe size at the
-
-beginning of the function, and you have to define the functions in
-
-order to avoid getting compilation errors.
-
-The compiler generates assembly code for x86-{32,64} and arm. But it aims
-
-to support more platforms. This code is the compiled with r\_asm and
-
-injected into a tiny binary with r\_bin.
-
-You may like to use r\_egg to create standalone binaries, position-
-
-independent raw eggs to be injected on running processes or to patch
-
-on-disk binaries.
-
-The generated code is not yet optimized, but it's safe to be executed
-
-at any place in the code.
-
-## Preprocessor
-
-### Aliases
-
-Sometimes you just need to replace at compile time a single entity on
-
-multiple places. Aliases are translated into 'equ' statements in assembly
-
-language. This is just an assembler-level keyword redefinition.
-
-` AF_INET@alias(2);`
-
-` printf@alias(0x8053940);`
-
-### Includes
-
-Use `cat(1)` or the preprocessor to concatenate multiple files to be compiled.
-
-` INCDIR@alias("/usr/include/ragg2");`
-
-` sys-osx.r@include(INCDIR);`
-
-
-
-### Hashbang
-
-eggs can use a hashbang to make them executable.
-
- `$ head -n1 hello.r`
-
-` #!/usr/bin/ragg2 -X`
-
-` $ ./hello.r`
-
-` Hello World!`
-
-### Main
-
-The execution of the code is done as in a flow. The first function to be
-
-defined will be the first one to be executed. If you want to run main\(\)
-
-just do like this:
-
-` #!/usr/bin/ragg2 -X`
-
-` main();`
-
-` ...`
-
-` main@global(128,64) {`
-
-` ...`
-
-  
-
-
-### Function definition
-
-You may like to split up your code into several code blocks. Those blocks
-
-are bound to a label followed by root brackets '{ ... }'
-
-### Function signatures
-
-`name@type(stackframesize,staticframesize) { body }`
-
-`name` : name of the function to define
-
-`type` : see function types below
-
-`stackframesize` : get space from stack to store local variables
-
-`staticframesize` : get space from stack to store static variables \(strings\)
-
-`body` : code of the function  
-
-
-### Function types
-
- `alias`   Used to create aliases
-
- `data` ; the body of the block is defined in .data
-
- `inline` ; the function body is inlined when called
-
- `global` ; make the symbol global
-
- `fastcall` ; function that is called using the fast calling convention
-
- `syscall`  ; define syscall calling convention signature
-
-### Syscalls
-
-r\_egg offers a syntax sugar for defining syscalls. The syntax is like this:
-
-` exit@syscall(1);`
-
-` @syscall() {`
-
-`` : mov eax, `.arg```
-
-` : int 0x80`
-
-` }`
-
-` main@global() {`
-
-` exit (0);`
-
-` }`
-
-### Libraries
-
-At the moment there is no support for linking r\_egg programs to system
-
-libraries. but if you inject the code into a program \(disk/memory\) you
-
-can define the address of each function using the @alias syntax.
-
-
-
-### Core library
-
-There's a work-in-progress libc-like library written completely in r\_egg
-
-### Variables
-
-`.arg`
-
-`.arg0`
-
-`.arg1`
-
-`.arg2`
-
-`.var0`
-
-`.var2`
-
-`.fix`
-
-`.ret ; eax for x86, r0 for arm`
-
-`.bp`
-
-`.pc`
-
-`.sp`
-
-__Attention:__ All the numbers after `.var` and `.arg` mean the offset with the 
-
-top of stack, not variable symbols. 
-
-### Arrays
-
-Supported as raw pointers. TODO: enhance this feature
-
-### Tracing
-
-Sometimes r\_egg programs will break or just not work as expected. Use the
-
-'trace' architecture to get a arch-backend call trace:
-
-` $ ragg2 -a trace -s yourprogram.r`
-
-### Pointers
-
-TODO: Theorically '\*' is used to get contents of a memory pointer.
-
-### Virtual registers
-
-TODO: a0, a1, a2, a3, sp, fp, bp, pc
-
-### Math operations
-
-Ragg2 supports local variables assignment by math operating, including
-
-the following operators:
-
-`+` `-` `*` `/` `&` `|` `^`
-
-### Return values
-
-The return value is stored in the a0 register, this register is set when
-
-calling a function or when typing a variable name without assignment.
-
-
-
-` $ cat test.r`
-
-` add@global(4) {`
-
-` .var0 = .arg0 + .arg1;`
-
-` .var0;`
-
-` }`
-
-` main@global() {`
-
-` add (3,4);`
-
-` }`
-
-`  
-`
-
-` $ ragg2 -F -o test test.r`
-
-` $ ./test`
-
-` $ echo $?`
-
-` 7`
-
-### Traps
-
-Each architecture have a different instruction to break the execution of
-
-the program. REgg language captures calls to 'break\(\)' to run the emit\_trap
-
-callback of the selected arch. The  
-
-
-` break()`; --&gt; compiles into 'int3' on x86
-
-` break;` --&gt; compiles into 'int3' on x86  
-
-
-### Inline assembly
-
-Lines prefixed with ':' char are just inlined in the output assembly.
-
-` : jmp 0x8048400`
-
-` : .byte 33,44`
-
-### Labels
-
-You can define labels using the `:` keyword like this:
-
-` :label_name:`
-
-` /* loop forever */`
-
-` goto(label_name`\)
-
-### Control flow
-
-` goto (addr)` -- branch execution
-
-` while (cond)`
-
-` if (cond)`
-
-` if (cond) { body } else { body }`
-
-` break ()` -- executes a trap instruction
-
-### Comments
-
-Supported syntax for comments are:
-
-` /* multiline comment */'`
-
-` // single line comment`
-
-` # single line comment`
-
+ragg2 stands for `radare2 egg`, this is the basic block to construct relocatable
+snippets of code to be used for injection in target processes when doing exploiting.
+
+ragg2 compiles programs written in a simple high-level language into tiny binaries
+for x86, x86-64, and ARM.
+
+By default it will compile it's own `ragg2` language, but you can also compile C
+code using GCC or CLANG shellcodes depending on the file extension:
+
+	$ cat a.c
+	int main() {
+		write(1, "Hello World\n", 13);
+		return 0;
+	}
+
+	$ ragg2 -a x86 -b32 a.c
+	e900000000488d3516000000bf01000000b80400000248c7c20d0000000f0531c0c348656c6c6f20576f726c640a00
+
+	$ rasm2 -a x86 -b 32 -D e900000000488d3516000000bf01000000b80400000248c7c20d0000000f0531c0c348656c6c6f20576f726c640a00
+	0x00000000   5               e900000000  jmp 5
+	0x00000005   1                       48  dec eax
+	0x00000006   6             8d3516000000  lea esi, [0x16]
+	0x0000000c   5               bf01000000  mov edi, 1
+	0x00000011   5               b804000002  mov eax, 0x2000004
+	0x00000016   1                       48  dec eax
+	0x00000017   6             c7c20d000000  mov edx, 0xd
+	0x0000001d   2                     0f05  syscall
+	0x0000001f   2                     31c0  xor eax, eax
+	0x00000021   1                       c3  ret
+	0x00000022   1                       48  dec eax
+	0x00000023   2                     656c  insb byte es:[edi], dx
+	0x00000025   1                       6c  insb byte es:[edi], dx
+	0x00000026   1                       6f  outsd dx, dword [esi]
+	0x00000027   3                   20576f  and byte [edi + 0x6f], dl
+	0x0000002a   2                     726c  jb 0x98
+	0x0000002c   3                   640a00  or al, byte fs:[eax]
+
+## Compiling ragg2 example
+
+
+	$ cat hello.r
+	exit@syscall(1);
+
+	main@global() {
+		exit(2);
+	}
+
+	$ ragg2 -a x86 -b 64 hello.r
+	48c7c00200000050488b3c2448c7c0010000000f054883c408c3
+	0x00000000   1                       48  dec eax
+	0x00000001   6             c7c002000000  mov eax, 2
+	0x00000007   1                       50  push eax
+	0x00000008   1                       48  dec eax
+	0x00000009   3                   8b3c24  mov edi, dword [esp]
+	0x0000000c   1                       48  dec eax
+	0x0000000d   6             c7c001000000  mov eax, 1
+	0x00000013   2                     0f05  syscall
+	0x00000015   1                       48  dec eax
+	0x00000016   3                   83c408  add esp, 8
+	0x00000019   1                       c3  ret
+
+	$ rasm2 -a x86 -b 64 -D 48c7c00200000050488b3c2448c7c0010000000f054883c408c3
+	0x00000000   7           48c7c002000000  mov rax, 2
+	0x00000007   1                       50  push rax
+	0x00000008   4                 488b3c24  mov rdi, qword [rsp]
+	0x0000000c   7           48c7c001000000  mov rax, 1
+	0x00000013   2                     0f05  syscall
+	0x00000015   4                 4883c408  add rsp, 8
+	0x00000019   1                       c3  ret
+
+
+## Tiny binaries
+
+You can create them using the `-F` flag in ragg2, or the `-C` in rabin2
+
+TODO: example
