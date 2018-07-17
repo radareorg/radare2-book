@@ -123,39 +123,4 @@ Another useful command is to list the sections of a specific library. In the fol
     21 0x000293b8  7101 0x00000000  7101 ---- ld-2.27.so..strtab
     22 0x0002af75   215 0x00000000   215 ---- ld-2.27.so..shstrtab
 
-## Memory map of the Heap
-
-radare2's `dm` subcommands can also display a map of the heap which is useful for those who are interesting in inspecting the heap and its content. Simply execute `dmh` to show a map of the heap:
-
-    [0x7fae46236ca6]> dmh
-      Malloc chunk @ 0x55a7ecbce250 [size: 0x411][allocated]
-      Top chunk @ 0x55a7ecbce660 - [brk_start: 0x55a7ecbce000, brk_end: 0x55a7ecbef000]
-
-You can also see a graph layout of the heap:
-
-    [0x7fae46236ca6]> dmhg
-    Heap Layout
-            ╭────────────────────────────────────╮
-            │    Malloc chunk @ 0x55a7ecbce000   │
-            │ size: 0x251                        │
-            │  fd: 0x0, bk: 0x0                  │
-            ╰────────────────────────────────────╯
-                │
-            ╭───╯
-            │
-            │
-        ╭─────────────────────────────────────────────╮
-        │    Malloc chunk @ 0x55a7ecbce250            │
-        │ size: 0x411                                 │
-        │  fd: 0x57202c6f6c6c6548, bk: 0xa21646c726f  │
-        ╰─────────────────────────────────────────────╯
-            │
-        ╭───╯
-        │
-        │
-    ╭────────────────────────────────────────────────────╮
-    │  Top chunk @ 0x55a7ecbce660                        │
-    │ [brk_start:0x55a7ecbce000, brk_end:0x55a7ecbef000] │
-    ╰────────────────────────────────────────────────────╯
-
-Another heap commands can be found under `dmh`, check `dmh?` for the full list.
+    
