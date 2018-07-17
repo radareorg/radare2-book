@@ -54,35 +54,35 @@ Usage: r2 [-ACdfLMnNqStuvwzX] [-P patch] [-p prj] [-a arch] [-b bits] [-i file]
 
 ### Common usage patterns
 
-* Open a file in write mode without parsing the file format headers.
+Open a file in write mode without parsing the file format headers.
 ```
 $ r2 -nw file
 ```
-* Quickly get into an r2 shell without opening any file.
+Quickly get into an r2 shell without opening any file.
 ```
 $ r2 -
 ```
-* Specify which sub-binary you want to select when opening a fatbin file:
+Specify which sub-binary you want to select when opening a fatbin file:
 ```
 $ r2 -a ppc -b 32 ls.fat
 ```
-* Run a script before showing interactive command-line prompt:
+Run a script before showing interactive command-line prompt:
 ```
 $ r2 -i patch.r2 target.bin
 ```
-* Execute a command and quit without entering the interactive mode:
+Execute a command and quit without entering the interactive mode:
 ```
 $ r2 -qc ij hi.bin > imports.json
 ```
-* Configure an eval variable:
+Configure an eval variable:
 ```
 $ r2 -e scr.color=false blah.bin
 ```
-* Debug a program:
+Debug a program:
 ```
 $ r2 -d ls
 ```
-* Use an existing project file:
+Use an existing project file:
 ```
 $ r2 -p test
 ```
