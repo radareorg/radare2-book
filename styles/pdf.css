@@ -9,5 +9,5 @@ pre {
 }
 
 code {
-  line-height: 0.8em;
+  line-height: 0.8em !important;
 }
