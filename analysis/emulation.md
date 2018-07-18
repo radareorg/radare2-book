@@ -12,8 +12,8 @@ For partial emulation (or imprecise full emulation) radare2 uses its own
 
 Radare2 supports this kind of partial emulation for all platforms that
 implements ESIL uplifting (x86/x86_64, ARM, MIPS, AVR, 8051, Gameboy, ...).
-One of the most common usage of such emulation is to calculating
-indirect jumps and calculating conditional jumps.
+One of the most common usages of such emulation is to calculate
+indirect jumps and conditional jumps.
 
 To see the ESIL representation of the program one can use `asm.esil` configuration
 variable, to check if the program uplifted correctly, and to grasp how ESIL works:
@@ -65,27 +65,27 @@ To manually setup the ESIL imprecise emulation you need to run this command sequ
 - `aei` to initialize ESIL VM
 - `aeim` to initialize ESIL VM memory (stack)
 - `aeip` to set the initial ESIL VM IP (instruction pointer)
-- sequence of `aer` commands to set the initial register values.
+- a sequence of `aer` commands to set the initial register values.
 
 While performing emulation, please remember, that ESIL VM cannot emulate external calls
 or system calls, along with SIMD instructions. Thus the most common scenario is to
 emulate only a small chunk of the code, like encryption/decryption, unpacking or
 calculating something.
 
-After we succesfully setup the ESIL VM we can interact with it like with a usual debugging mode.
+After we successfully set up the ESIL VM we can interact with it like with a usual debugging mode.
 Commands interface for ESIL VM is almost identical to the debugging one:
 
 - `aes` to step (or `s` key in visual mode)
 - `aesi` to step over the function calls
 - `aesu <address>` to step until some specified address
 - `aesue <ESIL expression>` to step until some specified ESIL expression met
-- `aec` to continue until break (Ctrl-C), this one is rarely useful though, due to the omnipresence
+- `aec` to continue until break (Ctrl-C), this one is rarely used though, due to the omnipresence
 	of external calls
 - `aecu <address>` to continue until some specified address
 
-In visual mode all of the debugging hotkeys will work also in ESIL emulation mode.
+In visual mode, all of the debugging hotkeys will work also in ESIL emulation mode.
 
-Along with usual emulation there is possibility to record and replay mode:
+Along with usual emulation, there is a possibility to record and replay mode:
 
 - `aets` to list all current ESIL R&R sessions
 - `aets+` to create a new one
@@ -95,11 +95,11 @@ More about this operation mode you can read in [Reverse Debugging](../debugger/r
 
 ## Emulation in analysis loop
 
-Apart from the manual emulation mode it can be used automatically in the analysis loop.
-For example `aaaa` command performs ESIL emulation stage along with others.
+Apart from the manual emulation mode, it can be used automatically in the analysis loop.
+For example, the `aaaa` command performs the ESIL emulation stage along with others.
 To disable or enable its usage you can use `anal.esil` configuration variable.
 There is one more important option, though setting it might be quite dangerous,
-especially in case of malware - `emu.write` wich allows ESIL VM to modify memory.
+especially in the case of malware - `emu.write` which allows ESIL VM to modify memory.
 Sometimes it is required though, especially in the process of deobfuscating or unpacking code.
 
 To show the process of emulation you can set `asm.emu` variable, which will show calculated
@@ -128,17 +128,17 @@ register and memory values in disassembly comments:
 Note here `likely` comments, which indicates that ESIL emulation predicted for particular
 conditional jump to happen.
 
-Apart from the basic ESIL VM setup you can change the behavior with other options located
+Apart from the basic ESIL VM setup, you can change the behavior with other options located
 in `emu.` and `esil.` configuration namespaces.
 
-For manipulating ESIL working with memory and stack you can use following options:
+For manipulating ESIL working with memory and stack you can use the following options:
 
 - `esil.stack` to enable or disable temporary stack for `asm.emu` mode
 - `esil.stack.addr` to set stack address in ESIL VM (like `aeim` command)
 - `esil.stack.size` to set stack size in ESIL VM (like `aeim` command)
 - `esil.stack.depth` limits the number of PUSH operations into the stack
 - `esil.romem` specifies read-only access to the ESIL memory
-- `esil.fillstack` and `esil.stack.pattern` allows you to use various pattern for filling ESIL VM
+- `esil.fillstack` and `esil.stack.pattern` allows you to use a various pattern for filling ESIL VM
 	stack upon initialization
 - `esil.nonull` when set stops ESIL execution upon NULL pointer read or write.
 
