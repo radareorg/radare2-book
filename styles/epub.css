@@ -11,3 +11,9 @@ pre {
 .markdown-section code, .markdown-section pre {
   line-height: 0.9;
 }
+
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
