@@ -1,6 +1,6 @@
 ## Graph commands
 
-Radare2 supports various types of graph available trough commands starting with `ag`:
+Radare2 supports various types of graph available through commands starting with `ag`:
 ```
 [0x00005000]> ag?
 |Usage: ag<graphtype><format> [addr]
@@ -22,11 +22,11 @@ Radare2 supports various types of graph available trough commands starting with 
 |
 | Output formats:
 | <blank>                 Ascii art
-| v                       Interactive ascii art
-| t                       Tiny ascii art
+| v                       Interactive ASCII art
+| t                       Tiny ASCII art
 | d                       Graphviz dot
-| j                       json ('J' for formatted disassembly)
-| g                       Graph Modelling Language (gml)
+| j                       JSON ('J' for formatted disassembly)
+| g                       Graph Modelling Language (GML)
 | k                       SDB key-value
 | *                       r2 commands
 | w                       Web/image (see graph.extension and graph.web)
@@ -35,28 +35,28 @@ Radare2 supports various types of graph available trough commands starting with 
 The structure of the commands is as follows: `ag <graph type> <output format>`.
 
 For example, `agid` displays the imports graph in dot format, while `aggj`
-outputs the custom graph in json format.
+outputs the custom graph in JSON format.
 
-Here's a short description for every output format avaliable:
+Here's a short description for every output format available:
 
 - ** Ascii Art ** (e.g. `agf`)
 
-	Displays the graph directly to stdout using ascii art to represent
+	Displays the graph directly to stdout using ASCII art to represent
 	blocks and edges.
 
 	_Warning: displaying large graphs directly to stdout
 	might prove to be computationally expensive and will make r2 not
-	responsive for some time. In case of doubt prefer using the interactive
+	responsive for some time. In case of a doubt, prefer using the interactive
 	view (explained below)._
 
 - ** Interactive Ascii Art ** (e.g. `agfv`)
 
-	Displays the ascii graph in an interactive view similar to `VV` which
+	Displays the ASCII graph in an interactive view similar to `VV` which
 	allows to move the screen, zoom in / zoom out, ...
 
 - ** Tiny Ascii Art ** (e.g. `agft`)
 
-	Displays the ascii graph directly to stdout in tiny mode (which is the
+	Displays the ASCII graph directly to stdout in tiny mode (which is the
 	same as reaching the maximum zoom out level in the interactive view).
 
 - ** Graphviz dot ** (e.g. `agfd`)
@@ -68,23 +68,23 @@ Here's a short description for every output format avaliable:
 
 - ** JSON ** (e.g. `agfj`)
 
-	Prints a json string representing the graph.
+	Prints a JSON string representing the graph.
 	- In case of the `f` format (basic blocks of function), it will have
 	detailed information about the function and will also contain the
 	disassembly of the function (use `J` format for the formatted
 	  disassembly.
-	- In all other cases it will only have basic information about the
+	- In all other cases, it will only have basic information about the
 	nodes of the graph (id, title, body, and edges).
 
 
 - ** Graph Modelling Language ** (e.g. `agfg`)
 
-	Prints the gml source code representing the graph, which can be interpreted by programs such as
+	Prints the GML source code representing the graph, which can be interpreted by programs such as
 	[yEd](https://www.yworks.com/products/yed/download)
 
 - ** SDB key-value ** (e.g. `agfk`)
 
-	Prints key-value strings representing the graph that were stored by sdb
+	Prints key-value strings representing the graph that was stored by sdb
 	(radare2's string database).
 
 - ** R2 custom graph commands ** (e.g. `agf*`)
@@ -109,6 +109,6 @@ Here's a short description for every output format avaliable:
 	`svg` as it will produce images of much smaller size_
 
 	If `graph.web` config variable is enabled, radare2 will try to display
-	the graph using the browser (_this feature is experimental and unifinished, and
-	disabled by default_)
+	the graph using the browser (_this feature is experimental and unfinished, and
+	disabled by default._)
 
