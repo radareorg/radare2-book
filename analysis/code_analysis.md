@@ -54,20 +54,20 @@ Code analysis is a common technique used to extract information from assembly co
 \          0x080486d4    c3           ret
 ```
 In this example, we analyze the whole file (`aa`) and then print disassembly of the `main()` function (`pdf`).
-The `aa` command belongs to the family of autoanalysis commands and perform only the most basic
+The `aa` command belongs to the family of autoanalysis commands and performs only the most basic
 autoanalysis steps. In radare2 there are many different types of the autoanalysis commands with a
 different analysis depth, including partial emulation: `aa`, `aaa`, `aab`, `aaaa`, ...
-There is also a mapping of those commands to the r2 cli options: `r2 -A`, `r2 -AA`, etc
+There is also a mapping of those commands to the r2 CLI options: `r2 -A`, `r2 -AA`, etc
 
 It is a common sense that completely automated analysis can produce non sequitur results, thus
-radare2 provides separate commands for the particular stages of the analysis allowing fine grained
-control of the analysis process. Moreover there is a treasure drove of configuration variables
+radare2 provides separate commands for the particular stages of the analysis allowing fine-grained
+control of the analysis process. Moreover, there is a treasure trove of configuration variables
 for controlling the analysis outcomes. You can find them in `anal.*` and `emu.*` cfg variables
 namespaces.
 
-One of the most important "basic" analysis command is a set of `af` subcommands. `af` means
-"analyse function". Using this command you can either allow automatic analysis of the particular
-function or to perform completely manual one.
+One of the most important "basic" analysis commands is a set of `af` subcommands. `af` means
+"analyze function". Using this command you can either allow automatic analysis of the particular
+function or perform completely manual one.
 
 ```
 |Usage: af
@@ -100,11 +100,11 @@ function or to perform completely manual one.
 
 One of the most challenging tasks while performing a function analysis - merge, crop or resize.
 As with other analysis commands you have two ways - semi-automatic and totally manual one.
-For the semi-automatic you can use `afm <function name>` to merge current function with
+For the semi-automatic, you can use `afm <function name>` to merge current function with
 the function specified, `aff` to readjust function after analysis changes or function edits,
 `afu <address>` to do the resize and analysis of the current function until specified address.
 
-Apart from those semi-automatic ways to edit/analyse the function you can create it in
+Apart from those semi-automatic ways to edit/analyze the function, you can create it in
 complete manual mode with `af+` command and edit basic blocks of it using `afb` commands.
 Before changing the basic blocks of the function it is recommended to check the already
 presented ones:
@@ -143,13 +143,13 @@ ms
 
 There are 4 important program wide half-automated analysis commands:
  - `aab` - perform basic-block analysis ("Nucleus" algorithm)
- - `aac` - analyse function calls from one (selected or current function)
- - `aaf` - analyse all function calls
- - `aar` - analyse data references
- - `aad` - analyse pointers to pointers references
+ - `aac` - analyze function calls from one (selected or current function)
+ - `aaf` - analyze all function calls
+ - `aar` - analyze data references
+ - `aad` - analyze pointers to pointers references
 
 Those are only generic semi-automated reference searching algorithms. Radare2 provides a
-wide choice of manual references' creation of any kind. For this fine grained control
+wide choice of manual references' creation of any kind. For this fine-grained control
 you can use `ax` commands.
 ```
 |Usage: ax[?d-l*] # see also 'afx?'
@@ -192,7 +192,7 @@ sub.strlen_d50 0x5de0 [STRING] lea rcx, str.02x
 ```
 
 Apart from predefined algorithms to identify functions there is a way to specify
-a function prelude with a configuration option `anal.prelude`, for example like
+a function prelude with a configuration option `anal.prelude`. For example, like
 `e anal.prelude = 0x554889e5` which means
 ```
 push rbp
@@ -202,7 +202,7 @@ on x86_64 platform. It should be specified _before_ any analysis commands.
 
 ## Configuration
 
-Radare2 allows to change the behaviour of almost any analysis stages or commands.
+Radare2 allows to changing the behavior of almost any analysis stages or commands.
 There are different kinds of the configuration options:
 
  - Flow control
@@ -215,27 +215,27 @@ There are different kinds of the configuration options:
 ### Control flow configuration
 
 Two most commonly used options for changing the behavior of control flow analysis in radare2 are
-`anal.hasnext` and `anal.afterjump`. The first one allows to force radare2 to continue the analysis
+`anal.hasnext` and `anal.afterjump`. The first one allows forcing radare2 to continue the analysis
 after the end of the function, even if the next chunk of the code wasn't called anywhere, thus
-analysing all of the available functions. The latter one allows to force radare2 to continue
+analyzing all of the available functions. The latter one allows forcing radare2 to continue
 the analysis even after unconditional jumps.
 
 In addition to those we can also set `anal.ijmp` to follow the indirect jumps, continuing analysis;
-`anal.pushret` to analyse `push ...; ret` sequence as a jump; `anal.nopskip` to skip the NOP
+`anal.pushret` to analyze `push ...; ret` sequence as a jump; `anal.nopskip` to skip the NOP
 sequences at a function beginning.
 
-For now radare2 also allows you to change the maximum basic block size with `anal.bb.maxsize` option
+For now, radare2 also allows you to change the maximum basic block size with `anal.bb.maxsize` option
 . The default value just works in most use cases, but it's useful to increase that for example when 
 dealing with obfuscated code. Beware that some of basic blocks
 control options may disappear in the future in favor of more automated ways to set those.
 
-For some unusual binaries or targets there is an option `anal.noncode`. Radare2 doesn't try
-to analyse data sections as a code by default. But in some cases - malware, packed binaries,
+For some unusual binaries or targets, there is an option `anal.noncode`. Radare2 doesn't try
+to analyze data sections as a code by default. But in some cases - malware, packed binaries,
 binaries for embedded systems, it is often a case. Thus - this option.
 
 ### Reference control
 
-The most crucial options that changes the analysis results drastically. Sometimes some can be
+The most crucial options that change the analysis results drastically. Sometimes some can be
 disabled to save the time and memory when analysing big binaries.
 
 - `anal.jmpref` - to allow references creation for unconditional jumps
@@ -258,7 +258,7 @@ There are only three options for this:
 
 Jump tables are being one of the trickiest targets in binary reverse engineering. There are hundreds
 of different types, the end result depending on the compiler/linker and LTO stages of optimization.
-Thus radare2 allows to enable some experimental jump tables detection algorithms using `anal.jmptbl`
+Thus radare2 allows enabling some experimental jump tables detection algorithms using `anal.jmptbl`
 option. Eventually, algorithms moved into the default analysis loops once they start to work on
 every supported platform/target/testcase.
 Two more options can affect the jump tables analysis results too:
@@ -271,11 +271,11 @@ Two more options can affect the jump tables analysis results too:
 There are two common problems when analysing embedded targets: ARM/Thumb detection and MIPS GP
 value. In case of ARM binaries radare2 supports some autodetection of ARM/Thumb mode switches, but
 beware that it uses partial ESIL emulation, thus slowing the analysis process. If you will not
-like the results, particular functions' mode can be overriden with `afB` command.
+like the results, particular functions' mode can be overridden with `afB` command.
 
-The MIPS GP problem is even tricker. It is a basic knowledge that GP value can be different not only
+The MIPS GP problem is even trickier. It is a basic knowledge that GP value can be different not only
 for the whole program, but also for some functions. To partially solve that there are options
-`anal.gp` and `anal.gp2`. The first one sets the GP value for the whole program, or particular
+`anal.gp` and `anal.gp2`. The first one sets the GP value for the whole program or particular
 function. The latter allows to "constantify" the GP value if some code is willing to change its
 value, always resetting it if the case. Those are heavily experimental and might be changed in the
 future in favor of more automated analysis.
@@ -314,8 +314,8 @@ is to perform a scrolling in a `Vv` special visual mode, allowing functions prev
    0x000034c0    6 sym.imp.isatty
 ```
 
-When we want to check how analysis changes affect the result in case of a big functions, we can
-use minimap instead, allowing to see a bigger flow graphs on the same screen size. To get into
+When we want to check how analysis changes affect the result in the case of big functions, we can
+use minimap instead, allowing to see a bigger flow graph on the same screen size. To get into
 the minimap mode type `VV` then press `p` twice:
 ```
 [0x00003ac0]> VV @ main (nodes 6 edges 5 zoom 100%) BB-MINI mouse:canvas-y mov-speed:5
@@ -352,12 +352,12 @@ the minimap mode type `VV` then press `p` twice:
   ; '('
   ...
 ```
-This mode allows you to see disassembly of each node separately, just navigate between them using `Tab` key.
+This mode allows you to see the disassembly of each node separately, just navigate between them using `Tab` key.
 
 ## Analysis hints
 
 It is not an uncommon case that analysis results are not perfect even after you tried every single
-configuration option. This is where the "analysis hints" radare2 mechanism comes in. It allow
+configuration option. This is where the "analysis hints" radare2 mechanism comes in. It allows
 to override some basic opcode or metainformation properties, or even to rewrite the whole opcode
 string. These commands are located under `ah` namespace:
 
@@ -420,7 +420,7 @@ which can be checked with `ah` command:
 
 Sometimes we need to override jump or call address, for example in case of tricky
 relocation, which is unknown for radare2, thus we can change the value manually.
-The current analysis information about particular opcode can be checked with `ao` command.
+The current analysis information about a particular opcode can be checked with `ao` command.
 We can use `ahc` command for performing such a change:
 ```
 [0x00003cee]> pd 2
