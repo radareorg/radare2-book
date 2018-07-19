@@ -1,5 +1,5 @@
 Radare2 supports the C-syntax data types description.
-Those types are parsed by C11-compatible parser and stored in
+Those types are parsed by a C11-compatible parser and stored in
 the internal SDB, thus introspectable with `k` command.
 
 Most of the related commands are located in `t` namespace:
@@ -34,7 +34,7 @@ Note, that the basic (atomic) types are not those from C standard -
 not `char`, `_Bool`, or `short`. Because those types can be different
 from one platform to another, radare2 uses `definite` types like as
 `int8_t` or `uint64_t` and will convert `int` to `int32_t` or `int64_t`
-depending on the binary or debugee platform/compiler.
+depending on the binary or debuggee platform/compiler.
 
 Basic types can be listed using `t` command, for the structured types
 you need to use `ts`, `tu` or `te` for enums:
@@ -84,9 +84,9 @@ dir.types: Default path to look for cparse type files
 
 Notice below we have used `ts` command, which basically converts
 the C type description (or to be precise it's SDB representation)
-into the the sequence of `pf` commands. See more about [print format](../basic_commands/print_modes.md).
+into the sequence of `pf` commands. See more about [print format](../basic_commands/print_modes.md).
 
-The `tp` command uses the `pf` string to print all the members of type at current offset/given address
+The `tp` command uses the `pf` string to print all the members of type at the current offset/given address:
 
 ```
 [0x000051c0]> ts foo
@@ -99,7 +99,7 @@ pf zd a b
  b : 0x000053cc = 20
 ```
 
-Also you could fill your own data into struct and print it using `tpx` command
+Also, you could fill your own data into the struct and print it using `tpx` command
 
 ```
 [0x000051c0]> tpx foo 4141414144141414141442001000000
@@ -109,7 +109,7 @@ Also you could fill your own data into struct and print it using `tpx` command
 
 ### Linking Types
 
-The `tp` command just performs temporary cast. But if we want to link some address or variable
+The `tp` command just performs a temporary cast. But if we want to link some address or variable
 with the chosen type, we can use `tl` command to store the relationship in SDB.
 
 ```
@@ -141,14 +141,14 @@ Moreover, the link will be shown in the disassembly output or visual mode:
             0x000051ff      4839f8         cmp rax, rdi
             0x00005202      4889e5         mov rbp, rsp
 ```
-Once the struct is linked , radare2 tries to propagate structure offset in the function at current offset , to run this analysis on whole program or at any targeted functions after all structs is linked you have `taa` command :
+Once the struct is linked, radare2 tries to propagate structure offset in the function at current offset, to run this analysis on whole program or at any targeted functions after all structs is linked you have `taa` command :
 
 ```
 [0x00000000]> ta?
 | taa [fcn]           Analyze all/given function to convert immediate to linked structure offsets (see tl?)
 ```
 
-Note sometimes the emulation may not be accurate , for example as below :
+Note sometimes the emulation may not be accurate, for example as below :
 
 ````
 |           0x000006da      55             push rbp
@@ -161,7 +161,7 @@ Note sometimes the emulation may not be accurate , for example as below :
 
 ````
 
-The return value of `malloc` may differ between two emulation , so you have to set the hint for return value manually using `ahr` command , so run `tl` or `taa` command after setting up the return value hint .
+The return value of `malloc` may differ between two emulations, so you have to set the hint for return value manually using `ahr` command, so run `tl` or `taa` command after setting up the return value hint.
 
 ```
 [0x000006da]> ah?
@@ -185,7 +185,7 @@ some structure pointer. Imagine that we have the following structures
 [0x000052f0]> "td struct ms2 { uint16_t a; int64_t b; int member1; };"
 ```
 Now we need to set the proper structure member offset instead of `8` in this instruction.
-At first we need to list available types matching this offset:
+At first, we need to list available types matching this offset:
 ```
 [0x000052f0]> tas 8
 ms.member1
@@ -235,7 +235,7 @@ struct.S1.z.meta=0
 [0x000051c0]>
 ```
 
-Defining primitive types requires understanding of basic pf formats,
+Defining primitive types requires an understanding of basic `pf` formats,
 you can find the whole list of format specifier in `pf??`:
 ```
 -----------------------------------------------------------------
@@ -265,7 +265,7 @@ there are basically 3 mandatory keys for defining basic data types:
 `X=type`
 `type.X=format_specifier`
 `type.X.size=size_in_bits`
-For example, lets define `UNIT`, according to [Microsoft documentation](https://msdn.microsoft.com/en-us/library/windows/desktop/aa383751(v=vs.85).aspx#UINT )
+For example, let's define `UNIT`, according to [Microsoft documentation](https://msdn.microsoft.com/en-us/library/windows/desktop/aa383751(v=vs.85).aspx#UINT )
 `UINT` is just equivalent of standard C `unsigned int` (or `uint32_t` in terms of TCC engine).
 It will be defined as:
 ```
@@ -278,22 +278,22 @@ Now there is an optional entry:
 `X.type.pointto=Y`
 
 This one may only be used in case of pointer `type.X=p`, one good example is LPFILETIME definition,
-it is pointer to `_FILETIME` which happens to be a structure.
-Assuming that we are targeting only 32 bit windows machine, it will be defined as the following:
+it is a pointer to `_FILETIME` which happens to be a structure.
+Assuming that we are targeting only 32-bit windows machine, it will be defined as the following:
 ```
 LPFILETIME=type
 type.LPFILETIME=p
 type.LPFILETIME.size=32
 type.LPFILETIME.pointto=_FILETIME
 ```
-that last field is not mandatory because some times the data structure
+This last field is not mandatory because some times the data structure
 internals will be property, and we will not have a clean representation for it.
 
 There is also one more optional entry:
 ```
 type.UINT.meta=4
 ```
-This entry is for integration with C parser and carry the type class information:
+This entry is for integration with C parser and carries the type class information:
 integer size, signed/unsigned, etc.
 
 ### Structures
@@ -306,10 +306,10 @@ struct.X=a,b
 struct.X.a=a_type,a_offset,a_number_of_elements
 struct.X.b=b_type,b_offset,b_number_of_elements
 ```
-The first line is used to define a structure called `X`, second line
-defines the elements of `X` as comma separated values. After that we just define each element info.
+The first line is used to define a structure called `X`, the second line
+defines the elements of `X` as comma separated values. After that, we just define each element info.
 
-for example we can have struct like this one:
+For example. we can have a struct like this one:
 ```
 struct _FILETIME {
 	DWORD dwLowDateTime;
@@ -332,7 +332,7 @@ Unions are defined exactly like structs the only difference is that you will rep
 
 ### Function prototypes
 
-Function prototypes representation is the most detail oriented and the most important one one of them all. Actually this is the one used directly for type matching
+Function prototypes representation is the most detail oriented and the most important one of them all. Actually, this is the one used directly for type matching
 
 ```
 X=func
@@ -344,11 +344,11 @@ func.x.arg0=Arg_type,arg_name
 func.X.ret=Return_type
 func.X.cc=calling_convention
 ```
-It should be self explanatory lets do strncasecmp as an example for x86 arch for linux machines According to man pages, strncasecmp is defined as the following:
+It should be self-explanatory. Let's do strncasecmp as an example for x86 arch for Linux machines. According to man pages, strncasecmp is defined as the following:
 ```
 int strcasecmp(const char *s1, const char *s2, size_t n);
 ```
-When converting it into its sdb representation it will looks like the following:
+When converting it into its sdb representation it will look like the following:
 ```
 strcasecmp=func
 func.strcasecmp.args=3
@@ -359,10 +359,10 @@ func.strcasecmp.ret=int
 func.strcasecmp.cc=cdecl
 ```
 
-Note that the `.cc` part is optional and if it didn't exist the default calling convention for your target architecture will be used instead.
-Their is one extra optional key
+Note that the `.cc` part is optional and if it didn't exist the default calling-convention for your target architecture will be used instead.
+There is one extra optional key
 
 ```
 func.x.noreturn=true/false
 ```
-This key is used to mark functions that will not return once called like `exit` and `_exit`.
+This key is used to mark functions that will not return once called, such as `exit` and `_exit`.

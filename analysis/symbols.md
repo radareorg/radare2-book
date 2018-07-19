@@ -1,16 +1,16 @@
 Radare2 automatically parsing available imports and exports sections in the binary,
-but moreover it can load additional debugging information, if presented.
+but moreover, it can load additional debugging information if presented.
 Two main formats are supported: DWARF and PDB (for Windows binaries).
 Note, that unlike many tools radare2 doesn't rely on Windows API to parse
 PDB files, thus they can be loaded on any other supported platform - e.g.
 Linux or OS X.
 
-DWARF debuginfo loads automatically by default, because usually it's stored
-right in the executable file. PDB is a bit of different beast - it is always
+DWARF debuginfo loads automatically by default because usually it's stored
+right in the executable file. PDB is a bit of a different beast - it is always
 stored as a separate binary, thus the different logic of handling it.
 
-At first, one of the common scenarios is to analyse the file from Windows distribution.
-In this case all PDB files are available in the Microsoft server, which is by default
+At first, one of the common scenarios is to analyze the file from Windows distribution.
+In this case, all PDB files are available on the Microsoft server, which is by default
 is in options. See all pdb options in radare2:
 ```
 pdb.autoload = 0
@@ -19,9 +19,9 @@ pdb.server = https://msdl.microsoft.com/download/symbols
 pdb.useragent = Microsoft-Symbol-Server/6.11.0001.402
 ```
 Using the variable `pdb.server` you can change the address where radare2 will try to
-download the PDB file by the GUID stored in executable header.
-Usually there is no reason to change default `pdb.useragent`, but who knows where
-it could be handy?
+download the PDB file by the GUID stored in the executable header.
+Usually, there is no reason to change default `pdb.useragent`, but who knows where
+could it be handy?
 
 Because those PDB files are stored as "cab" archives on the server, `pdb.extract=1`
 says to automatically extract them.
@@ -39,7 +39,7 @@ where `-PP` automatically downloads the pdb for the selected binary, using those
 `pdb.*` config options. `-P` will dump the contents of the PDB file, which is useful
 sometimes for a quick understanding of the symbols stored in it.
 
-Apart from the basic scenario of just opening file, PDB information can be additionally
+Apart from the basic scenario of just opening a file, PDB information can be additionally
 manipulated by the `id` commands:
 ```
 [0x000051c0]> id?
@@ -61,7 +61,7 @@ radare2 can autoload all required PDBs automatically - you need just set the
 in Windows, using `r2 -d file.exe` or `r2 -d 2345` (attach to pid 2345), all
 related PDB files will be loaded automatically.
 
-DWARF information loading on the other hand is completely automated, you don't
+DWARF information loading, on the other hand, is completely automated. You don't
 need to run any commands/change any options:
 ```
 r2 `which rabin2`
@@ -115,5 +115,5 @@ r2 `which rabin2`
       ;-- rabin_show_help:
       0x000024dd      55             push rbp                    ; .//rabin2.c:27
 ```
-As you can see it loads function names and source line information.
+As you can see, it loads function names and source line information.
 

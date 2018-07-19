@@ -1,5 +1,5 @@
-Radare2 allows to manage local variables, no matter of their location, stack or registers.
-The variables autoanalysis is enabled by default, but can be disabled with `anal.vars`
+Radare2 allows managing local variables, no matter their location, stack or registers.
+The variables autoanalysis is enabled by default but can be disabled with `anal.vars`
 configuration option.
 
 The main variables commands are located in `afv` namespace:
@@ -36,12 +36,12 @@ If we check the help for `afvr` we will get the way two others commands works to
 
 Like many other things variables detection performed by radare2 automatically, but results
 can be changed with those arguments/variables control commands. This kind of analysis
-relies heavily on preloaded function prototypes and calling convention, thus loading symbols
+relies heavily on preloaded function prototypes and the calling-convention, thus loading symbols
 can improve it. Moreover, after changing something we can rerun variables analysis with
 `afva` command. Quite often variables analysis is accompanied with
 [types analysis](types.md), see `afta` command.
 
-The most important aspect of reverse engineering - naming things. Of course you can rename
+The most important aspect of reverse engineering - naming things. Of course, you can rename
 variable too, affecting all places it was referenced. This can be achieved with `afvn` for
 _any_ type of argument or variable. Or you can simply remove the variable or argument with
 `afv-` command.
