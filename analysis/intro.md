@@ -1,6 +1,6 @@
 # Data and Code Analysis
 
-Radare2 has very rich set of commands and configuration options to perform data and code analysis,
+Radare2 has a very rich set of commands and configuration options to perform data and code analysis,
 to extract useful information from a binary, like pointers, string references,
 basic blocks, opcode data, jump targets, cross references, etc.
 These operations are handled by the `a` (analyze) command family:
@@ -31,7 +31,7 @@ These operations are handled by the `a` (analyze) command family:
 | ax[?]              manage refs/xrefs (see also afx?)
 ```
 
-In fact `a` namespace is one of the biggest in radare2 tool and allows to control
+In fact, `a` namespace is one of the biggest in radare2 tool and allows to control
 very different parts of the analysis:
 
  - Code flow analysis
