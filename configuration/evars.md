@@ -6,11 +6,11 @@ The `e??` command to get help on all the evaluable configuration variables of ra
 
 ![e??~color](../img/configuration/e--color.png)
 
-Visual mode have an eval browser that is accessible thru the `Vbe` command.
+Visual mode has an eval browser that is accessible thru the `Vbe` command.
 
 ### asm.arch
 
-Defines target CPU architecture used for disassembling (`pd`, `pD` commands) and code analysis (`a` command). You can find the list of possible value by looking at the result of `e asm.arch=?` or `rasm2 -L`.
+Defines the target CPU architecture used for disassembling (`pd`, `pD` commands) and code analysis (`a` command). You can find the list of possible values by looking at the result of `e asm.arch=?` or `rasm2 -L`.
 It is quite simple to add new architectures for disassembling and analyzing code. There is an interface for that. For x86, it is used to attach a number of third-party disassembler engines, including GNU binutils, Udis86 and a few of handmade ones.
 
 ### asm.bits
@@ -23,7 +23,7 @@ Changes syntax flavor for disassembler between Intel and AT&T. At the moment, th
 
 ### asm.pseudo
 
-A boolean value to choose a string disassembly engine. "False" indicates a native one, defined by current architecture, "true" activates a pseudocode strings format; for example, it will show `eax=ebx` instead of a `mov eax, ebx`.
+A boolean value to choose a string disassembly engine. "False" indicates a native one, defined by the current architecture, "true" activates a pseudocode strings format; for example, it will show `eax=ebx` instead of a `mov eax, ebx`.
 
 ### asm.os
 
@@ -68,7 +68,7 @@ If this variable is enabled, help messages will be displayed along with command 
 
 ### scr.color
 
-This boolean variable enables or disables colorized screen output.
+This variable specifies the mode for colorized screen output: "false" (or 0) means no colors, "true" (or 1) means 16-colors mode, 2 means 256-colors mode, 3 means 16 million-colors mode. If your favourite theme looks weird, try to bump this up.
 
 ### scr.seek
 
@@ -77,3 +77,7 @@ This variable accepts an expression, a pointer (eg. eip), etc. If set, radare wi
 ### cfg.fortunes
 
 Enables or disables "fortune" messages displayed at each radare start.
+
+### cfg.fortunes.type
+
+Fortunes are classified by type. This variable determines which types are allowed for displaying when `cfg.fortunes` is `true`, so they can be fine-tuned on what's appropriate for the intended audience. Current types are `tips`, `fun`, `nsfw`, `creepy`.
