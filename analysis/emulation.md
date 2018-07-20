@@ -4,6 +4,7 @@ One of the most important things to remember in reverse engineering is
 a core difference between static analysis and dynamic analysis. As many already
 know, static analysis suffers from the path exploration problem, which is impossible
 to solve even in the most basic way without at least a partial emulation.
+
 Thus many professional reverse engineering tools use code emulation while
 performing an analysis of binary code, and radare2 is no difference here.
 
@@ -11,11 +12,12 @@ For partial emulation (or imprecise full emulation) radare2 uses its own
 [ESIL](../disassembling/esil.md) intermediate language and virtual machine.
 
 Radare2 supports this kind of partial emulation for all platforms that
-implements ESIL uplifting (x86/x86_64, ARM, MIPS, AVR, 8051, Gameboy, ...).
+implements ESIL uplifting (x86/x86_64, ARM, arm64, MIPS, powerpc, sparc, AVR, 8051, Gameboy, ...).
+
 One of the most common usages of such emulation is to calculate
 indirect jumps and conditional jumps.
 
-To see the ESIL representation of the program one can use `asm.esil` configuration
+To see the ESIL representation of the program one can use the `ao` command or enable the `asm.esil` configuration
 variable, to check if the program uplifted correctly, and to grasp how ESIL works:
 
 ```

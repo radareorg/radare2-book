@@ -1,6 +1,11 @@
 ## Graph commands
 
+When analyzing data it is usually handy to have different ways to represent it in order to get new perspectives to allow the analist to understand how different parts of the program interact.
+
+Representing basic block edges, function calls, string references as graphs show a very clear view of this information.
+
 Radare2 supports various types of graph available through commands starting with `ag`:
+
 ```
 [0x00005000]> ag?
 |Usage: ag<graphtype><format> [addr]
