@@ -1,6 +1,6 @@
 ## Comparing Bytes
 
-`c` (short for "compare") allows you to compare arrays of bytes from different sources. The command accepts input in a number of formats, and then compares it against values found at current seek position.
+`c` (short for "compare") allows you to compare arrays of bytes from different sources. The command accepts input in a number of formats and then compares it against values found at current seek position.
 
     [0x00404888]> c?
     |Usage: c[?dfx] [argument] # Compare
@@ -52,7 +52,7 @@ To compare contents of two functions specified by their names:
     0x00000002 (byte=03)   4c 'L'  ->  00 ' '
 
 
-The number parameter can of course also be a math expressions which uses flag names etc:
+The number parameter can, of course, be math expressions which use flag names etc:
 
     [0x00000000]> cx 7f469046
 
