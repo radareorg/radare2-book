@@ -1,9 +1,9 @@
 ## Mapping Files
 
-Radare IO system allows you to map contents of files into the same IO space used to contain loaded binary. New contents can be placed at random offsets. This lets you create a static environment which emulate
+Radare IO system allows you to map contents of files into the same IO space used to contain loaded binary. New contents can be placed at random offsets. This lets you create a static environment which emulates
 the view you would have when using a debugger, where the program and all its libraries are loaded in memory and can be accessed.
 
-Using the `S` (sections) command you can define base address for each library to be loaded.
+Using the `S` (sections) command you can define a base address for each library to be loaded.
 
 Mapping files is done using the `o` (open) command. Let's read the help:
 
