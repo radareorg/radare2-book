@@ -2,7 +2,7 @@
 
 Flags are conceptually similar to bookmarks. They associate a name with a given offset in a file. Flags can be grouped into 'flag spaces'. A flag space is a namespace for flags, grouping together flags of similar characteristics or type. Examples for flag spaces: sections, registers, symbols.
 
-To create a flag type:
+To create a flag:
 
      [0x4A13B8C0]> f flag_name @ offset
 
