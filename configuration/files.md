@@ -15,18 +15,20 @@ built r2 for.
 
 You can also get the environment vars to reuse from shellscripts or so:
 
-	R2_PREFIX=/usr/local
-	MAGICPATH=share/radare2/2.8.0-git/magic
-	PREFIX=/usr/local
-	INCDIR=/usr/local/include/libr
-	LIBDIR=/usr/local/lib
-	LIBEXT=dylib
-	RCONFIGHOME=/Users/xxx/.config/radare2
-	RDATAHOME=/Users/xxx/.local/share/radare2
-	RCACHEHOME=/Users/xxx/.cache/radare2
-	LIBR_PLUGINS=/usr/local/lib/radare2/last
-	USER_PLUGINS=/Users/xxx/.local/share/radare2/plugins
-	USER_ZIGNS=/Users/xxx/.local/share/radare2/zigns
+```
+R2_PREFIX=/usr/local
+MAGICPATH=share/radare2/2.8.0-git/magic
+PREFIX=/usr/local
+INCDIR=/usr/local/include/libr
+LIBDIR=/usr/local/lib
+LIBEXT=dylib
+RCONFIGHOME=/Users/xxx/.config/radare2
+RDATAHOME=/Users/xxx/.local/share/radare2
+RCACHEHOME=/Users/xxx/.cache/radare2
+LIBR_PLUGINS=/usr/local/lib/radare2/last
+USER_PLUGINS=/Users/xxx/.local/share/radare2/plugins
+USER_ZIGNS=/Users/xxx/.local/share/radare2/zigns
+```
 
 ## RC Files
 
@@ -34,16 +36,15 @@ RC files are r2 scripts that are loaded at startup time. Those files must be in 
 
 ### System
 
-radare2 will try to load the /usr/share/radare2/radaer2rc file first
+radare2 will try to load the /usr/share/radare2/radare2rc file first
 
 ### Your Home
 
-Each user in the system can have its own r2 scripts to run on startup to select color scheme, and other
-custom options by having r2 commands in there.
+Each user in the system can have its own r2 scripts to run on startup to select color scheme, and other custom options by having r2 commands in there.
 
-	~/.radare2rc
-	~/.config/radare2/radare2rc
-	~/.config/radare2/radare2rc.d/
+* ~/.radare2rc
+* ~/.config/radare2/radare2rc
+* ~/.config/radare2/radare2rc.d/
 
 ### Target file
 

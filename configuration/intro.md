@@ -20,24 +20,26 @@ To get a list of all configuration variables just type `e` in the command line p
 
 To get help about `e` command type `e?`:
 
-    Usage: e[?] [var[=value]]
-    e?              show this help
-    e?asm.bytes     show description
-    e??             list config vars with description
-    e               list config vars
-    e-              reset config vars
-    e*              dump config vars in r commands
-    e!a             invert the boolean value of 'a' var
-    er [key]        set config key as readonly. no way back
-    ec [k] [color]  set color for given key (prompt, offset, ...)
-    e a             get value of var 'a'
-    e a=b           set var 'a' the 'b' value
-    env [k[=v]]     get/set environment variable
-
+```
+Usage: e[?] [var[=value]]
+e?              show this help
+e?asm.bytes     show description
+e??             list config vars with description
+e               list config vars
+e-              reset config vars
+e*              dump config vars in r commands
+e!a             invert the boolean value of 'a' var
+er [key]        set config key as readonly. no way back
+ec [k] [color]  set color for given key (prompt, offset, ...)
+e a             get value of var 'a'
+e a=b           set var 'a' the 'b' value
+env [k[=v]]     get/set environment variable
+```
 
 A simpler alternative to `e` command is accessible from the visual mode. Type `Ve` to enter it, use arrows (up, down, left, right) to navigate the configuration, and `q` to exit it. The start screen for the visual configuration edit looks like this:
 
-    Eval spaces:                                                                   
+```
+Eval spaces:                                                                   
 
     >  anal
        asm
@@ -57,10 +59,12 @@ A simpler alternative to `e` command is accessible from the visual mode. Type `V
        scr
        search
        io
-
+```
 
 For configuration values that can take one of several values, you can use the `=?` operator to get a list
 of valid values:
 
-    [0x00000000]> e scr.nkey =?
-    scr.nkey = fun, hit, flag
+```
+[0x00000000]> e scr.nkey = ?
+scr.nkey = fun, hit, flag
+```
