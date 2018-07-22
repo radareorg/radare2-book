@@ -2,7 +2,7 @@
 
 The zoom is a print mode that allows you to get a global view of the whole file or a memory map on a single screen. In this mode, each byte represents `file_size/block_size` bytes of the file. Use the `pz` command, or just use `Z` in the visual mode to toggle the zoom mode.
 
-The cursor can be used to scroll faster through the zoom out view. Pressing `z` again will zoom-in where at new cursor position.
+The cursor can be used to scroll faster through the zoom out view. Pressing `z` again will zoom-in at the cursor position.
 
     [0x004048c5]> pz?
     |Usage: pz [len] print zoomed blocks (filesize/N)
