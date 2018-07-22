@@ -50,17 +50,16 @@ CUI met some useful GUI as the menu, that is Visual Panels.
 
 ## Basic Usage
 
-Use `tab` to move around the panels until you get to the targeted panel then use `hjkl`, just like vim, to scroll the current panel you are on.
-`S` and `s` to step over/in, and all the panels should be updated dynamically while you are debugging.
-Either in the Registers or Stack panel, you can even edit the values by inserting hex. This will be explained later.
-The mode also has got the menu thing. Even though you can get there eventually by hitting `tab` several times, it is highly recommended just to push `m`.
+Use `tab` to move around the panels until you get to the targeted panel. Then, use `hjkl`, just like in vim, to scroll the panel you are currently on.
+Use `S` and `s` to step over/in, and all the panels should be updated dynamically while you are debugging.
+Either in the Registers or Stack panels, you can edit the values by inserting hex. This will be explained later.
+While hitting `tab` can help you moving between panels, it is highly recommended to use `m` to open the menu.
 As usual, you can use `hjkl` to move around the menu and will find tons of useful stuff there.
 
 ## Split Screen
 
-`|` is for the vertical and `-` is for the horizontal. You can delete any panel by `X`.
+`|` is for the vertical and `-` is for the horizontal split. You can delete any panel by pressing `X`.
 
 ## Edit Values
 
-Either in the Register or Stack panel, you can edit the values.
-`c` to activate cursor mode and you can manipulate the cursor by `hjkl` per usual. Then, hit `i`, just like the insert mode of vim, to insert the value.
+Either in the Register or Stack panel, you can edit the values. Use `c` to activate cursor mode and you can move the cursor by pressing `hjkl`, as usual. Then, hit `i`, just like the insert mode of vim, to insert a value.
