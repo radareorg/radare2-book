@@ -2,17 +2,13 @@
 
 ## Concept
 
-Do you like vim? Don't even answer that, I know you do.
-
-Or do you ever feel like splitting the disassembly screen so that you can read the different offset while you keep the one you are reading now?
-
-Visual Panels would meet the demands by providing the following features.
+Visual Panels is characterized by the following core functionalities.
 
 1. Split Screen
-2. Display the multiple screens such as Symbols, Registers, Stack, and you can even define your own panel too.
+2. Display the multiple screens such as Symbols, Registers, Stack, and you can even define your own panels too.
 3. Menu will cover all those commonly used commands for you so that you don't have to memorize any of them.
 
-Briefly, it is all about vim-like CUI combined with some useful GUI.
+CUI met some useful GUI as the menu, that is Visual Panels.
 
 ## Overview
 
