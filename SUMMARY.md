@@ -35,6 +35,7 @@
    * [Visual Disassembly](visual_mode/visual_disassembly.md)
    * [Visual Assembler](visual_mode/visual_assembler.md)
    * [Visual Configuration Editor](visual_mode/visual_configuration_editor.md)
+   * [Visual Panels](visual_mode/visual_panels.md)
 * [Searching bytes](search_bytes/intro.md)
    * [Basic Searches](search_bytes/basic_searches.md)
    * [Configurating the Search](search_bytes/configurating_the_search.md)
