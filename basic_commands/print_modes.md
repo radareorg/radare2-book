@@ -263,7 +263,7 @@ Valid print code formats for human-readable languages are:
 
 ### Strings
 
-Strings are probably one of the most important entrypoints when starting to reverse engineer a program, because they usually reference information about functions' actions (asserts, debug or info messages...) Therefore radare supports various string formats:
+Strings are probably one of the most important entry points when starting to reverse engineer a program because they usually reference information about functions' actions (asserts, debug or info messages...) Therefore radare supports various string formats:
 
     [0x00000000]> ps?
     |Usage: ps[zpw] [N]Print String
@@ -302,7 +302,7 @@ It is also possible to print various packed data types using the `pf` command:
     0x7fff0d29da34 = 0x00000000
     0x7fff0d29da38 = 0x7fff0d29da38 -> 0x0d29f7ee /bin/ls
 
-This can be used to look at the arguments passed to a function. To achieve this, simply pass a 'format memory string' as an argument to `pf`, and temporally change current seek position / offset using `@`. It is also possible to define arrays of structures with `pf`. To do this, prefix the format string with a numeric value. You can also define a name for each field of the structure by appending them as a space-separated arguments list.
+This can be used to look at the arguments passed to a function. To achieve this, simply pass a 'format memory string' as an argument to `pf`, and temporally change the current seek position/offset using `@`. It is also possible to define arrays of structures with `pf`. To do this, prefix the format string with a numeric value. You can also define a name for each field of the structure by appending them as a space-separated arguments list.
 
     [0x4A13B8C0]> pf 2*xw pointer type @ esp
     0x00404888 [0] {
@@ -391,7 +391,7 @@ There are multiple options which can be used to configure the output of disassem
 
                   asm.os: Select operating system (kernel) (linux, darwin, w32,..)
                asm.bytes: Display the bytes of each instruction
-          asm.cmtflgrefs: Show comment flags associated to branch referece
+          asm.cmtflgrefs: Show comment flags associated to branch reference
             asm.cmtright: Show comments at right of disassembly if they fit in screen
             asm.comments: Show comments in disassembly view
               asm.decode: Use code analysis as a disassembler
@@ -405,7 +405,7 @@ There are multiple options which can be used to configure the output of disassem
             asm.linesout: If enabled show out of block lines
           asm.linesright: If enabled show lines before opcode instead of offset
           asm.linesstyle: If enabled iterate the jump list backwards
-           asm.lineswide: If enabled put an space between lines
+           asm.lineswide: If enabled put a space between lines
               asm.middle: Allow disassembling jumps in the middle of an instruction
               asm.offset: Show offsets at disassembly
               asm.pseudo: Enable pseudo syntax
@@ -416,7 +416,7 @@ There are multiple options which can be used to configure the output of disassem
                asm.trace: Show execution traces for each opcode
                asm.ucase: Use uppercase syntax at disassembly
               asm.varsub: Substitute variables in disassembly
-                asm.arch: Set the arch to be usedd by asm
+                asm.arch: Set the arch to be used by asm
               asm.parser: Set the asm parser to use
               asm.segoff: Show segmented address in prompt (x86-16)
                  asm.cpu: Set the kind of asm.arch cpu
@@ -431,9 +431,9 @@ There are multiple options which can be used to configure the output of disassem
 
 ### Disassembly Syntax
 
-The `asm.syntax` variable is used to change flavor of assembly syntax used by a disassembler engine. To switch between Intel and AT&T representations:
+The `asm.syntax` variable is used to change the flavor of the assembly syntax used by a disassembler engine. To switch between Intel and AT&T representations:
 
     e asm.syntax = intel
     e asm.syntax = att
 
-You can also check `asm.pseudo`, which is an experimental pseudocode view, and `asm.esil` which outputs ESIL ('Evaluable Strings Intermedate Language'). ESIL's goal is to have a human-readable representation of every opcode semantics. Such representations can be evaluated (interpreted) to emulate effects of individual instructions.
+You can also check `asm.pseudo`, which is an experimental pseudocode view, and `asm.esil` which outputs ESIL ('Evaluable Strings Intermediate Language'). ESIL's goal is to have a human-readable representation of every opcode semantics. Such representations can be evaluated (interpreted) to emulate effects of individual instructions.
