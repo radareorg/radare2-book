@@ -9,6 +9,7 @@ Contributors:
 * Anton Kochkov
 * aoighost
 * Austin Hartzheim
+* cyanpencil
 * David Tomaschik
 * DZ_ruyk
 * Grigory Rechistov
