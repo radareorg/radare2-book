@@ -7,6 +7,7 @@
    * [Getting radare2](first_steps/getting_radare.md)
    * [Compilation and Portability](first_steps/compilation_portability.md)
    * [Compilation on Windows](first_steps/windows_compilation.md)
+   * [User Interfaces](first_steps/ui.md)
 * [First Steps](first_steps/intro.md)
    * [Command-line Flags](first_steps/commandline_flags.md)
    * [Basic Usage](first_steps/basic_usage.md)
