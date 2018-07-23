@@ -13,6 +13,7 @@ Contributors:
 * DZ_ruyk
 * Grigory Rechistov
 * hdznrrd
+* Itay Cohen
 * Jeffrey Crowell
 * John
 * Judge Dredd
@@ -24,6 +25,7 @@ Contributors:
 * SkUaTeR
 * TDKPS
 * Thanat0s
+* Vane11ope
 * pancake
 
 ### The original radare book
