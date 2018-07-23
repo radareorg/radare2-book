@@ -18,6 +18,7 @@ CUI met some useful GUI as the menu, that is Visual Panels.
 ```
 | Panels commands:
 | !                       run r2048 game
+| .                       seek to PC or entrypoint
 | :                       run r2 command in prompt
 | _                       start the hud input mode
 | |                       split the current panel vertically
