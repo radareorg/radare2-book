@@ -1,3 +1,5 @@
+## Managing variables
+
 Radare2 allows managing local variables, no matter their location, stack or registers.
 The variables autoanalysis is enabled by default but can be disabled with `anal.vars`
 configuration option.
@@ -105,3 +107,69 @@ local_46h  0x5083
 local_32h
 [0x00003b92]>
 ```
+
+## Type inference
+
+The type inference for local variables and arguments is well integrated with the command `afta`.
+
+Let's see an example of this with a simple [hello_world](https://github.com/radare/radare2book/tree/master/examples/hello_world) binary
+
+```
+[0x000007aa]> pdf
+|           ;-- main:
+/ (fcn) sym.main 157
+|   sym.main ();
+|           ; var int local_20h @ rbp-0x20
+|           ; var int local_1ch @ rbp-0x1c
+|           ; var int local_18h @ rbp-0x18
+|           ; var int local_10h @ rbp-0x10
+|           ; var int local_8h @ rbp-0x8
+|           ; DATA XREF from entry0 (0x6bd)
+|           0x000007aa      55             push rbp
+|           0x000007ab      4889e5         mov rbp, rsp
+|           0x000007ae      4883ec20       sub rsp, 0x20
+|           0x000007b2      488d051b0100.  lea rax, str.Hello          ; 0x8d4 ; "Hello"
+|           0x000007b9      488945e8       mov qword [local_18h], rax
+|           0x000007bd      488d05160100.  lea rax, str.r2_folks       ; 0x8da ; " r2-folks"
+|           0x000007c4      488945f0       mov qword [local_10h], rax
+|           0x000007c8      488b45e8       mov rax, qword [local_18h]
+|           0x000007cc      4889c7         mov rdi, rax
+|           0x000007cf      e88cfeffff     call sym.imp.strlen         ; size_t strlen(const char *s)
+```
+
+* After applying `afta`
+
+```
+[0x000007aa]> afta
+[0x000007aa]> pdf
+|           ;-- main:
+|           ;-- rip:
+/ (fcn) sym.main 157
+|   sym.main ();
+|           ; var size_t local_20h @ rbp-0x20
+|           ; var size_t size @ rbp-0x1c
+|           ; var char *src @ rbp-0x18
+|           ; var char *s2 @ rbp-0x10
+|           ; var char *dest @ rbp-0x8
+|           ; DATA XREF from entry0 (0x6bd)
+|           0x000007aa      55             push rbp
+|           0x000007ab      4889e5         mov rbp, rsp
+|           0x000007ae      4883ec20       sub rsp, 0x20
+|           0x000007b2      488d051b0100.  lea rax, str.Hello          ; 0x8d4 ; "Hello"
+|           0x000007b9      488945e8       mov qword [src], rax
+|           0x000007bd      488d05160100.  lea rax, str.r2_folks       ; 0x8da ; " r2-folks"
+|           0x000007c4      488945f0       mov qword [s2], rax
+|           0x000007c8      488b45e8       mov rax, qword [src]
+|           0x000007cc      4889c7         mov rdi, rax                ; const char *s
+|           0x000007cf      e88cfeffff     call sym.imp.strlen         ; size_t strlen(const char *s)
+```
+
+It also extracts type information from format string like `printf ("fmt : %s , %u , %d", ...)`, the format specifications are extracted from `anal/d/spec.sdb`
+
+You could create a new profile for specifying set of format chars depending upon different libraries/operating systems/programming languages like this :
+
+```
+win=spec
+spec.win.u32=unsigned int
+```
+Then change your default specification to newly created one using this config variable `e anal.spec = win`
