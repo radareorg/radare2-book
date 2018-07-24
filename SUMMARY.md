@@ -54,6 +54,7 @@
    * [Code Analysis](analysis/code_analysis.md)
    * [Variables](analysis/variables.md)
    * [Types](analysis/types.md)
+   * [Calling Conventions](analysis/calling_conventions.md)
    * [Virtual Tables](analysis/vtables.md)
    * [Emulation](analysis/emulation.md)
    * [Symbols information](analysis/symbols.md)
