@@ -128,26 +128,8 @@ presented ones:
 0x00003ba8 0x00003bf9 00:0000 81
 ```
 
-There are two very important commands: `afc` and `afB`. The latter is a must-know
-command for some platforms like ARM, it provides a way to change the "bitness" of the
+The `afB` command  is a must-know command for some platforms like ARM, it provides a way to change the "bitness" of the
 particular function, basically allowing to select between ARM and Thumb modes.
-`afc` on the other side allows to manually specify function calling convention
-
-```
-|Usage: afc[agl?]
-| afc convention  Manually set calling convention for current function
-| afc             Show Calling convention for the Current function
-| afcr[j]         Show register usage for the current function
-| afca            Analyse function for finding the current calling convention
-| afcf name       Prints return type function(arg1, arg2...)
-| afcl            List all available calling conventions
-| afco path       Open Calling Convention sdb profile from given path
-[0x00003ac0]> afc
-amd64
-[0x00003ac0]> afcl
-amd64
-ms
-```
 
 ## Recursive analysis
 
@@ -258,11 +240,12 @@ Note that strings references control disabled by default because it increases an
 
 ### Analysis ranges
 
-There are only three options for this:
+There are a few options for this:
 
 - `anal.limits` - enables the range limits for analysis operations
 - `anal.from` - starting address of the limit range
 - `anal.to` - the corresponding end of the limit range
+- `anal.in` - specify search boundaries for analysis (`io.maps`, `io.sections.exec`, `dbg.maps` etc ...)
 
 ### Jump tables
 
