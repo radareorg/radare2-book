@@ -258,11 +258,12 @@ Note that strings references control disabled by default because it increases an
 
 ### Analysis ranges
 
-There are only three options for this:
+There are a few options for this:
 
 - `anal.limits` - enables the range limits for analysis operations
 - `anal.from` - starting address of the limit range
 - `anal.to` - the corresponding end of the limit range
+- `anal.in` - specify search boundaries for analysis (`io.maps`, `io.sections.exec`, `dbg.maps` etc ...)
 
 ### Jump tables
 
