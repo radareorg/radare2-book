@@ -40,7 +40,7 @@ radare2 will try to load the /usr/share/radare2/radare2rc file first
 
 ### Your Home
 
-Each user in the system can have its own r2 scripts to run on startup to select color scheme, and other custom options by having r2 commands in there.
+Each user in the system can have its own r2 scripts to run on startup to select the color scheme, and other custom options by having r2 commands in there.
 
 * ~/.radare2rc
 * ~/.config/radare2/radare2rc
