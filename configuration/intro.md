@@ -2,7 +2,7 @@
 
 The core reads `~/.radare2rc` while starting. You can add `e` commands to this file to tune radare configuration to your taste.
 
-To prevent radare from parsing this file at start, pass it `-N` option.
+To prevent radare from parsing this file at the start, pass it `-N` option.
 
 All the configuration of radare is done with the `eval` commands. A typical startup configuration file looks like this:
 
@@ -16,7 +16,7 @@ Configuration can also be changed with `-e` <config=value> command-line option. 
 
 Internally, the configuration is stored in a hash table. The variables are grouped in namespaces: `cfg.`, `file.`, `dbg.`, `scr.` and so on.
 
-To get a list of all configuration variables just type `e` in the command line prompt. To limit output to a selected namespace, pass it with an ending dot to `e`. For example, `e file.` will display all variables defined inside "file" namespace.
+To get a list of all configuration variables just type `e` in the command line prompt. To limit output to a selected namespace, pass it with an ending dot to `e`. For example, `e file.` will display all variables defined inside the "file" namespace.
 
 To get help about `e` command type `e?`:
 
