@@ -6,16 +6,16 @@ The `e??` command to get help on all the evaluable configuration variables of ra
 
 ![e??~color](../img/configuration/e--color.png)
 
-Visual mode has an eval browser that is accessible thru the `Vbe` command.
+The Visual mode has an eval browser that is accessible thru the `Vbe` command.
 
 ### asm.arch
 
 Defines the target CPU architecture used for disassembling (`pd`, `pD` commands) and code analysis (`a` command). You can find the list of possible values by looking at the result of `e asm.arch=?` or `rasm2 -L`.
-It is quite simple to add new architectures for disassembling and analyzing code. There is an interface for that. For x86, it is used to attach a number of third-party disassembler engines, including GNU binutils, Udis86 and a few of handmade ones.
+It is quite simple to add new architectures for disassembling and analyzing code. There is an interface for that. For x86, it is used to attach a number of third-party disassembler engines, including GNU binutils, Udis86 and a few handmade ones.
 
 ### asm.bits
 
-Determines width in bits of registers for current architecture. Supported values: 8, 16, 32, 64. Note that not all target architectures support all combinations for asm.bits.
+Determines width in bits of registers for the current architecture. Supported values: 8, 16, 32, 64. Note that not all target architectures support all combinations for asm.bits.
 
 ### asm.syntax
 
@@ -27,7 +27,7 @@ A boolean value to choose a string disassembly engine. "False" indicates a nativ
 
 ### asm.os
 
-Selects a target operating system of currently loaded binary. Usually OS is automatically detected by `rabin -rI`. Yet, `asm.os` can be used to switch to a different syscall table employed by another OS.
+Selects a target operating system of currently loaded binary. Usually, OS is automatically detected by `rabin -rI`. Yet, `asm.os` can be used to switch to a different syscall table employed by another OS.
 
 ### asm.flags
 
@@ -35,23 +35,23 @@ If defined to "true", disassembler view will have flags column.
 
 ### asm.lines.call
 
-If set to "true", draw lines at the left of disassemble output (`pd`, `pD` commands) to graphically represent control flow changes (jumps and calls) that are targeted inside current block. Also, see `asm.linesout`.
+If set to "true", draw lines at the left of the disassemble output (`pd`, `pD` commands) to graphically represent control flow changes (jumps and calls) that are targeted inside current block. Also, see `asm.linesout`.
 
 ### asm.linesout
 
-When defined as "true", the disassembly view will also draw control flow lines that go ouside of the block.
+When defined as "true", the disassembly view will also draw control flow lines that go outside of the block.
 
 ### asm.linestyle
 
-A boolean value which changes the direction of control flow analysis. If set to "false", it is done from top to bottom of a block; otherwise, it goes from bottom to top. The "false" setting seems to be a better choice for improved readability, and is the default one.
+A boolean value which changes the direction of control flow analysis. If set to "false", it is done from top to bottom of a block; otherwise, it goes from bottom to top. The "false" setting seems to be a better choice for improved readability and is the default one.
 
 ### asm.offset
 
-Boolean value which controls visibility of offsets for individual disassembled instructions.
+Boolean value which controls the visibility of offsets for individual disassembled instructions.
 
 ### asm.trace
 
-A boolean value that controls displaying of tracing information (sequence number and counter) at the left of each opcode. It is used to assist programs trace analysis.
+A boolean value that controls displaying of tracing information (sequence number and counter) at the left of each opcode. It is used to assist with programs trace analysis.
 
 ### asm.bytes
 
@@ -68,7 +68,7 @@ If this variable is enabled, help messages will be displayed along with command 
 
 ### scr.color
 
-This variable specifies the mode for colorized screen output: "false" (or 0) means no colors, "true" (or 1) means 16-colors mode, 2 means 256-colors mode, 3 means 16 million-colors mode. If your favourite theme looks weird, try to bump this up.
+This variable specifies the mode for colorized screen output: "false" (or 0) means no colors, "true" (or 1) means 16-colors mode, 2 means 256-colors mode, 3 means 16 million-colors mode. If your favorite theme looks weird, try to bump this up.
 
 ### scr.seek
 
