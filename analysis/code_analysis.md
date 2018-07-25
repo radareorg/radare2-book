@@ -128,9 +128,9 @@ presented ones:
 0x00003ba8 0x00003bf9 00:0000 81
 ```
 
-There are two very important commands: `afc` and `afB`. The latter is a must-know command for some platforms like ARM, it provides a way to change the "bitness" of the particular function, basically allowing to select between ARM and Thumb modes.
+There are two very important commands: `afc` and `afB`. The latter is a must-know command for some platforms like ARM. It provides a way to change the "bitness" of the particular function. Basically, allowing to select between ARM and Thumb modes.
 
-`afc` on the other side allows to manually specify function calling convention. You can find more information on its usage in [calling_conventions](calling_conventions.md)
+`afc` on the other side, allows to manually specify function calling convention. You can find more information on its usage in [calling_conventions](calling_conventions.md).
 
 ## Recursive analysis
 
