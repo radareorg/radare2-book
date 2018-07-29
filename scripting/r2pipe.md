@@ -18,7 +18,7 @@ java      -     x     -    x    -   -   -
 golang    x     x     -    -    -   -   x
 ruby      x     x     -    -    -   -   x
 rust      x     x     -    -    -   -   x
-vala      -     x     x    -    -   -   - 
+vala      -     x     x    -    -   -   -
 erlang    x     x     -    -    -   -   -
 newlisp   x     -     -    -    -   -   -
 dlang     x     -     -    -    -   -   x
@@ -69,7 +69,7 @@ r2node.pipe (file, doSomeStuff);
 r2node.launch (file, doSomeStuff);
 ```
 
-**Full API doc:** https://github.com/radare/radare2-r2pipe/blob/master/nodejs/r2pipe/README.md 
+**Full API doc:** https://github.com/radare/radare2-r2pipe/blob/master/nodejs/r2pipe/README.md
 
 Go
 ```
@@ -108,7 +108,7 @@ func main() {
 		panic(err)
 	}
 	fmt.Println(buf1)
-	
+
         buf2, err := r2p.Cmd("px 64")
 	if err != nil {
 		panic(err)
@@ -167,7 +167,7 @@ r2p.quit
 
 Perl
 ----
-```
+```perl
 #!/usr/bin/perl
 
 use R2::Pipe;

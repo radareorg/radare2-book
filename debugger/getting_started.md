@@ -14,7 +14,7 @@
 
 * `dr`: Show registers state
 
-* `drr`: Show registers references (telescoping) (like peda)  
+* `drr`: Show registers references (telescoping) (like peda)
 
 * `ds`: Step into instruction
 
@@ -22,7 +22,7 @@
 
 * `dbt`: Display backtrace
 
-* `dm`: Show memory maps 
+* `dm`: Show memory maps
 
 * `dk <signal>`: Send KILL signal to child
 

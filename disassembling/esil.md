@@ -22,69 +22,69 @@ Can you guess what this is? If we take this post-fix notation and transform it b
 esp -= 4
 4bytes(dword) [esp] = ebp
 ```
-We can see that this corresponds to the x86 instruction ```push ebp```! Isn't that cool?
+We can see that this corresponds to the x86 instruction `push ebp`! Isn't that cool?
 The aim is to be able to express most of the common operations performed by CPUs, like binary arithmetic operations, memory loads and stores, processing syscalls etc. This way if we can transform the instructions to ESIL we can see what a program does while it is running even for the most cryptic architectures you definitely don't have a device to debug on for.
 
 ## Use ESIL
 
-   Using visual mode is great to inspect the esil evaluations.
+Using visual mode is great to inspect the esil evaluations.
 
-   There are 2 environment variables that are important for watching what a program does:
-   ```
-   [0x00000000]> e asm.emu = true
-   [0x00000000]> e asm.emustr = true   # for version 2.2 and earlier
-   [0x00000000]> e asm.emu.str = true  # for version 2.3 and earlier
-   ```
-   
-   "asm.emu" tells r2 if you want ESIL information to be displayed. If it is set to true you will see comments appear to the right of your disassembly that tell you how the contents of registers and memory addresses are changed by the current instruction. For example if you have an instruction that subtracts a value from a register it tells you what the value was before and what it becomes after. This is super useful so you don't have to sit there yourself and track which value goes where. 
-   
-   One problem with this is that it is a lot of information to take in at once and sometimes you simply don't need it. r2 has a nice compromise for this. That is what the "asm.emu.str" variable is for (asm.emustr on 2.2 and earlier). Instead of this super verbose output with every register value, this only adds really useful information to the output, e.g., strings that are found at addresses a program uses or whether a jump is likely to be taken or not.
-   
-   The third important variable is "asm.esil". This switches your disassembly to no longer show you the actual disassembled instructions, but instead now shows you corresponding ESIL expressions that describe what the instruction does.
+There are 2 environment variables that are important for watching what a program does:
+```
+[0x00000000]> e asm.emu = true
+[0x00000000]> e asm.emustr = true   # for version 2.2 and earlier
+[0x00000000]> e asm.emu.str = true  # for version 2.3 and earlier
+```
+	`asm.emu` tells r2 if you want ESIL information to be displayed. If it is set to true you will see comments appear to the right of your disassembly that tell you how the contents of registers and memory addresses are changed by the current instruction. For example if you have an instruction that subtracts a value from a register it tells you what the value was before and what it becomes after. This is super useful so you don't have to sit there yourself and track which value goes where.
+
+   One problem with this is that it is a lot of information to take in at once and sometimes you simply don't need it. r2 has a nice compromise for this. That is what the `asm.emu.str` variable is for (`asm.emustr` on 2.2 and earlier). Instead of this super verbose output with every register value, this only adds really useful information to the output, e.g., strings that are found at addresses a program uses or whether a jump is likely to be taken or not.
+
+   The third important variable is `asm.esil`. This switches your disassembly to no longer show you the actual disassembled instructions, but instead now shows you corresponding ESIL expressions that describe what the instruction does.
 So if you want to take a look at how instructions are expressed in ESIL simply set "asm.esil" to true.
-   ```
-   [0x00000000]> e asm.esil = true
-   ```
+```
+[0x00000000]> e asm.esil = true
+```
    In visual mode you can also toggle this by simply typing `O`.
 
 ## ESIL Commands
-   * "ae" : Evaluate ESIL expression.
 
-   ```
-   [0x00000000]> "ae 1,1,+"
-   0x2
-   [0x00000000]>
-   ```
+* "ae" : Evaluate ESIL expression.
 
-   * "aes" : ESIL Step.
+```
+[0x00000000]> "ae 1,1,+"
+0x2
+[0x00000000]>
+```
 
-   ```
-   [0x00000000]> aes
-   [0x00000000]>10aes
-   ```
-   * "aeso" : ESIL Step Over.
+* "aes" : ESIL Step.
 
-   ```
-   [0x00000000]> aeso
-   [0x00000000]>10aeso
-   ```
+```
+[0x00000000]> aes
+[0x00000000]>10aes
+```
+* "aeso" : ESIL Step Over.
 
-   * "aesu" : ESIL Step Until.
+```
+[0x00000000]> aeso
+[0x00000000]>10aeso
+```
 
-   ```
-   [0x00001000]> aesu 0x1035
-   ADDR BREAK
-   [0x00001019]>
-   ```
+* "aesu" : ESIL Step Until.
 
-   * "ar" : Show/modify ESIL registry
+```
+[0x00001000]> aesu 0x1035
+ADDR BREAK
+[0x00001019]>
+```
 
-   ```
-   [0x00001ec7]> ar r_00 = 0x1035
-   [0x00001ec7]> ar r_00
-   0x00001035
-   [0x00001019]>
-   ```
+* "ar" : Show/modify ESIL registry
+
+```
+[0x00001ec7]> ar r_00 = 0x1035
+[0x00001ec7]> ar r_00
+0x00001035
+[0x00001019]>
+```
 
 ### ESIL Instruction Set
 
@@ -95,9 +95,9 @@ ESIL Opcode | Operands | Name | Operation| example
 TRAP  | src | Trap | Trap signal |
 **$** | src | Syscall | syscall  |
 **$$** | src | Instruction address | Get address of current instruction<br>stack=instruction address |
-**==** | src,dst | Compare | stack = (dst == src) ; <br> update_eflags(dst - src) |   
+**==** | src,dst | Compare | stack = (dst == src) ; <br> update_eflags(dst - src) |
 **<** | src,dst | Smaller (signed comparison) | stack = (dst < src) ; <br> update_eflags(dst - src) | [0x0000000]> "ae 1,5,<" <br>0x0<br>[0x00000000]> "ae 5,5"<br>0x0"
-**<=** | src,dst | Smaller or Equal (signed comparison) | stack = (dst <= src) ; <br> update_eflags(dst - src) | [0x0000000]> "ae 1,5,<" <br>0x0<br>[0x00000000]> "ae 5,5"<br>0x1"   
+**<=** | src,dst | Smaller or Equal (signed comparison) | stack = (dst <= src) ; <br> update_eflags(dst - src) | [0x0000000]> "ae 1,5,<" <br>0x0<br>[0x00000000]> "ae 5,5"<br>0x1"
 **>** | src,dst | Bigger (signed comparison) | stack = (dst > src) ; <br> update_eflags(dst - src) | [0x00000000]> "ae 1,5,>"<br>0x1<br>[0x00000000]> "ae 5,5,>"<br>0x0
  **>=** | src,dst | Bigger or Equal (signed comparison) | stack = (dst >= src) ; <br> update_eflags(dst - src) | [0x00000000]> "ae 1,5,>="<br>0x1<br>[0x00000000]> "ae 5,5,>="<br>0x1
  **<<** | src,dst | Shift Left | stack = dst << src | [0x00000000]> "ae 1,1,<<"<br>0x2<br>[0x00000000]> "ae 2,1,<<"<br>0x4
@@ -130,7 +130,7 @@ TRAP  | src | Trap | Trap signal |
 **--=** | reg | DEC eq | reg = reg - 1 | [0x00000000]> ar r_00=4;ar r_00<br>0x00000004<br>[0x00000000]> "ae r_00,--="<br>[0x00000000]> ar r_00<br>0x00000003
 **!=** | reg | NOT eq | reg = !reg | [0x00000000]> ar r_00=4;ar r_00<br>0x00000004<br>[0x00000000]> "ae r_00,!="<br>[0x00000000]> ar r_00<br>0x00000000<br>[0x00000000]> "ae r_00,!="<br>[0x00000000]> ar r_00<br>0x00000001
 --- | --- | --- | --- | ----------------------------------------------
-=[]<br>=[\*]<br>=[1]<br>=[2]<br>=[4]<br>=[8] | src,dst | poke |\*dst=src | [0x00010000]> "ae 0xdeadbeef,0x10000,=[4],"<br>[0x00010000]> pxw 4@0x10000<br>0x00010000  0xdeadbeef                                ....<br>[0x00010000]> "ae 0x0,0x10000,=[4],"<br>[0x00010000]> pxw 4@0x10000<br>0x00010000  0x00000000                  
+=[]<br>=[\*]<br>=[1]<br>=[2]<br>=[4]<br>=[8] | src,dst | poke |\*dst=src | [0x00010000]> "ae 0xdeadbeef,0x10000,=[4],"<br>[0x00010000]> pxw 4@0x10000<br>0x00010000  0xdeadbeef                                ....<br>[0x00010000]> "ae 0x0,0x10000,=[4],"<br>[0x00010000]> pxw 4@0x10000<br>0x00010000  0x00000000
 []<br>[\*]<br>[1]<br>[2]<br>[4]<br>[8] | src | peek | stack=\*src | [0x00010000]> w test@0x10000<br>[0x00010000]> "ae 0x10000,[4],"<br>0x74736574<br>[0x00010000]> ar r_00=0x10000<br>[0x00010000]> "ae r_00,[4],"<br>0x74736574
 &#x7c;=[]<br>&#x7c;=[1]<br>&#x7c;=[2]<br>&#x7c;=[4]<br>&#x7c;=[8] | reg | nombre | code | [0x00000000]> <br>[0x00000000]>
 SWAP |  | Swap | Swap two top elements | SWAP
