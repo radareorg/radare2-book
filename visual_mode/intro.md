@@ -18,13 +18,10 @@ Notice that the top of the panel contains the command which is used, for example
 [0x00404890 16% 120 /bin/ls]> pd $r @ entry0
 ```
 
-
-
-
 ## Getting Help
 
 To see help on all key bindings defined for visual mode, press `?`:
-
+```
     Visual mode help:
      ?        show this help
      ??       show the user-friendly hud
@@ -84,3 +81,4 @@ To see help on all key bindings defined for visual mode, press `?`:
       F7      single step
       F8      step over
       F9      continue
+```

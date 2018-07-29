@@ -8,7 +8,7 @@ Follow a jump or a call using the `number` of your keyboard `[0-9]` and the numb
 ```
             0x00404894      e857dcffff     call sym.imp.__libc_start_main ;[1]
 ```
-            
+
 Seek back to the previous location using `u`, `U` will allow you to redo the seek.
 
 ## `d` as define
@@ -17,14 +17,14 @@ Seek back to the previous location using `u`, `U` will allow you to redo the see
 
 ```
 d → ...
-0x004048f7      48c1e83f       shr rax, 0x3f                                                 
+0x004048f7      48c1e83f       shr rax, 0x3f
 d → b
-0x004048f7 .byte 0x48     
+0x004048f7 .byte 0x48
 d → B
-0x004048f7 .word 0xc148                                                                      
+0x004048f7 .word 0xc148
 d → d
-0x004048f7 hex length=165 delta=0                                                            
-0x004048f7  48c1 e83f 4801 c648 d1fe 7415 b800 0000  H..?H..H..t.....                                    
+0x004048f7 hex length=165 delta=0
+0x004048f7  48c1 e83f 4801 c648 d1fe 7415 b800 0000  H..?H..H..t.....
 ...
 ```
 
@@ -32,9 +32,9 @@ To improve code readability you can change how radare2 presents numerical values
 
 ```
 d → i → ...
-0x004048f7      48c1e83f       shr rax, 0x3f                                                 
+0x004048f7      48c1e83f       shr rax, 0x3f
 d → i →  10
-0x004048f7      48c1e83f       shr rax, 63                                                   
+0x004048f7      48c1e83f       shr rax, 63
 d → i →  2
 0x004048f7      48c1e83f       shr rax, '?'
 ```
@@ -49,10 +49,10 @@ Pressing lowercase `c` toggles the cursor mode. When this mode is active, the cu
 
 The cursor is used to select a range of bytes or simply to point to a byte. You can use the cursor to create a named flag at specifc location. To do so, seek to the required position, then press `f` and enter a name for a flag.
 If the file was opened in write mode using the `-w` flag or the `o+` command, you can also use the cursor to overwrite a selected range with new values. To do so, select a range of bytes (with HJKL and SHIFT key pressed), then press `i` and enter the hexpair values for the new data. The data will be repeated as needed to fill the range selected. For example:
-
-    <select 10 bytes in visual mode using SHIFT+HJKL>
-    <press 'i' and then enter '12 34'>
-
+```
+<select 10 bytes in visual mode using SHIFT+HJKL>
+<press 'i' and then enter '12 34'>
+```
 The 10 bytes you have selected will be changed to "12 34 12 34 12 ...".
 
 
@@ -132,7 +132,7 @@ You can view the list of all arch using `e asm.arch=?`
 
 ```
 e asm.arch = dalvik
-            0x00404870      31ed4989       cmp-long v237, v73, v137                         
+            0x00404870      31ed4989       cmp-long v237, v73, v137
             0x00404874      d15e4889       rsub-int v14, v5, 0x8948
             0x00404878      e24883e4       ushr-int/lit8 v72, v131, 0xe4
             0x0040487c      f0505449c7c0   +invoke-object-init-range {}, method+18772 ;[0]
@@ -140,12 +140,12 @@ e asm.arch = dalvik
 ```
 
 ```
-e asm.bits = 16                                   
-            0000:4870      31ed           xor bp, bp                                  
+e asm.bits = 16
+            0000:4870      31ed           xor bp, bp
             0000:4872      49             dec cx
-            0000:4873      89d1           mov cx, dx 
+            0000:4873      89d1           mov cx, dx
             0000:4875      5e             pop si
-            0000:4876      48             dec ax 
+            0000:4876      48             dec ax
             0000:4877      89e2           mov dx, sp
 ```
 This latest operation can also be done using `&` in Visual mode.
@@ -154,8 +154,8 @@ This latest operation can also be done using `&` in Visual mode.
 #### asm.pseudo: Enable pseudo syntax
 
 ```
-e asm.pseudo = true                                   
-            0x00404870      31ed           ebp = 0                              
+e asm.pseudo = true
+            0x00404870      31ed           ebp = 0
             0x00404872      4989d1         r9 = rdx
             0x00404875      5e             pop rsi
             0x00404876      4889e2         rdx = rsp
@@ -167,8 +167,8 @@ e asm.pseudo = true
 ```
 e asm.syntax = att
             0x00404870      31ed           xor %ebp, %ebp
-            0x00404872      4989d1         mov %rdx, %r9 
-            0x00404875      5e             pop %rsi      
+            0x00404872      4989d1         mov %rdx, %r9
+            0x00404875      5e             pop %rsi
             0x00404876      4889e2         mov %rsp, %rdx
             0x00404879      4883e4f0       and $0xfffffffffffffff0, %rsp
 ```
@@ -180,7 +180,7 @@ e asm.describe = true
             0x00404870      31ed           xor ebp, ebp                ; logical exclusive or
             0x00404872      4989d1         mov r9, rdx                 ; moves data from src to dst
             0x00404875      5e             pop rsi                     ; pops last element of stack and stores the result in argument
-            0x00404876      4889e2         mov rdx, rsp                ; moves data from src to dst        
+            0x00404876      4889e2         mov rdx, rsp                ; moves data from src to dst
             0x00404879      4883e4f0       and rsp, 0xfffffffffffffff0 ; binary and operation between src and dst, stores result on dst
 ```
 
