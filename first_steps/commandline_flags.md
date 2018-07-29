@@ -74,7 +74,7 @@ Execute a command and quit without entering the interactive mode:
 ```
 $ r2 -qc ij hi.bin > imports.json
 ```
-Configure an eval variable:
+Set the configuration variable:
 ```
 $ r2 -e scr.color=false blah.bin
 ```

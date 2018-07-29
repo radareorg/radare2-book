@@ -1,19 +1,19 @@
 # Configuration
 
-The core reads `~/.radare2rc` while starting. You can add `e` commands to this file to tune radare configuration to your taste.
+The core reads `~/.config/radare2/radare2rc` while starting. You can add `e` commands to this file to tune radare2 configuration to your taste.
 
-To prevent radare from parsing this file at the start, pass it `-N` option.
+To prevent radare2 from parsing this file at the start, pass it `-N` option.
 
-All the configuration of radare is done with the `eval` commands. A typical startup configuration file looks like this:
-
-    $ cat ~/.radare2rc
-    e scr.color = true
-    e dbg.bep   = loader
-
+All the configuration of radare2 is done with the `eval` commands. A typical startup configuration file looks like this:
+```sh
+$ cat ~/.radare2rc
+e scr.color = true
+e dbg.bep   = loader
+```
 Configuration can also be changed with `-e` <config=value> command-line option. This way you can adjust configuration from the command line, keeping the .radare2rc file intact. For example, to start with empty configuration and then adjust `scr.color` and `asm.syntax` the following line may be used:
-
-    $ radare2 -N -e scr.color=true -e asm.syntax=intel -d /bin/ls
-
+```sh
+$ radare2 -N -e scr.color=true -e asm.syntax=intel -d /bin/ls
+```
 Internally, the configuration is stored in a hash table. The variables are grouped in namespaces: `cfg.`, `file.`, `dbg.`, `scr.` and so on.
 
 To get a list of all configuration variables just type `e` in the command line prompt. To limit output to a selected namespace, pass it with an ending dot to `e`. For example, `e file.` will display all variables defined inside the "file" namespace.
@@ -39,7 +39,7 @@ env [k[=v]]     get/set environment variable
 A simpler alternative to `e` command is accessible from the visual mode. Type `Ve` to enter it, use arrows (up, down, left, right) to navigate the configuration, and `q` to exit it. The start screen for the visual configuration edit looks like this:
 
 ```
-Eval spaces:                                                                   
+[EvalSpace]
 
     >  anal
        asm

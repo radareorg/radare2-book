@@ -33,7 +33,7 @@ sr pc             seek to register
 If you want to inspect the result of a math expression, you can evaluate it using the `?` command. Simply pass the expression as an argument. The result can be displayed in hexadecimal, decimal, octal or binary formats.
 ```
 > ? 0x100+200
-0x1C8 ; 456d ; 710o ; 1100 1000  
+0x1C8 ; 456d ; 710o ; 1100 1000
 ```
 
 In the visual mode, you can press `u` (undo) or `U` (redo) inside the seek history to return back to previous or forward to the next location.
@@ -42,52 +42,54 @@ In the visual mode, you can press `u` (undo) or `U` (redo) inside the seek histo
 
 As a test file, let's use a simple `hello_world.c` compiled in Linux ELF format.
 After we compile it let's open it with radare2:
-
-    $ r2 hello_world
-
+```
+$ r2 hello_world
+```
 Now we have the command prompt:
-
-    [0x00400410]>
-
-Now we are ready to go deeper.
+```
+[0x00400410]>
+```
+And it is time to go deeper.
 
 ## Seeking at any position
 
-All the seeking commands that take an address as a command parameter can use any numeral base
+All seeking commands that take an address as a command parameter can use any numeral base
 such as hex, octal, binary or decimal.
 
-Seek to address 0x0. An alternative command is simply `0x0`
-
-    [0x00400410]> s 0x0
-    [0x00000000]>
-
+Seek to an address 0x0. An alternative command is simply `0x0`
+```
+[0x00400410]> s 0x0
+[0x00000000]>
+```
 Print current address
-
-    [0x00000000]> s
-    0x0
-    [0x00000000]>
-
+```
+[0x00000000]> s
+0x0
+[0x00000000]>
+```
 There is an alternate way to print current position: `?v $$`.
 
 Seek N positions forward, space is optional
-
-    [0x00000000]> s+ 128
-    [0x00000080]>
-
+```
+[0x00000000]> s+ 128
+[0x00000080]>
+```
 Undo last two seeks to return to the initial address
-
-    [0x00000080]> s-
-    [0x00000000]> s-
-    [0x00400410]>
-
+```
+[0x00000080]> s-
+[0x00000000]> s-
+[0x00400410]>
+```
 we are back at _0x00400410_.
 
-There's also a command for showing the seek history:
+There's also a command to show the seek history:
+```
+[0x00400410]> s*
+f undo_3 @ 0x400410
+f undo_2 @ 0x40041a
+f undo_1 @ 0x400410
+f undo_0 @ 0x400411
+# Current undo/redo position.
+f redo_0 @ 0x4005b4
+```
 
-    [0x00400410]> s*
-    f undo_3 @ 0x400410
-    f undo_2 @ 0x40041a
-    f undo_1 @ 0x400410
-    f undo_0 @ 0x400411
-    # Current undo/redo position.
-    f redo_0 @ 0x4005b4

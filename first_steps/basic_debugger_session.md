@@ -20,7 +20,7 @@ to see any entrypoint or shared libraries at this point.
 
 You can override this behavior
 by setting another name for an entry breakpoint. To do this, add a radare command
-`e dbg.bep=entry` or `e dbg.bep=main` to your startup script, usually it is `~/.config/radare2/.radare2rc`.
+`e dbg.bep=entry` or `e dbg.bep=main` to your startup script, usually it is `~/.config/radare2/radare2rc`.
 
 Another way to continue until a specific address is by using the `dcu` command. Which means: "debug continue until" taking the address of the place to stop at. For example:
 

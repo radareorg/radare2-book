@@ -3,10 +3,10 @@
 Radare can manipulate a loaded binary file in many ways. You can resize the file, move and copy/paste bytes, insert new bytes (shifting data to the end of the block or file), or simply overwrite bytes. New data may be given as a wide-string, assembler instructions, or the data may be read in from another file.
 
 Resize the file using the `r` command. It accepts a numeric argument. A positive value sets a new size for the file. A negative one will truncate the file to the current seek position minus N bytes.
-
-    r 1024      ; resize the file to 1024 bytes
-    r -10 @ 33  ; strip 10 bytes at offset 33
-
+```
+r 1024      ; resize the file to 1024 bytes
+r -10 @ 33  ; strip 10 bytes at offset 33
+```
 Write bytes using the `w` command. It accepts multiple input formats like inline assembly, endian-friendly dwords, files, hexpair files, wide strings:
 ```
 [0x00404888]> w?
@@ -42,12 +42,10 @@ Write bytes using the `w` command. It accepts multiple input formats like inline
 
 Some examples:
 ```
-     [0x00000000]> wx 123456 @ 0x8048300
-     [0x00000000]> wv 0x8048123 @ 0x8049100
-     [0x00000000]> wa jmp 0x8048320
+ [0x00000000]> wx 123456 @ 0x8048300
+ [0x00000000]> wv 0x8048123 @ 0x8049100
+ [0x00000000]> wa jmp 0x8048320
 ```
-
-
 
 ### Write Over
 
@@ -61,7 +59,7 @@ an operator. The command is applied to the current block. Supported operators in
 |  wox 90     ; xor cur block with 0x90
 |  wox 0x0203 ; xor cur block with 0203
 |  woa 02 03  ; add [0203][0203][...] to curblk
-|  woe 02 03  
+|  woe 02 03
 |Supported operations:
 |  wow  ==  write looped value (alias for 'wb')
 |  woa  +=  addition
@@ -80,28 +78,29 @@ an operator. The command is applied to the current block. Supported operators in
 
 It is possible to implement cipher-algorithms using radare core primitives and `wo`. A sample session performing xor(90) + add(01, 02):
 ```
-    [0x7fcd6a891630]> px
-    - offset -       0 1  2 3  4 5  6 7  8 9  A B  C D  E F  0123456789ABCDEF
-    0x7fcd6a891630  4889 e7e8 6839 0000 4989 c48b 05ef 1622  H...h9..I......"
-    0x7fcd6a891640  005a 488d 24c4 29c2 5248 89d6 4989 e548  .ZH.$.).RH..I..H
-    0x7fcd6a891650  83e4 f048 8b3d 061a 2200 498d 4cd5 1049  ...H.=..".I.L..I
-    0x7fcd6a891660  8d55 0831 ede8 06e2 0000 488d 15cf e600  .U.1......H.....
+[0x7fcd6a891630]> px
+- offset -       0 1  2 3  4 5  6 7  8 9  A B  C D  E F  0123456789ABCDEF
+0x7fcd6a891630  4889 e7e8 6839 0000 4989 c48b 05ef 1622  H...h9..I......"
+0x7fcd6a891640  005a 488d 24c4 29c2 5248 89d6 4989 e548  .ZH.$.).RH..I..H
+0x7fcd6a891650  83e4 f048 8b3d 061a 2200 498d 4cd5 1049  ...H.=..".I.L..I
+0x7fcd6a891660  8d55 0831 ede8 06e2 0000 488d 15cf e600  .U.1......H.....
 
 
-    [0x7fcd6a891630]> wox 90
-    [0x7fcd6a891630]> px
-    - offset -       0 1  2 3  4 5  6 7  8 9  A B  C D  E F  0123456789ABCDEF
-    0x7fcd6a891630  d819 7778 d919 541b 90ca d81d c2d8 1946  ..wx..T........F
-    0x7fcd6a891640  1374 60d8 b290 d91d 1dc5 98a1 9090 d81d  .t`.............
-    0x7fcd6a891650  90dc 197c 9f8f 1490 d81d 95d9 9f8f 1490  ...|............
-    0x7fcd6a891660  13d7 9491 9f8f 1490 13ff 9491 9f8f 1490  ................
+[0x7fcd6a891630]> wox 90
+[0x7fcd6a891630]> px
+- offset -       0 1  2 3  4 5  6 7  8 9  A B  C D  E F  0123456789ABCDEF
+0x7fcd6a891630  d819 7778 d919 541b 90ca d81d c2d8 1946  ..wx..T........F
+0x7fcd6a891640  1374 60d8 b290 d91d 1dc5 98a1 9090 d81d  .t`.............
+0x7fcd6a891650  90dc 197c 9f8f 1490 d81d 95d9 9f8f 1490  ...|............
+0x7fcd6a891660  13d7 9491 9f8f 1490 13ff 9491 9f8f 1490  ................
 
 
-    [0x7fcd6a891630]> woa 01 02
-    [0x7fcd6a891630]> px
-    - offset -       0 1  2 3  4 5  6 7  8 9  A B  C D  E F  0123456789ABCDEF
-    0x7fcd6a891630  d91b 787a 91cc d91f 1476 61da 1ec7 99a3  ..xz.....va.....
-    0x7fcd6a891640  91de 1a7e d91f 96db 14d9 9593 1401 9593  ...~............
-    0x7fcd6a891650  c4da 1a6d e89a d959 9192 9159 1cb1 d959  ...m...Y...Y...Y
-    0x7fcd6a891660  9192 79cb 81da 1652 81da 1456 a252 7c77  ..y....R...V.R|w
+[0x7fcd6a891630]> woa 01 02
+[0x7fcd6a891630]> px
+- offset -       0 1  2 3  4 5  6 7  8 9  A B  C D  E F  0123456789ABCDEF
+0x7fcd6a891630  d91b 787a 91cc d91f 1476 61da 1ec7 99a3  ..xz.....va.....
+0x7fcd6a891640  91de 1a7e d91f 96db 14d9 9593 1401 9593  ...~............
+0x7fcd6a891650  c4da 1a6d e89a d959 9192 9159 1cb1 d959  ...m...Y...Y...Y
+0x7fcd6a891660  9192 79cb 81da 1652 81da 1456 a252 7c77  ..y....R...V.R|w
 ```
+

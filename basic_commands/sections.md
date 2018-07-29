@@ -27,35 +27,29 @@ You can specify a section in a single line:
 S [off] [va] [sz] [vsz] [name] [mrwx]
 ```
 For example:
-
-    [0x00404888]> S 0x00000100 0x00400000 0x0001ae08 0001ae08 test rwx
-
+```
+[0x00404888]> S 0x00000100 0x00400000 0x0001ae08 0001ae08 test rwx
+```
 Displaying information about sections:
 ```
-# List sections
-[0x00404888]> S
-
-[00] . 0x00000238 -r-- va=0x00400238 sz=0x0000001c vsz=0000001c .interp
-[01] . 0x00000254 -r-- va=0x00400254 sz=0x00000020 vsz=00000020 .note.ABI_tag
-[02] . 0x00000274 -r-- va=0x00400274 sz=0x00000024 vsz=00000024 .note.gnu.build_id
-[03] . 0x00000298 -r-- va=0x00400298 sz=0x00000068 vsz=00000068 .gnu.hash
-[04] . 0x00000300 -r-- va=0x00400300 sz=0x00000c18 vsz=00000c18 .dynsym
+[0x00005310]> iS
+[Sections]
+00 0x00000000     0 0x00000000     0 ----
+01 0x00000238    28 0x00000238    28 -r-- .interp
+02 0x00000254    32 0x00000254    32 -r-- .note.ABI_tag
+03 0x00000278   176 0x00000278   176 -r-- .gnu.hash
+04 0x00000328  3000 0x00000328  3000 -r-- .dynsym
+05 0x00000ee0  1412 0x00000ee0  1412 -r-- .dynstr
+06 0x00001464   250 0x00001464   250 -r-- .gnu.version
+07 0x00001560   112 0x00001560   112 -r-- .gnu.version_r
+08 0x000015d0  4944 0x000015d0  4944 -r-- .rela.dyn
+09 0x00002920  2448 0x00002920  2448 -r-- .rela.plt
+10 0x000032b0    23 0x000032b0    23 -r-x .init
 ...
 
-
-# List sections (in nice ascii-art bars)
-[0xB7EEA810]> S=
-
-...
-25  0x0001a600 |-----------------------------#| 0x0001a608 ---- .gnu_debuglink
-26  0x0001a608 |-----------------------------#| 0x0001a706 ---- .shstrtab
-27* 0x00000000 |##############################| 0x0001ae08 -rwx ehdr
-=>  0x00004888 |-----^------------------------| 0x00004988
 ```
 
-The first three lines are sections and the last one (prefixed by `=>`) is the current seek location.
-
-Remove a section definition using the `S-` command. Pass the section id to it as an argument.
+It is possible to remove a section definition using the `S-` command. Pass the section id to it as an argument:
 ```
 [0xB7EE8810]> S-4
 ```

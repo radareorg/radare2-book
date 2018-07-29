@@ -6,7 +6,7 @@ The `e??` command to get help on all the evaluable configuration variables of ra
 
 ![e??~color](../img/configuration/e--color.png)
 
-The Visual mode has an eval browser that is accessible thru the `Vbe` command.
+The Visual mode has an eval browser that is accessible through the `Vbe` command.
 
 ### asm.arch
 

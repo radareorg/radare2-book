@@ -4,30 +4,19 @@ Use `r2 -H` to list all the environment variables that matter to know where it w
 be looking for files. Those paths depend on the way (and operating system) you have
 built r2 for.
 
-
-	$ r2 -h
-	...
-	Scripts:
-	 system       ${R2_PREFIX}/share/radare2/radare2rc
-	 user         ~/.radare2rc ~/.config/radare2/radare2rc (and ~/.config/radare2/radare2rc.d/)
-	 file         ${filename}.r2
-	...
-
-You can also get the environment vars to reuse from shellscripts or so:
-
 ```
-R2_PREFIX=/usr/local
-MAGICPATH=share/radare2/2.8.0-git/magic
-PREFIX=/usr/local
-INCDIR=/usr/local/include/libr
-LIBDIR=/usr/local/lib
-LIBEXT=dylib
-RCONFIGHOME=/Users/xxx/.config/radare2
-RDATAHOME=/Users/xxx/.local/share/radare2
-RCACHEHOME=/Users/xxx/.cache/radare2
-LIBR_PLUGINS=/usr/local/lib/radare2/last
-USER_PLUGINS=/Users/xxx/.local/share/radare2/plugins
-USER_ZIGNS=/Users/xxx/.local/share/radare2/zigns
+R2_PREFIX=/usr
+MAGICPATH=/usr/share/radare2/2.8.0-git/magic
+PREFIX=/usr
+INCDIR=/usr/include/libr
+LIBDIR=/usr/lib64
+LIBEXT=so
+RCONFIGHOME=/home/user/.config/radare2
+RDATAHOME=/home/user/.local/share/radare2
+RCACHEHOME=/home/user/.cache/radare2
+LIBR_PLUGINS=/usr/lib/radare2/2.8.0-git
+USER_PLUGINS=/home/user/.local/share/radare2/plugins
+USER_ZIGNS=/home/user/.local/share/radare2/zigns
 ```
 
 ## RC Files
