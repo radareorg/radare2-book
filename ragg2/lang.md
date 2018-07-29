@@ -78,7 +78,7 @@ just do like this:
 
 ` ...`
 
-  
+
 
 
 ### Function definition
@@ -99,7 +99,7 @@ are bound to a label followed by root brackets '{ ... }'
 
 `staticframesize` : get space from stack to store static variables \(strings\)
 
-`body` : code of the function  
+`body` : code of the function
 
 
 ### Function types
@@ -174,9 +174,9 @@ There's a work-in-progress libc-like library written completely in r\_egg
 
 `.sp`
 
-__Attention:__ All the numbers after `.var` and `.arg` mean the offset with the 
+__Attention:__ All the numbers after `.var` and `.arg` mean the offset with the
 
-top of stack, not variable symbols. 
+top of stack, not variable symbols.
 
 ### Arrays
 
@@ -212,34 +212,22 @@ The return value is stored in the a0 register, this register is set when
 
 calling a function or when typing a variable name without assignment.
 
+```
+$ cat test.r
+add@global(4) {
+	.var0 = .arg0 + .arg1;
+	.var0;
+}
 
+main@global() {
+	add (3,4);
+}
 
-` $ cat test.r`
-
-` add@global(4) {`
-
-` .var0 = .arg0 + .arg1;`
-
-` .var0;`
-
-` }`
-
-` main@global() {`
-
-` add (3,4);`
-
-` }`
-
-`  
-`
-
-` $ ragg2 -F -o test test.r`
-
-` $ ./test`
-
-` $ echo $?`
-
-` 7`
+$ ragg2 -F -o test test.r
+$ ./test
+$ echo $?
+7
+```
 
 ### Traps
 
@@ -247,12 +235,12 @@ Each architecture have a different instruction to break the execution of
 
 the program. REgg language captures calls to 'break\(\)' to run the emit\_trap
 
-callback of the selected arch. The  
+callback of the selected arch. The
 
 
 ` break()`; --&gt; compiles into 'int3' on x86
 
-` break;` --&gt; compiles into 'int3' on x86  
+` break;` --&gt; compiles into 'int3' on x86
 
 
 ### Inline assembly
