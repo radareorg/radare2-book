@@ -1,4 +1,3 @@
-
 # Debugging
 
 It is common to have an issues when you write a plugin, especially if you do this for the first

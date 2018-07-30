@@ -17,6 +17,4 @@ https://github.com/radare/radare2/commit/933dc0ef6ddfe44c88bbb261165bf8f8b531476
 Implement RAnal plugin:
 https://github.com/radare/radare2/commit/ad430f0d52fbe933e0830c49ee607e9b0e4ac8f2
 
-## Write a disassembler plugin with another programming language
-
 

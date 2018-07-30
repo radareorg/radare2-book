@@ -1,4 +1,4 @@
-### Python
+# Python plugins
 
 At first, to be able to write a plugins in Python for radare2 you need to install
 r2lang plugin. If you're going to use Python 2, then use `r2pm -i lang-python2`, otherwise (and recommended) - install the Python 3 version: `r2pm -i lang-python3`.
