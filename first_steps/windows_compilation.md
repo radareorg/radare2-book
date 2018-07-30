@@ -4,7 +4,7 @@
 
 The most native way to compile radare2 under Windows is to use meson + msvc.
 
-#### Prerequisitories
+#### Prerequisites
 
 First you need **python3** to be installed on your computer. Once this is done, you can install the meson build system using `pip3 install meson` (with Administrator privileges).
 Now navigate to your Python installation folder, and copy the `meson.py` from `.\Scripts` subfolder into your radare2 folder.
