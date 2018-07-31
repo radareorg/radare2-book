@@ -1,8 +1,6 @@
 ## Basic Debugger Session
 
-To debug a program, start radare with the `-d` option. Note that
-
-You can attach to a running process by specifying its PID, or you can start a new program by specifying its name and parameters:
+To debug a program, start radare with the `-d` option. Note that you can attach to a running process by specifying its PID, or you can start a new program by specifying its name and parameters:
 
 ```
 $ pidof mc
@@ -15,11 +13,9 @@ $ r2 -a arm -b 16 -d gdb://192.168.1.43:9090
 
 In the second case, the debugger will fork and load the debugee `ls` program in memory.
 
-It will pause its execution early in `ld.so` dynamic linker. Therefore, do not expect
-to see any entrypoint or shared libraries at this point.
+It will pause its execution early in `ld.so` dynamic linker. As a result, you will not yet see the entrypoint or any shared libraries at this point.
 
-You can override this behavior
-by setting another name for an entry breakpoint. To do this, add a radare command
+You can override this behavior by setting another name for an entry breakpoint. To do this, add a radare command
 `e dbg.bep=entry` or `e dbg.bep=main` to your startup script, usually it is `~/.config/radare2/radare2rc`.
 
 Another way to continue until a specific address is by using the `dcu` command. Which means: "debug continue until" taking the address of the place to stop at. For example:
@@ -44,7 +40,7 @@ Below is a list of most common commands used with debugger:
 > dr eax=33		; set register value. eax = 33
 ```
 
-Maybe a simpler method to use debugger in radare is to switch to visual mode.
+There is another option for debugging in radare, which may be easier: using visual mode.
 
 That way you will neither need to remember many commands nor to keep program state in your mind.
 
