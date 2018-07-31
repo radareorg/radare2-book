@@ -4,7 +4,7 @@ A general format for radare commands is as follows:
 ```
 [.][times][cmd][~grep][@[@iter]addr!size][|>pipe] ;
 ```
-People who use Vim daily and familiar with its commands will find themselves home. You will see this through all book. Commands are identified by a single case-sensitive character [a-zA-Z].
+People who use Vim daily and are familiar with its commands will find themselves at home. You will see this format used throughout the book. Commands are identified by a single case-sensitive character [a-zA-Z].
 
 To repeatedly execute a command, prefix the command with a number:
 ```
@@ -14,9 +14,9 @@ px    # run px
 
 The `!` prefix is used to execute a command in shell context. If you want to use the cmd callback from the io plugin you must prefix with `=!`.
 
-Note that a single explamation mark will run the command and print the output thru the RCons api. Which means that the execution will be blocking and not interactive. Use double `!!` to run a standard system call.
+Note that a single exclamation mark will run the command and print the output through the RCons API. This means that the execution will be blocking and not interactive. Use double exclamation marks -- `!!` -- to run a standard system call.
 
-All the socket, filesystem and execution apis can be restricted with the `cfg.sandbox` configuration variable.
+All the socket, filesystem and execution APIs can be restricted with the `cfg.sandbox` configuration variable.
 
 A few examples:
 ```
@@ -28,7 +28,7 @@ pd 2000 | grep eax    ; grep opcodes that use the 'eax' register
 px 20 ; pd 3 ; px 40  ; multiple commands in a single line
 ```
 
-The standard unix pipe `|` is also available in the radare2 shell. You can use it to filter the output of an r2 command with a program from the shell reading from stdin like grep, less, wc, ... but if you dont want to spawn anything (or you can't) or the target system doesnt have the basic unix tools you need (windows or embedded users) you may be interested in using the internal grep.
+The standard unix pipe `|` is also available in the radare2 shell. You can use it to filter the output of an r2 command with a shell program that reads from stdin, such as `grep`, `less`, `wc`, etc. If you dont want to spawn anything, or you can't, or the target system doesnt have the basic UNIX tools you need (Windows or embedded users), you can also use the built-in grep.
 
 See `?~?` for help.
 
@@ -57,8 +57,8 @@ The original seek position in a file is then restored.
 For example, `pd 5 @ 0x100000fce` to disassemble 5 instructions at address 0x100000fce.
 
 Most of the commands offer autocompletion support using `<TAB>` key, for example `s`eek or `f`lags commands.
-It offers autocompletion using the all possible values, taking flag names in this case.
-Note, that it's possible to see the history of the commands
-using `!~...` command - it offers a visual mode to scroll through the radare2 command history.
+It offers autocompletion using all possible values, taking flag names in this case.
+Note that it is possible to see the history of the commands
+using the `!~...` command - it offers a visual mode to scroll through the radare2 command history.
 
 To extend the autocompletion support to handle more commands or enable autocompletion to your own commands defined in core, io plugins you must use the `!!!` command.
