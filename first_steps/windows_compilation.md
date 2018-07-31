@@ -2,7 +2,8 @@
 
 ### Meson (MSVC)
 
-The most native way to compile radare2 under Windows is to use meson + msvc.
+The most native way to compile radare2 under Windows is to use msvc with meson.
+Before compiling, note that we also provide binaries available [here](https://rada.re/r/down.html) or [here](https://radare.mikelloc.com/get/).
 
 #### Prerequisites
 
