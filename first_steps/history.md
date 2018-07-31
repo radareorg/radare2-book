@@ -7,4 +7,4 @@ Since then, the project has evolved to provide a complete framework for analyzin
 It was initially mostly a single-person project, these days gathered huge community and substantial amount of contributors.
 Moreover, if you have some ideas or source code contributions, be sure to open an issue in [radare2 GitHub](https://github.com/radare/radare2) or send a pull request.
 
-The central focus of this project is advanced hexadecimal editor. Additionally, the project has an assembler/disassembler, code/data analysis and graphing tools, scripting features, easy Unix integration, and more.
+The initial focus of the project was an advanced hexadecimal editor. Nowadays, the project also focuses on assembler/disassembler, code/data analysis and graphing tools, scripting features, easy Unix integration, and more.
