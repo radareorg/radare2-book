@@ -2,31 +2,42 @@
 
 ### Meson (MSVC)
 
-The most native way to compile radare2 under Windows is to use meson + msvc. First you need **python3** to be installed on your computer. Once this is done, you can install the meson build system using `pip3 install meson` (with Administrator privileges).
+The most native way to compile radare2 under Windows is to use msvc with meson.
+Before compiling, note that we also provide binaries available [here](https://rada.re/r/down.html) or [here](https://radare.mikelloc.com/get/).
+
+#### Prerequisites
+
+First you need **python3** to be installed on your computer. Once this is done, you can install the meson build system using `pip3 install meson` (with Administrator privileges).
 Now navigate to your Python installation folder, and copy the `meson.py` from `.\Scripts` subfolder into your radare2 folder.
 
-Meson also requires Ninja. You can download it from [here](https://ninja-build.org/). Copy `ninja.exe` binary into your radare2 folder. Then run `meson.bat` and wait until compilation is done.
+Meson also requires Ninja. You can download it from [here](https://ninja-build.org/). Copy `ninja.exe` binary into your radare2 folder.
 
 #### Compiling
 
-* At first you will need to run `vsvarsall.bat` from the corresponding directory of your Visual Studio or Visual C++ Build Tools.
-In case of VS2015 it is located usually in `C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\VC\\` or
-in `C:\\Program Files (x86)\\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat`
+```
+meson build
+ninja -C build
+```
 
-* Using **Ninja build system**: This is the easiest, simply run `meson.bat` and wait until the compilation is complete.
+Alternatively you can use the `meson.py` script, but it is going to be deprecated.
 
-* Using **Visual Studio**: If you want to work on radare2 in Visual Studio, you can simply run the command `meson.bat -p` which will generate a Visual Studio 2015 project. Then you can load it from `build\radare2.sln`.
+```
+python sys\meson.py
+```
 
-* Using **MSBuild**: Call `meson.bat --msbuild`
+You can also generate a visual studio project:
 
-In any case, everything is generated in the `build` folder by default, except for the sdb files generation process.
+```
+python sys\meson.py --backend=vs2017 --project
+```
 
 #### Installing
 
 Now that you successfully compiled radare2, you might want to gather every executables and requirements into the same place. The command below will collect everything and put it into the `dist` folder.
 ```
-E:\radare2>sys\meson_install.bat dist
+python sys\meson.py --install dist
 ```
+
 
 You can now test your newly crafted radare2 binary easily:
 ```
@@ -34,7 +45,7 @@ E:\radare2>cd dist
 E:\radare2\dist>radare2.exe -v
 ```
 
-### Mingw32
+### Mingw32 (deprecated)
 
 The easy way to compile things for Windows is using Mingw32. The w32 builds distributed from the radare homepage are generated from a GNU/Linux box using Mingw32 and they are tested with Wine. Also keep in mind, that Mingw-w64 isn't tested, so no guarantees here.
 
@@ -75,7 +86,7 @@ There is a script that automates process of detecting the crosscompiler toolchai
 sys/mingw32.sh
 ```
 
-### Cygwin
+### Cygwin (deprecated)
 
 Cygwin is another possibility; however, issues related to Cygwin libraries can make debugging difficult. But using binary compiled for Cygwin will allow you to use Unicode in the Windows console, and to have 16 million colors.
 
@@ -86,7 +97,7 @@ git config --global core.autocrlf false
 
 Please, be sure to build radare2 from the same environment you're going to use r2 in. If you are going to use r2 in MinGW32 shell or cmd.exe — you should build r2 in the MinGW32 environment. And if you are going to use r2 in Cygwin — you have to build r2 from the Cygwin shell. Since Cygwin is more UNIX-compatible than MinGW, the radare2 supports more colors and Unicode symbols if build using the former one.
 
-### Mingw-W64
+### Mingw-W64 (deprecated)
 
  - Download the MSYS2 distribution from the official site: http://msys2.github.io/
  - Setup the proxy (if needed):
