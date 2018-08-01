@@ -10,16 +10,16 @@ Radare2 supports various types of graph available through commands starting with
 [0x00005000]> ag?
 |Usage: ag<graphtype><format> [addr]
 | Graph commands:           
-| agc[format] [@ fcn addr]  Function callgraph
-| agf[format] [@ fcn addr]  Basic blocks function graph
-| agx[format] [@ addr]      Cross references graph
-| agr[format] [@ fcn addr]  References graph
 | aga[format] [@ fcn addr]  Data references graph
-| agd[format] [fcn addr]    Diff graph
-| agi[format]               Imports graph
-| agC[format]               Global callgraph
-| agR[format]               Global references graph
 | agA[format]               Global data references graph
+| agc[format] [@ fcn addr]  Function callgraph
+| agC[format]               Global callgraph
+| agd[format] [fcn addr]    Diff graph
+| agf[format] [@ fcn addr]  Basic blocks function graph
+| agi[format]               Imports graph
+| agr[format] [@ fcn addr]  References graph
+| agR[format]               Global references graph
+| agx[format] [@ addr]      Cross references graph
 | agg[format]               Custom graph
 | ag-                       Clear the custom graph
 | agn[?] title body         Add a node to the custom graph
@@ -27,14 +27,14 @@ Radare2 supports various types of graph available through commands starting with
 |                           
 | Output formats:           
 | <blank>                   Ascii art
-| v                         Interactive ascii art
-| t                         Tiny ascii art
-| d                         Graphviz dot
-| j                         json ('J' for formatted disassembly)
-| g                         Graph Modelling Language (gml)
-| k                         SDB key-value
 | *                         r2 commands
-| w [path]                  Web/image display or save to path (see graph.extension and graph.web)
+| d                         Graphviz dot
+| g                         Graph Modelling Language (gml)
+| j                         json ('J' for formatted disassembly)
+| k                         SDB key-value
+| t                         Tiny ascii art
+| v                         Interactive ascii art
+| w [path]                  Write to path or display graph image (see graph.gv.format and graph.web)
 ```
 
 The structure of the commands is as follows: `ag <graph type> <output format>`.
@@ -102,13 +102,13 @@ Here's a short description for every output format available:
 	To easily execute the printed commands, it is possible to prepend a dot
 	to the command (`.agf*`).
 
-- ** Web / image ** (e.g. `agfw [path]`)
+- ** Write / display image ** (e.g. `agfw [path]`)
 
 	Radare2 will convert the graph to dot format, use the `dot` program to
 	convert it to a `.gif` image and then save it to file `[path]`.
 	If no path is provided, radare2 will try to find an already installed
 	viewer on your system (`xdg-open`, `open`, ...) and display the image with it.
-	The extension of the output image can be set with the `graph.extension` config
+	The extension of the output image can be set with the `graph.gv.format` config
 	variable. Available extensions are `png, jpg, gif, pdf, ps`.
 
 	_Note: for particularly large graphs, the most recommended extension is
