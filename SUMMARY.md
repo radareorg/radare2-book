@@ -105,7 +105,7 @@
    * [Python plugins](plugins/python.md)
    * [Debugging](plugins/debug.md)
    * [Testing](plugins/testing.md)
-
+   * [Packaging](plugins/r2pm.md)
 
 ## XXX - Digital book only.
 
