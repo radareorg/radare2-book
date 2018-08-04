@@ -3,7 +3,6 @@
 Radare2 can also work with data types. You can use standard C data types or define your own using C. Currently, there is a support for structs, unions, function signatures, and enums.
 
 ```
-
 [0x00000000]> t?
 |Usage: t # cparse types commands
 | t                       List all loaded types
@@ -24,14 +23,15 @@ Radare2 can also work with data types. You can use standard C data types or defi
 | ts                      print loaded struct types
 | tu                      print loaded union types
 [0x00000000]> 
-
 ```
 
 ### Defining new types
 
 There are three different methods to define new types:
+
 1. Defining a new type from r2 shell immediately, to do this you will use `td` command, and put the whole line between double quotes. For example:
-    `td struct person {int age; char *name; char *address;};`
+
+`"td struct person {int age; char *name; char *address;};"`
 
 2. You can also use `to -` to open a text editor and write your own types in there. This is preferable when you got too many types to define.
 

@@ -1,11 +1,17 @@
 ## Mapping Files
 
-Radare I/O subsystem allows you to map contents of files into the same I/O space used to contain loaded binary. New contents can be placed at random offsets. This lets you create a static environment which emulates
-the view you would have when using a debugger, where the program and all its libraries are loaded in memory and can be accessed.
+Radare I/O subsystem allows you to map contents of files into the same I/O space used to contain loaded binary. New contents can be placed at random offsets.
 
-Using the `S` (sections) command you can define a base address for each library to be loaded.
+The o command permits the user to open a file, this is mapped at offset 0 unless it have a known binary header and then the maps are created in virtual addresses.
 
-Mapping files is done using the `o` (open) command. Let's read the help:
+Sometimes, we want to rebase a binary, or maybe we want to load or map the file in a different address.
+
+When launching r2, the base address can be changed with the -B flag. But you must notice the difference when opening files with unknown headers, like bootloaders, so we need to map them using the -m flag (or specifying it as argument to the o command).
+
+Being able to open files and map portions of them at random places in memory with some attributes like permissions, name, etc. Is the perfect basic tooling to reproduce an environment like a core file, a debug session, by also loading and mapping all the libraries the binary depends.
+
+Opening files (and mapping them) is done using the `o` (open) command. Let's read the help:
+
 ```
 [0x00000000]> o?
 |Usage: o [com- ] [file] ([offset])
@@ -38,6 +44,7 @@ Mapping files is done using the `o` (open) command. Let's read the help:
 ```
 
 Prepare a simple layout:
+
 ```sh
 $ rabin2 -l /bin/ls
 [Linked libraries]
@@ -48,11 +55,15 @@ libc.so.6
 
 4 libraries
 ```
+
 Map a file:
+
 ```
 [0x00001190]> o /bin/zsh 0x499999
 ```
+
 List mapped files:
+
 ```
 [0x00000000]> o
 - 6 /bin/ls @ 0x0 ; r
@@ -61,11 +72,13 @@ List mapped files:
 ```
 
 Print hexadecimal values from /bin/zsh:
+
 ```
 [0x00000000]> px @ 0x499999
 ```
 
 Unmap files using the `o-` command. Pass required file descriptor to it as an argument:
+
 ```
 [0x00000000]> o-14
 ```

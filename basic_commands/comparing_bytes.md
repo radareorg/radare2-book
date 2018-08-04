@@ -1,6 +1,15 @@
 ## Comparing Bytes
 
+For most generic reverse engineering tasks like finding the differences between two binary files, which bytes has changed, find differences in the graphs of the code analysis results, and other diffing operations you can just use radiff2:
+
+```
+$ radiff2 -h
+```
+
+Inside r2, the functionalities exposed by radiff2 are available in the c command.
+
 `c` (short for "compare") allows you to compare arrays of bytes from different sources. The command accepts input in a number of formats and then compares it against values found at current seek position.
+
 ```
 [0x00404888]> c?
  |Usage: c[?dfx] [argument] # Compare
@@ -28,6 +37,7 @@
 ```
 
 To compare memory contents at current seek position against given string of values, use `cx`:
+
 ```
 [0x08048000]> p8 4
 7f 45 4c 46
@@ -37,16 +47,22 @@ Compare 3/4 equal bytes
 0x00000002 (byte=03)   90 ' '  ->  4c 'L'
 [0x08048000]>
 ```
+
 Another subcommand of `c` command is `cc` which stands for "compare code".
 To compare a byte sequence with a sequence in memory:
+
 ```
 [0x4A13B8C0]> cc 0x39e8e089 @ 0x4A13B8C0
 ```
+
 To compare contents of two functions specified by their names:
+
 ```
 [0x08049A80]> cc sym.main2 @ sym.main
 ```
+
 `c8` compares a quadword from the current seek (in the example below, 0x00000000) against a math expression:
+
 ```
 [0x00000000]> c8 4
 
@@ -57,6 +73,7 @@ Compare 1/8 equal bytes (0%)
 ```
 
 The number parameter can, of course, be math expressions which use flag names etc:
+
 ```
 [0x00000000]> cx 7f469046
 
@@ -66,6 +83,7 @@ Compare 2/4 equal bytes
 ```
 
 You can use the compare command to find differences between a current block and a file previously dumped to a disk:
+
 ```
 r2 /bin/true
 [0x08049A80]> s 0

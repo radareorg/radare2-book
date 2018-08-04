@@ -5,6 +5,7 @@ One of the key features of radare2 is displaying information in many formats. Th
 Binary data can be represented as integers, shorts, longs, floats, timestamps, hexpair strings, or more complex formats like C structures, disassembly listings, decompilation listing, be a result of an external processing...
 
 Below is a list of available print modes listed by `p?`:
+
 ```
 [0x00005310]> p?
 |Usage: p[=68abcdDfiImrstuxz] [arg|len] [@addr]
@@ -41,6 +42,7 @@ Below is a list of available print modes listed by `p?`:
 ```
 
 Tip: when using json output, you can append the `~{}` to the command to get a pretty-printed version of the output:
+
 ```
 [0x00000000]> oj
 [{"raised":false,"fd":563280,"uri":"malloc://512","from":0,"writable":true,"size":512,"overlaps":false}]
@@ -63,6 +65,7 @@ For more on the magical powers of `~` see the help in `?@?`, and the "Command Fo
 ### Hexadecimal View
 
 `px` gives a user-friendly output showing 16 pairs of numbers per row with offsets and raw representations:
+
 ```
 [0x00404888]> px
 - offset -   0 1  2 3  4 5  6 7  8 9  A B  C D  E F  0123456789ABCDEF
@@ -70,7 +73,9 @@ For more on the magical powers of `~` see the help in `?@?`, and the "Command Fo
 0x00404898  c7c0 4024 4100 48c7 c1b0 2341 0048 c7c7  ..@$A.H...#A.H..
 0x004048a8  d028 4000 e83f dcff fff4 6690 662e 0f1f  .(@..?....f.f...
 ```
+
 #### Show Hexadecimal Words Dump (32 bits)
+
 ```
 [0x00404888]> pxw
 0x00404888  0x8949ed31 0x89485ed1 0xe48348e2 0x495450f0  1.I..^H..H...PTI
@@ -89,11 +94,14 @@ false
 ```
 
 #### 8 bits Hexpair List of Bytes
+
 ```
 [0x00404888]> p8 16
 31ed4989d15e4889e24883e4f0505449
 ```
+
 #### Show Hexadecimal Quad-words Dump (64 bits)
+
 ```
 [0x08049A80]> pxq
 0x00001390  0x65625f6b63617473  0x646e6962006e6967   stack_begin.bind
@@ -105,6 +113,7 @@ false
 ### Date/Time Formats
 
 Currently supported timestamp output modes are:
+
 ```
 [0x00404888]> pt?
 |Usage: pt[dn?]
@@ -113,7 +122,9 @@ Currently supported timestamp output modes are:
 | ptn     print ntfs time (64 bit !cfg.big_endian)
 | pt?     show help message
 ```
+
 For example, you can 'view' the current buffer as timestamps in the ntfs time:
+
 ```
 [0x08048000]> e cfg.bigendian = false
 [0x08048000]> pt 4
@@ -122,14 +133,18 @@ For example, you can 'view' the current buffer as timestamps in the ntfs time:
 [0x08048000]> pt 4
 20:05:13001 09:29:21 +0000
 ```
+
 As you can see, the endianness affects the result. Once you have printed a timestamp, you can grep output, for example, by year value:
+
 ```
 [0x08048000]> pt ~1974 | wc -l
 15
 [0x08048000]> pt ~2022
 27:04:2022 16:15:43 +0000
 ```
+
 The default date format can be configured using the `cfg.datefmt` variable. Formatting rules for it follow the well known strftime(3) format. An excerpt from the strftime(3) manpage:
+
 ```
     %a  The abbreviated name of the day of the week according to the current locale.
     %A  The full name of the day of the week according to the current locale.
@@ -180,6 +195,7 @@ The default date format can be configured using the `cfg.datefmt` variable. Form
 ### Basic Types
 
 There are print modes available for all basic types. If you are interested in a more complex structure, type `pf??` for format characters and `pf???` for examples:
+
 ```
 [0x00499999]> pf??
 |pf: pf[.k[.f[=v]]|[v]]|[n]|[0|cnt][fmt] [a0 a1 ...]
@@ -216,6 +232,9 @@ There are print modes available for all basic types. If you are interested in a 
 |  :       skip 4 bytes
 |  .       skip 1 byte
 ```
+
+Use triple-question to get some examples using print format strings.
+
 ```
 [0x00499999]> pf???
 |pf: pf[.k[.f[=v]]|[v]]|[n]|[0|cnt][fmt] [a0 a1 ...]
@@ -261,12 +280,19 @@ Valid print code formats for human-readable languages are:
 * `pcJ`    javascript
 * `pcp`    python
 
+If we need to create a .c file containing a binary blob, use the pc command, that creates this output. The default size, is like in many other commands: the block size.  Which can be changed with the b command.
+
+But we can just temporarily override this block size by expressing it as argument.
+
 ```
 [0xB7F8E810]> pc 32
 #define _BUFFER_SIZE 32
 unsigned char buffer[_BUFFER_SIZE] = {
 0x89, 0xe0, 0xe8, 0x49, 0x02, 0x00, 0x00, 0x89, 0xc7, 0xe8, 0xe2, 0xff, 0xff, 0xff, 0x81, 0xc3, 0xd6, 0xa7, 0x01, 0x00, 0x8b, 0x83, 0x00, 0xff, 0xff, 0xff, 0x5a, 0x8d, 0x24, 0x84, 0x29, 0xc2 };
 ```
+
+That cstring can used in many programming languages, not just C.
+
 ```
 [0x7fcd6a891630]> pcs
 "\x48\x89\xe7\xe8\x68\x39\x00\x00\x49\x89\xc4\x8b\x05\xef\x16\x22\x00\x5a\x48\x8d\x24\xc4\x29\xc2\x52\x48\x89\xd6\x49\x89\xe5\x48\x83\xe4\xf0\x48\x8b\x3d\x06\x1a
@@ -275,6 +301,7 @@ unsigned char buffer[_BUFFER_SIZE] = {
 ### Strings
 
 Strings are probably one of the most important entry points when starting to reverse engineer a program because they usually reference information about functions' actions (asserts, debug or info messages...) Therefore radare supports various string formats:
+
 ```
 [0x00000000]> ps?
 |Usage: ps[zpw] [N]Print String
@@ -290,7 +317,9 @@ Strings are probably one of the most important entry points when starting to rev
 | psW  print 32bit wide string
 | psj  print string in JSON format
 ```
+
 Most strings are zero-terminated. Here is an example by using the debugger to continue the execution of a program until it executes the 'open' syscall. When we recover the control over the process, we get the arguments passed to the syscall, pointed by %ebx. In the case of the 'open' call, it is a zero terminated string which we can inspect using `psz`.
+
 ```
 [0x4A13B8C0]> dcs open
 0x4a14fc24 syscall(5) open ( 0x4a151c91 0x00000000 0x00000000 ) = 0xffffffda
@@ -307,13 +336,16 @@ Most strings are zero-terminated. Here is an example by using the debugger to co
 ### Print Memory Contents
 
 It is also possible to print various packed data types using the `pf` command:
+
 ```
 [0xB7F08810]> pf xxS @ rsp
 0x7fff0d29da30 = 0x00000001
 0x7fff0d29da34 = 0x00000000
 0x7fff0d29da38 = 0x7fff0d29da38 -> 0x0d29f7ee /bin/ls
 ```
+
 This can be used to look at the arguments passed to a function. To achieve this, simply pass a 'format memory string' as an argument to `pf`, and temporally change the current seek position/offset using `@`. It is also possible to define arrays of structures with `pf`. To do this, prefix the format string with a numeric value. You can also define a name for each field of the structure by appending them as a space-separated arguments list.
+
 ```
 [0x4A13B8C0]> pf 2*xw pointer type @ esp
 0x00404888 [0] {
@@ -326,7 +358,9 @@ This can be used to look at the arguments passed to a function. To achieve this,
 	 type : 0x0040489a = 0x2440
 }
 ```
+
 A practical example for using `pf` on a binary of a GStreamer plugin:
+
 ```
 $ radare ~/.gstreamer-0.10/plugins/libgstflumms.so
 [0x000028A0]> seek sym.gst_plugin_desc
@@ -360,6 +394,7 @@ The `pd` command is used to disassemble code. It accepts a numeric value to spec
 ### Selecting Target Architecture
 
 The architecture flavor for disassembler is defined by the `asm.arch` eval variable. You can use `e asm.arch=??` to list all available architectures.
+
 ```
 [0x00005310]> e asm.arch=??
 _dAe  _8_16      6502        LGPL3   6502/NES/C64/Tamagotchi/T-1000 CPU
@@ -391,6 +426,7 @@ _d__  _32        lanai       GPL3    LANAI
 ### Configuring the Disassembler
 
 There are multiple options which can be used to configure the output of disassembler. All these options are described in `e? asm.`
+
 ```
 [0x00005310]> e? asm.
             asm.anal: Analyze code and refs while disassembling (see anal.strings)
@@ -407,16 +443,18 @@ There are multiple options which can be used to configure the output of disassem
         asm.cmt.fold: Fold comments, toggle with Vz
 ...
 ```
-Currently there are 136 `asm.` configuration variables so we do not list them all
 
+Currently there are 136 `asm.` configuration variables so we do not list them all
 
 ### Disassembly Syntax
 
 The `asm.syntax` variable is used to change the flavor of the assembly syntax used by a disassembler engine. To switch between Intel and AT&T representations:
+
 ```
 e asm.syntax = intel
 e asm.syntax = att
 ```
+
 You can also check `asm.pseudo`, which is an experimental pseudocode view,
 and `asm.esil` which outputs [ESIL](../disassembling/esil.md) ('Evaluable Strings Intermediate Language'). ESIL's goal is to have a human-readable representation of every opcode semantics. Such representations can be evaluated (interpreted) to emulate effects of individual instructions.
 

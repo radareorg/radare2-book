@@ -3,14 +3,19 @@
 Flags are conceptually similar to bookmarks. They associate a name with a given offset in a file. Flags can be grouped into 'flag spaces'. A flag space is a namespace for flags, grouping together flags of similar characteristics or type. Examples for flag spaces: sections, registers, symbols.
 
 To create a flag:
+
 ```
 [0x4A13B8C0]> f flag_name @ offset
 ```
+
 You can remove a flag by appending the `-` character to command. Most commands accept `-` as argument-prefix as an indication to delete something.
+
 ```
 [0x4A13B8C0]> f-flag_name
 ```
+
 To switch between or create new flagspaces use the `fs` command:
+
 ```
 [0x00005310]> fs?
 |Usage: fs [*] [+-][flagspace|addr] # Manage flagspaces
@@ -39,6 +44,8 @@ To switch between or create new flagspaces use the `fs` command:
 5  109 * imports
 [0x00005310]>
 ```
+
+Here there are some command examples:
 
 ```
 [0x4A13B8C0]> fs symbols ; select only flags in symbols flagspace

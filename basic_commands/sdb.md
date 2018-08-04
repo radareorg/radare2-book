@@ -1,5 +1,11 @@
 # SDB
 
+SDB stands for String DataBase. It's a simple key-value database that only operates with strings created by pancake. It is used in many parts of r2 to have a disk and in-memory database which is small and fast to manage using it as a hashtable with asteroids.
+
+The k command give us the interface to run sdb_query expressions to read or change internal information from the analysis, syscalls, binary information, etc
+
+Here there are some usage examples:
+
 List namespaces
 ```
 k **

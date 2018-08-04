@@ -1,12 +1,15 @@
 # Heap
 
 radare2's `dm` subcommands can also display a map of the heap which is useful for those who are interesting in inspecting the heap and its content. Simply execute `dmh` to show a map of the heap:
+
 ```
 [0x7fae46236ca6]> dmh
   Malloc chunk @ 0x55a7ecbce250 [size: 0x411][allocated]
   Top chunk @ 0x55a7ecbce660 - [brk_start: 0x55a7ecbce000, brk_end: 0x55a7ecbef000]
 ```
+
 You can also see a graph layout of the heap:
+
 ```
 [0x7fae46236ca6]> dmhg
 Heap Layout
@@ -33,7 +36,9 @@ Heap Layout
 │ [brk_start:0x55a7ecbce000, brk_end:0x55a7ecbef000] │
 ╰────────────────────────────────────────────────────╯
 ```
+
 Another heap commands can be found under `dmh`, check `dmh?` for the full list.
+
 ```
 [0x00000000]> dmh?
 |Usage:  dmh # Memory map heap
