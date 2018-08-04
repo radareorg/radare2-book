@@ -105,6 +105,10 @@
    * [Python plugins](plugins/python.md)
    * [Debugging](plugins/debug.md)
    * [Testing](plugins/testing.md)
+
+
+## XXX - Digital book only.
+
 * [Architectures](arch/intro.md)
    * [8051](arch/8051.md)
 * [Crackmes](crackmes/intro.md)
