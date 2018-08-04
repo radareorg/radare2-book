@@ -71,8 +71,7 @@
    * [Heap](debugger/heap.md)
    * [Files](debugger/files.md)
    * [Reverse Debugging](debugger/revdebug.md)
-* Remote Access Capabilities
-   * [Remoting Capabilities](debugger/remoting_capabilities.md)
+* [Remote Access](debugger/remoting_capabilities.md)
    * [Remote GDB](debugger/remote_gdb.md)
    * [Remote WinDbg](debugger/windbg.md)
 * [Rabin2](rabin2/intro.md)
