@@ -1,10 +1,19 @@
 ## Implementing a new analysis plugin
 
-While implem
+After implementing disassembly plugin, you might have noticed that output
+is far from being good - no proper highlighting, no reference lines
+and so on. This is because radare2 requires every architecture plugin
+to provide also analysis information about every opcode. At the moment
+the implementation of disassembly and opcodes analysis is separated between
+two modules - RAsm and RAnal. Thus we need to write an analysis plugin too.
+The principle is very similar - you just need to create a C file and
+corresponding Makefile.
+
+**Makefile**
 
 ```makefile
 NAME=anal_snes
-R2_PLUGIN_PATH=$(shell r2 -hh|grep LIBR_PLUGINS|awk '{print $$2}')
+R2_PLUGIN_PATH=$(shell r2 -H|grep USER_PLUGINS|awk '{print $$2}')
 CFLAGS=-g -fPIC $(shell pkg-config --cflags r_anal)
 LDFLAGS=-shared $(shell pkg-config --libs r_anal)
 OBJS=$(NAME).o
@@ -27,6 +36,7 @@ uninstall:
 ```
 
 **anal_snes.c:**
+
 ```c
 /* radare - LGPL - Copyright 2015 - condret */
 
@@ -77,7 +87,7 @@ struct r_lib_struct_t radare_plugin = {
 ```
 After compiling radare2 will list this plugin in the output:
 ```
-_d__  _8_16      snes        LGPL3   SuperNES CPU
+_dA_  _8_16      snes        LGPL3   SuperNES CPU
 ```
 
 **snes_op_table**.h: https://github.com/radare/radare2/blob/master/libr/asm/arch/snes/snes_op_table.h
