@@ -9,6 +9,27 @@ two modules - RAsm and RAnal. Thus we need to write an analysis plugin too.
 The principle is very similar - you just need to create a C file and
 corresponding Makefile.
 
+They structure of RAnal plugin looks like
+
+```c
+RAnalPlugin r_anal_plugin_v810 = {
+	.name = "mycpu",
+	.desc = "MYCPU code analysis plugin",
+	.license = "LGPL3",
+	.arch = "mycpu",
+	.bits = 32,
+	.op = mycpu_op,
+	.esil = true,
+	.set_reg_profile = set_reg_profile,
+};
+```
+
+Like with disassembly plugin there is a key function - `mycpu_op` which scans the opcode and builds
+RAnalOp structure. On the other hand, in this example analysis plugins also performs uplifting to
+ESIL, which is enabled in `.esil = true` statement. Thus, `mycpu_op` obliged to fill the
+corresponding RAnalOp ESIL field for the opcodes. Second important thing for ESIL uplifting and
+emulation - register profile, like in debugger, which is set within `set_reg_profile` function.
+
 **Makefile**
 
 ```makefile

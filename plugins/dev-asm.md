@@ -4,6 +4,26 @@ Radare2 has modular architecture, thus adding support for a new architecture is 
 are fluent in C. For various reasons it might be easier to implement it out of the tree. For this we
 will need to create single C file, called `asm_mycpu.c` and makefile for it.
 
+The key thing of RAsm plugin is a structure
+```c
+RAsmPlugin r_asm_plugin_mycpu = {
+	.name = "mycpu",
+	.license = "LGPL3",
+	.desc = "MYCPU disassembly plugin",
+	.arch = "mycpu",
+	.bits = 32,
+	.endian = R_SYS_ENDIAN_LITTLE,
+	.disassemble = &disassemble
+};
+```
+
+where `.disassemble` is a pointer to disassembly function, which accepts the bytes buffer
+and length:
+
+```c
+static int disassemble(RAsm *a, RAsmOp *op, const ut8 *buf, int len)
+```
+
 **Makefile**
 
 ```makefile
