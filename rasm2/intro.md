@@ -1,6 +1,7 @@
 # Rasm2
 
 `rasm2` is an inline assembler/disassembler. Initially, `rasm` tool was designed to be used for binary patching. It is main function is get bytes corresponding to given machine instruction opcode.
+
 ```
 $ rasm2 -h
 Usage: rasm2 [-ACdDehLBvw] [-a arch] [-b bits] [-o addr] [-s syntax]
@@ -104,6 +105,7 @@ _dA_  32         xcore       BSD     Capstone XCore disassembler
 _dAe  32         xtensa      GPL3    XTensa CPU
 adA_  8          z80         GPL     Zilog Z80
 ```
+
 > Note that "ad" in the first column means both assembler and disassembler are offered by a corresponding  plugin. "_d" indicates disassembler, "a_" means only assembler is available.
 
 
