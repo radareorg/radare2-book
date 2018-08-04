@@ -12,12 +12,14 @@ stored as a separate binary, thus the different logic of handling it.
 At first, one of the common scenarios is to analyze the file from Windows distribution.
 In this case, all PDB files are available on the Microsoft server, which is by default
 is in options. See all pdb options in radare2:
+
 ```
 pdb.autoload = 0
 pdb.extract = 1
 pdb.server = https://msdl.microsoft.com/download/symbols
 pdb.useragent = Microsoft-Symbol-Server/6.11.0001.402
 ```
+
 Using the variable `pdb.server` you can change the address where radare2 will try to
 download the PDB file by the GUID stored in the executable header.
 Usually, there is no reason to change default `pdb.useragent`, but who knows where
@@ -26,21 +28,23 @@ could it be handy?
 Because those PDB files are stored as "cab" archives on the server, `pdb.extract=1`
 says to automatically extract them.
 
-Note, that for automatical downloading to work you need "cabextract" tool, and
-wget/curl installed.
+Note, that for automatical downloading to work you need "cabextract" tool, and wget/curl installed.
 
 Sometimes you don't need to do that from the radare2 itself, thus - two handy
 rabin2 options:
+
 ```
  -P              show debug/pdb information
  -PP             download pdb file for binary
 ```
+
 where `-PP` automatically downloads the pdb for the selected binary, using those
 `pdb.*` config options. `-P` will dump the contents of the PDB file, which is useful
 sometimes for a quick understanding of the symbols stored in it.
 
 Apart from the basic scenario of just opening a file, PDB information can be additionally
 manipulated by the `id` commands:
+
 ```
 [0x000051c0]> id?
 |Usage: id Debug information
@@ -51,6 +55,7 @@ manipulated by the `id` commands:
 | idpi [file.pdb]  Show pdb file information
 | idpd             Download pdb file on remote server
 ```
+
 Where `idpi` is basically the same as `rabin2 -P`.
 Note, that `idp` can be also used not only in the static analysis mode, but also
 in the debugging mode, even if connected via WinDbg.
@@ -63,6 +68,7 @@ related PDB files will be loaded automatically.
 
 DWARF information loading, on the other hand, is completely automated. You don't
 need to run any commands/change any options:
+
 ```
 r2 `which rabin2`
 [0x00002437 8% 300 /usr/local/bin/rabin2]> pd $r
@@ -115,5 +121,6 @@ r2 `which rabin2`
       ;-- rabin_show_help:
       0x000024dd      55             push rbp                    ; .//rabin2.c:27
 ```
+
 As you can see, it loads function names and source line information.
 

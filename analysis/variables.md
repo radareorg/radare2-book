@@ -5,6 +5,7 @@ The variables autoanalysis is enabled by default but can be disabled with `anal.
 configuration option.
 
 The main variables commands are located in `afv` namespace:
+
 ```
 |Usage: afv[rbs]
 | afvr[?]                     manipulate register based arguments
@@ -25,6 +26,7 @@ debugger
 register-based arguments and variables, BP/FP-based arguments and variables,
 and SP-based arguments and variables respectively.
 If we check the help for `afvr` we will get the way two others commands works too:
+
 ```
 |Usage: afvr [reg] [type] [name]
 | afvr                        list register based arguments
@@ -82,6 +84,7 @@ Less commonly used feature, which is still under heavy development - distinction
 variables being read and write. You can list those being read with `afvR` command and those
 being written with `afvW` command. Both commands provide a list of the places those operations
 are performed:
+
 ```
 [0x00003b92]> afvR
 local_48h  0x48ee

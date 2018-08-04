@@ -3,6 +3,7 @@ Those types are parsed by a C11-compatible parser and stored in
 the internal SDB, thus introspectable with `k` command.
 
 Most of the related commands are located in `t` namespace:
+
 ```
 [0x000051c0]> t?
 |Usage: t # cparse types commands
@@ -52,12 +53,14 @@ long
 long long
 ...
 ```
+
 ### Loading types
 
 There are three easy ways to define a new type:
 * Directly from the string using `td` command
 * From the file using `to <filename>` command
 * Open  an `$EDITOR` to type the definitions in place using `to -`
+
 ```
 [0x000051c0]> "td struct foo {char* a; int b;}"
 [0x000051c0]> cat ~/radare2-regressions/bins/headers/s3.h
@@ -71,6 +74,7 @@ struct S1 {
 foo
 S1
 ```
+
 Also note there is a config option to specify include directories for types parsing
 
 ```
@@ -120,7 +124,9 @@ with the chosen type, we can use `tl` command to store the relationship in SDB.
  y : 0x000051db = [ 2370306049, 4293315645, 3860201471, 4093649307 ]
  z : 0x000051eb = 4464399
 ```
+
 Moreover, the link will be shown in the disassembly output or visual mode:
+
 ```
 [0x000051c0 15% 300 /bin/ls]> pd $r @ entry0
             ;-- entry0:
@@ -141,7 +147,8 @@ Moreover, the link will be shown in the disassembly output or visual mode:
             0x000051ff      4839f8         cmp rax, rdi
             0x00005202      4889e5         mov rbp, rsp
 ```
-Once the struct is linked, radare2 tries to propagate structure offset in the function at current offset, to run this analysis on whole program or at any targeted functions after all structs is linked you have `taa` command :
+
+Once the struct is linked, radare2 tries to propagate structure offset in the function at current offset, to run this analysis on whole program or at any targeted functions after all structs is linked you have `taa` command:
 
 ```
 [0x00000000]> ta?
@@ -173,6 +180,7 @@ The return value of `malloc` may differ between two emulations, so you have to s
 There is one more important aspect of using types in radare2 - using `ta` you
 can change the immediate in the opcode to the structure offset.
 Lets see a simple example of [R]SI-relative addressing
+
 ```
 [0x000052f0]> pd 1
             0x000052f0      488b4608       mov rax, qword [rsi + 8]    ; [0x8:8]=0
@@ -180,25 +188,30 @@ Lets see a simple example of [R]SI-relative addressing
 Here `8` - is some offset in the memory, where `rsi` probably holds
 some structure pointer. Imagine that we have the following structures
 ```
+
 [0x000052f0]> "td struct ms { char b[8]; int member1; int member2; };"
 [0x000052f0]> "td struct ms1 { uint64_t a; int member1; };"
 [0x000052f0]> "td struct ms2 { uint16_t a; int64_t b; int member1; };"
 ```
 Now we need to set the proper structure member offset instead of `8` in this instruction.
 At first, we need to list available types matching this offset:
+
 ```
 [0x000052f0]> tas 8
 ms.member1
 ms1.member1
 ```
+
 Note, that `ms2` is not listed, because it has no members with offset `8`.
 After listing available options we can link it to the chosen offset at
 the current address:
+
 ```
 [0x000052f0]> ta ms1.member1
 [0x000052f0]> pd 1
             0x000052f0      488b4608       mov rax, qword [rsi + ms1.member1]    ; [0x8:8]=0
 ```
+
 ### Managing enums
 
 * Printing all feilds in enum using `te` command
@@ -222,6 +235,7 @@ COW
 ## Internal representation
 
 To see the internal representation of the types you can use `tk` command:
+
 ```
 [0x000051c0]> tk~S1
 S1=struct
@@ -237,6 +251,7 @@ struct.S1.z.meta=0
 
 Defining primitive types requires an understanding of basic `pf` formats,
 you can find the whole list of format specifier in `pf??`:
+
 ```
 -----------------------------------------------------------------
 |  format specifier  | explanation                              |
@@ -260,6 +275,7 @@ you can find the whole list of format specifier in `pf??`:
 |         z          |  \0 terminated string                    |
 |         Z          |  \0 terminated wide string               |
 -----------------------------------------------------------------
+
 ```
 there are basically 3 mandatory keys for defining basic data types:
 `X=type`
@@ -268,11 +284,13 @@ there are basically 3 mandatory keys for defining basic data types:
 For example, let's define `UNIT`, according to [Microsoft documentation](https://msdn.microsoft.com/en-us/library/windows/desktop/aa383751(v=vs.85).aspx#UINT )
 `UINT` is just equivalent of standard C `unsigned int` (or `uint32_t` in terms of TCC engine).
 It will be defined as:
+
 ```
 UINT=type
 type.UINT=d
 type.UINT.size=32
 ```
+
 Now there is an optional entry:
 
 `X.type.pointto=Y`
@@ -280,19 +298,23 @@ Now there is an optional entry:
 This one may only be used in case of pointer `type.X=p`, one good example is LPFILETIME definition,
 it is a pointer to `_FILETIME` which happens to be a structure.
 Assuming that we are targeting only 32-bit windows machine, it will be defined as the following:
+
 ```
 LPFILETIME=type
 type.LPFILETIME=p
 type.LPFILETIME.size=32
 type.LPFILETIME.pointto=_FILETIME
 ```
+
 This last field is not mandatory because some times the data structure
 internals will be property, and we will not have a clean representation for it.
 
 There is also one more optional entry:
+
 ```
 type.UINT.meta=4
 ```
+
 This entry is for integration with C parser and carries the type class information:
 integer size, signed/unsigned, etc.
 
@@ -306,23 +328,28 @@ struct.X=a,b
 struct.X.a=a_type,a_offset,a_number_of_elements
 struct.X.b=b_type,b_offset,b_number_of_elements
 ```
+
 The first line is used to define a structure called `X`, the second line
 defines the elements of `X` as comma separated values. After that, we just define each element info.
 
 For example. we can have a struct like this one:
+
 ```
 struct _FILETIME {
 	DWORD dwLowDateTime;
 	DWORD dwHighDateTime;
 }
 ```
+
 assuming we have `DWORD` defined, the struct will look like this
+
 ```
  _FILETIME=struct
 struct._FILETIME=dwLowDateTime,dwHighDateTime
 struct._FILETIME.dwLowDateTime=DWORD,0,0
 struct._FILETIME.dwHighDateTime=DWORD,4,0
 ```
+
 Note that the number of elements filed is used in case of arrays only
 to identify how many elements are in arrays, other than that it is zero by default.
 
@@ -344,11 +371,15 @@ func.x.arg0=Arg_type,arg_name
 func.X.ret=Return_type
 func.X.cc=calling_convention
 ```
+
 It should be self-explanatory. Let's do strncasecmp as an example for x86 arch for Linux machines. According to man pages, strncasecmp is defined as the following:
+
 ```
 int strcasecmp(const char *s1, const char *s2, size_t n);
 ```
+
 When converting it into its sdb representation it will look like the following:
+
 ```
 strcasecmp=func
 func.strcasecmp.args=3
@@ -365,4 +396,5 @@ There is one extra optional key
 ```
 func.x.noreturn=true/false
 ```
+
 This key is used to mark functions that will not return once called, such as `exit` and `_exit`.

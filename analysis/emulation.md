@@ -106,6 +106,7 @@ Sometimes it is required though, especially in the process of deobfuscating or u
 
 To show the process of emulation you can set `asm.emu` variable, which will show calculated
 register and memory values in disassembly comments:
+
 ```
 [0x00001660]> e asm.emu=true
 [0x00001660]> pdf
