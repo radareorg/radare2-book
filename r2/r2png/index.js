@@ -4,11 +4,18 @@ const file = process.argv[2];
 const cmds = process.argv.slice(3)
 const text2png = require('text2png');
 
-
 if (process.argv.length < 4) {
   console.error('Usage: r2png [file] [cmds ...] > output.png');
   process.exit(1);
 }
+
+function log(x) {
+  if (x) {
+    console.error(x);
+  }
+}
+
+main().then(log).catch(log);
 
 function replaceAll (txt, replace, with_this) {
   replace = replace.replace('|', '\\|');
@@ -105,19 +112,21 @@ process.stdout.write(png);
 }
 
 async function main() {
-  const r2 = await r2promise.open(file, ['-escr.color=0']);
-  let res = '';
-  for (let cmd of cmds) {
-    const seek = (await r2.cmd('?vx $$')).trim();
-    const out = await r2.cmd(cmd);
-    res += '['+seek+']> ' + cmd + '\n' + out;
+  if (file === '"') {
+    render2 (cmds.join('\n'));
+  } else {
+    const r2 = await r2promise.open(file, ['-escr.color=0']);
+    let res = '';
+    for (let cmd of cmds) {
+      const seek = (await r2.cmd('?vx $$')).trim();
+      const out = await r2.cmd(cmd);
+      res += '['+seek+']> ' + cmd + '\n' + out;
+    }
+    // render (res);
+    render2 (res);
+    await r2.quit();
   }
-  // render (res);
-  render2 (res);
-  await r2.quit();
 }
-
-main().then(_ => console.error(_)).catch(_ => console.error(_));
 
 /*
 r2pipe.open(file, ['-escr.color=0'], (err, r2) => {

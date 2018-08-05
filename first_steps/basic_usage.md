@@ -11,12 +11,9 @@ If radare2 opens an executable file, by default it will open the file in VA mode
 The 'print' command is abbreviated as `p` and has a number of submodes — the second letter specifying a desired print mode. Frequent variants include `px` to print in hexadecimal, and `pd` for disassembling.
 
 To be allowed to write files, specify the `-w` option to radare2 when opening a file. The `w` command can be used to write strings, hexpairs (`x` subcommand), or even assembly opcodes (`a` subcommand). Examples:
-```
-> w hello world         ; string
-> wx 90 90 90 90        ; hexpairs
-> wa jmp 0x8048140      ; assemble
-> wf inline.bin         ; write contents of file
-```
+
+![write examples](basic_usage_01.png)
+
 Appending a `?` to a command will show its help message, for example, `p?`.
 Appending `?*` will show commands starting with the given string, e.g. `p?*`.
 
