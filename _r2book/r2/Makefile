@@ -3,7 +3,7 @@ R2SNIP=node r2snip.js
 D=../img-white/
 
 all:
-	$(R2SNIP) `find .. | grep -v _r2book | grep snippets$$` 
+	$(R2SNIP) `find ../| grep snippets$$` 
 
 test:
 	mkdir -p $(D)/configuration

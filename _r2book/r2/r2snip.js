@@ -6,8 +6,7 @@ const { spawnSync } = require('child_process');
 for (let snip of snippets) {
   const dir = path.dirname(snip);
   const text = fs.readFileSync(snip);
-  console.error('FILE', snip);
-  parseSnippet(snip, dir, text.toString('utf8'))
+  parseSnippet(dir, text.toString('utf8'))
 }
 
 function system(cmd, args) {
@@ -15,15 +14,7 @@ function system(cmd, args) {
   return result.stdout;
 }
 
-function buildSnippetImage(input, output, mode, args) {
-  const s = fs.statSync(output);
-  const a = new Date(s.mtime);
-  const i = fs.statSync(input);
-  const b = new Date(i.mtime);
-  if (b < a) {
-    console.error('PNG ---', output);
-    return true;
-  }
+function buildSnippetImage(output, mode, args) {
   if (mode === 'string') {
     console.error('PNG STR', output);
     const png = system("node", ['r2png/index.js', '"', ...args]);
@@ -36,7 +27,7 @@ function buildSnippetImage(input, output, mode, args) {
   }
 }
 
-function parseSnippet(input, dir, text) {
+function parseSnippet(dir, text) {
   var filename = '';
   var readMode = '';
   var args = [];
@@ -50,7 +41,7 @@ function parseSnippet(input, dir, text) {
           args = [comment.open, ...args];
         }
         // console.error("RUN", filename, mode, args);
-        buildSnippetImage(input, path.join(dir, filename), mode, args);
+        buildSnippetImage(path.join(dir, filename), mode, args);
         readMode = '';
         args = [];
         continue;
