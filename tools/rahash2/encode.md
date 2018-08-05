@@ -19,7 +19,7 @@ You can decode it by using the -D flag instead of -E.
 
 ## Encryption/Decryption
 
-For encrypting data and check the crypto hash plugins:
+For encrypting data check the crypto hash plugins:
 
 ```
 $ rahash2 -L | grep ^c
