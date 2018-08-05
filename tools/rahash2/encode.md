@@ -19,7 +19,7 @@ You can decode it by using the -D flag instead of -E.
 
 ## Encryption/Decryption
 
-For encrypting and such check for the crypto hash plugins.
+For encrypting data and check the crypto hash plugins:
 
 ```
 $ rahash2 -L | grep ^c
@@ -38,7 +38,7 @@ c  xor
 c  serpent-ecb
 ```
 
-Here's an example usage to encrypt a string using rahash2.
+Here's an example usage to encrypt a string using rahash2:
 
 ```
 $ rahash2 -E xor -S s:password -s hello | hexdump -C

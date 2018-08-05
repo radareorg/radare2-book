@@ -2,9 +2,9 @@
 
 Assembling is the action to take a computer instruction in human readable form (using mnemonics) and convert that into a bunch of bytes that can be executed by a machine.
 
-In r2, the assembler and disassembler logic is implemented in the r_asm API, and can be used with the pa and pad commands from the commandline as well as using `rasm2`.
+In radare2, the assembler and disassembler logic is implemented in the r_asm_* API, and can be used with the pa and pad commands from the commandline as well as using `rasm2`.
 
-Which can be used to quickly copy-paste hexpairs that represent a given machine instruction. The following line is assembling this mov instruction for x86/32.
+Rasm2 can be used to quickly copy-paste hexpairs that represent a given machine instruction. The following line is assembling this mov instruction for x86/32.
 
 ```
 $ rasm2 -a x86 -b 32 'mov eax, 33'
@@ -18,11 +18,11 @@ $ echo 'push eax;nop;nop' | rasm2 -f -
 5090
 ```
 
-As you have seen, rasm2 can assemble one or many instructions. In line by separating them with a semicolon ;, but can also read that from a file, using generic nasm/gas/.. syntax and directives. You can check the rasm2 manpage for more details on this.
+As you have seen, rasm2 can assemble one or many instructions. In line by separating them with a semicolon `;`, but can also read that from a file, using generic nasm/gas/.. syntax and directives. You can check the rasm2 manpage for more details on this.
 
-The pa and pad are subcommands of print, which means that they will only print (assembly or disassembly). But if you want to actually write the instruction you may want to use wa or wx (with the bytes appended)
+The `pa` and `pad` are a subcommands of print, what means they will only print assembly or disassembly. In case you want to actually write the instruction it is required to use `wa` or `wx` commands with the assembly string or bytes appended.
 
-The assembler understands the following input languages and their flavors: x86 (Intel and AT&T variants), olly (OllyDBG syntax), powerpc (PowerPC), arm and java. For Intel syntax, rasm2 tries to mimic NASM or GAS.
+The assembler understands the following input languages and their flavors: `x86` (Intel and AT&T variants), `olly` (OllyDBG syntax), `powerpc` (PowerPC), `arm` and `java`. For Intel syntax, rasm2 tries to mimic NASM or GAS.
 
 There are several examples in the rasm2 source code directory. Consult them to understand how you can assemble a raw binary file from a rasm2 description.
 
@@ -81,8 +81,9 @@ Now we can assemble it in place:
 
 ### Visual mode
 
-The visual mode of radare2. Accesible thru the V command have the A key that inserts assembly in the current offset.
+Assembling also is accessible in radare2 visual mode through pressing `A` key to insert the assembly in the current offset.
 
-The cool thing of writing assembly using the visual assembler interface is that the changes are done in memory until you press enter.
+The cool thing of writing assembly using the visual assembler interface that the changes are done in memory until you press enter.
 
 So you can check the size of the code and which instructions is overlapping before commiting the changes.
+

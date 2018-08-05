@@ -1,6 +1,6 @@
 # Rasm2
 
-`rasm2` is an inline assembler/disassembler. Initially, `rasm` tool was designed to be used for binary patching. It is main function is get bytes corresponding to given machine instruction opcode.
+`rasm2` is an inline assembler/disassembler. Initially, `rasm` tool was designed to be used for binary patching. Its main function is to get bytes corresponding to given machine instruction opcode.
 
 ```
 $ rasm2 -h

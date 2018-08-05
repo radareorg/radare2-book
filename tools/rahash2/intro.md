@@ -34,7 +34,7 @@ The rabin2 tool parses the binary headers of the files, but it also have the abi
 $ rabin2 -K md5 -S /bin/ls
 ```
 
-## Obtaining Hashes within Radare2 Session
+## Obtaining hashes within radare2 session
 
 To calculate a checksum of current block when running radare2, use the `ph` command. Pass an algorithm name to it as a parameter. An example session:
 
