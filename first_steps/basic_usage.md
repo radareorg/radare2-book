@@ -12,12 +12,15 @@ The 'print' command is abbreviated as `p` and has a number of submodes — the s
 
 To be allowed to write files, specify the `-w` option to radare2 when opening a file. The `w` command can be used to write strings, hexpairs (`x` subcommand), or even assembly opcodes (`a` subcommand). Examples:
 
-![write examples](basic_usage_01.png)
+```
+> w hello world         ; string
+> wx 90 90 90 90        ; hexpairs
+> wa jmp 0x8048140      ; assemble
+> wf inline.bin         ; write contents of file
+```
 
 Appending a `?` to a command will show its help message, for example, `p?`.
 Appending `?*` will show commands starting with the given string, e.g. `p?*`.
-
-![write examples](basic_usage_02.png)
 
 To enter visual mode, press `V<enter>`. Use `q` to quit visual mode and return to the prompt.
 
