@@ -10,24 +10,24 @@ Help for commands useful for remote access to radare:
 |Usage:  =[:!+-=hH] [...] # radare remote command execution protocol
 |
 rap commands:
-| =                  list all open connections
-| =<[fd] cmd         send output of local command to remote fd
-| =[fd] cmd          exec cmd at remote 'fd' (last open is default one)
-| =! cmd             run command via r_io_system
+| =           list all open connections
+| =<[fd] cmd  send output of local command to remote fd
+| =[fd] cmd   exec cmd at remote 'fd' (last open is default one)
+| =! cmd      run command via r_io_system
 | =+ [proto://]host  add host (default=rap://, tcp://, udp://)
-| =-[fd]             remove all hosts or host 'fd'
-| ==[fd]             open remote session with host 'fd', 'q' to quit
-| =!=                disable remote cmd mode
-| !=!                enable remote cmd mode
+| =-[fd]      remove all hosts or host 'fd'
+| ==[fd]      open remote session with host 'fd', 'q' to quit
+| =!=         disable remote cmd mode
+| !=!         enable remote cmd mode
 |
 rap server:
-| =:port             listen on given port using rap protocol (o rap://9999)
-| =&:port            start rap server in background
-| =:host:port cmd    run 'cmd' command on remote server
+| =:port      listen on given port using rap protocol (o rap://9999)
+| =&:port     start rap server in background
+| =:host:port run 'cmd' command on remote server
 |
 other servers:
-| =h[?]              listen for http connections
-| =g[?]              using gdbserver
+| =h[?]       listen for http connections
+| =g[?]       using gdbserver
 ```
 
 You can learn radare2 remote capabilities by displaying the list of supported IO plugins: `radare2 -L`.
