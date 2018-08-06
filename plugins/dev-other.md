@@ -17,18 +17,16 @@ Some commits related to "Implementing a new architecture"
 * 6502: https://github.com/radare/radare2/pull/656
 * h8300: https://github.com/radare/radare2/pull/664
 * GBA: https://github.com/radare/radare2/pull/702
-* CR16: https://github.com/radare/radare2/pull/721/ && https://github.com/radare/radare2/pull/726
+* CR16: https://github.com/radare/radare2/pull/721/ && 726
 * XCore: https://github.com/radare/radare2/commit/bb16d1737ca5a471142f16ccfa7d444d2713a54d
-* Sharp LH5801: https://github.com/neuschaefer/radare2/commit/f4993cca634161ce6f82a64596fce45fe6b818e7
+* SharpLH5801: https://github.com/neuschaefer/radare2/commit/f4993cca634161ce6f82a64596fce45fe6b818e7
 * MSP430: https://github.com/radare/radare2/pull/1426
-* HP PA-RISC: https://github.com/radare/radare2/commit/f8384feb6ba019b91229adb8fd6e0314b0656f7b
+* HP-PA-RISC: https://github.com/radare/radare2/commit/f8384feb6ba019b91229adb8fd6e0314b0656f7b
 * V810: https://github.com/radare/radare2/pull/2899
 * TMS320: https://github.com/radare/radare2/pull/596
 
 ## Implementing a new pseudo architecture
 
-Example:
+This is an simple plugin for z80 that you may use as example:
 
-* **Z80**: https://github.com/radare/radare2/commit/8ff6a92f65331cf8ad74cd0f44a60c258b137a06
-
-
+https://github.com/radare/radare2/commit/8ff6a92f65331cf8ad74cd0f44a60c258b137a06
