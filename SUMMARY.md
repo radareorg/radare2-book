@@ -1,7 +1,6 @@
 # Summary
 
 * [Introduction](README.md)
-   * [Credits](credits/credits.md)
    * [History](first_steps/history.md)
    * [Overview](first_steps/overview.md)
    * [Getting radare2](first_steps/getting_radare.md)
@@ -106,3 +105,4 @@
    * [Testing](plugins/testing.md)
    * [Packaging](plugins/r2pm.md)
 * [Reference Card](refcard/intro.md)
+* [Acknowledgments](credits/credits.md)

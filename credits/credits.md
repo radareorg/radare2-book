@@ -1,36 +1,80 @@
 ## Authors & Contributors
 
+This book wouldn't be possible without the help of a large list of contributors who have been reviewing, writing and reporting bugs and stuff in the radare2 project as well as in this book.
+
 ### The radare2 book
 
-Rework by maijin on the original radare book
+This book was started by maijin as a new version of the original radare book written by pancake.
 
-Contributors:
+* Old radare1 book [http://www.radare.org/get/radare.pdf](http://www.radare.org/get/radare.pdf)
 
-* Anton Kochkov
-* aoighost
-* Austin Hartzheim
-* cyanpencil
-* David Tomaschik
-* DZ_ruyk
-* Grigory Rechistov
-* hdznrrd
-* Itay Cohen
-* Jeffrey Crowell
-* John
-* Judge Dredd
-* jvoisin
-* Kevin Grandemange
-* muzlightbeer
-* Peter C
-* sghctoma
-* SkUaTeR
-* sivaramaaa
-* TDKPS
-* Thanat0s
-* Vane11ope
-* pancake
+Many thanks to everyone who has been involved with the gitbook:
 
-### The original radare book
-
-The original [radare book](http://www.radare.org/get/radare.pdf) by pancake
-
+Adrian,
+Ahmed,
+Akshay,
+Andrew,
+Anton,
+Antonio,
+Austin,
+Bob131,
+DZ_ruyk,
+David,
+Eric,
+Fangrui,
+Francesco,
+FreeArtMan,
+Gerardo,
+Giuseppe,
+Grigory,
+Hui,
+ITAYC0HEN,
+Itay,
+Jeffrey,
+John,
+Judge,
+Jupiter,
+Kevin,
+Luca,
+Lukas,
+Maijin,
+Michael,
+Mike,
+Nikita,
+Paul,
+Paweł,
+Peter,
+RandomLive,
+Ren,
+Reto,
+SchumBlubBlub,
+SkUaTeR,
+Solomon,
+Srimanta,
+Sushant,
+TDKPS,
+Thanat0s,
+Vanellope,
+Vex,
+Vorlent,
+XYlearn,
+Yuri,
+ali,
+aoighost,
+condret,
+hdznrrd,
+izhuer,
+jvoisin,
+kij,
+madblobfish,
+muzlightbeer,
+pancake,
+polym,
+puddl3glum,
+radare,
+sghctoma,
+shakreiner,
+sivaramaaa,
+taiyu,
+vane11ope,
+xarkes
