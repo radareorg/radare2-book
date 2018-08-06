@@ -30,9 +30,11 @@ Examples
 
 Python
 ------
+
 ```
 $ pip install r2pipe
 ```
+
 ```python
 import r2pipe
 
@@ -44,39 +46,42 @@ print(r2.cmdj("aflj"))  # evaluates JSONs and returns an object
 
 NodeJS
 ------
+
+Use this command to install the r2pipe bindings
+
 ```
 $ npm install r2pipe
 ```
+
+Here's a sample hello world
+
 ```node
-var r2jsapi = "./r2.js";
-var r2node = require ("./");
-var file = "/bin/ls";
-
-function doSomeStuff(r) {
-        var r2 = require (r2jsapi)(r);
-        r2.analOp ("entry0", function(op) {
-                console.log (op.size, op.opcode, op.esil);
-        });
-        r2.cmd ('af @ entry0', function (o) {
-                r2.cmd ("pdf @ entry0", function (o) {
-                        console.log (o);
-                        r.quit ()
-                });
-        });
-}
-
-r2node.pipe (file, doSomeStuff);
-r2node.launch (file, doSomeStuff);
+const r2pipe = require('r2pipe');
+r2pipe.open('/bin/ls', (err, res) => {
+  if (err) {
+    throw err;
+  }
+  r2.cmd ('af @ entry0', function (o) {
+    r2.cmd ("pdf @ entry0", function (o) {
+      console.log (o);
+      r.quit ()
+    });
+  });
+});
 ```
 
-**Full API doc:** https://github.com/radare/radare2-r2pipe/blob/master/nodejs/r2pipe/README.md
+Checkout the GIT repository for more examples and details.
+
+https://github.com/radare/radare2-r2pipe/blob/master/nodejs/r2pipe/README.md
 
 Go
+--
+
 ```
 $ r2pm -i r2pipe-go
 ```
---
-[go-r2pipe repo](https://github.com/radare/r2pipe-go)
+
+[https://github.com/radare/r2pipe-go](https://github.com/radare/r2pipe-go)
 
 ```go
 package main
@@ -119,7 +124,8 @@ func main() {
 ```
 
 Rust
---
+----
+
 ```
 $ cat Cargo.toml
 ...
@@ -328,6 +334,7 @@ public static int main (string[] args) {
 
 NewLisp
 -------
+
 ```lisp
 (load "r2pipe.lsp")
 (println "pd 3:\n" (r2pipe:cmd "pd 3"))
