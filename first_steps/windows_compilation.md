@@ -14,6 +14,8 @@ Meson also requires Ninja. You can download it from [here](https://ninja-build.o
 
 #### Compiling
 
+To build r2 with meson, you have to follow the traditional meson way which consists in the following commands:
+
 ```
 meson build
 ninja -C build
@@ -34,12 +36,13 @@ python sys\meson.py --backend=vs2017 --project
 #### Installing
 
 Now that you successfully compiled radare2, you might want to gather every executables and requirements into the same place. The command below will collect everything and put it into the `dist` folder.
+
 ```
 python sys\meson.py --install dist
 ```
 
-
 You can now test your newly crafted radare2 binary easily:
+
 ```
 E:\radare2>cd dist
 E:\radare2\dist>radare2.exe -v
@@ -51,12 +54,14 @@ The easy way to compile things for Windows is using Mingw32. The w32 builds dist
 
 Be sure to setup your Mingw32 to compile with **thread model: win32**, not **posix**, and target should be **mingw32**.
 Before the starting of compilation you need to setup git first, for a proper automatic fetching of capstone:
+
 ```sh
 git config --global core.autocrlf true
 git config --global core.filemode false
 ```
 
 The following is an example of compiling with MinGW32 (you need to have installed **zip** for Windows):
+
 ```sh
 CC=i486-mingw32-gcc ./configure
 make
@@ -69,8 +74,8 @@ The 'i486-mingw32-gcc' compiler is the one I have in my box, you will probably n
 
 To simplify the building under Windows/Mingw32 there is a script in radare2 sources:
 `sys/mingw32.bat`. Simply run it from the cmd.exe (or ConEmu/cmd.exe).
-It assumes that you have Mingw32 installed in `C:\Mingw` and Git in `C:\Program Files (x86)\Git`. If you want to
-use another installations, just set `MINGW_PATH` and `GIT_PATH` variables correspondingly:
+It assumes that you have Mingw32 installed in `C:\Mingw` and Git in `C:\Program Files (x86)\Git`. If you want to use another installations, just set `MINGW_PATH` and `GIT_PATH` variables correspondingly:
+
 ```
 set MINGW_PATH=D:\Mingw32
 set "GIT_PATH=E:\Program and Stuff\Git"
@@ -101,45 +106,57 @@ Please, be sure to build radare2 from the same environment you're going to use r
 
  - Download the MSYS2 distribution from the official site: http://msys2.github.io/
  - Setup the proxy (if needed):
+
 ```sh
-export http_proxy=<myusername>:<mypassword>@zz-wwwproxy-90-v:8080
+export http_proxy=<user>:<pass>@zz-wwwproxy-90-v:8080
 export https_proxy=$http_proxy
 export ftp_proxy=$http_proxy
 export rsync_proxy=$http_proxy
 export rsync_proxy=$http_proxy
-export no_proxy="localhost,127.0.0.1,localaddress,.localdomain.com"
+export no_proxy="localhost,127.0.0.1,localaddress"
 ```
+
  - Update packages:
+
 ```sh
 pacman --needed -Sy bash pacman pacman-mirrors msys2-runtime mingw-w64-x86_64-toolchain
 ```
+
  - Close MSYS2, run it again from Start menu and update the rest with
+
 ```sh
 pacman -Su
 ```
+
  - Install the building essentials:
+
 ```sh
 pacman -S git make zip gcc patch
 ```
+
  - Compile the radare2:
+
 ```sh
 ./configure --with-ostype=windows ; make ; make w32dist
 ```
+
 ### Bindings
 
 To build radare2 bindings, you will need to install [Vala (valac) for Windows](https://wiki.gnome.org/Projects/Vala/ValaOnWindows)
 
 Then download [valabind](https://github.com/radare/valabind) and build it:
+
 ```sh
-git clone https://github.com/radare/valabind.git valabind
+git clone https://github.com/radare/valabind
 cd valabind
 make
 make install
 ```
 
 After you installed valabind, you can build radare2-bindings, for example for Python and Perl:
+
 ```sh
-git clone https://github.com/radare/radare2-bindings.git radare2-bindings
+git clone https://github.com/radare/radare2-bindings
 cd radare2-bindings
 ./configure --enable=python,perl
 make
