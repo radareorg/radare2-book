@@ -25,33 +25,11 @@ As you may know, binaries use to have sections and maps. The sections define the
 
 Before the IO refactoring done by condret, the S command was used to manage what we now call maps. Currently the S command is supossed to be deprecated because iS and om should be enough.
 
-Firmware images, bootloaders and binary files usually place various sections of a binary at different addresses in memory. To represent this behavior, radare offers the `S` command.
+Firmware images, bootloaders and binary files usually place various sections of a binary at different addresses in memory. To represent this behavior, radare offers the `S` command. Use `S?` to get the help message. But we would recommend you to better check `om` and `iS` and try to avoid `S` as much as possible as long as it will be deprecated soon. To list all created sections use `S` (or Sj to get the json format). The `S=` will show the region bars in ascii-art.
 
-Here's the help message:
-
-```
-[0xB7EE8810]> S?
-|Usage: S[?-.*=adlr] [...]
-| S                          list sections
-| S.                         show current section name
-| S*                         list sections (in radare commands)
-| S=                         list sections (ascii-art bars) (io.va to display paddr or vaddr)
-| Sa[-] [A] [B] [[off]]      Specify arch and bits for given section
-| Sd[a] [file]               dump current (all) section to a file (see dmd)
-| Sl [file]                  load contents of file into current section (see dml)
-| Sf [baddr]                 Alias for S 0 0 $s $s foo mrwx
-| Sj                         list sections in JSON (alias for iSj)
-| Sr [name]                  rename section on current seek
-| S off va sz vsz name mrwx  add new section (if(!vsz)vsz=sz)
-| S-[id]                     remove section identified by id
-| S-.                        remove section at core->offset (can be changed with @)
-| S.-*                       remove all sections in current offset
-```
-
-You can specify a section in a single line:
+You can create a new section with a line like this:
 
 ```
-# Add new section
 S [off] [va] [sz] [vsz] [name] [mrwx]
 ```
 

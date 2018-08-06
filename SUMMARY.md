@@ -10,7 +10,6 @@
    * [User Interfaces](first_steps/ui.md)
 * [First Steps](first_steps/intro.md)
    * [Command-line Flags](first_steps/commandline_flags.md)
-   * [Basic Usage](first_steps/basic_usage.md)
    * [Command Format](first_steps/command_format.md)
    * [Expressions](first_steps/expressions.md)
    * [Basic Debugger Session](first_steps/basic_debugger_session.md)

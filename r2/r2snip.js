@@ -15,12 +15,23 @@ function system(cmd, args) {
   return result.stdout;
 }
 
+function mustRebuild(input, output) {
+  try {
+    const s = fs.statSync(output);
+    const a = new Date(s.mtime);
+    const i = fs.statSync(input);
+    const b = new Date(i.mtime);
+    if (b < a) {
+      return true;
+    }
+    return false;
+  } catch (e) {
+    return true;
+  }
+}
+
 function buildSnippetImage(input, output, mode, args) {
-  const s = fs.statSync(output);
-  const a = new Date(s.mtime);
-  const i = fs.statSync(input);
-  const b = new Date(i.mtime);
-  if (b < a) {
+  if (!mustRebuild(input, output)) {
     console.error('PNG ---', output);
     return true;
   }

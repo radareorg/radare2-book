@@ -9,35 +9,35 @@ Below is a list of available print modes listed by `p?`:
 ```
 [0x00005310]> p?
 |Usage: p[=68abcdDfiImrstuxz] [arg|len] [@addr]
-| p-[?][jh] [mode]               bar|json|histogram blocks (mode: e?search.in)
-| p=[?][bep] [blks] [len] [blk]  show entropy/printable chars/chars bars
-| p2 [len]                       8x8 2bpp-tiles
-| p3 [file]                      print stereogram (3D)
-| p6[de] [len]                   base64 decode/encode
-| p8[?][j] [len]                 8bit hexpair list of bytes
-| pa[edD] [arg]                  pa:assemble  pa[dD]:disasm or pae: esil from hexpairs
-| pA[n_ops]                      show n_ops address and type
-| p[b|B|xb] [len] ([skip])       bindump N bits skipping M
-| pb[?] [n]                      bitstream of N bits
-| pB[?] [n]                      bitstream of N bytes
-| pc[?][p] [len]                 output C (or python) format
-| pC[d] [rows]                   print disassembly in columns (see hex.cols and pdi)
-| pd[?] [sz] [a] [b]             disassemble N opcodes (pd) or N bytes (pD)
-| pf[?][.nam] [fmt]              print formatted data (pf.name, pf.name $<expr>)
-| ph[?][=|hash] ([len])          calculate hash for a block
-| pj[?] [len]                    print as indented JSON
-| p[iI][df] [len]                print N ops/bytes (f=func) (see pi? and pdi)
-| p[kK] [len]                    print key in randomart (K is for mosaic)
-| pm[?] [magic]                  print libmagic data (see pm? and /m?)
-| pq[?][iz] [len]                print QR code with the first Nbytes of the current block
-| pr[?][glx] [len]               print N raw bytes (in lines or hexblocks, 'g'unzip)
-| ps[?][pwz] [len]               print pascal/wide/zero-terminated strings
-| pt[?][dn] [len]                print different timestamps
-| pu[?][w] [len]                 print N url encoded bytes (w=wide)
-| pv[?][jh] [mode]               show variable/pointer/value in memory
-| pwd                            display current working directory
-| px[?][owq] [len]               hexdump of N bytes (o=octal, w=32bit, q=64bit)
-| pz[?] [len]                    print zoom view (see pz? for help)
+| p-[?][jh] [mode]         bar|json|histogram blocks (mode: e?search.in)
+| p=[?][bep] [N] [len] [b] show entropy/printable chars/chars bars
+| p2 [len]                 8x8 2bpp-tiles
+| p3 [file]                print stereogram (3D)
+| p6[de] [len]             base64 decode/encode
+| p8[?][j] [len]           8bit hexpair list of bytes
+| pa[edD] [arg]            pa:assemble  pa[dD]:disasm or pae: esil from hexpairs
+| pA[n_ops]                show n_ops address and type
+| p[b|B|xb] [len] ([skip]) bindump N bits skipping M
+| pb[?] [n]                bitstream of N bits
+| pB[?] [n]                bitstream of N bytes
+| pc[?][p] [len]           output C (or python) format
+| pC[d] [rows]             print disassembly in columns (see hex.cols and pdi)
+| pd[?] [sz] [a] [b]       disassemble N opcodes (pd) or N bytes (pD)
+| pf[?][.nam] [fmt]        print formatted data (pf.name, pf.name $<expr>)
+| ph[?][=|hash] ([len])    calculate hash for a block
+| pj[?] [len]              print as indented JSON
+| p[iI][df] [len]          print N ops/bytes (f=func) (see pi? and pdi)
+| p[kK] [len]              print key in randomart (K is for mosaic)
+| pm[?] [magic]            print libmagic data (see pm? and /m?)
+| pq[?][iz] [len]          print QR code with the first Nbytes of the current block
+| pr[?][glx] [len]         print N raw bytes (in lines or hexblocks, 'g'unzip)
+| ps[?][pwz] [len]         print pascal/wide/zero-terminated strings
+| pt[?][dn] [len]          print different timestamps
+| pu[?][w] [len]           print N url encoded bytes (w=wide)
+| pv[?][jh] [mode]         show variable/pointer/value in memory
+| pwd                      display current working directory
+| px[?][owq] [len]         hexdump of N bytes (o=octal, w=32bit, q=64bit)
+| pz[?] [len]              print zoom view (see pz? for help)
 [0x00005310]>
 ```
 
@@ -66,32 +66,11 @@ For more on the magical powers of `~` see the help in `?@?`, and the "Command Fo
 
 `px` gives a user-friendly output showing 16 pairs of numbers per row with offsets and raw representations:
 
-```
-[0x00404888]> px
-- offset -   0 1  2 3  4 5  6 7  8 9  A B  C D  E F  0123456789ABCDEF
-0x00404888  31ed 4989 d15e 4889 e248 83e4 f050 5449  1.I..^H..H...PTI
-0x00404898  c7c0 4024 4100 48c7 c1b0 2341 0048 c7c7  ..@$A.H...#A.H..
-0x004048a8  d028 4000 e83f dcff fff4 6690 662e 0f1f  .(@..?....f.f...
-```
+![hexprint](print_modes_px.png)
 
 #### Show Hexadecimal Words Dump (32 bits)
 
-```
-[0x00404888]> pxw
-0x00404888  0x8949ed31 0x89485ed1 0xe48348e2 0x495450f0  1.I..^H..H...PTI
-0x00404898  0x2440c0c7 0xc7480041 0x4123b0c1 0xc7c74800  ..@$A.H...#A.H..
-0x004048a8  0x004028d0 0xffdc3fe8 0x9066f4ff 0x1f0f2e66  .(@..?....f.f...
-
-[0x00404888]> e cfg.bigendian
-false
-
-[0x00404888]> e cfg.bigendian = true
-
-[0x00404888]> pxw
-0x00404888  0x31ed4989 0xd15e4889 0xe24883e4 0xf0505449  1.I..^H..H...PTI
-0x00404898  0xc7c04024 0x410048c7 0xc1b02341 0x0048c7c7  ..@$A.H...#A.H..
-0x004048a8  0xd0284000 0xe83fdcff 0xfff46690 0x662e0f1f  .(@..?....f.f...
-```
+![wordprint](print_modes_pxw.png)
 
 #### 8 bits Hexpair List of Bytes
 
@@ -102,12 +81,7 @@ false
 
 #### Show Hexadecimal Quad-words Dump (64 bits)
 
-```
-[0x08049A80]> pxq
-0x00001390  0x65625f6b63617473  0x646e6962006e6967   stack_begin.bind
-0x000013a0  0x616d6f6474786574  0x7469727766006e69   textdomain.fwrit
-0x000013b0  0x6b636f6c6e755f65  0x6d63727473006465   e_unlocked.strcm
-...
+![pxq](print_modes_pxq.png)
 ```
 
 ### Date/Time Formats
@@ -143,53 +117,25 @@ As you can see, the endianness affects the result. Once you have printed a times
 27:04:2022 16:15:43 +0000
 ```
 
-The default date format can be configured using the `cfg.datefmt` variable. Formatting rules for it follow the well known strftime(3) format. An excerpt from the strftime(3) manpage:
+The default date format can be configured using the `cfg.datefmt` variable. Formatting rules for it follow the well known strftime(3) format. Check the manpage for more details, but those are the more importants:
 
 ```
-    %a  The abbreviated name of the day of the week according to the current locale.
-    %A  The full name of the day of the week according to the current locale.
-    %b  The abbreviated month name according to the current locale.
-    %B  The full month name according to the current locale.
-    %c  The preferred date and time representation for the current locale.
-    %C  The century number (year/100) as a 2-digit integer. (SU)
-    %d  The day of the month as a decimal number (range 01 to 31).
-    %D  Equivalent to %m/%d/%y.  (Yecch—for Americans only.  Americans should note that in other countries %d/%m/%y is rather common. This means that in international context this format is ambiguous and should not be used.) (SU)
-    %e  Like %d, the day of the month as a decimal number, but a leading zero is replaced by a space. (SU)
-    %E  Modifier: use alternative format, see below. (SU)
-    %F  Equivalent to %Y-%m-%d (the ISO 8601 date format). (C99)
-    %G  The ISO 8601 week-based year (see NOTES) with century as a decimal number.  The 4-digit year corresponding to the ISO week number (see %V).  This has the same format and value as %Y, except that if the ISO week number belongs to the previous or next year, that year is used instead. (TZ)
-    %g  Like %G, but without century, that is, with a 2-digit year (00-99). (TZ)
-    %h  Equivalent to %b.  (SU)
-    %H  The hour as a decimal number using a 24-hour clock (range 00 to 23).
-    %I  The hour as a decimal number using a 12-hour clock (range 01 to 12).
-    %j  The day of the year as a decimal number (range 001 to 366).
-    %k  The hour (24-hour clock) as a decimal number (range 0 to 23); single digits are preceded by a blank.  (See also %H.)  (TZ)
-    %l  The hour (12-hour clock) as a decimal number (range 1 to 12); single digits are preceded by a blank.  (See also %I.)  (TZ)
-    %m  The month as a decimal number (range 01 to 12).
-    %M  The minute as a decimal number (range 00 to 59).
-    %n  A newline character. (SU)
-    %O  Modifier: use alternative format, see below. (SU)
-    %p  Either "AM" or "PM" according to the given time value, or the corresponding strings for the current locale.  Noon is treated as "PM" and midnight as "AM".
-    %P  Like %p but in lowercase: "am" or "pm" or a corresponding string for the current locale. (GNU)
-    %r  The time in a.m. or p.m. notation.  In the POSIX locale this is equivalent to %I:%M:%S %p.  (SU)
-    %R  The time in 24-hour notation (%H:%M).  (SU) For a version including the seconds, see %T below.
-    %s  The number of seconds since the Epoch, 1970-01-01 00:00:00  +0000 (UTC). (TZ)
-    %S  The second as a decimal number (range 00 to 60).  (The range is up to 60 to allow for occasional leap seconds.)
-    %t  A tab character. (SU)
-    %T  The time in 24-hour notation (%H:%M:%S).  (SU)
-    %u  The day of the week as a decimal, range 1 to 7, Monday being 1.  See also %w.  (SU)
-    %U  The week number of the current year as a decimal number, range 00 to 53, starting with the first Sunday as the first day of week 01.  See also %V and %W.
-    %V  The ISO 8601 week number (see NOTES) of the current year as a decimal number, range 01 to 53, where week 1 is the first week that has at least 4 days in the new year.  See also %U and %W.(U)
-    %w  The day of the week as a decimal, range 0 to 6, Sunday being 0.  See also %u.
-    %W  The week number of the current year as a decimal number, range 00 to 53, starting with the first Monday as the first day of week 01.
-    %x  The preferred date representation for the current locale without the time.
-    %X  The preferred time representation for the current locale without the date.
-    %y  The year as a decimal number without a century (range 00 to 99).
-    %Y  The year as a decimal number including the century.
-    %z  The +hhmm or -hhmm numeric timezone (that is, the hour and minute offset from UTC). (SU)
-    %Z  The timezone name or abbreviation.
-    %+  The date and time in date(1) format. (TZ) (Not supported in glibc2.)
-    %%  A literal '%' character.
+%a  The abbreviated name of the day of the week according to the current locale.
+%A  The full name of the day of the week according to the current locale.
+%d  The day of the month as a decimal number (range 01 to 31).
+%D  Equivalent to %m/%d/%y.  (Yecch—for Americans only).
+%H  The hour as a decimal number using a 24-hour clock (range 00 to 23).
+%I  The hour as a decimal number using a 12-hour clock (range 01 to 12).
+%m  The month as a decimal number (range 01 to 12).
+%M  The minute as a decimal number (range 00 to 59).
+%p  Either "AM" or "PM" according to the given time value.
+%s  The number of seconds since the Epoch, 1970-01-01 00:00:00  +0000 (UTC). (TZ)
+%S  The second as a decimal number (range 00 to 60).  (The range is up to 60 to allow for occasional leap seconds.)
+%T  The time in 24-hour notation (%H:%M:%S).  (SU)
+%y  The year as a decimal number without a century (range 00 to 99).
+%Y  The year as a decimal number including the century.
+%z  The +hhmm or -hhmm numeric timezone (that is, the hour and minute offset from UTC). (SU)
+%Z  The timezone name or abbreviation.
 ```
 
 ### Basic Types
@@ -429,18 +375,18 @@ There are multiple options which can be used to configure the output of disassem
 
 ```
 [0x00005310]> e? asm.
-            asm.anal: Analyze code and refs while disassembling (see anal.strings)
-            asm.arch: Set the arch to be used by asm
-       asm.assembler: Set the plugin name to use when assembling
-          asm.bbline: Show empty line after every basic block
-            asm.bits: Word size in bits at assembler
-           asm.bytes: Display the bytes of each instruction
-       asm.bytespace: Separate hexadecimal bytes with a whitespace
-           asm.calls: Show callee function related info as comments in disasm
-      asm.capitalize: Use camelcase at disassembly
-         asm.cmt.col: Column to align comments
-     asm.cmt.flgrefs: Show comment flags associated to branch reference
-        asm.cmt.fold: Fold comments, toggle with Vz
+asm.anal: Analyze code and refs while disassembling (see anal.strings)
+asm.arch: Set the arch to be used by asm
+asm.assembler: Set the plugin name to use when assembling
+asm.bbline: Show empty line after every basic block
+asm.bits: Word size in bits at assembler
+asm.bytes: Display the bytes of each instruction
+asm.bytespace: Separate hexadecimal bytes with a whitespace
+asm.calls: Show callee function related info as comments in disasm
+asm.capitalize: Use camelcase at disassembly
+asm.cmt.col: Column to align comments
+asm.cmt.flgrefs: Show comment flags associated to branch reference
+asm.cmt.fold: Fold comments, toggle with Vz
 ...
 ```
 
@@ -457,4 +403,3 @@ e asm.syntax = att
 
 You can also check `asm.pseudo`, which is an experimental pseudocode view,
 and `asm.esil` which outputs [ESIL](../disassembling/esil.md) ('Evaluable Strings Intermediate Language'). ESIL's goal is to have a human-readable representation of every opcode semantics. Such representations can be evaluated (interpreted) to emulate effects of individual instructions.
-

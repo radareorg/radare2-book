@@ -28,16 +28,16 @@ Be warned that certain malware or other tricky programs can actually execute cod
 
 Below is a list of most common commands used with debugger:
 ```
-> d?			; get help on debugger commands
-> ds 3			; step 3 times
+> d?            ; get help on debugger commands
+> ds 3          ; step 3 times
 > db 0x8048920  ; setup a breakpoint
 > db -0x8048920 ; remove a breakpoint
-> dc			; continue process execution
-> dcs			; continue until syscall
-> dd			; manipulate file descriptors
-> dm			; show process maps
-> dmp A S rwx	; change page at A with size S protection permissions
-> dr eax=33		; set register value. eax = 33
+> dc            ; continue process execution
+> dcs           ; continue until syscall
+> dd            ; manipulate file descriptors
+> dm            ; show process maps
+> dmp A S rwx   ; change permissions of page at A and size S
+> dr eax=33     ; set register value. eax = 33
 ```
 
 There is another option for debugging in radare, which may be easier: using visual mode.

@@ -17,26 +17,26 @@ Write bytes using the `w` command. It accepts multiple input formats like inline
 | w foobar             write string 'foobar'
 | w0 [len]             write 'len' bytes with value 0x00
 | w6[de] base64/hex    write base64 [d]ecoded or [e]ncoded string
-| wa[?] push ebp       write opcode, separated by ';' (use '"' around the command)
+| wa[?] push ebp       write opcode, separated by ';'
 | waf file             assemble file and write bytes
-| wao[?] op            modify opcode (change conditional of jump. nop, etc)
-| wA[?] r 0            alter/modify opcode at current seek (see wA?)
+| wao[?] op            modify opcode (conditional jump. nop, etc)
+| wA[?] r 0            alter/modify opcode at current seek (wA?)
 | wb 010203            fill current block with cyclic hexpairs
 | wB[-]0xVALUE         set or unset bits with given value
 | wc                   list all write changes
 | wc[?][ir*?]          write cache undo/commit/reset/list (io.cache)
-| wd [off] [n]         duplicate N bytes from offset at current seek (memcpy) (see y?)
-| we[?] [nNsxX] [arg]  extend write operations (insert instead of replace)
+| wd [off] [n]         duplicate N bytes from offset to here
+| we[?] [nNsxX] [arg]  extend write operations (insert vs replace)
 | wf -|file            write contents of file at current offset
 | wh r2                whereis/which shell command
-| wm f0ff              set binary mask hexpair to be used as cyclic write mask
+| wm f0ff              set cyclick binary write mask hexpair
 | wo[?] hex            write in block with operation. 'wo?' fmi
 | wp[?] -|file         apply radare patch file. See wp? fmi
 | wr 10                write 10 random bytes
 | ws pstring           write 1 byte for length and then the string
-| wt[f][?] file [sz]   write to file (from current seek, blocksize or sz bytes)
+| wt[f][?] file [sz]   write to file (from current seek, blocksize)
 | wts host:port [sz]   send data to remote host:port via tcp://
-| ww foobar            write wide string 'f\x00o\x00o\x00b\x00a\x00r\x00'
+| ww foobar            write wide string
 | wx[?][fs] 9090       write two intel nops (from wxfile or wxseek)
 | wv[?] eip+34         write 32-64 bit value
 | wz string            write zero terminated string (like w + \x00)
@@ -84,24 +84,24 @@ It is possible to implement cipher-algorithms using radare core primitives and `
 
 ```
 [0x7fcd6a891630]> px
-- offset -       0 1  2 3  4 5  6 7  8 9  A B  C D  E F  0123456789ABCDEF
-0x7fcd6a891630  4889 e7e8 6839 0000 4989 c48b 05ef 1622  H...h9..I......"
-0x7fcd6a891640  005a 488d 24c4 29c2 5248 89d6 4989 e548  .ZH.$.).RH..I..H
-0x7fcd6a891650  83e4 f048 8b3d 061a 2200 498d 4cd5 1049  ...H.=..".I.L..I
-0x7fcd6a891660  8d55 0831 ede8 06e2 0000 488d 15cf e600  .U.1......H.....
+- offset -       0 1  2 3  4 5  6 7  8 9  A B  C D  E F
+0x7fcd6a891630  4889 e7e8 6839 0000 4989 c48b 05ef 1622
+0x7fcd6a891640  005a 488d 24c4 29c2 5248 89d6 4989 e548
+0x7fcd6a891650  83e4 f048 8b3d 061a 2200 498d 4cd5 1049
+0x7fcd6a891660  8d55 0831 ede8 06e2 0000 488d 15cf e600
 [0x7fcd6a891630]> wox 90
 [0x7fcd6a891630]> px
-- offset -       0 1  2 3  4 5  6 7  8 9  A B  C D  E F  0123456789ABCDEF
-0x7fcd6a891630  d819 7778 d919 541b 90ca d81d c2d8 1946  ..wx..T........F
-0x7fcd6a891640  1374 60d8 b290 d91d 1dc5 98a1 9090 d81d  .t`.............
-0x7fcd6a891650  90dc 197c 9f8f 1490 d81d 95d9 9f8f 1490  ...|............
-0x7fcd6a891660  13d7 9491 9f8f 1490 13ff 9491 9f8f 1490  ................
+- offset -       0 1  2 3  4 5  6 7  8 9  A B  C D  E F
+0x7fcd6a891630  d819 7778 d919 541b 90ca d81d c2d8 1946
+0x7fcd6a891640  1374 60d8 b290 d91d 1dc5 98a1 9090 d81d
+0x7fcd6a891650  90dc 197c 9f8f 1490 d81d 95d9 9f8f 1490
+0x7fcd6a891660  13d7 9491 9f8f 1490 13ff 9491 9f8f 1490
 [0x7fcd6a891630]> woa 01 02
 [0x7fcd6a891630]> px
-- offset -       0 1  2 3  4 5  6 7  8 9  A B  C D  E F  0123456789ABCDEF
-0x7fcd6a891630  d91b 787a 91cc d91f 1476 61da 1ec7 99a3  ..xz.....va.....
-0x7fcd6a891640  91de 1a7e d91f 96db 14d9 9593 1401 9593  ...~............
-0x7fcd6a891650  c4da 1a6d e89a d959 9192 9159 1cb1 d959  ...m...Y...Y...Y
-0x7fcd6a891660  9192 79cb 81da 1652 81da 1456 a252 7c77  ..y....R...V.R|w
+- offset -       0 1  2 3  4 5  6 7  8 9  A B  C D  E F
+0x7fcd6a891630  d91b 787a 91cc d91f 1476 61da 1ec7 99a3
+0x7fcd6a891640  91de 1a7e d91f 96db 14d9 9593 1401 9593
+0x7fcd6a891650  c4da 1a6d e89a d959 9192 9159 1cb1 d959
+0x7fcd6a891660  9192 79cb 81da 1652 81da 1456 a252 7c77
 ```
 
