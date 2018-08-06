@@ -6,7 +6,7 @@ Move within the Disassembly using `arrows` or `hjkl`. Use `o` to seek directly t
 Follow a jump or a call using the `number` of your keyboard `[0-9]` and the number on the right in disassembly to follow a call or a jump. In this example typing `1` on the keyboard would follow the call to `sym.imp.__libc_start_main` and therefore, seek at the offset of this symbol.
 
 ```
-            0x00404894      e857dcffff     call sym.imp.__libc_start_main ;[1]
+0x00404894      e857dcffff     call sym.imp.__libc_start_main ;[1]
 ```
 
 Seek back to the previous location using `u`, `U` will allow you to redo the seek.
@@ -24,7 +24,7 @@ d → B
 0x004048f7 .word 0xc148
 d → d
 0x004048f7 hex length=165 delta=0
-0x004048f7  48c1 e83f 4801 c648 d1fe 7415 b800 0000  H..?H..H..t.....
+0x004048f7  48c1 e83f 4801 c648 d1fe 7415 b800 0000
 ...
 ```
 
@@ -64,8 +64,8 @@ into the disassembly. To use it, seek or place the cursor at the wanted location
 When radare2 has discovered a XREF during the analysis, it will show you the information in the Visual Disassembly using `XREF` tag:
 
 ```
-            ; DATA XREF from 0x00402e0e (unk)
-            str.David_MacKenzie:
+; DATA XREF from 0x00402e0e (unk)
+str.David_MacKenzie:
 ```
 
 To see where this string is called, press `x`, if you want to jump to the location where the data is used then press the corresponding number [0-9] on your keyboard. (This functionality is similar to `axt`)
@@ -132,21 +132,21 @@ You can view the list of all arch using `e asm.arch=?`
 
 ```
 e asm.arch = dalvik
-            0x00404870      31ed4989       cmp-long v237, v73, v137
-            0x00404874      d15e4889       rsub-int v14, v5, 0x8948
-            0x00404878      e24883e4       ushr-int/lit8 v72, v131, 0xe4
-            0x0040487c      f0505449c7c0   +invoke-object-init-range {}, method+18772 ;[0]
-            0x00404882      90244100       add-int v36, v65, v0
+0x00404870      31ed4989       cmp-long v237, v73, v137
+0x00404874      d15e4889       rsub-int v14, v5, 0x8948
+0x00404878      e24883e4       ushr-int/lit8 v72, v131, 0xe4
+0x0040487c      f0505449c7c0   +invoke-object-init-range {}, method+18772 ;[0]
+0x00404882      90244100       add-int v36, v65, v0
 ```
 
 ```
 e asm.bits = 16
-            0000:4870      31ed           xor bp, bp
-            0000:4872      49             dec cx
-            0000:4873      89d1           mov cx, dx
-            0000:4875      5e             pop si
-            0000:4876      48             dec ax
-            0000:4877      89e2           mov dx, sp
+0000:4870      31ed           xor bp, bp
+0000:4872      49             dec cx
+0000:4873      89d1           mov cx, dx
+0000:4875      5e             pop si
+0000:4876      48             dec ax
+0000:4877      89e2           mov dx, sp
 ```
 This latest operation can also be done using `&` in Visual mode.
 
@@ -155,33 +155,33 @@ This latest operation can also be done using `&` in Visual mode.
 
 ```
 e asm.pseudo = true
-            0x00404870      31ed           ebp = 0
-            0x00404872      4989d1         r9 = rdx
-            0x00404875      5e             pop rsi
-            0x00404876      4889e2         rdx = rsp
-            0x00404879      4883e4f0       rsp &= 0xfffffffffffffff0
+0x00404870      31ed           ebp = 0
+0x00404872      4989d1         r9 = rdx
+0x00404875      5e             pop rsi
+0x00404876      4889e2         rdx = rsp
+0x00404879      4883e4f0       rsp &= 0xfffffffffffffff0
 ```
 
 #### asm.syntax: Select assembly syntax (intel, att, masm...)
 
 ```
 e asm.syntax = att
-            0x00404870      31ed           xor %ebp, %ebp
-            0x00404872      4989d1         mov %rdx, %r9
-            0x00404875      5e             pop %rsi
-            0x00404876      4889e2         mov %rsp, %rdx
-            0x00404879      4883e4f0       and $0xfffffffffffffff0, %rsp
+0x00404870      31ed           xor %ebp, %ebp
+0x00404872      4989d1         mov %rdx, %r9
+0x00404875      5e             pop %rsi
+0x00404876      4889e2         mov %rsp, %rdx
+0x00404879      4883e4f0       and $0xfffffffffffffff0, %rsp
 ```
 
 #### asm.describe: Show opcode description
 
 ```
 e asm.describe = true
-            0x00404870      31ed           xor ebp, ebp                ; logical exclusive or
-            0x00404872      4989d1         mov r9, rdx                 ; moves data from src to dst
-            0x00404875      5e             pop rsi                     ; pops last element of stack and stores the result in argument
-            0x00404876      4889e2         mov rdx, rsp                ; moves data from src to dst
-            0x00404879      4883e4f0       and rsp, 0xfffffffffffffff0 ; binary and operation between src and dst, stores result on dst
+0x00404870  xor ebp, ebp   ; logical exclusive or
+0x00404872  mov r9, rdx    ; moves data from src to dst
+0x00404875  pop rsi        ; pops last element of stack and stores the result in argument
+0x00404876  mov rdx, rsp   ; moves data from src to dst
+0x00404879  and rsp, -0xf  ; binary and operation between src and dst, stores result on dst
 ```
 
 
