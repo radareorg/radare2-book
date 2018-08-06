@@ -35,16 +35,19 @@ There are 2 environment variables that are important for watching what a program
 [0x00000000]> e asm.emustr = true   # for version 2.2 and earlier
 [0x00000000]> e asm.emu.str = true  # for version 2.3 and earlier
 ```
-	`asm.emu` tells r2 if you want ESIL information to be displayed. If it is set to true you will see comments appear to the right of your disassembly that tell you how the contents of registers and memory addresses are changed by the current instruction. For example if you have an instruction that subtracts a value from a register it tells you what the value was before and what it becomes after. This is super useful so you don't have to sit there yourself and track which value goes where.
 
-   One problem with this is that it is a lot of information to take in at once and sometimes you simply don't need it. r2 has a nice compromise for this. That is what the `asm.emu.str` variable is for (`asm.emustr` on 2.2 and earlier). Instead of this super verbose output with every register value, this only adds really useful information to the output, e.g., strings that are found at addresses a program uses or whether a jump is likely to be taken or not.
+`asm.emu` tells r2 if you want ESIL information to be displayed. If it is set to true you will see comments appear to the right of your disassembly that tell you how the contents of registers and memory addresses are changed by the current instruction. For example if you have an instruction that subtracts a value from a register it tells you what the value was before and what it becomes after. This is super useful so you don't have to sit there yourself and track which value goes where.
 
-   The third important variable is `asm.esil`. This switches your disassembly to no longer show you the actual disassembled instructions, but instead now shows you corresponding ESIL expressions that describe what the instruction does.
+One problem with this is that it is a lot of information to take in at once and sometimes you simply don't need it. r2 has a nice compromise for this. That is what the `asm.emu.str` variable is for (`asm.emustr` on 2.2 and earlier). Instead of this super verbose output with every register value, this only adds really useful information to the output, e.g., strings that are found at addresses a program uses or whether a jump is likely to be taken or not.
+
+The third important variable is `asm.esil`. This switches your disassembly to no longer show you the actual disassembled instructions, but instead now shows you corresponding ESIL expressions that describe what the instruction does.
 So if you want to take a look at how instructions are expressed in ESIL simply set "asm.esil" to true.
+
 ```
 [0x00000000]> e asm.esil = true
 ```
-   In visual mode you can also toggle this by simply typing `O`.
+
+In visual mode you can also toggle this by simply typing `O`.
 
 ## ESIL Commands
 
@@ -224,19 +227,19 @@ Traps are implemented with the `<code>,TRAP` command. They are used to throw exc
 
 Here is a list of some quick checks to retrieve information from an ESIL string. Relevant information will be probably found in the first expression of the list.
 ```
-indexOf('[')       ->    have memory references
-indexOf("=[")      ->    write in memory
-indexOf("pc,=")    ->    modifies program counter (branch, jump, call)
-indexOf("sp,=")    ->    modifies the stack (what if we found sp+= or sp-=?)
-indexOf("=")       ->    retrieve src and dst
-indexOf(":")       ->    unknown esil, raw opcode ahead
-indexOf("$")       ->    accesses internal esil vm flags ex: $z
-indexOf("$")       ->    syscall ex: 1,$
-indexOf("TRAP")    ->    can trap
-indexOf('++')      ->    has iterator
-indexOf('--')      ->    count to zero
-indexOf("?{")      ->    conditional
-equalsTo("")       ->    empty string, means: nop (wrong, if we append pc+=x)
+indexOf('[')    -> have memory references
+indexOf("=[")   -> write in memory
+indexOf("pc,=") -> modifies program counter (branch, jump, call)
+indexOf("sp,=") -> modifies the stack (what if we found sp+= or sp-=?)
+indexOf("=")    -> retrieve src and dst
+indexOf(":")    -> unknown esil, raw opcode ahead
+indexOf("$")    -> accesses internal esil vm flags ex: $z
+indexOf("$")    -> syscall ex: 1,$
+indexOf("TRAP") -> can trap
+indexOf('++')   -> has iterator
+indexOf('--')   -> count to zero
+indexOf("?{")   -> conditional
+equalsTo("")    -> empty string, aka nop (wrong, if we append pc+=x)
 ```
 
 Common operations:
@@ -327,29 +330,32 @@ fmulp ST(1), ST(0)      =>      TODO,fmulp ST(1),ST(0)
 ```
 [0x1000010f8]> e asm.esil=true
 [0x1000010f8]> pd $r @ entry0
-   ;      [0] va=0x1000010f8 pa=0x000010f8 sz=13299 vsz=13299 rwx=-r-x 0.__text
-            ;-- section.0.__text:
-            0x1000010f8    55           8,rsp,-=,rbp,rsp,=[8]
-            0x1000010f9    4889e5       rsp,rbp,=
-            0x1000010fc    4883c768     104,rdi,+=
-            0x100001100    4883c668     104,rsi,+=
-            0x100001104    5d           rsp,[8],rbp,=,8,rsp,+=                                          ┌─< 0x100001105    e950350000   0x465a,rip,= ;[1]
-        │   0x10000110a    55           8,rsp,-=,rbp,rsp,=[8]
-        │   0x10000110b    4889e5       rsp,rbp,=                                                       │   0x10000110e    488d4668     rsi,104,+,rax,=
-        │   0x100001112    488d7768     rdi,104,+,rsi,=
-        │   0x100001116    4889c7       rax,rdi,=
-        │   0x100001119    5d           rsp,[8],rbp,=,8,rsp,+=                                         ┌──< 0x10000111a    e93b350000   0x465a,rip,= ;[1]
-       ││   0x10000111f    55           8,rsp,-=,rbp,rsp,=[8]
-       ││   0x100001120    4889e5       rsp,rbp,=
-       ││   0x100001123    488b4f60     rdi,96,+,[8],rcx,=
-       ││   0x100001127    4c8b4130     rcx,48,+,[8],r8,=                                              ││   0x10000112b    488b5660     rsi,96,+,[8],rdx,=
-       ││   0x10000112f    b801000000   1,eax,= ;  0x00000001
-       ││   0x100001134    4c394230     rdx,48,+,[8],r8,==,cz,?=
-      ┌───< 0x100001138    7f1a         sf,of,!,^,zf,!,&,?{,0x1154,rip,=,} ;[2]
-     ┌────< 0x10000113a    7d07         of,!,sf,^,?{,0x1143,rip,} ;[3]
-     ││││   0x10000113c    b8ffffffff   0xffffffff,eax,= ;  0xffffffff                              ┌─────< 0x100001141    eb11         0x1154,rip,= ;[2]
-    │└────> 0x100001143    488b4938     rcx,56,+,[8],rcx,=
-    │ │││   0x100001147    48394a38     rdx,56,+,[8],rcx,==,cz,?=
+0x1000010f8    55           8,rsp,-=,rbp,rsp,=[8]
+0x1000010f9    4889e5       rsp,rbp,=
+0x1000010fc    4883c768     104,rdi,+=
+0x100001100    4883c668     104,rsi,+=
+0x100001104    5d           rsp,[8],rbp,=,8,rsp,+=
+0x100001105    e950350000   0x465a,rip,= ;[1]
+0x10000110a    55           8,rsp,-=,rbp,rsp,=[8]
+0x10000110b    4889e5       rsp,rbp,=
+0x10000110e    488d4668     rsi,104,+,rax,=
+0x100001112    488d7768     rdi,104,+,rsi,=
+0x100001116    4889c7       rax,rdi,=
+0x100001119    5d           rsp,[8],rbp,=,8,rsp,+=
+0x10000111a    e93b350000   0x465a,rip,= ;[1]
+0x10000111f    55           8,rsp,-=,rbp,rsp,=[8]
+0x100001120    4889e5       rsp,rbp,=
+0x100001123    488b4f60     rdi,96,+,[8],rcx,=
+0x100001127    4c8b4130     rcx,48,+,[8],r8,=
+0x10000112b    488b5660     rsi,96,+,[8],rdx,=
+0x10000112f    b801000000   1,eax,=
+0x100001134    4c394230     rdx,48,+,[8],r8,==,cz,?=
+0x100001138    7f1a         sf,of,!,^,zf,!,&,?{,0x1154,rip,=,} ;[2]
+0x10000113a    7d07         of,!,sf,^,?{,0x1143,rip,} ;[3]
+0x10000113c    b8ffffffff   0xffffffff,eax,= ;  0xffffffff
+0x100001141    eb11         0x1154,rip,= ;[2]
+0x100001143    488b4938     rcx,56,+,[8],rcx,=
+0x100001147    48394a38     rdx,56,+,[8],rcx,==,cz,?=
 ```
 
 ### Introspection

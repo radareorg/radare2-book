@@ -17,51 +17,51 @@ Take some time to understand what each command does and the results after runnin
 [0x08048440]> pdf @ main
 		   ; DATA XREF from 0x08048457 (entry0)
 / (fcn) fcn.08048648 141
-|          ;-- main:
-|          0x08048648    8d4c2404     lea ecx, [esp+0x4]
-|          0x0804864c    83e4f0       and esp, 0xfffffff0
-|          0x0804864f    ff71fc       push dword [ecx-0x4]
-|          0x08048652    55           push ebp
-|          ; CODE (CALL) XREF from 0x08048734 (fcn.080486e5)
-|          0x08048653    89e5         mov ebp, esp
-|          0x08048655    83ec28       sub esp, 0x28
-|          0x08048658    894df4       mov [ebp-0xc], ecx
-|          0x0804865b    895df8       mov [ebp-0x8], ebx
-|          0x0804865e    8975fc       mov [ebp-0x4], esi
-|          0x08048661    8b19         mov ebx, [ecx]
-|          0x08048663    8b7104       mov esi, [ecx+0x4]
-|          0x08048666    c744240c000. mov dword [esp+0xc], 0x0
-|          0x0804866e    c7442408010. mov dword [esp+0x8], 0x1 ;  0x00000001
-|          0x08048676    c7442404000. mov dword [esp+0x4], 0x0
-|          0x0804867e    c7042400000. mov dword [esp], 0x0
-|          0x08048685    e852fdffff   call sym..imp.ptrace
-|             sym..imp.ptrace(unk, unk)
-|          0x0804868a    85c0         test eax, eax
-|      ,=< 0x0804868c    7911         jns 0x804869f
-|      |   0x0804868e    c70424cf870. mov dword [esp], str.Don_tuseadebuguer_ ;  0x080487cf
-|      |   0x08048695    e882fdffff   call sym..imp.puts
-|      |      sym..imp.puts()
-|      |   0x0804869a    e80dfdffff   call sym..imp.abort
-|      |      sym..imp.abort()
-|      `-> 0x0804869f    83fb02       cmp ebx, 0x2
-|     ,==< 0x080486a2    7411         je 0x80486b5
-|     |    0x080486a4    c704240c880. mov dword [esp], str.Youmustgiveapasswordforusethisprogram_ ;  0x0804880c
-|     |    0x080486ab    e86cfdffff   call sym..imp.puts
-|     |       sym..imp.puts()
-|     |    0x080486b0    e8f7fcffff   call sym..imp.abort
-|     |       sym..imp.abort()
-|     `--> 0x080486b5    8b4604       mov eax, [esi+0x4]
-|          0x080486b8    890424       mov [esp], eax
-|          0x080486bb    e8e5feffff   call fcn.080485a5
-|             fcn.080485a5() ; fcn.080484c6+223
-|          0x080486c0    b800000000   mov eax, 0x0
-|          0x080486c5    8b4df4       mov ecx, [ebp-0xc]
-|          0x080486c8    8b5df8       mov ebx, [ebp-0x8]
-|          0x080486cb    8b75fc       mov esi, [ebp-0x4]
-|          0x080486ce    89ec         mov esp, ebp
-|          0x080486d0    5d           pop ebp
-|          0x080486d1    8d61fc       lea esp, [ecx-0x4]
-\          0x080486d4    c3           ret
+|     ;-- main:
+|     0x08048648    8d4c2404     lea ecx, [esp+0x4]
+|     0x0804864c    83e4f0       and esp, 0xfffffff0
+|     0x0804864f    ff71fc       push dword [ecx-0x4]
+|     0x08048652    55           push ebp
+|     ; CODE (CALL) XREF from 0x08048734 (fcn.080486e5)
+|     0x08048653    89e5         mov ebp, esp
+|     0x08048655    83ec28       sub esp, 0x28
+|     0x08048658    894df4       mov [ebp-0xc], ecx
+|     0x0804865b    895df8       mov [ebp-0x8], ebx
+|     0x0804865e    8975fc       mov [ebp-0x4], esi
+|     0x08048661    8b19         mov ebx, [ecx]
+|     0x08048663    8b7104       mov esi, [ecx+0x4]
+|     0x08048666    c744240c000. mov dword [esp+0xc], 0x0
+|     0x0804866e    c7442408010. mov dword [esp+0x8], 0x1 ;  0x00000001
+|     0x08048676    c7442404000. mov dword [esp+0x4], 0x0
+|     0x0804867e    c7042400000. mov dword [esp], 0x0
+|     0x08048685    e852fdffff   call sym..imp.ptrace
+|        sym..imp.ptrace(unk, unk)
+|     0x0804868a    85c0         test eax, eax
+| ,=< 0x0804868c    7911         jns 0x804869f
+| |   0x0804868e    c70424cf870. mov dword [esp], str.Don_tuseadebuguer_ ;  0x080487cf
+| |   0x08048695    e882fdffff   call sym..imp.puts
+| |      sym..imp.puts()
+| |   0x0804869a    e80dfdffff   call sym..imp.abort
+| |      sym..imp.abort()
+| `-> 0x0804869f    83fb02       cmp ebx, 0x2
+|,==< 0x080486a2    7411         je 0x80486b5
+||    0x080486a4    c704240c880. mov dword [esp], str.Youmustgiveapasswordforusethisprogram_ ;  0x0804880c
+||    0x080486ab    e86cfdffff   call sym..imp.puts
+||       sym..imp.puts()
+||    0x080486b0    e8f7fcffff   call sym..imp.abort
+||       sym..imp.abort()
+|`--> 0x080486b5    8b4604       mov eax, [esi+0x4]
+|     0x080486b8    890424       mov [esp], eax
+|     0x080486bb    e8e5feffff   call fcn.080485a5
+|        fcn.080485a5() ; fcn.080484c6+223
+|     0x080486c0    b800000000   mov eax, 0x0
+|     0x080486c5    8b4df4       mov ecx, [ebp-0xc]
+|     0x080486c8    8b5df8       mov ebx, [ebp-0x8]
+|     0x080486cb    8b75fc       mov esi, [ebp-0x4]
+|     0x080486ce    89ec         mov esp, ebp
+|     0x080486d0    5d           pop ebp
+|     0x080486d1    8d61fc       lea esp, [ecx-0x4]
+\     0x080486d4    c3           ret
 ```
 
 In this example, we analyze the whole file (`aa`) and then print disassembly of the `main()` function (`pdf`).
@@ -81,32 +81,33 @@ One of the most important "basic" analysis commands is a set of `af` subcommands
 function or perform completely manual one.
 
 ```
+[0x00000000]> af?
 |Usage: af
-| af ([name]) ([addr])                  analyze functions (start at addr or $$)
-| afr ([name]) ([addr])                 analyze functions recursively
-| af+ addr name [type] [diff]           hand craft a function (requires afb+)
-| af- [addr]                            clean all function analysis data (or function at addr)
+| af ([name]) ([addr])     analyze functions (start at addr or $$)
+| afr ([name]) ([addr])    analyze functions recursively
+| af+ addr name [type] [diff]  hand craft a function (requires afb+)
+| af- [addr]               clean all function analysis data (or function at addr)
 | afb+ fcnA bbA sz [j] [f] ([t]( [d]))  add bb to function @ fcnaddr
-| afb[?] [addr]                         List basic blocks of given function
-| afB 16                                set current function as thumb (change asm.bits)
-| afC[lc] ([addr])@[addr]               calculate the Cycles (afC) or Cyclomatic Complexity (afCc)
-| afc[?] type @[addr]                   set calling convention for function
-| afd[addr]                             show function + delta for given offset
-| aff                                   re-adjust function boundaries to fit
-| afF[1|0|]                             fold/unfold/toggle
-| afi [addr|fcn.name]                   show function(s) information (verbose afl)
-| afl[?] [l*] [fcn name]                list functions (addr, size, bbs, name) (see afll)
-| afm name                              merge two functions
-| afM name                              print functions map
-| afn[?] name [addr]                    rename name for function at address (change flag too)
-| afna                                  suggest automatic name for current offset
-| afo [fcn.name]                        show address for the function named like this
-| afs [addr] [fcnsign]                  get/set function signature at current address
-| afS[stack_size]                       set stack frame size for function at current address
-| aft[?]                                type matching, type propagation
-| afu [addr]                            resize and analyze function from current address until addr
-| afv[bsra]?                            manipulate args, registers and variables in function
-| afx                                   list function references
+| afb[?] [addr]            List basic blocks of given function
+| afB 16                   set current function as thumb (change asm.bits)
+| afC[lc] ([addr])@[addr]  calculate the Cycles (afC) or Cyclomatic Complexity (afCc)
+| afc[?] type @[addr]      set calling convention for function
+| afd[addr]                show function + delta for given offset
+| aff                      re-adjust function boundaries to fit
+| afF[1|0|]                fold/unfold/toggle
+| afi [addr|fcn.name]      show function(s) information (verbose afl)
+| afl[?] [l*] [fcn name]   list functions (addr, size, bbs, name) (see afll)
+| afm name                 merge two functions
+| afM name                 print functions map
+| afn[?] name [addr]       rename name for function at address (change flag too)
+| afna                     suggest automatic name for current offset
+| afo [fcn.name]           show address for the function named like this
+| afs [addr] [fcnsign]     get/set function signature at current address
+| afS[stack_size]          set stack frame size for function at current address
+| aft[?]                   type matching, type propagation
+| afu [addr]               resize and analyze function from current address until addr
+| afv[bsra]?               manipulate args, registers and variables in function
+| afx                      list function references
 ```
 
 One of the most challenging tasks while performing a function analysis - merge, crop or resize.
@@ -173,17 +174,17 @@ it was referenced from, we should use `axt`:
 
 ```
 [0x0001783a]> pd 2
-	;-- str.02x:
-	; STRING XREF from 0x00005de0 (sub.strlen_d50)
-	; CODE XREF from 0x00017838 (str.._s_s_s + 7)
-	0x0001783a     .string "%%%02x" ; len=7
-	;-- str.src_ls.c:
-	; STRING XREF from 0x0000541b (sub.free_b04)
-	; STRING XREF from 0x0000543a (sub.__assert_fail_41f + 27)
-	; STRING XREF from 0x00005459 (sub.__assert_fail_41f + 58)
-	; STRING XREF from 0x00005f9e (sub._setjmp_e30)
-	; CODE XREF from 0x0001783f (str.02x + 5)
-	0x00017841 .string "src/ls.c" ; len=9
+;-- str.02x:
+; STRING XREF from 0x00005de0 (sub.strlen_d50)
+; CODE XREF from 0x00017838 (str.._s_s_s + 7)
+0x0001783a     .string "%%%02x" ; len=7
+;-- str.src_ls.c:
+; STRING XREF from 0x0000541b (sub.free_b04)
+; STRING XREF from 0x0000543a (sub.__assert_fail_41f + 27)
+; STRING XREF from 0x00005459 (sub.__assert_fail_41f + 58)
+; STRING XREF from 0x00005f9e (sub._setjmp_e30)
+; CODE XREF from 0x0001783f (str.02x + 5)
+0x00017841 .string "src/ls.c" ; len=9
 [0x0001783a]> axt
 sub.strlen_d50 0x5de0 [STRING] lea rcx, str.02x
 (nofunc) 0x17838 [CODE] jae str.02x
@@ -286,74 +287,13 @@ future in favor of more automated analysis.
 One of the easiest way to see and check the changes of the analysis commands and variables
 is to perform a scrolling in a `Vv` special visual mode, allowing functions preview:
 
-```
--[ functions ]----------------                              ...
-(a) add     (x)xrefs     (q)quit                            Visual code review (pdf)
-(r) rename  (c)calls     (g)go                              ╭ (fcn) entry0 43
-(d) delete  (v)variables (?)help                            │   entry0 ();
->* 0x00005480   43 entry0                                   │          0x00005480      xor ebp, ebp
-   0x000150f0   46 sym._obstack_allocated_p                 │          0x00005482      mov r9, rdx
-   0x00014fe0  179 sym._obstack_begin_1                     │          0x00005485      pop rsi
-   0x00014fc0  158 sym._obstack_begin                       │          0x00005486      mov rdx, rsp
-   0x00015130   97 sym._obstack_free                        │          0x00005489      and rsp, 0xfffffffffffffff0
-   0x00015000  283 sym._obstack_newchunk                    │          0x0000548d	   push rax
-   0x000151a0   36 sym._obstack_memory_used                 │          0x0000548e	   push rsp
-   0x000033f0    6 sym.imp.__ctype_toupper_loc              │          0x0000548f      lea r8, [0x00015e40]
-   0x00003400    6 sym.imp.__uflow                          │          0x00005496      lea rcx, [0x00015dd0]
-   0x00003410    6 sym.imp.getenv                           │		   0x0000549d      lea rdi, [main]  ; section..text ; 0x3ac0 ; "AWAVAUATUS\x89\xfdH\x89\xf3H\x83
-   0x00003420    6 sym.imp.sigprocmask                      │          0x000054a4      call qword [reloc.__libc_start_main] ; [0x21efc8:8]=0
-   0x00003430    6 sym.imp.__snprintf_chk                   ╰          0x000054aa      hlt
-   0x00003440    6 sym.imp.raise
-   0x00000000   48 sym.imp.free
-   0x00003450    6 sym.imp.abort
-   0x00003460    6 sym.imp.__errno_location
-   0x00003470    6 sym.imp.strncmp
-   0x00003480    6 sym.imp.localtime_r
-   0x00003490    6 sym.imp._exit
-   0x000034a0    6 sym.imp.strcpy
-   0x000034b0    6 sym.imp.__fpending
-   0x000034c0    6 sym.imp.isatty
-```
+![vv](code_analysis_vv.png)
 
 When we want to check how analysis changes affect the result in the case of big functions, we can
 use minimap instead, allowing to see a bigger flow graph on the same screen size. To get into
 the minimap mode type `VV` then press `p` twice:
 
-```
-[0x00003ac0]> VV @ main (nodes 6 edges 5 zoom 100%) BB-MINI mouse:canvas-y mov-speed:5
-
-[ 0x3ac0 ]
-; [13] -r-x section size 74709 named .text
-;-- section..text:
-(fcn) main 313                                                                       <@@@@@@>
-    main ();                                                                            │
-  ; var int local_8h @ rsp+0x8                                                          │
-  ; var int local_10h @ rsp+0x10                                                        │
-  ; var int local_28h @ rsp+0x28                                                  t f  __3b7f__
-  ; var int local_30h @ rsp+0x30                                                  │ │
-  ; var int local_32h @ rsp+0x32                                                  ╰─│─────────╮
-  ; var int local_38h @ rsp+0x38                                                  ╭─╯         │
-  ; var int local_45h @ rsp+0x45                                                  │           │
-  ; var int local_46h @ rsp+0x46                                                  │           │
-  ; var int local_47h @ rsp+0x47                                                 __3b84__  __3b92__
-  ; var int local_48h @ rsp+0x48                                                  │           │
-  ; STRING XREF from 0x0000549d (entry0)                                          │           │
-  push r15                                                                        │           │
-  push r14                                                                       __3b8d__  __3ba8__
-  push r13
-  push r12
-  push rbp
-  push rbx
-  mov ebp, edi
-  mov rbx, rsi
-  ; 'X'
-  sub rsp, 0x58
-  ; const char *s
-  mov rdi, qword [rsi]
-  ; [0x28:8]=0x1f6d0
-  ; '('
-  ...
-```
+![vv2](code_analysis_vv2.png)
 
 This mode allows you to see the disassembly of each node separately, just navigate between them using `Tab` key.
 
@@ -403,16 +343,16 @@ One of the most common case is to set a particular numeric base for immediates:
 | ahi S       set base to syscall (80)
 | ahi s       set base to string (1)
 [0x00003d54]> pd 2
-│          0x00003d54      0583000000     add eax, 0x83
-│          0x00003d59      3d13010000     cmp eax, 0x113
+0x00003d54      0583000000     add eax, 0x83
+0x00003d59      3d13010000     cmp eax, 0x113
 [0x00003d54]> ahi d
 [0x00003d54]> pd 2
-│          0x00003d54      0583000000     add eax, 131
-│          0x00003d59      3d13010000     cmp eax, 0x113
+0x00003d54      0583000000     add eax, 131
+0x00003d59      3d13010000     cmp eax, 0x113
 [0x00003d54]> ahi b
 [0x00003d54]> pd 2
-│          0x00003d54      0583000000     add eax, 10000011b
-│          0x00003d59      3d13010000     cmp eax, 0x113
+0x00003d54      0583000000     add eax, 10000011b
+0x00003d59      3d13010000     cmp eax, 0x113
 ```
 
 It is notable that some analysis stages or commands add the internal analysis hints,
@@ -432,8 +372,8 @@ We can use `ahc` command for performing such a change:
 
 ```
 [0x00003cee]> pd 2
-│          0x00003cee      e83d080100     call sub.__errno_location_530
-│          0x00003cf3      85c0           test eax, eax
+0x00003cee      e83d080100     call sub.__errno_location_530
+0x00003cf3      85c0           test eax, eax
 [0x00003cee]> ao
 address: 0x3cee
 opcode: call 0x14530
@@ -455,8 +395,8 @@ family: cpu
 stackop: null
 [0x00003cee]> ahc 0x5382
 [0x00003cee]> pd 2
-│          0x00003cee      e83d080100     call sub.__errno_location_530
-│          0x00003cf3      85c0           test eax, eax
+0x00003cee      e83d080100     call sub.__errno_location_530
+0x00003cf3      85c0           test eax, eax
 [0x00003cee]> ao
 address: 0x3cee
 opcode: call 0x14530
@@ -488,11 +428,11 @@ like:
 
 ```
 [0x00003d54]> pd 2
-│          0x00003d54      0583000000     add eax, 10000011b
-│          0x00003d59      3d13010000     cmp eax, 0x113
+0x00003d54      0583000000     add eax, 10000011b
+0x00003d59      3d13010000     cmp eax, 0x113
 [0x00003d54]> "aho myopcode bla, foo"
 [0x00003d54]> pd 2
-│          0x00003d54                     myopcode bla, foo
-│          0x00003d55      830000         add dword [rax], 0
+0x00003d54                     myopcode bla, foo
+0x00003d55      830000         add dword [rax], 0
 ```
 

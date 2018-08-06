@@ -1,0 +1,28 @@
+code_analysis_vv.png "
+-[ functions ]----------------                              ...
+(a) add     (x)xrefs     (q)quit                            Visual code review (pdf)
+(r) rename  (c)calls     (g)go                              ╭ (fcn) entry0 43
+(d) delete  (v)variables (?)help                            │   entry0 ();
+>* 0x00005480   43 entry0                                   │          0x00005480      xor ebp, ebp
+   0x000150f0   46 sym._obstack_allocated_p                 │          0x00005482      mov r9, rdx
+   0x00014fe0  179 sym._obstack_begin_1                     │          0x00005485      pop rsi
+   0x00014fc0  158 sym._obstack_begin                       │          0x00005486      mov rdx, rsp
+   0x00015130   97 sym._obstack_free                        │          0x00005489      and rsp, 0xfffffffffffffff0
+   0x00015000  283 sym._obstack_newchunk                    │          0x0000548d	   push rax
+   0x000151a0   36 sym._obstack_memory_used                 │          0x0000548e	   push rsp
+   0x000033f0    6 sym.imp.__ctype_toupper_loc              │          0x0000548f      lea r8, [0x00015e40]
+   0x00003400    6 sym.imp.__uflow                          │          0x00005496      lea rcx, [0x00015dd0]
+   0x00003410    6 sym.imp.getenv                           │		   0x0000549d      lea rdi, [main]  ; section..text ; 0x3ac0 ; "AWAVAUATUS\x89\xfdH\x89\xf3H\x83
+   0x00003420    6 sym.imp.sigprocmask                      │          0x000054a4      call qword [reloc.__libc_start_main] ; [0x21efc8:8]=0
+   0x00003430    6 sym.imp.__snprintf_chk                   ╰          0x000054aa      hlt
+   0x00003440    6 sym.imp.raise
+   0x00000000   48 sym.imp.free
+   0x00003450    6 sym.imp.abort
+   0x00003460    6 sym.imp.__errno_location
+   0x00003470    6 sym.imp.strncmp
+   0x00003480    6 sym.imp.localtime_r
+   0x00003490    6 sym.imp._exit
+   0x000034a0    6 sym.imp.strcpy
+   0x000034b0    6 sym.imp.__fpending
+   0x000034c0    6 sym.imp.isatty
+"
