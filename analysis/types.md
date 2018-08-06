@@ -7,28 +7,28 @@ Most of the related commands are located in `t` namespace:
 ```
 [0x000051c0]> t?
 |Usage: t # cparse types commands
-| t                          List all loaded types
-| tj                         List all loaded types as json
-| t <type>                   Show type in 'pf' syntax
-| t*                         List types info in r2 commands
-| t- <name>                  Delete types by its name
-| t-*                        Remove all types
-| ta <type>                  Mark immediate as a type offset
-| tc ([cctype])              calling conventions listing and manipulations
-| te[?]                      List all loaded enums
-| td[?] <string>             Load types from string
-| tf                         List all loaded functions signatures
-| tk <sdb-query>             Perform sdb query
-| tl[?]                      Show/Link type to an address
-| tn[?] [-][addr]            manage noreturn function attributes and marks
-| to -                       Open cfg.editor to load types
-| to <path>                  Load types from C header file
-| tos <path>                 Load types from parsed Sdb database
+| t               List all loaded types
+| tj              List all loaded types as json
+| t <type>        Show type in 'pf' syntax
+| t*              List types info in r2 commands
+| t- <name>       Delete types by its name
+| t-*             Remove all types
+| ta <type>       Mark immediate as a type offset
+| tc ([cctype])   calling conventions listing and manipulations
+| te[?]           List all loaded enums
+| td[?] <string>  Load types from string
+| tf              List all loaded functions signatures
+| tk <sdb-query>  Perform sdb query
+| tl[?]           Show/Link type to an address
+| tn[?] [-][addr] manage noreturn function attributes and marks
+| to -            Open cfg.editor to load types
+| to <path>       Load types from C header file
+| tos <path>      Load types from parsed Sdb database
 | tp  <type> [addr|varname]  cast data at <address> to <type> and print it
 | tpx <type> <hexpairs>      Show value for type with specified byte sequence
-| ts[?]                      print loaded struct types
-| tu[?]                      print loaded union types
-| tt[?]                      List all loaded typedefs
+| ts[?]           print loaded struct types
+| tu[?]           print loaded union types
+| tt[?]           List all loaded typedefs
 ```
 
 Note, that the basic (atomic) types are not those from C standard -
@@ -129,23 +129,23 @@ Moreover, the link will be shown in the disassembly output or visual mode:
 
 ```
 [0x000051c0 15% 300 /bin/ls]> pd $r @ entry0
-            ;-- entry0:
-            0x000051c0      31ed           xor ebp, ebp
-            0x000051c2      4989d1         mov r9, rdx
-            0x000051c5      5e             pop rsi
-            0x000051c6      4889e2         mov rdx, rsp
-            0x000051c9      4883e4f0       and rsp, 0xfffffffffffffff0
-            0x000051cd      50             push rax
-            0x000051ce      54             push rsp
+ ;-- entry0:
+ 0x000051c0      xor ebp, ebp
+ 0x000051c2      mov r9, rdx
+ 0x000051c5      pop rsi
+ 0x000051c6      mov rdx, rsp
+ 0x000051c9      and rsp, 0xfffffffffffffff0
+ 0x000051cd      push rax
+ 0x000051ce      push rsp
 (S1)
  x : 0x000051cf = [ 2315619660, 1207959810, 34803085 ]
  y : 0x000051db = [ 2370306049, 4293315645, 3860201471, 4093649307 ]
  z : 0x000051eb = 4464399
-            0x000051f0      488d3d51a021.  lea rdi, loc._edata         ; 0x21f248
-            0x000051f7      55             push rbp
-            0x000051f8      488d0549a021.  lea rax, loc._edata         ; 0x21f248
-            0x000051ff      4839f8         cmp rax, rdi
-            0x00005202      4889e5         mov rbp, rsp
+ 0x000051f0      lea rdi, loc._edata         ; 0x21f248
+ 0x000051f7      push rbp
+ 0x000051f8      lea rax, loc._edata         ; 0x21f248
+ 0x000051ff      cmp rax, rdi
+ 0x00005202      mov rbp, rsp
 ```
 
 Once the struct is linked, radare2 tries to propagate structure offset in the function at current offset, to run this analysis on whole program or at any targeted functions after all structs is linked you have `taa` command:
@@ -158,13 +158,13 @@ Once the struct is linked, radare2 tries to propagate structure offset in the fu
 Note sometimes the emulation may not be accurate, for example as below :
 
 ````
-|           0x000006da      55             push rbp
-|           0x000006db      4889e5         mov rbp, rsp
-|           0x000006de      4883ec10       sub rsp, 0x10
-|           0x000006e2      bf20000000     mov edi, 0x20               ; "@"
-|           0x000006e7      e8c4feffff     call sym.imp.malloc         ;  void *malloc(size_t size)
-|           0x000006ec      488945f8       mov qword [local_8h], rax
-|           0x000006f0      488b45f8       mov rax, qword [local_8h]
+|0x000006da  push rbp
+|0x000006db  mov rbp, rsp
+|0x000006de  sub rsp, 0x10
+|0x000006e2  mov edi, 0x20               ; "@"
+|0x000006e7  call sym.imp.malloc         ;  void *malloc(size_t size)
+|0x000006ec  mov qword [local_8h], rax
+|0x000006f0  mov rax, qword [local_8h]
 
 ````
 
@@ -183,7 +183,7 @@ Lets see a simple example of [R]SI-relative addressing
 
 ```
 [0x000052f0]> pd 1
-            0x000052f0      488b4608       mov rax, qword [rsi + 8]    ; [0x8:8]=0
+0x000052f0      mov rax, qword [rsi + 8]    ; [0x8:8]=0
 ```
 Here `8` - is some offset in the memory, where `rsi` probably holds
 some structure pointer. Imagine that we have the following structures
@@ -209,7 +209,7 @@ the current address:
 ```
 [0x000052f0]> ta ms1.member1
 [0x000052f0]> pd 1
-            0x000052f0      488b4608       mov rax, qword [rsi + ms1.member1]    ; [0x8:8]=0
+0x000052f0      488b4608       mov rax, qword [rsi + ms1.member1]    ; [0x8:8]=0
 ```
 
 ### Managing enums
@@ -253,28 +253,28 @@ Defining primitive types requires an understanding of basic `pf` formats,
 you can find the whole list of format specifier in `pf??`:
 
 ```
------------------------------------------------------------------
-|  format specifier  | explanation                              |
-|---------------------------------------------------------------|
-|         b          |  byte (unsigned)                         |
-|         c          |  char (signed byte)                      |
-|         d          |  0x%%08x hexadecimal value (4 bytes)     |
-|         f          |  float value (4 bytes)                   |
-|         i          |  %%i integer value (4 bytes)             |
-|         o          |  0x%%08o octal value (4 byte)            |
-|         p          |  pointer reference (2, 4 or 8 bytes)     |
-|         q          |  quadword (8 bytes)                      |
-|         s          |  32bit pointer to string (4 bytes)       |
-|         S          |  64bit pointer to string (8 bytes)       |
-|         t          |  UNIX timestamp (4 bytes)                |
-|         T          |  show Ten first bytes of buffer          |
-|         u          |  uleb128 (variable length)               |
-|         w          |  word (2 bytes unsigned short in hex)    |
-|         x          |  0x%%08x hex value and flag (fd @ addr)  |
-|         X          |  show formatted hexpairs                 |
-|         z          |  \0 terminated string                    |
-|         Z          |  \0 terminated wide string               |
------------------------------------------------------------------
+-----------------------------------------------------
+| format | explanation                              |
+|---------------------------------------------------|
+|  b     |  byte (unsigned)                         |
+|  c     |  char (signed byte)                      |
+|  d     |  0x%%08x hexadecimal value (4 bytes)     |
+|  f     |  float value (4 bytes)                   |
+|  i     |  %%i integer value (4 bytes)             |
+|  o     |  0x%%08o octal value (4 byte)            |
+|  p     |  pointer reference (2, 4 or 8 bytes)     |
+|  q     |  quadword (8 bytes)                      |
+|  s     |  32bit pointer to string (4 bytes)       |
+|  S     |  64bit pointer to string (8 bytes)       |
+|  t     |  UNIX timestamp (4 bytes)                |
+|  T     |  show Ten first bytes of buffer          |
+|  u     |  uleb128 (variable length)               |
+|  w     |  word (2 bytes unsigned short in hex)    |
+|  x     |  0x%%08x hex value and flag (fd @ addr)  |
+|  X     |  show formatted hexpairs                 |
+|  z     |  \0 terminated string                    |
+|  Z     |  \0 terminated wide string               |
+-----------------------------------------------------
 
 ```
 there are basically 3 mandatory keys for defining basic data types:

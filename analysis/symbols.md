@@ -72,54 +72,54 @@ need to run any commands/change any options:
 ```
 r2 `which rabin2`
 [0x00002437 8% 300 /usr/local/bin/rabin2]> pd $r
- ┌──< 0x00002437      752f           jne 0x2468                  ;[1]
- │⁝   0x00002439      48833d9f5b20.  cmp qword reloc.__cxa_finalize_224, 0
- │⁝   0x00002441      55             push rbp
- │⁝   0x00002442      4889e5         mov rbp, rsp
-┌───< 0x00002445      740c           je 0x2453                   ;[2]
-││⁝   0x00002447      488d3df25720.  lea rdi, obj.__dso_handle   ; 0x207c40 ; "@| "
-││⁝   0x0000244e      e80dffffff     call 0x2360                 ;[3]
-└───> 0x00002453      e848ffffff     call sym.deregister_tm_clones ;[4]
- │⁝   0x00002458      c605915e2000.  mov byte [obj.completed.6991], 1 ; obj.__TMC_END__ ; [0x2082f0:1]=0
- │⁝   0x0000245f      5d             pop rbp
- │⁝   0x00002460      c3             ret
- │⁝   0x00002461      0f1f80000000.  nop dword [rax]
- └──> 0x00002468      f3c3           ret
-  ⁝   0x0000246a      660f1f440000   nop word [rax + rax]
-  ⁝   ;-- entry1.init:
-  ⁝   ;-- frame_dummy:
-  ⁝   0x00002470      55             push rbp
-  ⁝   0x00002471      4889e5         mov rbp, rsp
-  ⁝   0x00002474      5d             pop rbp
-  └─< 0x00002475      e966ffffff     jmp sym.register_tm_clones  ;[5]
-      ;-- blob_version:
-      0x0000247a      55             push rbp                    ; ../blob/version.c:18
-      0x0000247b      4889e5         mov rbp, rsp
-      0x0000247e      4883ec10       sub rsp, 0x10
-      0x00002482      48897df8       mov qword [rbp - 8], rdi
-      0x00002486      b832000000     mov eax, 0x32               ; ../blob/version.c:24 ; '2'
-      0x0000248b      84c0           test al, al                 ; ../blob/version.c:19
-  ┌─< 0x0000248d      7409           je 0x2498                   ;[6]
-  │   0x0000248f      488d05223c00.  lea rax, str.2.0.1_182_gf1aa3aa4d ; 0x60b8 ; "2.0.1-182-gf1aa3aa4d"
- ┌──< 0x00002496      eb07           jmp 0x249f                  ;[7]
- │└─> 0x00002498      488d052e3c00.  lea rax, 0x000060cd
- └──> 0x0000249f      488b75f8       mov rsi, qword [rbp - 8]
-      0x000024a3      4989c0         mov r8, rax
-      0x000024a6      b940000000     mov ecx, 0x40               ; section_end.ehdr
-      0x000024ab      bac0400000     mov edx, 0x40c0
-      0x000024b0      488d3d193c00.  lea rdi, str._s_2.1.0_git__d___linux_x86__d_git._s_n ; 0x60d0 ; "%s 2.1.0-git %d @ linux-x86-%d git.%s\n"
-      0x000024b7      b800000000     mov eax, 0
-      0x000024bc      e88ffeffff     call 0x2350                 ;[8]
-      0x000024c1      b866000000     mov eax, 0x66               ; ../blob/version.c:25 ; 'f'
-      0x000024c6      84c0           test al, al
-  ┌─< 0x000024c8      740c           je 0x24d6                   ;[9]
-  │   0x000024ca      488d3d273c00.  lea rdi, str.commit:_f1aa3aa4d2599c1ad60e3ecbe5f4d8261b282385_build:_2017_11_06__12:18:39 ; ../blob/version.c:26 ; 0x60f8 ; "commit: f1aa3aa4d2599c1ad60e3ecbe5f4d8261b282385 build: 2017-11-06__1
-  │   0x000024d1      e8daf9ffff     call sym.imp.puts           ;[?]
-  └─> 0x000024d6      b800000000     mov eax, 0                  ; ../blob/version.c:28
-      0x000024db      c9             leave                       ; ../blob/version.c:29
-      0x000024dc      c3             ret
-      ;-- rabin_show_help:
-      0x000024dd      55             push rbp                    ; .//rabin2.c:27
+0x00002437  jne 0x2468                  ;[1]
+0x00002439  cmp qword reloc.__cxa_finalize_224, 0
+0x00002441  push rbp
+0x00002442  mov rbp, rsp
+0x00002445  je 0x2453                   ;[2]
+0x00002447  lea rdi, obj.__dso_handle   ; 0x207c40 ; "@| "
+0x0000244e  call 0x2360                 ;[3]
+0x00002453  call sym.deregister_tm_clones ;[4]
+0x00002458  mov byte [obj.completed.6991], 1 ; obj.__TMC_END__ ; [0x2082f0:1]=0
+0x0000245f  pop rbp
+0x00002460  ret
+0x00002461  nop dword [rax]
+0x00002468  ret
+0x0000246a  nop word [rax + rax]
+;-- entry1.init:
+;-- frame_dummy:
+0x00002470  push rbp
+0x00002471  mov rbp, rsp
+0x00002474  pop rbp
+0x00002475  jmp sym.register_tm_clones  ;[5]
+;-- blob_version:
+0x0000247a  push rbp                    ; ../blob/version.c:18
+0x0000247b  mov rbp, rsp
+0x0000247e  sub rsp, 0x10
+0x00002482  mov qword [rbp - 8], rdi
+0x00002486  mov eax, 0x32               ; ../blob/version.c:24 ; '2'
+0x0000248b  test al, al                 ; ../blob/version.c:19
+0x0000248d  je 0x2498                   ;[6]
+0x0000248f  lea rax, str.2.0.1_182_gf1aa3aa4d ; 0x60b8 ; "2.0.1-182-gf1aa3aa4d"
+0x00002496  jmp 0x249f                  ;[7]
+0x00002498  lea rax, 0x000060cd
+0x0000249f  mov rsi, qword [rbp - 8]
+0x000024a3  mov r8, rax
+0x000024a6  mov ecx, 0x40               ; section_end.ehdr
+0x000024ab  mov edx, 0x40c0
+0x000024b0  lea rdi, str._s_2.1.0_git__d___linux_x86__d_git._s_n ; 0x60d0 ; "%s 2.1.0-git %d @ linux-x86-%d git.%s\n"
+0x000024b7  mov eax, 0
+0x000024bc  call 0x2350                 ;[8]
+0x000024c1  mov eax, 0x66               ; ../blob/version.c:25 ; 'f'
+0x000024c6  test al, al
+0x000024c8  je 0x24d6                   ;[9]
+0x000024ca  lea rdi, str.commit:_f1aa3aa4d2599c1ad60e3ecbe5f4d8261b282385_build:_2017_11_06__12:18:39 ; ../blob/version.c:26 ; 0x60f8 ; "commit: f1aa3aa4d2599c1ad60e3ecbe5f4d8261b282385 build: 2017-11-06__1
+0x000024d1  call sym.imp.puts           ;[?]
+0x000024d6  mov eax, 0                  ; ../blob/version.c:28
+0x000024db  leave                       ; ../blob/version.c:29
+0x000024dc  ret
+;-- rabin_show_help:
+0x000024dd  push rbp                    ; .//rabin2.c:27
 ```
 
 As you can see, it loads function names and source line information.

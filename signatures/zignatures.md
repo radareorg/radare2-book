@@ -100,13 +100,13 @@ section (assuming we are currently in the `.text` section of course).
 Now we can check, what radare2 found for us:
 ```
 [0x000051c0]> pd 5
-            ;-- entry0:
-            ;-- sign.bytes.entry_0:
-            0x000051c0      31ed           xor ebp, ebp
-            0x000051c2      4989d1         mov r9, rdx
-            0x000051c5      5e             pop rsi
-            0x000051c6      4889e2         mov rdx, rsp
-            0x000051c9      4883e4f0       and rsp, 0xfffffffffffffff0
+;-- entry0:
+;-- sign.bytes.entry_0:
+0x000051c0      31ed           xor ebp, ebp
+0x000051c2      4989d1         mov r9, rdx
+0x000051c5      5e             pop rsi
+0x000051c6      4889e2         mov rdx, rsp
+0x000051c9      4883e4f0       and rsp, 0xfffffffffffffff0
 [0x000051c0]>
 ```
 Here we can see the comment of `entry0`, which is taken from the ELF parsing, but also the
