@@ -28,7 +28,7 @@ pd 2000 | grep eax    ; grep opcodes that use the 'eax' register
 px 20 ; pd 3 ; px 40  ; multiple commands in a single line
 ```
 
-The standard UNIX pipe `|` is also available in the radare2 shell. You can use it to filter the output of an r2 command with a shell program that reads from stdin, such as `grep`, `less`, `wc`, etc. If you do not want to spawn anything, or you can't, or the target system does not have the basic UNIX tools you need (Windows or embedded users), you can also use the built-in grep (`~`).
+The standard UNIX pipe `|` is also available in the radare2 shell. You can use it to filter the output of an r2 command with any shell program that reads from stdin, such as `grep`, `less`, `wc`. If you do not want to spawn anything, or you can't, or the target system does not have the basic UNIX tools you need (Windows or embedded users), you can also use the built-in grep (`~`).
 
 See `?~?` for help.
 

@@ -2,7 +2,7 @@
 
 To move around the file we are inspecting we will need to change the offset we are using the `s` command.
 
-The argument is a math expression that can contain flag names, parenthesis, addition, substraction, multiplication of immediates of contents of memory using brackets, etc.
+The argument is a math expression that can contain flag names, parenthesis, addition, substraction, multiplication of immediates of contents of memory using brackets.
 
 Some example commands:
 

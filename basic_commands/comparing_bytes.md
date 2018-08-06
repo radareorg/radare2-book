@@ -71,7 +71,7 @@ Compare 1/8 equal bytes (0%)
 0x00000002 (byte=03)   4c 'L'  ->  00 ' '
 ```
 
-The number parameter can, of course, be math expressions which use flag names etc:
+The number parameter can, of course, be math expressions which use flag names and anything allowed in an expression:
 
 ```
 [0x00000000]> cx 7f469046

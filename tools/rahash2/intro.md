@@ -2,7 +2,7 @@
 
 The rahash2 tool can be used to compute checksums of files, disk devices or strings. By block or entirely using many different hash algorithms.
 
-This tool is also capable of doing some encoding/decoding operations like base64, xor encryptions, etc
+This tool is also capable of doing some encoding/decoding operations like base64 and xor encryption.
 
 This is an example usage:
 

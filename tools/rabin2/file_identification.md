@@ -1,6 +1,6 @@
 ## File Properties Identification
 
-File type identification is done using `-I`. With this option, rabin2 prints information on a binary type, its encoding, endianness, class, operating system, etc.:
+File type identification is done using `-I`. With this option, rabin2 prints information on a binary type, like its encoding, endianness, class, operating system:
 ```
 $ rabin2 -I /bin/ls
 arch     x86

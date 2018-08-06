@@ -171,7 +171,7 @@ There is a special function, which returns information about the file - `info`:
 ```
 
 3. This structure should contain a pointers to the most important functions like
-`check_bytes`, `load` and `load_bytes`, `entries`, `relocs`, `imports`, etc.
+`check_bytes`, `load` and `load_bytes`, `entries`, `relocs`, `imports`.
 
 ```python
     return {

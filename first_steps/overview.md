@@ -10,7 +10,7 @@ It implements an advanced command line interface for moving around a file, analy
 
 ### rabin2
 
-A program to extract information from executable binaries, such as ELF, PE, Java CLASS, Mach-O, etc. rabin2 is used by the core to get exported symbols, imports, file information, cross references (xrefs), library dependencies, sections, etc.
+A program to extract information from executable binaries, such as ELF, PE, Java CLASS, Mach-O, plus any format supported by r2 plugins. rabin2 is used by the core to get data like exported symbols, imports, file information, cross references (xrefs), library dependencies, sections.
 
 ### rasm2
 
@@ -133,7 +133,7 @@ stdio=/dev/ttys010
 
 ### rax2
 
-A minimalistic mathematical expression evaluator for the shell that is useful for making base conversions between floating point values, hexadecimal representations, hexpair strings to ASCII, octal to integer, etc. It also supports endianness settings and can be used as an interactive shell if no arguments are given.
+A minimalistic mathematical expression evaluator for the shell that is useful for making base conversions between floating point values, hexadecimal representations, hexpair strings to ASCII, octal to integer, and more. It also supports endianness settings and can be used as an interactive shell if no arguments are given.
 
 #### Examples
 

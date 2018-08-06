@@ -37,7 +37,7 @@ There are three different methods to define new types:
 
 3. Radare2 also supports loading header files using the command `to` followed by a path to the header file you want to load.
 
-You can View loaded types in r2 using `ts` for structures, `tu` for unions, `tf` for function signatures, etc...
+You can View loaded types in r2 using `ts` for structures, `tu` for unions, `tf` for function signatures, `te` for enums.
 
 You can also cast pointers to data types and view data in there accordingly with `tp`. EX:
 
