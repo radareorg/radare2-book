@@ -6,7 +6,7 @@ Radare have different code analysis techniques implemented in the core and avail
 
 As long as the whole functionalities of r2 are available with the API as well as using commands. This gives you the ability to implement your own analysis loops using any programming language, even with r2 oneliners, shellscripts, or analysis or core native plugins.
 
-The analysis will show up the internal data structures to identify basic blocks, function trees, to extract opcode-level information etc.
+The analysis will show up the internal data structures to identify basic blocks, function trees and to extract opcode-level information.
 
 The most common radare2 analysis command sequence is `aa`, which stands for "analyze all". That all is refering to all symbols and entrypoints. If your binary is stripped you will need to use other commands like aaa, aab, aar, aac or so.
 
@@ -68,7 +68,7 @@ In this example, we analyze the whole file (`aa`) and then print disassembly of 
 The `aa` command belongs to the family of autoanalysis commands and performs only the most basic
 autoanalysis steps. In radare2 there are many different types of the autoanalysis commands with a
 different analysis depth, including partial emulation: `aa`, `aaa`, `aab`, `aaaa`, ...
-There is also a mapping of those commands to the r2 CLI options: `r2 -A`, `r2 -AA`, etc
+There is also a mapping of those commands to the r2 CLI options: `r2 -A`, `r2 -AA`, and so on.
 
 It is a common sense that completely automated analysis can produce non sequitur results, thus
 radare2 provides separate commands for the particular stages of the analysis allowing fine-grained
@@ -254,7 +254,8 @@ There are a few options for this:
 - `anal.limits` - enables the range limits for analysis operations
 - `anal.from` - starting address of the limit range
 - `anal.to` - the corresponding end of the limit range
-- `anal.in` - specify search boundaries for analysis (`io.maps`, `io.sections.exec`, `dbg.maps` etc ...)
+- `anal.in` - specify search boundaries for analysis (`io.maps`, `io.sections.exec`, `dbg.maps` and many
+more - see `e anal.in=?` for the complete list)
 
 ### Jump tables
 

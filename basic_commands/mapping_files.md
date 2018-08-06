@@ -8,7 +8,7 @@ Sometimes, we want to rebase a binary, or maybe we want to load or map the file 
 
 When launching r2, the base address can be changed with the -B flag. But you must notice the difference when opening files with unknown headers, like bootloaders, so we need to map them using the -m flag (or specifying it as argument to the o command).
 
-Being able to open files and map portions of them at random places in memory with some attributes like permissions, name, etc. Is the perfect basic tooling to reproduce an environment like a core file, a debug session, by also loading and mapping all the libraries the binary depends.
+Being able to open files and map portions of them at random places in memory specifying attributes like permissions and name. Is the perfect basic tooling to reproduce an environment like a core file, a debug session, by also loading and mapping all the libraries the binary depends.
 
 Opening files (and mapping them) is done using the `o` (open) command. Let's read the help:
 

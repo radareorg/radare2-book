@@ -23,7 +23,7 @@ esp -= 4
 4bytes(dword) [esp] = ebp
 ```
 We can see that this corresponds to the x86 instruction `push ebp`! Isn't that cool?
-The aim is to be able to express most of the common operations performed by CPUs, like binary arithmetic operations, memory loads and stores, processing syscalls etc. This way if we can transform the instructions to ESIL we can see what a program does while it is running even for the most cryptic architectures you definitely don't have a device to debug on for.
+The aim is to be able to express most of the common operations performed by CPUs, like binary arithmetic operations, memory loads and stores, processing syscalls plus a lot more. This way if we can transform the instructions to ESIL we can see what a program does while it is running even for the most cryptic architectures you definitely don't have a device to debug on for.
 
 ## Use ESIL
 
@@ -221,7 +221,7 @@ This approach is more readable, but it is less stack-friendly.
 
 NOPs are represented as empty strings. As it was said previously, syscalls are marked by '$' command. For example, '0x80,$'. It delegates emulation from the ESIL machine to a callback which implements syscalls for a specific OS/kernel.
 
-Traps are implemented with the `<code>,TRAP` command. They are used to throw exceptions for invalid instructions, division by zero, memory read error, etc.
+Traps are implemented with the `<code>,TRAP` command. They are used to throw exceptions for invalid instructions, division by zero, memory read error, or any other needed by specific architectures.
 
 ### Quick Analysis
 
@@ -377,7 +377,7 @@ We need a way to retrieve the numeric value of 'rip'. This is a very simple exam
 
 ### API HOOKS
 
-It is important for emulation to be able to setup hooks in parser, so we can extend it to implement analysis without having to change parser again and again. That is, every time an operation is about to be executed, a user hook is called. It can be used to determine if `RIP` is going to change, or if the instruction updates stack, etc.
+It is important for emulation to be able to setup hooks in parser, so we can extend it to implement analysis without having to change parser again and again. That is, every time an operation is about to be executed, a user hook is called. It can be used for example to determine if `RIP` is going to change, or if the instruction updates the stack.
 Later, we can split that callback into several ones to have an event-based analysis API that may be extended in js like this:
 
 ```

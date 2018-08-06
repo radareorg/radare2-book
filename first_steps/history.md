@@ -9,7 +9,7 @@ In 2006, Sergi Alvarez (aka pancake), was working as a forensic analyst. And, by
 
 It was designed to recover a deleted file from an HFS+ partition.
 
-After that, pancake decided to extend the tool to have a pluggable io to be able to attach to processes, implemented the debugger functionalities, support for multiple archs, code analysis, etc..
+After that, pancake decided to extend the tool to have a pluggable io to be able to attach to processes, implemented the debugger functionalities, support for multiple archs and code analysis.
 
 The project has evolved to provide a complete framework for analyzing binaries while making use of basic UNIX concepts. Those concepts include the famous "everything is a file", "small programs that interact using stdin/stdout", and "keep it simple" paradigms.
 

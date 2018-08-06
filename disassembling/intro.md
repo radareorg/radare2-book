@@ -2,7 +2,7 @@
 
 Disassembling in radare is just a way to represent an array of bytes. It is handled as a special print mode within `p` command.
 
-In the old times, when the radare core was smaller, the disassembler was handled by an external rsc file. That is, radare first dumped current block into a file, and then simply called `objdump` configured to disassemble for Intel, ARM etc...
+In the old times, when the radare core was smaller, the disassembler was handled by an external rsc file. That is, radare first dumped current block into a file, and then simply called `objdump` configured to disassemble for Intel, ARM or other supported architectures.
 
 It was a working and unix friendly solution, but it was inefficient as it repeated the same expensive actions over and over, because there were no caches. As a result, scrolling was terribly slow.
 
@@ -18,7 +18,7 @@ Or from inside radare2:
 > e asm.arch=??
 ```
 
-This was many years before capstone appeared. So r2 was using udis86 and olly disassemblers, many gnu (from binutils) etc, 
+This was many years before capstone appeared. So r2 was using udis86 and olly disassemblers, many gnu (from binutils).
 
 Nowadays, the disassembler support is one of the basic features of radare. It now has many options, endianness, including target architecture flavor and disassembler variants, among other things.
 

@@ -2,7 +2,7 @@
 
 Radare2 has a very rich set of commands and configuration options to perform data and code analysis,
 to extract useful information from a binary, like pointers, string references,
-basic blocks, opcode data, jump targets, cross references, etc.
+basic blocks, opcode data, jump targets, cross references and much more.
 These operations are handled by the `a` (analyze) command family:
 
 ```
@@ -37,7 +37,7 @@ very different parts of the analysis:
  - Code flow analysis
  - Data references analysis
  - Using loaded symbols
- - Managing different type of graphs, like CFG, call graph, etc
+ - Managing different type of graphs, like CFG and call graph
  - Manage variables
  - Manage types
  - Emulation using ESIL VM

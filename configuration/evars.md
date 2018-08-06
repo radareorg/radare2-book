@@ -72,7 +72,7 @@ This variable specifies the mode for colorized screen output: "false" (or 0) mea
 
 ### scr.seek
 
-This variable accepts an expression, a pointer (eg. eip), etc. If set, radare will set seek position to its value on startup.
+This variable accepts a full-featured expression or a pointer/flag (eg. eip). If set, radare will set seek position to its value on startup.
 
 ### cfg.fortunes
 
