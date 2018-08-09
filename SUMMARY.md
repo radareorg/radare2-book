@@ -72,7 +72,6 @@
    * [Remote WinDbg](debugger/windbg.md)
 * [Command Line Tools](tools/intro.md)
    * [Rax2](tools/rax2/intro.md)
-   * [Radare2](tools/radare2/intro.md)
    * [Rafind2](tools/rafind2/intro.md)
    * [Rarun2](tools/rarun2/intro.md)
    * [Rabin2](tools/rabin2/intro.md)
