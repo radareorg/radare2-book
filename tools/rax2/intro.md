@@ -1,6 +1,27 @@
 ## Rax2
 
 The `rax2` utility comes with the radare framework and aims to be a minimalistic expression evaluator for the shell. It is useful for making base conversions between floating point values, hexadecimal representations, hexpair strings to ascii, octal to integer. It supports endianness and can be used as a shell if no arguments are given.
+
+This is the help message of rax2, this tool can be used in the command-line or interactively (reading the values from stdin), so it can be used as a multi-base calculator.
+
+Inside r2, the functionality of rax2 is available under the ? command. For example:
+
+```
+[0x00000000]> ? 3+4
+```
+
+As you can see, the numeric expressions can contain mathematical expressions like addition, substraction, .. as well as group operations with parenthesis.
+
+The syntax in which the numbers are represented define the base, for example:
+
+* 3 : decimal, base 10
+* 0xface : hexadecimal, base 16
+* 0472 : octal, base 8
+* 2M : units, 2 megabytes
+* ...
+
+This is the help message of rax2 -h, which will show you a bunch more syntaxes
+
 ```
 $ rax2 -h
 Usage: rax2 [options] [expr ...]
@@ -97,4 +118,3 @@ $ rax2 -K 90203010
 |                 |
 +-----------------+
 ```
-

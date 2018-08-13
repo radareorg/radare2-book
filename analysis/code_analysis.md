@@ -436,4 +436,3 @@ like:
 0x00003d54                     myopcode bla, foo
 0x00003d55      830000         add dword [rax], 0
 ```
-

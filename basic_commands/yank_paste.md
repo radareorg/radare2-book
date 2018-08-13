@@ -57,4 +57,3 @@ You can perform a yank and paste in a single line by just using the `yt` command
 0x4A13B8CC, 89e0 e839 0700 0089 8b83 08ff ...9........
 0x4A13B8D8, ffff 5a8d 2484 29c2           ..Z.$.).
 ```
-

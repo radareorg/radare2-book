@@ -2,8 +2,8 @@
 
 * [Introduction](README.md)
    * [History](first_steps/history.md)
-   * [Overview](first_steps/overview.md)
-   * [Getting radare2](first_steps/getting_radare.md)
+   * [The Framework](first_steps/overview.md)
+   * [Downloading radare2](first_steps/getting_radare.md)
    * [Compilation and Portability](first_steps/compilation_portability.md)
    * [Compilation on Windows](first_steps/windows_compilation.md)
    * [User Interfaces](first_steps/ui.md)

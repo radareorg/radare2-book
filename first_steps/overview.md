@@ -1,10 +1,12 @@
-## Overview
+## The Framework
 
 The Radare2 project is a set of small command-line utilities that can be used together or independently.
 
+This chapter will give you a quick understanding of them, but you can check the dedicated sections for each tool at the end of this book. 
+
 ### radare2
 
-The core of the hexadecimal editor and debugger. radare2 allows you to open a number of input/output sources as if they were simple, plain files, including disks, network connections, kernel drivers, processes under debugging, and so on.
+The main tool of the whole framework. Using the core of the hexadecimal editor and debugger. radare2 allows you to open a number of input/output sources as if they were simple, plain files, including disks, network connections, kernel drivers, processes under debugging, and so on.
 
 It implements an advanced command line interface for moving around a file, analyzing data, disassembling, binary patching, data comparison, searching, replacing, visualizing. It can be scripted with a variety of languages, including Python, Ruby, JavaScript, Lua, Perl.
 
@@ -92,7 +94,7 @@ Hello
 A launcher for running programs within different environments, with different arguments,
 permissions, directories, and overridden default file descriptors. rarun2 is useful for:
 
-* Crackmes
+* Solving crackmes
 * Fuzzing
 * Test suites
 
@@ -108,13 +110,13 @@ chdir=/tmp
 ./foo.rr2
 ```
 
-#### Connecting a Program to a Socket
+#### Connecting a Program with a Socket
 ```
 $ nc -l 9999
 $ rarun2 program=/bin/ls connect=localhost:9999
 ```
 
-#### Debugging a Program by Redirecting IO to Another Terminal
+#### Debugging a Program Redirecting the stdio into Another Terminal
 
 1 - open a new terminal and type 'tty' to get a terminal name:
 

@@ -22,6 +22,8 @@ Below is a list of available print modes listed by `p?`:
 | pB[?] [n]                bitstream of N bytes
 | pc[?][p] [len]           output C (or python) format
 | pC[d] [rows]             print disassembly in columns (see hex.cols and pdi)
+```
+```
 | pd[?] [sz] [a] [b]       disassemble N opcodes (pd) or N bytes (pD)
 | pf[?][.nam] [fmt]        print formatted data (pf.name, pf.name $<expr>)
 | ph[?][=|hash] ([len])    calculate hash for a block
@@ -312,16 +314,16 @@ $ radare ~/.gstreamer-0.10/plugins/libgstflumms.so
 [0x000028A0]> seek sym.gst_plugin_desc
 [0x000185E0]> pf iissxsssss major minor name desc _init version \
  license source package origin
-	 major : 0x000185e0 = 0
-	 minor : 0x000185e4 = 10
-	  name : 0x000185e8 = 0x000185e8 flumms
-	  desc : 0x000185ec = 0x000185ec Fluendo MMS source
-	 _init : 0x000185f0 = 0x00002940
-   version : 0x000185f4 = 0x000185f4 0.10.15.1
-   license : 0x000185f8 = 0x000185f8 unknown
-	source : 0x000185fc = 0x000185fc gst-fluendo-mms
-   package : 0x00018600 = 0x00018600 Fluendo MMS source
-	origin : 0x00018604 = 0x00018604 http://www.fluendo.com
+    major : 0x000185e0 = 0
+    minor : 0x000185e4 = 10
+     name : 0x000185e8 = 0x000185e8 flumms
+     desc : 0x000185ec = 0x000185ec Fluendo MMS source
+    _init : 0x000185f0 = 0x00002940
+  version : 0x000185f4 = 0x000185f4 0.10.15.1
+  license : 0x000185f8 = 0x000185f8 unknown
+   source : 0x000185fc = 0x000185fc gst-fluendo-mms
+  package : 0x00018600 = 0x00018600 Fluendo MMS source
+   origin : 0x00018604 = 0x00018604 http://www.fluendo.com
 ```
 
 ### Disassembly

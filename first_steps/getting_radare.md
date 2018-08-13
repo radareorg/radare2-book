@@ -1,4 +1,4 @@
-## Getting radare2
+## Downloading radare2
 
 You can get radare from the website, [http://radare.org](http://radare.org),
 or the GitHub repository, [https://github.com/radare/radare2](https://github.com/radare/radare2).

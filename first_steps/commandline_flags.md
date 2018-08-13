@@ -31,6 +31,8 @@ Usage: r2 [-ACdfLMnNqStuvwzX] [-P patch] [-p prj] [-a arch] [-b bits] [-i file]
  -k [OS/kern] set asm.os (linux, macos, w32, netbsd, ...)
  -l [lib]     load plugin file
  -L           list supported IO plugins
+```
+```
  -m [addr]    map file at given address (loadaddr)
  -M           do not demangle symbol names
  -n, -nn      do not load RBin info (-nn only load bin structures)
@@ -86,4 +88,3 @@ Use an existing project file:
 ```
 $ r2 -p test
 ```
-

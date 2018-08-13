@@ -25,7 +25,7 @@ RC files are r2 scripts that are loaded at startup time. Those files must be in 
 
 ### System
 
-radare2 will try to load the /usr/share/radare2/radare2rc file first
+radare2 will first try to load /usr/share/radare2/radare2rc
 
 ### Your Home
 

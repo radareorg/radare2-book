@@ -31,7 +31,8 @@ Let's see some examples:
 0x00000030  ff10 0018 0fc8 031a 000c 8484 e970 8648
 0x00000040  d68b 3148 348b 03a0 8b0f c200 5d25 7074
 0x00000050  7500 00e1 ffe8 58fe 4dc4 00e0 dbc8 b885
-
+```
+```
 [0x08049790]> e zoom.byte=p
 [0x08049790]> pz // or pzp
 0x00000000  2f47 0609 070a 0917 1e9e a4bd 2a1b 2c27
@@ -40,7 +41,8 @@ Let's see some examples:
 0x00000030  b167 6192 a67d 8aa2 6246 856e 8c9b 999f
 0x00000040  a774 96c3 b1a4 6c8e a07c 6a8f 8983 6a62
 0x00000050  7d66 625f 7ea4 7ea6 b4b6 8b57 a19f 71a2
-
+```
+```
 [0x08049790]> eval zoom.byte = flags
 [0x08049790]> pz // or pzf
 0x00406e65  48d0 80f9 360f 8745 ffff ffeb ae66 0f1f
@@ -50,7 +52,8 @@ Let's see some examples:
 0x00406ea5  3a75 18b8 0500 0000 83f8 060f 95c0 e9cd
 0x00406eb5  feff ff0f 1f84 0000 0000 0041 8801 4983
 0x00406ec5  c001 4983 c201 4983 c101 e9ec feff ff0f
-
+```
+```
 [0x08049790]> e zoom.byte=F
 [0x08049790]> pO // or pzF
 0x00000000  0000 0000 0000 0000 0000 0000 0000 0000
@@ -77,4 +80,3 @@ zoom.in = io.map
 zoom.maxsz = 512
 zoom.to = 0
 ```
-

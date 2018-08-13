@@ -89,4 +89,3 @@ r2 /bin/true
 [0x08048000]> cf /bin/true
 Compare 512/512 equal bytes
 ```
-
