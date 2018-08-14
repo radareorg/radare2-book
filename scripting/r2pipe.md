@@ -90,37 +90,21 @@ import (
   "fmt"
   "github.com/radare/r2pipe-go"
 )
+```
 
+```go
 func main() {
   r2p, err := r2pipe.NewPipe("/bin/ls")
   if err != nil {
     panic(err)
   }
   defer r2p.Close()
-
-  _, err = r2p.Cmd("aaaa")
-  if err != nil {
-    panic(err)
-  }
-  buf0, err := r2p.Cmd("S*")
-  if err != nil {
-    panic(err)
-  }
-  fmt.Println(buf0)
-
-  buf1, err := r2p.Cmd("pi 10")
+  buf1, err := r2p.Cmd("?E Hello World")
   if err != nil {
     panic(err)
   }
   fmt.Println(buf1)
-
-buf2, err := r2p.Cmd("px 64")
-  if err != nil {
-    panic(err)
-  }
-  fmt.Println(buf2)
 }
-
 ```
 
 Rust
@@ -137,19 +121,11 @@ r2pipe = "*"
 extern crate r2pipe;
 use r2pipe::R2Pipe;
 fn main() {
-  // Initialize a new pipe
   let mut r2p = open_pipe!(Some("/bin/ls")).unwrap();
-
-
-  // r2p.cmd() to send a command to r2
   println!("{:?}", r2p.cmd("?e Hello World"));
-
-  // r2p.cmdj() to send a command and parse the returned JSON
   let json = r2p.cmdj("ij").unwrap();
   println!("{}", json.pretty());
   println!("ARCH {}", json.find_path(&["bin","arch"]).unwrap());
-
-  // Closed and Done!
   r2p.close();
 }
 ```
@@ -236,30 +212,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using r2pipe;
+```
 
-namespace LocalExample
-{
-  class Program
-  {
-    static void Main(string[] args)
-    {
+```csharp
+namespace LocalExample {
+  class Program {
+    static void Main(string[] args) {
 #if __MonoCS__
-      using(IR2Pipe pipe = new R2Pipe("/bin/ls"))
+      using(IR2Pipe pipe = new R2Pipe("/bin/ls")) {
 #else
       using (IR2Pipe pipe = new R2Pipe(@"C:\Windows\notepad.exe",
-        @"C:\radare2\radare2.exe"))
+        @"C:\radare2\radare2.exe")) {
 #endif
-      {
         Console.WriteLine("Hello r2! " + pipe.RunCommand("?V"));
         Task<string> async = pipe.RunCommandAsync("?V");
         Console.WriteLine("Hello async r2!" + async.Result);
         QueuedR2Pipe qr2 = new QueuedR2Pipe(pipe);
-
         qr2.Enqueue(new R2Command("x", (string result) => {
              Console.WriteLine("Result of x:\n {0}", result); }));
         qr2.Enqueue(new R2Command("pi 10", (string result) => {
              Console.WriteLine("Result of pi 10:\n {0}", result); }));
-
         qr2.ExecuteCommands();
       }
     }
@@ -276,7 +248,7 @@ public class Test {
   public static void main (String[] args) {
     try {
       R2Pipe r2p = new R2Pipe ("/bin/ls");
-      //R2Pipe r2p = new R2Pipe ("http://cloud.rada.re/cmd/", true);
+      // new R2Pipe ("http://cloud.rada.re/cmd/", true);
       System.out.println (r2p.cmd ("pd 10"));
       System.out.println (r2p.cmd ("px 32"));
       r2p.quit();
@@ -316,14 +288,13 @@ public static int main (string[] args) {
   MainLoop loop = new MainLoop ();
   var r2p = new R2Pipe ("/bin/ls");
   r2p.cmd ("pi 4", (x) => {
-    stdout.printf ("DISASM((%s))\n", x);
+    stdout.printf ("Disassembly:\n%s\n", x);
     r2p.cmd ("ie", (x) => {
-      stdout.printf ("entry((%s))\n", x);
+      stdout.printf ("Entrypoint:\n%s\n", x);
       r2p.cmd ("q");
     });
   });
   ChildWatch.add (r2p.child_pid, (pid, status) => {
-    // Triggered when the child indicated by child_pid exits
     Process.close_pid (pid);
     loop.quit ();
   });
