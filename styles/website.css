@@ -1,13 +1,3 @@
-p,
-blockquote,
-ul,
-ol,
-dl,
-table,
-pre {
-  text-align: justify;
-}
-
 .markdown-section code, .markdown-section pre {
   line-height: 0.9;
 }

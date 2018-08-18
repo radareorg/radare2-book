@@ -1,164 +1,102 @@
-## Compilation on Windows
+## Windows
 
-### Meson (MSVC)
+Radare2 relies on the Meson build system generator to support compilation on all platforms, including Windows. Meson will generate a Visual Studio Solution, all the necessary project files, and wire up the Microsoft Visual C++ compiler for you.
 
-The most native way to compile radare2 under Windows is to use msvc with meson.
-Before compiling, note that we also provide binaries available [here](https://rada.re/r/down.html) or [here](https://radare.mikelloc.com/get/).
+> **info** You can download nightly binaries from https://bin.rada.re.
 
-#### Prerequisites
+### Prerequisites
 
-First you need **python3** to be installed on your computer. Once this is done, you can install the meson build system using `pip3 install meson` (with Administrator privileges).
-Now navigate to your Python installation folder, and copy the `meson.py` from `.\Scripts` subfolder into your radare2 folder.
+* Visual Studio 2015 (or higher)
+* Python 3
+* Meson
+* Git
 
-Meson also requires Ninja. You can download it from [here](https://ninja-build.org/). Copy `ninja.exe` binary into your radare2 folder.
+### Step-by-Step
 
-#### Compiling
+#### Install Visual Studio 2015 (or higher)
 
-To build r2 with meson, you have to follow the traditional meson way which consists in the following commands:
+Visual Studio must be installed with a Visual C++ compiler, supporting C++ libraries, and the appropriate Windows SDK for the target platform version.
 
-```
-meson build
-ninja -C build
-```
+* In the Visual Studio 2015 installer, ensure `Programming Languages > Visual C++` is selected
+* In the Visual Studio 2017+ installers, ensure the `Desktop development with C++` workload is selected
 
-Alternatively you can use the `meson.py` script, but it is going to be deprecated.
+If you need a copy of Visual Studio, the Community versions are free and work great.
 
-```
-python sys\meson.py
-```
+* [Download Visual Studio 2015 Community (registration required)](https://my.visualstudio.com/Downloads?q=Visual%20Studio%202015%20with%20Update%203)
+* [Download Visual Studio 2017 Community](https://visualstudio.microsoft.com/downloads/)
 
-You can also generate a visual studio project:
+#### Install Python 3 and Meson via Conda
+It is strongly recommended you install Conda — a Python environment management system — when working with Python on the Windows platform. This will isolate the Radare2 build environment from other installed Python versions and minimize potential conflicts.
 
-```
-python sys\meson.py --backend=vs2017 --project
-```
+##### Set Up Conda:
+1. Download the appropriate Conda (Python 3.x) for your platform (https://conda.io/miniconda.html)
+2. Install Conda with the recommended defaults
 
-#### Installing
+##### Create a Python Environment for Radare2
+Follow these steps to create and activate a Conda environment named *r2*. All instructions from this point on will assume this name matches your environment, but you may change this if desired.
 
-Now that you successfully compiled radare2, you might want to gather every executables and requirements into the same place. The command below will collect everything and put it into the `dist` folder.
+1. Start > Anaconda Prompt
+2. `conda create -n r2 python=3`
+3. `activate r2`
 
-```
-python sys\meson.py --install dist
-```
+Any time you wish to enter this environment, open the Anaconda Prompt and re-issue `activate r2`. Conversely, `deactivate` will leave the environment.
 
-You can now test your newly crafted radare2 binary easily:
+##### Install Meson
+> **tip** All versions of Meson at or below 0.47.1 have a bug that prevent normal use on Windows. Because there's no official release with the fixes available, you must install from sources. The following steps will walk you through this. We will update this documentation as soon as 0.48 is officially released.
 
-```
-E:\radare2>cd dist
-E:\radare2\dist>radare2.exe -v
-```
+1. Enter the Radare2 Conda environment, if needed (`activate r2`)
+2. Download https://github.com/mesonbuild/meson/archive/master.zip
+3. `pip install \path\to\downloaded\master.zip`
+4. Verify Meson is version 0.48 or higher (`meson -v`)
 
-### Mingw32 (deprecated)
+#### Install Git for Windows
+All Radare2 code is managed via the Git version control system and [hosted on GitHub](https://github.com/radare).
 
-The easy way to compile things for Windows is using Mingw32. The w32 builds distributed from the radare homepage are generated from a GNU/Linux box using Mingw32 and they are tested with Wine. Also keep in mind, that Mingw-w64 isn't tested, so no guarantees here.
+Follow these steps to install Git for Windows.
 
-Be sure to setup your Mingw32 to compile with **thread model: win32**, not **posix**, and target should be **mingw32**.
-Before the starting of compilation you need to setup git first, for a proper automatic fetching of capstone:
+1. Download Git for Windows (https://git-scm.com/download/win)
 
-```sh
-git config --global core.autocrlf true
-git config --global core.filemode false
-```
+  As you navigate the install wizard, we recommend you set these options when they appear:
+    * Use a TrueType font in all console windows
+    * Use Git from the Windows Command Prompt
+    * Use the native Windows Secure Channel library (instead of OpenSSL)
+    * Checkout Windows-style, commit Unix-style line endings (core.autocrlf=true)
+    * Use Windows' default console window (instead of Mintty)
 
-The following is an example of compiling with MinGW32 (you need to have installed **zip** for Windows):
+2. Close any previously open console windows and re-open them to ensure they receive the new PATH
+3. Ensure `git --version` works
 
-```sh
-CC=i486-mingw32-gcc ./configure
-make
-make w32dist
-zip -r w32-build.zip w32-build
-```
+#### Get Radare2 Code
+Follow these steps to clone the Radare2 git repository.
 
-This generates a native, 32-bit console application for Windows.
-The 'i486-mingw32-gcc' compiler is the one I have in my box, you will probably need to change this.
+1. In your Radare2 Conda environment, navigate to a location where the code will be saved and compiled. This location needs approximately **3-4GiB** of space
+2. Clone the repository with `git clone https://github.com/radare/radare2.git`
 
-To simplify the building under Windows/Mingw32 there is a script in radare2 sources:
-`sys/mingw32.bat`. Simply run it from the cmd.exe (or ConEmu/cmd.exe).
-It assumes that you have Mingw32 installed in `C:\Mingw` and Git in `C:\Program Files (x86)\Git`. If you want to use another installations, just set `MINGW_PATH` and `GIT_PATH` variables correspondingly:
+#### Compile Radare2 Code
+Follow these steps to compile a debug 32-bit (x86) version of Radare2. (If you want to build a 64-bit (x64) version of Radare2, replace all instances of `x86` with `x64`. Similarly, if you want to build a release version, replace all instances of `debug` with `release`.)
 
-```
-set MINGW_PATH=D:\Mingw32
-set "GIT_PATH=E:\Program and Stuff\Git"
-sys\mingw32.bat
-```
+Compiled binaries will be installed into the `dest` folder.
 
-Please, note, that this script should be run from radare2 directory.
+1. Enter the Radare2 Conda environment
+2. Navigate to the root of the Radare2 sources (`cd radare2`)
+3. Initialize Visual Studio tooling by executing the command that matches the version of Visual Studio installed on your machine:
 
+    * Visual Studio 2015:
+    `"%ProgramFiles(x86)%\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86`
 
-There is a script that automates process of detecting the crosscompiler toolchain configuration, and builds a zip file containing r2 programs and libraries that can be deployed on Windows or Wine:
+    * Visual Studio 2017:
+    `"%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Enterprise\VC\Auxiliary\Build\vcvars32.bat"`
 
-```sh
-sys/mingw32.sh
-```
+    * Visual Studio Preview:
+    `"%ProgramFiles(x86)%\Microsoft Visual Studio\Preview\Enterprise\VC\Auxiliary\Build\vcvars32.bat"`
 
-### Cygwin (deprecated)
+4. Generate the build system with Meson: `meson build --buildtype debug --backend vs2015 --prefix %cd%\dest`
+  
+  > **info** Meson currently requires `--prefix` to point to an absolute path. We use the %CD% pseudo-variable to get the absolute path to the current working directory.
 
-Cygwin is another possibility; however, issues related to Cygwin libraries can make debugging difficult. But using binary compiled for Cygwin will allow you to use Unicode in the Windows console, and to have 16 million colors.
+5. Start a build: `msbuild build\radare2.sln /p:Configuration=Debug /m`
+  
+  > **info** The `/m[axcpucount]` switch creates one MSBuild worker process per logical processor on your machine. You can specify a numeric value (e.g. `/m:2`) to limit the number of worker processes if needed. (This should not be confused with the Visual C++ Compiler switch `/MP`.)
 
-Note, Cygwin build require exactly the opposite git configuration, so setup git first, for a proper automatic fetching of capstone:
-```sh
-git config --global core.autocrlf false
-```
-
-Please, be sure to build radare2 from the same environment you're going to use r2 in. If you are going to use r2 in MinGW32 shell or cmd.exe — you should build r2 in the MinGW32 environment. And if you are going to use r2 in Cygwin — you have to build r2 from the Cygwin shell. Since Cygwin is more UNIX-compatible than MinGW, the radare2 supports more colors and Unicode symbols if build using the former one.
-
-### Mingw-W64 (deprecated)
-
- - Download the MSYS2 distribution from the official site: http://msys2.github.io/
- - Setup the proxy (if needed):
-
-```sh
-export http_proxy=<user>:<pass>@zz-wwwproxy-90-v:8080
-export https_proxy=$http_proxy
-export ftp_proxy=$http_proxy
-export rsync_proxy=$http_proxy
-export rsync_proxy=$http_proxy
-export no_proxy="localhost,127.0.0.1,localaddress"
-```
-
- - Update packages:
-
-```sh
-pacman --needed -Sy bash pacman pacman-mirrors msys2-runtime mingw-w64-x86_64-toolchain
-```
-
- - Close MSYS2, run it again from Start menu and update the rest with
-
-```sh
-pacman -Su
-```
-
- - Install the building essentials:
-
-```sh
-pacman -S git make zip gcc patch
-```
-
- - Compile the radare2:
-
-```sh
-./configure --with-ostype=windows ; make ; make w32dist
-```
-
-### Bindings
-
-To build radare2 bindings, you will need to install [Vala (valac) for Windows](https://wiki.gnome.org/Projects/Vala/ValaOnWindows)
-
-Then download [valabind](https://github.com/radare/valabind) and build it:
-
-```sh
-git clone https://github.com/radare/valabind
-cd valabind
-make
-make install
-```
-
-After you installed valabind, you can build radare2-bindings, for example for Python and Perl:
-
-```sh
-git clone https://github.com/radare/radare2-bindings
-cd radare2-bindings
-./configure --enable=python,perl
-make
-make install
-```
+6. Install into your destination folder: `meson install -C build --no-rebuild`
+7. Check your Radare2 version: `dest\bin\radare2.exe -v`
