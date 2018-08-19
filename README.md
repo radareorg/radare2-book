@@ -1,11 +1,17 @@
-# R2 "Book"
-
-* Proselint: [![Build Status](https://travis-ci.org/radare/radare2book.svg?branch=master)](https://travis-ci.org/radare/radare2book)
-
 # Welcome to the Radare2 Book
+
+[![Build Status](https://travis-ci.org/radare/radare2book.svg?branch=master)](https://travis-ci.org/radare/radare2book)
+
+This book is an updated version (initially by maijin) of the original
+radare1 book written by pancake. Which is actively maintained and
+updated by many contributors over the Internet.
+
+Check the Github site to add new contents or fix typos:
 
 * Github: https://github.com/radare/radare2book
 * Gitbook: https://www.gitbook.com/book/radare/radare2book/details
+
+Gitbook autogenerates HTML/PDF/EPUB/MOBIL versions in here:
 
 * Online: http://radare.gitbooks.io/radare2book/content/
 * PDF: https://www.gitbook.com/download/pdf/book/radare/radare2book
