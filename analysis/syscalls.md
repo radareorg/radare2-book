@@ -1,6 +1,8 @@
 ## Syscalls
 
-You can manually search for assembly that looks like a syscall operation. On my platform syscalls are called with the `svc` op, though yours might be `syscall`
+Radare2 allows manual search for assembly code looking like a syscall operation.
+For example on ARM platform usually they are represented by the `svc` instruction,
+on the others can be a different instructions, e.g. `syscall` on x86 PC.
 ```
 [0x0001ece0]> /c svc
 ...
@@ -9,7 +11,10 @@ You can manually search for assembly that looks like a syscall operation. On my 
 0x00018a0e   # 2: svc 0x82
 ...
 ```
-Syscalls detection is driven by `asm.os` `asm.bits` and `asm.arch` so these all need to be set up properly. Do `asl` to see if syscall support is set up properly and as you expect on your system, this is the list of syscalls radare supports for your platform.
+Syscalls detection is driven by `asm.os`, `asm.bits`, and `asm.arch`. Be sure
+to setup those configuration options accordingly. You can use `asl` command
+to check if syscalls' support is set up properly and as you expect.
+The command lists syscalls supported for your platform.
 ```
 [0x0001ece0]> asl
 ...
@@ -19,7 +24,8 @@ sd_softdevice_is_enabled = 0x80.18
 ...
 ```
 
-Radare will do a `/c` style search for you and annotate calls if you have an esil stack set up with for instance `aei` or `aeim`
+If you setup ESIL stack with `aei` or `aeim`, you can use `/as` command to search
+the addresses where particular syscalls were found and list them.
 ```
 [0x0001ece0]> aei
 [0x0001ece0]> /as
@@ -28,18 +34,24 @@ Radare will do a `/c` style search for you and annotate calls if you have an esi
 0x00018a0e sd_ble_gap_sec_info_reply
 ...
 ```
-this takes forever on my binaries so assuming I have permission set up on the maps, I search in executable code only with `/as @e:search.in=io.maps.x`
+To reduce searching time it is possible to [restrict the
+searching](../search_bytes/configurating_the_search.md) range for
+only executable segments or sections with `/as @e:search.in=io.maps.x`
 
-You can enable more output so it prints arguments for you for you in the Visual and along side dissaembled code by doing `asm.emu=1`
+Using the [ESIL emulation](emulation.md) radare2 can print syscall arguments
+in the disassembly output. To enable the linear (but very rough) emulation use
+`asm.emu` configuration variable:
 ```
-[0x0001ece0]> e asm.emu=1
+[0x0001ece0]> e asm.emu=true
 [0x0001ece0]> s 0x000187c2
 [0x000187c2]> pdf~svc
-| |   0x000187c2   svc 0x76  ; 118 = sd_ble_gap_disconnect
-[0x000187c2]> 
+   0x000187c2   svc 0x76  ; 118 = sd_ble_gap_disconnect
+[0x000187c2]>
 ```
 
-If you used `aae` (or `aaaa` which calls `aae`) it'll stick syscalls in a flagspace which is super handy to list or search them
+In case of executing `aae` (or `aaaa` which calls `aae`) command
+radare2 will push found syscalls to a special `syscall.` flagspace,
+which can be useful for automation purpose:
 ```
 [0x000187c2]> fs
 0    0 * imports
@@ -55,7 +67,7 @@ If you used `aae` (or `aaaa` which calls `aae`) it'll stick syscalls in a flagsp
 ...
 ```
 
-or you can interactively search through the strings/flags in the system with `V_`
+It also can be interactively navigated through within HUD mode (`V_`)
 ```
 0> syscall.sd_ble_gap_disconnect
  - 0x000187b2  syscall.sd_ble_gap_disconnect
