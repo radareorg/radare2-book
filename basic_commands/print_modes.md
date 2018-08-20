@@ -84,7 +84,6 @@ For more on the magical powers of `~` see the help in `?@?`, and the "Command Fo
 #### Show Hexadecimal Quad-words Dump (64 bits)
 
 ![pxq](print_modes_pxq.png)
-```
 
 ### Date/Time Formats
 
