@@ -34,7 +34,7 @@ To get `#!python` and much more, just build [radare2-bindings](https://github.co
 
 ## How to list Source code as in gdb list ?
 
-CL TODO, see [#1783](https://github.com/radare/radare2/issues/1783)
+`CL @ sym.main` - though the feature is highly experimental
 
 # shortcuts
 
