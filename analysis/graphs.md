@@ -80,13 +80,10 @@ Prints key-value strings representing the graph that was stored by sdb (radare2'
 
 ### R2 custom graph commands (e.g. `agf*`)
 
-	Prints r2 commands that would recreate the desired graph. The commands
-	to construct the graph are `agn [title] [body]` to add a node and `age
-	[title1] [title2]` to add an edge.  The `[body]` field can be expressed
-	in base64 to include special formatting (such as newlines).
+Prints r2 commands that would recreate the desired graph. The commands to construct the graph are `agn [title] [body]` to add a node and `age [title1] [title2]` to add an edge.
+The `[body]` field can be expressed in base64 to include special formatting (such as newlines).
 
-	To easily execute the printed commands, it is possible to prepend a dot
-	to the command (`.agf*`).
+To easily execute the printed commands, it is possible to prepend a dot to the command (`.agf*`).
 
 ### Web / image	(e.g. `agfw`)
 
