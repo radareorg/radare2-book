@@ -51,6 +51,7 @@
    * [Types](analysis/types.md)
    * [Calling Conventions](analysis/calling_conventions.md)
    * [Virtual Tables](analysis/vtables.md)
+   * [Syscalls](analysis/syscalls.md)
    * [Emulation](analysis/emulation.md)
    * [Symbols information](analysis/symbols.md)
    * [Signatures](signatures/zignatures.md)
