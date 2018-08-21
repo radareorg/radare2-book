@@ -1,4 +1,4 @@
-# Purpose
+# ragg2
 
 ragg2 stands for `radare2 egg`, this is the basic block to construct relocatable
 snippets of code to be used for injection in target processes when doing exploiting.

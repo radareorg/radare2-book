@@ -1,4 +1,4 @@
-## Graph commands
+# Graph commands
 
 When analyzing data it is usually handy to have different ways to represent it in order to get new perspectives to allow the analist to understand how different parts of the program interact.
 

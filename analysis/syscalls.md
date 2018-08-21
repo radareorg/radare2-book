@@ -1,4 +1,4 @@
-## Syscalls
+# Syscalls
 
 Radare2 allows manual search for assembly code looking like a syscall operation.
 For example on ARM platform usually they are represented by the `svc` instruction,

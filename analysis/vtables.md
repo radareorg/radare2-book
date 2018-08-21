@@ -1,3 +1,5 @@
+# Virtual Tables
+
 There is a basic support of virtual tables parsing (RTTI and others).
 The most important thing before you start to perform such kind of analysis
 is to check if the `anal.cpp.abi` option is set correctly, and change if needed.

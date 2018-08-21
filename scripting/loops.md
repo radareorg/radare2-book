@@ -1,3 +1,5 @@
+# Loops
+
 One of the most common task in automation is looping through something,
 there are multiple ways to do this in radare2.
 

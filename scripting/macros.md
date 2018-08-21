@@ -1,3 +1,5 @@
+# Macros
+
 Apart from simple sequencing and looping, radare2 allows to write
 simple macros, using this construction:
 ```

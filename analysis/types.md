@@ -1,3 +1,5 @@
+# Types
+
 Radare2 supports the C-syntax data types description.
 Those types are parsed by a C11-compatible parser and stored in
 the internal SDB, thus introspectable with `k` command.

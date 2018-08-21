@@ -5,7 +5,6 @@ To enter visual mode, use `V` command. To exit from it back to command line, pre
 
 ![Visual Mode](visualmode.png)
 
-
 ## print modes aka Panels
 
 The Visual mode uses "print modes" which are basically different panel that you can rotate. By default those are:

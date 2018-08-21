@@ -1,4 +1,4 @@
-## Code Analysis
+# Code Analysis
 
 Code analysis is a common technique used to extract information from assembly code.
 

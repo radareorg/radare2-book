@@ -1,4 +1,4 @@
-## Packaging plugin
+# Creating an r2pm package of the plugin
 
 As you remember radare2 has its own [packaging manager](../tools/r2pm/intro.md) and we can easily
 add newly written plugin for everyone to access.

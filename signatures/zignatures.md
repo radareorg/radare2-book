@@ -1,5 +1,8 @@
+# Signatures
+
 Radare2 has its own format of the signatures, allowing to both load/apply and
 create them on the fly. They are available under the `z` command namespace:
+
 ```
 [0x000100b0]> z?
 |Usage: z[*j-aof/cs] [args] # Manage zignatures
@@ -15,7 +18,6 @@ create them on the fly. They are available under the `z` command namespace:
 | zc           check zignatures at address
 | zs[?]        manage zignspaces
 ```
-
 To load the created signature file you need to load it from SDB file using `zo` command or
 from the compressed SDB file using `zoz` command.
 

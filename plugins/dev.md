@@ -1,4 +1,3 @@
-
 ## Implementing a new architecture
 
 radare2 splits the logic of a CPU into several modules. You should write more than one plugin to get full support for a specific arch. Let's see which are those:

@@ -1,4 +1,4 @@
-## Testing the plugin
+# Testing the plugin
 
 This plugin is used by rasm2 and r2. You can verify that the plugin is properly loaded with this command:
 ```
