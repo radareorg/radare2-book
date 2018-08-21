@@ -1,4 +1,4 @@
-# Welcome to the Radare2 Book
+# Introduction
 
 [![Build Status](https://travis-ci.org/radare/radare2book.svg?branch=master)](https://travis-ci.org/radare/radare2book)
 
