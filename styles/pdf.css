@@ -8,6 +8,10 @@ pre {
   text-align: justify;
 }
 
+.endnote {
+  text-align: center
+}
+
 .markdown-section code, .markdown-section pre {
   line-height: 0.9;
 }
@@ -18,6 +22,12 @@ img {
   margin-right: auto;
 }
 
-body {
-  margin-top: 10px;
+.markdown-section h1, h1
+{
+    margin-bottom: 0px;
+    margin-left: 25px;
+}
+
+.page {
+    padding: 0;
 }

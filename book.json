@@ -1,3 +1,24 @@
 {
-    "plugins": ["styled-blockquotes"]
+    "title": "The Official Radare2 Book",
+    "root": "./",
+    "readme": null,
+    "author": "pancake <pancake@nopcode.org>",
+    "plugins": ["styled-blockquotes", "layout"],
+    "introduction": {
+        "path": "./intro.md",
+        "title": "Introduction"
+    },
+    "pdf": {
+      "toc": true,
+      "____fontFamily": "Times New Roman",
+      "fontSize": 8.5,
+      "pageNumbers": false,
+      "paperSize": "a5",
+      "margin": {"top": 40, "left": 30, "right": 30, "bottom": 40 },
+      "local-test-margin": {"left": -30, "left": 0, "right": 0, "bottom": 0 },
+      "footerTemplate": "<center> _PAGENUM_ </center>"
+    },
+    "layout": {
+        "footerPath": "_layouts/ebook/pdf_footer.html"
+    }
 }
