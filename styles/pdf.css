@@ -12,6 +12,10 @@ pre {
   text-align: center
 }
 
+h1,h2,h3,h4 {
+  font-family: Arial !important;
+}
+
 .markdown-section code, .markdown-section pre {
   line-height: 0.9;
 }
