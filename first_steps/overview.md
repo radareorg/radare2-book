@@ -131,7 +131,11 @@ $ tty ; clear ; sleep 999999
 program=/bin/ls
 stdio=/dev/ttys010
 ```
-3 - Launch the following radare2 command: r2 -r foo.rr2 -d /bin/ls
+
+3 - Launch the following radare2 command:
+```
+r2 -r foo.rr2 -d /bin/ls
+```
 
 ### rax2
 
