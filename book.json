@@ -11,7 +11,8 @@
     "pdf": {
       "toc": true,
       "____fontFamily": "Times New Roman",
-      "fontSize": 8.5,
+      "fontFamily": "Palatino",
+      "fontSize": 9,
       "pageNumbers": false,
       "paperSize": "a5",
       "margin": {"top": 40, "left": 30, "right": 30, "bottom": 40 },
