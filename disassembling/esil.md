@@ -99,43 +99,43 @@ TRAP  | src | Trap | Trap signal |
 **$** | src | Syscall | syscall  |
 **$$** | src | Instruction address | Get address of current instruction<br>stack=instruction address |
 **==** | src,dst | Compare | stack = (dst == src) ; <br> update_eflags(dst - src) |
-**<** | src,dst | Smaller (signed comparison) | stack = (dst < src) ; <br> update_eflags(dst - src) | [0x0000000]> "ae 1,5,<" <br>0x0<br>[0x00000000]> "ae 5,5"<br>0x0"
-**<=** | src,dst | Smaller or Equal (signed comparison) | stack = (dst <= src) ; <br> update_eflags(dst - src) | [0x0000000]> "ae 1,5,<" <br>0x0<br>[0x00000000]> "ae 5,5"<br>0x1"
-**>** | src,dst | Bigger (signed comparison) | stack = (dst > src) ; <br> update_eflags(dst - src) | [0x00000000]> "ae 1,5,>"<br>0x1<br>[0x00000000]> "ae 5,5,>"<br>0x0
- **>=** | src,dst | Bigger or Equal (signed comparison) | stack = (dst >= src) ; <br> update_eflags(dst - src) | [0x00000000]> "ae 1,5,>="<br>0x1<br>[0x00000000]> "ae 5,5,>="<br>0x1
- **<<** | src,dst | Shift Left | stack = dst << src | [0x00000000]> "ae 1,1,<<"<br>0x2<br>[0x00000000]> "ae 2,1,<<"<br>0x4
- **>>** | src,dst | Shift Right | stack = dst >> src | [0x00000000]> "ae 1,4,>>"<br>0x2<br>[0x00000000]> "ae 2,4,>>"<br>0x1
- **<<<** | src,dst | Rotate Left | stack=dst ROL src | [0x00000000]> "ae 31,1,<<<"<br>0x80000000<br>[0x00000000]> "ae 32,1,<<<"<br>0x1
-**>>>** | src,dst | Rotate Right | stack=dst ROR src | [0x00000000]> "ae 1,1,>>>"<br>0x80000000<br>[0x00000000]> "ae 32,1,>>>"<br>0x1
-**&** | src,dst | AND | stack = dst & src | [0x00000000]> "ae 1,1,&"<br>0x1<br>[0x00000000]> "ae 1,0,&"<br>0x0<br>[0x00000000]>  "ae 0,1,&"<br>0x0<br>[0x00000000]> "ae 0,0,&"<br>0x0
-**&#x7c;** | src,dst | OR | stack = dst &#x7c; src | [0x00000000]> "ae 1,1,&#x7c;"<br>0x1<br>[0x00000000]> "ae 1,0,&#x7c;"<br>0x1<br>[0x00000000]> "ae 0,1,&#x7c;"<br>0x1<br>[0x00000000]> "ae 0,0,&#x7c;"<br>0x0
-**^** | src,dst | XOR | stack = dst ^src  | [0x00000000]> "ae 1,1,^"<br>0x0<br>[0x00000000]> "ae 1,0,^"<br>0x1<br>[0x00000000]> "ae 0,1,^"<br>0x1<br>[0x00000000]> "ae 0,0,^"<br>0x0
-**+** | src,dst | ADD | stack = dst + src | [0x00000000]> "ae 3,4,+"<br>0x7<br>[0x00000000]> "ae 5,5,+"<br>0xa
-**-** | src,dst | SUB | stack = dst - src | [0x00000000]> "ae 3,4,-"<br>0x1<br>[0x00000000]> "ae 5,5,-"<br>0x0<br>[0x00000000]> "ae 4,3,-"<br>0xffffffffffffffff
-**\*** | src,dst | MUL | stack = dst * src | [0x00000000]> "ae 3,4,\*"<br>0xc<br>[0x00000000]> "ae 5,5,\*"<br>0x19
-**/** | src,dst | DIV | stack = dst / src  | [0x00000000]> "ae 2,4,/"<br>0x2<br>[0x00000000]> "ae 5,5,/"<br>0x1<br>[0x00000000]> "ae 5,9,/"<br>0x1
-**%** | src,dst | MOD | stack = dst % src | [0x00000000]> "ae 2,4,%"<br>0x0<br>[0x00000000]> "ae 5,5,%"<br>0x0<br>[0x00000000]> "ae 5,9,%"<br>0x4
-**!** | src | NEG | stack = !!!src | [0x00000000]> "ae 1,!"<br>0x0<br>[0x00000000]> "ae 4,!"<br>0x0<br>[0x00000000]> "ae 0,!"<br>0x1<br>
-**++** | src | INC | stack = src++ | [0x00000000]> ar r_00=0;ar r_00<br>0x00000000<br>[0x00000000]> "ae r_00,++"<br>0x1<br>[0x00000000]> ar r_00<br>0x00000000<br>[0x00000000]> "ae 1,++"<br>0x2
-**--** | src | DEC | stack = src-- | [0x00000000]> ar r_00=5;ar r_00<br>0x00000005<br>[0x00000000]> "ae r_00,--"<br>0x4<br>[0x00000000]> ar r_00<br>0x00000005<br>[0x00000000]> "ae 5,--"<br>0x4
-**=** | src,reg | EQU | reg = src | [0x00000000]> "ae 3,r_00,="<br>[0x00000000]> aer r_00<br>0x00000003<br>[0x00000000]> "ae r_00,r_01,="<br>[0x00000000]> aer r_01<br>0x00000003
-**+=** | src,reg | ADD eq | reg = reg + src | [0x00000000]> ar r_01=5;ar r_00=0;ar r_00<br>0x00000000<br>[0x00000000]> "ae r_01,r_00,+="<br>[0x00000000]> ar r_00<br>0x00000005<br>[0x00000000]> "ae 5,r_00,+="<br>[0x00000000]> ar r_00<br>0x0000000a
-**-=** | src,reg | SUB eq | reg = reg - src | [0x00000000]> "ae r_01,r_00,-="<br>[0x00000000]> ar r_00<br>0x00000004<br>[0x00000000]> "ae 3,r_00,-="<br>[0x00000000]> ar r_00<br>0x00000001
-**\*=** | src,reg | MUL eq | reg = reg * src | [0x00000000]> ar r_01=3;ar r_00=5;ar r_00<br>0x00000005<br>[0x00000000]> "ae r_01,r_00,\*="<br>[0x00000000]> ar r_00<br>0x0000000f<br>[0x00000000]> "ae 2,r_00,\*="<br>[0x00000000]> ar r_00<br>0x0000001e
- **/=** | src,reg | DIV eq | reg = reg / src | [0x00000000]> ar r_01=3;ar r_00=6;ar r_00<br>0x00000006<br>[0x00000000]> "ae r_01,r_00,/="<br>[0x00000000]> ar r_00<br>0x00000002<br>[0x00000000]> "ae 1,r_00,/="<br>[0x00000000]> ar r_00<br>0x00000002
- **%=** | src,reg | MOD eq | reg = reg % src | [0x00000000]>  ar r_01=3;ar r_00=7;ar r_00<br> 0x00000007<br> [0x00000000]> "ae r_01,r_00,%="<br> [0x00000000]> ar r_00<br> 0x00000001<br> [0x00000000]>  ar r_00=9;ar r_00<br> 0x00000009<br> [0x00000000]> "ae 5,r_00,%="<br> [0x00000000]> ar r_00<br> 0x00000004
-**<<=** | src,reg | Shift Left eq | reg = reg << src | [0x00000000]> ar r_00=1;ar r_01=1;ar r_01<br>0x00000001<br>[0x00000000]> "ae r_00,r_01,<<="<br>[0x00000000]> ar r_01<br>0x00000002<br>[0x00000000]> "ae 2,r_01,<<="<br>[0x00000000]> ar r_01<br>0x00000008
-**>>=** | src,reg | Shift Right eq | reg = reg << src | [0x00000000]> ar r_00=1;ar r_01=8;ar r_01<br>0x00000008<br>[0x00000000]> "ae r_00,r_01,>>="<br>[0x00000000]> ar r_01<br>0x00000004<br>[0x00000000]> "ae 2,r_01,>>="<br>[0x00000000]> ar r_01<br>0x00000001
-**&=** | src,reg |  AND eq | reg = reg & src | [0x00000000]> ar r_00=2;ar r_01=6;ar r_01<br>0x00000006<br>[0x00000000]> "ae r_00,r_01,&="<br>[0x00000000]> ar r_01<br>0x00000002<br>[0x00000000]> "ae 2,r_01,&="<br>[0x00000000]> ar r_01<br>0x00000002<br>[0x00000000]> "ae 1,r_01,&="<br>[0x00000000]> ar r_01<br>0x00000000
-**&#x7c;=** | src,reg | OR eq| reg = reg &#x7c; src | [0x00000000]> ar r_00=2;ar r_01=1;ar r_01<br>0x00000001<br>[0x00000000]> "ae r_00,r_01,&#x7c;="<br>[0x00000000]> ar r_01<br>0x00000003<br>[0x00000000]> "ae 4,r_01,&#x7c;="<br>[0x00000000]> ar r_01<br>0x00000007
- **^=** | src,reg | XOR eq | reg = reg ^ src | [0x00000000]> ar r_00=2;ar r_01=0xab;ar r_01<br>0x000000ab<br>[0x00000000]> "ae r_00,r_01,^="<br>[0x00000000]> ar r_01<br>0x000000a9<br>[0x00000000]> "ae 2,r_01,^="<br>[0x00000000]> ar r_01<br>0x000000ab
-**++=** | reg | INC eq | reg = reg + 1 | [0x00000000]> ar r_00=4;ar r_00<br>0x00000004<br>[0x00000000]> "ae r_00,++="<br>[0x00000000]> ar r_00<br>0x00000005
-**--=** | reg | DEC eq | reg = reg - 1 | [0x00000000]> ar r_00=4;ar r_00<br>0x00000004<br>[0x00000000]> "ae r_00,--="<br>[0x00000000]> ar r_00<br>0x00000003
-**!=** | reg | NOT eq | reg = !reg | [0x00000000]> ar r_00=4;ar r_00<br>0x00000004<br>[0x00000000]> "ae r_00,!="<br>[0x00000000]> ar r_00<br>0x00000000<br>[0x00000000]> "ae r_00,!="<br>[0x00000000]> ar r_00<br>0x00000001
+**<** | src,dst | Smaller (signed comparison) | stack = (dst < src) ; <br> update_eflags(dst - src) | [0x0000000]> "ae 1,5,<" <br>0x0<br>&gt; "ae 5,5"<br>0x0"
+**<=** | src,dst | Smaller or Equal (signed comparison) | stack = (dst <= src) ; <br> update_eflags(dst - src) | [0x0000000]> "ae 1,5,<" <br>0x0<br>&gt; "ae 5,5"<br>0x1"
+**>** | src,dst | Bigger (signed comparison) | stack = (dst > src) ; <br> update_eflags(dst - src) | &gt; "ae 1,5,>"<br>0x1<br>&gt; "ae 5,5,>"<br>0x0
+ **>=** | src,dst | Bigger or Equal (signed comparison) | stack = (dst >= src) ; <br> update_eflags(dst - src) | &gt; "ae 1,5,>="<br>0x1<br>&gt; "ae 5,5,>="<br>0x1
+ **<<** | src,dst | Shift Left | stack = dst << src | &gt; "ae 1,1,<<"<br>0x2<br>&gt; "ae 2,1,<<"<br>0x4
+ **>>** | src,dst | Shift Right | stack = dst >> src | &gt; "ae 1,4,>>"<br>0x2<br>&gt; "ae 2,4,>>"<br>0x1
+ **<<<** | src,dst | Rotate Left | stack=dst ROL src | &gt; "ae 31,1,<<<"<br>0x80000000<br>&gt; "ae 32,1,<<<"<br>0x1
+**>>>** | src,dst | Rotate Right | stack=dst ROR src | &gt; "ae 1,1,>>>"<br>0x80000000<br>&gt; "ae 32,1,>>>"<br>0x1
+**&** | src,dst | AND | stack = dst & src | &gt; "ae 1,1,&"<br>0x1<br>&gt; "ae 1,0,&"<br>0x0<br>&gt;  "ae 0,1,&"<br>0x0<br>&gt; "ae 0,0,&"<br>0x0
+**&#x7c;** | src,dst | OR | stack = dst &#x7c; src | &gt; "ae 1,1,&#x7c;"<br>0x1<br>&gt; "ae 1,0,&#x7c;"<br>0x1<br>&gt; "ae 0,1,&#x7c;"<br>0x1<br>&gt; "ae 0,0,&#x7c;"<br>0x0
+**^** | src,dst | XOR | stack = dst ^src  | &gt; "ae 1,1,^"<br>0x0<br>&gt; "ae 1,0,^"<br>0x1<br>&gt; "ae 0,1,^"<br>0x1<br>&gt; "ae 0,0,^"<br>0x0
+**+** | src,dst | ADD | stack = dst + src | &gt; "ae 3,4,+"<br>0x7<br>&gt; "ae 5,5,+"<br>0xa
+**-** | src,dst | SUB | stack = dst - src | &gt; "ae 3,4,-"<br>0x1<br>&gt; "ae 5,5,-"<br>0x0<br>&gt; "ae 4,3,-"<br>0xffffffffffffffff
+**\*** | src,dst | MUL | stack = dst * src | &gt; "ae 3,4,\*"<br>0xc<br>&gt; "ae 5,5,\*"<br>0x19
+**/** | src,dst | DIV | stack = dst / src  | &gt; "ae 2,4,/"<br>0x2<br>&gt; "ae 5,5,/"<br>0x1<br>&gt; "ae 5,9,/"<br>0x1
+**%** | src,dst | MOD | stack = dst % src | &gt; "ae 2,4,%"<br>0x0<br>&gt; "ae 5,5,%"<br>0x0<br>&gt; "ae 5,9,%"<br>0x4
+**!** | src | NEG | stack = !!!src | &gt; "ae 1,!"<br>0x0<br>&gt; "ae 4,!"<br>0x0<br>&gt; "ae 0,!"<br>0x1<br>
+**++** | src | INC | stack = src++ | &gt; ar r_00=0;ar r_00<br>0x00000000<br>&gt; "ae r_00,++"<br>0x1<br>&gt; ar r_00<br>0x00000000<br>&gt; "ae 1,++"<br>0x2
+**--** | src | DEC | stack = src-- | &gt; ar r_00=5;ar r_00<br>0x00000005<br>&gt; "ae r_00,--"<br>0x4<br>&gt; ar r_00<br>0x00000005<br>&gt; "ae 5,--"<br>0x4
+**=** | src,reg | EQU | reg = src | &gt; "ae 3,r_00,="<br>&gt; aer r_00<br>0x00000003<br>&gt; "ae r_00,r_01,="<br>&gt; aer r_01<br>0x00000003
+**+=** | src,reg | ADD eq | reg = reg + src | &gt; ar r_01=5;ar r_00=0;ar r_00<br>0x00000000<br>&gt; "ae r_01,r_00,+="<br>&gt; ar r_00<br>0x00000005<br>&gt; "ae 5,r_00,+="<br>&gt; ar r_00<br>0x0000000a
+**-=** | src,reg | SUB eq | reg = reg - src | &gt; "ae r_01,r_00,-="<br>&gt; ar r_00<br>0x00000004<br>&gt; "ae 3,r_00,-="<br>&gt; ar r_00<br>0x00000001
+**\*=** | src,reg | MUL eq | reg = reg * src | &gt; ar r_01=3;ar r_00=5;ar r_00<br>0x00000005<br>&gt; "ae r_01,r_00,\*="<br>&gt; ar r_00<br>0x0000000f<br>&gt; "ae 2,r_00,\*="<br>&gt; ar r_00<br>0x0000001e
+ **/=** | src,reg | DIV eq | reg = reg / src | &gt; ar r_01=3;ar r_00=6;ar r_00<br>0x00000006<br>&gt; "ae r_01,r_00,/="<br>&gt; ar r_00<br>0x00000002<br>&gt; "ae 1,r_00,/="<br>&gt; ar r_00<br>0x00000002
+ **%=** | src,reg | MOD eq | reg = reg % src | &gt;  ar r_01=3;ar r_00=7;ar r_00<br> 0x00000007<br> &gt; "ae r_01,r_00,%="<br> &gt; ar r_00<br> 0x00000001<br> &gt;  ar r_00=9;ar r_00<br> 0x00000009<br> &gt; "ae 5,r_00,%="<br> &gt; ar r_00<br> 0x00000004
+**<<=** | src,reg | Shift Left eq | reg = reg << src | &gt; ar r_00=1;ar r_01=1;ar r_01<br>0x00000001<br>&gt; "ae r_00,r_01,<<="<br>&gt; ar r_01<br>0x00000002<br>&gt; "ae 2,r_01,<<="<br>&gt; ar r_01<br>0x00000008
+**>>=** | src,reg | Shift Right eq | reg = reg << src | &gt; ar r_00=1;ar r_01=8;ar r_01<br>0x00000008<br>&gt; "ae r_00,r_01,>>="<br>&gt; ar r_01<br>0x00000004<br>&gt; "ae 2,r_01,>>="<br>&gt; ar r_01<br>0x00000001
+**&=** | src,reg |  AND eq | reg = reg & src | &gt; ar r_00=2;ar r_01=6;ar r_01<br>0x00000006<br>&gt; "ae r_00,r_01,&="<br>&gt; ar r_01<br>0x00000002<br>&gt; "ae 2,r_01,&="<br>&gt; ar r_01<br>0x00000002<br>&gt; "ae 1,r_01,&="<br>&gt; ar r_01<br>0x00000000
+**&#x7c;=** | src,reg | OR eq| reg = reg &#x7c; src | &gt; ar r_00=2;ar r_01=1;ar r_01<br>0x00000001<br>&gt; "ae r_00,r_01,&#x7c;="<br>&gt; ar r_01<br>0x00000003<br>&gt; "ae 4,r_01,&#x7c;="<br>&gt; ar r_01<br>0x00000007
+ **^=** | src,reg | XOR eq | reg = reg ^ src | &gt; ar r_00=2;ar r_01=0xab;ar r_01<br>0x000000ab<br>&gt; "ae r_00,r_01,^="<br>&gt; ar r_01<br>0x000000a9<br>&gt; "ae 2,r_01,^="<br>&gt; ar r_01<br>0x000000ab
+**++=** | reg | INC eq | reg = reg + 1 | &gt; ar r_00=4;ar r_00<br>0x00000004<br>&gt; "ae r_00,++="<br>&gt; ar r_00<br>0x00000005
+**--=** | reg | DEC eq | reg = reg - 1 | &gt; ar r_00=4;ar r_00<br>0x00000004<br>&gt; "ae r_00,--="<br>&gt; ar r_00<br>0x00000003
+**!=** | reg | NOT eq | reg = !reg | &gt; ar r_00=4;ar r_00<br>0x00000004<br>&gt; "ae r_00,!="<br>&gt; ar r_00<br>0x00000000<br>&gt; "ae r_00,!="<br>&gt; ar r_00<br>0x00000001
 --- | --- | --- | --- | ----------------------------------------------
-=[]<br>=[\*]<br>=[1]<br>=[2]<br>=[4]<br>=[8] | src,dst | poke |\*dst=src | [0x00010000]> "ae 0xdeadbeef,0x10000,=[4],"<br>[0x00010000]> pxw 4@0x10000<br>0x00010000  0xdeadbeef                                ....<br>[0x00010000]> "ae 0x0,0x10000,=[4],"<br>[0x00010000]> pxw 4@0x10000<br>0x00010000  0x00000000
-[]<br>[\*]<br>[1]<br>[2]<br>[4]<br>[8] | src | peek | stack=\*src | [0x00010000]> w test@0x10000<br>[0x00010000]> "ae 0x10000,[4],"<br>0x74736574<br>[0x00010000]> ar r_00=0x10000<br>[0x00010000]> "ae r_00,[4],"<br>0x74736574
-&#x7c;=[]<br>&#x7c;=[1]<br>&#x7c;=[2]<br>&#x7c;=[4]<br>&#x7c;=[8] | reg | nombre | code | [0x00000000]> <br>[0x00000000]>
+=[]<br>=[\*]<br>=[1]<br>=[2]<br>=[4]<br>=[8] | src,dst | poke |\*dst=src | <br>&gt; "ae 0xdeadbeef,0x10000,=[4],"<br><br>&gt; pxw 4@0x10000<br>0x00010000  0xdeadbeef                                ....<br><br>&gt; "ae 0x0,0x10000,=[4],"<br><br>&gt; pxw 4@0x10000<br>0x00010000  0x00000000
+[]<br>[\*]<br>[1]<br>[2]<br>[4]<br>[8] | src | peek | stack=\*src | <br>&gt; w test@0x10000<br><br>&gt; "ae 0x10000,[4],"<br>0x74736574<br><br>&gt; ar r_00=0x10000<br><br>&gt; "ae r_00,[4],"<br>0x74736574
+&#x7c;=[]<br>&#x7c;=[1]<br>&#x7c;=[2]<br>&#x7c;=[4]<br>&#x7c;=[8] | reg | nombre | code | &gt; <br>&gt;
 SWAP |  | Swap | Swap two top elements | SWAP
 PICK | n | Pick | Pick nth element<br> from the top of the stack | 2,PICK
 RPICK | m | Reverse Pick | Pick nth element<br> from the base of the stack | 0,RPICK
@@ -295,8 +295,7 @@ What to do with them? What about bit arithmetics if use variables instead of reg
 
 ### Floating Point Support
 
-
-_TODO_
+At the moment of writing this, ESIL does not yet supports FPU. But you can implement support for unsupported instructions using r2pipe. Eventually we will get proper support for multimedia and floating point.
 
 ### Handling x86 REP Prefix in ESIL
 
