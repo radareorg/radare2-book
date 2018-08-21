@@ -2,7 +2,7 @@
 
 Radare2 relies on the Meson build system generator to support compilation on all platforms, including Windows. Meson will generate a Visual Studio Solution, all the necessary project files, and wire up the Microsoft Visual C++ compiler for you.
 
-> **info** You can download nightly binaries from https://bin.rada.re.
+> **tip** You can download nightly binaries from https://bin.rada.re.
 
 ### Prerequisites
 
@@ -92,11 +92,11 @@ Compiled binaries will be installed into the `dest` folder.
 
 4. Generate the build system with Meson: `meson build --buildtype debug --backend vs2015 --prefix %cd%\dest`
   
-  > **info** Meson currently requires `--prefix` to point to an absolute path. We use the %CD% pseudo-variable to get the absolute path to the current working directory.
+    Meson currently requires `--prefix` to point to an absolute path. We use the %CD% pseudo-variable to get the absolute path to the current working directory.
 
 5. Start a build: `msbuild build\radare2.sln /p:Configuration=Debug /m`
   
-  > **info** The `/m[axcpucount]` switch creates one MSBuild worker process per logical processor on your machine. You can specify a numeric value (e.g. `/m:2`) to limit the number of worker processes if needed. (This should not be confused with the Visual C++ Compiler switch `/MP`.)
+    The `/m[axcpucount]` switch creates one MSBuild worker process per logical processor on your machine. You can specify a numeric value (e.g. `/m:2`) to limit the number of worker processes if needed. (This should not be confused with the Visual C++ Compiler switch `/MP`.)
 
 6. Install into your destination folder: `meson install -C build --no-rebuild`
 7. Check your Radare2 version: `dest\bin\radare2.exe -v`
