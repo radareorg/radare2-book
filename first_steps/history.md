@@ -1,8 +1,8 @@
 ## History
 
-In 2006, Sergi Àlvarez (aka pancake), was working as a forensic analyst. And, by license he wasn't allowed to use that private software for his personal needs, so he decided to write a small tool, an hexadecimal editor with very basic functionalities:
+In 2006, Sergi Àlvarez (aka pancake), was working as a forensic analyst. As long as he wasn't allowed to use private software for his personal needs, he decided to write a small tool, an hexadecimal editor with very basic characteristics:
 
-* be extremely portable (command line, c, small)
+* be extremely portable (unix friendly, command line, c, small)
 * open disk devices, this is using 64bit offsets
 * search for a string or hexpair
 * review and dump the results to disk
