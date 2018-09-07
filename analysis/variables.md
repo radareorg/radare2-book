@@ -1,7 +1,7 @@
 # Managing variables
 
 Radare2 allows managing local variables, no matter their location, stack or registers.
-The variables autoanalysis is enabled by default but can be disabled with `anal.vars`
+The variables' auto analysis is enabled by default but can be disabled with `anal.vars`
 configuration option.
 
 The main variables commands are located in `afv` namespace:
@@ -22,7 +22,7 @@ debugger
 | afv-([name])                remove all or given var
 ```
 
-`afvr`, `afvb` and `afvs` commands are uniform but allows manipulation of
+`afvr`, `afvb` and `afvs` commands are uniform but allow manipulation of
 register-based arguments and variables, BP/FP-based arguments and variables,
 and SP-based arguments and variables respectively.
 If we check the help for `afvr` we will get the way two others commands works too:
@@ -38,7 +38,7 @@ If we check the help for `afvr` we will get the way two others commands works to
 | afvrs [reg] [addr]          define argument set reference
 ```
 
-Like many other things variables detection performed by radare2 automatically, but results
+Like many other things variables detection is performed by radare2 automatically, but results
 can be changed with those arguments/variables control commands. This kind of analysis
 relies heavily on preloaded function prototypes and the calling-convention, thus loading symbols
 can improve it. Moreover, after changing something we can rerun variables analysis with
@@ -81,7 +81,7 @@ var int local_48h @ rsp+0x48
 ```
 
 Less commonly used feature, which is still under heavy development - distinction between
-variables being read and write. You can list those being read with `afvR` command and those
+variables being read and written. You can list those being read with `afvR` command and those
 being written with `afvW` command. Both commands provide a list of the places those operations
 are performed:
 
@@ -167,9 +167,9 @@ Let's see an example of this with a simple [hello_world](https://github.com/rada
 | 0x000007cf  call sym.imp.strlen         ; size_t strlen(const char *s)
 ```
 
-It also extracts type information from format string like `printf ("fmt : %s , %u , %d", ...)`, the format specifications are extracted from `anal/d/spec.sdb`
+It also extracts type information from format strings like `printf ("fmt : %s , %u , %d", ...)`, the format specifications are extracted from `anal/d/spec.sdb`
 
-You could create a new profile for specifying set of format chars depending upon different libraries/operating systems/programming languages like this :
+You could create a new profile for specifying a set of format chars depending on different libraries/operating systems/programming languages like this :
 
 ```
 win=spec
@@ -177,4 +177,4 @@ spec.win.u32=unsigned int
 ```
 Then change your default specification to newly created one using this config variable `e anal.spec = win`
 
-For more information about primitive and user-defined types support in radare2 refer [types](types.md) chapter.
+For more information about primitive and user-defined types support in radare2 refer to [types](types.md) chapter.

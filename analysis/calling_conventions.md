@@ -1,7 +1,7 @@
 # Calling Conventions
 
 Radare2 uses calling conventions to help in identifying function formal arguments and return types. 
-It is used also as guide for basic function prototype and type propagation.
+It is used also as a guide for basic function prototype and type propagation.
 
 ```
 [0x00000000]> afc?

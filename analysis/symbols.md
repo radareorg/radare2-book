@@ -1,13 +1,13 @@
 # Symbols
 
-Radare2 automatically parsing available imports and exports sections in the binary,
-but moreover, it can load additional debugging information if presented.
+Radare2 automatically parses available imports and exports sections in the binary,
+but moreover, it can load additional debugging information if present.
 Two main formats are supported: DWARF and PDB (for Windows binaries).
-Note, that unlike many tools radare2 doesn't rely on Windows API to parse
+Note that, unlike many tools radare2 doesn't rely on Windows API to parse
 PDB files, thus they can be loaded on any other supported platform - e.g.
 Linux or OS X.
 
-DWARF debuginfo loads automatically by default because usually it's stored
+DWARF debug info loads automatically by default because usually it's stored
 right in the executable file. PDB is a bit of a different beast - it is always
 stored as a separate binary, thus the different logic of handling it.
 
@@ -30,7 +30,7 @@ could it be handy?
 Because those PDB files are stored as "cab" archives on the server, `pdb.extract=1`
 says to automatically extract them.
 
-Note, that for automatical downloading to work you need "cabextract" tool, and wget/curl installed.
+Note that for the automatic downloading to work you need "cabextract" tool, and wget/curl installed.
 
 Sometimes you don't need to do that from the radare2 itself, thus - two handy
 rabin2 options:
@@ -59,7 +59,7 @@ manipulated by the `id` commands:
 ```
 
 Where `idpi` is basically the same as `rabin2 -P`.
-Note, that `idp` can be also used not only in the static analysis mode, but also
+Note that `idp` can be also used not only in the static analysis mode, but also
 in the debugging mode, even if connected via WinDbg.
 
 For simplifying the loading PDBs, especially for the processes with many linked DLLs,

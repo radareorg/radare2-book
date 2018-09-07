@@ -1,6 +1,6 @@
 # Graph commands
 
-When analyzing data it is usually handy to have different ways to represent it in order to get new perspectives to allow the analist to understand how different parts of the program interact.
+When analyzing data it is usually handy to have different ways to represent it in order to get new perspectives to allow the analyst to understand how different parts of the program interact.
 
 Representing basic block edges, function calls, string references as graphs show a very clear view of this information.
 
