@@ -25,7 +25,7 @@ If you have local modifications of the source, you can revert them (and lose the
 ```
 $ git reset --hard HEAD
 ```
-Or send me a patch:
+Or send us a patch:
 ```
 $ git diff > radare-foo.patch
 ```

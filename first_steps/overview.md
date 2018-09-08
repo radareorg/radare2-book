@@ -6,9 +6,9 @@ This chapter will give you a quick understanding of them, but you can check the 
 
 ### radare2
 
-The main tool of the whole framework. Using the core of the hexadecimal editor and debugger. radare2 allows you to open a number of input/output sources as if they were simple, plain files, including disks, network connections, kernel drivers, processes under debugging, and so on.
+The main tool of the whole framework. It uses the core of the hexadecimal editor and debugger. radare2 allows you to open a number of input/output sources as if they were simple, plain files, including disks, network connections, kernel drivers, processes under debugging, and so on.
 
-It implements an advanced command line interface for moving around a file, analyzing data, disassembling, binary patching, data comparison, searching, replacing, visualizing. It can be scripted with a variety of languages, including Python, Ruby, JavaScript, Lua, Perl.
+It implements an advanced command line interface for moving around a file, analyzing data, disassembling, binary patching, data comparison, searching, replacing and visualizing. It can be scripted with a variety of languages, including Python, Ruby, JavaScript, Lua and Perl.
 
 ### rabin2
 
