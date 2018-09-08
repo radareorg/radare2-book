@@ -2,7 +2,7 @@
 
 Radare2 supports the C-syntax data types description.
 Those types are parsed by a C11-compatible parser and stored in
-the internal SDB, thus introspectable with `k` command.
+the internal SDB, thus are introspectable with `k` command.
 
 Most of the related commands are located in `t` namespace:
 
@@ -33,7 +33,7 @@ Most of the related commands are located in `t` namespace:
 | tt[?]           List all loaded typedefs
 ```
 
-Note, that the basic (atomic) types are not those from C standard -
+Note that the basic (atomic) types are not those from C standard -
 not `char`, `_Bool`, or `short`. Because those types can be different
 from one platform to another, radare2 uses `definite` types like as
 `int8_t` or `uint64_t` and will convert `int` to `int32_t` or `int64_t`
@@ -150,7 +150,7 @@ Moreover, the link will be shown in the disassembly output or visual mode:
  0x00005202      mov rbp, rsp
 ```
 
-Once the struct is linked, radare2 tries to propagate structure offset in the function at current offset, to run this analysis on whole program or at any targeted functions after all structs is linked you have `taa` command:
+Once the struct is linked, radare2 tries to propagate structure offset in the function at current offset, to run this analysis on whole program or at any targeted functions after all structs are linked you have `taa` command:
 
 ```
 [0x00000000]> ta?
@@ -216,7 +216,7 @@ the current address:
 
 ### Managing enums
 
-* Printing all feilds in enum using `te` command
+* Printing all fields in enum using `te` command
 
 ```
 [0x00000000]> "td enum Foo {COW=1,BAR=2};"
@@ -308,8 +308,8 @@ type.LPFILETIME.size=32
 type.LPFILETIME.pointto=_FILETIME
 ```
 
-This last field is not mandatory because some times the data structure
-internals will be property, and we will not have a clean representation for it.
+This last field is not mandatory because sometimes the data structure
+internals will be proprietary, and we will not have a clean representation for it.
 
 There is also one more optional entry:
 

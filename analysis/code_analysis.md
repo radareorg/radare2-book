@@ -2,7 +2,7 @@
 
 Code analysis is a common technique used to extract information from assembly code.
 
-Radare have different code analysis techniques implemented in the core and available in different commands.
+Radare has different code analysis techniques implemented in the core and available in different commands.
 
 As long as the whole functionalities of r2 are available with the API as well as using commands. This gives you the ability to implement your own analysis loops using any programming language, even with r2 oneliners, shellscripts, or analysis or core native plugins.
 
@@ -73,10 +73,10 @@ There is also a mapping of those commands to the r2 CLI options: `r2 -A`, `r2 -A
 It is a common sense that completely automated analysis can produce non sequitur results, thus
 radare2 provides separate commands for the particular stages of the analysis allowing fine-grained
 control of the analysis process. Moreover, there is a treasure trove of configuration variables
-for controlling the analysis outcomes. You can find them in `anal.*` and `emu.*` cfg variables
-namespaces.
+for controlling the analysis outcomes. You can find them in `anal.*` and `emu.*`
+cfg variables' namespaces.
 
-One of the most important "basic" analysis commands is a set of `af` subcommands. `af` means
+One of the most important "basic" analysis commands is the set of `af` subcommands. `af` means
 "analyze function". Using this command you can either allow automatic analysis of the particular
 function or perform completely manual one.
 
@@ -203,7 +203,7 @@ on x86_64 platform. It should be specified _before_ any analysis commands.
 
 ## Configuration
 
-Radare2 allows to changing the behavior of almost any analysis stages or commands.
+Radare2 allows to change the behavior of almost any analysis stages or commands.
 There are different kinds of the configuration options:
 
  - Flow control
@@ -245,7 +245,7 @@ disabled to save the time and memory when analysing big binaries.
 - `anal.refstr` - search for strings in data references
 - `anal.strings` - search for strings and creating references
 
-Note that strings references control disabled by default because it increases analysis times.
+Note that strings references control is disabled by default because it increases the analysis time.
 
 ### Analysis ranges
 
@@ -259,7 +259,7 @@ more - see `e anal.in=?` for the complete list)
 
 ### Jump tables
 
-Jump tables are being one of the trickiest targets in binary reverse engineering. There are hundreds
+Jump tables are one of the trickiest targets in binary reverse engineering. There are hundreds
 of different types, the end result depending on the compiler/linker and LTO stages of optimization.
 Thus radare2 allows enabling some experimental jump tables detection algorithms using `anal.jmptbl`
 option. Eventually, algorithms moved into the default analysis loops once they start to work on
@@ -329,7 +329,7 @@ string. These commands are located under `ah` namespace:
 | ahS jz             set asm.syntax=jz for this opcode
 ```
 
-One of the most common case is to set a particular numeric base for immediates:
+One of the most common cases is to set a particular numeric base for immediates:
 
 ```
 [0x00003d54]> ahi?
