@@ -14,7 +14,7 @@ $ r2 -c=H /bin/ls
 
 After 3 years of private development, Hugo Teso; the author of Bokken (python-gtk gui of r2) released to the public another frontend of r2, this time written in c++ and qt, which has been very welcome by the community.
 
-This GUI was named Iaito, but as long as he prefered not to keep it maintaining it, Xarkes decided to fork it under the name of Cutter (name voted by the community) and to lead the project. This is how it looks:
+This GUI was named Iaito, but as long as he prefered not to keep it maintaining it, Xarkes decided to fork it under the name of Cutter (name voted by the community), and to lead the project. This is how it looks:
 
 * [https://github.com/radareorg/cutter](https://github.com/radareorg/cutter).
 
