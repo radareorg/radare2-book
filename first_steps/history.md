@@ -13,7 +13,7 @@ After that, pancake decided to extend the tool to have a pluggable io to be able
 
 The project has since then evolved to provide a complete framework for analyzing binaries, while making use of basic UNIX concepts. Those concepts include the famous "everything is a file", "small programs that interact using stdin/stdout", and "keep it simple" paradigms.
 
-The need for scripting showed up the fragility of the initial design: a monolithic tool made the api hard to use, and so a deep refactoring was needed. In 2009 radare2 was born as a fork of radare1. The refactor added flexibility and dynamic features. This enabled a much better integration, paving the way to use r2 from different programming languages.
+The need for scripting showed up the fragility of the initial design: a monolithic tool made the api hard to use, and so a deep refactoring was needed. In 2009 radare2 (r2) was born as a fork of radare1. The refactor added flexibility and dynamic features. This enabled a much better integration, paving the way to use r2 [from different programming languages](https://github.com/radare/radare2-bindings). Later on, the [r2pipe API](https://github.com/radare/radare2-r2pipe) allowed the access to radare2 via pipes from any language.
 
 What started as a one-man project, with some eventual contributions, gradually evolved into a big community-based project around 2014. The number of users was growing fast, and the author -and main developer- had to switch roles from coder to manager, in order to integrate the work of the different developers that were joining the project.
 
