@@ -1,6 +1,6 @@
 # ESIL
 
-ESIL stands for 'Evaluable Strings Intermediate Language'. It aims to describe a [Forth](https://en.wikipedia.org/wiki/Forth_(programming_language) )-like representation for every target CPU opcode semantics. ESIL representations can be evaluated (interpreted) in order to emulate individual instructions. Each command of an ESIL expression is separated by a comma. Its virtual machine can be described as this:
+ESIL stands for 'Evaluable Strings Intermediate Language'. It aims to describe a [Forth](https://en.wikipedia.org/wiki/Forth_(programming_language)-like representation for every target CPU opcode semantics. ESIL representations can be evaluated (interpreted) in order to emulate individual instructions. Each command of an ESIL expression is separated by a comma. Its virtual machine can be described as this:
 ```
    while ((word=haveCommand())) {
      if (word.isOperator()) {
@@ -25,9 +25,9 @@ esp -= 4
 We can see that this corresponds to the x86 instruction `push ebp`! Isn't that cool?
 The aim is to be able to express most of the common operations performed by CPUs, like binary arithmetic operations, memory loads and stores, processing syscalls. This way if we can transform the instructions to ESIL we can see what a program does while it is running even for the most cryptic architectures you definitely don't have a device to debug on for.
 
-## Use ESIL
+## Using ESIL
 
-Using visual mode is great to inspect the esil evaluations.
+r2's visual mode is great to inspect the ESIL evaluations.
 
 There are 2 environment variables that are important for watching what a program does:
 ```
@@ -36,7 +36,7 @@ There are 2 environment variables that are important for watching what a program
 [0x00000000]> e asm.emu.str = true  # for version 2.3 and earlier
 ```
 
-`asm.emu` tells r2 if you want ESIL information to be displayed. If it is set to true you will see comments appear to the right of your disassembly that tell you how the contents of registers and memory addresses are changed by the current instruction. For example if you have an instruction that subtracts a value from a register it tells you what the value was before and what it becomes after. This is super useful so you don't have to sit there yourself and track which value goes where.
+`asm.emu` tells r2 if you want ESIL information to be displayed. If it is set to true, you will see comments appear to the right of your disassembly that tell you how the contents of registers and memory addresses are changed by the current instruction. For example, if you have an instruction that subtracts a value from a register it tells you what the value was before and what it becomes after. This is super useful so you don't have to sit there yourself and track which value goes where.
 
 One problem with this is that it is a lot of information to take in at once and sometimes you simply don't need it. r2 has a nice compromise for this. That is what the `asm.emu.str` variable is for (`asm.emustr` on 2.2 and earlier). Instead of this super verbose output with every register value, this only adds really useful information to the output, e.g., strings that are found at addresses a program uses or whether a jump is likely to be taken or not.
 
@@ -80,7 +80,7 @@ ADDR BREAK
 [0x00001019]>
 ```
 
-* "ar" : Show/modify ESIL registry
+* "ar" : Show/modify ESIL registry.
 
 ```
 [0x00001ec7]> ar r_00 = 0x1035
@@ -148,7 +148,7 @@ TODO | | To Do | Stops execution<br> (reason: ESIL expression not completed) | T
 
 ### ESIL Flags
 
-ESIL VM has an internal state flags that are read only and can be used to export those values to the underlying target CPU flags. It is because the ESIL VM always calculates all flag changes, while target CPUs only update flags under certain conditions or at specific instructions.
+ESIL VM has an internal state flags that are read-only and can be used to export those values to the underlying target CPU flags. It is because the ESIL VM always calculates all flag changes, while target CPUs only update flags under certain conditions or at specific instructions.
 
 Internal flags are prefixed with `$` character.
 
@@ -176,8 +176,6 @@ xor eax, eax    ->    0,eax,=,1,zf,=
 Memory access is defined by brackets operation:
 ```
 mov eax, [0x80480]   ->   0x80480,[],eax,=
-
-
 ```
 Default operand size is determined by size of operation destination.
 ```
@@ -209,7 +207,7 @@ Syscalls need special treatment. They are indicated by '$' at the beginning of a
 
 ## Arguments Order for Non-associative Operations
 
-As discussed on IRC, current implementation works like this:
+As discussed on IRC, the current implementation works like this:
 
 ```
 a,b,-      b - a
@@ -221,7 +219,7 @@ This approach is more readable, but it is less stack-friendly.
 
 NOPs are represented as empty strings. As it was said previously, syscalls are marked by '$' command. For example, '0x80,$'. It delegates emulation from the ESIL machine to a callback which implements syscalls for a specific OS/kernel.
 
-Traps are implemented with the `<code>,TRAP` command. They are used to throw exceptions for invalid instructions, division by zero, memory read error, or any other needed by specific architectures.
+Traps are implemented with the `TRAP` command. They are used to throw exceptions for invalid instructions, division by zero, memory read error, or any other needed by specific architectures.
 
 ### Quick Analysis
 
@@ -265,7 +263,7 @@ Properties of the VM variables:
 
 3. Register names have no specific syntax. They are just strings.
 
-4. Numbers can be specified in any base supported by RNum (dec, hex, oct, binary ...)
+4. Numbers can be specified in any base supported by RNum (dec, hex, oct, binary ...).
 
 5. Each ESIL backend should have an associated RReg profile to describe the ESIL register specs.
 
@@ -276,7 +274,7 @@ What to do with them? What about bit arithmetics if use variables instead of reg
 ### Arithmetics
 
 1. ADD ("+")
-2. MUL ("*")
+2. MUL ("\*")
 3. SUB ("-")
 4. DIV ("/")
 5. MOD ("%")
@@ -293,9 +291,9 @@ What to do with them? What about bit arithmetics if use variables instead of reg
 7. ROR  ">>>"
 8. NEG  "!"
 
-### Floating Point Support
+### Floating Point Unit Support
 
-At the moment of writing this, ESIL does not yet supports FPU. But you can implement support for unsupported instructions using r2pipe. Eventually we will get proper support for multimedia and floating point.
+At the moment of this writing, ESIL does not yet support FPU. But you can implement support for unsupported instructions using r2pipe. Eventually we will get proper support for multimedia and floating point.
 
 ### Handling x86 REP Prefix in ESIL
 
@@ -309,14 +307,14 @@ STACK    - dump stack contents to screen
 CLEAR    - clear stack
 ```
 
-#### Usage example:
+#### Usage Example:
 
 rep cmpsb
----------
+```
 cx,!,?{,BREAK,},esi,[1],edi,[1],==,?{,BREAK,},esi,++,edi,++,cx,--,0,GOTO
+```
 
-
-### Unimplemented/unhandled Instructions
+### Unimplemented/Unhandled Instructions
 
 Those are expressed with the 'TODO' command. They act as a 'BREAK', but displays a warning message describing that an instruction is not implemented and will not be emulated. For example:
 
@@ -359,7 +357,7 @@ fmulp ST(1), ST(0)      =>      TODO,fmulp ST(1),ST(0)
 
 ### Introspection
 
-To ease ESIL parsing we should have a way to express introspection expressions to extract data we want. For example, we may want to get the target address of a jump. The parser for ESIL expressions should offer API to make it possible to extract information by analyzing the expressions easily.
+To ease ESIL parsing we should have a way to express introspection expressions to extract the data that we want. For example, we may want to get the target address of a jump. The parser for ESIL expressions should offer an API to make it possible to extract information by analyzing the expressions easily.
 
 ```
 >  ao~esil,opcode
@@ -369,25 +367,25 @@ esil: 0x10000465a,rip,=
 We need a way to retrieve the numeric value of 'rip'. This is a very simple example, but there are more complex, like conditional ones. We need expressions to be able to get:
 
 - opcode type
-- destination of jump
+- destination of a jump
 - condition depends on
 - all regs modified (write)
 - all regs accessed (read)
 
 ### API HOOKS
 
-It is important for emulation to be able to setup hooks in parser, so we can extend it to implement analysis without having to change parser again and again. That is, every time an operation is about to be executed, a user hook is called. It can be used for example to determine if `RIP` is going to change, or if the instruction updates the stack.
-Later, we can split that callback into several ones to have an event-based analysis API that may be extended in js like this:
+It is important for emulation to be able to setup hooks in the parser, so we can extend it to implement analysis without having to change it again and again. That is, every time an operation is about to be executed, a user hook is called. It can be used for example to determine if `RIP` is going to change, or if the instruction updates the stack.
+Later, we can split that callback into several ones to have an event-based analysis API that may be extended in JavaScript like this:
 
 ```
 esil.on('regset', function(){..
 esil.on('syscall', function(){esil.regset('rip'
 ```
 
-For the API, see functions `hook_flag_read()`, `hook_execute()`, `hook_mem_read()`. A callback should return true if you want to override the action taken for a callback. For example, to deny memory reads in a region, or voiding memory writes, effectively making it read-only.
+For the API, see the functions `hook_flag_read()`, `hook_execute()` and `hook_mem_read()`. A callback should return true or 1 if you want to override the action that it takes. For example, to deny memory reads in a region, or voiding memory writes, effectively making it read-only.
 Return false or 0 if you want to trace ESIL expression parsing.
 
-Other operations that require bindings to external functionalities to work. In this case, `r_ref` and `r_io`. This must be defined when initializing the esil vm.
+Other operations require bindings to external functionalities to work. In this case, `r_ref` and `r_io`. This must be defined when initializing the ESIL VM.
 
 * Io Get/Set
   ```
