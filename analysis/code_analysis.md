@@ -2,13 +2,13 @@
 
 Code analysis is a common technique used to extract information from assembly code.
 
-Radare has different code analysis techniques implemented in the core and available in different commands.
+Radare2 has different code analysis techniques implemented in the core and available in different commands.
 
 As long as the whole functionalities of r2 are available with the API as well as using commands. This gives you the ability to implement your own analysis loops using any programming language, even with r2 oneliners, shellscripts, or analysis or core native plugins.
 
 The analysis will show up the internal data structures to identify basic blocks, function trees and to extract opcode-level information.
 
-The most common radare2 analysis command sequence is `aa`, which stands for "analyze all". That all is refering to all symbols and entrypoints. If your binary is stripped you will need to use other commands like aaa, aab, aar, aac or so.
+The most common radare2 analysis command sequence is `aa`, which stands for "analyze all". That all is referring to all symbols and entry-points. If your binary is stripped you will need to use other commands like `aaa`, `aab`, `aar`, `aac` or so.
 
 Take some time to understand what each command does and the results after running them to find the best one for your needs.
 
@@ -65,8 +65,8 @@ Take some time to understand what each command does and the results after runnin
 ```
 
 In this example, we analyze the whole file (`aa`) and then print disassembly of the `main()` function (`pdf`).
-The `aa` command belongs to the family of autoanalysis commands and performs only the most basic
-autoanalysis steps. In radare2 there are many different types of the autoanalysis commands with a
+The `aa` command belongs to the family of auto analysis commands and performs only the most basic
+auto analysis steps. In radare2 there are many different types of the auto analysis commands with a
 different analysis depth, including partial emulation: `aa`, `aaa`, `aab`, `aaaa`, ...
 There is also a mapping of those commands to the r2 CLI options: `r2 -A`, `r2 -AA`, and so on.
 
@@ -110,14 +110,13 @@ function or perform completely manual one.
 | afx                      list function references
 ```
 
-One of the most challenging tasks while performing a function analysis - merge, crop or resize.
-As with other analysis commands you have two ways - semi-automatic and totally manual one.
-For the semi-automatic, you can use `afm <function name>` to merge current function with
-the function specified, `aff` to readjust function after analysis changes or function edits,
-`afu <address>` to do the resize and analysis of the current function until specified address.
+Some of the most challenging tasks while performing a function analysis are merge, crop and resize.
+As with other analysis commands you have two modes: semi-automatic and manual.
+For the semi-automatic, you can use `afm <function name>` to merge the current function with
+the one specified by name as an argument, `aff` to readjust the function after analysis changes or function edits,
+`afu <address>` to do the resize and analysis of the current function until the specified address.
 
-Apart from those semi-automatic ways to edit/analyze the function, you can create it in
-complete manual mode with `af+` command and edit basic blocks of it using `afb` commands.
+Apart from those semi-automatic ways to edit/analyze the function, you can hand craft it in the manual mode with `af+` command and edit basic blocks of it using `afb` commands.
 Before changing the basic blocks of the function it is recommended to check the already presented ones:
 
 ```
@@ -130,7 +129,7 @@ Before changing the basic blocks of the function it is recommended to check the 
 0x00003ba8 0x00003bf9 00:0000 81
 ```
 
-There are two very important commands: `afc` and `afB`. The latter is a must-know command for some platforms like ARM. It provides a way to change the "bitness" of the particular function. Basically, allowing to select between ARM and Thumb modes.
+There are two very important commands for this: `afc` and `afB`. The latter is a must-know command for some platforms like ARM. It provides a way to change the "bitness" of the particular function. Basically, allowing to select between ARM and Thumb modes.
 
 `afc` on the other side, allows to manually specify function calling convention. You can find more information on its usage in [calling_conventions](calling_conventions.md).
 
@@ -199,7 +198,7 @@ push rbp
 mov rbp, rsp
 ```
 
-on x86_64 platform. It should be specified _before_ any analysis commands.
+on x86\_64 platform. It should be specified _before_ any analysis commands.
 
 ## Configuration
 
@@ -226,7 +225,7 @@ In addition to those we can also set `anal.ijmp` to follow the indirect jumps, c
 sequences at a function beginning.
 
 For now, radare2 also allows you to change the maximum basic block size with `anal.bb.maxsize` option
-. The default value just works in most use cases, but it's useful to increase that for example when 
+. The default value just works in most use cases, but it's useful to increase that for example when
 dealing with obfuscated code. Beware that some of basic blocks
 control options may disappear in the future in favor of more automated ways to set those.
 
@@ -237,7 +236,7 @@ binaries for embedded systems, it is often a case. Thus - this option.
 ### Reference control
 
 The most crucial options that change the analysis results drastically. Sometimes some can be
-disabled to save the time and memory when analysing big binaries.
+disabled to save the time and memory when analyzing big binaries.
 
 - `anal.jmpref` - to allow references creation for unconditional jumps
 - `anal.cjmpref` - same, but for conditional jumps
@@ -271,8 +270,8 @@ Two more options can affect the jump tables analysis results too:
 
 ### Platform specific controls
 
-There are two common problems when analysing embedded targets: ARM/Thumb detection and MIPS GP
-value. In case of ARM binaries radare2 supports some autodetection of ARM/Thumb mode switches, but
+There are two common problems when analyzing embedded targets: ARM/Thumb detection and MIPS GP
+value. In case of ARM binaries radare2 supports some auto-detection of ARM/Thumb mode switches, but
 beware that it uses partial ESIL emulation, thus slowing the analysis process. If you will not
 like the results, particular functions' mode can be overridden with `afB` command.
 
@@ -302,7 +301,7 @@ This mode allows you to see the disassembly of each node separately, just naviga
 
 It is not an uncommon case that analysis results are not perfect even after you tried every single
 configuration option. This is where the "analysis hints" radare2 mechanism comes in. It allows
-to override some basic opcode or metainformation properties, or even to rewrite the whole opcode
+to override some basic opcode or meta-information properties, or even to rewrite the whole opcode
 string. These commands are located under `ah` namespace:
 
 ```
