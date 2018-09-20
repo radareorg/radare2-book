@@ -16,7 +16,7 @@
       "pageNumbers": false,
       "paperSize": "a5",
       "margin": {"top": 40, "left": 30, "right": 30, "bottom": 40 },
-      "local-test-margin": {"left": -30, "left": 0, "right": 0, "bottom": 0 },
+      "local-test-margin": {"top": -30, "left": 0, "right": 0, "bottom": 0 },
       "footerTemplate": "<center> _PAGENUM_ </center>"
     },
     "layout": {
