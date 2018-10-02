@@ -17,7 +17,7 @@ The need for scripting showed the fragility of the initial design: a monolithic 
 
 What started as a one-man project, with some eventual contributions, gradually evolved into a big community-based project around 2014. The number of users was growing fast, and the author-and main developer-had to switch roles from coder to manager in order to integrate the work of the different developers that were joining the project.
 
-Instructing users to report their issues allows the project to define new directions to evolvein. Everything is managed in [radare2's GitHub](https://github.com/radare/radare2) and discussed in the Telegram channel.
+Instructing users to report their issues allows the project to define new directions to evolve in. Everything is managed in [radare2's GitHub](https://github.com/radare/radare2) and discussed in the Telegram channel.
 
 The project remains active at the time of writing this book, and there are several side projects that provide, among other things, a graphical user interface ([Cutter](https://github.com/radareorg/cutter)), a decompiler ([r2dec](https://github.com/wargio/r2dec-js), [radeco](https://github.com/radareorg/radeco)), Frida integration ([r2frida](https://github.com/nowsecure/r2frida)), Yara, Unicorn, Keystone, and many other projects indexed in the [r2pm](https://github.com/radare/radare2-pm) (the radare2 package manager).
 
