@@ -1,8 +1,8 @@
 ## Command-line Options
 
-The radare core accepts many flags from command line.
+The radare core accepts many flags from the command line.
 
-An excerpt from usage help message:
+This is an excerpt from the usage help message:
 ```
 $ radare2 -h
 Usage: r2 [-ACdfLMnNqStuvwzX] [-P patch] [-p prj] [-a arch] [-b bits] [-i file]
@@ -78,7 +78,7 @@ $ r2 -qc ij hi.bin > imports.json
 ```
 Set the configuration variable:
 ```
-$ r2 -e scr.color=false blah.bin
+$ r2 -e scr.color=0 blah.bin
 ```
 Debug a program:
 ```

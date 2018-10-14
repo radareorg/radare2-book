@@ -5,7 +5,7 @@
 Visual Panels is characterized by the following core functionalities:
 
 1. Split Screen
-2. Display multiple screens such as Symbols, Registers, Stack, as well as customed panels
+2. Display multiple screens such as Symbols, Registers, Stack, as well as custom panels
 3. Menu will cover all those commonly used commands for you so that you don't have to memorize any of them
 
 CUI met some useful GUI as the menu, that is Visual Panels.

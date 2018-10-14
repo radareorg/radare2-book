@@ -50,7 +50,7 @@ To enter visual debugger mode use `Vpp`:
 [0xb7f0c8c0]> Vpp
 ```
 
-The initial view after entering visual mode is a hexdump view of current target program counter (e.g., EIP for x86).
+The initial view after entering visual mode is a hexdump view of the current target program counter (e.g., EIP for x86).
 Pressing `p` will allow you to cycle through the rest of visual mode views.
 You can press `p` and `P` to rotate through the most commonly used print modes.
 Use F7 or `s` to step into and F8 or `S` to step over current instruction.
@@ -63,9 +63,10 @@ For example, to dump a one block of memory contents at ESI:
 <Press ':'>
 x @ esi
 ```
-To get help on visual mode, press `?`. To scroll help screen, use arrows. To exit help view, press `q`.
+To get help on visual mode, press `?`. To scroll the help screen, use arrows. To
+exit the help view, press `q`.
 
-A frequently used command is `dr`, to read or write values of target's general purpose registers.
-For more compact registers value representation you might use `dr=` command.
-You can also manipulate the hardware and extended/floating point registers.
+A frequently used command is `dr`, which is used to read or write values of the target's general purpose registers.
+For a more compact register value representation you might use `dr=` command.
+You can also manipulate the hardware and the extended/floating point registers.
 

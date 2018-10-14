@@ -1,14 +1,14 @@
 ## Mapping Files
 
-Radare I/O subsystem allows you to map contents of files into the same I/O space used to contain loaded binary. New contents can be placed at random offsets.
+Radare's I/O subsystem allows you to map the contents of files into the same I/O space used to contain a loaded binary. New contents can be placed at random offsets.
 
-The o command permits the user to open a file, this is mapped at offset 0 unless it have a known binary header and then the maps are created in virtual addresses.
+The `o` command permits the user to open a file, this is mapped at offset 0 unless it has a known binary header and then the maps are created in virtual addresses.
 
 Sometimes, we want to rebase a binary, or maybe we want to load or map the file in a different address.
 
-When launching r2, the base address can be changed with the -B flag. But you must notice the difference when opening files with unknown headers, like bootloaders, so we need to map them using the -m flag (or specifying it as argument to the o command).
+When launching r2, the base address can be changed with the `-B` flag. But you must notice the difference when opening files with unknown headers, like bootloaders, so we need to map them using the `-m` flag (or specifying it as argument to the `o` command).
 
-Being able to open files and map portions of them at random places in memory specifying attributes like permissions and name. Is the perfect basic tooling to reproduce an environment like a core file, a debug session, by also loading and mapping all the libraries the binary depends.
+radare2 is able to open files and map portions of them at random places in memory specifying attributes like permissions and name. It is the perfect basic tooling to reproduce an environment like a core file, a debug session, by also loading and mapping all the libraries the binary depends on.
 
 Opening files (and mapping them) is done using the `o` (open) command. Let's read the help:
 
@@ -77,7 +77,7 @@ Print hexadecimal values from /bin/zsh:
 [0x00000000]> px @ 0x499999
 ```
 
-Unmap files using the `o-` command. Pass required file descriptor to it as an argument:
+Unmap files using the `o-` command. Pass the required file descriptor to it as an argument:
 
 ```
 [0x00000000]> o-14
