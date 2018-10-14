@@ -57,7 +57,7 @@ The 10 bytes you have selected will be changed to "12 34 12 34 12 ...".
 
 
 The Visual Assembler is a feature that provides a live-preview while you type in new instructions to patch
-into the disassembly. To use it, seek or place the cursor at the wanted location and hit the 'A' key. To provide multiple instructions, seperate them with semicolons, `;`.
+into the disassembly. To use it, seek or place the cursor at the wanted location and hit the 'A' key. To provide multiple instructions, separate them with semicolons, `;`.
 
 ## XREF
 

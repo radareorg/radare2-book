@@ -1,17 +1,17 @@
 ## Yank/Paste
 
-Radare2 have an internal clipboard to save and write portions of memory loaded from the current io layer.
+Radare2 has an internal clipboard to save and write portions of memory loaded from the current io layer.
 
-This clipboard can be manipulated with the y command.
+This clipboard can be manipulated with the `y` command.
 
 The two basic operations are
 
 * copy (yank)
 * paste
 
-The yank operation will read N bytes (specified by the argument) into the clipboard. We can later use the yy command to paste what we read before into a file.
+The yank operation will read N bytes (specified by the argument) into the clipboard. We can later use the `yy` command to paste what we read before into a file.
 
-You can yank/paste bytes in visual mode selecting them with the cursor mode (Vc) and then using the `y` and `Y` key bindings which are aliases for `y` and `yy` commands of the command-line interface.
+You can yank/paste bytes in visual mode selecting them with the cursor mode (`Vc`) and then using the `y` and `Y` key bindings which are aliases for `y` and `yy` commands of the command-line interface.
 
 ```
 [0x00000000]> y?

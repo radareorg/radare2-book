@@ -1,6 +1,6 @@
 ## Print Modes
 
-One of the key features of radare2 is displaying information in many formats. The goal is to offer a selection of displaying choices to best interpret binary data.
+One of the key features of radare2 is displaying information in many formats. The goal is to offer a selection of display choices to interpret in the best possible way binary data.
 
 Binary data can be represented as integers, shorts, longs, floats, timestamps, hexpair strings, or more complex formats like C structures, disassembly listings, decompilation listing, be a result of an external processing...
 
@@ -62,7 +62,7 @@ Tip: when using json output, you can append the `~{}` to the command to get a pr
 ]
 ```
 
-For more on the magical powers of `~` see the help in `?@?`, and the "Command Format" chapter earlier in the book.
+For more on the magical powers of `~` see the help in `?@?`, and the [Command Format](../first_steps/command_format.md) chapter earlier in the book.
 
 ### Hexadecimal View
 
@@ -109,7 +109,7 @@ For example, you can 'view' the current buffer as timestamps in the ntfs time:
 20:05:13001 09:29:21 +0000
 ```
 
-As you can see, the endianness affects the result. Once you have printed a timestamp, you can grep output, for example, by year value:
+As you can see, the endianness affects the result. Once you have printed a timestamp, you can grep the output, for example, by year:
 
 ```
 [0x08048000]> pt ~1974 | wc -l
@@ -118,7 +118,7 @@ As you can see, the endianness affects the result. Once you have printed a times
 27:04:2022 16:15:43 +0000
 ```
 
-The default date format can be configured using the `cfg.datefmt` variable. Formatting rules for it follow the well known strftime(3) format. Check the manpage for more details, but those are the more importants:
+The default date format can be configured using the `cfg.datefmt` variable. Formatting rules for it follow the well known strftime(3) format. Check the manpage for more details, but these are the most important:
 
 ```
 %a  The abbreviated name of the day of the week according to the current locale.
@@ -180,7 +180,7 @@ There are print modes available for all basic types. If you are interested in a 
 |  .       skip 1 byte
 ```
 
-Use triple-question to get some examples using print format strings.
+Use triple-question-mark `pf???` to get some examples using print format strings.
 
 ```
 [0x00499999]> pf???
@@ -227,9 +227,9 @@ Valid print code formats for human-readable languages are:
 * `pcJ`    javascript
 * `pcp`    python
 
-If we need to create a .c file containing a binary blob, use the pc command, that creates this output. The default size, is like in many other commands: the block size.  Which can be changed with the b command.
+If we need to create a .c file containing a binary blob, use the `pc` command, that creates this output. The default size is like in many other commands: the block size, which can be changed with the `b` command.
 
-But we can just temporarily override this block size by expressing it as argument.
+But we can just temporarily override this block size by expressing it as an argument.
 
 ```
 [0xB7F8E810]> pc 32
@@ -238,7 +238,7 @@ unsigned char buffer[_BUFFER_SIZE] = {
 0x89, 0xe0, 0xe8, 0x49, 0x02, 0x00, 0x00, 0x89, 0xc7, 0xe8, 0xe2, 0xff, 0xff, 0xff, 0x81, 0xc3, 0xd6, 0xa7, 0x01, 0x00, 0x8b, 0x83, 0x00, 0xff, 0xff, 0xff, 0x5a, 0x8d, 0x24, 0x84, 0x29, 0xc2 };
 ```
 
-That cstring can used in many programming languages, not just C.
+That cstring can be used in many programming languages, not just C.
 
 ```
 [0x7fcd6a891630]> pcs
@@ -247,7 +247,7 @@ That cstring can used in many programming languages, not just C.
 
 ### Strings
 
-Strings are probably one of the most important entry points when starting to reverse engineer a program because they usually reference information about functions' actions (asserts, debug or info messages...) Therefore radare supports various string formats:
+Strings are probably one of the most important entry points when starting to reverse engineer a program because they usually reference information about functions' actions (asserts, debug or info messages...). Therefore, radare supports various string formats:
 
 ```
 [0x00000000]> ps?
@@ -265,7 +265,7 @@ Strings are probably one of the most important entry points when starting to rev
 | psj  print string in JSON format
 ```
 
-Most strings are zero-terminated. Here is an example by using the debugger to continue the execution of a program until it executes the 'open' syscall. When we recover the control over the process, we get the arguments passed to the syscall, pointed by %ebx. In the case of the 'open' call, it is a zero terminated string which we can inspect using `psz`.
+Most strings are zero-terminated. Below there is an example using the debugger to continue the execution of a program until it executes the 'open' syscall. When we recover the control over the process, we get the arguments passed to the syscall, pointed by %ebx. In the case of the 'open' call, it is a zero terminated string which we can inspect using `psz`.
 
 ```
 [0x4A13B8C0]> dcs open
@@ -340,7 +340,7 @@ The `pd` command is used to disassemble code. It accepts a numeric value to spec
 
 ### Selecting Target Architecture
 
-The architecture flavor for disassembler is defined by the `asm.arch` eval variable. You can use `e asm.arch=??` to list all available architectures.
+The architecture flavor for the disassembler is defined by the `asm.arch` eval variable. You can use `e asm.arch=??` to list all available architectures.
 
 ```
 [0x00005310]> e asm.arch=??
@@ -372,7 +372,7 @@ _d__  _32        lanai       GPL3    LANAI
 
 ### Configuring the Disassembler
 
-There are multiple options which can be used to configure the output of disassembler. All these options are described in `e? asm.`
+There are multiple options which can be used to configure the output of the disassembler. All these options are described in `e? asm.`
 
 ```
 [0x00005310]> e? asm.
@@ -391,7 +391,7 @@ asm.cmt.fold: Fold comments, toggle with Vz
 ...
 ```
 
-Currently there are 136 `asm.` configuration variables so we do not list them all
+Currently there are 136 `asm.` configuration variables so we do not list them all.
 
 ### Disassembly Syntax
 

@@ -6,7 +6,7 @@ For most generic reverse engineering tasks like finding the differences between 
 $ radiff2 -h
 ```
 
-Inside r2, the functionalities exposed by radiff2 are available in the c command.
+Inside r2, the functionalities exposed by radiff2 are available with the `c` command.
 
 `c` (short for "compare") allows you to compare arrays of bytes from different sources. The command accepts input in a number of formats and then compares it against values found at current seek position.
 
@@ -35,7 +35,7 @@ Inside r2, the functionalities exposed by radiff2 are available in the c command
  | cl|cls|clear    Clear screen, (clear0 to goto 0, 0 only)
 ```
 
-To compare memory contents at current seek position against given string of values, use `cx`:
+To compare memory contents at current seek position against a given string of values, use `cx`:
 
 ```
 [0x08048000]> p8 4
@@ -47,7 +47,7 @@ Compare 3/4 equal bytes
 [0x08048000]>
 ```
 
-Another subcommand of `c` command is `cc` which stands for "compare code".
+Another subcommand of the `c` command is `cc` which stands for "compare code".
 To compare a byte sequence with a sequence in memory:
 
 ```

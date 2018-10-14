@@ -1,6 +1,6 @@
 ## Sections
 
-The concept of sections is tied to the information extracted from the binary. We can display this information by using the i command.
+The concept of sections is tied to the information extracted from the binary. We can display this information by using the `i` command.
 
 Displaying information about sections:
 
@@ -21,11 +21,15 @@ Displaying information about sections:
 ...
 ```
 
-As you may know, binaries use to have sections and maps. The sections define the contents of a portion of the file that can be mapped in memory (or not). What is mapped is defined by the segments.
+As you may know, binaries have sections and maps. The sections define the contents of a portion of the file that can be mapped in memory (or not). What is mapped is defined by the segments.
 
-Before the IO refactoring done by condret, the S command was used to manage what we now call maps. Currently the S command is supossed to be deprecated because iS and om should be enough.
+Before the IO refactoring done by condret, the `S` command was used to manage what we now call maps. Currently the `S` command is supposed to be deprecated because `iS` and `om` should be enough.
 
-Firmware images, bootloaders and binary files usually place various sections of a binary at different addresses in memory. To represent this behavior, radare offers the `S` command. Use `S?` to get the help message. But we would recommend you to better check `om` and `iS` and try to avoid `S` as much as possible as long as it will be deprecated soon. To list all created sections use `S` (or Sj to get the json format). The `S=` will show the region bars in ascii-art.
+Firmware images, bootloaders and binary files usually place various sections of
+a binary at different addresses in memory. To represent this behavior, radare
+offers the `S` command. Use `S?` to get the help message. But we would recommend
+you to better check `om` and `iS` and try to avoid `S` as much as possible
+since it will be deprecated soon. To list all created sections use `S` (or `Sj` to get the json format). The `S=` will show the region bars in ascii-art.
 
 You can create a new section with a line like this:
 

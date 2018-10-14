@@ -1,6 +1,6 @@
 ## Seeking
 
-To move around the file we are inspecting we will need to change the offset we are using the `s` command.
+To move around the file we are inspecting we will need to change the offset at which we are using the `s` command.
 
 The argument is a math expression that can contain flag names, parenthesis, addition, substraction, multiplication of immediates of contents of memory using brackets.
 
@@ -14,7 +14,7 @@ Some example commands:
 [0x00000014]>
 ```
 
-Observe how the prompt offset changes. The first line move the current offset to the address 0x10.
+Observe how the prompt offset changes. The first line moves the current offset to the address 0x10.
 
 The second does a relative seek 4 bytes forward.
 
@@ -22,19 +22,19 @@ And finally, the last 2 commands are undoing, and redoing the last seek operatio
 
 Instead of using just numbers, we can use complex expressions, or basic arithmetic operations to represent the address to seek.
 
-To do this, check the ?$? Help message which describes the internal variables that can be used in the expressions. For example. This is the same as doing s+4
+To do this, check the ?$? Help message which describes the internal variables that can be used in the expressions. For example, this is the same as doing s+4 .
 
 ```
 [0x00000000]> s $$+4
 ```
 
-From the debugger (or when emulating) we can also use the register names as references. They are loaded as flags with the .dr* command, which happens under the hood.
+From the debugger (or when emulating) we can also use the register names as references. They are loaded as flags with the `.dr*` command, which happens under the hood.
 
 ```
 [0x00000000]> s rsp+0x40
 ```
 
-Here's the full help of the s command. We will explain in more detail below.
+Here's the full help of the `s` command. We will explain in more detail below.
 
 ```
 [0x00000000]> s?
@@ -71,7 +71,7 @@ If you want to inspect the result of a math expression, you can evaluate it usin
 0x1C8 ; 456d ; 710o ; 1100 1000
 ```
 
-There's also subcommands of ? that display in one specific format (base 10, base 16 ,...) See ?v and ?vi.
+There are also subcommands of `?` that display the output in one specific format (base 10, base 16 ,...). See `?v` and `?vi`.
 
 In the visual mode, you can press `u` (undo) or `U` (redo) inside the seek history to return back to previous or forward to the next location.
 
@@ -104,7 +104,7 @@ Seek to an address 0x0. An alternative command is simply `0x0`
 [0x00000000]>
 ```
 
-Print current address
+Print current address:
 ```
 [0x00000000]> s
 0x0
@@ -113,14 +113,14 @@ Print current address
 
 There is an alternate way to print current position: `?v $$`.
 
-Seek N positions forward, space is optional
+Seek N positions forward, space is optional:
 
 ```
 [0x00000000]> s+ 128
 [0x00000080]>
 ```
 
-Undo last two seeks to return to the initial address
+Undo last two seeks to return to the initial address:
 
 ```
 [0x00000080]> s-
