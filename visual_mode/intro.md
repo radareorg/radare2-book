@@ -1,11 +1,17 @@
 # Visual Mode
 
-The visual mode is a more user-friendly interface alternative to radare2's command-line prompt.  It uses HJKL or arrow keys to move around data and code, has a cursor mode for selecting bytes, and offers numerous key bindings to simplify debugger use.
+The visual mode is a more user-friendly interface alternative to radare2's command-line prompt.  It allows easy navigation, has a cursor mode for selecting bytes, and offers numerous key bindings to simplify debugger use.
 To enter visual mode, use `V` command. To exit from it back to command line, press `q`.
+
+## Navigation
+
+Navigation can be done using HJKL or arrow keys and PgUp/PgDown keys. It also understands usual Home/End keys.
+Like in Vim the movements can be repeated by preceding the navigation key with the number, for
+example `5j` will move down for 5 lines, or `2l` will move 2 characters right.
 
 ![Visual Mode](visualmode.png)
 
-## print modes aka Panels
+## print modes aka panels
 
 The Visual mode uses "print modes" which are basically different panel that you can rotate. By default those are:
 
