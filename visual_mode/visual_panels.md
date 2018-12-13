@@ -10,45 +10,52 @@ Visual Panels is characterized by the following core functionalities:
 
 CUI met some useful GUI as the menu, that is Visual Panels.
 
+Panels can be accessed from visual mode by using `!`.
+
 ## Overview
 
 ![Panels Overview](panels_overview.png)
 
 ## Commands
 ```
-| Panels commands:
-| ?      show this help
-| !      run r2048 game
-| .      seek to PC or entrypoint
-| :      run r2 command in prompt
-| _      start the hud input mode
+|Visual Ascii Art Panels:
 | |      split the current panel vertically
 | -      split the current panel horizontally
+| :      run r2 command in prompt
+| _      start the hud input mode
+| ?      show this help
+| ??     show the user-friendly hud
+| !      run r2048 game
+| .      seek to PC or entrypoint
 | *      show pseudo code/r2dec in the current panel
+| /      highlight the keyword
 | [1-9]  follow jmp/call identified by shortcut (like ;[1])
-| b      browse symbols, flags, configurations, classes, etc
+| ' '    (space) toggle graph / panels
+| tab    go to the next panel
+| b      browse symbols, flags, configurations, classes, ...
 | c      toggle cursor
 | C      toggle color
 | d      define in the current address. Same as Vd
 | D      show disassembly in the current panel
 | e      change title and command of current panel
 | g      show graph in the current panel
-| hjkl   move around (left-down-up-right)
-| HL     resize panels horizontally
-| JK     scroll panels vertically by page
 | i      insert hex
-| m      move to the menu
+| hjkl   move around (left-down-up-right)
+| J      scroll panels down by page
+| K      scroll panels up by page
+| m      select the menu panel
 | M      open new custom frame
 | nN     create new panel with given command
-| r      toggle jmphints/leahints
 | o      go/seek to given offset
 | pP     seek to next or previous scr.nkey
 | q      quit, back to visual mode
+| r      toggle jmphints/leahints
 | sS     step in / step over
 | uU     undo / redo seek
+| w      start Window mode
 | V      go to the graph mode
-| w      change the current layout of the panels
 | X      close current panel
+| z      swap current panel with the first one
 ```
 
 ## Basic Usage
@@ -62,6 +69,22 @@ As usual, you can use `hjkl` to move around the menu and will find tons of usefu
 ## Split Screen
 
 `|` is for the vertical and `-` is for the horizontal split. You can delete any panel by pressing `X`.
+
+Split panels can be resized from Window Mode, which is accessed with `w`.
+
+## Window Mode Commands
+```
+|Panels Window mode help:
+| ?      show this help
+| ??     show the user-friendly hud
+| Enter  start Zoom mode
+| c      toggle cursor
+| hjkl   move around (left-down-up-right)
+| JK     resize panels vertically
+| HL     resize panels horizontally
+| q      quit Window mode
+
+```
 
 ## Edit Values
 
