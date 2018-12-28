@@ -33,7 +33,7 @@ $ sdb - '[]list=1,2' '[0]list' '[0]list=foo' '[]list' '[+1]list=bar'
 foo
 2
 foo
-fuck
+bar
 2
 ```
 
