@@ -8,7 +8,7 @@ $ sudo r2 /dev/mem
 0 AES keys found
 ```
 
-If you are simply looking for plaintext AES keys in your binary, radare2 will point to them as symbols so `/Ca` will not find the AES key, but `is~AES` should conveniently point to it instead:
+If you are simply looking for plaintext AES keys in your binary, `/Ca` will not find them, but you might want to search with `is~AES` instead if the programmer left those hints for you:
 
 ```
 [0x00000000]> /Ca
@@ -23,3 +23,5 @@ hits: 0
 [0x00000000]> is~AES
 010 0x000096d4 0x000196d4 GLOBAL    OBJ   16 AES_KEY
 ```
+
+Other than that, AES keys might show up in different ways in the binary be it encrypted, or hidden in several ways, so there's no reliable way other than understanding the binary being analized and/or using `p=e` to hunt for high(er) entropy sections.
