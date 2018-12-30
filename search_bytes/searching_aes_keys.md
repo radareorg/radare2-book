@@ -24,4 +24,4 @@ hits: 0
 010 0x000096d4 0x000196d4 GLOBAL    OBJ   16 AES_KEY
 ```
 
-Other than that, AES keys might show up in different ways in the binary be it encrypted, or hidden in several ways, so there's no reliable way other than understanding the binary being analized and/or using `p=e` to hunt for high(er) entropy sections.
+Other than that, AES keys might show up in different ways in the binary: encrypted, hidden by another encrypting routine, so there's no absolute way other than understanding the binary being analized. For instance, `p=e` might give some hints if high(er) entropy sections are found trying to cover up a hardcoded secret. Moreover AES keys might be referenced from strings or pointed from the imports, for instance, so the `/` and other search-related commands can come in handy in this regard.
