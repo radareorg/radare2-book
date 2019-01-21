@@ -14,7 +14,7 @@
 
 `r2 -D gdb gdb://localhost:1234` - attach to gdbserver
 
-## How to set args/environnement variable/load a specific libraries for the debugging session of radare
+## How to set args/environment variable/load a specific libraries for the debugging session of radare
 
 Use `rarun2` (`libpath=$PWD:/tmp/lib`, `arg2=hello`, `setenv=FOO=BAR` ...) see `rarun2 -h` / `man rarun2`
 
