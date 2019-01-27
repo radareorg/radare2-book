@@ -23,28 +23,6 @@ Displaying information about sections:
 
 As you may know, binaries have sections and maps. The sections define the contents of a portion of the file that can be mapped in memory (or not). What is mapped is defined by the segments.
 
-Before the IO refactoring done by condret, the `S` command was used to manage what we now call maps. Currently the `S` command is supposed to be deprecated because `iS` and `om` should be enough.
+Before the IO refactoring done by condret, the `S` command was used to manage what we now call maps. Currently the `S` command is deprecated because `iS` and `om` should be enough.
 
-Firmware images, bootloaders and binary files usually place various sections of
-a binary at different addresses in memory. To represent this behavior, radare
-offers the `S` command. Use `S?` to get the help message. But we would recommend
-you to better check `om` and `iS` and try to avoid `S` as much as possible
-since it will be deprecated soon. To list all created sections use `S` (or `Sj` to get the json format). The `S=` will show the region bars in ascii-art.
-
-You can create a new section with a line like this:
-
-```
-S [off] [va] [sz] [vsz] [name] [mrwx]
-```
-
-For example:
-
-```
-[0x00404888]> S 0x00000100 0x00400000 0x0001ae08 0001ae08 test rwx
-```
-
-It is possible to remove a section definition using the `S-` command. Pass the section id to it as an argument:
-
-```
-[0xB7EE8810]> S-4
-```
+Firmware images, bootloaders and binary files usually place various sections of a binary at different addresses in memory. To represent this behavior, radare offers the `iS`. Use `iS?` to get the help message. To list all created sections use `iS` (or `iSj` to get the json format). The `iS=` will show the region bars in ascii-art.
