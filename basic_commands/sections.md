@@ -23,28 +23,36 @@ Displaying information about sections:
 
 As you may know, binaries have sections and maps. The sections define the contents of a portion of the file that can be mapped in memory (or not). What is mapped is defined by the segments.
 
-Before the IO refactoring done by condret, the `S` command was used to manage what we now call maps. Currently the `S` command is supposed to be deprecated because `iS` and `om` should be enough.
+Before the IO refactoring done by condret, the `S` command was used to manage what we now call maps. Currently the `S` command is deprecated because `iS` and `om` should be enough.
 
-Firmware images, bootloaders and binary files usually place various sections of
-a binary at different addresses in memory. To represent this behavior, radare
-offers the `S` command. Use `S?` to get the help message. But we would recommend
-you to better check `om` and `iS` and try to avoid `S` as much as possible
-since it will be deprecated soon. To list all created sections use `S` (or `Sj` to get the json format). The `S=` will show the region bars in ascii-art.
+Firmware images, bootloaders and binary files usually place various sections of a binary at different addresses in memory. To represent this behavior, radare offers the `iS`. Use `iS?` to get the help message. To list all created sections use `iS` (or `iSj` to get the json format). The `iS=` will show the region bars in ascii-art.
 
-You can create a new section with a line like this:
-
+You can create a new mapping using the `om` subcommand as follows:
 ```
-S [off] [va] [sz] [vsz] [name] [mrwx]
+om fd vaddr [size] [paddr] [rwx] [name]
 ```
 
-For example:
+For Example:
+```
+[0x0040100]> om 4 0x00000100 0x00400000 0x0001ae08 rwx test
+```
+
+You can also use `om` command to view information about mapped sections:
 
 ```
-[0x00404888]> S 0x00000100 0x00400000 0x0001ae08 0001ae08 test rwx
-```
+[0x00401000]> om
+ 6 fd: 4 +0x0001ae08 0x00000100 - 0x004000ff rwx test
+ 5 fd: 3 +0x00000000 0x00000000 - 0x0000055f r-- fmap.LOAD0
+ 4 fd: 3 +0x00001000 0x00001000 - 0x000011e4 r-x fmap.LOAD1
+ 3 fd: 3 +0x00002000 0x00002000 - 0x0000211f r-- fmap.LOAD2
+ 2 fd: 3 +0x00002de8 0x00003de8 - 0x0000402f r-- fmap.LOAD3
+ 1 fd: 4 +0x00000000 0x00004030 - 0x00004037 rw- mmap.LOAD3
+ ```
+Use `om?` to get all the possible subcommands. To list all the defined maps use `om` (or `omj` to get the json format or `om*` to get the r2 commands format). To get the ascii art view use `om=`. 
 
-It is possible to remove a section definition using the `S-` command. Pass the section id to it as an argument:
+It is also possible to delete the mapped section using the `om-mapid` command.
 
+For Example:
 ```
-[0xB7EE8810]> S-4
+[0x00401000]> om-6
 ```
