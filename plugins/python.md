@@ -52,7 +52,7 @@ def mycpu_anal(a):
 		"gpr	pc	.32	28	0\n"
         return profile
 
-    def op(addr, buf):
+    def op(buf, len, pc):
 		analop = {
             "type" : R.R_ANAL_OP_TYPE_NULL,
             "cycles" : 0,
