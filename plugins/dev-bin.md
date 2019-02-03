@@ -10,7 +10,7 @@ In `info` add `et->has_va = 1;` and `ptr->srwx` with the `R_BIN_SCN_MAP;` attrib
 
 ```Makefile
 NAME=bin_nes
-R2_PLUGIN_PATH=$(shell r2 -hh|grep LIBR_PLUGINS|awk '{print $$2}')
+R2_PLUGIN_PATH=$(shell r2 -hh|grep R2_LIBR_PLUGINS|awk '{print $$2}')
 CFLAGS=-g -fPIC $(shell pkg-config --cflags r_bin)
 LDFLAGS=-shared $(shell pkg-config --libs r_bin)
 OBJS=$(NAME).o
