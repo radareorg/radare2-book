@@ -63,7 +63,7 @@ an operator. The command is applied to the current block. Supported operators in
 |  wox 90     ; xor cur block with 0x90
 |  wox 0x0203 ; xor cur block with 0203
 |  woa 02 03  ; add [0203][0203][...] to curblk
-|  woe 02 03
+|  woe 02 03  ; create sequence from 2 to 255 with step 3
 |Supported operations:
 |  wow  ==  write looped value (alias for 'wb')
 |  woa  +=  addition
