@@ -13,9 +13,9 @@ def mycpu(a):
     def assemble(s):
         return [1, 2, 3, 4]
 
-    def disassemble(buf):
+    def disassemble(memview, addr):
         try:
-            opcode = get_opcode(buf)
+            opcode = get_opcode(memview) # https://docs.python.org/3/library/stdtypes.html#memoryview
             opstr = optbl[opcode][1]
             return [4, opstr]
         except:
@@ -52,7 +52,7 @@ def mycpu_anal(a):
 		"gpr	pc	.32	28	0\n"
         return profile
 
-    def op(buf, len, pc):
+    def op(memview, pc):
 		analop = {
             "type" : R.R_ANAL_OP_TYPE_NULL,
             "cycles" : 0,
@@ -65,7 +65,7 @@ def mycpu_anal(a):
             "esil" : "",
         }
         try:
-            opcode = get_opcode(buf)
+            opcode = get_opcode(memview) # https://docs.python.org/3/library/stdtypes.html#memoryview
             esilstr = optbl[opcode][2]
             if optbl[opcode][0] == "J": # it's jump
                 analop["type"] = R.R_ANAL_OP_TYPE_JMP
