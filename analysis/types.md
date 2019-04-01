@@ -120,7 +120,7 @@ with the chosen type, we can use `tl` command to store the relationship in SDB.
 
 ```
 [0x000051c0]> tl S1 = 0x51cf
-[0x000051c0]> tl
+[0x000051c0]> tll
 (S1)
  x : 0x000051cf = [ 2315619660, 1207959810, 34803085 ]
  y : 0x000051db = [ 2370306049, 4293315645, 3860201471, 4093649307 ]
