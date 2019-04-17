@@ -153,3 +153,5 @@ function names. We can choose only the second column, to remove the redundant `n
 [0x004047d6]> afi @@@ functions ~name[1]
 ```
 
+**Beware, @@@ is not compatible with JSON commands.**
+
