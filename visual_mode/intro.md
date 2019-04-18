@@ -62,7 +62,7 @@ Visual mode help:
  mK/'K    mark/go to Key (any key)
  M        walk the mounted filesystems
  n/N      seek next/prev function/flag/hit (scr.nkey)
- o        go/seek to given offset
+ g        go/seek to given offset
  O        toggle asm.pseudo and asm.esil
  p/P      rotate print modes (hex, disasm, debug, words, buf)
  q        back to radare shell
