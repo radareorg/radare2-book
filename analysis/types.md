@@ -352,7 +352,7 @@ struct._FILETIME.dwLowDateTime=DWORD,0,0
 struct._FILETIME.dwHighDateTime=DWORD,4,0
 ```
 
-Note that the number of elements filed is used in case of arrays only
+Note that the number of elements field is used in case of arrays only
 to identify how many elements are in arrays, other than that it is zero by default.
 
 ### Unions
