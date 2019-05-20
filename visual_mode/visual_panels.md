@@ -29,28 +29,34 @@ Panels can be accessed from visual mode by using `!`.
 | .      seek to PC or entrypoint
 | *      show pseudo code/r2dec in the current panel
 | /      highlight the keyword
+| (      toggle snow
+| &      toggle cache
 | [1-9]  follow jmp/call identified by shortcut (like ;[1])
 | ' '    (space) toggle graph / panels
 | tab    go to the next panel
+| a      toggle auto update for decompiler
 | b      browse symbols, flags, configurations, classes, ...
 | c      toggle cursor
 | C      toggle color
 | d      define in the current address. Same as Vd
 | D      show disassembly in the current panel
 | e      change title and command of current panel
-| g      show graph in the current panel
+| g      go/seek to given offset
+| G      show graph in the current panel
 | i      insert hex
 | hjkl   move around (left-down-up-right)
 | J      scroll panels down by page
 | K      scroll panels up by page
+| H      scroll panels left by page
+| L      scroll panels right by page
 | m      select the menu panel
 | M      open new custom frame
 | nN     create new panel with given command
-| o      go/seek to given offset
 | pP     seek to next or previous scr.nkey
 | q      quit, back to visual mode
 | r      toggle jmphints/leahints
 | sS     step in / step over
+| t      rotate related commands in a panel
 | uU     undo / redo seek
 | w      start Window mode
 | V      go to the graph mode
