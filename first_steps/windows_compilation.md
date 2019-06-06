@@ -79,36 +79,36 @@ Compiled binaries will be installed into the `dest` folder.
 
 1. Enter the Radare2 Conda environment
 2. Navigate to the root of the Radare2 sources (`cd radare2`)
-3. Initialize Visual Studio tooling by executing the command that matches the version of Visual Studio installed on your machine and the version of Radare2 you wish to install:
+3. Initialize Visual Studio tooling by executing the command below that matches the version of Visual Studio installed on your machine and the version of Radare2 you wish to install:
 
     * **Visual Studio 2015:**
 
-        Note: For the 64-bit version, change only the x86 at the end to x64 below.
+        Note: For the 64-bit version change only the `x86` at the very end of the command below to `x64`.
 
         `"%ProgramFiles(x86)%\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86`
 
     * **Visual Studio 2017:**
 
-        Note 1: Change `Community` to either `Professional` or `Enterprise` below depending on the version installed.
+        Note 1: Change `Community` to either `Professional` or `Enterprise` in the command below depending on the version installed.
 
-        Note 2: Change `vcvars32.bat` to `vcvars64.bat` below for the 64-bit version.
+        Note 2: Change `vcvars32.bat` to `vcvars64.bat` in the command below for the 64-bit version.
 
          `"%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars32.bat"`
 
     * **Visual Studio Preview:**
 
-        Note 1: Change `Community` to either `Professional` or `Enterprise` below depending on the version installed.
+        Note 1: Change `Community` to either `Professional` or `Enterprise` in the command below depending on the version installed.
 
-        Note 2: Change `vcvars32.bat` to `vcvars64.bat` below for the 64-bit version.
+        Note 2: Change `vcvars32.bat` to `vcvars64.bat` in the command below for the 64-bit version.
 
         `"%ProgramFiles(x86)%\Microsoft Visual Studio\Preview\Community\VC\Auxiliary\Build\vcvars32.bat"`
 
 
 4. Generate the build system with Meson:
 
-  Note 1: Change `debug` to `release` below depending on whether the latest or release version is desired.
+  Note 1: Change `debug` to `release` in the command below depending on whether the latest version or release version is desired.
 
-  Note 2: If you are using visual studio 2017, you can change `vs2015` to `vs2017`.
+  Note 2: If you are using visual studio 2017, you can change swap `vs2015` for `vs2017`.
 
   `meson build --buildtype debug --backend vs2015 --prefix %cd%\dest`
 
@@ -116,18 +116,18 @@ Compiled binaries will be installed into the `dest` folder.
 
 5. Start a build:
 
-    Note: Change `Debug` to `Release` below depending on the version desired.
+    Note: Change `Debug` to `Release` in the command below depending on the version desired.
 
     `msbuild build\radare2.sln /p:Configuration=Debug /m`
 
     The `/m[axcpucount]` switch creates one MSBuild worker process per logical processor on your machine. You can specify a numeric value (e.g. `/m:2`) to limit the number of worker processes if needed. (This should not be confused with the Visual C++ Compiler switch `/MP`.)
 
-    If you get an error with the 32-bit install that says something along the lines of `error MSB4126: The specified solution configuration "Debug|x86" is invalid.` Get around this by adding the following argument to the build command: `/p:Platform=Win32`
+    If you get an error with the 32-bit install that says something along the lines of `error MSB4126: The specified solution configuration "Debug|x86" is invalid.` Get around this by adding the following argument to the command: `/p:Platform=Win32`
 
 6. Install into your destination folder: `meson install -C build --no-rebuild`
 7. Check your Radare2 version: `dest\bin\radare2.exe -v`
 
-#### Check that Radare2 runs from all locations
+#### Check That Radare2 Runs From All Locations
 1. In the file explorer go to the folder Radare2 was just installed in.
 2. From this folder go to `dest` > `bin` and keep this window open.
 3. Go to System Properties: In the Windows search bar enter `sysdm.cpl`.
