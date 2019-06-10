@@ -83,3 +83,8 @@ Unmap files using the `o-` command. Pass the required file descriptor to it as a
 [0x00000000]> o-14
 ```
 
+You can also view the ascii table showing the list of the opened files:
+
+```
+[0x00000000]> ob=
+```
