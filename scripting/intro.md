@@ -65,6 +65,9 @@ commands
 [0x00404800]> px 10 @ `ao~ptr[1]` >> example.txt
 ```
 
+Radare2 also provides quite a few Unix type file processing commands like cat, grep and many more. For example, you can order the content of the file with `sort`, find unique strings in it with `uniq` or merge two files with `join`. 
+
 The `?$?` command describes several helpful variables you can use to do similar actions even more
 easily, like the `$v` "immediate value" variable, or the `$m` opcode memory reference variable.
+
 
