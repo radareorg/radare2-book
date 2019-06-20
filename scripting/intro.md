@@ -65,6 +65,41 @@ commands
 [0x00404800]> px 10 @ `ao~ptr[1]` >> example.txt
 ```
 
+Radare2 also provides quite a few Unix type file processing commands like cat, grep and many more. One such command is [Uniq](https://en.wikipedia.org/wiki/Uniq), which can be used to filter a file to display only non-duplicate content. So to make a new file with only unique strings, you can do:
+```
+[0x00404800]> uniq file > uniq_file
+```
+
+The [join](https://en.wikipedia.org/wiki/Join_(Unix)) command could be used to merge two different files with comman first field. 
+```
+[0x00404800]> cat foodtypes.txt
+1 Protein
+2 Carbohydrate
+3 Fat
+[0x00404800]> cat foods.txt
+1 Cheese 
+2 Potato
+3 Butter
+[0x00404800]> join foodtypes foods.txt
+1 Protein Cheese
+2 Carbohydrate Potato
+3 Fat Butter
+```
+
+Similarly, sorting the content is also possible with the [sort](https://en.wikipedia.org/wiki/Sort_(Unix)) command. A typical 
+example could be:
+```
+[0x00404800]> sort file
+eleven
+five
+five
+great
+one
+one
+radare
+```
+
 The `?$?` command describes several helpful variables you can use to do similar actions even more
 easily, like the `$v` "immediate value" variable, or the `$m` opcode memory reference variable.
+
 
