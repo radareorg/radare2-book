@@ -73,30 +73,67 @@ Follow these steps to clone the Radare2 git repository.
 2. Clone the repository with `git clone https://github.com/radare/radare2.git`
 
 #### Compile Radare2 Code
-Follow these steps to compile a debug 32-bit (x86) version of Radare2. (If you want to build a 64-bit (x64) version of Radare2, replace all instances of `x86` with `x64`. Similarly, if you want to build a release version, replace all instances of `debug` with `release`.)
+Follow these steps to compile the Radare2 Code.
 
 Compiled binaries will be installed into the `dest` folder.
 
 1. Enter the Radare2 Conda environment
 2. Navigate to the root of the Radare2 sources (`cd radare2`)
-3. Initialize Visual Studio tooling by executing the command that matches the version of Visual Studio installed on your machine:
+3. Initialize Visual Studio tooling by executing the command below that matches the version of Visual Studio installed on your machine and the version of Radare2 you wish to install:
 
-    * Visual Studio 2015:
-    `"%ProgramFiles(x86)%\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86`
+    * **Visual Studio 2015:**
 
-    * Visual Studio 2017:
-    `"%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Enterprise\VC\Auxiliary\Build\vcvars32.bat"`
+        Note: For the 64-bit version change only the `x86` at the very end of the command below to `x64`.
 
-    * Visual Studio Preview:
-    `"%ProgramFiles(x86)%\Microsoft Visual Studio\Preview\Enterprise\VC\Auxiliary\Build\vcvars32.bat"`
+        `"%ProgramFiles(x86)%\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86`
 
-4. Generate the build system with Meson: `meson build --buildtype debug --backend vs2015 --prefix %cd%\dest`
-  
-    Meson currently requires `--prefix` to point to an absolute path. We use the %CD% pseudo-variable to get the absolute path to the current working directory.
+    * **Visual Studio 2017:**
 
-5. Start a build: `msbuild build\radare2.sln /p:Configuration=Debug /m`
-  
+        Note 1: Change `Community` to either `Professional` or `Enterprise` in the command below depending on the version installed.
+
+        Note 2: Change `vcvars32.bat` to `vcvars64.bat` in the command below for the 64-bit version.
+
+         `"%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars32.bat"`
+
+    * **Visual Studio Preview:**
+
+        Note 1: Change `Community` to either `Professional` or `Enterprise` in the command below depending on the version installed.
+
+        Note 2: Change `vcvars32.bat` to `vcvars64.bat` in the command below for the 64-bit version.
+
+        `"%ProgramFiles(x86)%\Microsoft Visual Studio\Preview\Community\VC\Auxiliary\Build\vcvars32.bat"`
+
+
+4. Generate the build system with Meson:
+
+  Note 1: Change `debug` to `release` in the command below depending on whether the latest version or release version is desired.
+
+  Note 2: If you are using visual studio 2017, you can change swap `vs2015` for `vs2017`.
+
+  `meson build --buildtype debug --backend vs2015 --prefix %cd%\dest`
+
+  Meson currently requires `--prefix` to point to an absolute path. We use the %CD% pseudo-variable to get the absolute path to the current working directory.
+
+5. Start a build:
+
+    Note: Change `Debug` to `Release` in the command below depending on the version desired.
+
+    `msbuild build\radare2.sln /p:Configuration=Debug /m`
+
     The `/m[axcpucount]` switch creates one MSBuild worker process per logical processor on your machine. You can specify a numeric value (e.g. `/m:2`) to limit the number of worker processes if needed. (This should not be confused with the Visual C++ Compiler switch `/MP`.)
+
+    If you get an error with the 32-bit install that says something along the lines of `error MSB4126: The specified solution configuration "Debug|x86" is invalid.` Get around this by adding the following argument to the command: `/p:Platform=Win32`
 
 6. Install into your destination folder: `meson install -C build --no-rebuild`
 7. Check your Radare2 version: `dest\bin\radare2.exe -v`
+
+#### Check That Radare2 Runs From All Locations
+1. In the file explorer go to the folder Radare2 was just installed in.
+2. From this folder go to `dest` > `bin` and keep this window open.
+3. Go to System Properties: In the Windows search bar enter `sysdm.cpl`.
+4. Go to `Advanced > Environment Variables`.
+5. Click on the PATH variable and then click edit (if it exists within both the user and system variables, look at the user version).
+6. Ensure the file path displayed in the window left open is listed within the PATH variable. If it is not add it and click `ok`.
+7. Log out of your Windows session.
+8. Open up a new Windows Command Prompt: type `cmd` in the search bar. Ensure that the current path is not in the Radare2 folder.
+9. Check Radare2 version from Command Prompt Window: `radare2 -v`
