@@ -70,7 +70,7 @@ Radare2 also provides quite a few Unix type file processing commands like cat, g
 [0x00404800]> uniq file > uniq_file
 ```
 
-The [join](https://en.wikipedia.org/wiki/Join_(Unix)) command could be used to merge two different files with comman first field. 
+The [join](https://en.wikipedia.org/wiki/Join_\(Unix\)) command could be used to merge two different files with comman first field. 
 ```
 [0x00404800]> cat foodtypes.txt
 1 Protein
@@ -86,7 +86,7 @@ The [join](https://en.wikipedia.org/wiki/Join_(Unix)) command could be used to m
 3 Fat Butter
 ```
 
-Similarly, sorting the content is also possible with the [sort](https://en.wikipedia.org/wiki/Sort_(Unix)) command. A typical 
+Similarly, sorting the content is also possible with the [sort](https://en.wikipedia.org/wiki/Sort_\(Unix\)) command. A typical 
 example could be:
 ```
 [0x00404800]> sort file
