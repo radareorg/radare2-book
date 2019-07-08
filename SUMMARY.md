@@ -29,6 +29,7 @@
    * [Yank/Paste](basic_commands/yank_paste.md)
    * [Comparing Bytes](basic_commands/comparing_bytes.md)
    * [SDB](basic_commands/sdb.md)
+   * [Dietline](basic_commands/dietline.md)
 * [Visual mode](visual_mode/intro.md)
    * [Visual Disassembly](visual_mode/visual_disassembly.md)
    * [Visual Assembler](visual_mode/visual_assembler.md)
