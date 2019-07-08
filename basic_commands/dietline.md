@@ -14,7 +14,9 @@ autocompletion options.
 # Autocompletion
 
 In the every shell and radare2 command autocompletion is supported. There are multiple modes of it -
-files, flags, and SDB keys/namespaces.
+files, flags, and SDB keys/namespaces. To provide the easy way to select possible completion options
+the scrollable popup widget is available. It can be enabled with `scr.prompt.popup`, just set it to
+the `1`.
 
 # Emacs (default) mode
 
