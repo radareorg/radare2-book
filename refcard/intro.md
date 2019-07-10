@@ -14,13 +14,13 @@ around a binary and getting information about it.
 
 | Command                 | Description                      |
 |:------------------------|:---------------------------------|
-| s (tab)                 | Seek to a different place        |
-| x [nbytes]              | Hexdump of nbytes, $b by default |
-| aa                      | Auto analyze                     |
-| pdf@fcn(Tab)            | Disassemble function             |
-| f fcn(Tab)              | List functions                   |
-| f str(Tab)              | List strings                     |
-| fr [flagname] [newname] | Rename flag                      |
+| s (tab)                 | Seek to a different place        |
+| x [nbytes]              | Hexdump of nbytes, $b by default |
+| aa                      | Auto analyze                     |
+| pdf@fcn(Tab)            | Disassemble function             |
+| f fcn(Tab)              | List functions                   |
+| f str(Tab)              | List strings                     |
+| fr [flagname] [newname] | Rename flag                      |
 | psz [offset]~grep       | Print strings and grep for one   |
 | arf [flag]              | Find cross reference for a flag  |
 
@@ -140,9 +140,9 @@ where the `/` command may search for the given value.
 | /! ff          | Search for first occurrence not matching      |
 | /i foo         | Search for string ’foo’ ignoring case         |
 | /e /E.F/i      | Match regular expression                      |
-| /x ff0.23      | Search for hex string                         |
-| /x ff..33      | Search for hex string ignoring some nibbles   |
-| /x ff43 ffd0   | Search for hexpair with mask                  |
+| /x a1b2c3      | Search for bytes; spaces and uppercase nibbles are allowed, same as /x A1 B2 C3|
+| /x a1..c3      | Search for bytes ignoring some nibbles (auto-generates mask, in this example: ff00ff)|
+| /x a1b2:fff3   | Search for bytes with mask (specify individual bits)|
 | /d 101112      | Search for a deltified sequence of bytes      |
 | /!x 00         | Inverse hexa search (find first byte != 0x00) |
 | /c jmp [esp]   | Search for asm code (see search.asmstr)       |

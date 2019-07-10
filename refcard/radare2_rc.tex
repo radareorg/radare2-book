@@ -172,9 +172,9 @@
 \cm{/! ff}{search for first occurrence not matching}
 \cm{/i foo}{search for string 'foo' ignoring case}
 \cm{/e /E.F/i}{match regular expression}
-\cm{/x ff0.23}{search for hex string}
-\cm{/x ff..33}{search for hex string ignoring some nibbles}
-\cm{/x ff43 ffd0}{search for hexpair with mask}
+\cm{/x a1b2c3}{search for bytes, same as {\tt/x A1 B2 C3}}
+\cm{/x a1..c3}{search for bytes ignoring some nibbles}
+\cm{/x a1b2:fff3}{search for bytes with mask}
 \cm{/d 101112}{search for a deltified sequence of bytes}
 \cm{/!x 00}{inverse hexa search (find first byte != 0x00)}
 \cm{/c jmp [esp]}{search for asm code (see search.asmstr)}
@@ -206,7 +206,7 @@
 \cm{\dollar{}j}{jump address (jmp 0x10, jz 0x10 =$>$ 0x10)}
 \cm{\dollar{}f}{jump fail address (jz 0x10 =$>$ next instruction)}
 \cm{\dollar{}I}{number of instructions of current function}
-\cm{\dollar{}F}{current function size} 
+\cm{\dollar{}F}{current function size}
 \cm{\dollar{}Jn}{get nth jump of function}
 \cm{\dollar{}Cn}{get nth call of function}
 \cm{\dollar{}Dn}{get nth data reference in function}
