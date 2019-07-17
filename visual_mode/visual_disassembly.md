@@ -101,6 +101,8 @@ The "UserFriendly HUD" can be accessed using the `??` key-combination. This HUD 
 
 This HUD can be displayed using the `_` key, it shows a list of all the flags defined and lets you jump to them. Using the keyboard you can quickly filter the list down to a flag that contains a specific pattern.
 
+Hud input mode can be closed using ^C. It will also exit when backspace is pressed when the user input string is empty.
+
 ## Tweaking the Disassembly
 
 The disassembly's look-and-feel is controlled using the "asm.* configuration keys, which can be
