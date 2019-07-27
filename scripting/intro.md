@@ -65,9 +65,20 @@ commands
 [0x00404800]> px 10 @ `ao~ptr[1]` >> example.txt
 ```
 
-Radare2 also provides quite a few Unix type file processing commands like cat, grep and many more. One such command is [Uniq](https://en.wikipedia.org/wiki/Uniq), which can be used to filter a file to display only non-duplicate content. So to make a new file with only unique strings, you can do:
+Radare2 also provides quite a few Unix type file processing commands like head, tail, cat, grep and many more. One such command is [Uniq](https://en.wikipedia.org/wiki/Uniq), which can be used to filter a file to display only non-duplicate content. So to make a new file with only unique strings, you can do:
 ```
 [0x00404800]> uniq file > uniq_file
+```
+
+The [head](https://en.wikipedia.org/wiki/Head_(Unix)) command can be used to see the first N number of lines in the file, similarly [tail](https://en.wikipedia.org/wiki/Tail_(Unix)) command allows the last N number of lines to be seen.
+```
+[0x00404800]> head 3 foodtypes.txt
+1 Protein
+2 Carbohydrate
+3 Fat
+[0x00404800]> tail 2 foodtypes.txt
+3 Shake
+4 Milk
 ```
 
 The [join](https://en.wikipedia.org/wiki/Join_\(Unix\)) command could be used to merge two different files with comman first field. 
