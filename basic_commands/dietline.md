@@ -23,16 +23,47 @@ the `1`.
 By default dietline mode is compatible with readline Emacs-like mode key bindings. Thus active are:
 - `Ctrl-a` - move to the beginning of the line
 - `Ctrl-e` - move to the end of the line
-- `Alt-b` - move one word backward
-- `Alt-f` - move one word forward
-- `Alt-d` - cuts the word after the cursor
-- `Ctrl-w` - delete the last word
+- `Alt-d` - cuts the character after the cursor
+- `Ctrl-w` - delete the previous word
 - `Ctrl-b` - move one character backward
 - `Ctrl-f` - move one character forward
 - `Ctrl-u` - delete the whole line
 - `Ctrl-r` - the reverse search in the command history
 - `Ctrl-h` - delete a character to the left
 - `Ctrl-d` - delete a character to the right
+- `Ctrl-k` - kill the text from point to the end of the line.
+- `Ctrl-x` - kill backward from the cursor to the beginning of the current line.
+- `Ctrl-t` - kill from point to the end of the current word, or if between words, to the end of the next word. Word boundaries are the same as forward-word.
+- `Ctrl-w` - kill the word behind point, using white space as a word boundary. The killed text is saved on the kill-ring.
+- `Ctrl-y` - yank the top of the kill ring into the buffer at point.
+- `Ctrl-]` - rotate the kill-ring, and yank the new top. You can only do this if the prior command is yank or yank-pop.
 
+# Vi mode
 
+Radare2 also comes with in vi mode that can be enabled by toggling `scr.prompt.vi`. The various keybindings available in this mode are:
+- `ESC` - enter into the control mode
+- `i` - enter into the insert mode
+- `a` - move cursor forward and enter into insert mode
+- `I` - move to the beginning of the line and enter into insert mode
+- `A` - move to the end of the line and enter into insert mode
+- `^` - move to the beginning of the line
+- `0` - move to the beginning of the line
+- `$` - move to the end of the line
+- `x` - cuts the character
+- `dw` - delete the current word
+- `db` - delete the previous word
+- `h` - move one character backward
+- `l` - move one character forward
+- `j` - acts like up arrow key
+- `k` - acts like down arrow key
+- `D` - delete the whole line
+- `dh` - delete a character to the left
+- `dl` - delete a character to the right
+- `d$` - kill the text from point to the end of the line.
+- `d^` - kill backward from the cursor to the beginning of the current line.
+- `de` - kill from point to the end of the current word, or if between words, to the end of the next word. Word boundaries are the same as forward-word.
+- `p` - yank the top of the kill ring into the buffer at point.
+- `diw` - deletes the current word.
+- `c` - acts similar to d based commands, but goes into insert mode in the end
+By prefixing the commands with numbers, the command is performed multiple times. 
 
