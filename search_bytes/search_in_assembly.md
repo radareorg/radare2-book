@@ -1,10 +1,10 @@
 ## Assembler Search
 
-If you want to search for a certain assembler opcodes, you can either use `/c` or `/a` commands.
+If you want to search for a certain assembler opcodes, you can use `/a` commands.
 
-The command `/c jmp [esp]` searches for the specified category of assembly mnemonic:
+The command `/ad/ jmp [esp]` searches for the specified category of assembly mnemonic:
 ```
-[0x00404888]> /c jmp qword [rdx]
+[0x00404888]> /ad/ jmp qword [rdx]
 f hit_0 @ 0x0040e50d   # 2: jmp qword [rdx]
 f hit_1 @ 0x00418dbb   # 2: jmp qword [rdx]
 f hit_2 @ 0x00418fcb   # 3: jmp qword [rdx]

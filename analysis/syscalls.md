@@ -4,7 +4,7 @@ Radare2 allows manual search for assembly code looking like a syscall operation.
 For example on ARM platform usually they are represented by the `svc` instruction,
 on the others can be a different instructions, e.g. `syscall` on x86 PC.
 ```
-[0x0001ece0]> /c svc
+[0x0001ece0]> /ad/ svc
 ...
 0x000187c2   # 2: svc 0x76
 0x000189ea   # 2: svc 0xa9
