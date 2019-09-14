@@ -305,7 +305,7 @@ to override some basic opcode or meta-information properties, or even to rewrite
 string. These commands are located under `ah` namespace:
 
 ```
-|Usage: ah[lba-]Analysis Hints
+Usage: ah[lba-]  Analysis Hints
 | ah?                show this help
 | ah? offset         show hint of given offset
 | ah                 list hints in human-readable format
@@ -316,16 +316,20 @@ string. These commands are located under `ah` namespace:
 | aha ppc 51         set arch for a range of N bytes
 | ahb 16 @ $$        force 16bit for current instruction
 | ahc 0x804804       override call/jump address
+| ahd foo a0,33      replace opcode string
 | ahe 3,eax,+=       set vm analysis string
 | ahf 0x804840       override fallback address for call
-| ahh 0x804840       highlight this adrress offset in disasm
+| ahF 0x10           set stackframe size at current offset
+| ahh 0x804840       highlight this address offset in disasm
 | ahi[?] 10          define numeric base for immediates (1, 8, 10, 16, s)
 | ahj                list hints in JSON
-| aho foo a0,33      replace opcode string
+| aho call           change opcode type (see aho?)
 | ahp addr           set pointer hint
 | ahr val            set hint for return value of a function
 | ahs 4              set opcode size=4
 | ahS jz             set asm.syntax=jz for this opcode
+| aht [?] <type>     Mark immediate as a type offset
+| ahv val            change opcode's val field (useful to set jmptbl sizes in jmp rax)
 ```
 
 One of the most common cases is to set a particular numeric base for immediates:
@@ -430,7 +434,7 @@ like:
 [0x00003d54]> pd 2
 0x00003d54      0583000000     add eax, 10000011b
 0x00003d59      3d13010000     cmp eax, 0x113
-[0x00003d54]> "aho myopcode bla, foo"
+[0x00003d54]> "ahd myopcode bla, foo"
 [0x00003d54]> pd 2
 0x00003d54                     myopcode bla, foo
 0x00003d55      830000         add dword [rax], 0
