@@ -155,7 +155,7 @@ Moreover, the link will be shown in the disassembly output or visual mode:
 Once the struct is linked, radare2 tries to propagate structure offset in the function at current offset, to run this analysis on whole program or at any targeted functions after all structs are linked you have `aat` command:
 
 ```
-[0x00000000]> t
+[0x00000000]> aa?
 | aat [fcn]           Analyze all/given function to convert immediate to linked structure offsets (see tl?)
 ```
 
