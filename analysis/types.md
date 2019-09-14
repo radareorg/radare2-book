@@ -8,29 +8,31 @@ Most of the related commands are located in `t` namespace:
 
 ```
 [0x000051c0]> t?
-|Usage: t # cparse types commands
-| t               List all loaded types
-| tj              List all loaded types as json
-| t <type>        Show type in 'pf' syntax
-| t*              List types info in r2 commands
-| t- <name>       Delete types by its name
-| t-*             Remove all types
-| ta <type>       Mark immediate as a type offset
-| tc ([cctype])   calling conventions listing and manipulations
-| te[?]           List all loaded enums
-| td[?] <string>  Load types from string
-| tf              List all loaded functions signatures
-| tk <sdb-query>  Perform sdb query
-| tl[?]           Show/Link type to an address
-| tn[?] [-][addr] manage noreturn function attributes and marks
-| to -            Open cfg.editor to load types
-| to <path>       Load types from C header file
-| tos <path>      Load types from parsed Sdb database
+Usage: t   # cparse types commands
+| t                          List all loaded types
+| tj                         List all loaded types as json
+| t <type>                   Show type in 'pf' syntax
+| t*                         List types info in r2 commands
+| t- <name>                  Delete types by its name
+| t-*                        Remove all types
+| tail [filename]            Output the last part of files
+| tc[type.name]              List all/given types in C output format
+| te[?]                      List all loaded enums
+| td[?] <string>             Load types from string
+| tf                         List all loaded functions signatures
+| tk <sdb-query>             Perform sdb query
+| tl[?]                      Show/Link type to an address
+| tn[?] [-][addr]            manage noreturn function attributes and marks
+| to -                       Open cfg.editor to load types
+| to <path>                  Load types from C header file
+| toe[type.name]             Open cfg.editor to edit types
+| tos <path>                 Load types from parsed Sdb database
 | tp  <type> [addr|varname]  cast data at <address> to <type> and print it
 | tpx <type> <hexpairs>      Show value for type with specified byte sequence
-| ts[?]           print loaded struct types
-| tu[?]           print loaded union types
-| tt[?]           List all loaded typedefs
+| ts[?]                      Print loaded struct types
+| tu[?]                      Print loaded union types
+| tx[f?]                     Type xrefs
+| tt[?]                      List all loaded typedefs
 ```
 
 Note that the basic (atomic) types are not those from C standard -
@@ -150,11 +152,11 @@ Moreover, the link will be shown in the disassembly output or visual mode:
  0x00005202      mov rbp, rsp
 ```
 
-Once the struct is linked, radare2 tries to propagate structure offset in the function at current offset, to run this analysis on whole program or at any targeted functions after all structs are linked you have `taa` command:
+Once the struct is linked, radare2 tries to propagate structure offset in the function at current offset, to run this analysis on whole program or at any targeted functions after all structs are linked you have `aat` command:
 
 ```
-[0x00000000]> ta?
-| taa [fcn]           Analyze all/given function to convert immediate to linked structure offsets (see tl?)
+[0x00000000]> aa?
+| aat [fcn]           Analyze all/given function to convert immediate to linked structure offsets (see tl?)
 ```
 
 Note sometimes the emulation may not be accurate, for example as below :
@@ -170,7 +172,7 @@ Note sometimes the emulation may not be accurate, for example as below :
 
 ````
 
-The return value of `malloc` may differ between two emulations, so you have to set the hint for return value manually using `ahr` command, so run `tl` or `taa` command after setting up the return value hint.
+The return value of `malloc` may differ between two emulations, so you have to set the hint for return value manually using `ahr` command, so run `tl` or `aat` command after setting up the return value hint.
 
 ```
 [0x000006da]> ah?
@@ -179,7 +181,7 @@ The return value of `malloc` may differ between two emulations, so you have to s
 
 ### Structure Immediates
 
-There is one more important aspect of using types in radare2 - using `ta` you
+There is one more important aspect of using types in radare2 - using `aht` you
 can change the immediate in the opcode to the structure offset.
 Lets see a simple example of [R]SI-relative addressing
 
@@ -199,7 +201,7 @@ Now we need to set the proper structure member offset instead of `8` in this ins
 At first, we need to list available types matching this offset:
 
 ```
-[0x000052f0]> tas 8
+[0x000052f0]> ahts 8
 ms.member1
 ms1.member1
 ```
@@ -209,7 +211,7 @@ After listing available options we can link it to the chosen offset at
 the current address:
 
 ```
-[0x000052f0]> ta ms1.member1
+[0x000052f0]> aht ms1.member1
 [0x000052f0]> pd 1
 0x000052f0      488b4608       mov rax, qword [rsi + ms1.member1]    ; [0x8:8]=0
 ```
