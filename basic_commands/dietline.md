@@ -67,3 +67,4 @@ Radare2 also comes with in vi mode that can be enabled by toggling `scr.prompt.v
 - `c` - acts similar to d based commands, but goes into insert mode in the end
 By prefixing the commands with numbers, the command is performed multiple times. 
 
+If you are finding it hard to keep track of which mode you are in, just set `scr.prompt.mode=true` to update the color of the prompt based on the vi-mode.
