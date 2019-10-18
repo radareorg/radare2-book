@@ -105,6 +105,7 @@ TRAP  | src | Trap | Trap signal |
  **>>** | src,dst | Shift Right | stack = dst >> src | &gt; "ae 1,4,>>"<br>0x2<br>&gt; "ae 2,4,>>"<br>0x1
  **<<<** | src,dst | Rotate Left | stack=dst ROL src | &gt; "ae 31,1,<<<"<br>0x80000000<br>&gt; "ae 32,1,<<<"<br>0x1
 **>>>** | src,dst | Rotate Right | stack=dst ROR src | &gt; "ae 1,1,>>>"<br>0x80000000<br>&gt; "ae 32,1,>>>"<br>0x1
+**>>>>** | src,dst | Arithmetic Shift Right | stack=dst >> src | &gt; "ae -4,r_01,="<br>&gt; "ae 1,r_01,>>>>"<br>&gt;"ar r_01"<br>0xfffffffe
 **&** | src,dst | AND | stack = dst & src | &gt; "ae 1,1,&"<br>0x1<br>&gt; "ae 1,0,&"<br>0x0<br>&gt;  "ae 0,1,&"<br>0x0<br>&gt; "ae 0,0,&"<br>0x0
 **&#x7c;** | src,dst | OR | stack = dst &#x7c; src | &gt; "ae 1,1,&#x7c;"<br>0x1<br>&gt; "ae 1,0,&#x7c;"<br>0x1<br>&gt; "ae 0,1,&#x7c;"<br>0x1<br>&gt; "ae 0,0,&#x7c;"<br>0x0
 **^** | src,dst | XOR | stack = dst ^src  | &gt; "ae 1,1,^"<br>0x0<br>&gt; "ae 1,0,^"<br>0x1<br>&gt; "ae 0,1,^"<br>0x1<br>&gt; "ae 0,0,^"<br>0x0
@@ -152,8 +153,8 @@ Internal flags are prefixed with `$` character.
 
 ```
 z      - zero flag, only set if the result of an operation is 0
-b      - borrow, this requires to specify from which bit (example: $b4 - checks if borrow from bit 4)
-c      - carry, same like above (example: $c7 - checks if carry from bit 7)
+b      - borrow, this requires to specify from which bit (example: 4,$b - checks if borrow from bit 4)
+c      - carry, same like above (example: 7,$c - checks if carry from bit 7)
 o      - overflow
 p      - parity
 r      - regsize ( asm.bits/8 )
