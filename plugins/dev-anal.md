@@ -34,12 +34,12 @@ emulation - register profile, like in debugger, which is set within `set_reg_pro
 
 ```makefile
 NAME=anal_snes
-R2_PLUGIN_PATH=$(shell r2 -H|grep USER_PLUGINS|awk '{print $$2}')
+R2_PLUGIN_PATH=$(shell r2 -H R2_USER_PLUGINS)
+LIBEXT=$(shell r2 -H LIBEXT)
 CFLAGS=-g -fPIC $(shell pkg-config --cflags r_anal)
 LDFLAGS=-shared $(shell pkg-config --libs r_anal)
 OBJS=$(NAME).o
-SO_EXT=$(shell uname|grep -q Darwin && echo dylib || echo so)
-LIB=$(NAME).$(SO_EXT)
+LIB=$(NAME).$(LIBEXT)
 
 all: $(LIB)
 
@@ -98,8 +98,8 @@ struct r_anal_plugin_t r_anal_plugin_snes = {
 	.diff_eval = NULL
 };
 
-#ifndef CORELIB
-struct r_lib_struct_t radare_plugin = {
+#ifndef R2_PLUGIN_INCORE
+R_API RLibStruct radare_plugin = {
 	.type = R_LIB_TYPE_ANAL,
 	.data = &r_anal_plugin_snes,
 	.version = R2_VERSION

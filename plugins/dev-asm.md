@@ -28,12 +28,12 @@ static int disassemble(RAsm *a, RAsmOp *op, const ut8 *buf, int len)
 
 ```makefile
 NAME=asm_snes
-R2_PLUGIN_PATH=$(shell r2 -H|grep USER_PLUGINS|awk '{print $$2}')
+R2_PLUGIN_PATH=$(shell r2 -H R2_USER_PLUGINS)
+LIBEXT=$(shell r2 -H LIBEXT)
 CFLAGS=-g -fPIC $(shell pkg-config --cflags r_anal)
 LDFLAGS=-shared $(shell pkg-config --libs r_anal)
 OBJS=$(NAME).o
-SO_EXT=$(shell uname|grep -q Darwin && echo dylib || echo so)
-LIB=$(NAME).$(SO_EXT)
+LIB=$(NAME).$(LIBEXT)
 
 all: $(LIB)
 
@@ -85,8 +85,8 @@ RAsmPlugin r_asm_plugin_mycpu = {
 	.disassemble = &disassemble
 };
 
-#ifndef CORELIB
-RLibStruct radare_plugin = {
+#ifndef R2_PLUGIN_INCORE
+R_API RLibStruct radare_plugin = {
 	.type = R_LIB_TYPE_ASM,
 	.data = &r_asm_plugin_mycpu,
 	.version = R2_VERSION

@@ -10,12 +10,12 @@ In `info` add `et->has_va = 1;` and `ptr->srwx` with the `R_BIN_SCN_MAP;` attrib
 
 ```Makefile
 NAME=bin_nes
-R2_PLUGIN_PATH=$(shell r2 -hh|grep R2_LIBR_PLUGINS|awk '{print $$2}')
+R2_PLUGIN_PATH=$(shell r2 -H R2_USER_PLUGINS)
+LIBEXT=$(shell r2 -H LIBEXT)
 CFLAGS=-g -fPIC $(shell pkg-config --cflags r_bin)
 LDFLAGS=-shared $(shell pkg-config --libs r_bin)
 OBJS=$(NAME).o
-SO_EXT=$(shell uname|grep -q Darwin && echo dylib || echo so)
-LIB=$(NAME).$(SO_EXT)
+LIB=$(NAME).$(LIBEXT)
 
 all: $(LIB)
 
@@ -36,28 +36,26 @@ uninstall:
 **bin_nes.c:**
 
 ```c
+#include <r_util.h>
 #include <r_bin.h>
 
-static int check(RBinFile *arch);
-static int check_bytes(const ut8 *buf, ut64 length);
-
-static void * load_bytes(RBinFile *arch, const ut8 *buf, ut64 sz, ut64 loadaddr, Sdb *sdb){
-	check_bytes (buf, sz);
-	return R_NOTNULL;
+static bool load_buffer(RBinFile *bf, void **bin_obj, RBuffer *b, ut64 loadaddr, Sdb *sdb) {
+	ut64 size;
+	const ut8 *buf = r_buf_data (b, &size);
+	r_return_val_if_fail (buf, false);
+	*bin_obj = r_bin_internal_nes_load (buf, size);
+	return *bin_obj != NULL;
 }
 
-
-static int check(RBinFile *arch) {
-	const ut8 \*bytes = arch ? r_buf_buffer (arch->buf) : NULL;
-	ut64 sz = arch ? r_buf_size (arch->buf): 0;
-	return check_bytes (bytes, sz);
+static void destroy(RBinFile *bf) {
+	r_bin_free_all_nes_obj (bf->o->bin_obj);
+	bf->o->bin_obj = NULL;
 }
 
-static int check_bytes(const ut8 *buf, ut64 length) {
+static bool check_buffer(RBuffer *b) {
 	if (!buf || length < 4) return false;
 	return (!memcmp (buf, "\x4E\x45\x53\x1A", 4));
 }
-
 
 static RBinInfo* info(RBinFile *arch) {
 	RBinInfo \*ret = R_NEW0 (RBinInfo);
@@ -77,26 +75,22 @@ static RBinInfo* info(RBinFile *arch) {
 	return ret;
 }
 
-
 struct r_bin_plugin_t r_bin_plugin_nes = {
 	.name = "nes",
 	.desc = "NES",
 	.license = "BSD",
-	.init = NULL,
-	.fini = NULL,
 	.get_sdb = NULL,
-	.load = NULL,
-	.load_bytes = &load_bytes,
-	.check = &check,
+	.load_buffer = &load_buffer,
+	.destroy = &destroy,
+	.check_buffer = &check_buffer,
 	.baddr = NULL,
-	.check_bytes = &check_bytes,
 	.entries = NULL,
 	.sections = NULL,
 	.info = &info,
 };
 
-#ifndef CORELIB
-struct r_lib_struct_t radare_plugin = {
+#ifndef R2_PLUGIN_INCORE
+R_API RLibStruct radare_plugin = {
 	.type = R_LIB_TYPE_BIN,
 	.data = &r_bin_plugin_nes,
 	.version = R2_VERSION
