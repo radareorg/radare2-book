@@ -285,7 +285,7 @@ there are basically 3 mandatory keys for defining basic data types:
 `X=type`
 `type.X=format_specifier`
 `type.X.size=size_in_bits`
-For example, let's define `UNIT`, according to [Microsoft documentation](https://msdn.microsoft.com/en-us/library/windows/desktop/aa383751(v=vs.85).aspx#UINT )
+For example, let's define `UNIT`, according to [Microsoft documentation](https://msdn.microsoft.com/en-us/library/windows/desktop/aa383751%28v=vs.85%29.aspx#UINT)
 `UINT` is just equivalent of standard C `unsigned int` (or `uint32_t` in terms of TCC engine).
 It will be defined as:
 

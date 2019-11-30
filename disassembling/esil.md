@@ -1,6 +1,6 @@
 # ESIL
 
-ESIL stands for 'Evaluable Strings Intermediate Language'. It aims to describe a [Forth](https://en.wikipedia.org/wiki/Forth_(programming_language))-like representation for every target CPU opcode semantics. ESIL representations can be evaluated (interpreted) in order to emulate individual instructions. Each command of an ESIL expression is separated by a comma. Its virtual machine can be described as this:
+ESIL stands for 'Evaluable Strings Intermediate Language'. It aims to describe a [Forth](https://en.wikipedia.org/wiki/Forth_%28programming_language%29)-like representation for every target CPU opcode semantics. ESIL representations can be evaluated (interpreted) in order to emulate individual instructions. Each command of an ESIL expression is separated by a comma. Its virtual machine can be described as this:
 ```
    while ((word=haveCommand())) {
      if (word.isOperator()) {
