@@ -70,7 +70,7 @@ Radare2 also provides quite a few Unix type file processing commands like head, 
 [0x00404800]> uniq file > uniq_file
 ```
 
-The [head](https://en.wikipedia.org/wiki/Head_(Unix)) command can be used to see the first N number of lines in the file, similarly [tail](https://en.wikipedia.org/wiki/Tail_(Unix)) command allows the last N number of lines to be seen.
+The [head](https://en.wikipedia.org/wiki/Head_%28Unix%29) command can be used to see the first N number of lines in the file, similarly [tail](https://en.wikipedia.org/wiki/Tail_(Unix)) command allows the last N number of lines to be seen.
 ```
 [0x00404800]> head 3 foodtypes.txt
 1 Protein
@@ -81,7 +81,7 @@ The [head](https://en.wikipedia.org/wiki/Head_(Unix)) command can be used to see
 4 Milk
 ```
 
-The [join](https://en.wikipedia.org/wiki/Join_\(Unix\)) command could be used to merge two different files with comman first field. 
+The [join](https://en.wikipedia.org/wiki/Join_%28Unix%29) command could be used to merge two different files with comman first field. 
 ```
 [0x00404800]> cat foodtypes.txt
 1 Protein
@@ -97,7 +97,7 @@ The [join](https://en.wikipedia.org/wiki/Join_\(Unix\)) command could be used to
 3 Fat Butter
 ```
 
-Similarly, sorting the content is also possible with the [sort](https://en.wikipedia.org/wiki/Sort_\(Unix\)) command. A typical 
+Similarly, sorting the content is also possible with the [sort](https://en.wikipedia.org/wiki/Sort_%28Unix%29) command. A typical 
 example could be:
 ```
 [0x00404800]> sort file
