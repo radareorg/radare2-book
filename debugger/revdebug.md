@@ -1,6 +1,6 @@
 # Reverse Debugging
 
-Radare2 has reverse debugger, that can seek program counter backward.
+Radare2 has reverse debugger, that can seek the program counter backward.
 (e.g. reverse-next, reverse-continue in gdb)
 Firstly you need to save program state at the point that you want to start recording.
 The syntax for recording is:
@@ -99,3 +99,7 @@ And step back by `aesb`:
 0x00404879
 ```
 
+In addition to the native reverse debugging capabilities in radare2, it's also possible to
+use gdb's remote protocol to reverse debug a target gdbserver that supports it.
+`=!dsb` and `=!dcb` are available as `dsb` and `dcb` replacementments for this purpose,
+see [remote gdb's documentation](remote_gdb.md) for more information.
