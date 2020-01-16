@@ -23,6 +23,13 @@ the host with:
 $ r2 -d gdb://<host>:<port>/<pid>
 ```
 
+It is also possible to start debugging after analyzing a file using the `doof` command
+which rebases the current session's data after opening gdb
+
+```
+[0x00404870]> doof gdb://<host>:<port>/<pid>
+```
+
 After connecting, you can use the standard r2 debug commands as normal.
 
 radare2 does not yet load symbols from gdbserver, so it needs the binary to
@@ -67,12 +74,25 @@ Usage: =!cmd args
  =!pid             - show targeted pid
  =!pkt s           - send packet 's'
  =!monitor cmd     - hex-encode monitor command and pass to target interpreter
+ =!rd              - show reverse debugging availability
+ =!dsb             - step backwards
+ =!dcb             - continue backwards
  =!detach [pid]    - detach from remote/detach specific pid
  =!inv.reg         - invalidate reg cache
  =!pktsz           - get max packet size used
  =!pktsz bytes     - set max. packet size as 'bytes' bytes
  =!exec_file [pid] - get file which was executed for current/specified pid
 ```
+
+Note that `=!dsb` and `=!dcb` are only available in special gdbserver implementations such
+as [Mozilla's rr](https://github.com/mozilla/rr), the default gdbserver doesn't include
+remote reverse debugging support.
+Use `=!rd` to print the currently available reverse debugging capabilities.
+
+If you are interested in debugging radare2's interaction with gdbserver you can use
+`=!monitor set remote-debug 1` to turn on logging of gdb's remote protocol packets in
+gdbserver's console and `=!monitor set debug 1` to show general debug messages from
+gdbserver in it's console.
 
 radare2 also provides its own gdbserver implementation:
 
