@@ -6,7 +6,7 @@ People often want to use radare as a debugger for reverse engineering. Currently
 
 Compared to core, the debugger feature is more restrictive portability-wise. If the debugger has not been ported to your favorite platform, you can disable the debugger layer with the --without-debugger `configure` script option when compiling radare2.
 
-Note that there are I/O plugins that use GDB, GDB, WinDbg, or Wine as back-ends, and therefore rely on presence of corresponding third-party tools (in case of remote debugging - just on the target machine).
+Note that there are I/O plugins that use GDB, WinDbg, or Wine as back-ends, and therefore rely on presence of corresponding third-party tools (in case of remote debugging - just on the target machine).
 
 To build on a system using `acr` and `GNU Make` (e.g. on *BSD systems):
 ```
