@@ -24,7 +24,7 @@ Use `rarun2` (`libpath=$PWD:/tmp/lib`, `arg2=hello`, `setenv=FOO=BAR` ...) see `
 
 `r2 -I <scriptfile> ...` - run a script **before** loading the file
 
-`r2 -c $@ | awk $@`  - run thru awk get asm from function => [[link](http://sprunge.us/dEOK)]
+`r2 -c $@ | awk $@`  - run through awk to get asm from function => [[link](http://sprunge.us/dEOK)]
 
 `[0x80480423]> . scriptfile` - interpret this file => [[video](http://asciinema.org/a/12017)]
 
