@@ -17,7 +17,7 @@ The main variables commands are located in `afv` namespace:
 | afva                        analyze function arguments/locals
 | afvd name                   output r2 command for displaying the value of args/locals in the
 debugger
-| afvn [old_name] [new_name]  rename argument/local
+| afvn [new_name] [old_name]  rename argument/local
 | afvt [name] [new_type]      change type for given argument/local
 | afv-([name])                remove all or given var
 ```
