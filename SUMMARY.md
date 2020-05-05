@@ -69,6 +69,7 @@
    * [Heap](debugger/heap.md)
    * [Files](debugger/files.md)
    * [Reverse Debugging](debugger/revdebug.md)
+   * [Windows Messages](debugger/windows_messages.md)
 * [Remote Access](debugger/remoting_capabilities.md)
    * [Remote GDB](debugger/remote_gdb.md)
    * [Remote WinDbg](debugger/windbg.md)
