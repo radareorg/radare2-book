@@ -28,7 +28,7 @@ def mycpu(a):
             "name" : "mycpu",
             "arch" : "mycpu",
             "bits" : 32,
-            "endian" : "little",
+            "endian" : R.R_SYS_ENDIAN_LITTLE,
             "license" : "GPL",
             "desc" : "MYCPU disasm",
             "assemble" : assemble,
