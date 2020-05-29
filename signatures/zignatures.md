@@ -7,16 +7,21 @@ create them on the fly. They are available under the `z` command namespace:
 [0x000100b0]> z?
 |Usage: z[*j-aof/cs] [args] # Manage zignatures
 | z            show zignatures
+| z.           find matching zignatures in current offset
 | z*           show zignatures in radare format
+| zq           show zignatures in quiet mode
 | zj           show zignatures in json format
+| zk           show zignatures in sdb format
 | z-zignature  delete zignature
 | z-*          delete all zignatures
 | za[?]        add zignature
+| zg           generate zignatures (alias for zaF)
 | zo[?]        manage zignature files
 | zf[?]        manage FLIRT signatures
 | z/[?]        search zignatures
-| zc           check zignatures at address
+| zc[?]        compare current zignspace zignatures with another one
 | zs[?]        manage zignspaces
+| zi           show zignatures matching information
 ```
 To load the created signature file you need to load it from SDB file using `zo` command or
 from the compressed SDB file using `zoz` command.
