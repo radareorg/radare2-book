@@ -148,7 +148,7 @@ wide choice of manual references' creation of any kind. For this fine-grained co
 you can use `ax` commands.
 
 ```
-|Usage: ax[?d-l*] # see also 'afx?'
+Usage: ax[?d-l*]   # see also 'afx?'
 | ax              list refs
 | ax*             output radare commands
 | ax addr [at]    add code ref pointing to addr (from curseek)
@@ -157,13 +157,18 @@ you can use `ax` commands.
 | axc addr [at]   add generic code ref
 | axC addr [at]   add code call ref
 | axg [addr]      show xrefs graph to reach current function
+| axg* [addr]     show xrefs graph to given address, use .axg*;aggv
 | axgj [addr]     show xrefs graph to reach current function in json format
 | axd addr [at]   add data ref
 | axq             list refs in quiet/human-readable format
 | axj             list refs in json format
 | axF [flg-glob]  find data/code references of flags
+| axm addr [at]   copy data/code references pointing to addr to also point to curseek (or at)
 | axt [addr]      find data/code references to this address
 | axf [addr]      find data/code references from this address
+| axv [addr]      list local variables read-write-exec references
+| ax. [addr]      find data/code references from and to this address
+| axff[j] [addr]  find data/code references from this function
 | axs addr [at]   add string ref
 ```
 
@@ -313,22 +318,24 @@ Usage: ah[lba-]  Analysis Hints
 | ah-                remove all hints
 | ah- offset [size]  remove hints at given offset
 | ah* offset         list hints in radare commands format
-| aha ppc 51         set arch for a range of N bytes
-| ahb 16 @ $$        force 16bit for current instruction
+| aha ppc @ 0x42     force arch ppc for all addrs >= 0x42 or until the next hint
+| aha 0 @ 0x84       disable the effect of arch hints for all addrs >= 0x84 or until the next hint
+| ahb 16 @ 0x42      force 16bit for all addrs >= 0x42 or until the next hint
+| ahb 0 @ 0x84       disable the effect of bits hints for all addrs >= 0x84 or until the next hint
 | ahc 0x804804       override call/jump address
 | ahd foo a0,33      replace opcode string
 | ahe 3,eax,+=       set vm analysis string
 | ahf 0x804840       override fallback address for call
 | ahF 0x10           set stackframe size at current offset
 | ahh 0x804840       highlight this address offset in disasm
-| ahi[?] 10          define numeric base for immediates (1, 8, 10, 16, s)
+| ahi[?] 10          define numeric base for immediates (2, 8, 10, 10u, 16, i, p, S, s)
 | ahj                list hints in JSON
-| aho call           change opcode type (see aho?)
+| aho call           change opcode type (see aho?) (deprecated, moved to "ahd")
 | ahp addr           set pointer hint
 | ahr val            set hint for return value of a function
 | ahs 4              set opcode size=4
 | ahS jz             set asm.syntax=jz for this opcode
-| aht [?] <type>     Mark immediate as a type offset
+| aht [?] <type>     Mark immediate as a type offset (deprecated, moved to "aho")
 | ahv val            change opcode's val field (useful to set jmptbl sizes in jmp rax)
 ```
 
@@ -336,16 +343,18 @@ One of the most common cases is to set a particular numeric base for immediates:
 
 ```
 [0x00003d54]> ahi?
-|Usage ahi [sbodh] [@ offset] Define numeric base
-| ahi [base]  set numeric base (1, 2, 8, 10, 16)
+Usage: ahi [2|8|10|10u|16|bodhipSs] [@ offset]   Define numeric base
+| ahi <base>  set numeric base (2, 8, 10, 16)
+| ahi 10|d    set base to signed decimal (10), sign bit should depend on receiver size
+| ahi 10u|du  set base to unsigned decimal (11)
 | ahi b       set base to binary (2)
-| ahi d       set base to decimal (10)
-| ahi h       set base to hexadecimal (16)
 | ahi o       set base to octal (8)
-| ahi p       set base to htons(port) (3)
+| ahi h       set base to hexadecimal (16)
 | ahi i       set base to IP address (32)
+| ahi p       set base to htons(port) (3)
 | ahi S       set base to syscall (80)
 | ahi s       set base to string (1)
+
 [0x00003d54]> pd 2
 0x00003d54      0583000000     add eax, 0x83
 0x00003d59      3d13010000     cmp eax, 0x113
