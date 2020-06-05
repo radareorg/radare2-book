@@ -4,25 +4,32 @@ Radare2 can also work with data types. You can use standard C data types or defi
 
 ```
 [0x00000000]> t?
-|Usage: t # cparse types commands
-| t                       List all loaded types
-| t <type>                Show type in 'pf' syntax
-| t*                      List types info in r2 commands
-| t- <name>               Delete types by its name
-| t-*                     Remove all types
-| tb <enum> <value>       Show matching enum bitfield for given number
-| te                      List all loaded enums
-| te <enum> <value>       Show name for given enum number
-| td <string>             Load types from string
-| tf                      List all loaded functions signatures
-| tk <sdb-query>          Perform sdb query
-| tl[?]                   Show/Link type to an address
-| to -                    Open cfg.editor to load types
-| to <path>               Load types from C header file
-| tp <type>  = <address>  cast data at <address> to <type> and print it
-| ts                      print loaded struct types
-| tu                      print loaded union types
-[0x00000000]> 
+Usage: t   # cparse types commands
+| t                          List all loaded types
+| tj                         List all loaded types as json
+| t <type>                   Show type in 'pf' syntax
+| t*                         List types info in r2 commands
+| t- <name>                  Delete types by its name
+| t-*                        Remove all types
+| tail [filename]            Output the last part of files
+| tc [type.name]             List all/given types in C output format
+| te[?]                      List all loaded enums
+| td[?] <string>             Load types from string
+| tf                         List all loaded functions signatures
+| tk <sdb-query>             Perform sdb query
+| tl[?]                      Show/Link type to an address
+| tn[?] [-][addr]            manage noreturn function attributes and marks
+| to -                       Open cfg.editor to load types
+| to <path>                  Load types from C header file
+| toe [type.name]            Open cfg.editor to edit types
+| tos <path>                 Load types from parsed Sdb database
+| tp  <type> [addr|varname]  cast data at <address> to <type> and print it (XXX: type can contain spaces)
+| tpv <type> @ [value]       Show offset formatted for given type
+| tpx <type> <hexpairs>      Show value for type with specified byte sequence (XXX: type can contain spaces)
+| ts[?]                      Print loaded struct types
+| tu[?]                      Print loaded union types
+| tx[f?]                     Type xrefs
+| tt[?]                      List all loaded typedefs
 ```
 
 ### Defining new types

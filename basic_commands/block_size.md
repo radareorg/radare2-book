@@ -4,13 +4,16 @@ The block size determines how many bytes radare2 commands will process when not 
 
 ```
 [0xB7F9D810]> b?
-|Usage: b[f] [arg] Get/Set block size
-| b        display current block size
+| Usage: b[f] [arg]
+| Get/Set block size
 | b 33     set block size to 33
+| b eip+4  numeric argument can be an expression
+| b        display current block size
 | b+3      increase blocksize by 3
 | b-16     decrease blocksize by 16
-| b eip+4  numeric argument can be an expression
+| b*       display current block size in r2 command
 | bf foo   set block size to flag size
+| bj       display block size information in JSON
 | bm 1M    set max block size
 ```
 
