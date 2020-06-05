@@ -22,27 +22,32 @@ There are many different metadata manipulation commands, here is the glimpse of 
 
 ```
 [0x00404cc0]> C?
-|Usage: C[-LCvsdfm*?][*?] [...] # Metadata management
-| C                            list meta info in human friendly form
-| C*                           list meta info in r2 commands
-| C[Chsdmf]                    list comments/hidden/strings/data/magic/formatted in human friendly form
-| C[Chsdmf]*                   list comments/hidden/strings/data/magic/formatted in r2 commands
-| C- [len] [[@]addr]           delete metadata at given address range
-| CL[-][*] [file:line] [addr]  show or add 'code line' information (bininfo)
-| CS[-][space]                 manage meta-spaces to filter comments, etc..
-| CC[?] [-] [comment-text] [@addr] add/remove comment
-| CC.[addr]                    show comment in current address
-| CC! [@addr]                  edit comment with $EDITOR
-| CCa[-at]|[at] [text] [@addr] add/remove comment at given address
-| CCu [comment-text] [@addr]   add unique comment
-| Cv[bsr][?]                   add comments to args
-| Cs[?] [-] [size] [@addr]     add string
-| Cz[@addr]                    add string (see Cs?)
-| Ch[-] [size] [@addr]         hide data
-| Cd[-] [size] [repeat] [@addr]hexdump data array (Cd 4 10 == dword [10])
+| Usage: C[-LCvsdfm*?][*?] [...]   # Metadata management
+| C                                              list meta info in human friendly form
+| C*                                             list meta info in r2 commands
+| C*.                                            list meta info of current offset in r2 commands
+| C- [len] [[@]addr]                             delete metadata at given address range
+| C.                                             list meta info of current offset in human friendly form
+| CC! [@addr]                                    edit comment with $EDITOR
+| CC[?] [-] [comment-text] [@addr]               add/remove comment
+| CC.[addr]                                      show comment in current address
+| CCa[-at]|[at] [text] [@addr]                   add/remove comment at given address
+| CCu [comment-text] [@addr]                     add unique comment
+| CF[sz] [fcn-sign..] [@addr]                    function signature
+| CL[-][*] [file:line] [addr]                    show or add 'code line' information (bininfo)
+| CS[-][space]                                   manage meta-spaces to filter comments, etc..
+| C[Cthsdmf]                                     list comments/types/hidden/strings/data/magic/formatted in human friendly form
+| C[Cthsdmf]*                                    list comments/types/hidden/strings/data/magic/formatted in r2 commands
+| Cd[-] [size] [repeat] [@addr]                  hexdump data array (Cd 4 10 == dword [10])
+| Cd. [@addr]                                    show size of data at current address
 | Cf[?][-] [sz] [0|cnt][fmt] [a0 a1...] [@addr]  format memory (see pf?)
-| CF[sz] [fcn-sign..] [@addr]  function signature
-| Cm[-] [sz] [fmt..] [@addr]   magic parse (see pm?)
+| Ch[-] [size] [@addr]                           hide data
+| Cm[-] [sz] [fmt..] [@addr]                     magic parse (see pm?)
+| Cs[?] [-] [size] [@addr]                       add string
+| Ct[?] [-] [comment-text] [@addr]               add/remove type analysis comment
+| Ct.[@addr]                                     show comment at current or specified address
+| Cv[bsr][?]                                     add comments to args
+| Cz[@addr]                                      add string (see Cs?)
 ```
 
 Simply to add the comment to a particular line/address you can use `Ca` command:
