@@ -39,7 +39,7 @@ There are many commands available now:
 r2pm -h
 Usage: r2pm [init|update|cmd] [...]
 Commands:
- -i,info                     show information about a package
+ -I,info                     show information about a package
  -i,install <pkgname>        install package in your home (pkgname=all)
  -gi,global-install <pkg>    install package system-wide
  -gu,global-uninstall <pkg>  uninstall pkg from systemdir
