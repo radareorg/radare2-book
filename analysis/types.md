@@ -8,7 +8,7 @@ Most of the related commands are located in `t` namespace:
 
 ```
 [0x000051c0]> t?
-Usage: t   # cparse types commands
+| Usage: t   # cparse types commands
 | t                          List all loaded types
 | tj                         List all loaded types as json
 | t <type>                   Show type in 'pf' syntax
@@ -16,7 +16,7 @@ Usage: t   # cparse types commands
 | t- <name>                  Delete types by its name
 | t-*                        Remove all types
 | tail [filename]            Output the last part of files
-| tc[type.name]              List all/given types in C output format
+| tc [type.name]             List all/given types in C output format
 | te[?]                      List all loaded enums
 | td[?] <string>             Load types from string
 | tf                         List all loaded functions signatures
@@ -25,10 +25,11 @@ Usage: t   # cparse types commands
 | tn[?] [-][addr]            manage noreturn function attributes and marks
 | to -                       Open cfg.editor to load types
 | to <path>                  Load types from C header file
-| toe[type.name]             Open cfg.editor to edit types
+| toe [type.name]            Open cfg.editor to edit types
 | tos <path>                 Load types from parsed Sdb database
-| tp  <type> [addr|varname]  cast data at <address> to <type> and print it
-| tpx <type> <hexpairs>      Show value for type with specified byte sequence
+| tp  <type> [addr|varname]  cast data at <address> to <type> and print it (XXX: type can contain spaces)
+| tpv <type> @ [value]       Show offset formatted for given type
+| tpx <type> <hexpairs>      Show value for type with specified byte sequence (XXX: type can contain spaces)
 | ts[?]                      Print loaded struct types
 | tu[?]                      Print loaded union types
 | tx[f?]                     Type xrefs

@@ -22,19 +22,28 @@ prompt. To limit the output to a selected namespace, pass it with an ending dot 
 To get help about `e` command type `e?`:
 
 ```
-Usage: e[?] [var[=value]]
-e?              show this help
-e?asm.bytes     show description
-e??             list config vars with description
-e               list config vars
-e-              reset config vars
-e*              dump config vars in r commands
-e!a             invert the boolean value of 'a' var
-er [key]        set config key as readonly. no way back
-ec [k] [color]  set color for given key (prompt, offset, ...)
-e a             get value of var 'a'
-e a=b           set var 'a' the 'b' value
-env [k[=v]]     get/set environment variable
+Usage: e [var[=value]]  Evaluable vars
+| e?asm.bytes     show description
+| e??             list config vars with description
+| e a             get value of var 'a'
+| e a=b           set var 'a' the 'b' value
+| e var=?         print all valid values of var
+| e var=??        print all valid values of var with description
+| e.a=b           same as 'e a=b' but without using a space
+| e,k=v,k=v,k=v   comma separated k[=v]
+| e-              reset config vars
+| e*              dump config vars in r commands
+| e!a             invert the boolean value of 'a' var
+| ec [k] [color]  set color for given key (prompt, offset, ...)
+| eevar           open editor to change the value of var
+| ed              open editor to change the ~/.radare2rc
+| ej              list config vars in JSON
+| env [k[=v]]     get/set environment variable
+| er [key]        set config key as readonly. no way back
+| es [space]      list all eval spaces [or keys]
+| et [key]        show type of given config variable
+| ev [key]        list config vars in verbose format
+| evj [key]       list config vars in verbose format in JSON
 ```
 
 A simpler alternative to the `e` command is accessible from the visual mode. Type `Ve` to enter it, use arrows (up, down, left, right) to navigate the configuration, and `q` to exit it. The start screen for the visual configuration edit looks like this:

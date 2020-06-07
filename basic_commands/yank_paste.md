@@ -15,20 +15,27 @@ You can yank/paste bytes in visual mode selecting them with the cursor mode (`Vc
 
 ```
 [0x00000000]> y?
-|Usage: y[ptxy] [len] [[@]addr] # See wd? for memcpy, same as 'yf'.
-| y              show yank buffer information (srcoff len bytes)
-| y 16           copy 16 bytes into clipboard
-| y 16 0x200     copy 16 bytes into clipboard from 0x200
-| y 16 @ 0x200   copy 16 bytes into clipboard from 0x200
-| yz [len]       copy string (from current block) into clipboard
-| yp             print contents of clipboard
-| yx             print contents of clipboard in hexadecimal
-| ys             print contents of clipboard as string
-| yt 64 0x200    copy 64 bytes from current seek to 0x200
-| ytf file       dump the clipboard to given file
-| yf 64 0x200    copy 64 bytes from 0x200 from file
-| yfa file copy  copy all bytes from file (opens w/ io)
-| yy 0x3344      paste clipboard
+Usage: y[ptxy] [len] [[@]addr]   # See wd? for memcpy, same as 'yf'.
+| y!              open cfg.editor to edit the clipboard
+| y 16 0x200      copy 16 bytes into clipboard from 0x200
+| y 16 @ 0x200    copy 16 bytes into clipboard from 0x200
+| y 16            copy 16 bytes into clipboard
+| y               show yank buffer information (srcoff len bytes)
+| y*              print in r2 commands what's been yanked
+| yf 64 0x200     copy file 64 bytes from 0x200 from file
+| yfa file copy   copy all bytes from file (opens w/ io)
+| yfx 10203040    yank from hexpairs (same as ywx)
+| yj              print in JSON commands what's been yanked
+| yp              print contents of clipboard
+| yq              print contents of clipboard in hexpairs
+| ys              print contents of clipboard as string
+| yt 64 0x200     copy 64 bytes from current seek to 0x200
+| ytf file        dump the clipboard to given file
+| yw hello world  yank from string
+| ywx 10203040    yank from hexpairs (same as yfx)
+| yx              print contents of clipboard in hexadecimal
+| yy 0x3344       paste clipboard
+| yz [len]        copy nul-terminated string (up to blocksize) into clipboard
 ```
 
 Sample session:

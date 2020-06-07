@@ -4,19 +4,20 @@ Rafind2 is the command line fronted of the `r_search` library. Which allows you 
 
 ```
 $ rafind2 -h
-Usage: rafind2 [-mXnzZhqv] [-a align] [-b sz] [-f/t from/to] [-[e|s|S] str] [-x hex] file|dir ..
+Usage: rafind2 [-mXnzZhqv] [-a align] [-b sz] [-f/t from/to] [-[e|s|S] str] [-x hex] -|file|dir ..
  -a [align] only accept aligned hits
  -b [size]  set block size
  -e [regex] search for regex matches (can be used multiple times)
  -f [from]  start searching from address 'from'
  -h         show this help
  -i         identify filetype (r2 -nqcpm file)
+ -j         output in JSON
  -m         magic search, file-type carver
  -M [str]   set a binary mask to be applied on keywords
  -n         do not stop on read errors
  -r         print using radare commands
  -s [str]   search for a specific string (can be used multiple times)
- -S [str]   search for a specific wide string (can be used multiple times)
+ -S [str]   search for a specific wide string (can be used multiple times). Assumes str is UTF-8.
  -t [to]    stop search at address 'to'
  -q         quiet - do not show headings (filenames) above matching contents (default for searching a single file)
  -v         print version and exit

@@ -38,27 +38,33 @@ Here's the full help of the `s` command. We will explain in more detail below.
 
 ```
 [0x00000000]> s?
-Usage: s[+-] [addr]
-s                 print current address
-s 0x320           seek to this address
-s-                undo seek
-s+                redo seek
-s*                list undo seek history
-s++               seek blocksize bytes forward
-s--               seek blocksize bytes backward
-s+ 512            seek 512 bytes forward
-s- 512            seek 512 bytes backward
-sg/sG             seek begin (sg) or end (sG) of section or file
-s.hexoff          Seek honoring a base from core->offset
-sa [[+-]a] [asz]  seek asz (or bsize) aligned to addr
-sn/sp             seek next/prev scr.nkey
-s/ DATA           search for next occurrence of 'DATA'
-s/x 9091          search for next occurrence of \x90\x91
-sb                seek aligned to bb start
-so [num]          seek to N next opcode(s)
-sf                seek to next function (f->addr+f->size)
-sC str            seek to comment matching given string
-sr pc             seek to register
+Usage: s    # Help for the seek commands. See ?$? to see all variables
+| s                 Print current address
+| s.hexoff          Seek honoring a base from core->offset
+| s:pad             Print current address with N padded zeros (defaults to 8)
+| s addr            Seek to address
+| s-                Undo seek
+| s-*               Reset undo seek history
+| s- n              Seek n bytes backward
+| s--[n]            Seek blocksize bytes backward (/=n)
+| s+                Redo seek
+| s+ n              Seek n bytes forward
+| s++[n]            Seek blocksize bytes forward (/=n)
+| s[j*=!]           List undo seek history (JSON, =list, *r2, !=names, s==)
+| s/ DATA           Search for next occurrence of 'DATA'
+| s/x 9091          Search for next occurrence of \x90\x91
+| sa [[+-]a] [asz]  Seek asz (or bsize) aligned to addr
+| sb                Seek aligned to bb start
+| sC[?] string      Seek to comment matching given string
+| sf                Seek to next function (f->addr+f->size)
+| sf function       Seek to address of specified function
+| sf.               Seek to the beginning of current function
+| sg/sG             Seek begin (sg) or end (sG) of section or file
+| sl[?] [+-]line    Seek to line
+| sn/sp ([nkey])    Seek to next/prev location, as specified by scr.nkey
+| so [N]            Seek to N next opcode(s)
+| sr pc             Seek to register
+| ss                Seek silently (without adding an entry to the seek history)
 
 > 3s++        ; 3 times block-seeking
 > s 10+0x80   ; seek at 0x80+10

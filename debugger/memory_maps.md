@@ -6,27 +6,28 @@ First, let's see the help message for `dm`, the command which is responsible for
 
 ```
 [0x55f2104cf620]> dm?
-|Usage: dm # Memory maps commands
-| dm              List memory maps of target process
-| dm addr size    Allocate <size> bytes at <address> (anywhere if address is -1) in child process
-| dm=             List memory maps of target process (ascii-art bars)
-| dm.             Show map name of current address
-| dm*             List memmaps in radare commands
-| dm- address     Deallocate memory map of <address>
-| dmd[a] [file]   Dump current (all) debug map region to a file (from-to.dmp) (see Sd)
-| dmh[?]          Show map of heap
-| dmi.            List closest symbol to the current address
-| dmiv            Show address of given symbol for given lib
-| dmj             List memmaps in JSON format
-| dml <file>      Load contents of file into the current map region (see Sl)
-| dmm[?][j*]      List modules (libraries, binaries loaded in memory)
+Usage: dm   # Memory maps commands
+| dm                               List memory maps of target process
+| dm address size                  Allocate <size> bytes at <address> (anywhere if address is -1) in child process
+| dm=                              List memory maps of target process (ascii-art bars)
+| dm.                              Show map name of current address
+| dm*                              List memmaps in radare commands
+| dm- address                      Deallocate memory map of <address>
+| dmd[a] [file]                    Dump current (all) debug map region to a file (from-to.dmp) (see Sd)
+| dmh[?]                           Show map of heap
 | dmi [addr|libname] [symname]     List symbols of target lib
 | dmi* [addr|libname] [symname]    List symbols of target lib in radare commands
-| dmp[?] <address> <size> <perms>  Change page at <address> with <size>, protection <perms> (rwx)
+| dmi.                             List closest symbol to the current address
+| dmiv                             Show address of given symbol for given lib
+| dmj                              List memmaps in JSON format
+| dml <file>                       Load contents of file into the current map region
+| dmm[?][j*]                       List modules (libraries, binaries loaded in memory)
+| dmp[?] <address> <size> <perms>  Change page at <address> with <size>, protection <perms> (perm)
 | dms[?] <id> <mapaddr>            Take memory snapshot
 | dms- <id> <mapaddr>              Restore memory snapshot
 | dmS [addr|libname] [sectname]    List sections of target lib
 | dmS* [addr|libname] [sectname]   List sections of target lib in radare commands
+| dmL address size                 Allocate <size> bytes at <address> and promote to huge page
 ```
 
 In this chapter, we'll go over some of the most useful subcommands of `dm` using simple examples. For the following examples, we'll use a simple `helloworld` program for Linux but it'll be the same for every binary.

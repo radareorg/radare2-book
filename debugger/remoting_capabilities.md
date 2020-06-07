@@ -7,27 +7,35 @@ Help for commands useful for remote access to radare:
 
 ```
 [0x00405a04]> =?
-|Usage:  =[:!+-=hH] [...] # radare remote command execution protocol
-|
-rap commands:
-| =           list all open connections
-| =<[fd] cmd  send output of local command to remote fd
-| =[fd] cmd   exec cmd at remote 'fd' (last open is default one)
-| =! cmd      run command via r_io_system
-| =+ [proto://]host  add host (default=rap://, tcp://, udp://)
-| =-[fd]      remove all hosts or host 'fd'
-| ==[fd]      open remote session with host 'fd', 'q' to quit
-| =!=         disable remote cmd mode
-| !=!         enable remote cmd mode
-|
-rap server:
-| =:port      listen on given port using rap protocol (o rap://9999)
-| =&:port     start rap server in background
-| =:host:port run 'cmd' command on remote server
-|
-other servers:
-| =h[?]       listen for http connections
-| =g[?]       using gdbserver
+Usage:  =[:!+-=ghH] [...]   # connect with other instances of r2
+
+remote commands:
+| =                             list all open connections
+| =<[fd] cmd                    send output of local command to remote fd
+| =[fd] cmd                     exec cmd at remote 'fd' (last open is default one)
+| =! cmd                        run command via r_io_system
+| =+ [proto://]host:port        connect to remote host:port (*rap://, raps://, tcp://, udp://, http://)
+| =-[fd]                        remove all hosts or host 'fd'
+| ==[fd]                        open remote session with host 'fd', 'q' to quit
+| =!=                           disable remote cmd mode
+| !=!                           enable remote cmd mode
+
+servers:
+| .:9000                        start the tcp server (echo x|nc ::1 9090 or curl ::1:9090/cmd/x)
+| =:port                        start the rap server (o rap://9999)
+| =g[?]                         start the gdbserver
+| =h[?]                         start the http webserver
+| =H[?]                         start the http webserver (and launch the web browser)
+
+other:
+| =&:port                       start rap server in background (same as '&_=h')
+| =:host:port cmd               run 'cmd' command on remote server
+
+examples:
+| =+tcp://localhost:9090/       connect to: r2 -c.:9090 ./bin
+| =+rap://localhost:9090/       connect to: r2 rap://:9090
+| =+http://localhost:9090/cmd/  connect to: r2 -c'=h 9090' bin
+| o rap://:9090/                start the rap server on tcp port 9090
 ```
 
 You can learn radare2 remote capabilities by displaying the list of supported IO plugins: `radare2 -L`.

@@ -27,4 +27,6 @@ Type `ec` to get a list of all currently used colors. Type `ecs` to show a color
 
 You can create your own color theme, but radare2 have its own predefined ones. Use the `eco` command to list or select them.
 
+After selecting one, you can compare between the color scheme of the shell and the current theme by pressing Ctrl-Shift and then right arrow key for the toggle.
+
 In visual mode use the `R` key to randomize colors or choose the next theme in the list.
