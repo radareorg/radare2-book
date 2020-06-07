@@ -12,27 +12,30 @@ Inside r2, the functionalities exposed by radiff2 are available with the `c` com
 
 ```
 [0x00404888]> c?
- |Usage: c[?dfx] [argument] # Compare
- | c [string]       Compare a plain with escaped chars string
- | c* [string]      Same as above, but printing r2 commands
- | c4 [value]       Compare a doubleword from a math expression
- | c8 [value]       Compare a quadword from a math expression
- | cat [file]       Show contents of file (see pwd, ls)
- | cc [at]          Compares in two hexdump columns of block size
- | ccc [at]         Same as above, but only showing different lines
- | ccd [at]         Compares in two disasm columns of block size
- | cf [file]        Compare contents of file at current seek
- | cg[?] [o] [file] Graphdiff current file and [file]
- | cu[?] [addr] @at Compare memory hexdumps of $$ and dst in unified diff
- | cud [addr] @at   Unified diff disasm from $$ and given address
- | cv[1248] [hexpairs] @at  Compare 1,2,4,8-byte value
- | cV[1248] [addr] @at      Compare 1,2,4,8-byte address contents
- | cw[?] [us?] [...]        Compare memory watchers
- | cx [hexpair]    Compare hexpair string (use '.' as nibble wildcard)
- | cx* [hexpair]   Compare hexpair string (output r2 commands)
- | cX [addr]       Like 'cc' but using hexdiff output
- | cd [dir]        chdir
- | cl|cls|clear    Clear screen, (clear0 to goto 0, 0 only)
+Usage: c[?dfx] [argument]   # Compare
+| c [string]               Compare a plain with escaped chars string
+| c* [string]              Same as above, but printing r2 commands instead
+| c1 [addr]                Compare 8 bits from current offset
+| c2 [value]               Compare a word from a math expression
+| c4 [value]               Compare a doubleword from a math expression
+| c8 [value]               Compare a quadword from a math expression
+| cat [file]               Show contents of file (see pwd, ls)
+| cc [at]                  Compares in two hexdump columns of block size
+| ccc [at]                 Same as above, but only showing different lines
+| ccd [at]                 Compares in two disasm columns of block size
+| ccdd [at]                Compares decompiler output (e cmd.pdc=pdg|pdd)
+| cf [file]                Compare contents of file at current seek
+| cg[?] [o] [file]         Graphdiff current file and [file]
+| cu[?] [addr] @at         Compare memory hexdumps of $$ and dst in unified diff
+| cud [addr] @at           Unified diff disasm from $$ and given address
+| cv[1248] [hexpairs] @at  Compare 1,2,4,8-byte (silent return in $?)
+| cV[1248] [addr] @at      Compare 1,2,4,8-byte address contents (silent, return in $?)
+| cw[?] [us?] [...]        Compare memory watchers
+| cx [hexpair]             Compare hexpair string (use '.' as nibble wildcard)
+| cx* [hexpair]            Compare hexpair string (output r2 commands)
+| cX [addr]                Like 'cc' but using hexdiff output
+| cd [dir]                 chdir
+| cl|cls|clear             Clear screen, (clear0 to goto 0, 0 only)
 ```
 
 To compare memory contents at current seek position against a given string of values, use `cx`:
