@@ -4,7 +4,7 @@ You can get radare from the website, [http://radare.org](http://radare.org),
 or the GitHub repository: [https://github.com/radare/radare2](https://github.com/radare/radare2)
 
 
-Binary packages are available for a number of operating systems (Ubuntu, Maemo, Gentoo, Windows, iPhone, and so on). Yet, you are highly encouraged to get the source and compile it yourself to better understand the dependencies, to make examples more accessible and of course to have the most recent version.
+Binary packages are available for a number of operating systems (Ubuntu, Maemo, Gentoo, Windows, iPhone, and so on). But you are highly encouraged to get the source and compile it yourself to better understand the dependencies, to make examples more accessible and, of course, to have the most recent version.
 
 A new stable release is typically published every month. Nightly tarballs are sometimes available at [http://bin.rada.re/](http://bin.rada.re/).
 
@@ -30,7 +30,7 @@ The most common way to get r2 updated and installed system wide is by using:
 ```
 $ sys/install.sh
 ```
-### Build with meson + ninja
+### Building with meson + ninja
 
 There is also a work-in-progress support for Meson.
 
@@ -43,13 +43,13 @@ ninja -C release
 
 ### Helper Scripts
 
-Take a look at the `sys/*` scripts, those are used to automate stuff related to syncing, building and installing r2 and its bindings.
+Take a look at the scripts in `sys/`, they are used to automate stuff related to syncing, building and installing r2 and its bindings.
 
 The most important one is `sys/install.sh`. It will pull, clean, build and symstall r2 system wide.
 
 Symstalling is the process of installing all the programs, libraries, documentation and data files using symlinks instead of copying the files.
 
-By default it will be installed in /usr, but you can define a new prefix as argument.
+By default it will be installed in `/usr/local`, but you can specify a different prefix using the argument `--prefix`.
 
 This is useful for developers, because it permits them to just run 'make' and try changes without having to run make install again.
 
