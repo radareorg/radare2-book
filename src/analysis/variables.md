@@ -115,7 +115,7 @@ local_32h
 
 The type inference for local variables and arguments is well integrated with the command `afta`.
 
-Let's see an example of this with a simple [hello_world](https://github.com/radare/radare2book/tree/master/examples/hello_world) binary
+Let's see an example of this with a simple [hello_world](https://github.com/radareorg/radare2book/tree/master/examples/hello_world) binary
 
 ```
 [0x000007aa]> pdf

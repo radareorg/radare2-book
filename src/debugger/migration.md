@@ -30,7 +30,7 @@ Use `rarun2` (`libpath=$PWD:/tmp/lib`, `arg2=hello`, `setenv=FOO=BAR` ...) see `
 
 `[0x80480423]> #!c` - enter C repl  (see `#!` to list all available RLang plugins)  => [[video](http://asciinema.org/a/12019)], everything have to be done in a oneliner or a .c file must be passed as an argument.
 
-To get `#!python` and much more, just build [radare2-bindings](https://github.com/radare/radare2-bindings)
+To get `#!python` and much more, just build [radare2-bindings](https://github.com/radareorg/radare2-bindings)
 
 ## How to list Source code as in gdb list ?
 
@@ -73,7 +73,7 @@ To get `#!python` and much more, just build [radare2-bindings](https://github.co
 |step over      |`F8`           |`dso`           | `S`              | `s`             | `p` 
 |step until a specific address|?|`dsu <addr>`    | ?                | `s`             | `g <addr>`
 |Run until return|`Ctrl+F7`     |`dcr`           | ?                | `finish`             | `gu`
-|Run until cursor|`F4`          |[#249](https://github.com/radare/radare2/issues/249)| [#249](https://github.com/radare/radare2/issues/249) | N/A             | N/A
+|Run until cursor|`F4`          |[#249](https://github.com/radareorg/radare2/issues/249)| [#249](https://github.com/radareorg/radare2/issues/249) | N/A             | N/A
 |Show Backtrace |`?`            |`dbt`           | ?                | `bt`             |
 |display Register|On register Windows|`dr all`   | Shown in Visual mode | `info registers`             | `r`
 |display eax    |On register Windows |`dr?eax`   | Shown in Visual mode | `info registers eax`             | `r rax`

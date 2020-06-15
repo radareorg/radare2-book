@@ -14,7 +14,7 @@ Bear in mind that plugins can be compiled static or dynamically, this means that
 
 To configure which plugins you want to compile use the `./configure-plugins` script which accepts the flags --shared and --static to specify them. You can also add it manually inside the `plugins.def.cfg` and then remove the `plugins.cfg` and run `./configure-plugins` again to update the `libr/config.mk` and `libr/config.h`.
 
-You may find some examples of external plugins in [radare2-extras](https://github.com/radare/radare2-extras) repository.
+You may find some examples of external plugins in [radare2-extras](https://github.com/radareorg/radare2-extras) repository.
 
 ## Writing the r_asm plugin
 

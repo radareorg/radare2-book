@@ -113,9 +113,9 @@ List of affected files:
 Check out how the NIOS II CPU disassembly plugin was implemented by reading those commits:
 
 Implement RAsm plugin:
-https://github.com/radare/radare2/commit/933dc0ef6ddfe44c88bbb261165bf8f8b531476b
+https://github.com/radareorg/radare2/commit/933dc0ef6ddfe44c88bbb261165bf8f8b531476b
 
 Implement RAnal plugin:
-https://github.com/radare/radare2/commit/ad430f0d52fbe933e0830c49ee607e9b0e4ac8f2
+https://github.com/radareorg/radare2/commit/ad430f0d52fbe933e0830c49ee607e9b0e4ac8f2
 
 

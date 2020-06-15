@@ -69,7 +69,7 @@ Follow these steps to install Git for Windows.
 Follow these steps to clone the Radare2 git repository.
 
 1. In your Radare2 Conda environment, navigate to a location where the code will be saved and compiled. This location needs approximately **3-4GiB** of space
-2. Clone the repository with `git clone https://github.com/radare/radare2.git`
+2. Clone the repository with `git clone https://github.com/radareorg/radare2.git`
 
 #### Compile Radare2 Code
 Follow these steps to compile the Radare2 Code.

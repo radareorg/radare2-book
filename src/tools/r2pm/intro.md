@@ -1,14 +1,14 @@
 ## Radare2 package manager
 
 Radare2 has its own package manager for managing external plugins (mainly from
-[radare2-extras](https://github.com/radare/radare2-extras)). As most of the package managers it allows you to install, remove or update packages (plugins). There is one restriction though - currently it supports only the compilation from sources, so providing the toolchan, necessary build tools and dependencies for each plugin is the user responsibility. It might change in the future.
+[radare2-extras](https://github.com/radareorg/radare2-extras)). As most of the package managers it allows you to install, remove or update packages (plugins). There is one restriction though - currently it supports only the compilation from sources, so providing the toolchan, necessary build tools and dependencies for each plugin is the user responsibility. It might change in the future.
 
 ```
 $ r2pm -h
 $R2PM_DBDIR: No such file or directory.
 Run 'r2pm init' to initialize the package repository
 $ r2pm init
-git clone https://github.com/radare/radare2-pm
+git clone https://github.com/radareorg/radare2-pm
 Cloning into 'radare2-pm'...
 remote: Counting objects: 147, done.
 remote: Compressing objects: 100% (139/139), done.
@@ -19,7 +19,7 @@ Resolving deltas: 100% (26/26), done.
 r2pm database initialized. Use 'r2pm update' to update later today
 ```
 
-As you noticed, the packages database located at [radare2-pm](https://github.com/radare/radare2-pm)
+As you noticed, the packages database located at [radare2-pm](https://github.com/radareorg/radare2-pm)
 repository. At any point of the time we can update the database using `r2pm update`:
 
 ```

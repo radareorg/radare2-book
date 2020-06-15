@@ -72,7 +72,7 @@ r2pipe.open('/bin/ls', (err, res) => {
 
 Checkout the GIT repository for more examples and details.
 
-https://github.com/radare/radare2-r2pipe/blob/master/nodejs/r2pipe/README.md
+https://github.com/radareorg/radare2-r2pipe/blob/master/nodejs/r2pipe/README.md
 
 Go
 --

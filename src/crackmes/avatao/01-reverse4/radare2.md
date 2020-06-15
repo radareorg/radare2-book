@@ -72,6 +72,6 @@ use the git version!
 Some highly recommended reading materials:
 
 - [Cheatsheet by pwntester](https://github.com/pwntester/cheatsheets/blob/master/radare2.md)
-- [Radare2 Book](https://www.gitbook.com/book/radare/radare2book/details)
+- [Radare2 Book](https://www.gitbook.com/book/radareorg/radare2book/details)
 - [Radare2 Blog](http://radare.today)
-- [Radare2 Wiki](https://github.com/radare/radare2/wiki)
+- [Radare2 Wiki](https://github.com/radareorg/radare2/wiki)

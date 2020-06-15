@@ -109,8 +109,8 @@ Or you can load it from the r2 shell: `#!python mycpu.py`
 
 See also:
 
-* [Python](https://github.com/radare/radare2-bindings/blob/master/libr/lang/p/test-py-asm.py)
-* [Javascript](https://github.com/radare/radare2-bindings/blob/master/libr/lang/p/dukasm.js)
+* [Python](https://github.com/radareorg/radare2-bindings/blob/master/libr/lang/p/test-py-asm.py)
+* [Javascript](https://github.com/radareorg/radare2-bindings/blob/master/libr/lang/p/dukasm.js)
 
 ### Implementing new format plugin in Python
 

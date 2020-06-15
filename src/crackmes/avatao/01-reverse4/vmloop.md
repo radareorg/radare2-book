@@ -13,7 +13,7 @@ reverse yet. The thing is that this function uses a jump table at 0x00400a74,
 ![vmloop bb-0a74](img/vmloop/bb-0a74.png)
 
 and r2 can't yet recognize jump tables
-([Issue 3201](https://github.com/radare/radare2/issues/3201)), so the analysis of
+([Issue 3201](https://github.com/radareorg/radare2/issues/3201)), so the analysis of
 this function is a bit incomplete. This means that we can't really use the graph
 view now, so either we just use visual mode, or fix those basic blocks. The
 entire function is just 542 bytes long, so we certainly could reverse it without
