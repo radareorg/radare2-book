@@ -2,7 +2,7 @@
 
 Radare2 relies on the Meson build system generator to support compilation on all platforms, including Windows. Meson will generate a Visual Studio Solution, all the necessary project files, and wire up the Microsoft Visual C++ compiler for you.
 
-> **tip** You can download nightly binaries from https://bin.rada.re.
+> **tip** You can download nightly binaries from https://ci.appveyor.com/project/radareorg/radare2/history. Be sure to download only from `master` branch!
 
 ### Prerequisites
 
@@ -42,7 +42,6 @@ Follow these steps to create and activate a Conda environment named *r2*. All in
 Any time you wish to enter this environment, open the Anaconda Prompt and re-issue `activate r2`. Conversely, `deactivate` will leave the environment.
 
 ##### Install Meson
-> **tip** All versions of Meson at or below 0.47.1 have a bug that prevent normal use on Windows. Because there's no official release with the fixes available, you must install from sources. The following steps will walk you through this. We will update this documentation as soon as 0.48 is officially released.
 
 1. Enter the Radare2 Conda environment, if needed (`activate r2`)
 2. Download https://github.com/mesonbuild/meson/archive/master.zip
