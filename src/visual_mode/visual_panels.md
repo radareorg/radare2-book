@@ -22,18 +22,21 @@ Panels can be accessed from visual mode by using `!`.
 | |      split the current panel vertically
 | -      split the current panel horizontally
 | :      run r2 command in prompt
+| ;      add/remove comment
 | _      start the hud input mode
+| \      show the user-friendly hud
 | ?      show this help
-| ??     show the user-friendly hud
 | !      run r2048 game
 | .      seek to PC or entrypoint
-| *      show pseudo code/r2dec in the current panel
+| *      show decompiler in the current panel
+| "      create a panel from the list and replace the current one
 | /      highlight the keyword
 | (      toggle snow
 | &      toggle cache
 | [1-9]  follow jmp/call identified by shortcut (like ;[1])
 | ' '    (space) toggle graph / panels
 | tab    go to the next panel
+| Enter  start Zoom mode
 | a      toggle auto update for decompiler
 | b      browse symbols, flags, configurations, classes, ...
 | c      toggle cursor
@@ -41,26 +44,27 @@ Panels can be accessed from visual mode by using `!`.
 | d      define in the current address. Same as Vd
 | D      show disassembly in the current panel
 | e      change title and command of current panel
+| f      set/add filter keywords
+| F      remove all the filters
 | g      go/seek to given offset
-| G      show graph in the current panel
+| G      go/seek to highlight
 | i      insert hex
 | hjkl   move around (left-down-up-right)
-| J      scroll panels down by page
-| K      scroll panels up by page
-| H      scroll panels left by page
-| L      scroll panels right by page
+| HJKL   move around (left-down-up-right) by page
 | m      select the menu panel
 | M      open new custom frame
-| nN     create new panel with given command
-| pP     seek to next or previous scr.nkey
-| q      quit, back to visual mode
-| r      toggle jmphints/leahints
-| sS     step in / step over
-| t      rotate related commands in a panel
-| uU     undo / redo seek
+| n/N    seek next/prev function/flag/hit (scr.nkey)
+| p/P    rotate panel layout
+| q      quit, or close a tab
+| Q      close all the tabs and quit
+| r      toggle callhints/jmphints/leahints 
+| R      randomize color palette (ecr)
+| s/S    step in / step over
+| t/T    tab prompt / close a tab
+| u/U    undo / redo seek
 | w      start Window mode
 | V      go to the graph mode
-| X      close current panel
+| xX     show xrefs/refs of current function from/to data/code
 | z      swap current panel with the first one
 ```
 
@@ -71,6 +75,7 @@ Use `S` and `s` to step over/in, and all the panels should be updated dynamicall
 Either in the Registers or Stack panels, you can edit the values by inserting hex. This will be explained later.
 While hitting `tab` can help you moving between panels, it is highly recommended to use `m` to open the menu.
 As usual, you can use `hjkl` to move around the menu and will find tons of useful stuff there.
+You can also press `"` to quickly browse through the different options View offers and change the contents of the selected panel.
 
 ## Split Screen
 
@@ -89,9 +94,17 @@ Split panels can be resized from Window Mode, which is accessed with `w`.
 | JK     resize panels vertically
 | HL     resize panels horizontally
 | q      quit Window mode
-
 ```
 
 ## Edit Values
 
 Either in the Register or Stack panel, you can edit the values. Use `c` to activate cursor mode and you can move the cursor by pressing `hjkl`, as usual. Then, hit `i`, just like the insert mode of vim, to insert a value.
+
+## Tabs
+Visual Panels also offer tabs to quickly access multiple forms of information easily. Press `t` to enter Tab Mode. All the tabs numbers will be visible in the top right corner.
+
+By default you will have one tab and you can press `t` to create a new tab with the same panels and `T` to create a new panel from scratch.
+
+For traversing through the tabs, you can type in the tab number while in Tab Mode.
+
+And pressing `-` deletes the tab you are in.
