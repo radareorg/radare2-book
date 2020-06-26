@@ -8,4 +8,4 @@ _book/*
 .*.swp
 .*.swo
 *.un~
-
+*.snippets
