@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/radare/radare2book.git"
+    "url": "git+https://github.com/radareorg/radare2book.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/radare/radare2book/issues"
+    "url": "https://github.com/radareorg/radare2book/issues"
   },
-  "homepage": "https://github.com/radare/radare2book#readme",
+  "homepage": "https://github.com/radareorg/radare2book#readme",
   "dependencies": {
     "gitbook-cli": "^2.3.2"
   }
