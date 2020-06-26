@@ -37,7 +37,7 @@ If we check the help for `afvr` we will get the way two others commands works to
 | afvrj                       return list of register arguments in JSON format
 | afvr- [name]                delete register arguments at the given index
 | afvrg [reg] [addr]          define argument get reference
-| afvrs [reg] [addr]          define argument set referencev
+| afvrs [reg] [addr]          define argument set reference
 ```
 
 Like many other things variables detection is performed by radare2 automatically, but results
