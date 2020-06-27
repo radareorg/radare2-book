@@ -2,9 +2,10 @@
 *.swo
 *.un~
 publish.sh
+book/
 _book/
 _book/*
 .*.swp
 .*.swo
 *.un~
-
+*.snippets

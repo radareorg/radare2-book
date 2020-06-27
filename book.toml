@@ -1,0 +1,10 @@
+[book]
+title = "The Official Radare2 Book"
+author = "pancake <pancake@nopcode.org>"
+description = "The Official Radare2 Book"
+
+[build]
+create-missing = false
+
+[output.html.search]
+limit-results = 15
