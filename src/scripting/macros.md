@@ -63,7 +63,7 @@ As you can see, the arguments are named by index, starting from 0: $0, $1, ...
 
 # Aliases
 
-radare2 also offerrs aliases which might help you save time by quickly executing your most used commands. They are under `$?`
+radare2 also offers aliases which might help you save time by quickly executing your most used commands. They are under `$?`
 
 The general usage of the feature is: `$alias=cmd`
 
