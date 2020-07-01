@@ -45,7 +45,9 @@ dL         # list debug plugins
 mL         # list fs plugins
 ph         # print support hash algoriths
 ```
-Also using the `?` value in the associated eval vars.
+
+You can use the `?` as value to get the possible values in the associated eval vars.
+
 ```
 e asm.arch=?   # list assembler/disassembler plugins
 e anal.arch=?  # list analysis plugins
