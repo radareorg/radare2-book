@@ -71,7 +71,7 @@ The general usage of the feature is: `$alias=cmd`
 [0x00404800]> $disas=pdf
 ```
 
-The above command will create an alias for `pdf`, which is `$disas`. And the running the command given below would print the disassembly of the main function.
+The above command will create an alias `disas` for `pdf`. The following command prints the disassembly of the main function.
 
 ```
 [0x00404800]> $disas @ main
