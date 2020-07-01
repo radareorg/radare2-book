@@ -1,0 +1,11 @@
+{
+    "checks": {
+        "hyperbole.misc": false,
+        "redundancy.misc": false,
+        "annotations.misc": false,
+        "typography.exclamation": false,
+        "typography.symbols": false,
+        "weasel_words.misc": false,
+        "weasel_words.very": false
+    }
+}
