@@ -16,9 +16,9 @@ Note that rahash2 also permits to read from stdin in a stream, so you don't need
 
 When doing forensics, it is useful to compute partial checksums. The reason for that is because you may want to split a huge file into small portions that are easier to identify by contents or regions in the disk.
 
-This will spot the same hash for blocks containing the same contents. For example, if filled by zeros.
+This will spot the same hash for blocks containing the same contents. For example, if filled by zeros, 
 
-But also, it can be used to find which blocks have changed between more than one sample dump.
+It also can be used to find which blocks have changed between more than one sample dump.
 
 This can be useful when analyzing ram dumps from a virtual machine for example. Use this command for this:
 

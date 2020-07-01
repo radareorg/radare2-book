@@ -1,8 +1,9 @@
 {
     "checks": {
+        "annotations.misc": false,
         "hyperbole.misc": false,
         "redundancy.misc": false,
-        "annotations.misc": false,
+        "redundancy.ras_syndrome": false,
         "typography.exclamation": false,
         "typography.symbols": false,
         "weasel_words.misc": false,

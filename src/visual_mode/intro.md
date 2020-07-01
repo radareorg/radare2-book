@@ -1,6 +1,6 @@
 # Visual Mode
 
-The visual mode is a more user-friendly interface alternative to radare2's command-line prompt.  It allows easy navigation, has a cursor mode for selecting bytes, and offers numerous key bindings to simplify debugger use.
+The visual mode is a more user-friendly interface alternative to radare2's command-line prompt. It allows easy navigation, has a cursor mode for selecting bytes, and offers numerous key bindings to simplify debugger use.
 To enter visual mode, use `V` command. To exit from it back to command line, press `q`.
 
 ## Navigation

@@ -229,7 +229,7 @@ Valid print code formats for human-readable languages are:
 
 If we need to create a .c file containing a binary blob, use the `pc` command, that creates this output. The default size is like in many other commands: the block size, which can be changed with the `b` command.
 
-But we can just temporarily override this block size by expressing it as an argument.
+We can also just temporarily override this block size by expressing it as an argument.
 
 ```
 [0xB7F8E810]> pc 32

@@ -37,7 +37,7 @@ It is possible to specify hexadecimal escape sequences in the search string by p
 
     [0x00000000]> / \x7FELF
 
-But, if you are searching for a string of hexadecimal values, you're probably better of using the `/x` command:
+if, instead, you are searching for a string of hexadecimal values, you're probably better of using the `/x` command:
 
     [0x00000000]> /x 7F454C46
 

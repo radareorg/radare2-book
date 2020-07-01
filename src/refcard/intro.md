@@ -165,7 +165,7 @@ default.
 Use `e io.cache.write=true` and the `wc` command to manage the *write cache*
 history changes. To undo, redo, commit them to write the changes on the file..
 
-But, if we want to save the analysis information, comments, flags and
+If, instead, we want to save the analysis information, comments, flags and
 other user-created metadata, we may want to use projects with `r2 -p` and the `P` command.
 
 | Command   | Description              |
@@ -178,7 +178,7 @@ other user-created metadata, we may want to use projects with `r2 -p` and the `P
 
 The `?$?` command will display the variables that can be used in any math
 operation inside the r2 shell. For example, using the `? $$` command to evaluate
-a number or `?v` to just the the value in one format.
+a number or `?v` to just the value in one format.
 
 All commands in r2 that accept a number supports the use of those variables.
 

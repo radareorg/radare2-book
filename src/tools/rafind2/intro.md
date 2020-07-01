@@ -62,7 +62,7 @@ $ for a in `rafind2 -s lib $F` ; do \
 0x000006ef  6c69 6200 0000 0000 .. lib......&......
 ```
 
-But rafind2 can be also used as a replacement of `file` to identify the mimetype of a file using the internal magic database of radare2.
+rafind2 can also be used as a replacement of `file` to identify the mimetype of a file using the internal magic database of radare2.
 
 ```
 $ rafind2 -i /bin/ls
