@@ -1,6 +1,6 @@
 # Symbols
 
-Radare2 automatically parses available imports and exports sections in the binary, but
+Radare2 automatically parses available imports and exports sections in the binary,
 moreover, it can load additional debugging information if present.
 Two main formats are supported: DWARF and PDB (for Windows binaries).
 Note that, unlike many tools radare2 doesn't rely on Windows API to parse
