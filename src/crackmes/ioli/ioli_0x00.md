@@ -45,7 +45,7 @@ This is the message on the password being accepted.
 vaddr=0x080485a9 paddr=0x000005a9 ordinal=004 sz=16 len=15 section=.rodata type=a string=Password OK :)\n
 ```
 
-But what is this? It's a string, but we haven't seen it in running the application yet.
+What is this? It's a string, but we haven't seen it in running the application yet.
 
 ```
 vaddr=0x0804858f paddr=0x0000058f ordinal=002 sz=7 len=6 section=.rodata type=a string=250382

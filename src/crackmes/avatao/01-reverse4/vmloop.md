@@ -20,7 +20,7 @@ entire function is just 542 bytes long, so we certainly could reverse it without
 the aid of the graph mode, but since this writeup aims to include as much r2
 wisdom as possible, I'm going to show you how to define basic blocks.
 
-But first, lets analyze what we already have! First, *rdi* is put into local_3.
+First, lets analyze what we already have! First, *rdi* is put into local_3.
 Since the application is a 64bit Linux executable, we know that *rdi* is the
 first function argument (as you may have recognized, the automatic analysis of
 arguments and local variables was not entirely correct), and we also know that
@@ -182,7 +182,7 @@ it, because it is apparently not stored when you save the project.)
 > ***r2 tip***: You can move the selected node around in graph view using the
 > HJKL keys.
 
-BTW, here is how IDA's graph of this same function looks like for comparison:
+By the way, here is how IDA's graph of this same function looks like for comparison:
 
 ![IDA graph](img/vmloop_ida.png)
 
@@ -286,8 +286,8 @@ The function this instruction calls is at offset 0x40080d, so lets seek there!
 If we seek to that address from the graph mode, we are presented with a message
 that says "Not in a function. Type 'df' to define it here. This is because the
 function is called from a basic block r2 did not recognize, so r2 could not
-find the function either. Lets obey, and type *df*! A function is indeed created,
-but we want some meaningful name for it. So press *dr* while still in visual mode,
+find the function either. Lets obey, and type *df*! A function is indeed created, but
+we want some meaningful name for it. So press *dr* while still in visual mode,
 and name this function *instr_A*!
 
 ![instr_A minimap](img/instr_A/instr_A_minimap.png)

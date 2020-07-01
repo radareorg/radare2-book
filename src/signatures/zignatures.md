@@ -59,9 +59,10 @@ You can show it in JSON format too, which can be useful for scripting:
 ]
 [0x000051c0]>
 ```
-To remove it just run `z-entry`
-But if you want to save all created signatures, you need to save it into the SDB file using command
-`zos myentry`.
+To remove it just run `z-entry`.
+
+If you want, instead, to save all created signatures, you need to save it into the SDB file using command `zos myentry`.
+
 Then we can apply them. Lets open a file again:
 ```
 r2 /bin/ls

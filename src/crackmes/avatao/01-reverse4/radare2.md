@@ -5,7 +5,7 @@ I've decided to solve the reversing challenges using
 [radare2](http://www.radare.org/r/), a free and open source reverse engineering
 framework. I have first learned about r2 back in 2011. during a huge project,
 where I had to reverse a massive, 11MB statically linked ELF. I simply needed
-something that I could easily patch Linux ELFs with.  Granted, back then I've
+something that I could easily patch Linux ELFs with. Granted, back then I've
 used r2 alongside IDA, and only for smaller tasks, but I loved the whole concept
 at first sight. Since then, radare2 evolved a lot, and I was planning for some
 time now to solve some crackmes with the framework, and write writeups about

@@ -8,4 +8,4 @@ webhack :) ) one of them. There were 3 different games at the conf, and I've
 chosen the one that was provided by [avatao](https://avatao.com). It consisted
 of 8 challenges, most of them being basic web hacking stuff, one sandbox escape,
 one simple buffer overflow exploitation, and there were two reverse engineering
-exercises too.  You can find these challenges on https://platform.avatao.com.
+exercises too. You can find these challenges on https://platform.avatao.com.

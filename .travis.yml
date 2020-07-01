@@ -2,4 +2,4 @@ install:
     - sudo pip install proselint
 
 script:
-    - XDG_CONFIG_HOME=".proselint/" proselint .
+    - XDG_CONFIG_HOME=".proselint/" proselint ./src
