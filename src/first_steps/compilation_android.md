@@ -55,7 +55,7 @@ A bit of explanation about all the options:
   it find the right libraries. Binaries have everything they need inside.
 * `-Dblob=true`: it tells meson to compile just one binary with all the needed
   code for running `radare2`, `rabin2`, `rasm2`, etc. and creates symbolic links to
-  those names. This avoids creating many statically-compiled large binaries and
+  those names. This avoids creating many statically compiled large binaries and
   just create one that provides all features. You will still have `rabin2`,
   `rasm2`, `rax2`, etc. but they are just symlinks to `radare2`.
 * `--cross-file ./meson-android.ini`: it describes how to compile radare2 for Android
