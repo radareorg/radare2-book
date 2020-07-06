@@ -8,38 +8,40 @@ Below is a list of available print modes listed by `p?`:
 
 ```
 [0x00005310]> p?
-|Usage: p[=68abcdDfiImrstuxz] [arg|len] [@addr]
-| p-[?][jh] [mode]         bar|json|histogram blocks (mode: e?search.in)
-| p=[?][bep] [N] [len] [b] show entropy/printable chars/chars bars
-| p2 [len]                 8x8 2bpp-tiles
-| p3 [file]                print stereogram (3D)
-| p6[de] [len]             base64 decode/encode
-| p8[?][j] [len]           8bit hexpair list of bytes
-| pa[edD] [arg]            pa:assemble  pa[dD]:disasm or pae: esil from hexpairs
-| pA[n_ops]                show n_ops address and type
-| p[b|B|xb] [len] ([skip]) bindump N bits skipping M
-| pb[?] [n]                bitstream of N bits
-| pB[?] [n]                bitstream of N bytes
-| pc[?][p] [len]           output C (or python) format
-| pC[d] [rows]             print disassembly in columns (see hex.cols and pdi)
-```
-```
-| pd[?] [sz] [a] [b]       disassemble N opcodes (pd) or N bytes (pD)
-| pf[?][.nam] [fmt]        print formatted data (pf.name, pf.name $<expr>)
-| ph[?][=|hash] ([len])    calculate hash for a block
-| pj[?] [len]              print as indented JSON
-| p[iI][df] [len]          print N ops/bytes (f=func) (see pi? and pdi)
-| p[kK] [len]              print key in randomart (K is for mosaic)
-| pm[?] [magic]            print libmagic data (see pm? and /m?)
-| pq[?][iz] [len]          print QR code with the first Nbytes of the current block
-| pr[?][glx] [len]         print N raw bytes (in lines or hexblocks, 'g'unzip)
-| ps[?][pwz] [len]         print pascal/wide/zero-terminated strings
-| pt[?][dn] [len]          print different timestamps
-| pu[?][w] [len]           print N url encoded bytes (w=wide)
-| pv[?][jh] [mode]         show variable/pointer/value in memory
-| pwd                      display current working directory
-| px[?][owq] [len]         hexdump of N bytes (o=octal, w=32bit, q=64bit)
-| pz[?] [len]              print zoom view (see pz? for help)
+|Usage: p[=68abcdDfiImrstuxz] [arg|len] [@addr]  
+| p[b|B|xb] [len] ([S])   bindump N bits skipping S bytes
+| p[iI][df] [len]         print N ops/bytes (f=func) (see pi? and pdi)
+| p[kK] [len]             print key in randomart (K is for mosaic)
+| p-[?][jh] [mode]        bar|json|histogram blocks (mode: e?search.in)
+| p2 [len]                8x8 2bpp-tiles
+| p3 [file]               print stereogram (3D)
+| p6[de] [len]            base64 decode/encode
+| p8[?][j] [len]          8bit hexpair list of bytes
+| p=[?][bep] [N] [L] [b]  show entropy/printable chars/chars bars
+| pa[edD] [arg]           pa:assemble  pa[dD]:disasm or pae: esil from hex
+| pA[n_ops]               show n_ops address and type
+| pb[?] [n]               bitstream of N bits
+| pB[?] [n]               bitstream of N bytes
+| pc[?][p] [len]          output C (or python) format
+| pC[aAcdDxw] [rows]      print disassembly in columns (see hex.cols and pdi)
+| pd[?] [sz] [a] [b]      disassemble N opcodes (pd) or N bytes (pD)
+| pf[?][.nam] [fmt]       print formatted data (pf.name, pf.name $<expr>)
+| pF[?][apx]              print asn1, pkcs7 or x509
+| pg[?][x y w h] [cmd]    create new visual gadget or print it (see pg? for details)
+| ph[?][=|hash] ([len])   calculate hash for a block
+| pj[?] [len]             print as indented JSON
+| pm[?] [magic]           print libmagic data (see pm? and /m?)
+| po[?] hex               print operation applied to block (see po?)
+| pp[?][sz] [len]         print patterns, see pp? for more help
+| pq[?][is] [len]         print QR code with the first Nbytes
+| pr[?][glx] [len]        print N raw bytes (in lines or hexblocks, 'g'unzip)
+| ps[?][pwz] [len]        print pascal/wide/zero-terminated strings
+| pt[?][dn] [len]         print different timestamps
+| pu[?][w] [len]          print N url encoded bytes (w=wide)
+| pv[?][jh] [mode]        show variable/pointer/value in memory
+| pwd                     display current working directory
+| px[?][owq] [len]        hexdump of N bytes (o=octal, w=32bit, q=64bit)
+| pz[?] [len]             print zoom view (see pz? for help)
 [0x00005310]>
 ```
 
@@ -91,11 +93,12 @@ Currently supported timestamp output modes are:
 
 ```
 [0x00404888]> pt?
-|Usage: pt[dn?]
-| pt      print unix time (32 bit cfg.big_endian)
-| ptd     print dos time (32 bit cfg.big_endian)
-| ptn     print ntfs time (64 bit !cfg.big_endian)
-| pt?     show help message
+|Usage: pt [dn]  print timestamps
+| pt.  print current time
+| pt   print UNIX time (32 bit `cfg.bigendian`) Since January 1, 1970
+| ptd  print DOS time (32 bit `cfg.bigendian`) Since January 1, 1980
+| pth  print HFS time (32 bit `cfg.bigendian`) Since January 1, 1904
+| ptn  print NTFS time (64 bit `cfg.bigendian`) Since January 1, 1601
 ```
 
 For example, you can 'view' the current buffer as timestamps in the ntfs time:
@@ -150,16 +153,17 @@ There are print modes available for all basic types. If you are interested in a 
 |  b       byte (unsigned)
 |  B       resolve enum bitfield (see t?)
 |  c       char (signed byte)
-|  d       0x%%08x hexadecimal value (4 bytes) (see %%i and %%x)
+|  C       byte in decimal
+|  d       0xHEX value (4 bytes) (see 'i' and 'x')
 |  D       disassemble one opcode
 |  e       temporally swap endian
 |  E       resolve enum name (see t?)
 |  f       float value (4 bytes)
 |  F       double value (8 bytes)
-|  i       %%i signed integer value (4 bytes) (see %%d and %%x)
+|  i       signed integer value (4 bytes) (see 'd' and 'x')
 |  n       next char specifies size of signed value (1, 2, 4 or 8 byte(s))
 |  N       next char specifies size of unsigned value (1, 2, 4 or 8 byte(s))
-|  o       0x%%08o octal value (4 byte)
+|  o       octal value (4 byte)
 |  p       pointer reference (2, 4 or 8 bytes)
 |  q       quadword (8 bytes)
 |  r       CPU register `pf r (eax)plop`
@@ -169,15 +173,17 @@ There are print modes available for all basic types. If you are interested in a 
 |  T       show Ten first bytes of buffer
 |  u       uleb128 (variable length)
 |  w       word (2 bytes unsigned short in hex)
-|  x       0x%%08x hex value and flag (fd @ addr) (see %%d and %%i)
+|  x       0xHEX value and flag (fd @ addr) (see 'd' and 'i')
 |  X       show formatted hexpairs
-|  z       \0 terminated string
-|  Z       \0 terminated wide string
+|  z       null terminated string
+|  Z       null terminated wide string
 |  ?       data structure `pf ? (struct_name)example_name`
 |  *       next char is pointer (honors asm.bits)
 |  +       toggle show flags for each offset
 |  :       skip 4 bytes
 |  .       skip 1 byte
+|  ;       rewind 4 bytes
+|  ,       rewind 1 byte
 ```
 
 Use triple-question-mark `pf???` to get some examples using print format strings.
@@ -191,14 +197,24 @@ Use triple-question-mark `pf???` to get some examples using print format strings
 | pf E (EnumType)arg_name`                     enum type
 | pf.obj xxdz prev next size name              Define the obj format as xxdz
 | pf obj=xxdz prev next size name              Same as above
+| pf *z*i*w nb name blob                       Print the pointers with given labels
 | pf iwq foo bar troll                         Print the iwq format with foo, bar, troll as the respective names for the fields
 | pf 0iwq foo bar troll                        Same as above, but considered as a union (all fields at offset 0)
 | pf.plop ? (troll)mystruct                    Use structure troll previously defined
+| pfj.plop @ 0x14                              Apply format object at the given offset
 | pf 10xiz pointer length string               Print a size 10 array of the xiz struct with its field names
+| pf 5sqw string quad word                     Print an array with sqw struct along with its field names
 | pf {integer}? (bifc)                         Print integer times the following format (bifc)
 | pf [4]w[7]i                                  Print an array of 4 words and then an array of 7 integers
-| pf ic...?i foo bar "(pf xw yo foo)troll" yo  Print nested anonymous structres
-| pfn2                                         print signed short (2 bytes) value. Use N insted of n for printing unsigned values
+| pf ic...?i foo bar "(pf xw yo foo)troll" yo  Print nested anonymous structures
+| pf ;..x                                      Print value located 6 bytes from current offset
+| pf [10]z[3]i[10]Zb                           Print an fixed size str, widechar, and var
+| pfj +F @ 0x14                                Print the content at given offset with flag
+| pf n2                                        print signed short (2 bytes) value. Use N instead of n for printing unsigned values
+| pf [2]? (plop)structname @ 0                 Prints an array of structs
+| pf eqew bigWord beef                         Swap endianness and print with given labels
+| pf.foo rr (eax)reg1 (eip)reg2                Create object referencing to register values 
+| pf tt troll plop                             print time stamps with labels troll and plop
 ```
 Some examples are below:
 ```
@@ -219,13 +235,21 @@ Valid print code formats for human-readable languages are:
 * `pch`    C half-words (2 byte)
 * `pcw`    C words (4 byte)
 * `pcd`    C dwords (8 byte)
+* `pci`    C array of bytes with instructions
 * `pca`    GAS .byte blob
 * `pcA`    .bytes with instructions in comments
 * `pcs`    string
 * `pcS`    shellscript that reconstructs the bin
 * `pcj`    json
 * `pcJ`    javascript
+* `pco`    Objective-C
 * `pcp`    python
+* `pck`    kotlin
+* `pcr`    rust
+* `pcv`    JaVa
+* `pcV`    V (vlang.io)
+* `pcy`    yara
+* `pcz`    Swift
 
 If we need to create a .c file containing a binary blob, use the `pc` command, that creates this output. The default size is like in many other commands: the block size, which can be changed with the `b` command.
 
@@ -251,18 +275,20 @@ Strings are probably one of the most important entry points when starting to rev
 
 ```
 [0x00000000]> ps?
-|Usage: ps[zpw] [N]Print String
-| ps   print string
-| pss  print string in screen (wrap width)
-| psi  print string inside curseek
-| psb  print strings in current block
-| psx  show string with escaped chars
-| psz  print zero terminated string
-| psp  print pascal string
-| psu  print utf16 unicode (json)
-| psw  print 16bit wide string
-| psW  print 32bit wide string
-| psj  print string in JSON format
+|Usage: ps[bijqpsuwWxz+] [N]  Print String
+| ps       print string
+| ps+[j]   print libc++ std::string (same-endian, ascii, zero-terminated)
+| psb      print strings in current block
+| psi      print string inside curseek
+| psj      print string in JSON format
+| psp[j]   print pascal string
+| psq      alias for pqs
+| pss      print string in screen (wrap width)
+| psu[zj]  print utf16 unicode (json)
+| psw[j]   print 16bit wide string
+| psW[j]   print 32bit wide string
+| psx      show string with escaped chars
+| psz[j]   print zero-terminated string
 ```
 
 Most strings are zero-terminated. Below there is an example using the debugger to continue the execution of a program until it executes the 'open' syscall. When we recover the control over the process, we get the arguments passed to the syscall, pointed by %ebx. In the case of the 'open' call, it is a zero terminated string which we can inspect using `psz`.
