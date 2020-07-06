@@ -16,7 +16,27 @@ Radare2 can be cross-compiled for other architectures/systems as well, like Andr
 
 Download the Android NDK from the [official site](https://developer.android.com/ndk) and extract it somewhere on your system (e.g. `/tmp/android-ndk`)
 
-#### Create a cross-file for meson
+#### Make
+
+##### Specify NDK base path
+
+```
+$ echo NDK=/tmp/android-ndk  > ~/.r2androidrc
+```
+
+##### Compile + create tar.gz + push it to connected android device
+
+```
+./sys/android-build.sh arm64-static
+```
+
+You can build for different architectures by changing the argument to
+`./sys/android-build.sh`. Run the script without any argument to see the
+accepted values.
+
+#### Meson
+
+##### Create a cross-file for meson
 
 Meson needs a configuration file that describes the cross compilation environment (e.g. `meson-android.ini`).
 You can adjust it as necessary, but something like the following should be a good starting point:
@@ -41,7 +61,7 @@ cpu = 'aarch64'
 endian = 'little'
 ```
 
-#### Compile with meson + ninja
+##### Compile with meson + ninja
 
 Now setup the build directory with meson as usual:
 ```
@@ -66,7 +86,7 @@ $ ninja -C build
 $ ninja -C build install
 ```
 
-#### Move files to your android device and enjoy
+##### Move files to your android device and enjoy
 
 At this point you can copy the generated files in /tmp/android-dir to your Android device and running radare2 from it.
 For example:
