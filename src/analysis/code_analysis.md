@@ -258,8 +258,11 @@ There are a few options for this:
 - `anal.limits` - enables the range limits for analysis operations
 - `anal.from` - starting address of the limit range
 - `anal.to` - the corresponding end of the limit range
-- `anal.in` - specify search boundaries for analysis (`io.maps`, `io.sections.exec`, `dbg.maps` and many
-more - see `e anal.in=?` for the complete list)
+- `anal.in` - specify search boundaries for analysis. You can set it to `io.maps`, `io.sections.exec`, `dbg.maps` and many more. For example:
+	- To analyze a specific memory map with `anal.from` and `anal.to`, set `anal.in = dbg.maps`.
+	- To analyze in the boundaries set by `anal.from` and `anal.to`, set `anal.in=range`.
+
+Please see `e anal.in=?` for the complete list.
 
 ### Jump tables
 
