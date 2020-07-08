@@ -261,8 +261,12 @@ There are a few options for this:
 - `anal.in` - specify search boundaries for analysis. You can set it to `io.maps`, `io.sections.exec`, `dbg.maps` and many more. For example:
 	- To analyze a specific memory map with `anal.from` and `anal.to`, set `anal.in = dbg.maps`.
 	- To analyze in the boundaries set by `anal.from` and `anal.to`, set `anal.in=range`.
+	- To analyze in the current mapped segment or section, you can put `anal.in=bin.segment` or `anal.in=bin.section`, respectively.
+	- To analyze in the current memory map, specify `anal.in=dbg.map`.
+	- To analyze in the stack or heap, you can set `anal.in=dbg.stack` or `anal.in=dbg.heap`.
+	- To analyze in the current function or basic block, you can specify `anal.in=anal.fcn` or `anal.in=anal.bb`.
 
-Please see `e anal.in=?` for the complete list.
+Please see `e anal.in=??` for the complete list.
 
 ### Jump tables
 
