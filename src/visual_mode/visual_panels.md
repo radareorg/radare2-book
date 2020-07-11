@@ -10,7 +10,7 @@ Visual Panels is characterized by the following core functionalities:
 
 CUI met some useful GUI as the menu, that is Visual Panels.
 
-Panels can be accessed from visual mode by using `!`.
+Panels can be accessed by using `v` or by using `!` from the visual mode.
 
 ## Overview
 
