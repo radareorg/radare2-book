@@ -97,3 +97,14 @@ to have the flags, for example inside the functions, with simple and ubiquitous 
 [0x00003a04]>
 ```
 
+### Flag Zones
+
+radare2 offers flag zones, which lets you label different offsets on the scrollbar, for making it easier to navigate through large binaries. You can set a flag zone on the current seek using:
+
+```
+[0x00003a04]> fz flag-zone-name
+```
+
+Set `scr.scrollbar=1` and go to the Visual mode, to see your flag zone appear on the scrollbar on the right end of the window.
+
+See `fz?` for more information.
