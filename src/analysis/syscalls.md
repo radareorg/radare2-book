@@ -76,3 +76,29 @@ It also can be interactively navigated through within HUD mode (`V_`)
    0x00018b32  syscall.sd_ble_gap_disconnect.2
    0x0002ac36  syscall.sd_ble_gap_disconnect.3
 ```
+
+When debugging in radare2, you can use `dcs` to continue execution until the next syscall. You can also run `dcs*` to trace all syscalls.
+```
+[0xf7fb9120]> dcs*
+Running child until syscalls:-1 
+child stopped with signal 133
+--> SN 0xf7fd3d5b syscall 45 brk (0xffffffda)
+child stopped with signal 133
+--> SN 0xf7fd28f3 syscall 384 arch_prctl (0xffffffda 0x3001)
+child stopped with signal 133
+--> SN 0xf7fc81b2 syscall 33 access (0xffffffda 0xf7fd8bf1)
+child stopped with signal 133
+```
+
+radare2 also has a syscall name to syscall number utility. You can return the syscall name of a given syscall number or vice versa, without leaving the shell.
+
+```
+[0x08048436]> asl 1
+exit
+[0x08048436]> asl write
+4
+[0x08048436]> ask write
+0x80,4,3,iZi
+```
+
+See `as?` for more information about the utility.
