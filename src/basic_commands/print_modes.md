@@ -1,6 +1,6 @@
 ## Print Modes
 
-One of the key features of radare2 is displaying information in many formats. The goal is to offer a selection of display choices to interpret in the best possible way binary data.
+One of the key features of radare2 is displaying information in many formats. The goal is to offer a selection of display choices to interpret binary data in the best possible way.
 
 Binary data can be represented as integers, shorts, longs, floats, timestamps, hexpair strings, or more complex formats like C structures, disassembly listings, decompilation listing, be a result of an external processing...
 
