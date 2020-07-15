@@ -57,6 +57,26 @@ A boolean value that controls displaying of tracing information (sequence number
 
 A boolean value used to show or hide displaying of raw bytes of instructions.
 
+### asm.sub.reg
+
+A boolean value used to replace register names with arguments or their associated role alias.
+
+### asm.sub.jmp
+
+A boolean value used to substitute jump, call and branch targets in disassembly.
+
+### asm.sub.rel
+
+A boolean value which substitutes pc relative expressions in disassembly. When turned on, it shows the references as string references.
+
+### asm.sub.section
+
+Boolean which shows offsets in disassembly prefixed with the name of the section or map.
+
+### asm.sub.varonly
+
+Boolean which substitutes the variable expression with the local variable name. For example, `var_14h` to `rbp - var_14h`
+
 ### cfg.bigendian
 
 Change endianness. "true" means big-endian, "false" is for little-endian.
