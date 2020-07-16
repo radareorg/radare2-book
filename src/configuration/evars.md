@@ -61,21 +61,64 @@ A boolean value used to show or hide displaying of raw bytes of instructions.
 
 A boolean value used to replace register names with arguments or their associated role alias.
 
+For example, if you have something like this:
+
+```
+│           0x080483ea      83c404         add esp, 4
+│           0x080483ed      68989a0408     push 0x8049a98
+│           0x080483f7      e870060000     call sym.imp.scanf
+│           0x080483fc      83c408         add esp, 8
+│           0x08048404      31c0           xor eax, eax
+```
+This variable changes it to:
+```
+│           0x080483ea      83c404         add SP, 4
+│           0x080483ed      68989a0408     push 0x8049a98
+│           0x080483f7      e870060000     call sym.imp.scanf
+│           0x080483fc      83c408         add SP, 8
+│           0x08048404      31c0           xor A0, A0
+```
+
 ### asm.sub.jmp
 
 A boolean value used to substitute jump, call and branch targets in disassembly.
+
+For example, when turned on, it'd display `jal 0x80001a40` as `jal fcn.80001a40` in the disassembly.
 
 ### asm.sub.rel
 
 A boolean value which substitutes pc relative expressions in disassembly. When turned on, it shows the references as string references.
 
+For example:
+
+```
+0x5563844a0181      488d3d7c0e00.  lea rdi, [rip + 0xe7c]    ; str.argv__2d_:__s
+```
+When turned on, this variable lets you display the above instruction as:
+
+```
+0x5563844a0181      488d3d7c0e00.  lea rdi, str.argv__2d_:__s    ; 0x5563844a1004 ; "argv[%2d]: %s\n"
+```
+
 ### asm.sub.section
 
 Boolean which shows offsets in disassembly prefixed with the name of the section or map.
 
+That means, from something like:
+
+```
+0x000067ea      488d0def0c01.  lea rcx, [0x000174e0]
+```
+to the one below, when toggled on.
+```
+0x000067ea      488d0def0c01.  lea rcx, [fmap.LOAD1.0x000174e0]
+```
+
 ### asm.sub.varonly
 
-Boolean which substitutes the variable expression with the local variable name. For example, `var_14h` to `rbp - var_14h`
+Boolean which substitutes the variable expression with the local variable name.
+
+For example: `var_14h` as `rbp - var_14h`, in the disassembly.
 
 ### cfg.bigendian
 
