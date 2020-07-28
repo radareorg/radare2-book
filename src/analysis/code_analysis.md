@@ -194,6 +194,18 @@ sub.strlen_d50 0x5de0 [STRING] lea rcx, str.02x
 (nofunc) 0x17838 [CODE] jae str.02x
 ```
 
+There are also some useful commands under `axt`. You can use `axtg` to generate radare2 commands which you can use to create graphs according to the XREFs.
+
+```
+[0x08048320]> s main
+[0x080483e0]> axtg
+agn 0x8048337 "entry0 + 23"
+agn 0x80483e0 "main"
+age 0x8048337 0x80483e0
+```
+
+You can also run `axt*` to split the radare2 commands and set flags on those corresponding XREFs.
+
 Apart from predefined algorithms to identify functions there is a way to specify
 a function prelude with a configuration option `anal.prelude`. For example, like
 `e anal.prelude = 0x554889e5` which means
