@@ -23,7 +23,7 @@ Changes syntax flavor for disassembler between Intel and AT&T. At the moment, th
 
 ### asm.pseudo
 
-A boolean value to choose a string disassembly engine. "False" indicates a native one, defined by the current architecture, "true" activates a pseudocode strings format. For example, it'll transform :
+A boolean value to set the psuedo syntax in the disassembly. "False" indicates a native one, defined by the current architecture, "true" activates a pseudocode strings format. For example, it'll transform :
 
 ```
 │           0x080483ff      e832000000     call 0x8048436
