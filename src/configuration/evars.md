@@ -23,7 +23,25 @@ Changes syntax flavor for disassembler between Intel and AT&T. At the moment, th
 
 ### asm.pseudo
 
-A boolean value to choose a string disassembly engine. "False" indicates a native one, defined by the current architecture, "true" activates a pseudocode strings format; for example, it will show `eax=ebx` instead of a `mov eax, ebx`.
+A boolean value to set the psuedo syntax in the disassembly. "False" indicates a native one, defined by the current architecture, "true" activates a pseudocode strings format. For example, it'll transform :
+
+```
+│           0x080483ff      e832000000     call 0x8048436
+│           0x08048404      31c0           xor eax, eax
+│           0x08048406      0205849a0408   add al, byte [0x8049a84]
+│           0x0804840c      83f800         cmp eax, 0
+│           0x0804840f      7405           je 0x8048416
+```
+to
+
+```
+│           0x080483ff      e832000000     0x8048436 ()
+│           0x08048404      31c0           eax = 0
+│           0x08048406      0205849a0408   al += byte [0x8049a84]
+│           0x0804840c      83f800         var = eax - 0
+│           0x0804840f      7405           if (!var) goto 0x8048416
+```
+It can be useful while disassembling obscure architectures.
 
 ### asm.os
 
@@ -137,6 +155,13 @@ This variable specifies the mode for colorized screen output: "false" (or 0) mea
 
 This variable accepts a full-featured expression or a pointer/flag (eg. eip). If set, radare will set seek position to its value on startup.
 
+### scr.scrollbar
+If you have set up any [flagzones](http://book.rada.re/basic_commands/flags.html#flag-zones) (`fz?`), this variable will let you display the scrollbar with the flagzones, in Visual mode. Set it to `1` to display the scrollbar at the right end, `2` for the top and `3` to display it at the bottom.
+
+### scr.utf8
+
+A boolen variable to show UTF-8 characters instead of ANSI.
+
 ### cfg.fortunes
 
 Enables or disables "fortune" messages displayed at each radare start.
@@ -144,3 +169,7 @@ Enables or disables "fortune" messages displayed at each radare start.
 ### cfg.fortunes.type
 
 Fortunes are classified by type. This variable determines which types are allowed for displaying when `cfg.fortunes` is `true`, so they can be fine-tuned on what's appropriate for the intended audience. Current types are `tips`, `fun`, `nsfw`, `creepy`.
+
+### stack.size
+
+This variable lets you set the size of stack in bytes.
