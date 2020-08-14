@@ -206,6 +206,18 @@ age 0x8048337 0x80483e0
 
 Use `axt*` to split the radare2 commands and set flags on those corresponding XREFs.
 
+Also under `ax`, is `axg`, which finds the path between two points in the file by showing an XREFs graph to reach the location or function. For example:
+
+```
+:> axg sym.imp.printf
+- 0x08048a5c fcn 0x08048a5c sym.imp.printf
+  - 0x080483e5 fcn 0x080483e0 main
+  - 0x080483e0 fcn 0x080483e0 main
+    - 0x08048337 fcn 0x08048320 entry0
+  - 0x08048425 fcn 0x080483e0 main
+```
+Use `axg*` to generate radare2 commands which will help you to create graphs using `agn` and `age` commands, according to the XREFs.
+
 Apart from predefined algorithms to identify functions there is a way to specify
 a function prelude with a configuration option `anal.prelude`. For example, like
 `e anal.prelude = 0x554889e5` which means
