@@ -206,7 +206,7 @@ age 0x8048337 0x80483e0
 
 Use `axt*` to split the radare2 commands and set flags on those corresponding XREFs.
 
-Also under `ax`, is `axg`, which finds the path between two points in the file by showing an XREFs graph to reach the location or function. For example:
+Also under `ax` is `axg`, which finds the path between two points in the file by showing an XREFs graph to reach the location or function. For example:
 
 ```
 :> axg sym.imp.printf
