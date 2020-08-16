@@ -165,7 +165,7 @@ function. Each will contain a score between 1.0 and 0.0.
 ```
 
 In the above example, `zb` correctly associated the `sym.fclose` signature to
-the current function. The `z/` and `z.` command would of failed to match here
+the current function. The `z/` and `z.` command would have failed to match here
 since both the `B`yte and `G`raph scores are less then 1.0. A 30% separation
 between the first and second place results is also a good indication of a
 correct match.
