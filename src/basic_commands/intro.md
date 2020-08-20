@@ -71,3 +71,11 @@ You can pass several commands in a single line by separating them with a semicol
 > px ; dr
 ```
 
+Using `_`, you can print the result that was obtained by the last command.
+
+```
+[0x00001060]> axt 0x00002004
+main 0x1181 [DATA] lea rdi, str.argv__2d_:__s
+[0x00001060]> _
+main 0x1181 [DATA] lea rdi, str.argv__2d_:__s
+```
