@@ -1,25 +1,21 @@
-# WinDBG
+# WinDBG Kernel-mode Debugging (KD)
 
-The WinDBG support for r2 allows you to attach to VM running Windows
-using a named socket file (will support more IOs in the future) to
-debug a windows box using the KD interface over serial port.
+The WinDBG KD interface support for r2 allows you to attach to VM running
+Windows and debug its kernel over a serial port or network.
 
-Bear in mind that WinDBG support is still work-in-progress, and this is
+Bear in mind that WinDBG KD support is still work-in-progress, and this is
 just an initial implementation which will get better in time.
 
 It is also possible to use the remote GDB interface to connect and
 debug Windows kernels without depending on Windows capabilities.
 
-Enable WinDBG support on Windows Vista and higher like this:
+## Setting Up KD on Windows
+
+### Serial Port
+Enable KD over a serial port on Windows Vista and higher like this:
 ```
 bcdedit /debug on
 bcdedit /dbgsettings serial debugport:1 baudrate:115200
-```
-Starting from Windows 8 there is no way to enforce debugging
-for every boot, but it is possible to always show the advanced boot options,
-which allows to enable kernel debugging:
-```
-bcedit /set {globalsettings} advancedoptions true
 ```
 
 Or like this for Windows XP:
@@ -58,6 +54,24 @@ $ qemu-system-x86_64 -chardev socket,id=serial0,\
      -serial chardev:serial0 -hda Windows7-VM.vdi
 ```
 
+### Network
+Enable KD over network (KDNet) on Windows 7 or later likes this:
+```
+bcdedit /debug on
+bcdedit /dbgsettings net hostip:w.x.y.z port:n
+```
+
+---
+Starting from Windows 8 there is no way to enforce debugging
+for every boot, but it is possible to always show the advanced boot options,
+which allows to enable kernel debugging:
+```
+bcedit /set {globalsettings} advancedoptions true
+```
+
+## Connecting to KD interface on r2
+
+### Serial Port
 Radare2 will use the 'windbg' io plugin to connect to a socket file
 created by virtualbox or qemu. Also, the 'windbg' debugger plugin and
 we should specify the x86-32 too. (32 and 64 bit debugging is supported)
@@ -69,7 +83,15 @@ On Windows you should run the following line:
 ```
 $ radare2 -D windbg windbg://\\.\pipe\com_1
 ```
-At this point, we will get stuck here:
+
+### Network
+```
+$ r2 -a x86 -b 32 -d windbg://<hostip>:<port>:w.x.y.z
+```
+
+## Using KD
+When connecting to a KD interface, r2 will send a breakin packet to interrupt
+the target and we will get stuck here:
 ```
 [0x828997b8]> pd 20
 	;-- eip:
