@@ -8,11 +8,14 @@ It is used also as a guide for basic function prototype and type propagation.
 |Usage: afc[agl?]
 | afc convention  Manually set calling convention for current function
 | afc             Show Calling convention for the Current function
+| afc=([cctype])  Select or show default calling convention
 | afcr[j]         Show register usage for the current function
 | afca            Analyse function for finding the current calling convention
-| afcf name       Prints return type function(arg1, arg2...)
+| afcf[j] [name]  Prints return type function(arg1, arg2...), see afij
+| afck            List SDB details of call loaded calling conventions
 | afcl            List all available calling conventions
 | afco path       Open Calling Convention sdb profile from given path
+| afcR            Register telescoping using the calling conventions order
 [0x00000000]>
 ```
 
