@@ -89,6 +89,7 @@ function or perform completely manual one.
 | af- [addr]               clean all function analysis data (or function at addr)
 | afb+ fcnA bbA sz [j] [f] ([t]( [d]))  add bb to function @ fcnaddr
 | afb[?] [addr]            List basic blocks of given function
+| afbF([0|1])              Toggle the basic-block 'folded' attribute
 | afB 16                   set current function as thumb (change asm.bits)
 | afC[lc] ([addr])@[addr]  calculate the Cycles (afC) or Cyclomatic Complexity (afCc)
 | afc[?] type @[addr]      set calling convention for function
@@ -96,17 +97,19 @@ function or perform completely manual one.
 | aff                      re-adjust function boundaries to fit
 | afF[1|0|]                fold/unfold/toggle
 | afi [addr|fcn.name]      show function(s) information (verbose afl)
-| afl[?] [l*] [fcn name]   list functions (addr, size, bbs, name) (see afll)
+| afj [tableaddr] [count]  analyze function jumptable
+| afl[?] [ls*] [fcn name]  list functions (addr, size, bbs, name) (see afll)
 | afm name                 merge two functions
 | afM name                 print functions map
 | afn[?] name [addr]       rename name for function at address (change flag too)
 | afna                     suggest automatic name for current offset
-| afo [fcn.name]           show address for the function named like this
-| afs [addr] [fcnsign]     get/set function signature at current address
+| afo[?j] [fcn.name]       show address for the function name or current offset
+| afs[!] ([fcnsign])       get/set function signature at current address (afs! uses cfg.editor)
 | afS[stack_size]          set stack frame size for function at current address
+| afsr [function_name] [new_type]  change type for given function
 | aft[?]                   type matching, type propagation
 | afu [addr]               resize and analyze function from current address until addr
-| afv[bsra]?               manipulate args, registers and variables in function
+| afv[absrx]?               manipulate args, registers and variables in function
 | afx                      list function references
 ```
 
@@ -135,7 +138,7 @@ There are two very important commands for this: `afc` and `afB`. The latter is a
 
 ## Recursive analysis
 
-There are 4 important program wide half-automated analysis commands:
+There are 5 important program wide half-automated analysis commands:
 
  - `aab` - perform basic-block analysis ("Nucleus" algorithm)
  - `aac` - analyze function calls from one (selected or current function)
