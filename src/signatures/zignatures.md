@@ -125,7 +125,6 @@ Signatures configuration stored in the `zign.` config vars' namespace:
 ```
 [0x000051c0]> e? zign.
        zign.autoload: Autoload all zignatures located in ~/.local/share/radare2/zigns
-     zign.bestthresh: Threshold for zb commands
           zign.bytes: Use bytes patterns for matching
    zign.diff.bthresh: Threshold for diffing zign bytes [0, 1] (see zc?)
    zign.diff.gthresh: Threshold for diffing zign graphs [0, 1] (see zc?)
@@ -137,6 +136,7 @@ Signatures configuration stored in the `zign.` config vars' namespace:
          zign.offset: Use original offset for matching
          zign.prefix: Default prefix for zignatures matches
            zign.refs: Use references for matching
+      zign.threshold: Minimum similarity required for inclusion in zb output
           zign.types: Use types for matching
 [0x000051c0]>
 ```
