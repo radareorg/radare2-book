@@ -1,6 +1,6 @@
 # Heap
 
-radare2's `dm` subcommands can also display a map of the heap which is useful for those who are interesting in inspecting the heap and its content. Simply execute `dmh` to show a map of the heap:
+radare2's `dm` subcommands can also display a map of the heap which is useful for those who are interested in inspecting the heap and its content. Simply execute `dmh` to show a map of the heap:
 
 ```
 [0x7fae46236ca6]> dmh
@@ -60,3 +60,4 @@ Another heap commands can be found under `dmh`, check `dmh?` for the full list.
 | dmh?                Show map heap help
 ```
 
+To print safe-linked lists (glibc >= 2.32) with demangled pointers, the variable `dbg.glibc.demangle` must be true.
