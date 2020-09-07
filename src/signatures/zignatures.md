@@ -123,15 +123,21 @@ Here we can see the comment of `entry0`, which is taken from the ELF parsing, bu
 
 Signatures configuration stored in the `zign.` config vars' namespace:
 ```
-[0x000051c0]> e zign.
-zign.bytes = true
-zign.graph = true
-zign.maxsz = 500
-zign.mincc = 10
-zign.minsz = 16
-zign.offset = true
-zign.prefix = sign
-zign.refs = true
+[0x000051c0]> e? zign.
+       zign.autoload: Autoload all zignatures located in ~/.local/share/radare2/zigns
+          zign.bytes: Use bytes patterns for matching
+   zign.diff.bthresh: Threshold for diffing zign bytes [0, 1] (see zc?)
+   zign.diff.gthresh: Threshold for diffing zign graphs [0, 1] (see zc?)
+          zign.graph: Use graph metrics for matching
+           zign.hash: Use Hash for matching
+          zign.maxsz: Maximum zignature length
+          zign.mincc: Minimum cyclomatic complexity for matching
+          zign.minsz: Minimum zignature length for matching
+         zign.offset: Use original offset for matching
+         zign.prefix: Default prefix for zignatures matches
+           zign.refs: Use references for matching
+      zign.threshold: Minimum similarity required for inclusion in zb output
+          zign.types: Use types for matching
 [0x000051c0]>
 ```
 
