@@ -76,6 +76,8 @@ control of the analysis process. Moreover, there is a treasure trove of configur
 for controlling the analysis outcomes. You can find them in `anal.*` and `emu.*`
 cfg variables' namespaces.
 
+## Analyze functions
+
 One of the most important "basic" analysis commands is the set of `af` subcommands. `af` means
 "analyze function". Using this command you can either allow automatic analysis of the particular
 function or perform completely manual one.
@@ -112,6 +114,13 @@ function or perform completely manual one.
 | afv[absrx]?               manipulate args, registers and variables in function
 | afx                      list function references
 ```
+You can use `afl` to list the functions found by the analysis.
+
+There are a lot of useful commands under `afl` such as `aflj`, which lists the function in JSON format and `aflm`, which lists the functions in the syntax found in makefiles.
+
+There's also `afl=`, which displays ASCII-art bars with function ranges.
+
+You can find the rest of them under `afl?`.
 
 Some of the most challenging tasks while performing a function analysis are merge, crop and resize.
 As with other analysis commands you have two modes: semi-automatic and manual.
