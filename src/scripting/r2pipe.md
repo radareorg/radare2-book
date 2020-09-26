@@ -124,8 +124,8 @@ fn main() {
   let mut r2p = open_pipe!(Some("/bin/ls")).unwrap();
   println!("{:?}", r2p.cmd("?e Hello World"));
   let json = r2p.cmdj("ij").unwrap();
-  println!("{}", json.pretty());
-  println!("ARCH {}", json.find_path(&["bin","arch"]).unwrap());
+  println!("{}", serde_json::to_string_pretty(&json).unwrap());
+  println!("ARCH {}", json["bin"]["arch"]);
   r2p.close();
 }
 ```
