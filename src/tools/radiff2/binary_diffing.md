@@ -1,6 +1,6 @@
 # Binary Diffing
 
-This section is based on the http://radare.today article "[binary diffing](http://radare.today/binary-diffing/)"
+This section is based on the http://radare.today article "[binary diffing](https://radareorg.github.io/blog/posts/binary-diffing/)"
 
 Without any parameters, `radiff2` by default shows what bytes are changed and their corresponding offsets:
 ```
@@ -60,10 +60,10 @@ $ radiff2 -AC -a x86 /bin/true /bin/false | grep UNMATCH
                           fcn.00003a50  120 0x3a50 | UNMATCH  (0.125000) | 0x3a60   120 fcn.00003a60
 ```
 
-And now a cool feature : radare2 supports graph-diffing, à la [DarunGrim](http://www.darungrim.org/), with the `-g` option. You can either give it a symbol name, of specify two offsets, if the function you want to diff is named differently in compared files. For example, `radiff2 -g main /bin/true /bin/false | xdot -` will show differences in `main()` function of Unix `true` and `false` programs. You can compare it to `radiff2 -g main /bin/false /bin/true` (Notice the order of the arguments) to get the two versions.
+And now a cool feature : radare2 supports graph-diffing, à la [DarunGrim](http://www.darungrim.org/), with the `-g` option. You can either give it a symbol name, of specify two offsets, if the function you want to diff is named differently in compared files. For example, `radiff2 -md -g main /bin/true /bin/false | xdot -` will show differences in `main()` function of Unix `true` and `false` programs. You can compare it to `radiff2 -md -g main /bin/false /bin/true | xdot -` (Notice the order of the arguments) to get the two versions.
 This is the result:
 
-![/bin/true vs /bin/false](../pics/true_false.png)
+![/bin/true vs /bin/false](img/true_false.png)
 
 
 Parts in yellow indicate that some offsets do not match. The grey piece means a perfect match. The red one highlights a strong difference. If you look closely, you will see that the left part of the picture has `mov edi, 0x1; call sym.imp.exit`, while the right one has `xor edi, edi; call sym.imp.exit`.
