@@ -163,7 +163,7 @@ But it's unreliable especially in processing loops (while, for, etc.). So I pref
 r2pm install r2dec
 ```
 
-decompile `main()` with the following command:
+decompile `main()` with the following command (like `F5` in IDA):
 ```C
 [0x08048330]> pdd@main
 /* r2dec pseudo code output */
