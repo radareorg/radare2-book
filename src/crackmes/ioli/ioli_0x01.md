@@ -31,39 +31,38 @@ $ r2 ./crackme0x01
 [0x08048330]> aa
 [0x08048330]> pdf@main
             ; DATA XREF from entry0 @ 0x8048347
-┌ 113: int main (int argc, char **argv, char **envp);
-│           ; var int32_t var_4h @ ebp-0x4
-│           ; var int32_t var_sp_4h @ esp+0x4
-│           0x080483e4      55             push ebp
-│           0x080483e5      89e5           mov ebp, esp
-│           0x080483e7      83ec18         sub esp, 0x18
-│           0x080483ea      83e4f0         and esp, 0xfffffff0
-│           0x080483ed      b800000000     mov eax, 0
-│           0x080483f2      83c00f         add eax, 0xf                ; 15
-│           0x080483f5      83c00f         add eax, 0xf                ; 15
-│           0x080483f8      c1e804         shr eax, 4
-│           0x080483fb      c1e004         shl eax, 4
-│           0x080483fe      29c4           sub esp, eax
-│           0x08048400      c70424288504.  mov dword [esp], str.IOLI_Crackme_Level_0x01 ; [0x8048528:4]=0x494c4f49 ; "IOLI Crackme Level 0x01\n"
-│           0x08048407      e810ffffff     call sym.imp.printf         ; int printf(const char *format)
-│           0x0804840c      c70424418504.  mov dword [esp], str.Password: ; [0x8048541:4]=0x73736150 ; "Password: "
-│           0x08048413      e804ffffff     call sym.imp.printf         ; int printf(const char *format)
-│           0x08048418      8d45fc         lea eax, [var_4h]
-│           0x0804841b      89442404       mov dword [var_sp_4h], eax
-│           0x0804841f      c704244c8504.  mov dword [esp], 0x804854c  ; [0x804854c:4]=0x49006425
-│           0x08048426      e8e1feffff     call sym.imp.scanf          ; int scanf(const char *format)
-│           0x0804842b      817dfc9a1400.  cmp dword [var_4h], 0x149a
-│       ┌─< 0x08048432      740e           je 0x8048442
-│       │   0x08048434      c704244f8504.  mov dword [esp], str.Invalid_Password ; [0x804854f:4]=0x61766e49 ; "Invalid Password!\n"
-│       │   0x0804843b      e8dcfeffff     call sym.imp.printf         ; int printf(const char *format)
-│      ┌──< 0x08048440      eb0c           jmp 0x804844e
-│      │└─> 0x08048442      c70424628504.  mov dword [esp], str.Password_OK_: ; [0x8048562:4]=0x73736150 ; "Password OK :)\n"
-│      │    0x08048449      e8cefeffff     call sym.imp.printf         ; int printf(const char *format)
-│      │    ; CODE XREF from main @ 0x8048440
-│      └──> 0x0804844e      b800000000     mov eax, 0
-│           0x08048453      c9             leave
-└           0x08048454      c3             ret
-
+/ 113: int main (int argc, char **argv, char **envp);
+|           ; var int32_t var_4h @ ebp-0x4
+|           ; var int32_t var_sp_4h @ esp+0x4
+|           0x080483e4      55             push ebp
+|           0x080483e5      89e5           mov ebp, esp
+|           0x080483e7      83ec18         sub esp, 0x18
+|           0x080483ea      83e4f0         and esp, 0xfffffff0
+|           0x080483ed      b800000000     mov eax, 0
+|           0x080483f2      83c00f         add eax, 0xf                ; 15
+|           0x080483f5      83c00f         add eax, 0xf                ; 15
+|           0x080483f8      c1e804         shr eax, 4
+|           0x080483fb      c1e004         shl eax, 4
+|           0x080483fe      29c4           sub esp, eax
+|           0x08048400      c70424288504.  mov dword [esp], str.IOLI_Crackme_Level_0x01 ; [0x8048528:4]=0x494c4f49 ; "IOLI Crackme Level 0x01\n"
+|           0x08048407      e810ffffff     call sym.imp.printf         ; int printf(const char *format)
+|           0x0804840c      c70424418504.  mov dword [esp], str.Password: ; [0x8048541:4]=0x73736150 ; "Password: "
+|           0x08048413      e804ffffff     call sym.imp.printf         ; int printf(const char *format)
+|           0x08048418      8d45fc         lea eax, [var_4h]
+|           0x0804841b      89442404       mov dword [var_sp_4h], eax
+|           0x0804841f      c704244c8504.  mov dword [esp], 0x804854c  ; [0x804854c:4]=0x49006425
+|           0x08048426      e8e1feffff     call sym.imp.scanf          ; int scanf(const char *format)
+|           0x0804842b      817dfc9a1400.  cmp dword [var_4h], 0x149a
+|       ,=< 0x08048432      740e           je 0x8048442
+|       |   0x08048434      c704244f8504.  mov dword [esp], str.Invalid_Password ; [0x804854f:4]=0x61766e49 ; "Invalid Password!\n"
+|       |   0x0804843b      e8dcfeffff     call sym.imp.printf         ; int printf(const char *format)
+|      ,==< 0x08048440      eb0c           jmp 0x804844e
+|      |`-> 0x08048442      c70424628504.  mov dword [esp], str.Password_OK_: ; [0x8048562:4]=0x73736150 ; "Password OK :)\n"
+|      |    0x08048449      e8cefeffff     call sym.imp.printf         ; int printf(const char *format)
+|      |    ; CODE XREF from main @ 0x8048440
+|      `--> 0x0804844e      b800000000     mov eax, 0
+|           0x08048453      c9             leave
+\           0x08048454      c3             ret
 ```
 
 "aa" tells r2 to analyze the whole binary, which gets you symbol names, among things.
