@@ -158,7 +158,7 @@ function main () {
 }
 ```
 
-But it's unreliable especially in processing loops (while, for, etc.). So I prefer to use the [r2dec](https://github.com/radareorg/r2dec-js) plugin in r2 repo to generate the pseudo C code. you can install it easily:
+The `pdc` command is unreliable especially in processing loops (while, for, etc.). So I prefer to use the [r2dec](https://github.com/radareorg/r2dec-js) plugin in r2 repo to generate the pseudo C code. you can install it easily:
 ```
 r2pm install r2dec
 ```
