@@ -77,9 +77,7 @@ Commands interface for ESIL VM is almost identical to the debugging one:
 - `aesi` to step over the function calls
 - `aesu <address>` to step until some specified address
 - `aesue <ESIL expression>` to step until some specified ESIL expression met
-- `aec` to continue until break (Ctrl-C), this one is rarely used though, due to the omnipresence
-	of external calls
-- `aecu <address>` to continue until some specified address
+- `aec` to continue until break (Ctrl-C), this one is rarely used though, due to the omnipresence of external calls
 
 In visual mode, all of the debugging hotkeys will work also in ESIL emulation mode.
 

@@ -29,7 +29,7 @@ The aim is to be able to express most of the common operations performed by CPUs
 
 r2's visual mode is great to inspect the ESIL evaluations.
 
-There are 2 environment variables that are important for watching what a program does:
+There are 3 environment variables that are important for watching what a program does:
 ```
 [0x00000000]> e emu.str = true
 ```
@@ -249,7 +249,7 @@ Common operations:
 
 ### CPU Flags
 
-CPU flags are usually defined as single bit registers in the RReg profile. They and sometimes found under the 'flg' register type.
+CPU flags are usually defined as single bit registers in the RReg profile. They are sometimes found under the 'flg' register type.
 
 ### Variables
 
