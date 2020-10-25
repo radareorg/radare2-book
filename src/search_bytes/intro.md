@@ -50,4 +50,4 @@ anal.depth)
 
 Because everything is treated as a file in radare2, it does not matter whether you search in a socket, a remote device, in process memory, or a file.
 
-note that '/****' starts multiline comment. It's not for searching. type '*/' to end comment.
+note that '/*' starts multiline comment. It's not for searching. type '*/' to end comment.
