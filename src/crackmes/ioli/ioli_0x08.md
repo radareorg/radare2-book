@@ -11,7 +11,7 @@ Password: 12346
 Password OK!
 ```
 
-but [dustri](https://dustri.org/b/defeating-ioli-with-radare2.html) provided a better way to check crackme0x08. 0x07 is the stripped version of 0x08.
+[dustri](https://dustri.org/b/defeating-ioli-with-radare2.html) provided a better way to check crackme0x08. 0x07 is the stripped version of 0x08.
 
 ```sh
 $ radiff2 -A -C ./crackme0x07 ./crackme0x08

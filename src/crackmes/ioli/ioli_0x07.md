@@ -28,7 +28,7 @@ int32_t main (int32_t arg_10h) {
 }
 ```
 
-due to the symbol info lost, neither `aa` nor `aaa` show the name of functions. we can double check this in "flagspace".  Radare2 use fcn_080485b9 as the function name. It's a common case in reverse engineering that we don't have any symbol info of the binary.
+due to the symbol info lost, neither `aa` nor `aaa` show the name of functions. we can double check this in "flagspace". Radare2 use fcn_080485b9 as the function name. It's a common case in reverse engineering that we don't have any symbol info of the binary.
 
 ```sh
 [0x080487fd]> fs symbols
