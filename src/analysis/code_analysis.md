@@ -84,35 +84,35 @@ function or perform completely manual one.
 
 ```
 [0x00000000]> af?
-|Usage: af
-| af ([name]) ([addr])     analyze functions (start at addr or $$)
-| afr ([name]) ([addr])    analyze functions recursively
-| af+ addr name [type] [diff]  hand craft a function (requires afb+)
-| af- [addr]               clean all function analysis data (or function at addr)
+Usage: af
+| af ([name]) ([addr])                  analyze functions (start at addr or $$)
+| afr ([name]) ([addr])                 analyze functions recursively
+| af+ addr name [type] [diff]           hand craft a function (requires afb+)
+| af- [addr]                            clean all function analysis data (or function at addr)
+| afa                                   analyze function arguments in a call (afal honors dbg.funcarg)
 | afb+ fcnA bbA sz [j] [f] ([t]( [d]))  add bb to function @ fcnaddr
-| afb[?] [addr]            List basic blocks of given function
-| afbF([0|1])              Toggle the basic-block 'folded' attribute
-| afB 16                   set current function as thumb (change asm.bits)
-| afC[lc] ([addr])@[addr]  calculate the Cycles (afC) or Cyclomatic Complexity (afCc)
-| afc[?] type @[addr]      set calling convention for function
-| afd[addr]                show function + delta for given offset
-| aff                      re-adjust function boundaries to fit
-| afF[1|0|]                fold/unfold/toggle
-| afi [addr|fcn.name]      show function(s) information (verbose afl)
-| afj [tableaddr] [count]  analyze function jumptable
-| afl[?] [ls*] [fcn name]  list functions (addr, size, bbs, name) (see afll)
-| afm name                 merge two functions
-| afM name                 print functions map
-| afn[?] name [addr]       rename name for function at address (change flag too)
-| afna                     suggest automatic name for current offset
-| afo[?j] [fcn.name]       show address for the function name or current offset
-| afs[!] ([fcnsign])       get/set function signature at current address (afs! uses cfg.editor)
-| afS[stack_size]          set stack frame size for function at current address
-| afsr [function_name] [new_type]  change type for given function
-| aft[?]                   type matching, type propagation
-| afu [addr]               resize and analyze function from current address until addr
-| afv[absrx]?               manipulate args, registers and variables in function
-| afx                      list function references
+| afb[?] [addr]                         List basic blocks of given function
+| afbF([0|1])                           Toggle the basic-block 'folded' attribute
+| afB 16                                set current function as thumb (change asm.bits)
+| afC[lc] ([addr])@[addr]               calculate the Cycles (afC) or Cyclomatic Complexity (afCc)
+| afc[?] type @[addr]                   set calling convention for function
+| afd[addr]                             show function + delta for given offset
+| afF[1|0|]                             fold/unfold/toggle
+| afi [addr|fcn.name]                   show function(s) information (verbose afl)
+| afj [tableaddr] [count]               analyze function jumptable
+| afl[?] [ls*] [fcn name]               list functions (addr, size, bbs, name) (see afll)
+| afm name                              merge two functions
+| afM name                              print functions map
+| afn[?] name [addr]                    rename name for function at address (change flag too)
+| afna                                  suggest automatic name for current offset
+| afo[?j] [fcn.name]                    show address for the function name or current offset
+| afs[!] ([fcnsign])                    get/set function signature at current address (afs! uses cfg.editor)
+| afS[stack_size]                       set stack frame size for function at current address
+| afsr [function_name] [new_type]       change type for given function
+| aft[?]                                type matching, type propagation
+| afu addr                              resize and analyze function from current address until addr
+| afv[absrx]?                           manipulate args, registers and variables in function
+| afx                                   list function references
 ```
 You can use `afl` to list the functions found by the analysis.
 
@@ -256,12 +256,12 @@ There are different kinds of the configuration options:
 ### Control flow configuration
 
 Two most commonly used options for changing the behavior of control flow analysis in radare2 are
-`anal.hasnext` and `anal.afterjump`. The first one allows forcing radare2 to continue the analysis
+`anal.hasnext` and `anal.jmp.after`. The first one allows forcing radare2 to continue the analysis
 after the end of the function, even if the next chunk of the code wasn't called anywhere, thus
 analyzing all of the available functions. The latter one allows forcing radare2 to continue
 the analysis even after unconditional jumps.
 
-In addition to those we can also set `anal.ijmp` to follow the indirect jumps, continuing analysis;
+In addition to those we can also set `anal.jmp.indir` to follow the indirect jumps, continuing analysis;
 `anal.pushret` to analyze `push ...; ret` sequence as a jump; `anal.nopskip` to skip the NOP
 sequences at a function beginning.
 
@@ -279,8 +279,8 @@ binaries for embedded systems, it is often a case. Thus - this option.
 The most crucial options that change the analysis results drastically. Sometimes some can be
 disabled to save the time and memory when analyzing big binaries.
 
-- `anal.jmpref` - to allow references creation for unconditional jumps
-- `anal.cjmpref` - same, but for conditional jumps
+- `anal.jmp.ref` - to allow references creation for unconditional jumps
+- `anal.jmp.cref` - same, but for conditional jumps
 - `anal.datarefs` - to follow the data references in code
 - `anal.refstr` - search for strings in data references
 - `anal.strings` - search for strings and creating references
@@ -313,7 +313,7 @@ option. Eventually, algorithms moved into the default analysis loops once they s
 every supported platform/target/testcase.
 Two more options can affect the jump tables analysis results too:
 
-- `anal.ijmp` - follow the indirect jumps, some jump tables rely on them
+- `anal.jmp.indir` - follow the indirect jumps, some jump tables rely on them
 - `anal.datarefs` - follow the data references, some jump tables use those
 
 ### Platform specific controls
