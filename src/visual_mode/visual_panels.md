@@ -108,3 +108,16 @@ By default you will have one tab and you can press `t` to create a new tab with 
 For traversing through the tabs, you can type in the tab number while in Tab Mode.
 
 And pressing `-` deletes the tab you are in.
+
+## Saving layouts
+You can save your custom layout of your visual panels either by picking the option 'Save Layout' from the File menu of the menu bar or by running:
+```
+v= test
+```
+Where `test` is the name with which you'd like to save it.
+
+You can open a saved layout by passing the name as the parameter to `v`:
+```
+v test
+```
+More about that can be found under `v?`.
