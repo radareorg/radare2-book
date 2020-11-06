@@ -80,7 +80,7 @@ The above command will create an alias `disas` for `pdf`. The following command 
 Apart from commands, you can also alias a text to be printed, when called.
 
 ```
-[0x00404800]> $my_alias = $test input
+[0x00404800]> $my_alias=$test input
 [0x00404800]> $my_alias
 test input
 ```
