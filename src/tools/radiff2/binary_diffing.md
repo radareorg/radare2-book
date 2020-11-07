@@ -65,8 +65,6 @@ This is the result:
 
 ![/bin/true vs /bin/false](img/true_false2.png)
 
-
-true false left, false true right
 Parts in yellow indicate that some offsets do not match. The grey piece means a perfect match. The orange one highlights a strong difference. If you look closely, you will see that the left part of the picture has `mov eax, 0x1; pop rbx; pop rbp; ret`, while the right one has `xor edx, edx; pop rbx; pop rbp; ret`.
 
 Binary diffing is an important feature for reverse engineering. It can be used to analyze [security updates](https://en.wikipedia.org/wiki/Patch_Tuesday), infected binaries, firmware changes and more...
