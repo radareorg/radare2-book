@@ -5,6 +5,9 @@ With rabin2, the generated symbols list format is similar to the imports list. U
 ```
 rabin2 -s /bin/ls | head
 [Symbols]
+
+nth paddr       vaddr      bind   type   size lib name
+――――――――――――――――――――――――――――――――――――――――――――――――――――――
 110 0x000150a0 0x000150a0 GLOBAL FUNC 56 _obstack_allocated_p
 111 0x0001f600 0x0021f600 GLOBAL  OBJ  8 program_name
 112 0x0001f620 0x0021f620 GLOBAL  OBJ  8 stderr

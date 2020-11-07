@@ -4,6 +4,9 @@ Rabin2 is able to find exports. For example:
 ```
 $ rabin2 -E /usr/lib/libr_bin.so | head
 [Exports]
+
+nth  paddr       vaddr      bind   type size lib name
+―――――――――――――――――――――――――――――――――――――――――――――――――――――
 210 0x000ae1f0 0x000ae1f0 GLOBAL   FUNC  200 r_bin_java_print_exceptions_attr_summary
 211 0x000afc90 0x000afc90 GLOBAL   FUNC  135 r_bin_java_get_args
 212 0x000b18e0 0x000b18e0 GLOBAL   FUNC   35 r_bin_java_get_item_desc_from_bin_cp_list
