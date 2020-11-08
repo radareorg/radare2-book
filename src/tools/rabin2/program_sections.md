@@ -4,6 +4,9 @@ Rabin2 called with the `-S` option gives complete information about the sections
 ```
 $ rabin2 -S /bin/ls
 [Sections]
+
+nth paddr          size vaddr         vsize perm name
+―――――――――――――――――――――――――――――――――――――――――――――――――――――
 00 0x00000000     0 0x00000000     0 ----
 01 0x00000238    28 0x00000238    28 -r-- .interp
 02 0x00000254    32 0x00000254    32 -r-- .note.ABI_tag
@@ -37,14 +40,14 @@ With the `-Sr` option, rabin2 will flag the start/end of every section, and will
 ```
 $ rabin2 -Sr /bin/ls | head
 fs sections
-S 0x00000000 0x00000000 0x00000000 0x00000000  0
-f section. 0 0x00000000
-f section_end. 1 0x00000000
-CC section 0 va=0x00000000 pa=0x00000000 sz=0 vsz=0 rwx=----  @ 0x00000000
-S 0x00000238 0x00000238 0x0000001c 0x0000001c .interp 4
-f section..interp 28 0x00000238
-f section_end..interp 1 0x00000254
-CC section 1 va=0x00000238 pa=0x00000238 sz=28 vsz=28 rwx=-r-- .interp @ 0x00000238
-S 0x00000254 0x00000254 0x00000020 0x00000020 .note.ABI_tag 4
+"f section. 1 0x00000000"
+"f section..interp 1 0x000002a8"
+"f section..note.gnu.build_id 1 0x000002c4"
+"f section..note.ABI_tag 1 0x000002e8"
+"f section..gnu.hash 1 0x00000308"
+"f section..dynsym 1 0x000003b8"
+"f section..dynstr 1 0x00000fb8"
+"f section..gnu.version 1 0x00001574"
+"f section..gnu.version_r 1 0x00001678"
 ```
 
