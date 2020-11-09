@@ -90,6 +90,7 @@ To undefine alias, use `$alias=`:
 [0x00404800]> $pmore='b 300;px'
 [0x00404800]> $
 $pmore
+[0x00404800]> $pmore=
 [0x00404800]> $
 
 ```
