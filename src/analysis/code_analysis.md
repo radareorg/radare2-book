@@ -185,6 +185,12 @@ our goal is to hand craft a function with the following structure
 
 ![analyze_one](analyze_one.png)
 
+
+create a function at 0x8000034 named code_block:
+```
+[0x8000034]> af+ 0x8000034 code_block
+```
+
 In most cases, we use jump or call instructions as code block boundaries. so the range of first block is from `0x08000034 push ebp` to `0x08000048 jmp 0x8000052`.
 use `afb+` command to add it. 
 
