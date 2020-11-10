@@ -385,7 +385,7 @@ Please see `e anal.in=??` for the complete list.
 
 Jump tables are one of the trickiest targets in binary reverse engineering. There are hundreds
 of different types, the end result depending on the compiler/linker and LTO stages of optimization.
-Thus radare2 allows enabling some experimental jump tables detection algorithms using `anal.jmptbl`
+Thus radare2 allows enabling some experimental jump tables detection algorithms using `anal.jmp.tbl`
 option. Eventually, algorithms moved into the default analysis loops once they start to work on
 every supported platform/target/testcase.
 Two more options can affect the jump tables analysis results too:
@@ -402,7 +402,7 @@ like the results, particular functions' mode can be overridden with `afB` comman
 
 The MIPS GP problem is even trickier. It is a basic knowledge that GP value can be different not only
 for the whole program, but also for some functions. To partially solve that there are options
-`anal.gp` and `anal.gp2`. The first one sets the GP value for the whole program or particular
+`anal.gp` and `anal.gpfixed`. The first one sets the GP value for the whole program or particular
 function. The latter allows to "constantify" the GP value if some code is willing to change its
 value, always resetting it if the case. Those are heavily experimental and might be changed in the
 future in favor of more automated analysis.
