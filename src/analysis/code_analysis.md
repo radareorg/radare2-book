@@ -141,6 +141,89 @@ Before changing the basic blocks of the function it is recommended to check the 
 0x00003ba8 0x00003bf9 00:0000 81
 ```
 
+### Hand craft function
+before start, let's prepare a binary file first, for example:
+```C
+int code_block()
+{
+  int result = 0;
+
+  for(int i = 0; i < 10; ++i)
+    result += 1;
+
+  return result;
+}
+```
+then compile it with `gcc -c example.c -m32 -O0 -fno-pie`, we will get the object file `example.o`. open it with radare2. 
+
+since we haven't analyzed it yet, the `pdf` command will not print out the disassembly here:
+```
+$ r2 example.o 
+[0x08000034]> pdf
+p: Cannot find function at 0x08000034
+[0x08000034]> pd
+            ;-- section..text:
+            ;-- .text:
+            ;-- code_block:
+            ;-- eip:
+            0x08000034      55             push ebp                    ; [01] -r-x section size 41 named .text
+            0x08000035      89e5           mov ebp, esp
+            0x08000037      83ec10         sub esp, 0x10
+            0x0800003a      c745f8000000.  mov dword [ebp - 8], 0
+            0x08000041      c745fc000000.  mov dword [ebp - 4], 0
+        ,=< 0x08000048      eb08           jmp 0x8000052
+       .--> 0x0800004a      8345f801       add dword [ebp - 8], 1
+       :|   0x0800004e      8345fc01       add dword [ebp - 4], 1
+       :`-> 0x08000052      837dfc09       cmp dword [ebp - 4], 9
+       `==< 0x08000056      7ef2           jle 0x800004a
+            0x08000058      8b45f8         mov eax, dword [ebp - 8]
+            0x0800005b      c9             leave
+            0x0800005c      c3             ret
+
+```
+our goal is to hand craft a function with the following structure
+
+![analyze_one](analyze_one.png)
+
+
+create a function at 0x8000034 named code_block:
+```
+[0x8000034]> af+ 0x8000034 code_block
+```
+
+In most cases, we use jump or call instructions as code block boundaries. so the range of first block is from `0x08000034 push ebp` to `0x08000048 jmp 0x8000052`.
+use `afb+` command to add it. 
+
+```
+[0x08000034]> afb+ code_block 0x8000034 0x800004a-0x8000034 0x8000052
+```
+
+note that the basic syntax of `afb+` is `afb+ function_address block_address block_size [jump] [fail]`. the final instruction of this block points to a new address(jmp 0x8000052), thus we add the address of jump target (0x8000052) to reflect the jump info.
+
+the next block (0x08000052 ~ 0x08000056) is more likeyly an if conditional statement which has two branches. It will jump to 0x800004a if `jle-less or equal`, otherwise (the fail condition) jump to next instruction -- 0x08000058.:
+
+```
+[0x08000034]> afb+ code_block 0x8000052 0x8000058-0x8000052 0x800004a 0x8000058
+```
+
+follow the control flow and create the remaining two blocks (two branches) :
+```
+[0x08000034]> afb+ code_block 0x800004a 0x8000052-0x800004a 0x8000052
+[0x08000034]> afb+ code_block 0x8000058 0x800005d-0x8000058
+```
+
+check our work:
+```
+[0x08000034]> afb
+0x08000034 0x0800004a 00:0000 22 j 0x08000052
+0x0800004a 0x08000052 00:0000 8 j 0x08000052
+0x08000052 0x08000058 00:0000 6 j 0x0800004a f 0x08000058
+0x08000058 0x0800005d 00:0000 5
+[0x08000034]> VV
+```
+
+![handcraft_one](handcraft_one.png)
+
 There are two very important commands for this: `afc` and `afB`. The latter is a must-know command for some platforms like ARM. It provides a way to change the "bitness" of the particular function. Basically, allowing to select between ARM and Thumb modes.
 
 `afc` on the other side, allows to manually specify function calling convention. You can find more information on its usage in [calling_conventions](calling_conventions.md).
@@ -308,7 +391,7 @@ Please see `e anal.in=??` for the complete list.
 
 Jump tables are one of the trickiest targets in binary reverse engineering. There are hundreds
 of different types, the end result depending on the compiler/linker and LTO stages of optimization.
-Thus radare2 allows enabling some experimental jump tables detection algorithms using `anal.jmptbl`
+Thus radare2 allows enabling some experimental jump tables detection algorithms using `anal.jmp.tbl`
 option. Eventually, algorithms moved into the default analysis loops once they start to work on
 every supported platform/target/testcase.
 Two more options can affect the jump tables analysis results too:
@@ -325,7 +408,7 @@ like the results, particular functions' mode can be overridden with `afB` comman
 
 The MIPS GP problem is even trickier. It is a basic knowledge that GP value can be different not only
 for the whole program, but also for some functions. To partially solve that there are options
-`anal.gp` and `anal.gp2`. The first one sets the GP value for the whole program or particular
+`anal.gp` and `anal.gpfixed`. The first one sets the GP value for the whole program or particular
 function. The latter allows to "constantify" the GP value if some code is willing to change its
 value, always resetting it if the case. Those are heavily experimental and might be changed in the
 future in favor of more automated analysis.
