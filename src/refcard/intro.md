@@ -12,17 +12,17 @@ general public licence — Copyright by Thanat0s - v0.1 -
 Those are the basic commands you will want to know and use for moving
 around a binary and getting information about it.
 
-| Command                 | Description                      |
-|:------------------------|:---------------------------------|
-| s (tab)                 | Seek to a different place        |
-| x [nbytes]              | Hexdump of nbytes, $b by default |
-| aa                      | Auto analyze                     |
-| pdf@fcn(Tab)            | Disassemble function             |
-| f fcn(Tab)              | List functions                   |
-| f str(Tab)              | List strings                     |
-| fr [flagname] [newname] | Rename flag                      |
-| psz [offset]~grep       | Print strings and grep for one   |
-| arf [flag]              | Find cross reference for a flag  |
+| Command                 | Description                             |
+|:------------------------|:----------------------------------------|
+| s (tab)                 | Seek to a different place               |
+| x [nbytes]              | Hexdump of nbytes, $b by default        |
+| aa                      | Auto analyze                            |
+| pdf@ [funcname](Tab)    | Disassemble function (main, fcn, etc.)  |
+| f fcn(Tab)              | List functions                          |
+| f str(Tab)              | List strings                            |
+| fr [flagname] [newname] | Rename flag                             |
+| psz [offset]~grep       | Print strings and grep for one          |
+| axF [flag]              | Find cross reference for a flag         |
 
 ## Flags
 
@@ -34,7 +34,7 @@ Flags are like bookmarks, but they carry some extra information like size, tags 
 | fd $$               | Describe an offset    |
 | fj                  | Display flags in JSON |
 | fl                  | Show flag length      |
-| fx                  | Show hexdump of flag  |
+| fx [flagname]       | Show hexdump of flag  |
 | fC [name] [comment] | Set flag comment      |
 
 ## Flagspaces
@@ -47,7 +47,7 @@ you can use the `fs` command to restrict it.
 |:--------------|:----------------------|
 | fs            | Display flagspaces    |
 | fs *          | Select all flagspaces |
-| fs [sections] | Select one flagspace  |
+| fs [space]    | Select one flagspace  |
 
 ## Information
 
@@ -94,15 +94,16 @@ have to press keys to get the actions happen instead of commands.
 | hjkl           | Move around (or HJKL) (left-down-up-right)        |
 | Enter          | Follow address of jump/call                       |
 | sS             | Step/step over                                    |
-| o              | Go/seek to given offset                           |
+| o              | Toggle asm.pseudo and asm.esil                    |
 | .              | Seek to program counter                           |
 | /              | In cursor mode, search in current block           |
 | :cmd           | Run radare command                                |
 | ;[-]cmt        | Add/remove comment                                |
-| x+-/[]         | Change block size, [] = resize hex.cols           |
-| >&#124;&#124;< | Seek aligned to block size                        |
+| /*+-[]         | Change block size, [] = resize hex.cols           |
+| <,>            | Seek aligned to block size                        |
 | i/a/A          | (i)nsert hex, (a)ssemble code, visual (A)ssembler |
-| b/B            | Toggle breakpoint / automatic block size          |
+| b              | Toggle breakpoint                                 |
+| B              | Browse evals, symbols, flags, classes, ...        |
 | d[f?]          | Define function, data, code, ..                   |
 | D              | Enter visual diff mode (set diff.from/to)         |
 | e              | Edit eval configuration variables                 |
@@ -111,17 +112,16 @@ have to press keys to get the actions happen instead of commands.
 | mK/’K          | Mark/go to Key (any key)                          |
 | M              | Walk the mounted filesystems                      |
 | n/N            | Seek next/prev function/flag/hit (scr.nkey)       |
-| o              | Go/seek to given offset                           |
 | C              | Toggle (C)olors                                   |
 | R              | Randomize color palette (ecr)                     |
-| t              | Track flags (browse symbols, functions..)         |
-| T              | Browse anal info and comments                     |
+| tT             | Tab related. see also [tab](visual_panels.md)     |
 | v              | Visual code analysis menu                         |
-| V/W            | (V)iew graph (agv?), open (W)ebUI                 |
+| V              | (V)iew graph (agv?)                               |
+| wW             | Seek cursor to next/prev word                     |
 | uU             | Undo/redo seek                                    |
-| x              | Show xrefs to seek between them                   |
+| x              | Show xrefs of current func from/to data/code      |
 | yY             | Copy and paste selection                          |
-| z              | Toggle zoom mode                                  |
+| z              | fold/unfold comments in diassembly                |
 
 
 ## Searching
