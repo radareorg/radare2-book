@@ -12,17 +12,17 @@ general public licence — Copyright by Thanat0s - v0.1 -
 Those are the basic commands you will want to know and use for moving
 around a binary and getting information about it.
 
-| Command                 | Description                      |
-|:------------------------|:---------------------------------|
-| s (tab)                 | Seek to a different place        |
-| x [nbytes]              | Hexdump of nbytes, $b by default |
-| aa                      | Auto analyze                     |
-| pdf@fcn(Tab)            | Disassemble function             |
-| f fcn(Tab)              | List functions                   |
-| f str(Tab)              | List strings                     |
-| fr [flagname] [newname] | Rename flag                      |
-| psz [offset]~grep       | Print strings and grep for one   |
-| arf [flag]              | Find cross reference for a flag  |
+| Command                 | Description                             |
+|:------------------------|:----------------------------------------|
+| s (tab)                 | Seek to a different place               |
+| x [nbytes]              | Hexdump of nbytes, $b by default        |
+| aa                      | Auto analyze                            |
+| pdf@ [funcname](Tab)    | Disassemble function (main, fcn, etc.)  |
+| f fcn(Tab)              | List functions                          |
+| f str(Tab)              | List strings                            |
+| fr [flagname] [newname] | Rename flag                             |
+| psz [offset]~grep       | Print strings and grep for one          |
+| axF [flag]              | Find cross reference for a flag         |
 
 ## Flags
 
@@ -34,7 +34,7 @@ Flags are like bookmarks, but they carry some extra information like size, tags 
 | fd $$               | Describe an offset    |
 | fj                  | Display flags in JSON |
 | fl                  | Show flag length      |
-| fx                  | Show hexdump of flag  |
+| fx [flagname]       | Show hexdump of flag  |
 | fC [name] [comment] | Set flag comment      |
 
 ## Flagspaces
@@ -47,7 +47,7 @@ you can use the `fs` command to restrict it.
 |:--------------|:----------------------|
 | fs            | Display flagspaces    |
 | fs *          | Select all flagspaces |
-| fs [sections] | Select one flagspace  |
+| fs [space]    | Select one flagspace  |
 
 ## Information
 
@@ -94,15 +94,16 @@ have to press keys to get the actions happen instead of commands.
 | hjkl           | Move around (or HJKL) (left-down-up-right)        |
 | Enter          | Follow address of jump/call                       |
 | sS             | Step/step over                                    |
-| o              | Go/seek to given offset                           |
+| o              | Toggle asm.pseudo and asm.esil                    |
 | .              | Seek to program counter                           |
 | /              | In cursor mode, search in current block           |
 | :cmd           | Run radare command                                |
 | ;[-]cmt        | Add/remove comment                                |
-| x+-/[]         | Change block size, [] = resize hex.cols           |
-| >&#124;&#124;< | Seek aligned to block size                        |
+| /*+-[]         | Change block size, [] = resize hex.cols           |
+| <,>            | Seek aligned to block size                        |
 | i/a/A          | (i)nsert hex, (a)ssemble code, visual (A)ssembler |
-| b/B            | Toggle breakpoint / automatic block size          |
+| b              | Toggle breakpoint                                 |
+| B              | Browse evals, symbols, flags, classes, ...        |
 | d[f?]          | Define function, data, code, ..                   |
 | D              | Enter visual diff mode (set diff.from/to)         |
 | e              | Edit eval configuration variables                 |
@@ -111,17 +112,16 @@ have to press keys to get the actions happen instead of commands.
 | mK/’K          | Mark/go to Key (any key)                          |
 | M              | Walk the mounted filesystems                      |
 | n/N            | Seek next/prev function/flag/hit (scr.nkey)       |
-| o              | Go/seek to given offset                           |
 | C              | Toggle (C)olors                                   |
 | R              | Randomize color palette (ecr)                     |
-| t              | Track flags (browse symbols, functions..)         |
-| T              | Browse anal info and comments                     |
+| tT             | Tab related. see also [tab](visual_panels.md)     |
 | v              | Visual code analysis menu                         |
-| V/W            | (V)iew graph (agv?), open (W)ebUI                 |
+| V              | (V)iew graph (agv?)                               |
+| wW             | Seek cursor to next/prev word                     |
 | uU             | Undo/redo seek                                    |
-| x              | Show xrefs to seek between them                   |
+| x              | Show xrefs of current func from/to data/code      |
 | yY             | Copy and paste selection                          |
-| z              | Toggle zoom mode                                  |
+| z              | fold/unfold comments in diassembly                |
 
 
 ## Searching
@@ -156,23 +156,23 @@ where the `/` command may search for the given value.
 | /z min max     | Search for strings of given size              |
 | /v[?248] num   | Look for a asm.bigendian 32bit value          |
 
-## Saving
+## Saving (Broken)
 
-By default, when you open a file in write mode (`r2 -w`) all changes
-will be written directly into the file. No undo history is saved by
-default.
+This feature has broken and not been resolved at the time of writing these words (Nov.16th 2020). check [#Issue 6945: META - Project files](https://github.com/radareorg/radare2/issues/6945) and [#Issue 17034](https://github.com/radareorg/radare2/issues/17034) for more details.
 
-Use `e io.cache.write=true` and the `wc` command to manage the *write cache*
-history changes. To undo, redo, commit them to write the changes on the file..
+To save your analysis for now, write your own script which records the function name, variable name, etc. for example:
+```sh
+vim sample_A.r2
 
-If, instead, we want to save the analysis information, comments, flags and
-other user-created metadata, we may want to use projects with `r2 -p` and the `P` command.
+e scr.utf8 = false
+s 0x000403ce0
+aaa
+s fcn.00403130
+afn return_delta_to_heapaddr
+afvn iter var_04h
+...
 
-| Command   | Description              |
-|:----------|:-------------------------|
-| Po [file] | Open project             |
-| Ps [file] | Save project             |
-| Pi [file] | Show project information |
+```
 
 ## Usable variables in expression
 
