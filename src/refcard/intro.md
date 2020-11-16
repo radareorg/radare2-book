@@ -156,23 +156,23 @@ where the `/` command may search for the given value.
 | /z min max     | Search for strings of given size              |
 | /v[?248] num   | Look for a asm.bigendian 32bit value          |
 
-## Saving
+## Saving (Broken)
 
-By default, when you open a file in write mode (`r2 -w`) all changes
-will be written directly into the file. No undo history is saved by
-default.
+This feature has broken and not been resolved at the time of writing these words (Nov.16th 2020). check [#Issue 6945: META - Project files](https://github.com/radareorg/radare2/issues/6945) and [#Issue 17034](https://github.com/radareorg/radare2/issues/17034) for more details.
 
-Use `e io.cache.write=true` and the `wc` command to manage the *write cache*
-history changes. To undo, redo, commit them to write the changes on the file..
+To save your analysis for now, write your own script which records the function name, variable name, etc. for example:
+```sh
+vim sample_A.r2
 
-If, instead, we want to save the analysis information, comments, flags and
-other user-created metadata, we may want to use projects with `r2 -p` and the `P` command.
+e scr.utf8 = false
+s 0x000403ce0
+aaa
+s fcn.00403130
+afn return_delta_to_heapaddr
+afvn iter var_04h
+...
 
-| Command   | Description              |
-|:----------|:-------------------------|
-| Po [file] | Open project             |
-| Ps [file] | Save project             |
-| Pi [file] | Show project information |
+```
 
 ## Usable variables in expression
 
