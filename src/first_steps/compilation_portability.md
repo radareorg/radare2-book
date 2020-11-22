@@ -24,6 +24,16 @@ You can build radare2 statically along with all other tools with the command:
 ```
 $ sys/static.sh
 ```
+### Meson build
+
+You can use meson + ninja to build:
+```
+$ sys/meson.py --prefix=/usr --shared --install
+```
+If you want to build locally:
+```
+$ sys/meson.py --prefix=/home/$USER/r2meson --local --shared --install
+```
 ### Docker
 
 Radare2 repository ships a [Dockerfile](https://github.com/radareorg/radare2/blob/master/Dockerfile) that you can use with Docker.
