@@ -9,3 +9,6 @@ _book/*
 .*.swo
 *.un~
 *.snippets
+*.orig
+*.rej
+*.bak
