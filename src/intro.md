@@ -6,6 +6,5 @@ updated by many contributors over the Internet.
 
 Check the Github site to add new contents or fix typos:
 
-* Github: https://github.com/radareorg/radare2book
-* Online: https://radareorg.github.io/radare2book/index.html
-
+* Github: [https://github.com/radareorg/radare2book](https://github.com/radareorg/radare2book)
+* Online: [https://book.rada.re/](https://book.rada.re/)
