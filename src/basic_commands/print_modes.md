@@ -8,7 +8,7 @@ Below is a list of available print modes listed by `p?`:
 
 ```
 [0x00005310]> p?
-|Usage: p[=68abcdDfiImrstuxz] [arg|len] [@addr]  
+|Usage: p[=68abcdDfiImrstuxz] [arg|len] [@addr]
 | p[b|B|xb] [len] ([S])   bindump N bits skipping S bytes
 | p[iI][df] [len]         print N ops/bytes (f=func) (see pi? and pdi)
 | p[kK] [len]             print key in randomart (K is for mosaic)
@@ -213,7 +213,7 @@ Use triple-question-mark `pf???` to get some examples using print format strings
 | pf n2                                        print signed short (2 bytes) value. Use N instead of n for printing unsigned values
 | pf [2]? (plop)structname @ 0                 Prints an array of structs
 | pf eqew bigWord beef                         Swap endianness and print with given labels
-| pf.foo rr (eax)reg1 (eip)reg2                Create object referencing to register values 
+| pf.foo rr (eax)reg1 (eip)reg2                Create object referencing to register values
 | pf tt troll plop                             print time stamps with labels troll and plop
 ```
 Some examples are below:
@@ -335,20 +335,26 @@ This can be used to look at the arguments passed to a function. To achieve this,
 A practical example for using `pf` on a binary of a GStreamer plugin:
 
 ```
-$ radare ~/.gstreamer-0.10/plugins/libgstflumms.so
-[0x000028A0]> seek sym.gst_plugin_desc
-[0x000185E0]> pf iissxsssss major minor name desc _init version \
- license source package origin
-    major : 0x000185e0 = 0
-    minor : 0x000185e4 = 10
-     name : 0x000185e8 = 0x000185e8 flumms
-     desc : 0x000185ec = 0x000185ec Fluendo MMS source
-    _init : 0x000185f0 = 0x00002940
-  version : 0x000185f4 = 0x000185f4 0.10.15.1
-  license : 0x000185f8 = 0x000185f8 unknown
-   source : 0x000185fc = 0x000185fc gst-fluendo-mms
-  package : 0x00018600 = 0x00018600 Fluendo MMS source
-   origin : 0x00018604 = 0x00018604 http://www.fluendo.com
+$ radare2 /usr/lib/gstreamer-1.0/libgstflv.so
+[0x00006020]> aa; pdf @ sym.gst_plugin_flv_get_desc
+[x] Analyze all flags starting with sym. and entry0 (aa)
+╭ 8: sym.gst_plugin_flv_get_desc ();
+│ [...]
+│           0x00013830      488d0549db0000  lea rax, section..data.rel.ro ; 0x21380
+╰           0x00013837      c3              ret
+[0x00006020]> s section..data.rel.ro
+[0x00021380]> pf ii*z*zp*z*z*z*z*z*z major minor name desc init version license source package origin release_datetime
+            major : 0x00021380 = 1
+            minor : 0x00021384 = 18
+             name : (*0x19cf2)0x00021388 = "flv"
+             desc : (*0x1b358)0x00021390 = "FLV muxing and demuxing plugin"
+             init : 0x00021398 = (qword)0x0000000000013460
+          version : (*0x19cae)0x000213a0 = "1.18.2"
+          license : (*0x19ce1)0x000213a8 = "LGPL"
+           source : (*0x19cd0)0x000213b0 = "gst-plugins-good"
+          package : (*0x1b378)0x000213b8 = "GStreamer Good Plugins (Arch Linux)"
+           origin : (*0x19cb5)0x000213c0 = "https://www.archlinux.org/"
+ release_datetime : (*0x19cf6)0x000213c8 = "2020-12-06"
 ```
 
 ### Disassembly
