@@ -81,7 +81,7 @@ The [head](https://en.wikipedia.org/wiki/Head_%28Unix%29) command can be used to
 4 Milk
 ```
 
-The [join](https://en.wikipedia.org/wiki/Join_%28Unix%29) command could be used to merge two different files with comman first field. 
+The [join](https://en.wikipedia.org/wiki/Join_%28Unix%29) command could be used to merge two different files with common first field. 
 ```
 [0x00404800]> cat foodtypes.txt
 1 Protein
