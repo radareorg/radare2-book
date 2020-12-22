@@ -113,6 +113,9 @@ TRAP  | src | Trap | Trap signal |
 **\*** | src,dst | MUL | stack = dst * src | &gt; "ae 3,4,\*"<br>0xc<br>&gt; "ae 5,5,\*"<br>0x19
 **/** | src,dst | DIV | stack = dst / src  | &gt; "ae 2,4,/"<br>0x2<br>&gt; "ae 5,5,/"<br>0x1<br>&gt; "ae 5,9,/"<br>0x1
 **%** | src,dst | MOD | stack = dst % src | &gt; "ae 2,4,%"<br>0x0<br>&gt; "ae 5,5,%"<br>0x0<br>&gt; "ae 5,9,%"<br>0x4
+**~** | bits,src | SIGNEXT | stack = src sign extended | &gt; "ae 8,0x80,~"<br>0xffffffffffffff80
+**~/** | src,dst | SIGNED DIV | stack = dst / src (signed) | &gt; "ae 2,-4,~/"<br>0xfffffffffffffffe
+**~%** | src,dst | SIGNED MOD | stack = dst % src (signed) | &gt; "ae 2,-5,~%"<br>0xffffffffffffffff
 **!** | src | NEG | stack = !!!src | &gt; "ae 1,!"<br>0x0<br>&gt; "ae 4,!"<br>0x0<br>&gt; "ae 0,!"<br>0x1<br>
 **++** | src | INC | stack = src++ | &gt; ar r_00=0;ar r_00<br>0x00000000<br>&gt; "ae r_00,++"<br>0x1<br>&gt; ar r_00<br>0x00000000<br>&gt; "ae 1,++"<br>0x2
 **--** | src | DEC | stack = src-- | &gt; ar r_00=5;ar r_00<br>0x00000005<br>&gt; "ae r_00,--"<br>0x4<br>&gt; ar r_00<br>0x00000005<br>&gt; "ae 5,--"<br>0x4
