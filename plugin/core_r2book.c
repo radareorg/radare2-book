@@ -79,18 +79,24 @@ static void r2book_view(RCore *core, const char *path) {
 	while (!stop) {
 		int h, w = r_cons_get_size (&h);
 		char *si = r_str_crop (index, 0, scroll[0], split - 2, scroll[0] + h - 3);
-		char *_sb = r_str_wrap (body, w - split - 5);
-		char *sb = r_str_crop (_sb, 0, scroll[1], w, scroll[1] + h - 3);
+		char *_sb = r_str_wrap (body, w - split - 4);
+		char *sb = r_str_crop (_sb, 0, scroll[1], w, scroll[1] + h);
 		free (_sb);
 		if (si && sb) {
 			r_cons_clear00 ();
 			if (col) {
-				r_cons_println ("--- SUMMARY.md -");
+				r_cons_print ("--- SUMMARY.md -");
 			} else {
-				r_cons_println ("--[ SUMMARY.md ]");
+				r_cons_print ("--[ SUMMARY.md ]");
 			}
-			r_cons_printat (sb, split, 1);
+			int i;
+			for (i = 16; i < split - 1; i++) {
+				r_cons_print ("-");
+			}
+			r_cons_println (".");
+			r_cons_printat (sb, split + 2, 1);
 			r_cons_printat (si, 0, 3);
+			r_cons_line (split, 2, split + 1, h + 1, '|');
 		}
 		free (si);
 		free (sb);
