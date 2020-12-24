@@ -42,13 +42,16 @@ from one platform to another, radare2 uses `definite` types like as
 `int8_t` or `uint64_t` and will convert `int` to `int32_t` or `int64_t`
 depending on the binary or debuggee platform/compiler.
 
-Basic types can be listed using `t` command, for the structured types
-you need to use `ts`, `tu` or `te` for enums:
+Basic types can be listed using `t` command. For the structured types
+you need to use `ts`, for unions use `tu` and for enums — `te`.
 
 ```
 [0x000051c0]> t
 char
 char *
+double
+float
+gid_t
 int
 int16_t
 int32_t
@@ -56,7 +59,18 @@ int64_t
 int8_t
 long
 long long
-...
+pid_t
+short
+size_t
+uid_t
+uint16_t
+uint32_t
+uint64_t
+uint8_t
+unsigned char
+unsigned int
+unsigned short
+void *
 ```
 
 ### Loading types
