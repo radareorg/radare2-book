@@ -83,7 +83,7 @@ S1
 Also note there is a config option to specify include directories for types parsing
 
 ```
-[0x00000000]> e??~dir.type
+[0x00000000]> e? dir.types
 dir.types: Default path to look for cparse type files
 [0x00000000]> e dir.types
 /usr/include
