@@ -1,4 +1,4 @@
-## Print Modes
+# Print Modes
 
 One of the key features of radare2 is displaying information in many formats. The goal is to offer a selection of display choices to interpret binary data in the best possible way.
 
@@ -338,10 +338,10 @@ A practical example for using `pf` on a binary of a GStreamer plugin:
 $ radare2 /usr/lib/gstreamer-1.0/libgstflv.so
 [0x00006020]> aa; pdf @ sym.gst_plugin_flv_get_desc
 [x] Analyze all flags starting with sym. and entry0 (aa)
-╭ 8: sym.gst_plugin_flv_get_desc ();
-│ [...]
-│           0x00013830      488d0549db0000  lea rax, section..data.rel.ro ; 0x21380
-╰           0x00013837      c3              ret
+sym.gst_plugin_flv_get_desc ();
+[...]
+      0x00013830      488d0549db0000  lea rax, section..data.rel.ro ; 0x21380
+      0x00013837      c3              ret
 [0x00006020]> s section..data.rel.ro
 [0x00021380]> pf ii*z*zp*z*z*z*z*z*z major minor name desc init version license source package origin release_datetime
             major : 0x00021380 = 1
@@ -366,8 +366,8 @@ The `pd` command is used to disassemble code. It accepts a numeric value to spec
 
 ```
 [0x00404888]> pd 1
-			;-- entry0:
-			0x00404888    31ed         xor ebp, ebp
+;-- entry0:
+0x00404888    31ed         xor ebp, ebp
 ```
 
 ### Selecting Target Architecture

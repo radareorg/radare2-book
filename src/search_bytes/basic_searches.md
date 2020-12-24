@@ -2,25 +2,29 @@
 
 A basic search for a plain text string in a file would be something like:
 
-    $ r2 -q -c "/ lib" /bin/ls
-    Searching 3 bytes from 0x00400000 to 0x0041ae08: 6c 69 62 
-    hits: 9
-    0x00400239 hit0_0 "lib64/ld-linux-x86-64.so.2"
-    0x00400f19 hit0_1 "libselinux.so.1"
-    0x00400fae hit0_2 "librt.so.1"
-    0x00400fc7 hit0_3 "libacl.so.1"
-    0x00401004 hit0_4 "libc.so.6"
-    0x004013ce hit0_5 "libc_start_main"
-    0x00416542 hit0_6 "libs/"
-    0x00417160 hit0_7 "lib/xstrtol.c"
-    0x00417578 hit0_8 "lib"
+```
+$ r2 -q -c "/ lib" /bin/ls
+Searching 3 bytes from 0x00400000 to 0x0041ae08: 6c 69 62 
+hits: 9
+0x00400239 hit0_0 "lib64/ld-linux-x86-64.so.2"
+0x00400f19 hit0_1 "libselinux.so.1"
+0x00400fae hit0_2 "librt.so.1"
+0x00400fc7 hit0_3 "libacl.so.1"
+0x00401004 hit0_4 "libc.so.6"
+0x004013ce hit0_5 "libc_start_main"
+0x00416542 hit0_6 "libs/"
+0x00417160 hit0_7 "lib/xstrtol.c"
+0x00417578 hit0_8 "lib"
+```
 
 As can be seen from the output above, radare2 generates a "hit" flag for every entry found. You can then use the `ps` command to see the strings stored at the offsets marked by the flags in this group, and they will have names of the form `hit0_<index>`:
 
-    [0x00404888]> / ls
-    ...
-    [0x00404888]> ps @ hit0_0
-    lseek
+```
+[0x00404888]> / ls
+...
+[0x00404888]> ps @ hit0_0
+lseek
+```
 
 You can search for wide-char strings (e.g., unicode letters) using the `/w` command:
 

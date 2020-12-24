@@ -6,6 +6,9 @@ R2_LDFLAGS=$(shell pkg-config --libs r_core)
 R2BOOK_HOME=$(shell cd ../src; pwd)
 
 CFLAGS+=-DR2BOOK_HOME=\"$(R2BOOK_HOME)\"
+CFLAGS+=-g
+
+# CFLAGS+=-fsanitize=address
 
 all:
 	$(CC) $(CFLAGS) $(R2_CFLAGS) $(R2_LDFLAGS) core_r2book.c -shared -o core_r2book.$(EXT_SO)
