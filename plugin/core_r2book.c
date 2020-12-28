@@ -277,7 +277,7 @@ static int r_cmd_r2book(void *user, const char *input) {
 		if (R_STR_ISEMPTY (arg)) {
 			eprintf ("Usage: r2h [word]\n");
 		} else {
-			char *out = r_sys_cmd_strf ("cd /usr/local/include/libr/; grep -R %s *", arg);
+			char *out = r_sys_cmd_strf ("cd /usr/local/include/libr/; grep -R %s * | grep h: | grep R_API", arg);
 			r_cons_printf ("%s%c", out, 10);
 			free (out);
 		}
