@@ -4,13 +4,61 @@
 #include <r_core.h>
 #include <r_io.h>
 
-static char *indentcode (char *r) {
+static void box(int x0, int y0, int x1, int y1) {
+	int y;
+	int bw = x1 - x0;
+	r_cons_gotoxy (x0 + 1, y0);
+	r_cons_memset ('-', bw - 1);
+	for (y = y0 + 1; y < y1; y++) {
+		r_cons_gotoxy (x0 + 1, y);
+		r_cons_memset (' ', bw - 1);
+	}
+	r_cons_gotoxy (x0 + 1, y1);
+	r_cons_memset ('-', bw - 1);
+}
+
+static void showhelp(void) {
+	int y, h, w = r_cons_get_size (&h);
+	int x0 = w / 4;
+	int x1 = w - x0;
+	int y0 = h / 5;
+	int y1 = h - y0;
+	box (x0, y0, x1, y1);
+
+	r_cons_printat (
+		"Help message\n"
+		"------------\n"
+		"tab  - focus left or right panels\n"
+		"_    - open file of the r2book\n"
+		"/    - search string in all the r2book\n"
+		"gG   - go begin/end of the page\n"
+		"hlHL - move split\n"
+		"jkJK - scroll the page\n"
+		"e    - edit current page with vim\n"
+		"q    - quit\n",
+		x0 + 2, y0 + 2
+	);
+	for (y = y0 + 1; y < y1; y++) {
+		r_cons_gotoxy (x0, y);
+		r_cons_print ("|");
+		r_cons_gotoxy (x1, y);
+		r_cons_print ("|");
+	}
+	
+	r_cons_flush ();
+	r_cons_readchar ();
+}
+
+static char *indentcode(char *r, int *col) {
+	char *or = NULL;
 	*r++ = ' ';
 	*r++ = ' ';
 	*r++ = ' ';
 	*r++ = ' ';
 	strcpy (r, Color_YELLOW);
-	r += strlen (r);
+	int l = strlen (r);
+	r += l;
+	*col += l;
 	return r;
 }
 
@@ -33,7 +81,7 @@ static char *md2txt(const char *in) {
 		case ' ':
 			if (col == 0 && in[1] == ' ') {
 				const char *arg = r_str_trim_head_ro (in);
-				r = indentcode (r);
+				r = indentcode (r, &col);
 				in = arg - 1;
 				spcode = true;
 			} else {
@@ -46,7 +94,8 @@ static char *md2txt(const char *in) {
 					iscode = !iscode;
 					if (!iscode) {
 						strcpy (r, Color_RESET);
-						r += strlen (r);
+						col += strlen (Color_RESET);
+						r += strlen (Color_RESET);
 					}
 					in += 2;
 				} else {
@@ -88,7 +137,7 @@ static char *md2txt(const char *in) {
 			*r++ = *in;
 			col = -1;
 			if (iscode) {
-				r = indentcode (r);
+				r = indentcode (r, &col);
 			}
 			break;
 		default:
@@ -150,9 +199,9 @@ static void r2book_view(RCore *core, const char *path) {
 	r_cons_enable_mouse (true);
 	while (!stop) {
 		int h, w = r_cons_get_size (&h);
-		char *si = r_str_crop (index, 0, scroll[0], split - 2, scroll[0] + h - 3);
+		char *si = r_str_ansi_crop (index, 0, scroll[0], split - 2, scroll[0] + h - 3);
 		char *_sb = r_str_wrap (body, w - split - 4);
-		char *sb = r_str_crop (_sb, 0, scroll[1], w, scroll[1] + h - 1);
+		char *sb = r_str_ansi_crop (_sb, 0, scroll[1], w, scroll[1] + h - 1);
 		free (_sb);
 		if (si && sb) {
 			r_cons_clear00 ();
@@ -243,6 +292,28 @@ static void r2book_view(RCore *core, const char *path) {
 			free (body);
 			body = r2book_body_str (core, buf);
 			break;
+		case '/':
+			{
+				char *files = r_sys_cmd_strf ("cd %s ; git grep -e '.' | grep md:", R2BOOK_HOME);
+				char *p = r_cons_hud_string (files);
+				// char *p = r_core_cmd_strf (core, "r2book~...");
+				if (p && *p) {
+				// 	free (path);	
+					char *ch = strstr (p, ".md:");
+					*ch = 0;
+					path = p;
+					free (index);
+					free (body);
+					free (files);
+					goto reload;
+				}
+				free (p);
+				free (files);
+			}
+			break;
+		case '?':
+			showhelp ();
+			break;
 		case '_':
 			{
 				char *files = r_sys_cmd_strf ("cd %s ; find * -iname '*.md' | sed -e 's,.md,,'", R2BOOK_HOME);
@@ -282,16 +353,16 @@ static int r_cmd_r2book(void *user, const char *input) {
 			free (out);
 		}
 		return true;
+	} else if (!strncmp (input, "r2books", 7)) {
+		char *out = r_sys_cmd_strf ("cd %s ; find * -iname '*.md' | sed -e 's,.md,,'", R2BOOK_HOME);
+		r_cons_printf ("%s%c", out, 10);
+		free (out);
 	} else if (!strncmp (input, "r2book", 6)) {
 		const char *arg = r_str_trim_head_ro (input + 6);
 		if (R_STR_ISEMPTY (arg)) {
-			eprintf ("Usage: r2book topic");
-			char *out = r_sys_cmd_strf ("cd %s ; find * -iname '*.md' | sed -e 's,.md,,'", R2BOOK_HOME);
-			r_cons_printf ("%s%c", out, 10);
-			free (out);
-		} else {
-			r2book_view (core, arg);
+			arg = "intro";
 		}
+		r2book_view (core, arg);
 		return true;
 	}
 	return false;
@@ -300,7 +371,7 @@ static int r_cmd_r2book(void *user, const char *input) {
 // PLUGIN Definition Info
 RCorePlugin r_core_plugin_r2book = {
 	.name = "r2book",
-	.desc = "The r2book available inside r2",
+	.desc = "Adds r2book, r2books and r2h commands",
 	.license = "LGPL3",
 	.call = r_cmd_r2book,
 };
