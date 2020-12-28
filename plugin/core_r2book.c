@@ -19,7 +19,7 @@ static void box(int x0, int y0, int x1, int y1) {
 
 static void showhelp(void) {
 	int y, h, w = r_cons_get_size (&h);
-	int x0 = w / 4;
+	int x0 = w / 8;
 	int x1 = w - x0;
 	int y0 = h / 5;
 	int y1 = h - y0;
@@ -39,10 +39,8 @@ static void showhelp(void) {
 		x0 + 2, y0 + 2
 	);
 	for (y = y0 + 1; y < y1; y++) {
-		r_cons_gotoxy (x0, y);
-		r_cons_print ("|");
-		r_cons_gotoxy (x1, y);
-		r_cons_print ("|");
+		r_cons_printat ("|", x0, y);
+		r_cons_printat ("|", x1, y);
 	}
 	
 	r_cons_flush ();
