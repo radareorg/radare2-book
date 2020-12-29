@@ -4,6 +4,8 @@
 #include <r_core.h>
 #include <r_io.h>
 
+static char *Glang = NULL;
+
 static void box(int x0, int y0, int x1, int y1) {
 	int y;
 	int bw = x1 - x0;
@@ -15,6 +17,19 @@ static void box(int x0, int y0, int x1, int y1) {
 	}
 	r_cons_gotoxy (x0 + 1, y1);
 	r_cons_memset ('-', bw - 1);
+}
+
+static void translate(void) {
+	// translate -l
+	eprintf ("Select language to translate to: (ca, es, eo, de, fr, jp, cn)\n");
+	const char *line = r_line_readline ();
+	free (Glang);
+	if (!strcmp (line, "cn")) {
+		line = "zh-CN";
+	} else if (!strcmp (line, "jp")) {
+		line = "ja";
+	}
+	Glang = strdup (line);
 }
 
 static void showhelp(void) {
@@ -29,8 +44,10 @@ static void showhelp(void) {
 		"Help message\n"
 		"------------\n"
 		"tab  - focus left or right panels\n"
+		"!    - escape to the shell to commit changes\n"
 		"_    - open file of the r2book\n"
 		"/    - search string in all the r2book\n"
+		"t    - language (sudo npm -g install translate)\n"
 		"gG   - go begin/end of the page\n"
 		"hlHL - move split\n"
 		"jkJK - scroll the page\n"
@@ -154,6 +171,11 @@ static char *md2txt(const char *in) {
 static char *r2book_index_str(RCore *core) {
 	char *file = r_str_newf ("%s/SUMMARY.md", R2BOOK_HOME);
 	if (r_file_exists (file)) {
+		if (Glang) {
+			r_sys_cmdf ("translate -s en -t %s < %s > /tmp/.a.txt", Glang, file);
+			free (file);
+			file = strdup ("/tmp/.a.txt");
+		}
 		char *data = r_file_slurp (file, NULL);
 		char *md = md2txt (data);
 		free (data);
@@ -167,6 +189,11 @@ static char *r2book_body_str(RCore *core, const char *path) {
 	if (r_file_exists (file)) {
 		// char *data = r_file_slurp (file, NULL);
 		// return data;
+		if (Glang) {
+			r_sys_cmdf ("translate -s en -t %s < %s > /tmp/.a.txt", Glang, file);
+			free (file);
+			file = strdup ("/tmp/.a.txt");
+		}
 		char *data = r_file_slurp (file, NULL);
 		char *md = md2txt (data);
 		free (data);
@@ -228,6 +255,9 @@ static void r2book_view(RCore *core, const char *path) {
 		case 9: // TAB
 			col = !col;
 			break;
+		case '!':
+			r_sys_cmdf ("echo;cd '%s/..'; PS1='$ ' sh", R2BOOK_HOME);
+			break;
 		case 'H':
 			split -= 4;
 			if (split < 1) {
@@ -270,6 +300,9 @@ static void r2book_view(RCore *core, const char *path) {
 		case 'j':
 			scroll[col]++;
 			break;
+		case 't':
+			translate ();
+			goto reload;
 		case 'k':
 			scroll[col]--;
 			if (scroll[col] < 0) {
