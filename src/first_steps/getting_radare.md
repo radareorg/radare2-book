@@ -1,12 +1,11 @@
 ## Downloading radare2
 
-You can get radare from the website, [http://radare.org](http://radare.org),
-or the GitHub repository: [https://github.com/radareorg/radare2](https://github.com/radareorg/radare2)
+You can get radare from the GitHub repository: [https://github.com/radareorg/radare2](https://github.com/radareorg/radare2)
 
 
 Binary packages are available for a number of operating systems (Ubuntu, Maemo, Gentoo, Windows, iPhone, and so on). But you are highly encouraged to get the source and compile it yourself to better understand the dependencies, to make examples more accessible and, of course, to have the most recent version.
 
-A new stable release is typically published every month. Nightly tarballs are sometimes available at [http://bin.rada.re/](http://bin.rada.re/).
+A new stable release is typically published every month.
 
 The radare development repository is often more stable than the 'stable' releases. To obtain the latest version:
 ```
