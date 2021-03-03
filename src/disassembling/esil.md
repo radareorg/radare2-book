@@ -94,16 +94,17 @@ Here is the complete instruction set used by the ESIL VM:
 ESIL Opcode | Operands | Name | Operation| example
 --- | --- | --- | --- | ----------------------------------------------
 TRAP  | src | Trap | Trap signal |
-**$** | src | Syscall | syscall  |
+**$** | src | Interrupt | interrupt | 0x80,$
+**()** | src | Syscall | syscall | rax,()
 **$$** | src | Instruction address | Get address of current instruction<br>stack=instruction address |
 **==** | src,dst | Compare | stack = (dst == src) ; <br> update_eflags(dst - src) |
 **<** | src,dst | Smaller (signed comparison) | stack = (dst < src) ; <br> update_eflags(dst - src) | [0x0000000]> "ae 1,5,<" <br>0x0<br>&gt; "ae 5,5"<br>0x0"
 **<=** | src,dst | Smaller or Equal (signed comparison) | stack = (dst <= src) ; <br> update_eflags(dst - src) | [0x0000000]> "ae 1,5,<" <br>0x0<br>&gt; "ae 5,5"<br>0x1"
 **>** | src,dst | Bigger (signed comparison) | stack = (dst > src) ; <br> update_eflags(dst - src) | &gt; "ae 1,5,>"<br>0x1<br>&gt; "ae 5,5,>"<br>0x0
- **>=** | src,dst | Bigger or Equal (signed comparison) | stack = (dst >= src) ; <br> update_eflags(dst - src) | &gt; "ae 1,5,>="<br>0x1<br>&gt; "ae 5,5,>="<br>0x1
- **<<** | src,dst | Shift Left | stack = dst << src | &gt; "ae 1,1,<<"<br>0x2<br>&gt; "ae 2,1,<<"<br>0x4
- **>>** | src,dst | Shift Right | stack = dst >> src | &gt; "ae 1,4,>>"<br>0x2<br>&gt; "ae 2,4,>>"<br>0x1
- **<<<** | src,dst | Rotate Left | stack=dst ROL src | &gt; "ae 31,1,<<<"<br>0x80000000<br>&gt; "ae 32,1,<<<"<br>0x1
+**>=** | src,dst | Bigger or Equal (signed comparison) | stack = (dst >= src) ; <br> update_eflags(dst - src) | &gt; "ae 1,5,>="<br>0x1<br>&gt; "ae 5,5,>="<br>0x1
+**<<** | src,dst | Shift Left | stack = dst << src | &gt; "ae 1,1,<<"<br>0x2<br>&gt; "ae 2,1,<<"<br>0x4
+**>>** | src,dst | Shift Right | stack = dst >> src | &gt; "ae 1,4,>>"<br>0x2<br>&gt; "ae 2,4,>>"<br>0x1
+**<<<** | src,dst | Rotate Left | stack=dst ROL src | &gt; "ae 31,1,<<<"<br>0x80000000<br>&gt; "ae 32,1,<<<"<br>0x1
 **>>>** | src,dst | Rotate Right | stack=dst ROR src | &gt; "ae 1,1,>>>"<br>0x80000000<br>&gt; "ae 32,1,>>>"<br>0x1
 **&** | src,dst | AND | stack = dst & src | &gt; "ae 1,1,&"<br>0x1<br>&gt; "ae 1,0,&"<br>0x0<br>&gt;  "ae 0,1,&"<br>0x0<br>&gt; "ae 0,0,&"<br>0x0
 **&#x7c;** | src,dst | OR | stack = dst &#x7c; src | &gt; "ae 1,1,&#x7c;"<br>0x1<br>&gt; "ae 1,0,&#x7c;"<br>0x1<br>&gt; "ae 0,1,&#x7c;"<br>0x1<br>&gt; "ae 0,0,&#x7c;"<br>0x0
@@ -120,6 +121,7 @@ TRAP  | src | Trap | Trap signal |
 **++** | src | INC | stack = src++ | &gt; ar r_00=0;ar r_00<br>0x00000000<br>&gt; "ae r_00,++"<br>0x1<br>&gt; ar r_00<br>0x00000000<br>&gt; "ae 1,++"<br>0x2
 **--** | src | DEC | stack = src-- | &gt; ar r_00=5;ar r_00<br>0x00000005<br>&gt; "ae r_00,--"<br>0x4<br>&gt; ar r_00<br>0x00000005<br>&gt; "ae 5,--"<br>0x4
 **=** | src,reg | EQU | reg = src | &gt; "ae 3,r_00,="<br>&gt; aer r_00<br>0x00000003<br>&gt; "ae r_00,r_01,="<br>&gt; aer r_01<br>0x00000003
+**:=** | src,reg | weak EQU | reg = src without side effects | &gt; "ae 3,r_00,:="<br>&gt; aer r_00<br>0x00000003<br>&gt; "ae r_00,r_01,:="<br>&gt; aer r_01<br>0x00000003
 **+=** | src,reg | ADD eq | reg = reg + src | &gt; ar r_01=5;ar r_00=0;ar r_00<br>0x00000000<br>&gt; "ae r_01,r_00,+="<br>&gt; ar r_00<br>0x00000005<br>&gt; "ae 5,r_00,+="<br>&gt; ar r_00<br>0x0000000a
 **-=** | src,reg | SUB eq | reg = reg - src | &gt; "ae r_01,r_00,-="<br>&gt; ar r_00<br>0x00000004<br>&gt; "ae 3,r_00,-="<br>&gt; ar r_00<br>0x00000001
 **\*=** | src,reg | MUL eq | reg = reg * src | &gt; ar r_01=3;ar r_00=5;ar r_00<br>0x00000005<br>&gt; "ae r_01,r_00,\*="<br>&gt; ar r_00<br>0x0000000f<br>&gt; "ae 2,r_00,\*="<br>&gt; ar r_00<br>0x0000001e
@@ -138,8 +140,6 @@ TRAP  | src | Trap | Trap signal |
 []<br>[\*]<br>[1]<br>[2]<br>[4]<br>[8] | src | peek | stack=\*src | <br>&gt; w test@0x10000<br><br>&gt; "ae 0x10000,[4],"<br>0x74736574<br><br>&gt; ar r_00=0x10000<br><br>&gt; "ae r_00,[4],"<br>0x74736574
 &#x7c;=[]<br>&#x7c;=[1]<br>&#x7c;=[2]<br>&#x7c;=[4]<br>&#x7c;=[8] | reg | nombre | code | &gt; <br>&gt;
 SWAP |  | Swap | Swap two top elements | SWAP
-PICK | n | Pick | Pick nth element<br> from the top of the stack | 2,PICK
-RPICK | m | Reverse Pick | Pick nth element<br> from the base of the stack | 0,RPICK
 DUP | | Duplicate | Duplicate top element in stack | DUP
 NUM | | Numeric | If top element is a reference <br> (register name, label, etc),<br> dereference it and push its real value | NUM
 CLEAR | | Clear | Clear stack | CLEAR
@@ -149,14 +149,17 @@ TODO | | To Do | Stops execution<br> (reason: ESIL expression not completed) | T
 
 ### ESIL Flags
 
-ESIL VM has an internal state flags that are read-only and can be used to export those values to the underlying target CPU flags. It is because the ESIL VM always calculates all flag changes, while target CPUs only update flags under certain conditions or at specific instructions.
-
-Internal flags are prefixed with `$` character.
+ESIL VM provides by default a set of helper operations for calculating flags.
+They fulfill their purpose by comparing the old and the new value of the dst operand of the last performed eq-operation.
+On every eq-operation (e.g. `=`) ESIL saves the old and new value of the dst operand.
+Note, that there also exist weak eq operations (e.g. `:=`), which do not affect flag operations.
+The `==` operation affects flag operations, despite not being an eq operation.
+Flag operations are prefixed with `$` character.
 
 ```
 z      - zero flag, only set if the result of an operation is 0
-b      - borrow, this requires to specify from which bit (example: $b4 - checks if borrow from bit 4)
-c      - carry, same like above (example: $c7 - checks if carry from bit 7)
+b      - borrow, this requires to specify from which bit (example: 4,$b - checks if borrow from bit 4)
+c      - carry, same like above (example: 7,$c - checks if carry from bit 7)
 o      - overflow
 p      - parity
 r      - regsize ( asm.bits/8 )
@@ -164,9 +167,6 @@ s      - sign
 ds     - delay slot state
 jt     - jump target
 js     - jump target set
-[0-9]* - Used to set flags and registers without having any side effects,
-         i.e. setting esil_cur, esil_old and esil_lastsz.
-         (example: "$0,of,=" to reset the overflow flag)
 ```
 
 ## Syntax and Commands
@@ -218,7 +218,7 @@ This approach is more readable, but it is less stack-friendly.
 
 ### Special Instructions
 
-NOPs are represented as empty strings. As it was said previously, syscalls are marked by '$' command. For example, '0x80,$'. It delegates emulation from the ESIL machine to a callback which implements syscalls for a specific OS/kernel.
+NOPs are represented as empty strings. As it was said previously, interrupts are marked by '$' command. For example, '0x80,$'. It delegates emulation from the ESIL machine to a callback which implements interrupt handler for a specific OS/kernel/platform.
 
 Traps are implemented with the `TRAP` command. They are used to throw exceptions for invalid instructions, division by zero, memory read error, or any other needed by specific architectures.
 
