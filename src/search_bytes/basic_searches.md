@@ -45,6 +45,13 @@ if, instead, you are searching for a string of hexadecimal values, you're probab
 
     [0x00000000]> /x 7F454C46
 
+You may not know some bit values of your hexadecimal pattern. Thus you may use a bit mask on your pattern. Each bit set to one in the mask indicates to search the bit value in the pattern. A bit set to zero in the mask indicates that the value of a matching value can be 0 or 1:
+
+    0x00407354]> /x 808080:ff80ff
+    0x0040d4c8 hit14_0 808080
+    0x0040d7b0 hit14_1 808080
+    0x004058a6 hit14_2 80fb80    
+
 Once the search is done, the results are stored in the `searches` flag space.
 
     [0x00000000]> fs
