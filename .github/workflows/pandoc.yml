@@ -1,0 +1,20 @@
+name: Make PDF using pandoc
+
+jobs:
+  pandoc_pdf:
+    runs-on: ubuntu-latest
+    env:
+      ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+          mkdir output  # create output dir
+          # this will also include README.md
+          echo "::set-env name=FILELIST::$(printf '"%s" ' src/**/*.md)"
+      - uses: docker://pandoc/latex:2.9
+        with:
+          args: --output=output/result.pdf ${{ env.FILELIST }}
+      - uses: actions/upload-artifact@master
+        with:
+          name: r2book.zip
+          path: output
