@@ -7,7 +7,7 @@ the internal SDB, thus are introspectable with `k` command.
 Most of the related commands are located in `t` namespace:
 
 ```
-[0x000051c0]> t?
+[0x00000000]> t?
 | Usage: t   # cparse types commands
 | t                          List all loaded types
 | tj                         List all loaded types as json
@@ -42,13 +42,16 @@ from one platform to another, radare2 uses `definite` types like as
 `int8_t` or `uint64_t` and will convert `int` to `int32_t` or `int64_t`
 depending on the binary or debuggee platform/compiler.
 
-Basic types can be listed using `t` command, for the structured types
-you need to use `ts`, `tu` or `te` for enums:
+Basic types can be listed using `t` command. For the structured types
+you need to use `ts`, for unions use `tu` and for enums — `te`.
 
 ```
-[0x000051c0]> t
+[0x00000000]> t
 char
 char *
+double
+float
+gid_t
 int
 int16_t
 int32_t
@@ -56,7 +59,18 @@ int64_t
 int8_t
 long
 long long
-...
+pid_t
+short
+size_t
+uid_t
+uint16_t
+uint32_t
+uint64_t
+uint8_t
+unsigned char
+unsigned int
+unsigned short
+void *
 ```
 
 ### Loading types
@@ -67,15 +81,15 @@ There are three easy ways to define a new type:
 * Open  an `$EDITOR` to type the definitions in place using `to -`
 
 ```
-[0x000051c0]> "td struct foo {char* a; int b;}"
-[0x000051c0]> cat ~/radare2-regressions/bins/headers/s3.h
+[0x00000000]> "td struct foo {char* a; int b;}"
+[0x00000000]> cat ~/radare2-regressions/bins/headers/s3.h
 struct S1 {
     int x[3];
     int y[4];
     int z;
 };
-[0x000051c0]> to ~/radare2-regressions/bins/headers/s3.h
-[0x000051c0]> ts
+[0x00000000]> to ~/radare2-regressions/bins/headers/s3.h
+[0x00000000]> ts
 foo
 S1
 ```
@@ -83,7 +97,7 @@ S1
 Also note there is a config option to specify include directories for types parsing
 
 ```
-[0x00000000]> e??~dir.type
+[0x00000000]> e? dir.types
 dir.types: Default path to look for cparse type files
 [0x00000000]> e dir.types
 /usr/include
@@ -98,22 +112,26 @@ into the sequence of `pf` commands. See more about [print format](../basic_comma
 The `tp` command uses the `pf` string to print all the members of type at the current offset/given address:
 
 ```
-[0x000051c0]> ts foo
+[0x00000000]> "td struct foo {char* a; int b;}"
+[0x00000000]> wx 68656c6c6f000c000000
+[0x00000000]> wz world @ 0x00000010 ; wx 17 @ 0x00000016
+[0x00000000]> px
+[0x00000000]> ts foo
 pf zd a b
-[0x000051c0]> tp foo
- a : 0x000051c0 = 'hello'
- b : 0x000051cc = 10
-[0x000051c0]> tp foo 0x000053c0
- a : 0x000053c0 = 'world'
- b : 0x000053cc = 20
+[0x00000000]> tp foo
+ a : 0x00000000 = "hello"
+ b : 0x00000006 = 12
+[0x00000000]> tp foo @ 0x00000010
+ a : 0x00000010 = "world"
+ b : 0x00000016 = 23
 ```
 
 Also, you could fill your own data into the struct and print it using `tpx` command
 
 ```
-[0x000051c0]> tpx foo 4141414144141414141442001000000
- a : 0x000051c0 = AAAAD.....B
- b : 0x000051cc = 16
+[0x00000000]> tpx foo 414243440010000000
+ a : 0x00000000 = "ABCD"
+ b : 0x00000005 = 16
 ```
 
 ### Linking Types
