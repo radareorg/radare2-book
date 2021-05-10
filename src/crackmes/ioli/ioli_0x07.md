@@ -7,7 +7,7 @@ a weird "wtf?" string.
 $ rabin2 -z ./crackme0x07
 [Strings]
 nth paddr      vaddr      len size section type  string
-―――――――――――――――――――――――――――――――――――――――――――――――――――――――
+-------------------------------------------------------
 0   0x000007a8 0x080487a8 4   5    .rodata ascii LOLO
 1   0x000007ad 0x080487ad 20  21   .rodata ascii Password Incorrect!\n
 2   0x000007c5 0x080487c5 13  14   .rodata ascii Password OK!\n

@@ -16,7 +16,7 @@ The first thing to check is if the password is just plaintext inside the file. I
 $ rabin2 -z ./crackme0x00
 [Strings]
 nth paddr      vaddr      len size section type  string
-―――――――――――――――――――――――――――――――――――――――――――――――――――――――
+-------------------------------------------------------
 0   0x00000568 0x08048568 24  25   .rodata ascii IOLI Crackme Level 0x00\n
 1   0x00000581 0x08048581 10  11   .rodata ascii Password: 
 2   0x0000058f 0x0804858f 6   7    .rodata ascii 250382
@@ -28,7 +28,7 @@ So we know what the following section is, this section is the header shown when 
 
 ```
 nth paddr      vaddr      len size section type  string
-―――――――――――――――――――――――――――――――――――――――――――――――――――――――
+-------------------------------------------------------
 0   0x00000568 0x08048568 24  25   .rodata ascii IOLI Crackme Level 0x00\n
 ```
 

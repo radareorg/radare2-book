@@ -7,7 +7,7 @@ nearly a routine to check this binary (not complete output in the following):
 rabin2 -z ./crackme0x06
 [Strings]
 nth paddr      vaddr      len size section type  string
-―――――――――――――――――――――――――――――――――――――――――――――――――――――――
+-------------------------------------------------------
 0   0x00000738 0x08048738 4   5    .rodata ascii LOLO
 1   0x00000740 0x08048740 13  14   .rodata ascii Password OK!\n
 2   0x0000074e 0x0804874e 20  21   .rodata ascii Password Incorrect!\n

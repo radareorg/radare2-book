@@ -6,7 +6,7 @@ Rabin2 is able to find imported objects by an executable, as well as their offse
 $ rabin2 -i /bin/ls
 [Imports]
 nth vaddr      bind   type   lib name
-―――――――――――――――――――――――――――――――――――――
+-------------------------------------
    1 0x000032e0  GLOBAL    FUNC __ctype_toupper_loc
    2 0x000032f0  GLOBAL    FUNC getenv
    3 0x00003300  GLOBAL    FUNC sigprocmask

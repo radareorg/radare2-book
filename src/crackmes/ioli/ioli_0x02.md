@@ -15,7 +15,7 @@ check it with rabin2.
 $ rabin2 -z ./crackme0x02
 [Strings]
 nth paddr      vaddr      len size section type  string
-―――――――――――――――――――――――――――――――――――――――――――――――――――――――
+-------------------------------------------------------
 0   0x00000548 0x08048548 24  25   .rodata ascii IOLI Crackme Level 0x02\n
 1   0x00000561 0x08048561 10  11   .rodata ascii Password:
 2   0x0000056f 0x0804856f 15  16   .rodata ascii Password OK :)\n

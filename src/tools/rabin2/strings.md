@@ -6,7 +6,7 @@ The `-z` option is used to list readable strings found in the .rodata section of
 $ rabin2 -z /bin/ls | head
 [Strings]
 nth paddr      vaddr      len size section type  string
-―――――――――――――――――――――――――――――――――――――――――――――――――――――――
+-------------------------------------------------------
 000 0x000160f8 0x000160f8  11  12 (.rodata) ascii dev_ino_pop
 001 0x00016188 0x00016188  10  11 (.rodata) ascii sort_files
 002 0x00016193 0x00016193   6   7 (.rodata) ascii posix-
