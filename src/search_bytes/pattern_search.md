@@ -7,7 +7,7 @@ Here is an example:
 ```
 This command output will show different patterns found and how many times each of them is encountered.
 
-It is possible to search patterns with a known difference between consecutive bytes with `\d` command. For example, the command to search all the patterns with the first and second bytes having the first bit which differs and the second and third bytes with the second bit which differs is:
+It is possible to search patterns with a known difference between consecutive bytes with `/d` command. For example, the command to search all the patterns with the first and second bytes having the first bit which differs and the second and third bytes with the second bit which differs is:
 
 ```
 [0x00000000]> /d 0102
