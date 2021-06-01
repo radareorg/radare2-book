@@ -20,14 +20,15 @@ h1,h2,h3,h4 {
   line-height: 0.9;
 }
 
+img[alt=cover] { display: inline-block; }
+
 img {
   display: block;
   margin-left: auto;
   margin-right: auto;
 }
 
-.markdown-section h1, h1
-{
+.markdown-section h1, h1 {
     margin-bottom: 0px;
     margin-left: 25px;
 }

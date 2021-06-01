@@ -1,0 +1,16 @@
+name: Make PDF using pandoc
+
+jobs:
+  make_pdf:
+    runs-on: ubuntu-latest
+    env:
+      ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+          sudo apt install pandoc texlive
+          make pdf
+          make epub
+      - uses: actions/upload-artifact@master
+        with:
+          path: r2book.*

@@ -83,7 +83,7 @@
       * [Entrypoint](tools/rabin2/entrypoints.md)
       * [Imports](tools/rabin2/imports.md)
       * [Exports](tools/rabin2/exports.md)
-      * [Symbols (exports)](tools/rabin2/symbols.md)
+      * [Symbols](tools/rabin2/symbols.md)
       * [Libraries](tools/rabin2/libraries.md)
       * [Strings](tools/rabin2/strings.md)
       * [Program Sections](tools/rabin2/program_sections.md)

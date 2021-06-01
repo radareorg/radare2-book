@@ -1,5 +1,5 @@
 {
-  "name": "radare2book",
+  "name": "radare2-book",
   "version": "1.0.0",
   "description": "the official radare2 book",
   "scripts": {
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/radareorg/radare2book.git"
+    "url": "git+https://github.com/radareorg/radare2-book.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/radareorg/radare2book/issues"
+    "url": "https://github.com/radareorg/radare2-book/issues"
   },
-  "homepage": "https://github.com/radareorg/radare2book#readme",
+  "homepage": "https://github.com/radareorg/radare2-book#readme",
   "dependencies": {
     "gitbook-cli": "^2.3.2"
   }
