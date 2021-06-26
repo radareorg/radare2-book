@@ -59,7 +59,7 @@ Cleaning up the source tree is important to avoid problems like linking to old o
 The following commands may help you to get your git clone up to date:
 ```
 $ git clean -xdf
-$ git reset --hard @~10
+$ git reset --hard origin/master
 $ git pull
 ```
 If you want to remove previous installations from your system, you must run the following commands:
