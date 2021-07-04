@@ -43,7 +43,7 @@
    * [Automation](search_bytes/automation.md)
    * [Backward Search](search_bytes/backward_search.md)
    * [Search in Assembly](search_bytes/search_in_assembly.md)
-   * [Searching for AES Keys](search_bytes/searching_aes_keys.md)
+   * [Searching for Cryptography materials](search_bytes/searching_crypto.md)
 * [Disassembling](disassembling/intro.md)
    * [Adding Metadata](disassembling/adding_metadata.md)
    * [ESIL](disassembling/esil.md)
