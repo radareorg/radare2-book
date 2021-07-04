@@ -12,3 +12,4 @@ _book/*
 *.orig
 *.rej
 *.bak
+*.log
