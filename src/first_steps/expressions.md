@@ -40,7 +40,7 @@ Supported arithmetic operations are:
 6
 ```
 
-To use of logical OR should quote the whole command to avoid executing the `|` pipe:
+To use of binary OR should quote the whole command to avoid executing the `|` pipe:
 ```
 [0x00000000]> "? 1 | 2"
 hex     0x3
