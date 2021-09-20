@@ -32,8 +32,8 @@ Supported arithmetic operations are:
  *  \* : multiplication
  *  / : division
  *  % : modulus
- *  \> : shift right
- *  < : shift left
+ *  \>> : shift right
+ *  << : shift left
 
 ```
 [0x00000000]> ?vi 1+2+3
