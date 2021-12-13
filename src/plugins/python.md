@@ -92,7 +92,36 @@ def mycpu_anal(a):
             "op" : op,
     }
 ```
-6. Then register those using `r2lang.plugin("asm")` and `r2lang.plugin("anal")` respectively
+6. (Optional) To add extra information about op sizes and alignment, add a `archinfo` subfunction and point to it in the structure
+
+```python
+def mycpu_anal(a):
+    def set_reg_profile():
+        [...]
+    def archinfo(query):
+        if query == R.R_ANAL_ARCHINFO_MIN_OP_SIZE:
+            return 1
+        if query == R.R_ANAL_ARCHINFO_MAX_OP_SIZE:
+            return 8
+        if query == R.R_ANAL_ARCHINFO_INV_OP_SIZE:  # invalid op size
+            return 2
+        return 0
+    def analop(memview, pc):
+        [...]
+
+    return {
+            "name" : "mycpu",
+            "arch" : "mycpu",
+            "bits" : 32,
+            "license" : "GPL",
+            "desc" : "MYCPU anal",
+            "esil" : 1,
+            "set_reg_profile" : set_reg_profile,
+            "archinfo": archinfo,
+            "op" : op,
+    }
+```
+7. Register both plugins using `r2lang.plugin("asm")` and `r2lang.plugin("anal")` respectively
 
 ```python
 print("Registering MYCPU disasm plugin...")
