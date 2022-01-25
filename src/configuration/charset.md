@@ -12,4 +12,4 @@ Sadly, as you can imagine, very often the charset will be missing. There can not
 
 It works of course for each architecture. Not only the gameboy.
 
-In the future we plan to allow people to use visual mode with the custom charset.
+You can also use visual mode with the custom charset for single char encodings.
