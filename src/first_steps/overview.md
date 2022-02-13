@@ -1,24 +1,24 @@
-## The Framework
+## Пакет программ radare2
 
-The Radare2 project is a set of small command-line utilities that can be used together or independently.
+Программная система Radare2 представляет собой набор небольших утилит командной строки, используемых вместе или по отдельности.
 
-This chapter will give you a quick understanding of them, but you can check the dedicated sections for each tool at the end of this book. 
+Глава дает общее представление о том, как они функционируют, в специальных разделах в конце книги есть информация по каждому инструменту.
 
-### radare2
+### Программа radare2
 
-The main tool of the whole framework. It uses the core of the hexadecimal editor and debugger. radare2 allows you to open a number of input/output sources as if they were simple, plain files, including disks, network connections, kernel drivers, processes under debugging, and so on.
+Основной инструмент программной системы. Он основан на ядре, включающем шестнадцатеричный редактор и отладчик. Программа Radare2 позволяет загружать и отображать данные, полученные из различных источников данных (ввода/вывода), включая диски, сетевые подключения, драйверы ядра, отлаживаемые процессы и т.д., как будто это обычные файлы.
 
-It implements an advanced command line interface for moving around a file, analyzing data, disassembling, binary patching, data comparison, searching, replacing, and visualizing. It can be scripted with a variety of languages, including Python, Ruby, JavaScript, Lua, and Perl.
+Возможности реализованного в ней интерфейса командной строки позволяют перемещаться по файлу, проводить анализ данных, дизассемблировать, вносить исправления в двоичные файлы, сравнивать данные, осуществлять поиск и замену, а также визуализацию. Также можно управлять этим интерфейсом из различных языков программирования, включая Python, Ruby, JavaScript, Lua и Perl.
 
-### rabin2
+### Программа rabin2
 
-A program to extract information from executable binaries, such as ELF, PE, Java CLASS, Mach-O, plus any format supported by r2 plugins. rabin2 is used by the core to get data like exported symbols, imports, file information, cross references (xrefs), library dependencies, and sections.
+Программа для извлечения информации из исполняемых двоичных файлов, таких как ELF, PE, Java CLASS, Mach-O, а также любого другого формата, поддерживаемого плагинами r2. Программа rabin2 используется ядром для получения данных о формате файла, например, перечень экспортированных символов, импортов, информации о формате файлов, перекрестных ссылках (xrefs), зависимостей библиотек и разделов (секций загрузчика).
 
-### rasm2
+### Программа rasm2
 
-A command line assembler and disassembler for multiple architectures (including Intel x86 and x86-64, MIPS, ARM, PowerPC, Java, and myriad of others).
+Ассемблер и дизассемблер, управляемый из командной строки операционной системы, поддерживающий огромное множество архитектур, включая Intel x86 и x86-64, MIPS, ARM, PowerPC, Java.
 
-#### Examples
+#### Примеры
 ```
 $ rasm2 -a java 'nop'
 00
@@ -36,12 +36,12 @@ $ echo 'push eax;nop;nop' | rasm2 -f -
 509090
 ```
 
-### rahash2
+### Программа rahash2
 
-An implementation of a block-based hash tool. From small text strings to large disks, rahash2 supports multiple algorithms, including MD4, MD5, CRC16, CRC32, SHA1, SHA256, and others.
-rahash2 can be used to check the integrity or track changes of big files, memory dumps, or disks.
+Реализация блочного хеширования. Она позволяет хэшировать текстовые строки и большие пространства на диске, rahash2 поддерживает много различных алгоритмов, включая MD4, MD5, CRC16, CRC32, SHA1, SHA256.
+Программа rahash2 используется для проверки целостности или отслеживания изменений больших файлов, дампов памяти или дисков.
 
-### Examples
+### Примеры
 ```
 $ rahash2 file
 file: 0x00000000-0x00000007 sha256: 887cfbd0d44aaff69f7bdbedebd282ec96191cce9d7fa7336298a18efc3c7a5a
@@ -50,19 +50,19 @@ file: 0x00000000-0x00000007 sha256: 887cfbd0d44aaff69f7bdbedebd282ec96191cce9d7f
 $ rahash2 -a md5 file
 file: 0x00000000-0x00000007 md5: d1833805515fc34b46c2b9de553f599d
 ```
-### radiff2
+### Программа radiff2
 
-A binary diffing utility that implements multiple algorithms. It supports byte-level or delta diffing for binary files, and code-analysis diffing to find changes in basic code blocks obtained from the radare code analysis.
+Утилита для сравнения двоичных файлов, реализующая множество алгоритмов. Она поддерживает побайтовое сравнение или представление выявленных различий двоичных файлов, а также сравнение результатов анализа кода, полученных из радара, для поиска изменений в блоках кода.
 
-### rafind2
+### Программа rafind2
 
-A program to find byte patterns in files.
+Программа для поиска байтов в файлах по заданным шаблонам.
 
-### ragg2
+### Программа ragg2
 
-A frontend for r_egg. ragg2 compiles programs written in a simple high-level language into tiny binaries for x86, x86-64, and ARM.
+Представляет функции r_egg в виде утилиты командной строки. Программа ragg2 компилирует программы, представленные на простом языке высокого уровня, в крошечные двоичные файлы для архитектур x86, x86-64 и ARM.
 
-#### Examples
+#### Примеры
 
 ```
 $ cat hi.r
@@ -89,16 +89,16 @@ $ ./hi.c.bin
 Hello
 ```
 
-### rarun2
+### Программа rarun2
 
-A launcher for running programs within different environments, with different arguments,
-permissions, directories, and overridden default file descriptors. rarun2 is useful for:
+Предназначена для запуска программ в разных средах, с другими аргументами,
+разрешениями, в других каталогах и переопределенными файловыми дескрипторами по умолчанию. Программ rarun2 используется для
 
-* Solving crackmes
+* Решения задачек crackme
 * Fuzzing
-* Test suites
+* Организации различного рода тестов
 
-#### Sample rarun2 script
+#### Пример скрипта rarun2
 ```
 $ cat foo.rr2
 #!/usr/bin/rarun2
@@ -110,38 +110,38 @@ chdir=/tmp
 ./foo.rr2
 ```
 
-#### Connecting a Program with a Socket
+#### Подключение программы к сокету
 ```
 $ nc -l 9999
 $ rarun2 program=/bin/ls connect=localhost:9999
 ```
 
-#### Debugging a Program Redirecting the stdio into Another Terminal
+#### Отладка программы, перенаправив stdio в другой терминал
 
-1 - open a new terminal and type 'tty' to get a terminal name:
+1 - Откройте новый терминал и введите 'tty', чтобы получить название терминала:
 
 ```
 $ tty ; clear ; sleep 999999
 /dev/ttyS010
 ```
 
-2 - Create a new file containing the following rarun2 profile named foo.rr2:
+2 - Создайте новый файл, содержащий следующий профиль rarun2 с именем foo.rr2:
 ```
 #!/usr/bin/rarun2
 program=/bin/ls
 stdio=/dev/ttys010
 ```
 
-3 - Launch the following radare2 command:
+3 - Теперь запустите команду radare2:
 ```
 r2 -r foo.rr2 -d /bin/ls
 ```
 
-### rax2
+### Программа rax2
 
-A minimalistic mathematical expression evaluator for the shell that is useful for making base conversions between floating point values, hexadecimal representations, hexpair strings to ASCII, octal to integer, and more. It also supports endianness settings and can be used as an interactive shell if no arguments are given.
+Минималистичный вычислитель математических выражений, используемый в командной строке операцонной системы. Он полезен для выполнения базовых преобразований значений чисел с плавающей запятой в их шестнадцатеричное представление, шестнадцатеричных строк в ASCII, восьмеричных чисел в десятичные целые и многое другое. Программа также поддерживает установку порядка следования байтов в представлении, используется также в качестве интерактивной оболочки если аргументы не были в командной строке заданы.
 
-#### Examples
+#### Примеры
 
 ```
 $ rax2 1337

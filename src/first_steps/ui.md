@@ -1,20 +1,20 @@
-# User Interfaces
+# Интерфейсы пользователя
 
-Radare2 has seen many different user interfaces being developed over the years.
+Для Radare2 на протяжении многих лет разработано много различных пользовательских интерфейсов.
 
-Maintaining a GUI is far from the scope of developing the core machinery of a reverse engineering toolkit: it is preferred to have a separate project and community, allowing both projects to collaborate and to improve together - rather than forcing cli developers to think in gui problems and having to jump back and forth between the graphic aspect and the low level logic of the implementations.
+Идея графического интерфейса далеко от использованной идеологии основного механизма инструментария обратного проектирования: предпочтительно иметь отдельный проект и сообщество, позволяющее обоим проектам сотрудничать и совершенствоваться вместе, вместо того, чтобы заставлять разработчиков интерфейса командной строки думать о проблемах графического интерфейса и прыгать взад и вперед между графическим аспектом и низкоуровневой логикой реализаций.
 
-In the past, there have been at least 5 different native user interfaces (ragui, r2gui, gradare, r2net, bokken) but none of them got enough maintenance power to take off and they all died.
+В прошлом было, по крайней мере, пять различных пользовательских интерфейсов (ragui, r2gui, gradare, r2net, bokken), но ни один из них не получил достаточной поддержки, чтобы набрать достаточную популярность, в результате и все они "сложили ласты".
 
-In addition, r2 has an embedded webserver and ships some basic user interfaces written in html/js. You can start them like this:
+Кроме того, r2 снабжен встроенным веб-сервером и предоставляет неколько простых пользовательских интерфейсов, реализованных при помощи HTML/JS. Данный режим запускается следующим образом:
 
 ```
 $ r2 -c=H /bin/ls
 ```
 
-After 3 years of private development, Hugo Teso; the author of Bokken (python-gtk gui of r2) released to the public another frontend of r2, this time written in c++ and qt, which has been very welcomed by the community.
+После трех лет самостоятельного развития, Уго Тесо, автор проекта Bokken (python-gtk-итерфейс для r2), выпустил для общественности еще один интерфейс для r2, но на этот раз написанный на c++ и qt, что очень понравилось сообществу.
 
-This GUI was named Iaito, but as long as he prefered not to keep maintaining it, Xarkes decided to fork it under the name of Cutter (name voted by the community), and lead the project. This is how it looks:
+Разработанный графический интерфейс назван Iaito, однако Уго несколько лениво поддерживал проект, что привело и созданию на основе Iaito нового проекта под именем Cutter (так проголосовало сообщество), возглавил проект пользователь Xarkes. Вот как он выглядит:
 
 * [https://github.com/radareorg/cutter](https://github.com/radareorg/cutter).
 
