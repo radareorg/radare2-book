@@ -7,7 +7,7 @@
    * [Компиляция и переносимость](first_steps/compilation_portability.md)
    * [Компиляция в Windows](first_steps/windows_compilation.md)
    * [Компиляция на Андроиде](first_steps/compilation_android.md)
-   * [Интерфейсs пользователя](first_steps/ui.md)
+   * [Интерфейсы пользователя](first_steps/ui.md)
 * [Первые шаги](first_steps/intro.md)
    * [Флаги командной строки](first_steps/commandline_flags.md)
    * [Формат команды](first_steps/command_format.md)
