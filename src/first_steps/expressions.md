@@ -1,10 +1,9 @@
-## Expressions
+## Выражения
 
-Expressions are mathematical representations of 64-bit numerical values.
-They can be displayed in different formats, be compared or used with all commands
-accepting numeric arguments. Expressions can use traditional arithmetic operations,
-as well as binary and boolean ones.
-To evaluate mathematical expressions prepend them with command `?`:
+Выражение — это математическое представление 64-битных числовых значений.
+Результаты выражений отображаются в разных форматах, сравниваются и могут быть использованы со всеми командами, принимающими числовые аргументы. Выражения используют традиционные арифметические операции,
+ а также двоичные и логические значения.
+Чтобы вычислить математическое выражение в команде, надо добавить к ней `?`:
 ```
 [0xb7f9d810]> ?vi 0x8048000
 134512640
@@ -25,22 +24,22 @@ float:  nanf
 double: nan
 trits   0t11112220022122120101211020120210210211201
 ```
-Supported arithmetic operations are:
+Поддерживаемые арифметические операции:
 
- *  \+ : addition
- *  \- : subtraction
- *  \* : multiplication
- *  / : division
- *  % : modulus
- *  \>> : shift right
- *  << : shift left
+* \+ : сумма
+* \- : вычитание
+* \* : умножение
+* / : деление
+* % : остаток от деления по модулю
+* \>> : сдвиг вправо
+* << : сдвиг влево
 
 ```
 [0x00000000]> ?vi 1+2+3
 6
 ```
 
-To use of binary OR should quote the whole command to avoid executing the `|` pipe:
+При использовании двоичного ИЛИ, всю команду следует заключать в кавычки, иначе выполнится связывание потоков `|`:
 ```
 [0x00000000]> "? 1 | 2"
 hex     0x3
@@ -56,30 +55,30 @@ double: 0.000000
 trits   0t10
 ```
 
-Numbers can be displayed in several formats:
+Числа могут отображаться в одном из следующих форматов:
 ```
-0x033   : hexadecimal can be displayed
-3334    : decimal
-sym.fo  : resolve flag offset
-10K     : KBytes  10*1024
-10M     : MBytes  10*1024*1024
-```
-
-You can also use variables and seek positions to build complex expressions.
-
-Use the `?$?` command to list all the available commands or read the refcard chapter of this book.
-
-```
-$$    here (the current virtual seek)
-$l    opcode length
-$s    file size
-$j    jump address (e.g. jmp 0x10, jz 0x10 => 0x10)
-$f    jump fail address (e.g. jz 0x10 => next instruction)
-$m    opcode memory reference (e.g. mov eax,[0x10] => 0x10)
-$b    block size
+0x033   : шеснадцатеричное число просто отображается
+3334    : десятичное
+sym.fo  : преобразуется в смещение флага
+10K     : килобайты (KBytes) 10*1024
+10M     : мегабайты (MBytes) 10*1024*1024
 ```
 
-Some more examples:
+Также можно использовать переменные и адреса, включая текущий, при построении сложных выражений.
+
+Последовательность символов `?$?` выдает список всех доступных команд. Можно также ознакомиться с кратким перечнем команд в конце книги.
+
+```
+$$    here (текущий виртуальный адрес, смещение)
+$l    длина кода инструкции (opcode length)
+$s    Размер файла
+$j    адрес перехода (например, jmp 0x10, jz 0x10 => 0x10)
+$f    адрес перехода, если ложь (например, jz 0x10 => адрес следующей инструкции)
+$m    ссылка на адрес памяти, выраженна кодом инструкции (opcode) (например, mov eax,[0x10] => 0x10)
+$b    размер блока
+```
+
+Еще несколько примеров:
 ```
 [0x4A13B8C0]> ? $m + $l
 140293837812900 0x7f98b45df4a4 03771426427372244 130658.0G 8b45d000:04a4 140293837812900 10100100 140293837812900.0 -0.000000
