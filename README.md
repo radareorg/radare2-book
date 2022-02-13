@@ -1,11 +1,10 @@
-# Introduction
+# Введение
 
-This book is an updated version (started by maijin) of the original
-radare1 book (written by pancake). Please contribute by updating and
-improving the contents.
+Книга представляет собой обновленную версию оригинальной книги о radare2, написанной пользователем pancake. Обновление начато пользователем maijin. Пожалуйста, не стесьняйтесь дополнять ее, обновлять и улучшать ее содержание.
 
-* Github: [https://github.com/radareorg/radare2-book](https://github.com/radareorg/radare2-book)
-* Online: [https://book.rada.re/](https://book.rada.re/)
+* Проект Github английской версии: [https://github.com/radareorg/radare2-book](https://github.com/radareorg/radare2-book)
+* Проект Github русской версии: [https://github.com/eugeneai/radare2-book-russian](https://github.com/eugeneai/radare2-book-russian)
+* Английская версия находится на сайте [https://book.rada.re/](https://book.rada.re/)
 
 
 [![mdbook](https://github.com/radareorg/radare2-book/actions/workflows/mdbook.yml/badge.svg)](https://github.com/radareorg/radare2-book/actions/workflows/mdbook.yml)
