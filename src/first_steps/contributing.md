@@ -1,18 +1,18 @@
-## Contributing
+## Разработка radare2
 
-### Radare2 Book
+### Книга Radare2
 
-If you want to contribute to the Radare2 book, you can do it at the [Github repository](https://github.com/radareorg/radare2-book).
-Suggested contributions include:
+Если есть желание внести свой вклад в книгу Radare2, можно сделать это на сайте [Github](https://github.com/radareorg/radare2-book).
+Предлагаемые варианты развития:
 
-* Crackme writeups
-* CTF writeups
-* Documentation on how to use Radare2
-* Documentation on developing for Radare2
-* Conference presentations/workshops using Radare2
-* Missing content from the Radare1 book updated to Radare2
+* Обзоры упражнений Crackme
+* Обзоры CTF
+* Документация по использованию Radare2
+* Документация по разработке для Radare2
+* Презентации на конференциях и семинарах о Radare2
+* Портирование отсутствующего контента из книги Radare1 в Radare2
 
-Please get permission to port any content you do not own/did not create before you put it in the Radare2 book.
+Не забудьте получить разрешение на перенос любого контента, которым вы не владеете лично или который вы лично не создавали, прежде чем помещать его в книгу Radare2.
 
-See <https://github.com/radareorg/radare2/blob/master/DEVELOPERS.md> for general help on contributing to radare2.
+Ознакомьтесь с общей инструкцией <https://github.com/radareorg/radare2/blob/master/DEVELOPERS.md> о развитие проекта Radare2.
 
