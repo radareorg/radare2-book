@@ -1,46 +1,46 @@
-## Compilation and Portability
+## Компиляция и переносимость
 
-Currently the core of radare2 can be compiled on many systems and architectures, but the main development is done on GNU/Linux with GCC, and on MacOS X with clang. Radare is also known to compile on many different systems and architectures (including TCC and SunStudio).
+В настоящее время ядро radare2 можно скомпилировать для многих операционных систем и архитектур, но основная разработка ведется на GNU/Linux с помощью GCC, на MacOS X с помощью clang. Radare также компилируется на других системах и архитектурах, включая TCC и SunStudio.
 
-People often want to use radare as a debugger for reverse engineering. Currently, the debugger layer can be used on Windows, GNU/Linux (Intel x86 and x86_64, MIPS, and ARM), OS X, FreeBSD, NetBSD, and OpenBSD (Intel x86 and x86_64)..
+Разработчики часто используют radare в качестве отладчика при обратном проектирования (реверс-инжениринг). Сейчас подсистему отладчика можно использовать в Windows, GNU/Linux (Intel x86, x86_64, MIPS и ARM), OS X, FreeBSD, NetBSD и OpenBSD (Intel x86 и x86_64).
 
-Compared to core, the debugger feature is more restrictive portability-wise. If the debugger has not been ported to your favorite platform, you can disable the debugger layer with the --without-debugger `configure` script option when compiling radare2.
+По сравнению с ядром функция отладчика является ограниченно-переносимой. Если отладчик еще не портирован на вашу любимую платформу, можно отключить модуль отладки при помощи параметра --without-debugger скрипта `configure` при компиляции Radare2.
 
-Note that there are I/O plugins that use GDB, WinDbg, or Wine as back-ends, and therefore rely on presence of corresponding third-party tools (in case of remote debugging - just on the target machine).
+Напомним, что в программной системе есть плагины ввода-вывода, которые используют функции GDB, WinDbg или Wine, они полагаются на наличие соответствующих инструментов (в случае удаленной отладки — только на целевой машине).
 
-To build on a system using `acr` and `GNU Make` (e.g. on *BSD systems):
+Чтобы собрать программную систему, используя `acr` и `GNU Make`, например, в системах *BSD:
 ```
 $ ./configure --prefix=/usr
 $ gmake
 $ sudo gmake install
 ```
-There is also a simple script to do this automatically:
+Существует и простой скрипт, собирающий проект автоматически:
 ```
 $ sys/install.sh
 ```
-### Static Build
+### Статическая сборка
 
-You can build radare2 statically along with all other tools with the command:
+Можно собрать radare2 статически вместе со всеми инструментами с помощью команды:
 ```
 $ sys/static.sh
 ```
-### Meson build
+### Сборка при помощи Meson
 
-You can use meson + ninja to build:
+Для сборки можно использовать meson + ninja:
 ```
 $ sys/meson.py --prefix=/usr --shared --install
 ```
-If you want to build locally:
+Для локальной сборки:
 ```
 $ sys/meson.py --prefix=/home/$USER/r2meson --local --shared --install
 ```
-### Docker
+### Установка в Docker
 
-Radare2 repository ships a [Dockerfile](https://github.com/radareorg/radare2/blob/master/Dockerfile) that you can use with Docker.
+В репозитории исходного кода radare2 есть [Dockerfile](https://github.com/radareorg/radare2/blob/master/Dockerfile), используемый с системой Docker.
 
-This dockerfile is also used by Remnux distribution from SANS, and is available on the docker [registryhub](https://registry.hub.docker.com/u/remnux/radare2/).
+Этот dockerfile также используется в дистрибутиве Remnux из SANS, а также на сайте hub.docker.com, [registryhub](https://registry.hub.docker.com/u/remnux/radare2/).
 
-## Cleaning Up Old Radare2 Installations
+## Деинсталляция старых установок Radare2
 ```
 ./configure --prefix=/old/r2/prefix/installation
 make purge
