@@ -9,7 +9,7 @@
    * [Компиляция на Андроиде](first_steps/compilation_android.md)
    * [Интерфейсы пользователя](first_steps/ui.md)
 * [Первые шаги](first_steps/intro.md)
-   * [Флаги командной строки](first_steps/commandline_flags.md)
+   * [Аргументы командной строки](first_steps/commandline_flags.md)
    * [Формат команды](first_steps/command_format.md)
    * [Выражения](first_steps/expressions.md)
    * [Основные команды отладчика](first_steps/basic_debugger_session.md)
