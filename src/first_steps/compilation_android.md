@@ -62,7 +62,7 @@ endian = 'little'
 
 ##### Скомпилировать при помощи meson + ninja
 
-Настроить каталог сборки с meson-ом как обычно:
+Настроить каталог сборки с meson-ом, как обычно:
 ```
 $ CFLAGS="-static" LDFLAGS="-static" meson --default-library static --prefix=/tmp/android-dir -Dblob=true build --cross-file ./meson-android.ini
 ```
@@ -73,7 +73,7 @@ $ CFLAGS="-static" LDFLAGS="-static" meson --default-library static --prefix=/tm
 * `-Dblob=true` указывает meson-у компилировать только один единый запускаемый файл со всем требуемым кодом для всех программ `radare2`, `rabin2`, `rasm2`, и т.д. В результате для каждой программы будет создана символьная ссылка на этот единый файл. Это позволяет избежать создания множества больших статически скомпилированных двоичных файлов, а
     просто создается один единый, включающий все функции. Мы получим наши `rabin2`,
    `rasm2`, `rax2`, и др., но они будут только ссылками на `radare2`.
-* `--cross-file ./meson-android.ini` описыват процесс компилирования radare2 для ОС Android
+* `--cross-file ./meson-android.ini` описывает процесс компилирования radare2 для ОС Android
 
 Затем, надо скомпилировать проект, и установить его на устройство:
 ```
