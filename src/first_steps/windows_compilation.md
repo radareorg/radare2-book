@@ -84,13 +84,13 @@ git clone https://github.com/radareorg/radare2
 
 Следующие действия - компиляция кода Radare2.
 
-    * **Visual Studio 2017:**
+* **Visual Studio 2017:**
 
-        Замечание 1: Замените `Community` на `Professional` или `Enterprise` в следующем примере командной строки в зависимости от используемой вами версии.
+  Замечание 1: Замените `Community` на `Professional` или `Enterprise` в следующем примере командной строки в зависимости от используемой вами версии.
 
-        Замечание 2: Замените `vcvars32.bat` на `vcvars64.bat` в этой строке для сборки 64-битовой версии.
+  Замечание 2: Замените `vcvars32.bat` на `vcvars64.bat` в этой строке для сборки 64-битовой версии.
 
-         `"%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars32.bat"`
+  `"%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars32.bat"`
 
 4. Создание системы сборки с помощью Meson:
 
