@@ -83,9 +83,8 @@ $ ninja -C build install
 
 ##### Копирование файлов на свое устройство Android, запуск приложения
 
-Последний этап - копирование сгенерированных файлов в /tmp/android-dir на ваше Android-устройство, запуск на нем radare2.
+Последний этап - копирование сгенерированных файлов в /tmp/android-dir на ваше Android-устройство, запуск на нем radare2:
 
-Например:
 ```
 $ cd /tmp && tar -cvf radare2-android.tar.gz android-dir
 $ adb push radare2-android.tar.gz /data/local/tmp
