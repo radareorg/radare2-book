@@ -1,141 +1,141 @@
 ## Windows
 
-Компилирование `г2` в Windows требует использования системы сборки Meson. Вообще существует возможность сборки r2 в Windows с использованием cygwin, mingw или wsl, используя в качестве системы сборки acr/make, однако этот подход не является рекомендуемым/официальным/поддерживаемым и может привести к неожиданным результатам.
+To build `r2` on Windows you have to use the Meson build system. Despite being able to build r2 on Windows using cygwin, mingw or wsl using the acr/make build system it is not the recommended/official/supported method and may result on unexpected results.
 
-Готовые двоичные сборки загружаются со страницы релизов, кроме того, можно использовать артефакты GITHUB CI, создаваемые на каждый коммит как для 32-разрядной, так и 64-разрядной версий Windows.
+Binary builds can be downloaded from the release page or the github CI artifacts from every single commit for 32bit and 64bit Windows.
 
 * https://github.com/radareorg/radare2/releases
 
-### Необходимые ресурсы и инструменты
+### Prerequisites
 
-* Требуется 3 ГБ свободного места на диске,
-* Visual Studio 2019 (or higher),
-* Python 3,
-* Meson,
-* Ninja,
-* Git.
+* 3 GB of free disk space
+* Visual Studio 2019 (or higher)
+* Python 3
+* Meson
+* Ninja
+* Git
 
-### Последовательность шагов
+### Step-by-Step
 
-#### Установка Visual Studio 2015 или более поздней версии
+#### Install Visual Studio 2015 (or higher)
 
-Visual Studio должна включать компилятор Visual C++, поддерживающий библиотеки C++, и соответствующий пакет Windows SDK для целевой версии платформы.
+Visual Studio must be installed with a Visual C++ compiler, supporting C++ libraries, and the appropriate Windows SDK for the target platform version.
 
-* Убедитесь, что задан `Programming Languages > Visual C++`
+* Ensure `Programming Languages > Visual C++` is selected
 
-Если у вас не установлена Visual Studio, то грузите какую-нибудь версию community-edition, эти версии бесплатны и отлично работают.
+If you need a copy of Visual Studio, the Community versions are free and work great.
 
-* [Загрузка Visual Studio 2019](https://visualstudio.microsoft.com/downloads/)
+* [Download Visual Studio 2019](https://visualstudio.microsoft.com/downloads/)
 
-#### Установка Python 3 и Meson при помощи пакетного менеджера Conda
+#### Install Python 3 and Meson via Conda
 
-Conda - это, вероятно, лучший дистрибутив Python для Windows. Пропустите следующие шаги, если у вас уже установлен Python
+Conda is our probably the best Python distribution for Windows. But you can skip the next steps if you have Python installed already
 
 * https://docs.conda.io/en/latest/miniconda.html
 * https://repo.anaconda.com/archive/
 
-##### Создание среды (environment) Python для Radare2
+##### Create a Python Environment for Radare2
 
-Следующие действия создают и активируют среду Conda с именем *r2*. Все дальнейшие инструкции приводятся в предположении, что имя среды `r2`, при желании имя можно изменить.
+Follow these steps to create and activate a Conda environment named *r2*. All instructions from this point on will assume this name matches your environment, but you may change this if desired.
 
-1. Пуск > Anaconda Prompt
+1. Start > Anaconda Prompt
 2. `conda create -n r2 python=3`
 3. `activate r2`
 
-Всякий раз, когда вы входите в среду, открыв Anaconda Prompt, надо запускать `activate r2`. И наоборот, запуск `deactivate` отключает от среды.
+Any time you wish to enter this environment, open the Anaconda Prompt and re-issue `activate r2`. Conversely, `deactivate` will leave the environment.
 
-##### Установка Meson
+##### Install Meson
 
-Убедитесь, что установлен Meson версии 0.48 или выше (`meson -v`)
+Ensure Meson is version 0.48 or higher (`meson -v`)
 
 ```
 pip install meson
 ```
 
-#### Установка Git for Windows
+#### Install Git for Windows
 
-Разработка Radare2 ведется в системе управления версиями Git, исходный код [опубликован на GitHub](https://github.com/radareorg).
+All Radare2 code is managed via the Git version control system and [hosted on GitHub](https://github.com/radareorg).
 
-Установка Git для Windows требует выполнения следующих действий.
+Follow these steps to install Git for Windows.
 
-Загрузка  Windows-версии Git
+Download Git for Windows 
 
 * https://git-scm.com/download/win
 
-Во время установки проверьте следующие параметры.
+Check the following options during the Wizard steps.
 
-* Использовать шрифт TrueType во всех окнах консоли,
-* Использовать Git из командной строки Windows,
-* Использовать библиотеку Windows Secure Channel, вместо OpenSSL,
-* Установить флаг Windows-style, коммит - Unix-style для кодирования концов строк(core.autocrlf=true),
-* Использовать окно консоли Windows по умолчанию, вместо Mintty,
-* Убедитесь, что `git --version` срабатывает после инсталляции.
+* Use a TrueType font in all console windows
+* Use Git from the Windows Command Prompt
+* Use the native Windows Secure Channel library (instead of OpenSSL)
+* Checkout Windows-style, commit Unix-style line endings (core.autocrlf=true)
+* Use Windows' default console window (instead of Mintty)
+* Ensure `git --version` works after install
 
 
-#### Загрузка исходного кода Radare2
+#### Get Radare2 Code
 
-Следующие действия приводят к клонированию git-репозитория Radare2.
+Follow these steps to clone the Radare2 git repository.
 
 ```
 git clone https://github.com/radareorg/radare2
 ```
 
-#### Компилирование Radare2 Code
+#### Compile Radare2 Code
 
-Следующие действия - компиляция кода Radare2.
+Follow these steps to compile the Radare2 Code.
 
-* **Visual Studio 2017:**
+    * **Visual Studio 2017:**
 
-  Замечание 1: Замените `Community` на `Professional` или `Enterprise` в следующем примере командной строки в зависимости от используемой вами версии.
+        Note 1: Change `Community` to either `Professional` or `Enterprise` in the command below depending on the version installed.
 
-  Замечание 2: Замените `vcvars32.bat` на `vcvars64.bat` в этой строке для сборки 64-битовой версии.
+        Note 2: Change `vcvars32.bat` to `vcvars64.bat` in the command below for the 64-bit version.
 
-  `"%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars32.bat"`
+         `"%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars32.bat"`
 
-4. Создание системы сборки с помощью Meson:
+4. Generate the build system with Meson:
 
-В командной строке Meson можно задавать аргументы для настройки типа сборки. Однако, r2 должен собраться без дополнительных флагов meson-а. При использовании Visual Studio. Замечание: Замените `Debug` на `Release` в следующей строке в зависимости от намерения собрать версию для отладки или релиз.
+Meson takes some arguments to configure the build type, but in short you should be able to build r2 without any meson flag. For Visual Studio. Note: Change `Debug` to `Release` in the command below depending on the version desired.
 
 ```
 meson b --buildtype debug --backend vs2019 --prefix %cd%\dest
 msbuild build\radare2.sln /p:Configuration=Debug /m
 ```
 
-При использовании Ninja интерфейс Visual Studio не требуется, достаточно установить инструменты компилятора msvc:
+For Ninja (no visual studio interface required, just msvc compiler toolchain installed):
 
 ```
 meson b
 ninja -C b
 ```
 
-Наконец, надо запустить следующую строку для установки r2 в заданный каталог (абсолютный префикс):
+Finally run this line to install r2 into the given absolute prefix directory:
 
 ```
 meson install -C build --no-rebuild
 ```
 
-#### Заметки о параметрах сборки
+#### Build options notes
 
-Параметр `/m[axcpucount]` создает один рабочий процесс MSBuild для каждого процессорного ядра компьютера. Указание числового значения (например, `/m:2`) ограничивает количество рабочих процессов. (Не следует путать с параметром компилятора Visual C++ `/MP`.)
+The `/m[axcpucount]` switch creates one MSBuild worker process per logical processor on your machine. You can specify a numeric value (e.g. `/m:2`) to limit the number of worker processes if needed. (This should not be confused with the Visual C++ Compiler switch `/MP`.)
 
-Иногда при попытке 32-разрядной установки можно получить сообщение такого вида: `error MSB4126: The specified solution configuration "Debug|x86" is invalid.` Проблема решается добавлением следующего аргумента: `/p:Platform=Win32`.
+If you get an error with the 32-bit install that says something along the lines of `error MSB4126: The specified solution configuration "Debug|x86" is invalid.` Get around this by adding the following argument to the command: `/p:Platform=Win32`
 
-Проверить версию собранного Radare2: `dest\bin\radare2.exe -v`
+Check your Radare2 version: `dest\bin\radare2.exe -v`
 
-#### Как убедится, что Radare2 запускается из любой папки
+#### Check That Radare2 Runs From All Locations
 
-В системах UNIX `r2` — это просто символьная ссылка на исполняемый файл `radare2`. В Windows если вы хотите, чтобы у вас был именно `r2`, то надо просто скопировать в него `radare2.exe`: `copy radare2.exe r2.exe`. Также надо добавить каталог с этими файлами в переменную PATH в настройках **Проводника** Windows.
+Note that `r2` in UNIX systems is just a symlink to the `radare2` executable. So, in case you want to have it in Windows you can just `copy radare2.exe r2.exe` and add the directory into the system-wide PATH env var in the **File Explorer** settings.
 
-Откройте консоль `cmd.exe` и наберите `r2 -v`. Если не получите ошибку, то весь процесс сборки и установки прошел успешно.
+Open the `cmd.exe` console and type `r2 -v` to confirm the whole process was successful.
 
-#### Примечания по настройке общесистемных (system-wide) переменных среды
+#### Notes about setting up the system-wide env var
 
-1. В проводнике windows перейдите в папку Radare2, т.е., в которую только что мы устанавливали пакет.
-2. Из этой папки перейдите в `dest` > `bin` и оставьте окно открытым.
-3. Перейдите в раздел "Свойства системы" (System Properties): в строке поиска Windows введите `sysdm.cpl`.
-4. Перейдите в `Дополнительно > Переменные среды` (`Advanced > Environment Variables`).
-5. Щелкните на переменной PATH, затем нажмите кнопку edit. Если PATH присутствует в настройках и для пользователя, и среди перечня системных переменных, то лучше править пользовательскую.
-6. Проверьте наличие в переменной PATH пути к папке в оставленном ранее окне. Если это не так, добавьте эту папку и нажмите `OK`.
-7. Выйдите из сеанса Windows.
-8. Откройте командную строку Windows: введите `cmd` в строке поиска. Убедитесь, что текущая папка не папка Radare2.
-9. Проверьте работоспособность Radare2 в командной строке: `radare2 -v`.
+1. In the file explorer go to the folder Radare2 was just installed in.
+2. From this folder go to `dest` > `bin` and keep this window open.
+3. Go to System Properties: In the Windows search bar enter `sysdm.cpl`.
+4. Go to `Advanced > Environment Variables`.
+5. Click on the PATH variable and then click edit (if it exists within both the user and system variables, look at the user version).
+6. Ensure the file path displayed in the window left open is listed within the PATH variable. If it is not add it and click `ok`.
+7. Log out of your Windows session.
+8. Open up a new Windows Command Prompt: type `cmd` in the search bar. Ensure that the current path is not in the Radare2 folder.
+9. Check Radare2 version from Command Prompt Window: `radare2 -v`

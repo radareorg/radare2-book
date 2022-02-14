@@ -1,90 +1,90 @@
-## Аргументы командной строки
+## Command-line Options
 
-Ядро Radare управляется множеством флагов, аргументов командной строки.
+The radare core accepts many flags from the command line.
 
-Вот кусочек сообщения справки по использованию флагов:
+This is an excerpt from the usage help message:
 ```
 $ radare2 -h
 Usage: r2 [-ACdfLMnNqStuvwzX] [-P patch] [-p prj] [-a arch] [-b bits] [-i file]
           [-s addr] [-B baddr] [-m maddr] [-c cmd] [-e k=v] file|pid|-|--|=
- --           запустить radare2 без открытия файла
- -            тоже, что 'r2 malloc://512'
- =            читать файл со стандартного ввода (используйте -i и -c для выполнения команд)
- -=           флаг !=! позволяет удаленно запускать команды
- -0           напечатать \x00 перед первой и после каждой команды
- -2           закрыть файловый дескриптор stderr (тихий режим без вывода сообщений)
- -a [arch]    установить asm.arch
- -A           запуск команды 'aaa' анализа ссылок в коде
- -b [bits]    задать asm.bits
- -B [baddr]   задать базовый адрес для PIE-бинариков
- -c 'cmd..'   запуск команды radare
- -C           отобразить в файл host:port (alias for -c+=http://%s/cmd/)
- -d           отлаживать запускаемый 'file' или процесс по 'pid'
- -D [backend] установить режим отладки (e cfg.debug=true)
- -e k=v       вычислить переменную конфигурации
- -f           размер блока приравнять к размеру файла
- -F [binplug] использовать известный всем плагин rbin насильно
- -h, -hh      показать сообщение о флагах и их предназначении, -hh - подробнее
- -H ([var])   напечатать переменную
- -i [file]    запустить файл-сценарий
- -I [file]    запустить файл-сценарий ПЕРЕД открытием основного файла
- -k [OS/kern] задать asm.os (linux, macos, w32, netbsd, ...)
- -l [lib]     загрузить плагин из файла
- -L           перечислить поддерживаемые плагины ввода-вывода
+ --           run radare2 without opening any file
+ -            same as 'r2 malloc://512'
+ =            read file from stdin (use -i and -c to run cmds)
+ -=           perform !=! command to run all commands remotely
+ -0           print \x00 after init and every command
+ -2           close stderr file descriptor (silent warning messages)
+ -a [arch]    set asm.arch
+ -A           run 'aaa' command to analyze all referenced code
+ -b [bits]    set asm.bits
+ -B [baddr]   set base address for PIE binaries
+ -c 'cmd..'   execute radare command
+ -C           file is host:port (alias for -c+=http://%s/cmd/)
+ -d           debug the executable 'file' or running process 'pid'
+ -D [backend] enable debug mode (e cfg.debug=true)
+ -e k=v       evaluate config var
+ -f           block size = file size
+ -F [binplug] force to use that rbin plugin
+ -h, -hh      show help message, -hh for long
+ -H ([var])   display variable
+ -i [file]    run script file
+ -I [file]    run script file before the file is opened
+ -k [OS/kern] set asm.os (linux, macos, w32, netbsd, ...)
+ -l [lib]     load plugin file
+ -L           list supported IO plugins
 ```
 ```
- -m [addr]    отобразить файл по указанному адресу (loadaddr)
- -M           не чудить с именами символов
- -n, -nn      не загружать информацию RBin (-nn загружает только двоичные структуры)
- -N           не загружать установки и сценарии пользователя
- -q           тихий режим без командной строки, выйти после исполнения -i
- -Q           тихий режим без командной строки, быстро затем выйти (quickLeak=true)
- -p [prj]     использовать проект, список, если не задан аргумент, загрузить, если не указан основной файл
- -P [file]    применить rapatch-файл и выйти
- -r [rarun2]  указать профиль rarun2 для загрузки (то же самое, что -e dbg.profile=X)
- -R [rr2rule] указать дополнительную директиву rarun2
- -s [addr]    начальный адрес смещения (seek)
- -S           запуск r2 в режиме "песочницы"
- -t           загрузить информацию rabin2 в "thread"
- -u           задать bin.filter=false для получения "грубых" имен sym/sec/cls
- -v, -V       показать версию radare2 (-V показывает версии библиотек)
- -w           открыть файл в режиме перезаписи
- -x           открыть без флага exec (asm.emu не будет работать), смотри io.exec
- -X           то же самое, что -e bin.usextr=false (используется в dyldcache)
- -z, -zz      не загружать строки, или загружать их в грубом формате
+ -m [addr]    map file at given address (loadaddr)
+ -M           do not demangle symbol names
+ -n, -nn      do not load RBin info (-nn only load bin structures)
+ -N           do not load user settings and scripts
+ -q           quiet mode (no prompt) and quit after -i
+ -Q           quiet mode (no prompt) and quit faster (quickLeak=true)
+ -p [prj]     use project, list if no arg, load if no file
+ -P [file]    apply rapatch file and quit
+ -r [rarun2]  specify rarun2 profile to load (same as -e dbg.profile=X)
+ -R [rr2rule] specify custom rarun2 directive
+ -s [addr]    initial seek
+ -S           start r2 in sandbox mode
+ -t           load rabin2 info in thread
+ -u           set bin.filter=false to get raw sym/sec/cls names
+ -v, -V       show radare2 version (-V show lib versions)
+ -w           open file in write mode
+ -x           open without exec-flag (asm.emu will not work), See io.exec
+ -X           same as -e bin.usextr=false (useful for dyldcache)
+ -z, -zz      do not load strings or load them even in raw
 ```
 
-### Частые варианты использования
+### Common usage patterns
 
-Открыть файл в режиме записи без анализа формата его заголовков.
+Open a file in write mode without parsing the file format headers.
 ```
 $ r2 -nw file
 ```
-Войти в оболочку r2, не открывая ни одного файла.
+Quickly get into an r2 shell without opening any file.
 ```
 $ r2 -
 ```
-Указать конкретный суббинарный файл в открываемом fatbin-файле:
+Specify which sub-binary you want to select when opening a fatbin file:
 ```
 $ r2 -a ppc -b 32 ls.fat
 ```
-Запустить сценарий перед переходом в основную командную строку:
+Run a script before showing interactive command-line prompt:
 ```
 $ r2 -i patch.r2 target.bin
 ```
-Выполнить команду и выйти, не входя в интерактивный режим:
+Execute a command and quit without entering the interactive mode:
 ```
 $ r2 -qc ij hi.bin > imports.json
 ```
-Установка значения переменной конфигурации:
+Set the configuration variable:
 ```
 $ r2 -e scr.color=0 blah.bin
 ```
-Отладить программу:
+Debug a program:
 ```
 $ r2 -d ls
 ```
-Использовать существующий файл проекта:
+Use an existing project file:
 ```
 $ r2 -p test
 ```

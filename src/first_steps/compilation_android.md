@@ -1,44 +1,45 @@
 ## Android
 
-Программа Radare2 также может быть кросс-компилирована для других архитектур и операционных систем, например в Android.
+Radare2 can be cross-compiled for other architectures/systems as well, like Android.
 
-### Необходимые инструменты
+### Prerequisites
 
-* Python 3,
-* Meson,
-* Ninja,
-* Git,
-* Android NDK.
+* Python 3
+* Meson
+* Ninja
+* Git
+* Android NDK
 
-### Последовательность шагов
+### Step-by-step
 
-#### Загрузка и распаковка Android NDK
+#### Download and extract the Android NDK
 
-Загрузите Android NDK с [официального сайта](https://developer.android.com/ndk) и распакуйте его где-нибудь у вас в системе, например в директории `/tmp/android-ndk`.
+Download the Android NDK from the [official site](https://developer.android.com/ndk) and extract it somewhere on your system (e.g. `/tmp/android-ndk`)
 
-#### Использование Make
+#### Make
 
-##### Указание месторасположение NDK
+##### Specify NDK base path
 
 ```
 $ echo NDK=/tmp/android-ndk  > ~/.r2androidrc
 ```
 
-##### Компилирование и создание архива tar.gz, загрузка в подключенное устройство android
+##### Compile + create tar.gz + push it to connected android device
 
 ```
 ./sys/android-build.sh arm64-static
 ```
 
-Можно собрать пакет для какой-либо другой архитектуры, изменив аргумент на
-`./sys/android-build.sh`. Запустить скрипт без аргументов, он покажет использованные значения.
+You can build for different architectures by changing the argument to
+`./sys/android-build.sh`. Run the script without any argument to see the
+accepted values.
 
-#### Использование Meson
+#### Meson
 
-##### Создание кросс-файл для мезона
+##### Create a cross-file for meson
 
-Meson-у нужен конфигурационный файл, описывающий среду кросс-компиляции, например, `meson-android.ini`.
-Его можно донастроить при необходимости. Следующий пример - хорошая отправная точка:
+Meson needs a configuration file that describes the cross compilation environment (e.g. `meson-android.ini`).
+You can adjust it as necessary, but something like the following should be a good starting point:
 ```
 [binaries]
 c       = '/tmp/android-ndk/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android28-clang'
@@ -60,31 +61,35 @@ cpu = 'aarch64'
 endian = 'little'
 ```
 
-##### Компилирование при помощи meson + ninja
+##### Compile with meson + ninja
 
-Настроить каталог сборки с meson-ом, как обычно:
+Now setup the build directory with meson as usual:
 ```
 $ CFLAGS="-static" LDFLAGS="-static" meson --default-library static --prefix=/tmp/android-dir -Dblob=true build --cross-file ./meson-android.ini
 ```
 
-Поясним значения всех перечисленных выше переменных:
-* `CFLAGS="-static"`, `LDFLAGS="-static"`, `--default-library static` обеспечивает
-   компилирование библиотек и запускаемых файлов в статическом режиме, теперь нет необходимости указывать значения переменных LD_* в вашей среде Android-а. Переменные указывают, где находятся подходящие библиотеки. В статическом режиме они не нужны. У двоичных (запускаемых) файлов есть все, что им нужно внутри.
-* `-Dblob=true` указывает meson-у компилировать только один единый запускаемый файл со всем требуемым кодом для всех программ `radare2`, `rabin2`, `rasm2`, и т.д. В результате для каждой программы будет создана символьная ссылка на этот единый файл. Это позволяет избежать создания множества больших статически скомпилированных двоичных файлов, а
-    просто создается один единый, включающий все функции. Мы получим наши `rabin2`,
-   `rasm2`, `rax2`, и др., но они будут только ссылками на `radare2`.
-* `--cross-file ./meson-android.ini` описывает процесс компилирования radare2 для ОС Android
+A bit of explanation about all the options:
+* `CFLAGS="-static"`, `LDFLAGS="-static"`, `--default-library static`: this
+  ensure that libraries and binaries are statically compiled, so you do not need
+  to properly set LD_* environment variables in your Android environment to make
+  it find the right libraries. Binaries have everything they need inside.
+* `-Dblob=true`: it tells meson to compile just one binary with all the needed
+  code for running `radare2`, `rabin2`, `rasm2`, etc. and creates symbolic links to
+  those names. This avoids creating many statically compiled large binaries and
+  just create one that provides all features. You will still have `rabin2`,
+  `rasm2`, `rax2`, etc. but they are just symlinks to `radare2`.
+* `--cross-file ./meson-android.ini`: it describes how to compile radare2 for Android
 
-Затем, надо скомпилировать проект, и установить его на устройство:
+Then compile and install the project:
 ```
 $ ninja -C build
 $ ninja -C build install
 ```
 
-##### Копирование файлов на свое устройство Android, запуск приложения
+##### Move files to your android device and enjoy
 
-Последний этап - копирование сгенерированных файлов в /tmp/android-dir на ваше Android-устройство, запуск на нем radare2:
-
+At this point you can copy the generated files in /tmp/android-dir to your Android device and running radare2 from it.
+For example:
 ```
 $ cd /tmp && tar -cvf radare2-android.tar.gz android-dir
 $ adb push radare2-android.tar.gz /data/local/tmp

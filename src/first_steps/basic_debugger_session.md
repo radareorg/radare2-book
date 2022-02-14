@@ -1,6 +1,6 @@
-# Основные команды отладчика
+# Basic Debugger Session
 
-Запуск радара в режиме отладки осуществляется при помощи флага `-d` в командной строке операционной системы. Обычно производится запуск новой программы, указывая ее имя и параметры, можно также и присоединиться к выполняющемуся процессу, указав его PID.
+To debug a program, start radare with the `-d` option. Note that you can attach to a running process by specifying its PID, or you can start a new program by specifying its name and parameters:
 
 ```
 $ pidof mc
@@ -11,60 +11,62 @@ $ r2 -a arm -b 16 -d gdb://192.168.1.43:9090
 ...
 ```
 
-Во втором случае отладчик создаст дочерний процесс и загрузит в него программу `ls` для отладки.
+In the second case, the debugger will fork and load the debugee `ls` program in memory.
 
-Программа остановится в момент загрузки `ld.so` динамическим компоновщиком. В этот момент точка входа еще не будет видна и разделяемые библиотеки тоже.
+It will pause its execution early in `ld.so` dynamic linker. As a result, you will not yet see the entrypoint or any shared libraries at this point.
 
-Переопределить такое функционирование можно, задав другой адрес для останова - адрес точки входа по ее имени. Делается это добавлением команды радара
-`e dbg.bep=entry` или `e dbg.bep=main` в ваш startup-сценарий, обычно он находится в файле `~/.config/radare2/radare2rc`.
+You can override this behavior by setting another name for an entry breakpoint. To do this, add a radare command
+`e dbg.bep=entry` or `e dbg.bep=main` to your startup script, usually it is `~/.config/radare2/radare2rc`.
 
-Другой способ - запустить продолжения исполнения до определенного адреса - команда `dcu`. Команда означает «отладку продолжать до тех пор, пока» (debug continue until) не будет достигнут адрес, где нужно остановить исполнение. Например:
+Another way to continue until a specific address is by using the `dcu` command. Which means: "debug continue until" taking the address of the place to stop at. For example:
 
 ```
 dcu main
 ```
 
-Имейте в виду, что определенные вредоносные или другие замороченные программы могут выполнять некоторый код до запуска `main()`, что не даст возможности контролировать вам исполнение этого кода. (Также и конструкторы программ и TLS-инициализации)
+Be warned that certain malware or other tricky programs can actually execute code before `main()` and thus you'll be unable to control them. (Like the program constructor or the tls initializers)
 
-Ниже приведен список наиболее распространенных команд, используемых с отладчиком:
+Below is a list of most common commands used with debugger:
 ```
-> d?            ; показать подсказку по командам отладчика
-> ds 3          ; сделать три шага (step)
-> db 0x8048920  ; установить точку останова (set breakpoint)
-> db -0x8048920 ; удаление точки останова
-> dc            ; продолжить исполнение процесса (continue)
-> dcs           ; продолжить исполнение до запуска системного вызова (continue until syscall)
-> dd            ; проводить манипуляции с файловыми дескрипторами
-> dm            ; показать карты процесса (show process maps)
-> dmp A S rwx   ; поменять ограничения для страницы по адресу A размером S
-> dr eax=33     ; присвоить значение регистру (set register value). eax = 33
+> d?            ; get help on debugger commands
+> ds 3          ; step 3 times
+> db 0x8048920  ; setup a breakpoint
+> db -0x8048920 ; remove a breakpoint
+> dc            ; continue process execution
+> dcs           ; continue until syscall
+> dd            ; manipulate file descriptors
+> dm            ; show process maps
+> dmp A S rwx   ; change permissions of page at A and size S
+> dr eax=33     ; set register value. eax = 33
 ```
 
-Есть еще один вариант отладки в радаре, который проще - использование визуального режима.
+There is another option for debugging in radare, which may be easier: using visual mode.
 
-При его использовании не нужно ни запоминать команды, ни держать в уме состояние программы.
+That way you will neither need to remember many commands nor to keep program state in your mind.
 
-Чтобы перейти в режим визуального отладчика, используйте `Vpp`:
+To enter visual debugger mode use `Vpp`:
 
 ```
 [0xb7f0c8c0]> Vpp
 ```
 
-Начальное вид экрана в визуальном режиме представляет собой шестнадцатеричный вид текущего счетчика отлаживаемой программы (например, EIP для архитектуры x86).
-Нажатие `p` переключает между разными представлениями в визуальном режиме.
-Можно нажимать `p` и `P` для смены режимов различных вариантов визуализации.
-Используйте F7 или `s`, чтобы войти внутрь функции и F8 или `S` для перешагивания через текущую инструкцию.
-Ключ `c` позволяет переключаться в режим курсора. В этом режиме можно выделять диапазоны байтов,
-например, чтобы потом перезаписать их nop-пами. Установка точки останова - клавиша `F2`.
+The initial view after entering visual mode is a hexdump view of the current target program counter (e.g., EIP for x86).
+Pressing `p` will allow you to cycle through the rest of visual mode views.
+You can press `p` and `P` to rotate through the most commonly used print modes.
+Use F7 or `s` to step into and F8 or `S` to step over current instruction.
+With the `c` key you can toggle the cursor mode to mark a byte range selection
+(for example, to later overwrite them with nop). You can set breakpoints with `F2` key.
 
-В визуальном режиме можно вводить обычные команды радара, добавляя к ним префикс `:`.
-Например, чтобы сбросить один блок содержимого памяти по адресу в регистре ESI:
+In visual mode you can enter regular radare commands by prepending them with `:`.
+For example, to dump a one block of memory contents at ESI:
 ```
-<Нажать ':'>
+<Press ':'>
 x @ esi
 ```
-Получение справки по визуальному режиму - клавиша `?`. Для прокрутки экрана справки используются стрелки. Если надо выйти из режима справки, используйте клавишу `q`.
+To get help on visual mode, press `?`. To scroll the help screen, use arrows. To
+exit the help view, press `q`.
 
-Часто используемая команда - `dr`, она используется для чтения или установки значений регистров общего назначения.
-Еще есть более компактное представления значения регистра - команда `dr=`.
-Можно манипулировать также аппаратными регистрами, расширенными регистрами, регистрами для чисел с плавающей запятой.
+A frequently used command is `dr`, which is used to read or write values of the target's general purpose registers.
+For a more compact register value representation you might use `dr=` command.
+You can also manipulate the hardware and the extended/floating point registers.
+

@@ -1,63 +1,68 @@
-## Загрузка radare2
+## Downloading radare2
 
-Исходный код программы radare2 находится в GitHub-репозитории: [https://github.com/radareorg/radare2](https://github.com/radareorg/radare2)
+You can get radare from the GitHub repository: [https://github.com/radareorg/radare2](https://github.com/radareorg/radare2)
 
 
-Бинарные пакеты доступны для операционных систем Ubuntu, Maemo, Gentoo, Windows, iPhone и др. Настоятельно рекомендуется именно загружать исходный код и самостоятельно компилировать его. Это дает лучшее понимание зависимостей, делает примеры более доступными и, конечно же, позволяет вам иметь у себя самую последнюю версию программы.
+Binary packages are available for a number of operating systems (Ubuntu, Maemo, Gentoo, Windows, iPhone, and so on). But you are highly encouraged to get the source and compile it yourself to better understand the dependencies, to make examples more accessible and, of course, to have the most recent version.
 
-Новый стабильный релиз обычно публикуется в Интернет каждый месяц.
-Основная ветка разработки часто более стабильна, чем «стабильные» релизы. Загрузка последней версии:
+A new stable release is typically published every month.
+
+The radare development repository is often more stable than the 'stable' releases. To obtain the latest version:
 ```
 $ git clone https://github.com/radareorg/radare2.git
 ```
-Загрузка, вероятно, займет некоторое время, поэтому сделайте перерыв на кофе и продолжайте читать эту книгу.
+This will probably take a while, so take a coffee break and continue reading this book.
 
-Можно обновить локальную копию репозитория, используя `git pull` в любой папке дерева кода radare2:
+To update your local copy of the repository, use `git pull` anywhere in the radare2 source code tree:
 ```
 $ git pull
 ```
-Если код вами был локально модифицирован, то эти правки можно отменить (потерять их!):
+If you have local modifications of the source, you can revert them (and lose them!) with:
 ```
 $ git reset --hard HEAD
 ```
-Или пришлите нам патч ваших исправлений:
+Or send us a patch:
 ```
 $ git diff > radare-foo.patch
 ```
-Наиболее удобным способом обновления и установки r2 в масштабах всей операционной системы является использование:
+The most common way to get r2 updated and installed system wide is by using:
 ```
 $ sys/install.sh
 ```
-### Сборка при помощи meson + ninja
+### Building with meson + ninja
 
-Существует также недоделанная настройка для Meson.
+There is also a work-in-progress support for Meson.
 
-Использование clang и ld.gold ускоряет сборку:
+Using clang and ld.gold makes the build faster:
 ```bash
 CC=clang LDFLAGS=-fuse-ld=gold meson . release --buildtype=release --prefix ~/.local/stow/radare2/release
 ninja -C release
 # ninja -C release install
 ```
 
-### Вспомогательные скрипты
+### Helper Scripts
 
-Ознакомьтесь со скриптами в `sys/`, они используются для автоматизации этапов сборки, связанных с синхронизацией, построением и установкой r2 и его привязок к различным системам программирования.  Наиболее важным из них является `sys/install.sh`. Он обновит, очистит, соберет и установит (symstall) r2 в операционную систему.
+Take a look at the scripts in `sys/`, they are used to automate stuff related to syncing, building and installing r2 and its bindings.
 
-Symstalling - это процесс установки всех программ, библиотек, документации и файлов данных с использованием символьных ссылок, вместо копирования файлов. 
-По умолчанию он будет установлен в `/usr/local`, но можно указать другой префикс, используя аргумент `--prefix`.
-Разработчикам так бывает очень удобно поскольку позволяет просто запускать 'make' и тестировать результаты изменения без необходимости запускать 'make install'.
+The most important one is `sys/install.sh`. It will pull, clean, build and symstall r2 system wide.
 
-### Очистка директория сборки
+Symstalling is the process of installing all the programs, libraries, documentation and data files using symlinks instead of copying the files.
 
-Очистка дерева исходного кода позволяет избегать проблем связывания со старыми файлами объектов, необновления объектов после изменения ABI.
+By default it will be installed in `/usr/local`, but you can specify a different prefix using the argument `--prefix`.
 
-Следующие команды обновляют локальный клон git:
+This is useful for developers, because it permits them to just run 'make' and try changes without having to run make install again.
+
+### Cleaning Up
+
+Cleaning up the source tree is important to avoid problems like linking to old objects files or not updating objects after an ABI change.
+
+The following commands may help you to get your git clone up to date:
 ```
 $ git clean -xdf
 $ git reset --hard origin/master
 $ git pull
 ```
-Удаление предыдущих установок из системы выполняется следующими командами:
+If you want to remove previous installations from your system, you must run the following commands:
 ```
 $ ./configure --prefix=/usr/local
 $ make purge
