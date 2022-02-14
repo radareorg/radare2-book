@@ -13,7 +13,7 @@
    * [Формат команды](first_steps/command_format.md)
    * [Выражения](first_steps/expressions.md)
    * [Основные команды отладчика](first_steps/basic_debugger_session.md)
-   * [Разработка radare2](first_steps/contributing.md)
+   * [Улучшение книги radare2](first_steps/contributing.md)
 * [Конфигурация](configuration/intro.md)
    * [Цвета](configuration/colors.md)
    * [Переменные конфигурации](configuration/evars.md)
