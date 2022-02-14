@@ -1,7 +1,7 @@
 # Содержание
 
 * [Введение](README.md)
-   * [История](first_steps/history.md)
+   * [История проекта](first_steps/history.md)
    * [Пакет программ radare2](first_steps/overview.md)
    * [Загрузка radare2](first_steps/getting_radare.md)
    * [Компиляция и переносимость](first_steps/compilation_portability.md)
