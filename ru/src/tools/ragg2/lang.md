@@ -1,0 +1,286 @@
+# Syntax of the language
+
+The code of r\_egg is compiled as in a flow. It is a one-pass compiler;
+
+this means that you have to define the proper stackframe size at the
+
+beginning of the function, and you have to define the functions in
+
+order to avoid getting compilation errors.
+
+The compiler generates assembly code for x86-{32,64} and arm. But it aims
+
+to support more platforms. This code is the compiled with r\_asm and
+
+injected into a tiny binary with r\_bin.
+
+You may like to use r\_egg to create standalone binaries, position-
+
+independent raw eggs to be injected on running processes or to patch
+
+on-disk binaries.
+
+The generated code is not yet optimized, but it's safe to be executed
+
+at any place in the code.
+
+## Preprocessor
+
+### Aliases
+
+Sometimes you just need to replace at compile time a single entity on
+
+multiple places. Aliases are translated into 'equ' statements in assembly
+
+language. This is just an assembler-level keyword redefinition.
+
+` AF_INET@alias(2);`
+
+` printf@alias(0x8053940);`
+
+### Includes
+
+Use `cat(1)` or the preprocessor to concatenate multiple files to be compiled.
+
+` INCDIR@alias("/usr/include/ragg2");`
+
+` sys-osx.r@include(INCDIR);`
+
+
+
+### Hashbang
+
+eggs can use a hashbang to make them executable.
+
+ `$ head -n1 hello.r`
+
+` #!/usr/bin/ragg2 -X`
+
+` $ ./hello.r`
+
+` Hello World!`
+
+### Main
+
+The execution of the code is done as in a flow. The first function to be
+
+defined will be the first one to be executed. If you want to run main\(\)
+
+just do like this:
+
+` #!/usr/bin/ragg2 -X`
+
+` main();`
+
+` ...`
+
+` main@global(128,64) {`
+
+` ...`
+
+
+
+
+### Function definition
+
+You may like to split up your code into several code blocks. Those blocks
+
+are bound to a label followed by root brackets '{ ... }'
+
+### Function signatures
+
+`name@type(stackframesize,staticframesize) { body }`
+
+`name` : name of the function to define
+
+`type` : see function types below
+
+`stackframesize` : get space from stack to store local variables
+
+`staticframesize` : get space from stack to store static variables \(strings\)
+
+`body` : code of the function
+
+
+### Function types
+
+ `alias`   Used to create aliases
+
+ `data` ; the body of the block is defined in .data
+
+ `inline` ; the function body is inlined when called
+
+ `global` ; make the symbol global
+
+ `fastcall` ; function that is called using the fast calling convention
+
+ `syscall`  ; define syscall calling convention signature
+
+### Syscalls
+
+r\_egg offers a syntax sugar for defining syscalls. The syntax is like this:
+
+` exit@syscall(1);`
+
+` @syscall() {`
+
+`` : mov eax, `.arg```
+
+` : int 0x80`
+
+` }`
+
+` main@global() {`
+
+` exit (0);`
+
+` }`
+
+### Libraries
+
+At the moment there is no support for linking r\_egg programs to system
+
+libraries. but if you inject the code into a program \(disk/memory\) you
+
+can define the address of each function using the @alias syntax.
+
+
+
+### Core library
+
+There's a work-in-progress libc-like library written completely in r\_egg
+
+### Variables
+
+`.arg`
+
+`.arg0`
+
+`.arg1`
+
+`.arg2`
+
+`.var0`
+
+`.var2`
+
+`.fix`
+
+`.ret ; eax for x86, r0 for arm`
+
+`.bp`
+
+`.pc`
+
+`.sp`
+
+__Attention:__ All the numbers after `.var` and `.arg` mean the offset with the
+
+top of stack, not variable symbols.
+
+### Arrays
+
+Supported as raw pointers. TODO: enhance this feature
+
+### Tracing
+
+Sometimes r\_egg programs will break or just not work as expected. Use the
+
+'trace' architecture to get a arch-backend call trace:
+
+` $ ragg2 -a trace -s yourprogram.r`
+
+### Pointers
+
+TODO: Theorically '\*' is used to get contents of a memory pointer.
+
+### Virtual registers
+
+TODO: a0, a1, a2, a3, sp, fp, bp, pc
+
+### Math operations
+
+Ragg2 supports local variables assignment by math operating, including
+
+the following operators:
+
+`+` `-` `*` `/` `&` `|` `^`
+
+### Return values
+
+The return value is stored in the a0 register, this register is set when
+
+calling a function or when typing a variable name without assignment.
+
+```
+$ cat test.r
+add@global(4) {
+	.var0 = .arg0 + .arg1;
+	.var0;
+}
+
+main@global() {
+	add (3,4);
+}
+
+$ ragg2 -F -o test test.r
+$ ./test
+$ echo $?
+7
+```
+
+### Traps
+
+Each architecture have a different instruction to break the execution of
+
+the program. REgg language captures calls to 'break\(\)' to run the emit\_trap
+
+callback of the selected arch. The
+
+
+` break()`; --&gt; compiles into 'int3' on x86
+
+` break;` --&gt; compiles into 'int3' on x86
+
+
+### Inline assembly
+
+Lines prefixed with ':' char are just inlined in the output assembly.
+
+` : jmp 0x8048400`
+
+` : .byte 33,44`
+
+### Labels
+
+You can define labels using the `:` keyword like this:
+
+` :label_name:`
+
+` /* loop forever */`
+
+` goto(label_name`\)
+
+### Control flow
+
+` goto (addr)` -- branch execution
+
+` while (cond)`
+
+` if (cond)`
+
+` if (cond) { body } else { body }`
+
+` break ()` -- executes a trap instruction
+
+### Comments
+
+Supported syntax for comments are:
+
+` /* multiline comment */'`
+
+` // single line comment`
+
+` # single line comment`
+
+
