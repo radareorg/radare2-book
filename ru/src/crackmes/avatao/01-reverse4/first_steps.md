@@ -1,8 +1,7 @@
 .first_steps
 ------------
 
-OK, enough of praising r2, lets start reversing this stuff. First, you have to
-know your enemy:
+Хорошо, хватит хвалить r2, давайте начнем взламывать (ревер-инжениринг) программы. Во-первых, вы должны знать своего врага:
 
 ```
 [0x00 avatao]$ rabin2 -I reverse4
@@ -30,12 +29,9 @@ rpath    NONE
 binsz    8620
 ```
 
-> ***r2 tip:*** rabin2 is one of the handy tools that comes with radare2. It can
-> be used to extract information (imports, symbols, libraries, etc.) about
-> binary executables. As always, check the help (rabin2 -h)!
+> ***Совет от r2:*** rabin2 — это удобный инструмент, поставляемый вместе с radare2. Он используется для извлечения информации (импорты, символы, библиотеки и т. д.) из бинарных исполняемых файлов. Как всегда, пользуйтесь справкой (rabin2 -h)!
 
-So, its a dynamically linked, stripped, 64bit Linux executable - nothing fancy
-here. Let's try to run it:
+Итак, имеем динамически связанный, 64-битный исполняемый файл Linux с вырезанной информацией о символах (stripped) - ничего особенного. Попробуем запустить его:
 
 ```
 [0x00 avatao]$ ./reverse4
@@ -48,24 +44,18 @@ Wrong!
 Size of data: 1
 ```
 
-OK, so it reads a number as a size from the standard input first, than reads
-further, probably "size" bytes/characters, processes this input, and outputs
-either "Wrong!", nothing or something else, presumably our flag. But do not
-waste any more time monkeyfuzzing the executable, let's fire up r2, because in
-asm we trust!
+Хорошо, программа сначала считывает число в качестве размера со стандартного ввода, затем читает далее, вероятно, "размер" байтов/символов, обрабатывает этот ввод и выводит либо "Неправильно!", либо ничего, либо еще что-то, предположительно наш флаг. Не стоит тратить больше времени на дебильный подбор данных для ввода исполняемого файла, запустим r2, потому что in asm we trust!
 
 ```
 [0x00 avatao]$ r2 -A reverse4
  -- Heisenbug: A bug that disappears or alters its behavior when one attempts to probe or isolate it.
+(-- Heisenbug - ошибка, которая исчезает или меняет свое поведение при попытке исследовать или изолировать ее (синдром телемастера).)
 [0x00400720]>
 ```
 
-> ***r2 tip:*** The -A switch runs *aaa* command at start to analyze all
-> referenced code, so we will have functions, strings, XREFS, etc. right at the
-> beginning. As usual, you can get help with *?*.
+> ***Совет от r2:*** Флаг командной строки -A запускает команду *ааа* при запуске r2, он анализирует весь код на наличие перекресных ссылок. Вследствие этого мы получим имена функций, строк, информацию о перекрестных сслках (XREFS) и т.д. уже при первом входе в командную строку r2. Как всегда, нужна помощь - используйте *?*.
 
-It is a good practice to create a project, so we can save our progress, and we
-can come back at a later time:
+Хорошей практикой является создание проекта для сохранения и восстановления состояния при повтрном входе в r2:
 
 ```
 [0x00400720]> Ps avatao_reverse4
@@ -73,10 +63,10 @@ avatao_reverse4
 [0x00400720]>
 ```
 
-> ***r2 tip:*** You can save a project using Ps [file], and load one using Po [file].
-> With the -p option, you can load a project when starting r2.
+> ***Совет от r2:*** Сохранение проекта - команда Ps [файл] файл, загрузка - Po [файл].
+> При помощи флага -p можно загрузить проект при запуске r2.
 
-We can list all the strings r2 found:
+Посмотрим все найденные строки r2:
 
 ```
 [0x00400720]> fs strings
@@ -92,21 +82,11 @@ We can list all the strings r2 found:
 [0x00400720]>
 ```
 
-> ***r2 tip***: r2 puts so called flags on important/interesting offsets, and
-> organizes these flags into flagspaces (strings, functions, symbols, etc.) You
-> can list all flagspaces using *fs*, and switch the current one using
-> *fs [flagspace]* (the default is \*, which means all the flagspaces). The
-> command *f* prints all flags from the currently selected flagspace(s).
+> ***Совет от r2:*** r2 ставит флаги на важные/интересные адреса смещений, и организует их в пространства флагов (строки, функции, символы и т.д.). Можно посмотреть список всех пространств, используя *fs*, подключиться - *fs [пространство]* (по умолчанию - \*, что означает все пространства флагов). Команда *f* покажет все флаги из выбранного пространства.
 
-OK, the strings looks interesting, especially the one at 0x00400f92. It seems to
-hint that this crackme is based on a virtual machine. Keep that in mind!
+Итак, строки выглядят интересно, особенно 0x00400f92. Намекает, что этот crackme основан на виртуальной машине. Будем иметь ввиду!
 
-These strings could be a good starting point if we were talking about a
-real-life application with many-many features. But we are talking about a
-crackme, and they tend to be small and simple, and focused around the problem to
-be solved. So I usually just take a look at the entry point(s) and see if I can
-figure out something from there. Nevertheless, I'll show you how to find where
-these strings are used:
+Строки служат хорошей отправной точкой, если иметь дело с реальным приложением со множеством разных функций. Но у нас crackme, они обычно маленькие и простые, сосредоточены на решении простых задач. Поэтому просто смотрим на точку или точки входа, можно ли понять что-то оттуда. Сайчас все-таки посмотрим, где эти строки используются:
 
 ```
 [0x00400720]> axt @@=`f~[0]`
@@ -118,11 +98,7 @@ d 0x400db4 mov edi, str.You_won__The_flag_is:__s_n
 d 0x400dd2 mov edi, str.Your_getting_closer_
 ```
 
-> ***r2 tip***: We can list crossreferences to addresses using the *axt [addr]*
-> command (similarly, we can use *axf* to list references from the address).
-> The *@@* is an iterator, it just runs the command once for every arguments
-> listed.
+> ***Совет от r2:*** можно посмотреть список перекрестных ссылок на адреса, используя команду *axt [адрес]*. Также можно использовать *axf* перечислить ссылки с заданного адреса).
+> Последовательность символов *@@* задает итератор, он запускает команду, подставляя в качестве параметра каждый элемент списка.
 >
-> The argument list in this case comes from the command *f~[0]*. It lists the
-> strings from the executable with *f*, and uses the internal grep command *~*
-> to select only the first column (*[0]*) that contains the strings' addresses.
+> Список аргументов в данном примере берется из команды *f~[0]* . Она порождает список строк из исполняемого файла *f*, при этом фильтрует встроенным grep-ом *~* только первые столбцы (*[0]*), содержащие адреса строк.

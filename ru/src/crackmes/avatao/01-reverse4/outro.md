@@ -1,10 +1,6 @@
 .outro
 ------
 
-Well, what can I say? Such VM, much reverse! :)
+Итак, что можно здесь сказать? Сложная ВМ, много пришлось ломать! :)
 
-What started out as a simple writeup for a simple crackme, became a rather
-lengthy writeup/r2 tutorial, so kudos if you've read through it. I hope you
-enjoyed it (I know I did), and maybe even learnt something from it. I've surely
-learnt a lot about r2 during the process, and I've even contributed some small
-patches, and got a few ideas of more possible improvements.
+То, что начиналось как обзор простого crackme, превратилось в довольно детальное руководство по r2, так что спасибо, если вы его до самого конца прочли. Надеюсь вы остались довольны результатом (я знаю, что это так) и даже чему-то научились. Я также многое узнал о r2 в процессе обзора, и даже сделал несколько патчей, у меня появилось несколько идей о возможных улучшениях.

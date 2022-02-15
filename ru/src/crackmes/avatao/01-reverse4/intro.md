@@ -1,11 +1,6 @@
 Avatao R3v3rs3 4
 ------
 
-After a few years of missing out on wargames at
-[Hacktivity](https://hacktivity.com), this year I've finally found the time to
-begin, and almost finish (yeah, I'm quite embarrassed about that unfinished
-webhack :) ) one of them. There were 3 different games at the conf, and I've
-chosen the one that was provided by [avatao](https://avatao.com). It consisted
-of 8 challenges, most of them being basic web hacking stuff, one sandbox escape,
-one simple buffer overflow exploitation, and there were two reverse engineering
-exercises too. You can find these challenges on https://platform.avatao.com.
+После нескольких лет отсутствия варгеймов (wargames) в [Hacktivity](https://hacktivity.com), в этом году наконец нашлось время
+ начать и почти закончить (да, я очень смущен этим незаконченным
+ webhack-ом :) ) один из них. В конференции было три разные игры, выбрал предоставленый [avatao](https://avatao.com). Было восемь испытаний, большинство из которых представляют собой базовые элементы веб-хакерства, один - получение привелегированных прав и бегство из песочницы, одно переполнение буфера с последующим его использованием по назначению, также было два упражнения по реверс-инжинирингу. Задачи находятся по адресу https://platform.avatao.com.

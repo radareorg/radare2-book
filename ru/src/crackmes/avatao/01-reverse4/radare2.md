@@ -1,36 +1,18 @@
 .radare2
 --------
 
-I've decided to solve the reversing challenges using
-[radare2](http://www.radare.org/r/), a free and open source reverse engineering
-framework. I have first learned about r2 back in 2011. during a huge project,
-where I had to reverse a massive, 11MB statically linked ELF. I simply needed
-something that I could easily patch Linux ELFs with. Granted, back then I've
-used r2 alongside IDA, and only for smaller tasks, but I loved the whole concept
-at first sight. Since then, radare2 evolved a lot, and I was planning for some
-time now to solve some crackmes with the framework, and write writeups about
-them. Well, this CTF gave me the perfect opportunity :)
+Решим задачу обратной инженерии, используя [radar2](http://www.radare.org/r/), свободный инструмет реверс-инжиниринга с открытым исходным кодом. Я впервые узнал о r2 еще в 2011 году,  когда участвовал в большом проекте, где пришлось взламывать огромный статический ELF размером 11 МБ. Нужен был инструмент, позволяющий легко вносить исправления в Linux ELF. Тогда я использовал r2 вместе с IDA и то только для небольших задач,  мне с первого взгляда понравилась вся концепция. С тех пор radare2 сильно развился, и я решил уделять немного времени  решению задач crackme при помощи этого инструмента, также писать по результатам статьи. Что ж, этот CTF дал мне прекрасную возможность :)
 
-Because this writeup aims to show some of r2's features besides how the crackmes
-can be solved, I will explain every r2 command I use in blockquote paragraphs
-like this one:
+Статья нацелена на то, чтобы показать некоторые особенности r2 в процессе решения задачи crackme. Я объясню каждую использованную команду r2 в виде цитат, подобных этой:
 
-> ***r2 tip:*** Always use ? or -h to get more information!
+> ***Совет от r2:*** Всегда используй ? или флаг -h - больше информации!
 
-If you know r2, and just interested in the crackme, feel free to skip those
-parts! Also keep in mind please, that because of this tutorial style I'm going
-to do a lot of stuff that you just don't do during a CTF, because there is no
-time for proper bookkeeping (e.g. flag every memory area according to its
-purpose), and with such small executables you can succeed without doing these
-stuff.
+Если владеете r2 и просто интересуетесь задачками на взлом, пропустите эти разделы! Обращаю внимание, что из-за стиля дальнейшего изложения я собираюсь детально разбирать приемы, которые обычно не делаются во время CTF, так как нет на это достаточно времени (например, пометить **каждую** область памяти в соответствии с ее предназначением). С небольшими исполняемыми файлами crackme можно получить результат, не вдаваясь в детали.
 
-A few advice if you are interested in learning radare2 (and frankly, if you are
-into RE, you should be interested in learning r2 :) ):
+Дам несколько советов в изучении radare2, и, раз вы интересуетесь реверс-инженирингом, вас как мимнимум должен заинтересовать r2 :):
 
-The framework has a lot of supplementary executables and a vast amount of
-functionality - and they are very well documented. I encourage you to read the
-available docs, and use the built-in help (by appending a ? to any command)
-extensively! E.g.:
+Пакет включает множество дополнительных инструментов и огромное количество функций. Все они очень хорошо документированы. Призываю вас ознакомиться с руководством и использовать встроенную систему справки, добляя в конец команды ? to any command)
+extensively! Пример:
 
 ```
 [0x00000000]> ?
@@ -65,13 +47,11 @@ Prefix with number to repeat command N times (f.ex: 3x)
 ...
 ```
 
-Also, the project is under heavy development, there is no day
-without commits to the GitHub repo. So, as the readme says, you should always
-use the git version!
+Проект находится в стадии активной разработки - нет дня без фиксации в репозитории GitHub. Как говорит файле readme, всегда нужно использовать версию git!
 
-Some highly recommended reading materials:
+Некоторые рекомендуемые материалы для чтения:
 
-- [Cheatsheet by pwntester](https://github.com/pwntester/cheatsheets/blob/master/radare2.md)
-- [Radare2 Book](https://www.gitbook.com/book/radareorg/radare2-book/details)
-- [Radare2 Blog](http://radare.today)
+- [Шпаргалка от pwntester-а](https://github.com/pwntester/cheatsheets/blob/master/radare2.md)
+- [Книга Radare2](https://www.gitbook.com/book/radareorg/radare2-book/details)
+- [Блог Radare2](http://radare.today)
 - [Radare2 Wiki](https://github.com/radareorg/radare2/wiki)

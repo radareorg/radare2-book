@@ -7,70 +7,51 @@
 
 ![vmloop bb-0a45](img/vmloop/bb-0a45.png)
 
-Well, that seems disappointingly short, but no worries, we have plenty to
-reverse yet. The thing is that this function uses a jump table at 0x00400a74,
+Кажется наша публикация разочаровывающе коротка, но не беспокойтесь, у нас есть много чего можно взломать. Все дело в том, что эта функция использует таблицу переходов по адресу 0x00400a74,
 
 ![vmloop bb-0a74](img/vmloop/bb-0a74.png)
 
-and r2 can't yet recognize jump tables
-([Issue 3201](https://github.com/radareorg/radare2/issues/3201)), so the analysis of
-this function is a bit incomplete. This means that we can't really use the graph
-view now, so either we just use visual mode, or fix those basic blocks. The
-entire function is just 542 bytes long, so we certainly could reverse it without
-the aid of the graph mode, but since this writeup aims to include as much r2
-wisdom as possible, I'm going to show you how to define basic blocks.
+и r2 пока не может распознать таблицы переходов
+([Выпуск 3201](https://github.com/radareorg/radare2/issues/3201)), так что анализ
+этой функции неполон. Использование графа управления не дает полной информации, поэтому надо либо использовать визуальный режим, либо вносить исправления в блоки. Двоичный код функция всего 542 байта, можно ее взломать и без
+использования графа.  Наша цель - использовать как можно больше возможностей r2, и имеет сысл показать, как определять блоки.
 
-First, lets analyze what we already have! First, *rdi* is put into local_3.
-Since the application is a 64bit Linux executable, we know that *rdi* is the
-first function argument (as you may have recognized, the automatic analysis of
-arguments and local variables was not entirely correct), and we also know that
-*vmloop*'s first argument is the bytecode. So lets rename local_3:
+Давайте проанализируем то, что у нас уже есть! Во-первых, *rdi* помещается в local_3.
+Поскольку приложение является 64-битным исполняемым файлом Linux, известно, что *rdi* - это первый аргумент функции (как вы, возможно, поняли, автоматический анализ аргументов и локальных переменных не был полностью корректным и полным). Также известно, что
+первым аргументом *vmloop* является байт-код. Переименуем local_3:
 
 ```
 :> afvn local_3 bytecode
 ```
 
-Next, *sym.memory* is put into another local variable at *rbp-8* that r2 did not
-recognize. So let's define it!
+Затем *sym.memory* помещается в другую локальную переменную по адресу *rbp-8* , нераспознанные r2. Давайте определим ее!
 
 ```
 :> afv 8 memory qword
 ```
 
-> ***r2 tip***: The *afv [idx] [name] [type]* command is used to define local
-> variable at [frame pointer - idx] with the name [name] and type [type]. You
-> can also remove local variables using the *afv- [idx]* command.
+> ***Совет от r2:*** Команда *afv [idx] [name] [type]</g3 используется для определения локальной
+> переменной с [указателем фрейма - idx], именем [name] и типом [type]. Можно также удалять локальные переменные с помощью команды *afv- [idx]*.
 
-In the next block, the program checks one byte of bytecode, and if it is 0, the
-function returns with 1.
+В следующем блоке программа проверяет один байт байт-кода, и если он равен 0, функция возвращает 1.
 
 ![vmloop bb-0c4d](img/vmloop/bb-0c4d.png)
 
-If that byte is not zero, the program subtracts 0x41 from it, and compares the
-result to 0x17. If it is above 0x17, we get the dreaded "Wrong!" message, and
-the function returns with 0. This basically means that valid bytecodes are ASCII
-characters in the range of "A" (0x41) through "X" (0x41 + 0x17). If the bytecode
-is valid, we arrive at the code piece that uses the jump table:
+Если этот байт не равен нулю, программа вычитает из него 0x41 и сравнивает результат с 0x17. Если результат больше 0x17, получаем страшное сообщение "Wrong!", и функция возвращает значение 0. Это означает, что допустимые байт-коды - это ASCII-символы в диапазоне от "A" (0x41) до "X" (0x41 + 0x17). Если байт-код действителен, приходим к фрагменту кода, реализующему таблицу переходов:
 
 ![vmloop bb-0a74](img/vmloop/bb-0a74.png)
 
-The jump table's base is at 0x400ec0, so lets define that memory area as a
-series of qwords:
+Адрес первой ячейки таблицы переходов - 0x400ec0, определим эту область памяти как набор qword-ов:
 
 ```
 [0x00400a74]> s 0x00400ec0
 [0x00400ec0]> Cd 8 @@=`?s $$ $$+8*0x17 8`
 ```
 
-> ***r2 tip***: Except for the *?s*, all parts of this command should be
-> familiar now, but lets recap it! *Cd* defines a memory area as data, and 8 is
-> the size of that memory area. *@@* is an iterator that make the preceding
-> command run for every element that *@@* holds. In this example it holds a
-> series generated using the *?s* command. *?s* simply generates a series from
-> the current seek (*$$*) to current seek + 8*0x17 (*$$+8*0x17*) with a step
-> of 8.
+> ***Совет от r2:*** Кроме *?s* все части этой команды знакома, давайте подведем итоги! *Cd* определяет область памяти как данные, а 8
+> размер этой области памяти. *@@* — это итератор, выполяющий команду слева для каждого элемента, для которого условие *@@* истинно. В этом примере он содержит список, сгенерированный с помощью команды *?s*. *?s* генерирует список адресов, начиная с текущего смещения (seek) *$$* до seek + 8*0x17 (*$$+8*0x17*) с шагом 8.
 
-This is how the disassembly looks like after we add this metadata:
+Вот как выглядит дизассемблирование после добавления метаданных:
 
 ```
 [0x00400ec0]> pd 0x18
@@ -101,22 +82,17 @@ This is how the disassembly looks like after we add this metadata:
             0x00400f78 .qword 0x0000000000400b99
 ```
 
-As we can see, the address 0x400c04 is used a lot, and besides that there are 9
-different addresses. Lets see that 0x400c04 first!
+Теперь видно, что адрес 0x400c04 в таблице активно используется, есть также девять других адресов. Посмотрим сначала 0x400c04!
 
 ![vmloop bb-0c04](img/vmloop/bb-0c04.png)
 
-We get the message "Wrong!", and the function just returns 0. This means that
-those are not valid instructions (they are valid bytecode though, they can be
-e.g. parameters!) We should flag 0x400c04 accordingly:
+Выводится сообщение "Wrong!", и функция просто возвращает 0. Это недопустимые инструкции (они являются допустимым байт-кодамм, могут быть, например, параметрами!). Отметим 0x400c04 соответствующим образом:
 
 ```
 [0x00400ec0]> f not_instr @ 0x0000000000400c04
 ```
 
-As for the other offsets, they all seem to be doing something meaningful, so we
-can assume they belong to valid instructions. I'm going to flag them using the
-instructions' ASCII values:
+Что касается других адресов, они, кажется, делают что-то существенное, предположим, что адреса соответствуют действительным инструкциям. Пометим их с помощью ASCII-символов:
 
 ```
 [0x00400ec0]> f instr_A @ 0x0000000000400a80
@@ -130,23 +106,15 @@ instructions' ASCII values:
 [0x00400ec0]> f instr_X @ 0x0000000000400b99
 ```
 
-Ok, so these offsets were not on the graph, so it is time to define basic blocks
-for them!
+Перечисленных адресов нет на графе, определим блоки для них!
 
-> ***r2 tip***: You can define basic blocks using the *afb+* command. You have
-> to supply what function the block belongs to, where does it start, and what is
-> its size. If the block ends in a jump, you have to specify where does it jump
-> too. If the jump is a conditional jump, the false branch's destination address
-> should be specified too.
+> ***Совет от r2:*** Блоки графа управления задаются с помощью команды *afb+*. Надо указать функцию, соответствующую конкретному блоку, адрес первого байта кода и его размер. Если блок заканчивается переходом (jmp), надо указать куда осуществляется переход. Если переход является условным, целевой адрес false-ветви также следует указать.
 
-We can get the start and end addresses of these basic blocks from the full disasm
-of *vmloop*.
+Получить начальный и конечный адрес каждого блока получается в результате анализа дизассемблированного кода функции *vmloop*.
 
-![vmloop full](img/vmloop/vmloop-full.png)
+![все о vmloop](img/vmloop/vmloop-full.png)
 
-As I've mentioned previously, the function itself is pretty short, and easy to
-read, especially with our annotations. But a promise is a promise, so here is
-how we can create the missing bacic blocks for the instructions:
+Ранее мы видели, что сама функция простая, а ее код короткий, простой в изучении особенно с нашими аннотациями. Как обещано, создам недостающие блоки для всех инструкций:
 
 ```
 [0x00400ec0]> afb+ 0x00400a45 0x00400a80 0x00400ab6-0x00400a80 0x400c15
@@ -160,8 +128,7 @@ how we can create the missing bacic blocks for the instructions:
 [0x00400ec0]> afb+ 0x00400a45 0x00400be5 0x00400c04-0x00400be5 0x400c15
 ```
 
-It is also apparent from the disassembly that besides the instructions there
-are three more basic blocks. Lets create them too!
+Из дизассемблированного кода также видно, что кроме блоков инструкций есть еще три блока. Создадим их тоже!
 
 ```
 [0x00400ec0]> afb+ 0x00400a45 0x00400c15 0x00400c2d-0x00400c15 0x400c3c 0x00400c2d
@@ -169,93 +136,70 @@ are three more basic blocks. Lets create them too!
 [0x00400ec0]> afb+ 0x00400a45 0x00400c3c 0x00400c4d-0x00400c3c 0x400c61
 ```
 
-Note that the basic blocks starting at 0x00400c15 and 0x00400c2d ending in a
-conditional jump, so we had to set the false branch's destination too!
+Эти блоки начинаются с адресов 0x00400c15 и 0x00400c2d и заканчиваются условными переходами, надо задать также адрес назначения для false-ветви!
 
-And here is the graph in its full glory after a bit of manual restructuring:
+И вот граф управления во всей его красе после ручной реструктуризации:
 
-![vmloop graph](img/vmloop/vmloop-graph-reconstructed_full.png)
+![граф управления vmloop](img/vmloop/vmloop-graph-reconstructed_full.png)
 
-I think it worth it, don't you? :) (Well, the restructuring did not really worth
-it, because it is apparently not stored when you save the project.)
+Я думаю, это того стоило? :) На самом деле на реструктуризацию не стоило тратить время, так как он не сохраняется при сохранении проекта.
 
-> ***r2 tip***: You can move the selected node around in graph view using the
-> HJKL keys.
+> ***Совет от r2:*** Можно перемещать выбранный узел в представлении графика с помощью клавиш HJKL.
 
-By the way, here is how IDA's graph of this same function looks like for comparison:
+Кстати, вот как выглядит граф этой же функции в IDA:
 
-![IDA graph](img/vmloop_ida.png)
+![Граф управления в IDA](img/vmloop_ida.png)
 
-As we browse through the disassembly of the *instr_LETTER* basic blocks, we
-should realize a few things. The first: all of the instructions starts with a
-sequence like these:
+Просматривая дизассемблированный код *instr_LETTER* в виде блоков графа, распознаются несколько сущностей. Первое: все инструкции начинаются с последовательности вида
 
 ![vmloop bb-0a80](img/vmloop/bb-0a80.png)
 
 ![vmloop bb-0ab6](img/vmloop/bb-0ab6.png)
 
-It became clear now that the 9 dwords at *sym.instr_dirty* are not simply
-indicators that an instruction got executed, but they are used to count how many
-times an instruction got called. Also I should have realized earlier that
-*sym.good_if_le_9* (0x6020f0) is part of this 9 dword array, but yeah, well, I
-didn't, I have to live with it... Anyways, what the condition
-"*sym.good_if_le_9* have to be lesser or equal 9" really means is that *instr_P*
-can not be executed more than 9 times:
+Теперь ясно, что девять dword-ов в *sym.instr_dirty* - это не просто индикаторы того, что инструкция была выполнена, они также используются для подсчета количества вызовов инструкций. Также я должен был понять раньше, что *sym.good_if_le_9* (0x6020f0) является частью этого массива из девяти dword-ов ... ну да... Теперь как-то надо жить с этим... Какой смысл условия "*sym.good_if_le_9* должно быть меньше или равно 9" на самом деле? - *instr_P* не может быть выполнен более девяти раз:
 
 ![vmloop bb-0b42](img/vmloop/bb-0b42.png)
 
-Another similarity of the instructions is that 7 of them calls a function with
-either one or two parameters, where the parameters are the next, or the next two
-bytecodes. One parameter example:
+Еще одно некоторое сходство между инструкциями заключается в том, что семь из них вызывает функцию с либо с одним, либо с двумя параметрами, причем параметры - это байт-коды, следующий или два следующих. Пример с одним параметром:
 
 ![vmloop bb-0aec](img/vmloop/bb-0aec.png)
 
-And a two parameters example:
+И пример с двумя параметрами:
 
 ![vmloop bb-0a80_full](img/vmloop/bb-0a80_full.png)
 
-We should also realize that these blocks put the number of bytes they eat up of
-the bytecode (1 byte instruction + 1 or 2 bytes arguments = 2 or 3) into a local
-variable at 0xc. r2 did not recognize this local var, so lets do it manually!
+Известно также, что эти блоки помещают в локальную переменную по адресу 0xc количество байтов, которые они "отъедают" от байт-кода (1 байт инструкции + 1 или 2 байта аргументов = 2 или 3). r2 не распознал эту переменную, давайте обозначим ее вручную!
 
 ```
 :> afv 0xc instr_ptr_step dword
 ```
 
-If we look at *instr_J* we can see that this is an exception to the above rule,
-since it puts the return value of the called function into *instr_ptr_step*
-instead of a constant 2 or 3:
+Посмотрим на *instr_J* и увидим, что это исключение из приведенного выше правила, так как она помещает возвращаемое значение вызываемой функции в *instr_ptr_step* вместо константы 2 или 3:
 
 ![vmloop bb-0bc1](img/vmloop/bb-0bc1.png)
 
-And speaking of exceptions, here are the two instructions that do not call functions:
+И, продолжая изучать исключения, вот две инструкции, которые не вызывают функции:
 
 ![vmloop bb-0be5](img/vmloop/bb-0be5.png)
 
-This one simply puts the next bytecode (the first the argument) into *eax*, and
-jumps to the end of *vmloop*. So this is the VM's *ret* instruction, and we know
-that *vmloop* has to return "\*", so "R\*" should be the last two bytes of our
-bytecode.
+Эта инструкция просто помещает следующий байт-код (первый аргумент) в *eax*, и переходит в конец *vmloop*. Итак, добравшись до инструкции *ret* виртуальной машины, тепарь мы знаем, что *vmloop* должна возвращать "\*", поэтому "R\*" должен быть последними двумя байтами нашего байт-кода.
 
-The next one that does not call a function:
+Следующая инструкция не вызывает функцию:
 
 ![vmloop bb-0b6d](img/vmloop/bb-0b6d.png)
 
-This is a one argument instruction, and it puts its argument to 0x6020c0. Flag
-that address!
+Это инструкция с одним аргументом, и она записывает свой аргумент по адресу 0x6020c0. Установим флаг на этот адрес!
 
 ```
 :> f sym.written_by_instr_C 4 @ 0x6020c0
 ```
 
-Oh, and by the way, I do have a hunch that *instr_C* also had a function call in
-the original code, but it got inlined by the compiler. Anyways, so far we have
-these two instructions:
+О, у меня предчувствие, что инструкции *instr_C* также в исходном коде crackme соответствовал вызов функции, но он был соптимизирован компилятором (inlined). Во всяком случае, у нас есть вот эти две инструкции:
 
-- *instr_R(a1):* returns with *a1*
-- *instr_C(a1):* writes *a1* to *sym.written_by_instr_C*
+- *instr_R(a1):* выходит с *a1*
+- *instr_C(a1):* сохраняет *a1* в *sym.written_by_instr_C*
 
-And we also know that these accept one argument,
+Также известно, что они принимают один аргумент,
 
 - instr_I
 - instr_D
@@ -263,165 +207,117 @@ And we also know that these accept one argument,
 - instr_X
 - instr_J
 
-and these accept two:
+я эти принимают два аргумента:
 
 - instr_A
 - instr_S
 
-What remains is the reversing of the seven functions that are called by the
-instructions, and finally the construction of a valid bytecode that gives us the
-flag.
+Остается взломать семь функций, которые вызываются инструкциями, потом построить действительную последовательность байт-кода, дающей нам желанный флаг.
 
-###instr_A
+### instr_A
 
-The function this instruction calls is at offset 0x40080d, so lets seek there!
+Функция, которую вызывает эта инструкция, находится по адресу 0x40080d, поэтому давайте изучать ее!
 
 ```
 [offset]> 0x40080d
 ```
 
-> ***r2 tip:*** In visual mode you can just hit \<Enter\> when the current line is
-> a jump or a call, and r2 will seek to the destination address.
+> ***Совет от r2:*** В визуальном режиме вы можете просто нажать \<Enter\> на строке перехода (jmp и др.) или вызова call, и r2 установит смещение (seek) на адрес назначения.
 
-If we seek to that address from the graph mode, we are presented with a message
-that says "Not in a function. Type 'df' to define it here. This is because the
-function is called from a basic block r2 did not recognize, so r2 could not
-find the function either. Lets obey, and type *df*! A function is indeed created, but
-we want some meaningful name for it. So press *dr* while still in visual mode,
-and name this function *instr_A*!
+Если попробуем перейти на этот адрес в режиме графа управления, получим сообщение: "Not in a function". Введите 'df' и задайте его прямо здесь. Функция вызывается из блока r2, который был не распознался, поэтому r2 не удалось найти эту функцию. Повенуемся и введем *df*! Функция определена, но нам нужно осмысленное название для нее. Наберем *dr*, находясь все еще в визуальном режиме,
+назовем эту функцию *instr_A*!
 
-![instr_A minimap](img/instr_A/instr_A_minimap.png)
+![миникарта инструкции instr_A](img/instr_A/instr_A_minimap.png)
 
-> ***r2 tip:*** You should realize that these commands are all part of the same
-> menu system in visual mode I was talking about when we first used *Cd* to
-> declare *sym.memory* as data.
+> ***Совет от r2:*** Все эти команды являются частью меню в визуальном режиме, впервые использованного для определения *sym.memory* как блока данных: *Cd*.
 
-Ok, now we have our shiny new *fcn.instr_A*, lets reverse it! We can see from
-the shape of the minimap that probably there is some kind cascading
-if-then-elif, or a switch-case statement involved in this function. This is one
-of the reasons the minimap is so useful: you can recognize some patterns at a
-glance, which can help you in your analysis (remember the easily recognizable
-for loop from a few paragraphs before?) So, the minimap is cool and useful, but
-I've just realized that I did not yet show you the full graph mode, so I'm
-going to do this using full graph. The first basic blocks:
+Теперь у нас есть наша новая *fcn.instr_A*, взломаем и ее! Из формы миникарты видно, что есть какой-то каскад if-then-elif или оператор switch-case в теле этой функции. Это одина из причин, почему миникарта так полезна: можно визуально распознать шаблоны кода, помогающие при анализе (вспомните легко узнаваемый шаблон цикла нескольких абзацев тому назад). Итак, признаем, что миникарта классная и полезная, но я еще не показал все возможности режима графа управления, давайте сделаем все, что нужно в этом режиме. Первые блоки:
 
 ![instr_A bb-080d](img/instr_A/bb-080d.png)
 
-The two function arguments (*rdi* and *rsi*) are stored in local variables, and
-the first is compared to 0. If it is, the function returns (you can see it on
-the minimap), otherwise the same check is executed on the second argument. The
-function returns from here too, if the argument is zero. Although this function
-is really tiny, I am going to stick with my methodology, and rename the local
-vars:
+Два аргумента функции (*RDI* и *RSI*) сохраняются в локальных переменных, затем первый сравнивается с 0. Если это так, функция завершается (можно видеть это на миникарте), в противном случае эта же проверка выполняется по второму аргументу. Функция завершается, если и второй аргумент равен нулю. Код функции крошечный, но будем придерживаться используемой методологии и переименуем локальные переменные:
 
 ```
 :> afvn local_1 arg1
 :> afvn local_2 arg2
 ```
 
-And we have arrived to the predicted switch-case statement, and we can see that
-*arg1*'s value is checked against "M", "P", and "C".
+Мы пришли к ранее распознанному оператору switch-case, теперь видно, что значение *arg1* сверяется с "M", "P" и "C".
 
-![instr_A switch values](img/instr_A/switch-values.png)
+![значения оператора switch для instr_A](img/instr_A/switch-values.png)
 
-This is the "M" branch:
+Ветвь "М":
 
 ![instr_A switch-M](img/instr_A/switch-M.png)
 
-It basically loads an address from offset 0x602088 and adds *arg2* to the byte
-at that address. As r2 kindly shows us in a comment, 0x602088 initially holds
-the address of *sym.memory*, the area where we have to construct the "Such VM!
-MuCH reV3rse!" string. It is safe to assume that somehow we will be able to
-modify the value stored at 0x602088, so this "M" branch will be able to modify
-bytes other than the first. Based on this assumption, I'll flag 0x602088 as
-*sym.current_memory_ptr*:
+Он загружает адрес из ячейки 0x602088 и суммирует *arg2* с байтом по этому адресу. Программа r2 показывает нам в комментарии, что 0x602088 изначально содержит адрес *sym.memory*, область памяти нужно сконструировать строку "Such VM!
+MuCH reV3rse!" string. Можно предположить, что надо как-то менять значение, хранящееся по адресу 0x602088, получается, что ветвь «M» может менять байты, отличные от первого. Исходя из этого предположения, пометим 0x602088 как *sym.current_memory_ptr*:
 
 ```
 :> f sym.current_memory_ptr 8 @ 0x602088
 ```
 
-Moving on to the "P" branch:
+Переходим к ветке "P":
 
 ![instr_A switch-P](img/instr_A/switch-P.png)
 
-Yes, this is the piece of code that allows us to modify
-*sym.current_memory_ptr*: it adds *arg2* to it.
+Фрагмент кода, позволяющий модифицировать *sym.current_memory_ptr*: он прибавляет к нему *arg2*.
 
-Finally, the "C" branch:
+Наконец, ветвь "C":
 
 ![instr_A switch-C](img/instr_A/switch-C.png)
 
-Well, it turned out that *instr_C* is not the only instruction that modifies 
-*sym.written_by_instr_C*: this piece of code adds *arg2* to it.
+Оказывается *instr_C* - это не единственная инструкция, изменяющая *sym.written_by_instr_C*: этот фрагмент кода прибавляет к нему *arg2*.
 
-And that was *instr_A*, lets summarize it! Depending on the first argument, this
-instruction does the following:
+Мы взломали *instr_A*, подведем итоги! В зависимости от первого аргумента, это инструкция исполняет следующее:
 
-- *arg1* == "M": adds *arg2* to the byte at *sym.current_memory_ptr*.
-- *arg1* == "P": steps *sym.current_memory_ptr* by *arg2* bytes.
-- *arg1* == "C": adds *arg2* to the value at *sym.written_by_instr_C*.
+- *arg1* == "M": прибавляет *arg2* к байту по адресу *sym.current_memory_ptr*.
+- *arg1* == "P": смещает *sym.current_memory_ptr* на *arg2* байтов.
+- *arg1* == "C": прибавляет *arg2* к значению по адресу *sym.written_by_instr_C*.
 
-###instr_S
+### instr_S
 
-This function is not recognized either, so we have to manually define it like we
-did with *instr_A*. After we do, and take a look at the minimap, scroll through
-the basic blocks, it is pretty obvious that these two functions are very-very
-similar. We can use *radiff2* to see the difference.
+Эта функция также не распозналась автоматически, зададим вручную ее аналогично *instr_A*. После этого посмотрим на миникарту, поперемещаем диаграмму, теперь очевидно, что эти две функции очень похожи. Можно также использовать *radiff2* для построения диаграммы различий (diff).
 
-> ***r2 tip:*** radiff2 is used to compare binary files. There's a few options
-> we can control the type of binary diffing the tool does, and to what kind of
-> output format we want. One of the cool features is that it can generate
-> [DarumGrim](http://www.darungrim.org/)-style bindiff graphs using the *-g*
-> option.
+> ***Совет от r2:*** Программа radiff2 используется для сравнения двоичных файлов. Есть возможность управлять способом анализа двоичных файлов, и требуемым форматом результата. Интересной функцией является порождение графов вида [DarumGrim](http://www.darungrim.org/) с использованием флага *-g*.
 
-Since now we want to diff two functions from the same binary, we specify the
-offsets with *-g*, and use reverse4 for both binaries. Also, we create the
-graphs for comparing *instr_A* to *instr_S* and for comparing *instr_S* to
-*instr_A*.
+Нам надо сравнить две функции из одного и того же двоичного файла, поэтому указываем смещения при помощи флага *-g*, далее применяем reverse4 для обоих двоичных файлов. Итак, создадим графы сравнения *instr_A* с *instr_S* и сравнения *instr_S* с *instr_A*.
 
 ```
 [0x00 ~]$ radiff2 -g 0x40080d,0x40089f  reverse4 reverse4 | xdot -
 ```
-![instr_S graph1](img/instr_S/graph1.png)
+![граф сравнения для instr_S](img/instr_S/graph1.png)
 
 ```
 [0x00 ~]$ radiff2 -g 0x40089f,0x40080d  reverse4 reverse4 | xdot -
 ```
-![instr_S graph2](img/instr_S/graph2.png)
+![граф сравнения instr_S](img/instr_S/graph2.png)
 
-A sad truth reveals itself after a quick glance at these graphs: radiff2 is a
-liar! In theory, grey boxes should be identical, yellow ones should differ only
-at some offsets, and red ones should differ seriously. Well this is obviously
-not the case here - e.g. the larger grey boxes are clearly not identical. This
-is something I'm definitely going to take a deeper look at after I've finished
-this writeup.
+Печальная правда раскрывается после беглого взгляда на эти графы: radiff2 лжет! Теоретически серые блоки должны быть идентичными, желтые должны отличаться только в некоторых адресах, причем красные должны серьезно различаться. Очевидно, что большие серые блоки явно неодинаковы. Определенно надо рыть глубже даже после того, как я закончу эту статью.
 
-Anyways, after we get over the shock of being lied to, we can easily recognize
-that *instr_S* is basically a reverse-*instr_A*: where the latter does addition,
-the former does subtraction. To summarize this:
+Отойдя от шока, созданного лживым инструментом, легко понимаем,
+что *instr_S* в по сути является обратной *instr_A*, при этом последний прибавляет, а первый вычитает. Подведем итог:
 
-- *arg1* == "M": subtracts *arg2* from the byte at *sym.current_memory_ptr*.
-- *arg1* == "P": steps *sym.current_memory_ptr* backwards by *arg2* bytes.
-- *arg1* == "C": subtracts *arg2* from the value at *sym.written_by_instr_C*.
+- *arg1* == "M": вычитает *arg2* из байта по адресу *sym.current_memory_ptr*.
+- *arg1* == "P": смещает *sym.current_memory_ptr* назад на *arg2* байт.
+- *arg1* == "C": вычитает *arg2* из згачения по адресу *sym.written_by_instr_C*.
 
-###instr_I
+### instr_I
 
 ![instr_I](img/instr_I/instr_I.png)
 
-This one is simple, it just calls *instr_A(arg1, 1)*. As you may have noticed
-the function call looks like `call fcn.0040080d` instead of `call fcn.instr_A`.
-This is because when you save and open a project, function names get lost -
-another thing to examine and patch in r2!
+Инструкция просто вызывает *instr_A(arg1, 1)*. Заметим, что запуск функции выглядит как `call fcn.0040080d` вместо `call fcn.instr_A`.
+В текущей версии при сохранении и открытии проекта имена функций теряются - еще один момент для исправления в r2!
 
-###instr_D
+### instr_D
 
 ![instr_D](img/instr_D/instr_D.png)
 
-Again, simple: it calls *instr_S(arg1, 1)*.
+Опять же, все просто: она вызывает *instr_S(arg1, 1)*.
 
-###instr_P
+### instr_P
 
-It's local var rename time again!
+Время переименовать ее локальные переменные!
 
 ```
 :> afvn local_0_1 const_M
@@ -431,18 +327,13 @@ It's local var rename time again!
 
 ![instr_P](img/instr_P/instr_P.png)
 
-This function is pretty straightforward also, but there is one oddity: const_M
-is never used. I don't know why it is there - maybe it is supposed to be some
-kind of distraction? Anyways, this function simply writes *arg1* to
-*sym.current_memory_ptr*, and than calls *instr_I("P")*. This basically means
-that *instr_P* is used to write one byte, and put the pointer to the next byte.
-So far this would seem the ideal instruction to construct most of the "Such VM!
-MuCH reV3rse!" string, but remember, this is also the one that can be used only
-9 times!
+Функция также проста, но есть одна странность: const_M не используется. Это вероятно какое-то отвлечение внимания хакера?... По сути функция просто сохраняет *arg1* в *sym.current_memory_ptr*, а затем вызывает *instr_I("P")*. Это означает, что *instr_P* сохранает один байт и переводит указатель на следующий байт.
+Кажется, эта инструкция идеальна для построения большей части строки "Such VM!
+MuCH reV3rse!", но ее можно использовать только девять раз!
 
-###instr_X
+### instr_X
 
-Another simple one, rename local vars anyways!
+Переименовываем локальные переменные ... ну как всегда!
 
 ```
 :> afvn local_1 arg1
@@ -450,12 +341,11 @@ Another simple one, rename local vars anyways!
 
 ![instr_X](img/instr_X/instr_X.png)
 
-This function XORs the value at *sym.current_memory_ptr* with *arg1*.
+Функция выполняет операцию XOR со значением по адресу *sym.current_memory_ptr* с *arg1*.
 
-###instr_J
+### instr_J
 
-This one is not as simple as the previous ones, but it's not that complicated
-either. Since I'm obviously obsessed with variable renaming:
+Функция не так проста, как предыдущие, но при этом и не сложна. Одержимость переименованием переменных приводит к
 
 ```
 :> afvn local_3 arg1
@@ -464,34 +354,32 @@ either. Since I'm obviously obsessed with variable renaming:
 
 ![instr_J](img/instr_J/instr_J.png)
 
-After the result of *arg1 & 0x3f* is put into a local variable, *arg1 & 0x40* is
-checked against 0. If it isn't zero, *arg1_and_0x3f* is negated:
+После помещения *arg1 & 0x3f* в локальную переменную, *arg1 & 0x40* сравнивается с 0. Если результат не равен нулю, биты *arg1_and_0x3f* инвертируются:
 
 ![instr_J bb-09e1](img/instr_J/bb-09e1.png)
 
-The next branching: if *arg1* >= 0, then the function returns *arg1_and_0x3f*,
+Следующее ветвление: если *arg1* >= 0, то функция возвращает *arg1_and_0x3f*,
 
 ![instr_J bb-09e4](img/instr_J/bb-09e4.png)
 
 ![instr_J bb-0a1a](img/instr_J/bb-0a1a.png)
 
-else the function branches again, based on the value of
-*sym.written_by_instr_C*:
+в противном случае функция разветвляется снова в зависимости от значения *sym.written_by_instr_C*:
 
 ![instr_J bb-09ef](img/instr_J/bb-09ef.png)
 
-If it is zero, the function returns 2,
+Если оно равно нулю, функция возвращает 2,
 
 ![instr_J bb-0a13](img/instr_J/bb-0a13.png)
 
-else it is checked if *arg1_and_0x3f* is a negative number,
+иначе проверяется, является ли *arg1_and_0x3f* отрицательным числом,
 
 ![instr_J bb-09f9](img/instr_J/bb-09f9.png)
 
-and if it is, *sym.good_if_ne_zero* is incremented by 1:
+и если это так, то *sym.good_if_ne_zero* увеличивается на 1:
 
 ![instr_J bb-09ff](img/instr_J/bb-09ff.png)
 
-After all this, the function returns with *arg1_and_0x3f*:
+После всех проверок функция возвращает *arg1_and_0x3f*:
 
 ![instr_J bb-0a0e](img/instr_J/bb-0a0e.png)
