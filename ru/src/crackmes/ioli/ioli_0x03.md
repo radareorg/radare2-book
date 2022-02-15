@@ -1,7 +1,7 @@
 IOLI 0x03
 =========
 
-crackme 0x03, let's skip the string check part and analyze it directly.
+Задача crackme 0x03. Пропустим поиск строк и сразу все проанализируем.
 
 ```C
 [0x08048360]> aaa
@@ -39,7 +39,7 @@ int32_t main (void) {
 }
 ```
 
- It looks straightforward except the function `test(eax, eax)`. This is unusual to call a function with same two parameters , so I speculate that the decompiler has gone wrong. we can check it in disassembly.
+Выглядит просто, за исключением функции `test(eax, eax)`. Необычно вызывать функцию с двумя одинаковыми параметрами, можно предположить, что декомпиляция прошла не совсем так, как требуется. проверим в виде инструкций процессора.
 
 ```asm
 [0x08048360]> pdf@sym.main
@@ -53,7 +53,7 @@ int32_t main (void) {
 ...
 ```
 
-Here comes the`sym.test`, called with two parameters. One is var_4h (our input from `scanf()`). The other is var_ch. The value of var_ch (as the parameter of `test()`) can be calculated like it did in crackme_0x02. It's  0x52b24. Try it!
+В наличии `sym.test`, вызываемый с двумя параметрами. Один параметр - var_4h (наш ввод из `scanf()`). Другой - var_ch. Значение var_ch (как параметр `test()`) можно вычислить, как это было в задаче crackme_0x02. Оно равно 0x52b24. Пробуем!
 
 ```sh
 ./crackme0x03
@@ -62,7 +62,7 @@ Password: 338724
 Password OK!!! :)
 ```
 
-Take a look at `sym.test`. It's a two path conditional jump which compares two parameters and then do shift. We can guess that shift is most likely the decryption part (shift cipher, e.g. Caesar cipher).
+Смотрим на `sym.test`. Это условный переход с двумя ветвями, сравнивающий два параметрами, потом производится сдвиг. Догадка состоит в том, сдвиг, скорее всего, является частью некоторой процедуры расшифровки (шифр сдвига, например, шифр Цезаря).
 
 ```C
 /* r2dec pseudo code output */
@@ -80,7 +80,7 @@ int32_t test (int32_t arg_8h, uint32_t arg_ch) {
 }
 ```
 
-can also reverse `shift()` to satisfy curiosity.
+взломаем `shift()`, удовлетворим наше любопытство.
 
 ```asm
 [0x08048360]> pdf@sym.shift
@@ -128,14 +128,14 @@ can also reverse `shift()` to satisfy curiosity.
         ; ------------
 ```
 
-you can read the assembly code and find the decryption is actually a "sub al, 0x3". we can write a python script for it:
+прочитав ассемблерный код, обнаруживаем, что расшифровка на самом деле - "sub al, 0x3". напишем программу python:
 
 ```python
 print(''.join([chr(ord(i)-0x3) for i in 'SdvvzrugRN$$$']))
 print(''.join([chr(ord(i)-0x3) for i in 'LqydolgSdvvzrug$']))
 ```
 
-the easier way is to `run` the decryption code, that means debug it or emulate it. I used radare2 ESIL emulator but it got stuck when executed ` call dword imp.strlen`. And I can't find the usage of hooking function / skip instruction in radare2.  The following is an example to show u how to emulate ESIL.
+проще `запустить` этот код расшифровки, то есть отладить его или эмулировать. Попытка использования эмулятора ESIL radare2 провалилась, он завис при выполнении `call dword imp.strlen`. Также не удалось воспользоваться функцией hooking / пропуском инструкции в radare2.  Ниже приведен пример эмуляции ESIL.
 
 ```sh
 [0x08048414]> s 0x08048445		# the 'sub al, 0x03'
@@ -180,7 +180,7 @@ dead at 0x00000000
            0x08048450      8d4588         lea eax, [var_78h]
 ```
 
-By the way, u can also open the file and use write data command to decrypt data.
+Кстати, можно открыть файл и использовать команду "write data" для расшифровки данных.
 
 ```sh
 r2 -w ./crackme0x03

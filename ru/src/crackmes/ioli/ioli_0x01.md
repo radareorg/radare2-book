@@ -1,7 +1,7 @@
 IOLI 0x01
 =========
 
-This is the second IOLI crackme.
+Вторая задачка IOLI crackme.
 
 ```
 $ ./crackme0x01
@@ -10,7 +10,7 @@ Password: test
 Invalid Password!
 ```
 
-Let's check for strings with rabin2.
+Посмотрим перечень строк при помощи rabin2.
 
 ```
 $ rabin2 -z ./crackme0x01
@@ -18,15 +18,15 @@ $ rabin2 -z ./crackme0x01
 nth paddr      vaddr      len size section type  string
 -------------------------------------------------------
 0   0x00000528 0x08048528 24  25   .rodata ascii IOLI Crackme Level 0x01\n
-1   0x00000541 0x08048541 10  11   .rodata ascii Password: 
+1   0x00000541 0x08048541 10  11   .rodata ascii Password:
 2   0x0000054f 0x0804854f 18  19   .rodata ascii Invalid Password!\n
 3   0x00000562 0x08048562 15  16   .rodata ascii Password OK :)\n
 ```
 
-This isn't going to be as easy as 0x00. Let's try disassembly with r2.
+Видно, что взлом будет не на столько прост как в задаче 0x00. Попробуем дизассемблоровать, используя r2.
 
 ```
-$ r2 ./crackme0x01 
+$ r2 ./crackme0x01
 -- Use `zoom.byte=printable` in zoom mode ('z' in Visual mode) to find strings
 [0x08048330]> aa
 [0x08048330]> pdf@main
@@ -65,29 +65,29 @@ $ r2 ./crackme0x01
 \           0x08048454      c3             ret
 ```
 
-"aa" tells r2 to analyze the whole binary, which gets you symbol names, among things.
+Команда «aa» заставляет r2 проанализировать весь двоичный файл, в результате, среди прочего, получим имена символов (идентификаторов сущностей).
 
-"pdf" stands for
+Комбинация "pdf" - это сокращение от
 
-*	Print
+* Print (распечатать)
 
-*	Disassemble
+* Disassemble (в дизассемблированном виде)
 
-*	Function
+* Function (функцию)
 
-This will print the disassembly of the main function, or the `main()` that everyone knows. You can see several things as well: weird names, arrows, etc.
+Команда распечатает код основной функции в виде ассемберных инструкций, т.е. известной всем функции `main()`. В тексте много всего, включая странные имена, стрелки и т.д.
 
-*	"imp." stands for imports. Those are imported symbols, like printf()
+* "imp." - сокращение от "imports". Это импортированные символы, такие как printf()
 
-*	"str." stands for strings. Those are strings (obviously).
+* "str." - сокращение от "strings". Это, очевидно, строки.
 
-If you look carefully, you'll see a `cmp` instruction, with a constant, 0x149a. `cmp` is an x86 compare instruction, and the 0x in front of it specifies it is in base 16, or hex (hexadecimal).
+Смотрим внимательно, находим инструкцию `cmp` с константой 0x149a. `cmp` - инструкция сравнения в архитектуре x86, а 0x - префикс, задающий 16-ричную систему счисления (hexadecimal, hex) для числа константы.
 
 ```
 0x0804842b    817dfc9a140. cmp dword [ebp + 0xfffffffc], 0x149a
 ```
 
-You can use radare2's `?` command to display 0x149a in another numeric base.
+Можно использовать команду radare2 `?` для распечатки 0x149a в другой системе счисления.
 
 ```
 [0x08048330]> ? 0x149a
@@ -105,7 +105,7 @@ binary  0b0001010010011010
 trits   0t21020100
 ```
 
-So now we know that 0x149a is 5274 in decimal. Let's try this as a password.
+Теперь понятно, что 0x149a равно 5274 в десятичной системе счисления. Давайте попробуем это в качестве пароля.
 
 ```
 $ ./crackme0x01
@@ -114,7 +114,7 @@ Password: 5274
 Password OK :)
 ```
 
-Bingo, the password was 5274. In this case, the password function at 0x0804842b was comparing the input against the value, 0x149a in hex. Since user input is usually decimal, it was a safe bet that the input was intended to be in decimal, or 5274. Now, since we're hackers, and curiosity drives us, let's see what happens when we input in hex.
+Бинго, пароль - 5274. В этом случае функция пароля в 0x0804842b сравнивала входные данные со значением 0x149a (шестнадцатеричный формат). Поскольку в вводят числа обычно в десятичной системе счисления, нетрудно догадаться, что ввод пароля должен быть в десятичном формате или 5274. Поскольку мы хакеры, и любопытство движет нами, давайте посмотрим, что происходит, когда мы вводим в шестнадцатеричном виде.
 
 ```
 $ ./crackme0x01
@@ -123,6 +123,6 @@ Password: 0x149a
 Invalid Password!
 ```
 
-It was worth a shot, but it doesn't work. That's because `scanf()` will take the 0 in 0x149a to be a zero, rather than accepting the input as actually being the hex value.
+Стоило попытатья, но не сработало. Проблема в том, что `scanf()` принимает 0 в 0x149a как ноль, а остальные данные в связи с этим не принимаются как шестнадцатеричное значение.
 
-And this concludes IOLI 0x01.
+На этом все с задачей IOLI 0x01.

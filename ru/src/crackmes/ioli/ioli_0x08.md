@@ -1,7 +1,7 @@
 IOLI 0x08
 =========
 
-we can reverse it and find it's similar to 0x07, and use the same password to solve it:
+взломав задачу, обнаруживаем, что она похож на 0x07, используется тот же пароль:
 
 ```sh
 $ export LOLAA=help
@@ -11,7 +11,7 @@ Password: 12346
 Password OK!
 ```
 
-[dustri](https://dustri.org/b/defeating-ioli-with-radare2.html) provided a better way to check crackme0x08. 0x07 is the stripped version of 0x08.
+[dustri](https://dustri.org/b/defeating-ioli-with-radare2.html) показал лучший способ анализа crackme0x08. 0x07 — это урезанная версия 0x08.
 
 ```sh
 $ radiff2 -A -C ./crackme0x07 ./crackme0x08

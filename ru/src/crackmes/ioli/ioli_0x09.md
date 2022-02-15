@@ -1,10 +1,10 @@
 IOLI 0x09
 =========
 
-Hints: crackme0x09 hides the format string (%d and %s), and nothing more than 0x08.
+Подсказка: crackme0x09 скрывает строку формата (%d и %s), и она ничем не отличается от 0x08.
 
 ```sh
-$ export LOLA=help 
+$ export LOLA=help
 $ ./crackme0x09
 IOLI Crackme Level 0x09
 Password: 12346

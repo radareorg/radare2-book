@@ -1,6 +1,6 @@
-IOLI CrackMes
+Задачки IOLI CrackMes
 =============
 
-The IOLI crackme is a good starting point for learning r2. This is a set of tutorials based on the tutorial at [dustri](http://dustri.org/b/defeating-ioli-with-radare2.html)
+Задачки IOLI crackme - хорошая отправная точка для изучения r2. Это набор разобранных примеров, основанных на пособии [dustri](http://dustri.org/b/defeating-ioli-with-radare2.html)
 
-The IOLI crackmes are available at a locally hosted [mirror](https://github.com/radareorg/radare2-book/raw/master/src/crackmes/ioli/IOLI-crackme.tar.gz)
+Копии задач доступны на локальном [зеркале](https://github.com/radareorg/radare2-book/raw/master/src/crackmes/ioli/IOLI-crackme.tar.gz)

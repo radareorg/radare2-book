@@ -1,7 +1,7 @@
 IOLI 0x02
 =========
 
-This is the third one.
+Третья задача.
 
 ```
 $ ./crackme0x02
@@ -10,7 +10,7 @@ Password: hello
 Invalid Password!
 ```
 
-check it with rabin2.
+посмотрим файл с помощью rabin2.
 ```
 $ rabin2 -z ./crackme0x02
 [Strings]
@@ -22,10 +22,10 @@ nth paddr      vaddr      len size section type  string
 3   0x0000057f 0x0804857f 18  19   .rodata ascii Invalid Password!\n
 ```
 
-similar to 0x01, no explicity password string here. so it's time to analyze it with r2.
+аналогично задаче 0x01, здесь нет строки с явным паролем. проанализируем код с помощью r2.
 ```
 [0x08048330]> aa
-[x] Analyze all flags starting with sym. and entry0 (aa)
+[x] Провести анализ всех флагов, начинающихся с sym. и entry0 (aa)
 [0x08048330]> pdf@main
             ; DATA XREF from entry0 @ 0x8048347
 / 144: int main (int argc, char **argv, char **envp);
@@ -74,15 +74,15 @@ similar to 0x01, no explicity password string here. so it's time to analyze it w
 
 ```
 
-with the experience of solving crackme0x02, we first locate the position of `cmp` instruction by using this simple oneliner:
+Имея опыт решения crackme0x02, сначала ищем инструкцию `cmp` при помощи простой команды:
 ```
 [0x08048330]> pdf@main | grep cmp
 |           0x0804844e      3b45f4         cmp eax, dword [var_ch]
 ```
 
-Unfortunately, the variable compared to eax is stored in the stack. we can't check the value of this variable directly. It's a common case in reverse engineerning that we have to derive the value of the variable from the previous sequence. As the amount of code is relatively small, it's possible.
+К сожалению, переменная, сравниваемая с eax, хранится где-то в стеке. проверить значение этой переменной напрямую невозможно. Распространенный случай в реверс-инжениринге, нужно вычислить значение переменной, анализируя инструкции перед cmp. Поскольку объем кода относительно невелик, это возможно.
 
-for example:
+пример:
 ```
 |           0x080483ed      b800000000     mov eax, 0
 |           0x080483f2      83c00f         add eax, 0xf                ; 15
@@ -92,13 +92,13 @@ for example:
 |           0x080483fe      29c4           sub esp, eax
 ```
 
-we can easily get the value of eax. it's 0x16.
+легко получается значение в регистре eax. оно равно 0x16.
 
-It gets hard when the scale of program grows. radare2 provides a pseudo disassembler output in C-like syntax. It may be useful.
+Становятся сложно, когда объем кода растет. radare2 позволяет выводить дизассемблерированный код в формате подобном C. Что весьма бывает полезно.
 ```
 [0x08048330]> pdc@main
 function main () {
-    //  4 basic blocks
+    //  4 функциональных блока
 
     loc_0x80483e4:
 
@@ -114,15 +114,15 @@ function main () {
        eax <<<= 4
        esp -= eax
        dword [esp] = "IOLI Crackme Level 0x02\n" //[0x8048548:4]=0x494c4f49 ; str.IOLI_Crackme_Level_0x02 ; const char *format
-                                                   
+
        int printf("IOLI Crackme Level 0x02\n")
        dword [esp] = "Password: " //[0x8048561:4]=0x73736150 ; str.Password: ; const char *format
-                                                   
+
        int printf("Password: ")
        eax = var_4h
        dword [var_sp_4h] = eax
        dword [esp] = 0x804856c  //[0x804856c:4]=0x50006425 ; const char *format
-       int scanf("%d") 
+       int scanf("%d")
                                //sym.imp.scanf ()
        dword [var_8h] = 0x5a    //'Z' ; 90
        dword [var_ch] = 0x1ec   //492
@@ -140,7 +140,7 @@ function main () {
 
            //CODE XREF from main @ 0x8048451
            dword [esp] = s"Invalid Password!\n"//[0x804857f:4]=0x61766e49 ; str.Invalid_Password ; const char *format
-                                                       
+
            int printf("Invalid ")
        do
        {
@@ -158,12 +158,12 @@ function main () {
 }
 ```
 
-The `pdc` command is unreliable especially in processing loops (while, for, etc.). So I prefer to use the [r2dec](https://github.com/radareorg/r2dec-js) plugin in r2 repo to generate the pseudo C code. you can install it easily:
+Команда `pdc` ненадежна, особенно при анализе циклов обработки данных (while, for и т.д.). Поэтому предпочтительно использовать плагин [r2dec](https://github.com/radareorg/r2dec-js) в репозитории r2 для генерации псевдокода C. ое легко устанавливается:
 ```
 r2pm install r2dec
 ```
 
-decompile `main()` with the following command (like `F5` in IDA):
+декомпилируем `main()`, используя команду (типа `F5` в IDA):
 ```C
 [0x08048330]> pdd@main
 /* r2dec pseudo code output */
@@ -204,29 +204,27 @@ int32_t main (void) {
 }
 ```
 
-It's more human-readable now. To check the string in 0x804856c,
-we can:
-* seek
-* print string
+Теперь это более человекочитабельно. Чтобы посмотреть строку в 0x804856c, можно:
+* seek (установить смещение)
+* print string (распечатать строку)
 ```
 [0x08048330]> s 0x804856c
 [0x0804856c]> ps
 %d
 ```
-it's exactly the format string of `scanf()`. But r2dec does not recognize the second argument (eax) which is a pointer. it points to var_4h and means out input will store in var_4h.
+получили строку формата, используемую в `scanf()`. Однако r2dec не распознает второй аргумент (eax) - указатель. он указывает на var_4h и означает, что входные данные будут именно там храниться.
 
-we can easily write out pseudo code here.
+здесь мы можем легко выписать псевдокод.
 ```C
 var_ch = (var_8h + var_ch)^2;
 if (var_ch == our_input)
   printf("Password OK :)\n");
 ```
 
-given the initial status that var_8h is 0x5a, var_ch is 0x1ec, we have 
-var_ch = 338724 (0x52b24):
+учитывая, что первоначальначальное значение переменной var_8h равно 0x5a, а var_ch равно 0x1ec, получаем var_ch = 338724 (0x52b24):
 
 ```
-$ rax2 '=10' '(0x5a+0x1ec)*(0x5a+0x1ec)' 
+$ rax2 '=10' '(0x5a+0x1ec)*(0x5a+0x1ec)'
 338724
 
 $ ./crackme0x02
@@ -235,4 +233,4 @@ Password: 338724
 Password OK :)
 ```
 
-and we finish the crackme0x02.
+вот и все с crackme0x02.

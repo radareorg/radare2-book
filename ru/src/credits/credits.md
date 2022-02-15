@@ -1,14 +1,14 @@
-## Authors & Contributors
+## Авторы и активные участники
 
-This book wouldn't be possible without the help of a large list of contributors who have been reviewing, writing and reporting bugs and stuff in the radare2 project as well as in this book.
+Этой книги не было бы без помощи большого числа участников, рецензировавших, дописывающих ее и славших сообщения об ошибках и других проблемах в проекте radare2.
 
-### The radare2 book
+### Книга radare2
 
-This book was started by maijin as a new version of the original radare book written by pancake.
+Книга была начата maijin как новая версия оригинальной книги о  radare, написанной pancake.
 
-* Old radare1 book [http://www.radare.org/get/radare.pdf](http://www.radare.org/get/radare.pdf)
+* Книга о radare1 находится здесь [http://www.radare.org/get/radare.pdf](http://www.radare.org/get/radare.pdf) (ссылка не открывается)
 
-Many thanks to everyone who has been involved with the gitbook:
+Большое спасибо всем, кто участвовал в сосдании gitbook:
 
 Adrian Studer,
 Ahmed Mohamed Abd El-MAwgood,

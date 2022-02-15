@@ -1,5 +1,5 @@
-Crackmes
+Задачи Crackmes
 ========
 
-Crackmes (from "crack me" challenge) are the training ground for reverse engineering people. This section will go over tutorials on how to defeat various crackmes using r2.
+Задачи Crackmes (из «crack me» challenge) предназначены для решения инженерами, интересующимся братным инжинирингом, для совершенствования своих навыков. В этом разделе приведены учебные материалы по приемам взлома файлов crackme с помощью r2.
 

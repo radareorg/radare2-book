@@ -1,7 +1,7 @@
 IOLI 0x07
 =========
 
-a weird "wtf?" string.
+странная строка "wtf?".
 
 ```sh
 $ rabin2 -z ./crackme0x07
@@ -16,7 +16,7 @@ nth paddr      vaddr      len size section type  string
 5   0x000007f2 0x080487f2 10  11   .rodata ascii Password:
 ```
 
-again, no password string or compare in `main()`. I put the simplified pseudo code here. var_78h is likely to a char *pointer (string) .
+Опять же, нет строки пароля или сравнений в `main()`. приведем здесь уже упрощенный псевдокод. var_78h вероятно char *pointer (string) .
 
 ```asm
 #include <stdint.h>
@@ -28,7 +28,7 @@ int32_t main (int32_t arg_10h) {
 }
 ```
 
-due to the symbol info lost, neither `aa` nor `aaa` show the name of functions. we can double check this in "flagspace". Radare2 use fcn_080485b9 as the function name. It's a common case in reverse engineering that we don't have any symbol info of the binary.
+из-за потери информации ни `aa`, `aaa` не определили названий функций. можно дважды проверить "flagspace". Radare2 использует fcn_080485b9 в качестве имен функций. Распространенный случай в реверс-инжениринге, когда нет никакой информации о символах в двоичного файла.
 
 ```sh
 [0x080487fd]> fs symbols
@@ -92,7 +92,7 @@ decompile the `fcn_080485b9()`:
 \      `--> 0x0804862a      e8f5feffff     call fcn.08048524
 ```
 
-we got familiar with this code structure in the previous challenges (the check function). It's not difficult for us even we don't have the symbol info. you can also use `afn` command to rename the function name if you like.
+уже знакомы со структурой этого кода из предыдущих задач (функция проверки). Отсутствие информации о символах не создает нам больших трудностей. при желании можно использовать команду `afn` для переименования имен функций.
 
 ```C
 int32_t fcn_080485b9 (char * s, void* envp)
@@ -111,7 +111,7 @@ int32_t fcn_080485b9 (char * s, void* envp)
 }
 ```
 
-most part of crackme 0x07 is the same with 0x06. and it can be solved by the same password & environment:
+Большая часть crackme 0x07 схожа с 0x06. задачу можно решить с помощью того же пароля и переменных среды:
 
 ```sh
 $ export LOLAA=help
@@ -121,7 +121,7 @@ Password: 12346
 Password OK!
 ```
 
-wait ... where is the 'wtf?'. Often, we would like to find the cross reference (xref) to strings (or data, functions, etc.) in reverse engineering. The related commands in Radare2 are under "ax" namespace:
+но ... где находится 'wtf?'. Обычное дело в реверс-инжениринге искать перекрестные ссылки (xref) на строки (данные, функции и т.д.). Соответствующие команды в Radare2 находятся в группе имен "ax":
 
 ```sh
 [0x08048400]> f
@@ -134,12 +134,12 @@ wait ... where is the 'wtf?'. Often, we would like to find the cross reference (
 [0x08048400]> axt 0x80487d3
 (nofunc) 0x804865c [DATA] mov dword [esp], str.wtf
 [0x08048400]> axF str.wtf
-Finding references of flags matching 'str.wtf'...
+Ищем ссылки на флаги, соответствующие 'str.wtf'...
 [0x001eff28-0x001f0000] (nofunc) 0x804865c [DATA] mov dword [esp], str.wtf
 Macro 'findstref' removed.
 ```
 
-the `[DATA] mov dword [esp], str.wtf` at `0x804865c` is an instruction of fcn.080485b9. But the analysis in my PC ignores the remained instructions and only display the incomplete assembly. the range of fcn.080485b9 should be `0x080485b9 ~ 0x0804867c` . we can reset block size and print opcodes.
+`[DATA] mov dword [esp], str.wtf` по адресу `0x804865c` - инструкция fcn.080485b9. Но анализ на ПК игнорирует оставшиеся инструкции и отображает только неполный текст дизассемблирования. диапазон адресов fcn.080485b9 должен быть `0x080485b9 ~ 0x0804867c`. сбросим размер блока и распечатаем текст вместе с опкодом.
 
 ```
 [0x08040000]> s 0x080485b9
@@ -175,5 +175,5 @@ the `[DATA] mov dword [esp], str.wtf` at `0x804865c` is an instruction of fcn.08
 
 ```
 
-`test eax, ea;je 0x804867b` will jump to `leave; ret`, which forever skips the str.wtf part. only use `aa` to analyze this binary can display the whole function.
+`test eax, ea;je 0x804867b` перейдет к инструкциям `leave; ret`, что пропускает часть str.wtf кода. только использование `aa` при анализе этого двоичного файла может отобразить всю функцию.
 

@@ -1,7 +1,7 @@
 IOLI 0x05
 =========
 
-check again, it uses `scanf()` to get our input and pass it to `check()` as parameter.
+смотрим, использется `scanf()` для получения ввода, затем он передается в функцию `check()` в качестве параметра.
 
 ```C
 [0x080483d0]> pdd@main
@@ -73,7 +73,7 @@ label_0:
 }
 ```
 
-The same, we can write our own C-like pseudo code.
+Точно так же можно написать наш собственный C-подобный псевдокод.
 
 ```C
 #include <stdint.h>
@@ -94,7 +94,7 @@ int32_t check(char *s)
 }
 ```
 
-The if condition becomes `var_8h == 0x10`. In addition, a new function call - `parell(s)` replace the `printf("password OK")`now. The next step is to reverse sym.parell.
+Условие в if - `var_8h == 0x10`. Кроме того, новый вызов функции - `parell(s)` заменяет тепрь `printf("пароль OK")`. Следующим шагом является взлом sym.parell.
 
 ```C
 [0x08048484]> s sym.parell
@@ -120,7 +120,7 @@ uint32_t parell (char * s) {
 }
 ```
 
-the decompiled code looks well except the `sscanf()` function. It can be easily corrected by checking the assembly code.
+с декомпилированным кодом все в порядке, за исключением функции `sscanf(`). Его можно легко исправить, посмотрев ассемблерный код.
 
 ```asm
 / 68: sym.parell (int32_t arg_8h);
@@ -140,9 +140,9 @@ the decompiled code looks well except the `sscanf()` function. It can be easily 
 ....
 ```
 
-The `mov dword [esp], eax` is the nearest instruction to sscanf (and it's equivalent to a push instruction). It stores the string 's' to the stack top (arg1).  `mov dword [var_sp_4h], 0x8048668` push '%d' as arg2 into stack. var_8h (esp + 0x8) which keeps the address of var_4h is the arg3.
+Инструкция `mov dword [esp], eax` является ближайшей к sscanf (она эквивалентна инструкции push). Он сохраняет строку 's' на вершине стека (arg1).  `mov dword [var_sp_4h], 0x8048668` засылает '%d' как arg2 в стек. var_8h (esp + 0x8) хранит адрес var_4h, т.е. arg3.
 
-Finally we have the corrected pseudo code:
+Наконец, исправленный псевдокод -
 
 ```C
 uint32_t parell (char * s) {
@@ -155,12 +155,12 @@ uint32_t parell (char * s) {
 }
 ```
 
-Now there are 2 constraints:
+Выявлены два ограничения:
 
-* Digit Sum is 16 (0x10)
-* Must be an odd number (1 & number == 0)
+* Сумма цифр должна быть равна 16 (0x10)
+* Должно быть нечетным числом (1 & number == 0)
 
-The password is at our fingertips now.
+Пароль теперь у нас под рукой.
 
 ```sh
 ./crackme0x05
@@ -174,4 +174,4 @@ Password: 12346
 Password OK!
 ```
 
-we can also use angr to solve it since we have two constraints to the password.
+также можно использовать angr для решения этой задачи, так как заданы два ограничения на пароль.

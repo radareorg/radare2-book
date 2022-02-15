@@ -71,7 +71,7 @@ label_0:
 }
 ```
 
-manually analyze with both the assembly and pseudo code we can simply write down the C-like code to describe this function:
+анализируя вручную ассемблерный код и псевдокод, можно просто выписать C-подобный код для описания этой функции:
 
 ```C
 #include <stdint.h>
@@ -92,7 +92,7 @@ int32_t check(char *s)
 }
 ```
 
-In short, it calculates the Digit Sum of a number (add a number digit by digit. for example, 96 => 9 + 6 = 15) :
+Короче говоря, вычисляется сумма цифр некоторого числа (сдложение цифры за цифрой). например, 96 => 9 + 6 = 15) :
 
 ```sh
 ./crackme0x04

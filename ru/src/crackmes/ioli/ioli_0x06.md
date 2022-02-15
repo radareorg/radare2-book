@@ -1,7 +1,7 @@
 IOLI 0x06
 =========
 
-nearly a routine to check this binary (not complete output in the following):
+долгий процесс анализа этого двоичного файла (не полное представление результата далее в тексте):
 
 ```shell
 rabin2 -z ./crackme0x06
@@ -32,7 +32,7 @@ static   false
 va       true
 ```
 
-and analyze it then decompile main
+проанализировав ответ, декомпилируем main
 
 ```C
 [0x08048400]> pdd@main
@@ -43,14 +43,14 @@ and analyze it then decompile main
 int32_t main (int32_t arg_10h) {
     int32_t var_78h;
     int32_t var_4h;
-    // adjusting stack
+    // выравнивание стека
     eax = 0;
     eax += 0xf;
     eax += 0xf;
     eax >>= 4;
     eax <<= 4;
 
-    // main logic
+    // основная логика
     printf ("IOLI Crackme Level 0x06\n");
     printf ("Password: ");
     eax = &var_78h;
@@ -63,7 +63,7 @@ int32_t main (int32_t arg_10h) {
 }
 ```
 
-main has 3 arguments `argc, argv, envp`, and this program is compiled with GCC, so the stack should be like this :
+main-у передаются три аргумента `argc, argv, envp`, и эта программа компилировалась GCC, поэтому стек должен быть таким:
 
 ```sh
 [esp + 0x10] - envp
@@ -72,7 +72,7 @@ main has 3 arguments `argc, argv, envp`, and this program is compiled with GCC, 
 [esp + 0x04] - return address
 ```
 
-enter the `check()` and decompile it. this function is different from 0x05 now. but they still have similar code structure.
+входим в функцию `check()` и декомпилируем ее. функция отличается от той, что была в задаче 0x05. но они по-прежнему имеют схожие структуры кода.
 
 ```C
 int32_t check (char * s, int32_t arg_ch) {
@@ -114,7 +114,7 @@ label_0:
 }
 ```
 
-Correct the `sscanf` part and `parell` part, both of them were generated incorrectly:
+Надо исправить `sscanf` и `parell`, обе они были сгенерированы неправильно:
 
 ```C
 int32_t check (char * s, void* envp)
@@ -134,7 +134,7 @@ int32_t check (char * s, void* envp)
 }
 ```
 
- no more info, we have to reverse `parell()` again.
+больше никакой информации, надо снова взламывать `parell()`.
 
 ```C
 #include <stdint.h>
@@ -156,7 +156,7 @@ uint32_t parell (char * s, char * arg_ch) {
 }
 ```
 
-well, there is a new check condition in `parell()` -- `dummy (var_4h, arg_ch) == 0`. then reverse dummy!
+появилось новое условие в `parell()` -- `dummy (var_4h, arg_ch) == 0`. тогда взламываем dummy!
 
 ```C
 [0x080484b4]> pdd@sym.dummy
@@ -195,7 +195,7 @@ label_1:
 }
 ```
 
-looks like a loop to process string. we can beautify it.
+выглядит как цикл обработки строки. можем "украсить" его.
 
 ```C
 [0x080484b4]> pdd@sym.dummy
@@ -212,11 +212,11 @@ int32_t dummy (char ** s1) {
 }
 ```
 
-There are 3 constraints to crackme_0x06:
+Теперь имеем три ограничения в crackme_0x06:
 
-* Digit Sum
-* Odd Number
-* should have an environment variable whose name started with "LOL".
+* Сумма цифр
+* Нечетное число
+* должна быть переменная среды, имя которой начинается с "LOL".
 
 ```sh
 $ ./crackme0x06
