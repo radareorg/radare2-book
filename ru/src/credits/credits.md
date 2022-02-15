@@ -8,7 +8,7 @@
 
 * Книга о radare1 находится здесь [http://www.radare.org/get/radare.pdf](http://www.radare.org/get/radare.pdf) (ссылка не открывается)
 
-Большое спасибо всем, кто участвовал в сосдании gitbook:
+Большое спасибо всем, кто участвовал в создании книги на gitbook:
 
 Adrian Studer,
 Ahmed Mohamed Abd El-MAwgood,
