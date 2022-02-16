@@ -1,31 +1,29 @@
-## Adding Metadata to Disassembly
+## Добавление метаданных к тексту дизассемблера
 
-The typical work involved in reversing binary files makes powerful annotation capabilities essential.
-Radare offers multiple ways to store and retrieve such metadata.
+Типичная работа, связанная с взломом двоичных файлов, - аннотация, она значительно увеличивает производительность процесса.
+Radare предлагает несколько способов хранения и извлечения таких метаданных.
 
-By following common basic UNIX principles, it is easy to write a small utility in a scripting language which uses `objdump`, `otool` or any other existing utility to obtain information from a binary and to import it into radare. For example, take a look at `idc2r.py` shipped with [radare2ida](https://github.com/radareorg/radare2ida). To use it, invoke it as `idc2r.py file.idc > file.r2`. It reads an IDC file exported from an IDA Pro database and produces an r2 script containing the same comments, names of functions and other data. You can import the resulting 'file.r2' by using the dot `.` command of radare:
+Следуя общим основным принципам UNIX, легко написать небольшую утилиту на языке сценариев, которая использует `objdump`, `otool` или любую другую существующую утилиту для получения информации из двоичного файла, и импортировать ее результаты в radare. Например, взгляните на `idc2r.py`, которая поставляется с [radare2ida](https://github.com/radareorg/radare2ida). Использование - запуск `idc2r.py file.idc > file.r2`. Она считывает файл IDC, экспортированный из базы данных IDA Pro, и создает скрипт r2, содержащий те же комментарии, имена функций и другие данные. Полученный файл 'file.r2' можно импортировать с помощью команды "точка" `.` radar-а:
 ```
 [0x00000000]> . file.r2
 ```
-The `.` command is used to interpret Radare commands from external sources, including files and program output. For example, to omit generation of an intermediate file and import the script directly you can use this combination:
+Команда `.` используется для интерпретации команд Radare из внешних источников, включая файлы и выходные данные программы. Чтобы пропустить генерацию промежуточного файла и импортировать скрипт напрямую, можно использовать такую комбинацию:
 ```
 [0x00000000]> .!idc2r.py < file.idc
 ```
 
-Please keep in mind that importing IDA Pro metadata from IDC dump is deprecated mechanism and might
-not work in the future. The recommended way to do it - use [python-idb](https://github.com/williballenthin/python-idb)-based `ida2r2.py` which
-opens IDB files directly without IDA Pro installed.
+Импорт метаданных IDA Pro из дампа IDC является устаревшим механизмом и может не работать в будущем. Рекомендуемый способ - использовать срипт `ida2r2.py`, основанный на [python-idb](https://github.com/williballenthin/python-idb), он открывает IDB файлы напрямую без установки IDA Pro.
 
-The `C` command is used to manage comments and data conversions. You can define a range of program's bytes to be interpreted as either code, binary data or string. It is also possible to execute external code at every specified flag location in order to fetch some metadata, such as a comment, from an external file or database.
+Команда `C` используется для управления комментариями и отображением данных. Можно снаблить некоторый диапазон байтов метаданными, указывающими как его следует интерпретировать: код, блок двоичных данных или строкой. Также можно запустить внешнюю программу, передав ей часть данных флага. Программа должна провести анализ и передать обратно метаданные, например, комментарии. Она может получать данные для анализа из внешнего файла или базы данных в том числе.
 
-There are many different metadata manipulation commands, here is the glimpse of all of them:
+Существует множество различных команд задания метаданнымх, вот краткий обзор всех из них:
 
 ```
 [0x00404cc0]> C?
 | Usage: C[-LCvsdfm*?][*?] [...]   # Metadata management
 | C                                              list meta info in human friendly form
 | C*                                             list meta info in r2 commands
-| C*.                                            list meta info of current offset in r2 commands
+| C*.                                            перечень метаданных, привязанных к текущему смещению, команды r2
 | C- [len] [[@]addr]                             delete metadata at given address range
 | C.                                             list meta info of current offset in human friendly form
 | CC! [@addr]                                    edit comment with $EDITOR
@@ -50,7 +48,7 @@ There are many different metadata manipulation commands, here is the glimpse of 
 | Cz[@addr]                                      add string (see Cs?)
 ```
 
-Simply to add the comment to a particular line/address you can use `Ca` command:
+Добавление комментария к определенной строке/адресу - команда `Ca` :
 
 ```
 [0x00000000]> CCa 0x0000002 this guy seems legit
@@ -60,16 +58,16 @@ Simply to add the comment to a particular line/address you can use `Ca` command:
 0x00000002    0000         add [rax], al
 ```
 
-The `C?` family of commands lets you mark a range as one of several kinds of types. Three basic types are: code (disassembly is done using asm.arch), data (an array of data elements) or string. Use the `Cs` comand to define a string, use the `Cd` command for defining an array of data elements, and use the `Cf` command to define more complex data structures like structs.
+Семейство команд `C?` позволяет пометить некоторый диапазон адресов заданным типом. Три основных типа метаданных - это код (дизассемблирование выполняется с помощью asm.arch), блок данных (массив элементов данных) или строка. Команда `cs` - определение метаданных для строки, команда `Cd` - для массива элементов данных, командп `Cf` - определение сложных структур данных.
 
-Annotating data types is most easily done in visual mode, using the "d" key, short for "data type change". First, use the cursor to select a range of bytes (press `c` key to toggle cursor mode and use HJKL keys to expand selection), then press 'd' to get a menu of possible actions/types. For example, to mark the range as a string, use the 's' option from the menu. You can achieve the same result from the shell using the `Cs` command:
+Аннотация типов данных легче всего выполнять в визуальном режиме, используя клавишу «d», сокращение от "data type change". Используйте курсор для выбора диапазона байтов (нажмите клавишу `c` , чтобы переключить режим курсора, используйте клавиши HJKL для определения области выделения), затем нажмите «d», чтобы получить меню возможных действий / типов. Например, чтобы пометить диапазон как строку, используйте опцию 's' из меню. В командной строке такой же результат получается при помощи команды `Cs`:
 
 ```
 [0x00000000]> f string_foo @ 0x800
 [0x00000000]> Cs 10 @ string_foo
 ```
 
-The `Cf` command is used to define a memory format string (the same syntax used by the `pf` command). Here's an example:
+Команда `Cf` используется для определения структуры для участка памяти (используется тот же синтаксис, что в команде `pf`). Вот пример:
 
 ```
 [0x7fd9f13ae630]> Cf 16 2xi foo bar
@@ -89,17 +87,14 @@ The `Cf` command is used to define a memory format string (the same syntax used 
 0x7fd9f13ae638    4989c4       mov r12, rax
 ```
 
-The `[sz]` argument to `Cf` is used to define how many bytes the struct should take up in the disassembly, and is completely independent from the size of the data structure defined by the format string. This may seem confusing, but has several uses. For example, you may want to see the formatted structure displayed in the disassembly, but still have those locations be visible as offsets and with raw bytes. Sometimes, you find large structures, but only identified a few fields, or only interested in specific fields. Then, you can tell r2 to display only those fields, using the format string and using 'skip' fields, and also have the disassembly continue after the entire structure, by giving it full size using the `sz` argument.
+Аргумент `[sz]` у `Cf` используется для задания количества байтов, занимаемых структурой при дизассемблировании, она полностью независима от размера структуры данных, определяемой строкой задания формата. Может это кажется странным, но этому есть несколько применений. Например, можно задать и форматирование структуры, отображаемой при дизассемблировании, и по-прежнему отображать эти адреса в виде смещений и байтаов. Для больших структур удобно идентифицировать только несколько полей, если нужны только они. Затем можно указать r2 отображать только эти поля, используя строку формата и специальные 'skip'-поля, а также продолжить дизассемблирование после отображения всей структуры, задав ей полный размер с помощью аргумента `sz`.
 
-Using `Cf`, it's easy to define complex structures with simple oneliners. See `pf?` for more information.
-Remember that all these `C` commands can also be accessed from the visual mode by pressing the `d` (data conversion) key.
-Note that unlike [`t`](../analysis/types.md) commands `Cf` doesn't change analysis results. It is only
-a visual boon.
+Использование `Cf` позволяет описывать сложные структуры при помощи простых однострочных командных выражений. Посмотрите инструкцию `pf?`.
+Помните, что все команды группы `C` также доступны в визуальном режиме, нажав кнопку `d` (data conversion).
+В отличие от команды [`t`](../analysis/types.md) команда `Cf` не изменяет результаты анализа. Это только инструмент визуализации.
 
-Sometimes just adding a single line of comments is not enough, in this case radare2 allows you to
-create a link for a particular text file. You can use it with `CC,` command or by pressing `,` key in
-the visual mode. This will open an `$EDITOR` to create a new file, or if filename does exist, just
-will create a link. It will be shown in the disassembly comments:
+Иногда добавление одной строки комментария бывает недостаточно, radare2 позволяет создавать ссылки на текстовые файлы. Функция реализуется командой `СС,` или нажатием клавиши `,` в
+ визуальном режиме. В результате откроется `$EDITOR` для создания нового файла, если файл существует, просто создаст ссылку. Файл будет показан в комментариях к коду:
 
 ```
 [0x00003af7 11% 290 /bin/ls]> pd $r @ main+55 # 0x3af7
@@ -109,7 +104,5 @@ will create a link. It will be shown in the disassembly comments:
 │0x00003b0a  call sym.imp.bindtextdomain   ;[2] ; char *bindtextdomain(char *domainname, char *dirname)
 ```
 
-Note `,(locale-help.txt)` appeared in the comments, if we press `,` again in the visual mode, it
-will open the file. Using this mechanism we can create a long descriptions of some particular places
-in disassembly, link datasheets or related articles.
+Найдите `,(locale-help.txt)` в комментариях выше, если теперь снова нажать `,` в визуальном режиме, файл откроется. Используя этот механизм, создаются длинные описания конкретных мест в дизассемблированном коде, устанавливаются ссылки на документацию, статьи по теме.
 

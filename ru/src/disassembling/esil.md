@@ -1,6 +1,6 @@
 # ESIL
 
-ESIL stands for 'Evaluable Strings Intermediate Language'. It aims to describe a [Forth](https://en.wikipedia.org/wiki/Forth_%28programming_language%29)-like representation for every target CPU opcode semantics. ESIL representations can be evaluated (interpreted) in order to emulate individual instructions. Each command of an ESIL expression is separated by a comma. Its virtual machine can be described as this:
+ESIL расшифровывается как "Evaluable Strings Intermediate Language". Технология использует описание на языке, подобном [Forth](https://en.wikipedia.org/wiki/Forth_%28programming_language%29), семантики оп-кодов операций целевого процессора. Представления ESIL интерпретируются, имитируя отдельные инструкции. Команды выражения ESIL разделяются запятыми. Его виртуальная машина описывается так:
 ```
    while ((word=haveCommand())) {
      if (word.isOperator()) {
@@ -11,45 +11,45 @@ ESIL stands for 'Evaluable Strings Intermediate Language'. It aims to describe a
      nextCommand();
    }
 ```
-As we can see ESIL uses a stack-based interpreter similar to what is commonly used for calculators. You have two categories of inputs: values and operators. A value simply gets pushed on the stack, an operator then pops values (its arguments if you will) off the stack, performs its operation and pushes its results (if any) back on. We can think of ESIL as a post-fix notation of the operations we want to do.
+Как мы видим, ESIL использует интерпретатор на основе стека, аналогичный тому, который обычно используется для калькуляторов. Есть две категории входных данных: значения и операторы. Значение просто помещается в стек, затем оператор извлекает значения (если хотите, его аргументы) из стека, выполняет операцию и помещает результаты (если они есть) обратно в стек. ESIL использует постфиксную нотацию операций, которые мы хотим выполнить.
 
-So let's see an example:
+Посмотрим пример:
 ```
 4,esp,-=,ebp,esp,=[4]
 ```
-Can you guess what this is? If we take this post-fix notation and transform it back to in-fix we get
+Догадываетесь, что это такое? Если возьмем запись и преобразуем ее обратно в инфиксную, получим
 ```
 esp -= 4
 4bytes(dword) [esp] = ebp
 ```
-We can see that this corresponds to the x86 instruction `push ebp`! Isn't that cool?
-The aim is to be able to express most of the common operations performed by CPUs, like binary arithmetic operations, memory loads and stores, processing syscalls. This way if we can transform the instructions to ESIL we can see what a program does while it is running even for the most cryptic architectures you definitely don't have a device to debug on for.
+Теперь видно, что это выражение соответствует инструкции x86. `push ebp`! Круто, да?
+Цель проекта состоит в том выражить большинство операций, выполняемых процессорами: двоичные арифметические операции, загрузка и сохранение ячеек памяти, обработка системных вызовов. Преобразовав инструкции в ESIL, будет увидно, что делает программа во время исполнения. Технология позволяет моделировать самые загадочные архитектуры, или, если у вас нет устройства для отладки.
 
-## Using ESIL
+## Использование ESIL
 
-r2's visual mode is great to inspect the ESIL evaluations.
+Визуальный режим r2 отлично подходит для использования ESIL.
 
-There are 3 environment variables that are important for watching what a program does:
+Есть три переменные среды r2, управляющие формой представления процесса исполнения программы:
 ```
 [0x00000000]> e emu.str = true
 ```
 
-`asm.emu` tells r2 if you want ESIL information to be displayed. If it is set to true, you will see comments appear to the right of your disassembly that tell you how the contents of registers and memory addresses are changed by the current instruction. For example, if you have an instruction that subtracts a value from a register it tells you what the value was before and what it becomes after. This is super useful so you don't have to sit there yourself and track which value goes where.
+`asm.emu` настраивает r2, таким образом, чтобы отображалась информация ESIL. Если установлено значение true, справа от вашего дизассемблированного кода добавятся комментарии, показывающие изменения содержимого регистров и адресов памяти в результате исполнения соответсвующей инструкции. Например, для инструкции, вычитающей значение из регистра, ESIL сообщит, каким было значение до и каким оно становится после исполнения инструкции. Теперь не нужно отслеживать, какое значение куда идет.
 
-One problem with this is that it is a lot of information to take in at once and sometimes you simply don't need it. r2 has a nice compromise for this. That is what the `emu.str` variable is for (`asm.emustr` on <= 2.2). Instead of this super verbose output with every register value, this only adds really useful information to the output, e.g., strings that are found at addresses a program uses or whether a jump is likely to be taken or not.
+Правда при этом приходится воспринимать сразу много информации, что иногда просто не нужно. В r2 есть хороший компромисс. Для этого есть `emu.str` (`asm.emustr` для версии r2 <= 2.2). Вместо сверхподробного вывода с каждым значением регистра, настройка добавляет к коду только действительно полезную информацию, например, строки, найденные по адресам, или вероятность того, что переход будет выполнен или нет.
 
-The third important variable is `asm.esil`. This switches your disassembly to no longer show you the actual disassembled instructions, but instead now shows you corresponding ESIL expressions that describe what the instruction does.
-So if you want to take a look at how instructions are expressed in ESIL simply set "asm.esil" to true.
+Третья важная переменная - `asm.esil`. Она переключает дизассемблирование таким образом, что оно больше не показывает фактически дизассемблированные инструкции, а вместо этого печатает соответствующие выражения ESIL, описывающие, что делает инструкция.
+Если хотите посмотреть, как инструкции выражаются в ESIL, просто установите значение переменной «asm.esil» в true.
 
 ```
 [0x00000000]> e asm.esil = true
 ```
 
-In visual mode you can also toggle this by simply typing `O`.
+В визуальном режиме также можно переключить эти варианты представления кода, просто нажав `О` .
 
-## ESIL Commands
+## ESIL-команды
 
-* "ae" : Evaluate ESIL expression.
+* "ae" : Вычислить выражение ESIL.
 
 ```
 [0x00000000]> "ae 1,1,+"
@@ -57,7 +57,7 @@ In visual mode you can also toggle this by simply typing `O`.
 [0x00000000]>
 ```
 
-* "aes" : ESIL Step.
+* "aes" : Шаг ESIL.
 
 ```
 [0x00000000]> aes
@@ -78,7 +78,7 @@ ADDR BREAK
 [0x00001019]>
 ```
 
-* "ar" : Show/modify ESIL registry.
+* "ar" : Показать/задать регистр ESIL.
 
 ```
 [0x00001ec7]> ar r_00 = 0x1035
@@ -87,74 +87,74 @@ ADDR BREAK
 [0x00001019]>
 ```
 
-### ESIL Instruction Set
+### Набор инструкций ESIL
 
-Here is the complete instruction set used by the ESIL VM:
+Вот полный набор инструкций, используемый виртуальной машиной ESIL:
 
-ESIL Opcode | Operands | Name | Operation| example
+| Код операции ESIL | Операнды | Название | Операция | пример |
 --- | --- | --- | --- | ----------------------------------------------
-TRAP  | src | Trap | Trap signal |
-**$** | src | Interrupt | interrupt | 0x80,$
-**()** | src | Syscall | syscall | rax,()
-**$$** | src | Instruction address | Get address of current instruction<br>stack=instruction address |
-**==** | src,dst | Compare | stack = (dst == src) ; <br> update_eflags(dst - src) |
-**<** | src,dst | Smaller (signed comparison) | stack = (dst < src) ; <br> update_eflags(dst - src) | [0x0000000]> "ae 1,5,<" <br>0x0<br>&gt; "ae 5,5"<br>0x0"
-**<=** | src,dst | Smaller or Equal (signed comparison) | stack = (dst <= src) ; <br> update_eflags(dst - src) | [0x0000000]> "ae 1,5,<" <br>0x0<br>&gt; "ae 5,5"<br>0x1"
-**>** | src,dst | Bigger (signed comparison) | stack = (dst > src) ; <br> update_eflags(dst - src) | &gt; "ae 1,5,>"<br>0x1<br>&gt; "ae 5,5,>"<br>0x0
-**>=** | src,dst | Bigger or Equal (signed comparison) | stack = (dst >= src) ; <br> update_eflags(dst - src) | &gt; "ae 1,5,>="<br>0x1<br>&gt; "ae 5,5,>="<br>0x1
-**<<** | src,dst | Shift Left | stack = dst << src | &gt; "ae 1,1,<<"<br>0x2<br>&gt; "ae 2,1,<<"<br>0x4
-**>>** | src,dst | Shift Right | stack = dst >> src | &gt; "ae 1,4,>>"<br>0x2<br>&gt; "ae 2,4,>>"<br>0x1
-**<<<** | src,dst | Rotate Left | stack=dst ROL src | &gt; "ae 31,1,<<<"<br>0x80000000<br>&gt; "ae 32,1,<<<"<br>0x1
-**>>>** | src,dst | Rotate Right | stack=dst ROR src | &gt; "ae 1,1,>>>"<br>0x80000000<br>&gt; "ae 32,1,>>>"<br>0x1
-**&** | src,dst | AND | stack = dst & src | &gt; "ae 1,1,&"<br>0x1<br>&gt; "ae 1,0,&"<br>0x0<br>&gt;  "ae 0,1,&"<br>0x0<br>&gt; "ae 0,0,&"<br>0x0
-**&#x7c;** | src,dst | OR | stack = dst &#x7c; src | &gt; "ae 1,1,&#x7c;"<br>0x1<br>&gt; "ae 1,0,&#x7c;"<br>0x1<br>&gt; "ae 0,1,&#x7c;"<br>0x1<br>&gt; "ae 0,0,&#x7c;"<br>0x0
-**^** | src,dst | XOR | stack = dst ^src  | &gt; "ae 1,1,^"<br>0x0<br>&gt; "ae 1,0,^"<br>0x1<br>&gt; "ae 0,1,^"<br>0x1<br>&gt; "ae 0,0,^"<br>0x0
-**+** | src,dst | ADD | stack = dst + src | &gt; "ae 3,4,+"<br>0x7<br>&gt; "ae 5,5,+"<br>0xa
-**-** | src,dst | SUB | stack = dst - src | &gt; "ae 3,4,-"<br>0x1<br>&gt; "ae 5,5,-"<br>0x0<br>&gt; "ae 4,3,-"<br>0xffffffffffffffff
-**\*** | src,dst | MUL | stack = dst * src | &gt; "ae 3,4,\*"<br>0xc<br>&gt; "ae 5,5,\*"<br>0x19
-**/** | src,dst | DIV | stack = dst / src  | &gt; "ae 2,4,/"<br>0x2<br>&gt; "ae 5,5,/"<br>0x1<br>&gt; "ae 5,9,/"<br>0x1
-**%** | src,dst | MOD | stack = dst % src | &gt; "ae 2,4,%"<br>0x0<br>&gt; "ae 5,5,%"<br>0x0<br>&gt; "ae 5,9,%"<br>0x4
-**~** | bits,src | SIGNEXT | stack = src sign extended | &gt; "ae 8,0x80,~"<br>0xffffffffffffff80
-**~/** | src,dst | SIGNED DIV | stack = dst / src (signed) | &gt; "ae 2,-4,~/"<br>0xfffffffffffffffe
-**~%** | src,dst | SIGNED MOD | stack = dst % src (signed) | &gt; "ae 2,-5,~%"<br>0xffffffffffffffff
-**!** | src | NEG | stack = !!!src | &gt; "ae 1,!"<br>0x0<br>&gt; "ae 4,!"<br>0x0<br>&gt; "ae 0,!"<br>0x1<br>
-**++** | src | INC | stack = src++ | &gt; ar r_00=0;ar r_00<br>0x00000000<br>&gt; "ae r_00,++"<br>0x1<br>&gt; ar r_00<br>0x00000000<br>&gt; "ae 1,++"<br>0x2
-**--** | src | DEC | stack = src-- | &gt; ar r_00=5;ar r_00<br>0x00000005<br>&gt; "ae r_00,--"<br>0x4<br>&gt; ar r_00<br>0x00000005<br>&gt; "ae 5,--"<br>0x4
-**=** | src,reg | EQU | reg = src | &gt; "ae 3,r_00,="<br>&gt; aer r_00<br>0x00000003<br>&gt; "ae r_00,r_01,="<br>&gt; aer r_01<br>0x00000003
-**:=** | src,reg | weak EQU | reg = src without side effects | &gt; "ae 3,r_00,:="<br>&gt; aer r_00<br>0x00000003<br>&gt; "ae r_00,r_01,:="<br>&gt; aer r_01<br>0x00000003
-**+=** | src,reg | ADD eq | reg = reg + src | &gt; ar r_01=5;ar r_00=0;ar r_00<br>0x00000000<br>&gt; "ae r_01,r_00,+="<br>&gt; ar r_00<br>0x00000005<br>&gt; "ae 5,r_00,+="<br>&gt; ar r_00<br>0x0000000a
-**-=** | src,reg | SUB eq | reg = reg - src | &gt; "ae r_01,r_00,-="<br>&gt; ar r_00<br>0x00000004<br>&gt; "ae 3,r_00,-="<br>&gt; ar r_00<br>0x00000001
-**\*=** | src,reg | MUL eq | reg = reg * src | &gt; ar r_01=3;ar r_00=5;ar r_00<br>0x00000005<br>&gt; "ae r_01,r_00,\*="<br>&gt; ar r_00<br>0x0000000f<br>&gt; "ae 2,r_00,\*="<br>&gt; ar r_00<br>0x0000001e
- **/=** | src,reg | DIV eq | reg = reg / src | &gt; ar r_01=3;ar r_00=6;ar r_00<br>0x00000006<br>&gt; "ae r_01,r_00,/="<br>&gt; ar r_00<br>0x00000002<br>&gt; "ae 1,r_00,/="<br>&gt; ar r_00<br>0x00000002
- **%=** | src,reg | MOD eq | reg = reg % src | &gt;  ar r_01=3;ar r_00=7;ar r_00<br> 0x00000007<br> &gt; "ae r_01,r_00,%="<br> &gt; ar r_00<br> 0x00000001<br> &gt;  ar r_00=9;ar r_00<br> 0x00000009<br> &gt; "ae 5,r_00,%="<br> &gt; ar r_00<br> 0x00000004
-**<<=** | src,reg | Shift Left eq | reg = reg << src | &gt; ar r_00=1;ar r_01=1;ar r_01<br>0x00000001<br>&gt; "ae r_00,r_01,<<="<br>&gt; ar r_01<br>0x00000002<br>&gt; "ae 2,r_01,<<="<br>&gt; ar r_01<br>0x00000008
-**>>=** | src,reg | Shift Right eq | reg = reg << src | &gt; ar r_00=1;ar r_01=8;ar r_01<br>0x00000008<br>&gt; "ae r_00,r_01,>>="<br>&gt; ar r_01<br>0x00000004<br>&gt; "ae 2,r_01,>>="<br>&gt; ar r_01<br>0x00000001
-**&=** | src,reg |  AND eq | reg = reg & src | &gt; ar r_00=2;ar r_01=6;ar r_01<br>0x00000006<br>&gt; "ae r_00,r_01,&="<br>&gt; ar r_01<br>0x00000002<br>&gt; "ae 2,r_01,&="<br>&gt; ar r_01<br>0x00000002<br>&gt; "ae 1,r_01,&="<br>&gt; ar r_01<br>0x00000000
-**&#x7c;=** | src,reg | OR eq| reg = reg &#x7c; src | &gt; ar r_00=2;ar r_01=1;ar r_01<br>0x00000001<br>&gt; "ae r_00,r_01,&#x7c;="<br>&gt; ar r_01<br>0x00000003<br>&gt; "ae 4,r_01,&#x7c;="<br>&gt; ar r_01<br>0x00000007
- **^=** | src,reg | XOR eq | reg = reg ^ src | &gt; ar r_00=2;ar r_01=0xab;ar r_01<br>0x000000ab<br>&gt; "ae r_00,r_01,^="<br>&gt; ar r_01<br>0x000000a9<br>&gt; "ae 2,r_01,^="<br>&gt; ar r_01<br>0x000000ab
-**++=** | reg | INC eq | reg = reg + 1 | &gt; ar r_00=4;ar r_00<br>0x00000004<br>&gt; "ae r_00,++="<br>&gt; ar r_00<br>0x00000005
-**--=** | reg | DEC eq | reg = reg - 1 | &gt; ar r_00=4;ar r_00<br>0x00000004<br>&gt; "ae r_00,--="<br>&gt; ar r_00<br>0x00000003
-**!=** | reg | NOT eq | reg = !reg | &gt; ar r_00=4;ar r_00<br>0x00000004<br>&gt; "ae r_00,!="<br>&gt; ar r_00<br>0x00000000<br>&gt; "ae r_00,!="<br>&gt; ar r_00<br>0x00000001
---- | --- | --- | --- | ----------------------------------------------
-=[]<br>=[\*]<br>=[1]<br>=[2]<br>=[4]<br>=[8] | src,dst | poke |\*dst=src | <br>&gt; "ae 0xdeadbeef,0x10000,=[4],"<br><br>&gt; pxw 4@0x10000<br>0x00010000  0xdeadbeef                                ....<br><br>&gt; "ae 0x0,0x10000,=[4],"<br><br>&gt; pxw 4@0x10000<br>0x00010000  0x00000000
-[]<br>[\*]<br>[1]<br>[2]<br>[4]<br>[8] | src | peek | stack=\*src | <br>&gt; w test@0x10000<br><br>&gt; "ae 0x10000,[4],"<br>0x74736574<br><br>&gt; ar r_00=0x10000<br><br>&gt; "ae r_00,[4],"<br>0x74736574
-&#x7c;=[]<br>&#x7c;=[1]<br>&#x7c;=[2]<br>&#x7c;=[4]<br>&#x7c;=[8] | reg | nombre | code | &gt; <br>&gt;
-SWAP |  | Swap | Swap two top elements | SWAP
-DUP | | Duplicate | Duplicate top element in stack | DUP
-NUM | | Numeric | If top element is a reference <br> (register name, label, etc),<br> dereference it and push its real value | NUM
-CLEAR | | Clear | Clear stack | CLEAR
-BREAK | | Break | Stops ESIL emulation | BREAK
-GOTO | n | Goto | Jumps to Nth ESIL word | GOTO 5
-TODO | | To Do | Stops execution<br> (reason: ESIL expression not completed) | TODO
+| TRAP | src | Trap | Trap сигнал |
+| **$** | src | Interrupt | interrupt | 0x80,$ |
+| **()** | src | Syscall | syscall | rax,() |
+| **$$** | src | Адрес инструкции | Получить адрес текущей инструкции <br>стек=адрес инструкции |
+| **==** | src,dst | Compare | stack = (dst == src) ; <br> update_eflags(dst - src) |
+| **<** | src,dst | Smaller (сравнение с учетом знака) | stack = (dst < src) ; <br> update_eflags(dst - src) | [0x0000000]> "ae 1,5,<" <br>0x0<br>&gt; "ae 5,5"<br>0x0" |
+| **<=** | src,dst | Smaller or Equal (сравнение с учетом знака) | stack = (dst <= src) ; <br> update_eflags(dst - src) | [0x0000000]> "ae 1,5,<" <br>0x0<br>&gt; "ae 5,5"<br>0x1" |
+| **>** | src,dst | Bigger (сравнение с учетом знака) | stack = (dst > src) ; <br> update_eflags(dst - src) | &gt; "ae 1,5,>"<br>0x1<br>&gt; "ae 5,5,>"<br>0x0 |
+| **>=** | src,dst | Bigger or Equal (сравнение с учетом знака) | stack = (dst >= src) ; <br> update_eflags(dst - src) | &gt; "ae 1,5,>="<br>0x1<br>&gt; "ae 5,5,>="<br>0x1 |
+| **<<** | src,dst | Shift Left | stack = dst << src | &gt; "ae 1,1,<<"<br>0x2<br>&gt; "ae 2,1,<<"<br>0x4 |
+| **>>** | src,dst | Shift Right | stack = dst >> src | &gt; "ae 1,4,>>"<br>0x2<br>&gt; "ae 2,4,>>"<br>0x1 |
+| **<<<** | src,dst | Rotate Left | stack=dst ROL src | &gt; "ae 31,1,<<<"<br>0x80000000<br>&gt; "ae 32,1,<<<"<br>0x1 |
+| **>>>** | src,dst | Rotate Right | stack=dst ROR src | &gt; "ae 1,1,>>>"<br>0x80000000<br>&gt; "ae 32,1,>>>"<br>0x1 |
+| **&** | src,dst | AND | stack = dst & src | &gt; "ae 1,1,&"<br>0x1<br>&gt; "ae 1,0,&"<br>0x0<br>&gt;  "ae 0,1,&"<br>0x0<br>&gt; "ae 0,0,&"<br>0x0 |
+| **&#x7c;** | src,dst | OR | stack = dst &#x7c; src | &gt; "ae 1,1,&#x7c;"<br>0x1<br>&gt; "ae 1,0,&#x7c;"<br>0x1<br>&gt; "ae 0,1,&#x7c;"<br>0x1<br>&gt; "ae 0,0,&#x7c;"<br>0x0 |
+| **^** | src,dst | XOR | stack = dst ^src | &gt; "ae 1,1,^"<br>0x0<br>&gt; "ae 1,0,^"<br>0x1<br>&gt; "ae 0,1,^"<br>0x1<br>&gt; "ae 0,0,^"<br>0x0 |
+| **+** | src,dst | ADD | stack = dst + src | &gt; "ae 3,4,+"<br>0x7<br>&gt; "ae 5,5,+"<br>0xa |
+| **-** | src,dst | SUB | stack = dst - src | &gt; "ae 3,4,-"<br>0x1<br>&gt; "ae 5,5,-"<br>0x0<br>&gt; "ae 4,3,-"<br>0xffffffffffffffff |
+| **\*** | src,dst | MUL | stack = dst * src | &gt; "ae 3,4,\*"<br>0xc<br>&gt; "ae 5,5,\*"<br>0x19 |
+| **/** | src,dst | DIV | stack = dst / src | &gt; "ae 2,4,/"<br>0x2<br>&gt; "ae 5,5,/"<br>0x1<br>&gt; "ae 5,9,/"<br>0x1 |
+| **%** | src,dst | MOD | stack = dst % src | &gt; "ae 2,4,%"<br>0x0<br>&gt; "ae 5,5,%"<br>0x0<br>&gt; "ae 5,9,%"<br>0x4 |
+| **~** | bits,src | SIGNEXT | stack = src sign extended | &gt; "ae 8,0x80,~"<br>0xffffffffffffff80 |
+| **~/** | src,dst | SIGNED DIV | stack = dst / src (signed) | &gt; "ae 2,-4,~/"<br>0xfffffffffffffffe |
+| **~%** | src,dst | SIGNED MOD | stack = dst % src (signed) | &gt; "ae 2,-5,~%"<br>0xffffffffffffffff |
+| **!** | src | NEG | stack = !!!src | &gt; "ae 1,!"<br>0x0<br>&gt; "ae 4,!"<br>0x0<br>&gt; "ae 0,!"<br>0x1<br> |
+| **++** | src | INC | stack = src++ | &gt; ar r_00=0;ar r_00<br>0x00000000<br>&gt; "ae r_00,++"<br>0x1<br>&gt; ar r_00<br>0x00000000<br>&gt; "ae 1,++"<br>0x2 |
+| **--** | src | DEC | stack = src-- | &gt; ar r_00=5;ar r_00<br>0x00000005<br>&gt; "ae r_00,--"<br>0x4<br>&gt; ar r_00<br>0x00000005<br>&gt; "ae 5,--"<br>0x4 |
+| **=** | src,reg | EQU | reg = src | &gt; "ae 3,r_00,="<br>&gt; aer r_00<br>0x00000003<br>&gt; "ae r_00,r_01,="<br>&gt; aer r_01<br>0x00000003 |
+| **:=** | src,reg | weak EQU | reg = src without side effects | &gt; "ae 3,r_00,:="<br>&gt; aer r_00<br>0x00000003<br>&gt; "ae r_00,r_01,:="<br>&gt; aer r_01<br>0x00000003 |
+| **+=** | src,reg | ADD eq | reg = reg + src | &gt; ar r_01=5;ar r_00=0;ar r_00<br>0x00000000<br>&gt; "ae r_01,r_00,+="<br>&gt; ar r_00<br>0x00000005<br>&gt; "ae 5,r_00,+="<br>&gt; ar r_00<br>0x0000000a |
+| **-=** | src,reg | SUB eq | reg = reg - src | &gt; "ae r_01,r_00,-="<br>&gt; ar r_00<br>0x00000004<br>&gt; "ae 3,r_00,-="<br>&gt; ar r_00<br>0x00000001 |
+| **\*=** | src,reg | MUL eq | reg = reg * src | &gt; ar r_01=3;ar r_00=5;ar r_00<br>0x00000005<br>&gt; "ae r_01,r_00,\*="<br>&gt; ar r_00<br>0x0000000f<br>&gt; "ae 2,r_00,\*="<br>&gt; ar r_00<br>0x0000001e |
+| **/=** | src,reg | DIV eq | reg = reg / src | &gt; ar r_01=3;ar r_00=6;ar r_00<br>0x00000006<br>&gt; "ae r_01,r_00,/="<br>&gt; ar r_00<br>0x00000002<br>&gt; "ae 1,r_00,/="<br>&gt; ar r_00<br>0x00000002 |
+| **%=** | src,reg | MOD eq | reg = reg % src | &gt;  ar r_01=3;ar r_00=7;ar r_00<br> 0x00000007<br> &gt; "ae r_01,r_00,%="<br> &gt; ar r_00<br> 0x00000001<br> &gt;  ar r_00=9;ar r_00<br> 0x00000009<br> &gt; "ae 5,r_00,%="<br> &gt; ar r_00<br> 0x00000004 |
+| **<<=** | src,reg | Shift Left eq | reg = reg << src | &gt; ar r_00=1;ar r_01=1;ar r_01<br>0x00000001<br>&gt; "ae r_00,r_01,<<="<br>&gt; ar r_01<br>0x00000002<br>&gt; "ae 2,r_01,<<="<br>&gt; ar r_01<br>0x00000008 |
+| **>>=** | src,reg | Shift Right eq | reg = reg << src | &gt; ar r_00=1;ar r_01=8;ar r_01<br>0x00000008<br>&gt; "ae r_00,r_01,>>="<br>&gt; ar r_01<br>0x00000004<br>&gt; "ae 2,r_01,>>="<br>&gt; ar r_01<br>0x00000001 |
+| **&=** | src,reg | AND eq | reg = reg & src | &gt; ar r_00=2;ar r_01=6;ar r_01<br>0x00000006<br>&gt; "ae r_00,r_01,&="<br>&gt; ar r_01<br>0x00000002<br>&gt; "ae 2,r_01,&="<br>&gt; ar r_01<br>0x00000002<br>&gt; "ae 1,r_01,&="<br>&gt; ar r_01<br>0x00000000 |
+| **&#x7c;=** | src,reg | OR eq | reg = reg &#x7c; src | &gt; ar r_00=2;ar r_01=1;ar r_01<br>0x00000001<br>&gt; "ae r_00,r_01,&#x7c;="<br>&gt; ar r_01<br>0x00000003<br>&gt; "ae 4,r_01,&#x7c;="<br>&gt; ar r_01<br>0x00000007 |
+| **^=** | src,reg | XOR eq | reg = reg ^ src | &gt; ar r_00=2;ar r_01=0xab;ar r_01<br>0x000000ab<br>&gt; "ae r_00,r_01,^="<br>&gt; ar r_01<br>0x000000a9<br>&gt; "ae 2,r_01,^="<br>&gt; ar r_01<br>0x000000ab |
+| **++=** | reg | INC eq | reg = reg + 1 | &gt; ar r_00=4;ar r_00<br>0x00000004<br>&gt; "ae r_00,++="<br>&gt; ar r_00<br>0x00000005 |
+| **--=** | reg | DEC eq | reg = reg - 1 | &gt; ar r_00=4;ar r_00<br>0x00000004<br>&gt; "ae r_00,--="<br>&gt; ar r_00<br>0x00000003 |
+| **!=** | reg | NOT eq | reg = !reg | &gt; ar r_00=4;ar r_00<br>0x00000004<br>&gt; "ae r_00,!="<br>&gt; ar r_00<br>0x00000000<br>&gt; "ae r_00,!="<br>&gt; ar r_00<br>0x00000001 |
+| --- | --- | --- | --- | ---------------------------------------------- |
+| =[]<br>=[\*]<br>=[1]<br>=[2]<br>=[4]<br>=[8] | src,dst | poke | \*dst=src | <br>&gt; "ae 0xdeadbeef,0x10000,=[4],"<br><br>&gt; pxw 4@0x10000<br>0x00010000  0xdeadbeef                                ....<br><br>&gt; "ae 0x0,0x10000,=[4],"<br><br>&gt; pxw 4@0x10000<br>0x00010000  0x00000000 |
+| []<br>[\*]<br>[1]<br>[2]<br>[4]<br>[8] | src | peek | stack=\*src | <br>&gt; w test@0x10000<br><br>&gt; "ae 0x10000,[4],"<br>0x74736574<br><br>&gt; ar r_00=0x10000<br><br>&gt; "ae r_00,[4],"<br>0x74736574 |
+| &#x7c;=[]<br>&#x7c;=[1]<br>&#x7c;=[2]<br>&#x7c;=[4]<br>&#x7c;=[8] | reg | nombre | code | &gt; <br>&gt; |
+| SWAP |  | Swap | Поменять местами два верхних элемента | SWAP |
+| DUP | | Duplicate | Дублировать верхний элемент в стеке | DUP |
+| NUM | | Numeric | Если верхний элемент является ссылкой <br> (регистровое имя, метка и т.д.),<br> разыменовать его и положить на стек его реальное значение | NUM |
+| CLEAR | | Clear | Очистить стек | CLEAR |
+| BREAK | | Break | Останавливает эмуляцию ESIL | BREAK |
+| GOTO | n | Goto | Переход к N-му слову ESIL | GOTO 5 |
+| TODO | | To Do | Останавливает выполнение <br> (причина: выражение ESIL не завершено) | TODO |
 
-### ESIL Flags
+### Флаги ESIL
 
-ESIL VM provides by default a set of helper operations for calculating flags.
-They fulfill their purpose by comparing the old and the new value of the dst operand of the last performed eq-operation.
-On every eq-operation (e.g. `=`) ESIL saves the old and new value of the dst operand.
-Note, that there also exist weak eq operations (e.g. `:=`), which do not affect flag operations.
-The `==` operation affects flag operations, despite not being an eq operation.
-Flag operations are prefixed with `$` character.
+ESIL VM по умолчанию предоставляет набор вспомогательных операций для вычисления флагов.
+Они выполняют свою задачу, сравнивая старое и новое значение операнда dst последней выполненной операции eq.
+На каждой операции eq (например, `==`) ESIL сохраняет старое и новое значение операнда dst.
+Обратите внимание, что существуют также слабые операции eq (например,`:=`), которые не влияют на операции с флагами.
+Операция `==` влияет на операции с флагами, несмотря на то, что она не является операцией eq.
+Операции с флагами задаются префиксным символом `$`.
 
 ```
 z      - zero flag, only set if the result of an operation is 0
@@ -242,13 +242,13 @@ equalsTo("")    -> empty string, aka nop (wrong, if we append pc+=x)
 ```
 
 Common operations:
- * Check dstreg
- * Check srcreg
- * Get destinaion
- * Is jump
- * Is conditional
- * Evaluate
- * Is syscall
+* Check dstreg
+* Check srcreg
+* Get destinaion
+* Is jump
+* Is conditional
+* Evaluate
+* Is syscall
 
 ### CPU Flags
 
@@ -317,7 +317,7 @@ cx,!,?{,BREAK,},esi,[1],edi,[1],==,?{,BREAK,},esi,++,edi,++,cx,--,0,GOTO
 
 ### Unimplemented/Unhandled Instructions
 
-Those are expressed with the 'TODO' command. They act as a 'BREAK', but displays a warning message describing that an instruction is not implemented and will not be emulated. For example:
+Those are expressed with the 'TODO' command. They act as a 'BREAK', but displays a warning message describing that an instruction is not implemented and will not be emulated. Например:
 
 ```
 fmulp ST(1), ST(0)      =>      TODO,fmulp ST(1),ST(0)
@@ -389,12 +389,12 @@ Return false or 0 if you want to trace ESIL expression parsing.
 Other operations require bindings to external functionalities to work. In this case, `r_ref` and `r_io`. This must be defined when initializing the ESIL VM.
 
 * Io Get/Set
-  ```
-  Out ax, 44
-  44,ax,:ou
-  ```
+   ```
+   Out ax, 44
+   44,ax,:ou
+   ```
 * Selectors (cs,ds,gs...)
-  ```
-  Mov eax, ds:[ebp+8]
-  Ebp,8,+,:ds,eax,=
-  ```
+   ```
+   Mov eax, ds:[ebp+8]
+   Ebp,8,+,:ds,eax,=
+   ```
