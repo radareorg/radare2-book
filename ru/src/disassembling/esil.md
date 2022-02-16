@@ -157,36 +157,36 @@ ESIL VM по умолчанию предоставляет набор вспом
 Операции с флагами задаются префиксным символом `$`.
 
 ```
-z      - zero flag, only set if the result of an operation is 0
-b      - borrow, this requires to specify from which bit (example: 4,$b - checks if borrow from bit 4)
-c      - carry, same like above (example: 7,$c - checks if carry from bit 7)
-o      - overflow
-p      - parity
-r      - regsize ( asm.bits/8 )
-s      - sign
+z      - флаг zero (ноль) устанавливается только если результат был 0
+b      - флаг borrow (заем), требует указывать из какого бита занимать (пример: 4,$b - проверяет, можно ли занимать из бита 4)
+c      - флаг carry (перенос), то же что выше(пример: 7,$c - проверяет наличие переноса из бита 7)
+o      - флаг overflow (переполнение)
+p      - флаг parity (четность)
+r      - флаг regsize (изменение размера) ( asm.bits/8 )
+s      - флаг sign (знак)
 ds     - delay slot state
 jt     - jump target
 js     - jump target set
 ```
 
-## Syntax and Commands
-A target opcode is translated into a comma separated list of ESIL expressions.
+## Синтаксис и команды
+Целевой оп-код транслируется в список выражений ESIL, разделенных запятыми.
 ```
 xor eax, eax    ->    0,eax,=,1,zf,=
 ```
-Memory access is defined by brackets operation:
+Доступ к памяти определяется операцииями "скобки":
 ```
 mov eax, [0x80480]   ->   0x80480,[],eax,=
 ```
-Default operand size is determined by size of operation destination.
+Размер данных по умолчанию определяется размером операнда назначения.
 ```
 movb $0, 0x80480     ->   0,0x80480,=[1]
 ```
 
-The `?` operator uses the value of its argument to decide whether to evaluate the expression in curly braces.
+Оператор `?` использует значение своего аргумента, решает, следует ли вычислять выражение в фигурных скобках.
 
-1. Is the value zero?      -> Skip it.
-2. Is the value non-zero?  -> Evaluate it.
+1. Значение равно нулю?      -> Пропустить.
+2. Значение не равно нулю?  -> Вычислить.
 
 ```
 cmp eax, 123  ->   123,eax,==,$z,zf,=
@@ -194,37 +194,37 @@ jz eax        ->   zf,?{,eax,eip,=,}
 ```
 
 
-If you want to run several expressions under a conditional, put them in curly braces:
+Запустить несколько выражений под условным выражением можно, поместив их в фигурные скобки:
 ```
 zf,?{,eip,esp,=[],eax,eip,=,$r,esp,-=,}
 ```
 
-Whitespaces, newlines and other chars are ignored. So the first thing when processing a ESIL program is to remove spaces:
+Пробелы, переводы строки и другие символы игнорируются. Итак, первое, что нужно сделать при подготовке ESIL-программы, — удалить пробелы:
 ```
 esil = r_str_replace (esil, " ", "", R_TRUE);
 ```
 
-Syscalls need special treatment. They are indicated by '$' at the beginning of an expression. You can pass an optional numeric value to specify a number of syscall. An ESIL emulator must handle syscalls. See (r_esil_syscall).
+Системные вызовы нуждаются в особой обработке. Они обозначаются символом «$» в начале выражения. Можно передать необязательное числовое значение - номер системного вызова. Эмулятор ESIL должен обрабатывать системные вызовы. Смотри (r_esil_syscall).
 
-## Arguments Order for Non-associative Operations
+## Порядок аргументов для неассоциативных операций
 
-As discussed on IRC, the current implementation works like this:
+Как обсуждалось в IRC, текущая реализация работает следующим образом:
 
 ```
 a,b,-      b - a
 a,b,/=     b /= a
 ```
-This approach is more readable, but it is less stack-friendly.
+Такой вариант более удобочитаем, но менее удобен для стека.
 
-### Special Instructions
+### Специальные указания
 
-NOPs are represented as empty strings. As it was said previously, interrupts are marked by '$' command. For example, '0x80,$'. It delegates emulation from the ESIL machine to a callback which implements interrupt handler for a specific OS/kernel/platform.
+NOP представлены в виде пустых строк. Как было сказано выше, прерывания помечаются командой '$'. Например, «0x80,$». Он делегирует эмуляцию с машины ESIL callback-функции, реализующей обработчик прерывания для конкретной ОС/ядра/платформы.
 
-Traps are implemented with the `TRAP` command. They are used to throw exceptions for invalid instructions, division by zero, memory read error, or any other needed by specific architectures.
+Аппаратные прерывания (traps) реализованы при помощи команды `TRAP`. Они используются для создания исключений для недопустимых инструкций, деления на ноль, ошибки чтения памяти или любых других действий, необходимых для конкретных архитектур.
 
-### Quick Analysis
+### Экспресс-анализ
 
-Here is a list of some quick checks to retrieve information from an ESIL string. Relevant information will be probably found in the first expression of the list.
+Вот список некоторых экспресс-проверок для извлечения информации из строки ESIL. Соответствующая информация, вероятно, будет найдена в первом выражении списка.
 ```
 indexOf('[')    -> have memory references
 indexOf("=[")   -> write in memory
@@ -241,38 +241,38 @@ indexOf("?{")   -> conditional
 equalsTo("")    -> empty string, aka nop (wrong, if we append pc+=x)
 ```
 
-Common operations:
-* Check dstreg
-* Check srcreg
-* Get destinaion
-* Is jump
-* Is conditional
-* Evaluate
-* Is syscall
+Общие операции:
+* Проверить dstreg
+* Проверить srcreg
+* Получить целевой адрес
+* Переход?
+* Условие?
+* Вычислить
+* Системныйвызов?
 
-### CPU Flags
+### Флаги ЦП
 
-CPU flags are usually defined as single bit registers in the RReg profile. They are sometimes found under the 'flg' register type.
+Флаги ЦП обычно определяются как однобитные регистры в профиле RReg. Иногда их можно найти в типе регистра 'flg'.
 
-### Variables
+### Переменные
 
-Properties of the VM variables:
+Свойства переменных ВМ:
 
-1. They have no predefined bit width. This way it should be easy to extend them to 128, 256 and 512 bits later, e.g. for MMX, SSE, AVX, Neon SIMD.
+1. У них нет предопределенной разрядности. Таким образом, их при необходимости легко расширить до 128, 256 и 512 бит, например, для MMX, SSE, AVX, Neon SIMD.
 
-2. There can be unbound number of variables. It is done for SSA-form compatibility.
+2. Может быть неограниченное количество переменных. Это сделано для совместимости с SSA-формами.
 
-3. Register names have no specific syntax. They are just strings.
+3. Имена регистров не имеют определенного синтаксиса. Это просто строки.
 
-4. Numbers can be specified in any base supported by RNum (dec, hex, oct, binary ...).
+4. Числа могут быть указаны в любой системе счисления, поддерживаемой RNum (десятичная, шестнадцатеричная, восьмеричная, двоичная...).
 
-5. Each ESIL backend should have an associated RReg profile to describe the ESIL register specs.
+5. Каждый бэкенд ESIL должен иметь связанный профиль RReg для описания спецификаций регистра ESIL.
 
-### Bit Arrays
+### Битовые массивы
 
-What to do with them? What about bit arithmetics if use variables instead of registers?
+Что с ними можно сделать? А как насчет битовой арифметики, если использовать переменные вместо регистров?
 
-### Arithmetics
+### Арифметика
 
 1. ADD ("+")
 2. MUL ("\*")
@@ -281,7 +281,7 @@ What to do with them? What about bit arithmetics if use variables instead of reg
 5. MOD ("%")
 
 
-### Bit Arithmetics
+### Битовая арифметика
 
 1. AND  "&"
 2. OR   "|"
@@ -292,13 +292,13 @@ What to do with them? What about bit arithmetics if use variables instead of reg
 7. ROR  ">>>"
 8. NEG  "!"
 
-### Floating Point Unit Support
+### Поддержка устройств с плавающей запятой
 
-At the moment of this writing, ESIL does not yet support FPU. But you can implement support for unsupported instructions using r2pipe. Eventually we will get proper support for multimedia and floating point.
+На момент написания этой статьи ESIL еще не поддерживает FPU. Можете реализовать поддержку неподдерживаемых инструкций с помощью r2pipe. В конце концов мы получим надлежащую поддержку мультимедиа и операций с плавающей запятой.
 
-### Handling x86 REP Prefix in ESIL
+### Обработка префикса x86 REP в ESIL
 
-ESIL specifies that the parsing control-flow commands must be uppercase. Bear in mind that some architectures have uppercase register names. The corresponding register profile should take care not to reuse any of the following:
+ESIL указывает, что команды анализа потока управления должны быть в верхнем регистре. Имейте в виду, что некоторые архитектуры используют имена регистров в верхнем регистре. Соответствующий профиль регистра должен позаботиться о том, чтобы не использовать повторно ни одно из следующего:
 ```
 3,SKIP   - skip N instructions. used to make relative forward GOTOs
 3,GOTO   - goto instruction 3
@@ -308,22 +308,22 @@ STACK    - dump stack contents to screen
 CLEAR    - clear stack
 ```
 
-#### Usage Example:
+#### Пример использования:
 
 rep cmpsb
 ```
 cx,!,?{,BREAK,},esi,[1],edi,[1],==,?{,BREAK,},esi,++,edi,++,cx,--,0,GOTO
 ```
 
-### Unimplemented/Unhandled Instructions
+### Нереализованные/необработанные инструкции
 
-Those are expressed with the 'TODO' command. They act as a 'BREAK', but displays a warning message describing that an instruction is not implemented and will not be emulated. Например:
+Они выражаются командой TODO. Они действуют как «BREAK», но отображают предупреждающее сообщение о том, что инструкция не реализована и не будет эмулироваться. Например:
 
 ```
 fmulp ST(1), ST(0)      =>      TODO,fmulp ST(1),ST(0)
 ```
 
-### ESIL Disassembly Example:
+### Пример дизассемблирования ESIL:
 
 ```
 [0x1000010f8]> e asm.esil=true
@@ -356,44 +356,44 @@ fmulp ST(1), ST(0)      =>      TODO,fmulp ST(1),ST(0)
 0x100001147    48394a38     rdx,56,+,[8],rcx,==,cz,?=
 ```
 
-### Introspection
+### Интроспекция
 
-To ease ESIL parsing we should have a way to express introspection expressions to extract the data that we want. For example, we may want to get the target address of a jump. The parser for ESIL expressions should offer an API to make it possible to extract information by analyzing the expressions easily.
+Чтобы упростить синтаксический анализ ESIL, у нас должен быть способ представления выражений интроспекции для извлечения нужных нам данных. Например, мы можем захотеть получить целевой адрес перехода. Транслятор выражений ESIL должен предлагать API, позволяющий легко извлекать информацию путем анализа выражений.
 
 ```
 >  ao~esil,opcode
 opcode: jmp 0x10000465a
 esil: 0x10000465a,rip,=
 ```
-We need a way to retrieve the numeric value of 'rip'. This is a very simple example, but there are more complex, like conditional ones. We need expressions to be able to get:
+Нам нужен способ получить числовое значение 'rip'. Это очень простой пример, но есть и посложнее, вроде условных. Нам нужны выражения, чтобы иметь возможность получить:
 
-- opcode type
-- destination of a jump
-- condition depends on
-- all regs modified (write)
-- all regs accessed (read)
+- тип кода операции
+- целевой адрес перехода
+- состояние, от которых что-то зависит
+- список измененных регистров (write)
+- список использованных (accessed) регистров (read)
 
 ### API HOOKS
 
-It is important for emulation to be able to setup hooks in the parser, so we can extend it to implement analysis without having to change it again and again. That is, every time an operation is about to be executed, a user hook is called. It can be used for example to determine if `RIP` is going to change, or if the instruction updates the stack.
-Later, we can split that callback into several ones to have an event-based analysis API that may be extended in JavaScript like this:
+Для эмуляции важно иметь возможность устанавливать хуки в синтаксическом анализаторе, так, чтобы можно было расширить его для реализации анализа без необходимости изменять его снова и снова. То есть каждый раз, непосредственно перед выполнением операции, вызывается пользовательский хук. Его можно использовать, например, для определения того, собирается ли `RIP` измениться, обновляет ли стек инструкция.
+Позже можно разделить этот callback на несколько и выполнить событийный анализ на основе  API, который можно расширить в JavaScript следующим образом:
 
 ```
 esil.on('regset', function(){..
 esil.on('syscall', function(){esil.regset('rip'
 ```
 
-For the API, see the functions `hook_flag_read()`, `hook_execute()` and `hook_mem_read()`. A callback should return true or 1 if you want to override the action that it takes. For example, to deny memory reads in a region, or voiding memory writes, effectively making it read-only.
-Return false or 0 if you want to trace ESIL expression parsing.
+API содержит функции `hook_flag_read()`, `hook_execute()` и `hook_mem_read()` . Callbak должен возвращать true или 1, если надо переопределить выполняемое им действие. Например, чтобы запретить чтение памяти в регионе или отменить запись в память, фактически сделав ее доступной только для чтения.
+Верните false или 0, если вы хотите отслеживать синтаксический анализ выражения ESIL.
 
-Other operations require bindings to external functionalities to work. In this case, `r_ref` and `r_io`. This must be defined when initializing the ESIL VM.
+Для работы других операций требуются привязки к внешним функциям. То есть к `r_ref` и `r_io` . Это должно быть определено при инициализации виртуальной машины ESIL.
 
 * Io Get/Set
    ```
    Out ax, 44
    44,ax,:ou
    ```
-* Selectors (cs,ds,gs...)
+* Селекторы (cs,ds,gs...)
    ```
    Mov eax, ds:[ebp+8]
    Ebp,8,+,:ds,eax,=

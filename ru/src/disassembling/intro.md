@@ -1,28 +1,28 @@
-# Disassembling
+# Дизассемблирование
 
-Disassembling in radare is just a way to represent an array of bytes. It is handled as a special print mode within `p` command.
+Дизассемблирование в радаре — это всего лишь способ представления массива байтов. Он обрабатывается как специальный режим печати внутри команды `p`.
 
-In the old times, when the radare core was smaller, the disassembler was handled by an external rsc file. That is, radare first dumped current block into a file, and then simply called `objdump` configured to disassemble for Intel, ARM or other supported architectures.
+В прежние времена, когда ядро радара было меньше, дизассемблер управлялся внешним файлом rsc. То есть радар сначала сбрасывал текущий блок в файл, а потом просто вызывал `objdump`, сконфигурированный на дизассемблирование для Intel, ARM или других поддерживаемых архитектур.
 
-It was a working and unix friendly solution, but it was inefficient as it repeated the same expensive actions over and over, because there were no caches. As a result, scrolling was terribly slow.
+Это было работающее и дружественное к Unix решение, но оно было неэффективным, так как повторяло одни и те же дорогостоящие действия снова и снова, потому что не было кешей. В результате прокрутка была ужасно медленной.
 
-So there was a need to create a generic disassembler library to support multiple plugins for different architectures. We can list the current loaded plugins with
+Поэтому возникла необходимость создать универсальную библиотеку дизассемблера для поддержки нескольких плагинов для разных архитектур. Перечислим текущие используемые плагины с помощью
 
 ```
 $ rasm2 -L
 ```
 
-Or from inside radare2:
+Или изнутри radare2:
 
 ```
 > e asm.arch=??
 ```
 
-This was many years before capstone appeared. So r2 was using udis86 and olly disassemblers, many gnu (from binutils).
+Это было за много лет до появления capstone. Итак, r2 использовал дизассемблеры udis86 и olly, разные от gnu (binutils).
 
-Nowadays, the disassembler support is one of the basic features of radare. It now has many options, endianness, including target architecture flavor and disassembler variants, among other things.
+В настоящее время поддержка дизассемблера является одной из основных особенностей радара. Теперь у него есть много опций, порядок следования байтов, включая вариант целевой архитектуры и варианты дизассемблера и др.
 
-To see the disassembly, use the `pd` command. It accepts a numeric argument to specify how many opcodes of current block you want to see. Most of the commands in radare consider the current block size as the default limit for data input. If you want to disassemble more bytes, set a new block size using the `b` command.
+Чтобы получить дизассемблированный код, используйте команду `pd`. Он принимает числовой аргумент, указывающий сколько оп-кодов текущего блока вы хотите видеть. Большинство команд в radare считают текущий размер блока ограничением по умолчанию для ввода данных. Если вы хотите дизассемблировать больше байтов, установите новый размер блока с помощью команды `b`.
 
 ```
 [0x00000000]> b 100    ; set block size to 100
@@ -31,9 +31,9 @@ To see the disassembly, use the `pd` command. It accepts a numeric argument to s
 [0x00000000]> pD 30    ; disassemble 30 bytes
 ```
 
-The `pD` command works like `pd` but accepts the number of input bytes as its argument, instead of the number of opcodes.
+Команда `pD` работает как `pd` но принимает в качестве аргумента количество входных байтов вместо количества оп-кодов.
 
-The "pseudo" syntax may be somewhat easier for a human to understand than the default assembler notations. But it can become annoying if you read lots of code. To play with it:
+«Псевдо»-синтаксис может быть несколько проще для понимания человеком, чем нотации ассемблера по умолчанию. Но иногда становится раздражающим читение большого объема кода. Попробуйте использовать разные варианты:
 
 ```
 [0x00405e1c]> e asm.pseudo = true
