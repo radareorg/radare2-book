@@ -91,21 +91,21 @@ ADDR BREAK
 
 Вот полный набор инструкций, используемый виртуальной машиной ESIL:
 
-| Код операции ESIL | Операнды | Название | Операция | пример |
+| Код операции ESIL | Операнды | Название | Операция | Пример |
 --- | --- | --- | --- | ----------------------------------------------
-| TRAP | src | Trap | Trap сигнал |
-| **$** | src | Interrupt | interrupt | 0x80,$ |
-| **()** | src | Syscall | syscall | rax,() |
+| TRAP | src | Trap | Trap-сигнал |
+| **$** | src | Прерывание | interrupt | 0x80,$ |
+| **()** | src | Системный вызов | syscall | rax,() |
 | **$$** | src | Адрес инструкции | Получить адрес текущей инструкции <br>стек=адрес инструкции |
-| **==** | src,dst | Compare | stack = (dst == src) ; <br> update_eflags(dst - src) |
-| **<** | src,dst | Smaller (сравнение с учетом знака) | stack = (dst < src) ; <br> update_eflags(dst - src) | [0x0000000]> "ae 1,5,<" <br>0x0<br>&gt; "ae 5,5"<br>0x0" |
-| **<=** | src,dst | Smaller or Equal (сравнение с учетом знака) | stack = (dst <= src) ; <br> update_eflags(dst - src) | [0x0000000]> "ae 1,5,<" <br>0x0<br>&gt; "ae 5,5"<br>0x1" |
-| **>** | src,dst | Bigger (сравнение с учетом знака) | stack = (dst > src) ; <br> update_eflags(dst - src) | &gt; "ae 1,5,>"<br>0x1<br>&gt; "ae 5,5,>"<br>0x0 |
-| **>=** | src,dst | Bigger or Equal (сравнение с учетом знака) | stack = (dst >= src) ; <br> update_eflags(dst - src) | &gt; "ae 1,5,>="<br>0x1<br>&gt; "ae 5,5,>="<br>0x1 |
-| **<<** | src,dst | Shift Left | stack = dst << src | &gt; "ae 1,1,<<"<br>0x2<br>&gt; "ae 2,1,<<"<br>0x4 |
-| **>>** | src,dst | Shift Right | stack = dst >> src | &gt; "ae 1,4,>>"<br>0x2<br>&gt; "ae 2,4,>>"<br>0x1 |
-| **<<<** | src,dst | Rotate Left | stack=dst ROL src | &gt; "ae 31,1,<<<"<br>0x80000000<br>&gt; "ae 32,1,<<<"<br>0x1 |
-| **>>>** | src,dst | Rotate Right | stack=dst ROR src | &gt; "ae 1,1,>>>"<br>0x80000000<br>&gt; "ae 32,1,>>>"<br>0x1 |
+| **==** | src,dst | Сравнение | stack = (dst == src) ; <br> update_eflags(dst - src) |
+| **<** | src,dst | Меньше (сравнение с учетом знака) | stack = (dst < src) ; <br> update_eflags(dst - src) | [0x0000000]> "ae 1,5,<" <br>0x0<br>&gt; "ae 5,5"<br>0x0" |
+| **<=** | src,dst | Меньше или равно (сравнение с учетом знака) | stack = (dst <= src) ; <br> update_eflags(dst - src) | [0x0000000]> "ae 1,5,<" <br>0x0<br>&gt; "ae 5,5"<br>0x1" |
+| **>** | src,dst | Больше (сравнение с учетом знака) | stack = (dst > src) ; <br> update_eflags(dst - src) | &gt; "ae 1,5,>"<br>0x1<br>&gt; "ae 5,5,>"<br>0x0 |
+| **>=** | src,dst | Больше или равно (сравнение с учетом знака) | stack = (dst >= src) ; <br> update_eflags(dst - src) | &gt; "ae 1,5,>="<br>0x1<br>&gt; "ae 5,5,>="<br>0x1 |
+| **<<** | src,dst | Сдвиг влево | stack = dst << src | &gt; "ae 1,1,<<"<br>0x2<br>&gt; "ae 2,1,<<"<br>0x4 |
+| **>>** | src,dst | Сдвиг вправо | stack = dst >> src | &gt; "ae 1,4,>>"<br>0x2<br>&gt; "ae 2,4,>>"<br>0x1 |
+| **<<<** | src,dst | Циклический сдвиг влево | stack=dst ROL src | &gt; "ae 31,1,<<<"<br>0x80000000<br>&gt; "ae 32,1,<<<"<br>0x1 |
+| **>>>** | src,dst | Циклический сдвиг вправо | stack=dst ROR src | &gt; "ae 1,1,>>>"<br>0x80000000<br>&gt; "ae 32,1,>>>"<br>0x1 |
 | **&** | src,dst | AND | stack = dst & src | &gt; "ae 1,1,&"<br>0x1<br>&gt; "ae 1,0,&"<br>0x0<br>&gt;  "ae 0,1,&"<br>0x0<br>&gt; "ae 0,0,&"<br>0x0 |
 | **&#x7c;** | src,dst | OR | stack = dst &#x7c; src | &gt; "ae 1,1,&#x7c;"<br>0x1<br>&gt; "ae 1,0,&#x7c;"<br>0x1<br>&gt; "ae 0,1,&#x7c;"<br>0x1<br>&gt; "ae 0,0,&#x7c;"<br>0x0 |
 | **^** | src,dst | XOR | stack = dst ^src | &gt; "ae 1,1,^"<br>0x0<br>&gt; "ae 1,0,^"<br>0x1<br>&gt; "ae 0,1,^"<br>0x1<br>&gt; "ae 0,0,^"<br>0x0 |
@@ -121,7 +121,7 @@ ADDR BREAK
 | **++** | src | INC | stack = src++ | &gt; ar r_00=0;ar r_00<br>0x00000000<br>&gt; "ae r_00,++"<br>0x1<br>&gt; ar r_00<br>0x00000000<br>&gt; "ae 1,++"<br>0x2 |
 | **--** | src | DEC | stack = src-- | &gt; ar r_00=5;ar r_00<br>0x00000005<br>&gt; "ae r_00,--"<br>0x4<br>&gt; ar r_00<br>0x00000005<br>&gt; "ae 5,--"<br>0x4 |
 | **=** | src,reg | EQU | reg = src | &gt; "ae 3,r_00,="<br>&gt; aer r_00<br>0x00000003<br>&gt; "ae r_00,r_01,="<br>&gt; aer r_01<br>0x00000003 |
-| **:=** | src,reg | weak EQU | reg = src without side effects | &gt; "ae 3,r_00,:="<br>&gt; aer r_00<br>0x00000003<br>&gt; "ae r_00,r_01,:="<br>&gt; aer r_01<br>0x00000003 |
+| **:=** | src,reg | слвбое EQU | reg = src without side effects | &gt; "ae 3,r_00,:="<br>&gt; aer r_00<br>0x00000003<br>&gt; "ae r_00,r_01,:="<br>&gt; aer r_01<br>0x00000003 |
 | **+=** | src,reg | ADD eq | reg = reg + src | &gt; ar r_01=5;ar r_00=0;ar r_00<br>0x00000000<br>&gt; "ae r_01,r_00,+="<br>&gt; ar r_00<br>0x00000005<br>&gt; "ae 5,r_00,+="<br>&gt; ar r_00<br>0x0000000a |
 | **-=** | src,reg | SUB eq | reg = reg - src | &gt; "ae r_01,r_00,-="<br>&gt; ar r_00<br>0x00000004<br>&gt; "ae 3,r_00,-="<br>&gt; ar r_00<br>0x00000001 |
 | **\*=** | src,reg | MUL eq | reg = reg * src | &gt; ar r_01=3;ar r_00=5;ar r_00<br>0x00000005<br>&gt; "ae r_01,r_00,\*="<br>&gt; ar r_00<br>0x0000000f<br>&gt; "ae 2,r_00,\*="<br>&gt; ar r_00<br>0x0000001e |
