@@ -63,7 +63,7 @@
    * [Макросы](scripting/macros.md)
    * [R2pipe](scripting/r2pipe.md)
 * [Отладчик](debugger/intro.md)
-   * [С чего начинать](debugger/getting_started.md)
+   * [Начало работы](debugger/getting_started.md)
    * [Переход с ida, GDB и WinDBG](debugger/migration.md)
    * [Регистры](debugger/registers.md)
    * [Карты памяти](debugger/memory_maps.md)
