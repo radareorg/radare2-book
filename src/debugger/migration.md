@@ -1,134 +1,132 @@
-# Переход с ida, GDB и WinDBG
+# Migration from ida, GDB or WinDBG
 
-## Как запустить программу с помощью отладчиках
-##
+## How to run the program using the debugger ##
 
-`r2 -d /bin/ls` - запуск в режиме отладки => [[video](http://asciinema.org/a/12022)]
+`r2 -d /bin/ls` - start in debugger mode => [[video](http://asciinema.org/a/12022)]
 
-## Как присоединиться/отсоединиться от исполняющегося процесса? (gdb -p)
-##
+## How do I attach/detach to running process ? (gdb -p) ##
 
-`r2 -d <pid>` - присоединившихся к процессу
+`r2 -d <pid>` - attach to process
 
-`r2 ptrace://pid` - подсоединиться к процессу, но только для io (не используется бэкенд отладчика)
+`r2 ptrace://pid` - same as above, but only for io (not debugger backend hooked)
 
-`[0x7fff6ad90028]> o-225` - закрыть fd=225 (перечень из `o~[1]:0`)
+`[0x7fff6ad90028]> o-225` - close fd=225 (listed in `o~[1]:0`)
 
-`r2 -D gdb gdb://localhost:1234` - подключиться к серверу gdb
+`r2 -D gdb gdb://localhost:1234` - attach to gdbserver
 
-## Как установить аргументы/переменные среды/загрузить динамическую библиотеку в сеансе отладки radare
+## How to set args/environment variable/load a specific libraries for the debugging session of radare
 
-Используйте `rarun2` (`libpath=$PWD:/tmp/lib`, `arg2=hello`, `setenv=FOO=BAR` ...), инструкции - `rarun2 -h` / `man rarun2`
+Use `rarun2` (`libpath=$PWD:/tmp/lib`, `arg2=hello`, `setenv=FOO=BAR` ...) see `rarun2 -h` / `man rarun2`
 
-## Как запускать скрипты в radare2 ?
+## How to script radare2 ?
 
-`r2 -i <scriptfile> ...` - запуск скрипта **после** загрузки файла => [[video](http://asciinema.org/a/12020)]
+`r2 -i <scriptfile> ...` - run a script **after** loading the file => [[video](http://asciinema.org/a/12020)]
 
-`r2 -I <scriptfile> ...` - запуск скрипта **до** загрузки файла
+`r2 -I <scriptfile> ...` - run a script **before** loading the file
 
-`r2 -c $@ | awk $@`  - пропустить через awk для получения asm-кода функции => [[link](http://sprunge.us/dEOK)]
+`r2 -c $@ | awk $@`  - run through awk to get asm from function => [[link](http://sprunge.us/dEOK)]
 
-`[0x80480423]> . scriptfile` - интерпретировать файл => [[video](http://asciinema.org/a/12017)]
+`[0x80480423]> . scriptfile` - interpret this file => [[video](http://asciinema.org/a/12017)]
 
-`[0x80480423]> #!c` - вход в C-шный repl  (см. `#!` перечень доступных плагинов RLang)  => [[video](http://asciinema.org/a/12019)], все должно быть сделано в одной строке, можно передать файл.c в качестве аргумента.
+`[0x80480423]> #!c` - enter C repl  (see `#!` to list all available RLang plugins)  => [[video](http://asciinema.org/a/12019)], everything have to be done in a oneliner or a .c file must be passed as an argument.
 
-Если нужен `#!python` и другие варианты, просто соберите модуль [radare2-bindings](https://github.com/radareorg/radare2-bindings)
+To get `#!python` and much more, just build [radare2-bindings](https://github.com/radareorg/radare2-bindings)
 
-## Как показать исходный код подобно gdb?
+## How to list Source code as in gdb list ?
 
-`CL @ sym.main` - данная функция еще недостаточно стабилизирована
+`CL @ sym.main` - though the feature is highly experimental
 
-# сочетания клавиш
+# shortcuts
 
-| Команда | IDA Pro | Программа radare2 | r2 (визуальный режим) | GDB | WinDbg |
+| Command       | IDA Pro       | radare2        | r2 (visual mode) | GDB | WinDbg |
 | ------------- | ------------- |----------------|------------------|-----|-----|
-| **Анализ** |               |                |
-| Анализ всех данных и кода | `Автоматически запускается при открытии бинарника` | `aaa или -A (aaaa или -AA для запуска новых экспериментальных видов анализа)` | `отсутствует` | отсутствует | отсутствует |
-| **Управление интерфейсом** |               |                |
-| переход по внешней ссылке | `x` | `axt` | `x` | отсутствует | отсутствует |
-| переход с внешней ссылки | `ctrl + j` | `axf` | `X` | отсутствует | отсутствует |
-| xref в граф | ? | `agt [offset]` | ? | отсутствует | отсутствует |
-| xref из графа | ? | `agf [offset]` | ? | отсутствует | отсутствует |
-| список функций | `alt + 1` | `afl;is` | `t` | отсутствует | отсутствует |
-| Листинг | `alt + 2` | `pdf` | `p` | отсутствует | отсутствует |
-| режим hex | `alt + 3` | `pxa` | `P` | отсутствует | отсутствует |
-| импорты | `alt + 6` | `ii` | `:ii` | отсутствует | отсутствует |
-| экспорты | `alt + 7` | `is~FUNC` | ? | отсутствует | отсутствует |
-| переход по jmp/call | `enter` | `s offset` | `enter` или `0`-`9` | отсутствует | отсутствует |
-| отмена seek | `esc` | `s-` | `u` | отсутствует | отсутствует |
-| вернуть прежний seek | `ctrl+enter` | `s+` | `U` | отсутствует | отсутствует |
-| показать граф управления | `space` | `agv` | `V` | отсутствует | отсутствует |
-| **Edit** |               |                |
-| переименование | `n` | `afn` | `dr` | отсутствует | отсутствует |
-| режим графа управления | `space` | `agv` | `V` | отсутствует | отсутствует |
-| определить как блок данных | `d` | `Cd [size]` | `dd`,`db`,`dw`,`dW` | отсутствует | отсутствует |
-| определить как блок кода | `c` | `C- [size]` | `d-` or `du` | отсутствует | отсутствует |
-| определить как неопределеный блок | `u` | `C- [size]` | `d-` or `du` | отсутствует | отсутствует |
-| определить как строку | `A` | `Cs [size]` | `ds` | отсутствует | отсутствует |
-| определить как структуру | `Alt+Q` | `Cf [size]` | `dF` | отсутствует | отсутствует |
-| **Отладчик** |               |                |                |
-| Начать процесс / Продолжить выполнение | `F9` | `dc` | `F9` | `r` и `c` | `g` |
-| Завершить процесс | `Ctrl+F2` | `dk 9` | ? | `kill` | `q` |
-| Отсоединится | `?` | `o-` | ? | `detach` |
-| step into | `F7` | `ds` | `s` | `n` | `t` |
-| step into 4 instructions | ? | `ds 4` | F7 | `n 4` | `t 4` |
-| step over | `F8` | `dso` | `S` | `s` | `p` |
-| step until a specific address | ? | `dsu <addr>` | ? | `s` | `g <addr>` |
-| Исполнять до оператора return | `Ctrl+F7` | `dcr` | ? | `finish` | `gu` |
-| Выполнять до курсора | `F4` | [#249](https://github.com/radareorg/radare2/issues/249) | [#249](https://github.com/radareorg/radare2/issues/249) | отсутствует | отсутствует |
-| Показать стек | `?` | `dbt` | ? | `bt` |
-| показать регистр | В реестре Windows | `dr all` | Показать в визуальном режиме | `info registers` | `r` |
-| display eax | В реестре Windows | `dr?eax` | Показать в визуальном режиме | `info registers eax` | `r rax` |
-| показать старое состояние всех регистров | ? | `dro` | ? | ? | ? |
-| display function addr + N | ? | `afi $$` - показать информацию о функции в текущем смещении (`$$`) | ? | ? | ? |
-| отображать состояние кадра | ? | `pxw rbp-rsp@rsp` | ? | `i f` | ? |
-| Как исполнять до тех пор, пока условие не станет истинным | ? | `dsi` | ? | ? | ? |
-| Обновить значение регистра | ? | `dr rip=0x456` | ? | `set $rip=0x456` | `r rip=456` |
-| **Disassembly** |            |                |                  |
-| дизассемблирование далее | отсутствует | `pd` | `Vp` | `disas` | `uf`, `u` |
-| дизассемблироать N инструкций | отсутствует | `pd X` | Vp | x/<N>i | `u <addr> LX` |
-| дизассемблироать N в обратном направлении | отсутствует | `pd -X` | `Vp` | `disas <a-o> <a>` | `ub` |
-| **Информация о корзине** |            |                |                  |
-| Секции/регионы | `Menu sections` | `iS` или `S` (добавить j для json) | отсутствует | maint info sections | !address |
-| **Загрузить файл символов** |            |                |                  |
-| Секции/регионы | `pdb menu` | `asm.dwarf.file`, `pdb.XX`) | отсутствует | add-symbol-file | r |
-| **BackTrace** |            |                |                  |
-| Стек | отсутствует | `dbt` | отсутствует | `bt` | `k` |
-| Стек в Json | отсутствует | `dbtj` | отсутствует |  |
-| Частичное отображение стека (внутренняя часть) | отсутствует | `dbt` (`dbg.btdepth` `dbg.btalgo`) | отсутствует | bt <N> | k <N> |
-| Частичное отображение стека (внешняя часть) | отсутствует | `dbt` (`dbg.btdepth` `dbg.btalgo`) | отсутствует | bt -<N> |
-| Стек для всех нитей | отсутствует | `dbt@t` | отсутствует | `thread apply all bt` | `~* k` |
-| **Точки останова** |            |                |                  | |
-| Список точек останова | `Ctrl+Alt+B` | `db` | ? | `info breakpoints` | `bl` |
-| добавление точки останова | `F2` | `db [offset]` | `F2` | `break` | `bp` |
-| **Threads** |        |                |                  |                  |
-| Переключится в нить | `Thread menu` | `dp` | отсутствует | `thread <N>` | `~<N>s` |
-| **Frames** |        |                |                  |                  |
-| Номера кадров | `отсутствует` | `?` | отсутствует | `any bt command` | `kn` |
-| Выбор кадра | `отсутствует` | `?` | отсутствует | `frame` | `.frame` |
-| **Parameters/Locals** |        |                |                  |                  |
-| Отображение параметров | `отсутствует` | `afv` | отсутствует | `info args` | `dv /t /i /V` |
-| Отображение параметров | `отсутствует` | `afv` | отсутствует | `info locals` | `dv /t /i /V` |
-| Отображать параметров/локальных объектов в json | `отсутствует` | `afvj` | отсутствует | `info locals` | `dv /t /i /V` |
-| список адресов, где есть доступ к переменным (R/W) | `отсутствует` | `afvR/afvW` | отсутствует | `?` | `?` |
-| **Поддержание проекта** |        |                |                  |
-| open project |                 | `Po [file]` |                  | ? |
-| save project | automatic | `Ps [file]` |                  | ? |
-| show project informations |    | `Pi [file]` |                  | ? |
-| **Разное** |               |                |             |
-| Дамп массива в виде символов | `отсутствует` | `pc?` (json, C, char, etc.) | Vpppp | x/<N>bc | db |
-| options | option menu | `e?` | `e` |
-| search | search menu | `/?` | выбор зоны курсором `c` затем `/` | | `s` |
+|**Analysis** |               |                |
+|Analysis of everything        |`Automatically launched when opening a binary`            |`aaa or -A (aaaa or -AA for even experimental analysis)`           | `N/A`              |N/A              |N/A
+|**Navigation** |               |                |
+|xref to        |`x`            |`axt`           | `x`              |N/A              |N/A
+|xref from      |`ctrl + j`     |`axf`           | `X`              |N/A              |N/A
+|xref to graph  |?              |`agt [offset]`  | ?                |N/A              |N/A
+|xref from graph|?              |`agf [offset]`  | ?                |N/A              |N/A
+|list functions |`alt + 1`      |`afl;is`        | `t`              |N/A              |N/A
+|listing        |`alt + 2`      |`pdf`           | `p`              |N/A              |N/A
+|hex mode       |`alt + 3`      |`pxa`           | `P`              |N/A              |N/A
+|imports        |`alt + 6`      |`ii`            | `:ii`            |N/A              |N/A
+|exports        |`alt + 7`      |`is~FUNC`       | ?                |N/A              |N/A
+|follow jmp/call|`enter`        |`s offset`      |`enter` or `0`-`9`|N/A              |N/A
+|undo seek      |`esc`          |`s-`            | `u`              |N/A              |N/A
+|redo seek      |`ctrl+enter`   |`s+`            | `U`              |N/A              |N/A
+|show graph     |`space`        |`agv`           | `V`              |N/A              |N/A
+|**Edit**       |               |                |
+|rename         |`n`            |`afn`| `dr`            |N/A              |N/A
+|graph view     |`space`        |`agv`           | `V`              |N/A              |N/A
+|define as data |`d`            |`Cd [size]`     | `dd`,`db`,`dw`,`dW`|N/A              |N/A
+|define as code |`c`            |`C- [size]`     | `d-` or `du`     |N/A              |N/A
+|define as undefined|`u`        |`C- [size]`     | `d-` or `du`     |N/A              |N/A
+|define as string|`A`           |`Cs [size]`     | `ds`             |N/A              |N/A
+|define as struct|`Alt+Q`       |`Cf [size]`     | `dF`             |N/A              |N/A
+|**Debugger**   |               |                |                | 
+|Start Process/ Continue execution|`F9`    |`dc` | `F9`             | `r` and `c`             | `g`
+|Terminate Process|`Ctrl+F2`    |`dk 9`          | ?                | `kill`             | `q`
+|Detach         |`?`            | `o-`           | ?                | `detach`             |
+|step into      |`F7`           |`ds`            | `s`              | `n`             | `t`
+|step into 4 instructions | ?   | `ds 4`         | F7               | `n 4`             | `t 4`
+|step over      |`F8`           |`dso`           | `S`              | `s`             | `p` 
+|step until a specific address|?|`dsu <addr>`    | ?                | `s`             | `g <addr>`
+|Run until return|`Ctrl+F7`     |`dcr`           | ?                | `finish`             | `gu`
+|Run until cursor|`F4`          |[#249](https://github.com/radareorg/radare2/issues/249)| [#249](https://github.com/radareorg/radare2/issues/249) | N/A             | N/A
+|Show Backtrace |`?`            |`dbt`           | ?                | `bt`             |
+|display Register|On register Windows|`dr all`   | Shown in Visual mode | `info registers`             | `r`
+|display eax    |On register Windows |`dr?eax`   | Shown in Visual mode | `info registers eax`             | `r rax`
+|display old state of all registers |? |`dro`    | ?                | ?             | ?
+|display function addr + N  |?  |`afi $$` - display function information of current offset (`$$`) | ?               | ?             | ?
+|display frame state     |?     |`pxw rbp-rsp@rsp`| ?               | `i f`             | ?
+|How to step until condition is true |?  |`dsi`  | ?                | ?             | ?
+|Update a register value |?     |`dr rip=0x456`  | ?                | `set $rip=0x456`             | `r rip=456`
+|**Disassembly**   |            |                |                  |
+|disassembly forward   | N/A           | `pd`               | `Vp`                 | `disas` | `uf`, `u`
+|disassembly N instructions   | N/A           | `pd X`               | Vp                 | x/<N>i | `u <addr> LX`
+|disassembly N (backward)   | N/A           | `pd -X`               | `Vp`                 | `disas <a-o> <a>` | `ub`
+|**Information on the bin**   |            |                |                  |
+|Sections/regions   | `Menu sections`           | `iS` or `S` (append j for json)               | N/A                 | maint info sections | !address
+|**Load symbol file**   |            |                |                  |
+|Sections/regions   | `pdb menu`           | `asm.dwarf.file`, `pdb.XX`)               | N/A                 |  add-symbol-file | r
+|**BackTrace**   |            |                |                  |
+|Stack Trace   | N/A           | `dbt`               | N/A                 | `bt` | `k`
+|Stack Trace in Json   | N/A           | `dbtj`               | N/A                 |  | 
+|Partial Backtrace (innermost)  | N/A           | `dbt` (`dbg.btdepth` `dbg.btalgo`)               | N/A                 | bt <N> | k <N>
+|Partial Backtrace (outermost)  | N/A           | `dbt` (`dbg.btdepth` `dbg.btalgo`)               | N/A                 | bt -<N> |
+|Stacktrace for all threads  | N/A           | `dbt@t`               | N/A                 | `thread apply all bt` | `~* k`
+|**Breakpoints**   |            |                |                  | |
+|Breakpoint list |`Ctrl+Alt+B`  |`db`            | ?                | `info breakpoints` | `bl`
+|add breakpoint |`F2`           |`db [offset]`   |`F2`              | `break`| `bp`
+|**Threads**   |        |                |                  |                  |
+|Switch to thread |`Thread menu`           |`dp`   | N/A              | `thread <N>`| `~<N>s`
+|**Frames**   |        |                |                  |                  |
+|Frame Numbers |`N/A`           |`?`   | N/A              | `any bt command`| `kn`
+|Select Frame |`N/A`           |`?`   | N/A              | `frame`| `.frame`
+|**Parameters/Locals**   |        |                |                  |                  |
+|Display parameters |`N/A`           |`afv`   | N/A              | `info args`| `dv /t /i /V`
+|Display parameters |`N/A`           |`afv`   | N/A              | `info locals`| `dv /t /i /V`
+|Display parameters/locals in json |`N/A`           |`afvj`   | N/A              | `info locals`| `dv /t /i /V`
+|list addresses where vars are accessed(R/W) |`N/A`           |`afvR/afvW`   | N/A              | `?`| `?`
+|**Project Related**   |        |                |                  |
+|open project |                 |`Po [file]`     |                  | ?
+|save project | automatic       |`Ps [file]`     |                  | ?
+|show project informations |    |`Pi [file]`     |                  | ?
+|**Miscellaneous**   |               |                |             |
+|Dump byte char array        | `N/A`    |`pc?` (json, C, char, etc.)            | Vpppp              | x/<N>bc | db
+|options        |option menu    |`e?`            | `e`              |
+|search         |search menu    |`/?`            | Select the zone with the cursor `c` then `/`              | | `s`
 
-## Эквивалент команды gdb "set-follow-fork-mode"
-Делается с помощью 2 команд:
+## Equivalent of "set-follow-fork-mode" gdb command
+This can be done using 2 commands:
 
-1. `dcf` - пока не произойдет форк
-2. затем используйте `dp` - выбор процесса для отладки.
+1. `dcf` - until a fork happen
+2. then use `dp` to select what process you want to debug.
 
-# Общие функции
-- r2 принимает подписи FLIRT
-- r2 подключается к GDB, LLVM и WinDbg
-- r2 может писать/исправлять загруженный файл
-- в r2 встроены fortune [s], пасхальные [/s] и стальные яйца
-- r2 выполняет загрузку слепков (core dump) файлов ELF и MDMP (минидампы Windows)
+# Common features
+- r2 accepts FLIRT signatures
+- r2 can connect to GDB, LLVM and WinDbg
+- r2 can write/patch in place
+- r2 have fortunes and [s]easter eggs[/s]balls of steel
+- r2 can do basic loading of ELF core files from the box and MDMP (Windows minidumps)

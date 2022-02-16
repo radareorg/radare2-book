@@ -1,9 +1,9 @@
-# Файлы
+# Files
 
-Отладчик radare2 позволяет составлять список файловых дескрипторов исследуемого процесса, а также манипулировать ими.
+The radare2 debugger allows the user to list and manipulate the file descriptors from the target process.
 
-Это полезная функция, отсутствующая в других отладчиках, ее возможности похожи на инструмент командной строки lsof, но есть и дополнительные подкоманды для изменения смещения, закрытия или дублирования дескрипторов.
+This is a useful feature, which is not found in other debuggers, the functionality is similar to the lsof command line tool, but have extra subcommands to change the seek, close or duplicate them.
 
-В любой момент можно заменить дескрипторы файлов stdio на сетевые сокеты, созданные r2, или заменить существующее сетевое сокетное подключение с целью его перехвата.
+So, at any time in the debugging session you can replace the stdio file descriptors to use network sockets created by r2, or replace a network socket connection to hijack it.
 
-Функция также доступна в r2frida при использовании команды dd с бэкслешем в качестве префикса. В r2 можно увидеть вывод dd? перейлем деталям.
+This functionality is also available in r2frida by using the dd command prefixed with a backslash. In r2 you may want to see the output of dd? for proper details.

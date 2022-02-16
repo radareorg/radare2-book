@@ -1,14 +1,15 @@
-# Возможности удаленного доступа
+# Remote Access Capabilities
 
-Radare, как правило, запускается локально, можно запускать серверный процесс и  контролировать его локальным процессом radare2. Реализация управления использует подсистему ввода-вывода radare, которая абстрагирует доступ к system(), cmd() и все основные операции ввода-вывода для работы по сети.
+Radare can be run locally, or it can be started as a server process which is controlled by a local
+radare2 process. This is possible because everything uses radare's IO subsystem which abstracts access to system(), cmd() and all basic IO operations so to work over a network.
 
-Справка по командам, используемым для организации удаленного доступа к radare:
+Help for commands useful for remote access to radare:
 
 ```
 [0x00405a04]> =?
-Usage:  =[:!+-=ghH] [...]   # соединиться с другим процессом r2
+Usage:  =[:!+-=ghH] [...]   # connect with other instances of r2
 
-команды удаленного доступа:
+remote commands:
 | =                             list all open connections
 | =<[fd] cmd                    send output of local command to remote fd
 | =[fd] cmd                     exec cmd at remote 'fd' (last open is default one)
@@ -17,7 +18,7 @@ Usage:  =[:!+-=ghH] [...]   # соединиться с другим проце�
 | =-[fd]                        remove all hosts or host 'fd'
 | ==[fd]                        open remote session with host 'fd', 'q' to quit
 | =!=                           disable remote cmd mode
-| !=!                           установка режима удаленной командной строки
+| !=!                           enable remote cmd mode
 
 servers:
 | .:9000                        start the tcp server (echo x|nc ::1 9090 or curl ::1:9090/cmd/x)
@@ -37,29 +38,29 @@ examples:
 | o rap://:9090/                start the rap server on tcp port 9090
 ```
 
-Инструкции по удаленным возможностям radare2 отображаются списоком поддерживаемых плагинов ввода-вывода: `radare2 -L`.
+You can learn radare2 remote capabilities by displaying the list of supported IO plugins: `radare2 -L`.
 
-Небольшой пример прояснит это. Типичный удаленный сеанс выглядит следующим образом:
+A little example should make this clearer. A typical remote session might look like this:
 
-На удаленном хосте 1:
-
-```
-$ radare2 rap://:1234
-```
-
-На удаленном хосте 2:
+At the remote host1:
 
 ```
 $ radare2 rap://:1234
 ```
 
-На локальном хосте:
+At the remote host2:
+
+```
+$ radare2 rap://:1234
+```
+
+At localhost:
 
 ```
 $ radare2 -
 ```
 
-Добавление хостов
+Add hosts
 
 ```
 [0x004048c5]> =+ rap://<host1>:1234//bin/ls
@@ -70,7 +71,7 @@ waiting... ok
 0 - rap://<host1>:1234//bin/ls
 ```
 
-Можно открывать удаленные файлы в режиме отладки (или с помощью любого подключаемого модуля ввода-вывода), указывая URI при добавлении хостов:
+You can open remote files in debug mode (or using any IO plugin) specifying URI when adding hosts:
 
 ```
 [0x004048c5]> =+ =+ rap://<host2>:1234/dbg:///bin/ls
@@ -80,14 +81,14 @@ waiting... ok
 1 - rap://<host2>:1234/dbg:///bin/ls
 ```
 
-Выполнение команд на хосте 1:
+To execute commands on host1:
 
 ```
 [0x004048c5]> =0 px
 [0x004048c5]> = s 0x666
 ```
 
-Открыть сеанс ссвязи с хостом 2:
+To open a session with host2:
 
 ```
 [0x004048c5]> ==1
@@ -96,13 +97,13 @@ fd:6> pi 1
 fd:6> q
 ```
 
-Удаление узлов и закрытие подключения:
+To remove hosts (and close connections):
 
 ```
 [0x004048c5]> =-
 ```
 
-Можно также перенаправлять вывод radare на TCP- или UDP-сервер, например, при помощи `nc -l`. Сначала добавьте сервер при помощи '=+ tcp://' или '=+ udp://', затем можно перенаправить выходные данные команды на сервер:
+You can also redirect radare output to a TCP or UDP server (such as `nc -l`). First, Add the server with '=+ tcp://' or '=+ udp://', then you can redirect the output of a command to be sent to the server:
 
 ```
 [0x004048c5]> =+ tcp://<host>:<port>/
@@ -111,5 +112,5 @@ Connected to: <host> at port <port>
 [0x004048c5]> =<5 cmd...
 ```
 
-Команда `=<` отправит вывод команды `cmd` на удаленное подключение с номером N или на последнее подключение, если идентификатор не указан.
+The `=<` command will send the output from the execution of `cmd` to the remote connection number N (or the last one used if no id specified).
 

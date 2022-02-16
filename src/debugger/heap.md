@@ -1,6 +1,6 @@
-# Куча
+# Heap
 
-Команды radare2-а семейства `dm` отображают карту кучи (heap map) - полезная функция при проверке кучи и ее содержимого. Выполнение команды `dmh` показывает карту кучи:
+radare2's `dm` subcommands can also display a map of the heap which is useful for those who are interested in inspecting the heap and its content. Simply execute `dmh` to show a map of the heap:
 
 ```
 [0x7fae46236ca6]> dmh
@@ -8,7 +8,7 @@
   Top chunk @ 0x55a7ecbce660 - [brk_start: 0x55a7ecbce000, brk_end: 0x55a7ecbef000]
 ```
 
-Можете посмотреть компоновку кучи в виде графа:
+You can also see a graph layout of the heap:
 
 ```
 [0x7fae46236ca6]> dmhg
@@ -37,7 +37,7 @@ Heap Layout
 `────────────────────────────────────────────────────'
 ```
 
-Есть еще команды кучи, они находятся в разделе `dmh`, полный список команд выводится так - `dmh?`.
+Another heap commands can be found under `dmh`, check `dmh?` for the full list.
 
 ```
 [0x00000000]> dmh?
@@ -57,7 +57,7 @@ Heap Layout
 | dmhm                List all elements of struct malloc_state of main thread (main_arena)
 | dmhm [malloc_state] List all malloc_state instance of a particular arena
 | dmht                Display all parsed thead cache bins of main_arena's tcache instance
-| dmh?                Показать справку карты кучи
+| dmh?                Show map heap help
 ```
 
-Чтобы напечатать безопасные (safe-linked) списки (glibc >= 2.32) с разыменованными указателями, переменная `dbg.glibc.demangle` должна равняться истине.
+To print safe-linked lists (glibc >= 2.32) with demangled pointers, the variable `dbg.glibc.demangle` must be true.

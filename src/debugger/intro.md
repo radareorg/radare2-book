@@ -1,32 +1,32 @@
-# Отладчик
+# Debugger
 
-Отладчики реализуются при помощи плагинов ввода-вывода. Поэтому radare2 может обрабатывать различные типы URI, порождая, присоединяясь и управляя процессами. Полный список плагинов доступен при помощи флага `r2 -L`. Плагины, имеющие "d" в первом столбце ("rwd"), поддерживают отладку. Например:
+Debuggers are implemented as IO plugins. Therefore, radare can handle different URI types for spawning, attaching and controlling processes. The complete list of IO plugins can be viewed with `r2 -L`. Those that have "d" in the first column ("rwd") support debugging. For example:
 
 ```
-r_d  debug       Отладить программу или процесс по pid. dbg:///bin/ls, dbg://1388 (LGPL3)
-rwd  gdb         Подсоединиться к серверу gdb, 'qemu -s', gdb://localhost:1234 (LGPL3)
+r_d  debug       Debug a program or pid. dbg:///bin/ls, dbg://1388 (LGPL3)
+rwd  gdb         Attach to gdbserver, 'qemu -s', gdb://localhost:1234 (LGPL3)
 ```
 
-Существуют разные бэкенды для многих целевых архитектур и операционных систем, например, GNU/Linux, Windows, MacOS X, (Net,Free,Open)BSD и Solaris.
+There are different backends for many target architectures and operating systems, e.g., GNU/Linux, Windows, MacOS X, (Net,Free,Open)BSD and Solaris.
 
-Память процесса обрабатывается как обычный файл. Все отображаемые страницы памяти отлаживаемой программы и ее библиотек читаются и интерпретируются как код или структуры данных.
+Process memory is treated as a plain file. All mapped memory pages of a debugged program and its libraries can be read and interpreted as code or data structures.
 
-Связь между radare и уровнем ввода-вывода отладчика обрамлена в вызовы `system()`, принимающий строку в качестве аргумента и выполняющий ее как команду. Затем ответ буферизуется в консоли вывода, его содержимое может быть дополнительно обработано скриптом. Доступ к системе ввода-вывода осуществляется с помощью `=!`. Большинство подключаемых модулей ввода-вывода снабжены инструкциями, доступными при помощи `=!?` и `=!help`. Например:
+Communication between radare and the debugger IO layer is wrapped into `system()` calls, which accept a string as an argument, and executes it as a command. An answer is then buffered in the output console, its contents can be additionally processed by a script. Access to the IO system is achieved with `=!`. Most IO plugins provide help with `=!?` or `=!help`. For example:
 
 ```
 $ r2 -d /bin/ls
 ...
 [0x7fc15afa3cc0]> =!help
 Usage: =!cmd args
- =!ptrace   - использовать ptrace io
- =!mem      - использовать /proc/pid/mem io, если возможно
- =!pid      - показать целевой pid
- =!pid <#>  - выбрать новый pid
+ =!ptrace   - use ptrace io
+ =!mem      - use /proc/pid/mem io if possible
+ =!pid      - show targeted pid
+ =!pid <#>  - select new pid
 ```
 
-Как правило, команды отладчика переносимы между архитектурами и операционными системами. Тем не менее, поскольку radare пытается поддерживать одну и ту же функциональность для всех целевых архитектур и операционных систем, некоторые вещи приходится решать отдельно. Они включают внедрение шелл-кодов и обработку исключений. Например, в архитектурах MIPS нет аппаратной поддержки пошагового запуска инструкций. В этом случае radare2 предоставляет собственную реализацию пошагового выполнения, используя сочетание анализа кода и программных точек останова.
+In general, debugger commands are portable between architectures and operating systems. Still, as radare tries to support the same functionality for all target architectures and operating systems, certain things have to be handled separately. They include injecting shellcodes and handling exceptions. For example, in MIPS targets there is no hardware-supported single-stepping feature. In this case, radare2 provides its own implementation for single-step by using a mix of code analysis and software breakpoints.
 
-Базовая справка по отладчику доступна по команде 'd?':
+To get basic help for the debugger, type 'd?':
 
 ```
 Usage: d   # Debug commands
@@ -53,9 +53,9 @@ Usage: d   # Debug commands
 | dx[?]                    Inject and run code on target process (See gs)
 ```
 
-Чтобы перезапустить сеанс отладки, можно ввести `oo` или `оо+` в зависимости от задачи.
+To restart your debugging session, you can type `oo` or `oo+`, depending on desired behavior.
 
 ```
-oo                 заново открыть текущий файл (kill+fork в отладчике)
-oo+                заново открыть текущий файл в режиме перезаписи
+oo                 reopen current file (kill+fork in debugger)
+oo+                reopen current file in read-write
 ```

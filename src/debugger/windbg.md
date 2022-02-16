@@ -1,26 +1,28 @@
-# Отладка в режиме ядра с WinDBG KD
+# WinDBG Kernel-mode Debugging (KD)
 
-Поддержка интерфейса WinDBG KD в r2 позволяет подключаться к работающей виртуальной машине Windows и отлаживать ее ядро через последовательный порт или сеть.
+The WinDBG KD interface support for r2 allows you to attach to VM running
+Windows and debug its kernel over a serial port or network.
 
-Также можно использовать удаленный интерфейса GDB для подключения и
-отладки ядрер Windows вне зависимости от инструментов Windows.
+It is also possible to use the remote GDB interface to connect and
+debug Windows kernels without depending on Windows capabilities.
 
-Имейте в виду, что поддержка WinDBG KD все еще находится в стадии разработки, сейчас это базовая реализация, которая со временем станет лучше.
+Bear in mind that WinDBG KD support is still work-in-progress, and this is
+just an initial implementation which will get better in time.
 
-## Настройка KD в Windows
+## Setting Up KD on Windows
 
-> Пошаговое руководство см. в [документации корпорации Майкрософт](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/setting-up-kernel-mode-debugging-in-windbg--cdb--or-ntsd).
+> For a complete walkthrough, refer to Microsoft's [documentation](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/setting-up-kernel-mode-debugging-in-windbg--cdb--or-ntsd).
 
-### Последовательный порт
-Подключение KD через последовательный порт в Windows Vista и выше следующим образом:
+### Serial Port
+Enable KD over a serial port on Windows Vista and higher like this:
 
 ```
 bcdedit /debug on
 bcdedit /dbgsettings serial debugport:1 baudrate:115200
 ```
 
-Так это делвется для Windows XP:
-Открыть boot.ini и добавить /debug /debugport=COM1 /baudrate=115200:
+Or like this for Windows XP:
+	Open boot.ini and add /debug /debugport=COM1 /baudrate=115200:
 ```
 [boot loader]
 timeout=30
@@ -28,7 +30,7 @@ default=multi(0)disk(0)rdisk(0)partition(1)\WINDOWS
 [operating systems]
 multi(0)disk(0)rdisk(0)partition(1)\WINDOWS="Debugging with Cable" /fastdetect /debug /debugport=COM1 /baudrate=57600
 ```
-В случае VMWare
+In case of VMWare
 ```
 	Virtual Machine Settings -> Add -> Serial Port
 	Device Status:
@@ -38,7 +40,7 @@ multi(0)disk(0)rdisk(0)partition(1)\WINDOWS="Debugging with Cable" /fastdetect /
 	[_/tmp/winkd.pipe________]
 	From: Server To: Virtual Machine
 ```
-Настройка машины VirtualBox:
+Configure the VirtualBox Machine like this:
 ```
     Preferences -> Serial Ports -> Port 1
 
@@ -48,46 +50,49 @@ multi(0)disk(0)rdisk(0)partition(1)\WINDOWS="Debugging with Cable" /fastdetect /
                  [v] Create Pipe
     Port/File Path: [_/tmp/winkd.pipe____]
 ```
-Создание виртуальной машины при помощи qemu:
+Or just spawn the VM with qemu like this:
 ```
 $ qemu-system-x86_64 -chardev socket,id=serial0,\
      path=/tmp/winkd.pipe,nowait,server \
      -serial chardev:serial0 -hda Windows7-VM.vdi
 ```
 
-### Сеть
-Подключение KD по сети (KDNet) в Windows 7 или более поздней версии выглядит следующим образом:
+### Network
+Enable KD over network (KDNet) on Windows 7 or later likes this:
 ```
 bcdedit /debug on
 bcdedit /dbgsettings net hostip:w.x.y.z port:n
 ```
-Начиная с Windows 8, принудительно выполнить отладку
-в каждой загрузке невозможно, но всегда можно входить в расширенные параметры загрузки и там включать отладку ядра:
+Starting from Windows 8 there is no way to enforce debugging
+for every boot, but it is possible to always show the advanced boot options,
+which allows to enable kernel debugging:
 ```
 bcedit /set {globalsettings} advancedoptions true
 ```
 
-## Подключение к интерфейсу KD на r2
+## Connecting to KD interface on r2
 
-### Последовательный порт
-Radare2 использует плагин ввода-вывода `winkd` для подключения к файлу сокета, создаваемому virtualbox-ом или qemu. Для плагина отладчика `winkd` нужно также указать x86-32. (поддерживаются 32- и 64-разрядная отладка)
+### Serial Port
+Radare2 will use the `winkd` io plugin to connect to a socket file
+created by virtualbox or qemu. Also, the `winkd` debugger plugin and
+we should specify the x86-32 too. (32 and 64 bit debugging is supported)
 ```
 $ r2 -a x86 -b 32 -D winkd winkd:///tmp/winkd.pipe
 ```
 
-В Windows надо запустить следующую строку:
+On Windows you should run the following line:
 ```
 $ radare2 -D winkd winkd://\\.\pipe\com_1
 ```
 
-### Сеть
+### Network
 ```
 $ r2 -a x86 -b 32 -d winkd://<hostip>:<port>:w.x.y.z
 ```
 
-## Использование KD
-При подключении к интерфейсу KD r2 отправит пакет разрыва для прерывания
-выполнения целевого процесса:
+## Using KD
+When connecting to a KD interface, r2 will send a breakin packet to interrupt
+the target and we will get stuck here:
 ```
 [0x828997b8]> pd 20
 	;-- eip:
@@ -99,30 +104,35 @@ $ r2 -a x86 -b 32 -d winkd://<hostip>:<port>:w.x.y.z
     0x828997bf    90           nop
 ```
 
-Чтобы пропустить это прерывание, нужно изменить eip и запустить 'dc' дважды:
+In order to skip that trap we will need to change eip and run 'dc' twice:
 ```
 dr eip=eip+1
 dc
 dr eip=eip+1
 dc
 ```
-Теперь виртуальная машина Windows снова будет интерактивной. Нам нужно будет убить r2 и присоединить его еще раз, чтобы перейти к управлению ядром.
+Now the Windows VM will be interactive again. We will need to kill r2 and
+attach again to get back to control the kernel.
 
-Команда `dp` используется для перечисления всех процессов, а `dpa` или `dp=` для присоединения к процессу. Будет отображены базовые адреса процессов в карте физической памяти.
+In addition, the `dp` command can be used to list all processes, and
+`dpa` or `dp=` to attach to the process. This will display the base
+address of the process in the physical memory layout.
 
-# WinDBG бэкенд для Windows (DbgEng)
+# WinDBG Backend for Windows (DbgEng)
 
-В Windows radare2 может использовать `DbgEng.dll` в качестве серверной части отладки, позволяя ему использовать возможности WinDBG, включая поддержку файлов дампа памяти, отладку режимов пользователя и ядра локально и удаленно.
+On Windows, radare2 can use `DbgEng.dll` as a debugging backend,
+allowing it to make use of WinDBG's capabilities, supporting dump files,
+local and remote user and kernel mode debugging.
 
-Можно использовать библиотеки DLL отладки, включенные в Windows, или загрузить последние версии со [страницы загрузки](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/debugger-download-tools) Майкрософт, что рекомендуется сделать.
+You can use the debugging DLLs included on Windows or get the latest version from Microsoft's [download page](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/debugger-download-tools) (recommended).
 
-> Использовать библиотеки DLL из папки приложения `WinDbg Preview` Microsoft Store напрямую **нельзя**, поскольку они не помечены как исполняемые для обычных пользователей.
+> You cannot use DLLs from the Microsoft Store's `WinDbg Preview` app folder directly as they are not marked as executable for normal users.
 
-> radare2 попытается сначала загрузить `dbgeng.dll` из директория, указанного в переменной среды `_NT_DEBUGGER_EXTENSION_PATH`, перед тем как использоваь путь поиска библиотек Windows по умолчанию.
+> radare2 will try to load `dbgeng.dll` from the `_NT_DEBUGGER_EXTENSION_PATH` environment variable before using Windows' default library search path.
 
-## Использование плагина
+## Using the plugin
 
-Чтобы использовать плагин `windbg`, задавайте те же параметры командной строки, что и для `WinDBG` или `kd` (см. [документацию](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/windbg-command-line-options) Microsoft), добавляя кавычки и экранируя "\"-ами при необходимости:
+To use the `windbg` plugin, pass the same command-line options as you would for `WinDBG` or `kd` (see Microsoft's [documentation](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/windbg-command-line-options)), quoting/escaping when necessary:
 
 ```
 > r2 -d "windbg://-remote tcp:server=Server,port=Socket"
@@ -137,7 +147,7 @@ dc
 > r2 -d "windbg://-z MyDumpFile.dmp"
 ```
 
-Затем можно выполнять отладку как обычно (см. команду `d?` ) или взаимодействовать с командной строкой на сервере непосредственно с помощью команды `=!`:
+You can then debug normally (see `d?` command) or interact with the backend shell directly with the `=!` command:
 
 ```
 [0x7ffcac9fcea0]> dcu 0x0007ffc98f42190
