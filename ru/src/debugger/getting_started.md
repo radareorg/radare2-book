@@ -1,31 +1,32 @@
-# Getting Started
+# Начало работы
 
-## Small session in radare2 debugger
+## Небольшая сессия в отладчике Radeone2
 
-* `r2 -d /bin/ls`: Opens radare2 with file `/bin/ls` in debugger mode using the radare2 native debugger, but does not run the program. You’ll see a prompt (radare2) - all examples are from this prompt.
+* `r2 -d /bin/ls`: Открывает radare2 с файлом `/bin/ls` в режиме отладчика, используя встроенный отладчик, при этом программа не запускается. Запустится командная строка radare2, все примеры приводятся в этой строке.
 
-* `db flag`: place a breakpoint at flag, where flag can be either an address or a function name
+* `db flag`: установить точку останова на флаг, где флаг - это либо адрес, либо имя функции
 
-* `db - flag`: remove the breakpoint at flag, where flag can be either an address or a function name
+* `db - flag`: удалить точку останова на флаге, где флаг - это либо адрес, либо имя функции.
 
-* `db`: show list of breakpoint
 
-* `dc`: run the program
+* `db`: показать список точек останова
 
-* `dr`: Show registers state
+* `dc`: запуск программы
 
-* `drr`: Show registers references (telescoping) (like peda)
+* `dr`: Показать состояние регистров
 
-* `ds`: Step into instruction
+* `drr`: Показать ссылки из регистров (telescoping) (как peda)
 
-* `dso`: Step over instruction
+* `ds`: Выполнить инструкцию, войдя в нее, если можно (step into)
 
-* `dbt`: Display backtrace
+* `dso`: Выполнить инструкцию без входа внутрь (step over)
 
-* `dm`: Show memory maps
+* `dbt`: Показать трассировку стека
 
-* `dk <signal>`: Send KILL signal to child
+* `dm`: Показать карты памяти
 
-* `ood`: reopen in debug mode
+* `dk <signal>`: Отправить сигнал KILL дочернему процессу
 
-* `ood arg1 arg2`: reopen in debug mode with arg1 and arg2
+* `ood`: переоткрыть в режиме отладки
+
+* `ood arg1 arg2`: переоткрыть в режиме отладки с параметрами arg1 и arg2
