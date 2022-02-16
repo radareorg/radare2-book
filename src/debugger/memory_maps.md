@@ -1,8 +1,8 @@
-# Memory Maps
+# Карты памяти
 
-The ability to understand and manipulate the memory maps of a debugged program is important for many different Reverse Engineering tasks. radare2 offers a rich set of commands to handle memory maps in the binary. This includes listing the memory maps of the currently debugged binary, removing memory maps, handling loaded libraries and more.
+Понимание и манипулирование картами памяти отлаживаемой программы важна для многих задач реверс-инжениринга. radare2 предлагает богатый набор команд обработки карт памяти в двоичном формате. Он включает в себя перечисление карт памяти отлаживаемого двоичного файла, удаление карт памяти, обработку загруженных библиотек и многое другое.
 
-First, let's see the help message for `dm`, the command which is responsible for handling memory maps:
+Посмотрим на инструкцию команды `dm`, отвечающей за обработку карт памяти:
 
 ```
 [0x55f2104cf620]> dm?
@@ -10,14 +10,14 @@ Usage: dm   # Memory maps commands
 | dm                               List memory maps of target process
 | dm address size                  Allocate <size> bytes at <address> (anywhere if address is -1) in child process
 | dm=                              List memory maps of target process (ascii-art bars)
-| dm.                              Show map name of current address
+| dm.                              Показать название карты, содержащей текущий адрес
 | dm*                              List memmaps in radare commands
 | dm- address                      Deallocate memory map of <address>
 | dmd[a] [file]                    Dump current (all) debug map region to a file (from-to.dmp) (see Sd)
 | dmh[?]                           Show map of heap
 | dmi [addr|libname] [symname]     List symbols of target lib
 | dmi* [addr|libname] [symname]    List symbols of target lib in radare commands
-| dmi.                             List closest symbol to the current address
+| dmi.                             Список ближайших к текущему адресу символов
 | dmiv                             Show address of given symbol for given lib
 | dmj                              List memmaps in JSON format
 | dml <file>                       Load contents of file into the current map region
@@ -30,9 +30,9 @@ Usage: dm   # Memory maps commands
 | dmL address size                 Allocate <size> bytes at <address> and promote to huge page
 ```
 
-In this chapter, we'll go over some of the most useful subcommands of `dm` using simple examples. For the following examples, we'll use a simple `helloworld` program for Linux but it'll be the same for every binary.
+В этой главе рассмотрим только наиболее полезные подкоманды группы `dm`, используя простые примеры. Будем использовать простую программу `helloworld` для Linux, для других видов архитектур все будет выглядеть аналогично.
 
-First things first - open a program in debugging mode:
+Перво-наперво — откройте программу в режиме отладки:
 
 ```
 $ r2 -d helloworld
@@ -44,9 +44,9 @@ asm.bits 64
 [0x7f133f022fb0]>
 ```
 
-> Note that we passed "helloworld" to radare2 without "./". radare2 will try to find this program in the current directory and then in $PATH, even if no "./" is passed. This is contradictory with UNIX systems, but makes the behaviour consistent for windows users
+> Обратите внимание, что мы подставили «helloworld» в radare2 без «./». Программа radare2 попытается найти бинарик в текущем каталоге, а затем в $PATH, даже если не задан "./". Это несколько противоречит идеям UNIX, но делает ее удобной для пользователей Windows
 
-Let's use `dm` to print the memory maps of the binary we've just opened:
+Воспользуемся `dm` и распечатаем карты памяти открытого двоичного файла:
 
 ```
 [0x7f133f022fb0]> dm
@@ -61,25 +61,25 @@ Let's use `dm` to print the memory maps of the binary we've just opened:
 0xffffffffff600000 - usr   4K s r-x [vsyscall] [vsyscall] ; map.vsyscall_.r_x
 ```
 
-For those of you who prefer a more visual way, you can use `dm=` to see the memory maps using an ASCII-art bars. This will be handy when you want to see how these maps are located in the memory.
+Для тех из вас, кто предпочитает более наглядный способ, можно использовать `dm=`, карты памяти отобразятся при помощи штрихов ASCII-art. Это удобно, если надо посмотреть расположение карт в памяти.
 
-If you want to know the memory-map you are currently in, use `dm.`:
+Для печати имени карты памяти для текущего адреса смещения используйте `dm.` :
 
 ```
 [0x7f133f022fb0]> dm.
 0x00007f947eed9000 # 0x00007f947eefe000 * usr   148K s r-x /usr/lib/ld-2.27.so /usr/lib/ld-2.27.so ; map.usr_lib_ld_2.27.so.r_x
 ```
 
-Using `dmm` we can "List modules (libraries, binaries loaded in memory)", this is quite a handy command to see which modules were loaded.
+Используя `dmm` можно «Получить список модулей (библиотек, двоичных файлов, загруженных в память)» - удобная команда для просмотра перечня загруженных модулей.
 
 ```
 [0x7fa80a19dfb0]> dmm
 0x55ca23a4a000 /tmp/helloworld
 0x7fa80a19d000 /usr/lib/ld-2.27.so
 ```
-> Note that the output of `dm` subcommands, and `dmm` specifically, might be different in various systems and different binaries.
+> Обратите внимание, что формат вывода команды `dm` и конкретно `dmm` будет разный в различных операционных системах и двоичных файлах.
 
-We can see that along with our `helloworld` binary itself, another library was loaded which is `ld-2.27.so`. We don't see `libc` yet and this is because radare2 breaks before `libc` is loaded to memory. Let's use `dcu` (**d**ebug **c**ontinue **u**ntil) to execute our program until the entry point of the program, which radare flags as `entry0`.
+Вместе с нашим бинарным файлом `helloworld` загружена динамическая библиотека `ld-2.27.so`. И мы пока не видим `libc`: radare2 останавливает исполнение перед загрузкой `libc` в память. Используем `dcu` (**d**ebug **c**ontinue **u**ntil) и выполним программу до ее точки входа, помеченной radare-ом как `entry0`.
 
 ```
 [0x7fa80a19dfb0]> dcu entry0
@@ -91,9 +91,9 @@ hit breakpoint at: 55ca23a4a518
 0x7fa80a19d000 /usr/lib/ld-2.27.so
 ```
 
-Now we can see that `libc-2.27.so` was loaded as well, great!
+Теперь `libc-2.27.so` тоже загрузился, отлично!
 
-Speaking of `libc`, a popular task for binary exploitation is to find the address of a specific symbol in a library. With this information in hand, you can build, for example, an exploit which uses ROP. This can be achieved using the `dmi` command. So if we want, for example, to find the address of [`system()`](http://man7.org/linux/man-pages/man3/system.3.html) in the loaded `libc`, we can simply execute the following command:
+Говоря о `libc`, популярной задачей для бинарного эксплоита является поиск адреса определенного символа в библиотеке. Имея эту информацию, можно создать эксплойт, использующий ROP. Адрес можно получить при помощи команды `dmi`. Если надо найти адрес [`system()`](http://man7.org/linux/man-pages/man3/system.3.html) в загруженном`libc`, выполним следующую команду:
 
 ```
 [0x55ca23a4a520]> dmi libc system
@@ -106,9 +106,9 @@ Speaking of `libc`, a popular task for binary exploitation is to find the addres
 7480 0x001285a0 0x7fa809f095a0 GLBAL  FUNC  100 svcerr_systemerr
 ```
 
-Similar to the `dm.` command, with `dmi.` you can see the closest symbol to the current address.
+Подобно команде `dm.`, используя `dmi.` получим ближайший символ к текущему адресу.
 
-Another useful command is to list the sections of a specific library. In the following example we'll list the sections of `ld-2.27.so`:
+Еще одна полезная команда — вывести список разделов динамической библиотеки. В следующем примере перечислены секции `ld-2.27.so`:
 
 ```
 [0x55a7ebf09520]> dmS ld-2.27

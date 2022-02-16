@@ -1,8 +1,8 @@
-# Windows Messages
+# Сообщения Windows
 
-On Windows, you can use `dbW` while debugging to set a breakpoint for the message handler of a specific window.
+В Windows во время отладки можно использовать `dbW`, задавая точку останова в обработчике сообщений для определенного окна.
 
-Get a list of the current process windows with  `dW` :
+Получение списка активных окон процесса - `dW`:
 
 ```
 [0x7ffe885c1164]> dW
@@ -17,21 +17,21 @@ Get a list of the current process windows with  `dW` :
 `----------------------------------------------------'
 ```
 
-Set the breakpoint with a message type, together with either the window class name or its handle:
+Установка точки останова с заданным типом сообщения и именем класса окна или его дескриптором:
 
 ```
 [0x7ffe885c1164]> dbW WM_KEYDOWN Edit
 Breakpoint set.
 ```
 
-Or
+Или
 
-``` 
+```
 [0x7ffe885c1164]> dbW WM_KEYDOWN 0x002c048a
 Breakpoint set.
 ```
 
-If you aren't sure which window you should put a breakpoint on, use `dWi` to identify it with your mouse:
+Если вы не уверены, в какое окно следует поместить точку останова, используйте `dWi`, и указывайте окно при помощи мыши:
 
 ```
 [0x7ffe885c1164]> dWi

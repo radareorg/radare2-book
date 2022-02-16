@@ -1,8 +1,8 @@
-# Registers
+# Реестры
 
-The registers are part of a user area stored in the context structure used by the scheduler. This structure can be manipulated to get and set the values of those registers, and, for example, on Intel hosts, it is possible to directly manipulate DR0-DR7 hardware registers to set hardware breakpoints.
+Регистры являются частью среды пользователя, хранящейся в структуре контекста, используемой планировщиком. Эту структуру можно изменять для получения и установки значений этих регистров, и, например, на хостах Intel можно напрямую манипулировать аппаратными регистрами DR0-DR7 для установки аппаратных точек останова.
 
-There are different commands to get values of registers. For the General Purpose ones use:
+Есть разные команды для получения значений регистров. Для регистров общего назначения используют:
 
 ```
 [0x4A13B8C0]> dr
@@ -31,10 +31,10 @@ rsp = 0x7fff515923c0
 [0x4A13B8C0]> dr rip = esp   ; set 'rip' as esp
 ```
 
-Interaction between a plugin and the core is done by commands returning radare instructions. This is used, for example, to set flags in the core to set  values of registers.
+Взаимодействие между плагином и ядром осуществляется командами, возвращающими инструкции radare. Это используется, например, для установки флагов в ядре и значений регистров.
 
 ```
-[0x7f0f2dbae630]> dr*      ; Appending '*' will show radare commands
+[0x7f0f2dbae630]> dr*      ; Добавление '*' покажет команды radare
 f r15 1 0x0
 f r14 1 0x0
 f r13 1 0x0
@@ -58,7 +58,7 @@ f rsp 1 0x7fff73557940
 [0x4A13B8C0]> .dr*  ; include common register values in flags
 ```
 
-An old copy of registers is stored all the time to keep track of the changes done during execution of a program being analyzed. This old copy can be accessed with `oregs`.
+Старая копия регистров сохраняется на все время отладки, она позволяет отслеживать изменения, сделанные во время выполнения анализируемой программы. Доступ к копии можно получить с помощью `oregs`.
 
 ```
 [0x7f1fab84c630]> dro
@@ -82,7 +82,7 @@ rip = 0x7f1fab84c630
 rflags = 0x00000200
 rsp = 0x7fff386b5080
 ```
-Current state of registers
+Текущее состояние регистров
 
 ```
 [0x7f1fab84c630]> dr
@@ -107,23 +107,23 @@ rflags = 0x00000202
 rsp = 0x7fff386b5080
 ```
 
-Values stored in eax, oeax and eip have changed.
+Значения, хранящиеся в eax, oeax и eip, изменились.
 
-To store and restore register values you can just dump the output of 'dr*' command to disk and then re-interpret it again:
+Чтобы сохранить и восстановить значения регистров, можно просто сбросить дамп команды 'dr*' на диск, а затем снова проинтерпретировать его:
 
 ```
-[0x4A13B8C0]> dr* > regs.saved ; save registers
-[0x4A13B8C0]> drp regs.saved ; restore
+[0x4A13B8C0]> dr* > regs.saved ; сохранить регистры
+[0x4A13B8C0]> drp regs.saved ; восстановить их
 ```
 
-EFLAGS can be similarly altered. E.g., setting selected flags:
+Аналогичным образом меняются EFLAGS. Например, установка выбранных флагов:
 
 ```
 [0x4A13B8C0]> dr eflags = pst
 [0x4A13B8C0]> dr eflags = azsti
 ```
 
-You can get a string which represents latest changes of registers using `drd` command (diff registers):
+Получение информации об изменении регистров - команда  `drd` (diff registers):
 
 ```
 [0x4A13B8C0]> drd
