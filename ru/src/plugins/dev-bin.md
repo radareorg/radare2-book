@@ -1,10 +1,10 @@
-## Реализация нового формата
+## Реализация нового формата двоичного файла
 
 ### Включение виртуальной адресации
 
-In `info` add `et->has_va = 1;` and `ptr->srwx` with the `R_BIN_SCN_MAP;` attribute
+В `info` надо добавить `et->has_va = 1;` и `ptr->srwx` с атрибутом `R_BIN_SCN_MAP;`
 
-### Создайте папку с именем формата файла в libr/bin/format
+### Оформление папки с именем формата файла в libr/bin/format
 
 **Makefile:**
 
@@ -101,9 +101,8 @@ R_API RLibStruct radare_plugin = {
 
 ### Примеры
 
-* XBE - https://github.com/radareorg/radare2/pull/972
-* COFF - https://github.com/radareorg/radare2/pull/645
-* TE - https://github.com/radareorg/radare2/pull/61
-* Zimgz - https://github.com/radareorg/radare2/commit/d1351cf836df3e2e63043a6dc728e880316f00eb
-* OMF - https://github.com/radareorg/radare2/commit/44fd8b2555a0446ea759901a94c06f20566bbc40
-
+* XBE - https://github.com/radareorg/radare2/pull/972,
+* COFF - https://github.com/radareorg/radare2/pull/645,
+* TE - https://github.com/radareorg/radare2/pull/61,
+* Zimgz - https://github.com/radareorg/radare2/commit/d1351cf836df3e2e63043a6dc728e880316f00eb,
+* OMF - https://github.com/radareorg/radare2/commit/44fd8b2555a0446ea759901a94c06f20566bbc40.
