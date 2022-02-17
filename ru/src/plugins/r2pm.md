@@ -2,13 +2,13 @@
 
 Напомним, что в radare2 включен собственный [менеджер пакетов](../tools/r2pm/intro.md),  можно легко добавлять новые плагины, чтобы они были доступны всем.
 
-Все пакеты расположены в репозитории [radare2-pm](https://github.com/radareorg/radare2-pm), для описания его структуры используется очень простой текстовый формат.
+Все пакеты расположены в репозитории [radare2-pm](https://github.com/radareorg/radare2-pm). Для описания структуры плагина используется очень простой текстовый формат.
 
 ```
 R2PM_BEGIN
 
 R2PM_GIT "https://github.com/user/mycpu"
-R2PM_DESC "[r2-arch] MYCPU disassembler and analyzer plugins"
+R2PM_DESC "[r2-arch] дизассемблер и анализатор для MYCPU, плагин"
 
 R2PM_INSTALL() {
 	${MAKE} clean
@@ -25,5 +25,4 @@ R2PM_END
 ```
 
 Затем добавьте его в каталог `/db` репозитория radare2-pm и отправьте pull-запрос.
-
 
