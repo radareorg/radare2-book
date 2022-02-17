@@ -1,13 +1,11 @@
-# Python plugins
+# Плагины Python
 
-At first, to be able to write a plugins in Python for radare2 you need to install
-r2lang plugin: `r2pm -i lang-python`.
-Note - in the following examples there are missing functions of the actual decoding
-for the sake of readability!
+Необходимым условием для реализации модулей расширения на языке Python для radare2 является установка плагина r2lang: `r2pm -i lang-python`.
+Обратим внимание, что ради читабельности кода в следующих примерах отсутствуют функции фактического декодирования!
 
-For this you need to do this:
-1. `import r2lang` and `from r2lang import R` (for constants)
-2. Make a function with 2 subfunctions - `assemble` and `disassemble` and returning plugin structure - for RAsm plugin
+Для этого нужно сделать следующее:
+1. `import r2lang` и `from r2lang import R` (модуль констант)
+2. Далее для плагина RAsm реализуем функцию с двумя подфункциями - `assemble` и `disassemble`, она также должна возвращать структуру, представляющую плагин
 ```python
 def mycpu(a):
     def assemble(s):
@@ -21,7 +19,7 @@ def mycpu(a):
         except:
             return [4, "unknown"]
 ```
-3. This structure should contain a pointers to these 2 functions - `assemble` and `disassemble`
+3. Данная конструкция должна содержать указатели на эти две функции – `assemble` и `disassemble`
 
 ```python
     return {
@@ -35,7 +33,7 @@ def mycpu(a):
             "disassemble" : disassemble,
     }
 ```
-4. Make a function with 2 subfunctions - `set_reg_profile` and `op` and returning plugin structure - for RAnal plugin
+4. Для плагина RAnal создается функция с двумя подфункциями - `set_reg_profile` и `op`, возвращается структура
 
 ```python
 def mycpu_anal(a):
@@ -92,7 +90,7 @@ def mycpu_anal(a):
             "op" : op,
     }
 ```
-6. (Optional) To add extra information about op sizes and alignment, add a `archinfo` subfunction and point to it in the structure
+6. (Необязательный шаг) Чтобы добавить дополнительную информацию о размерах операций и выравнивании добавьте подфункцию `archinfo` и поместите ее указатель в структуре
 
 ```python
 def mycpu_anal(a):
@@ -121,7 +119,7 @@ def mycpu_anal(a):
             "op" : op,
     }
 ```
-7. Register both plugins using `r2lang.plugin("asm")` and `r2lang.plugin("anal")` respectively
+7. Зарегистрируйте оба плагина, используя `r2lang.plugin("asm")` и `r2lang.plugin("anal")`, соответственно.
 
 ```python
 print("Registering MYCPU disasm plugin...")
@@ -130,25 +128,24 @@ print("Registering MYCPU analysis plugin...")
 print(r2lang.plugin("anal", mycpu_anal))
 ```
 
-You can combine everything in one file and load it using `-i` option:
+Можно объединить все в один файл и загрузить его с помощью флага `-i` :
 ```
 r2 -I mycpu.py some_file.bin
 ```
-Or you can load it from the r2 shell: `#!python mycpu.py`
+Можно загрузить плагин из оболочки r2: `#!python mycpu.py`
 
-See also:
+Смотрите также:
 
 * [Python](https://github.com/radareorg/radare2-bindings/blob/master/libr/lang/p/test-py-asm.py)
 * [Javascript](https://github.com/radareorg/radare2-bindings/blob/master/libr/lang/p/dukasm.js)
 
-### Implementing new format plugin in Python
+### Реализация плагина формата в Python
 
-Note - in the following examples there are missing functions of the actual decoding
-for the sake of readability!
+Обратим внимание, что ради читабельности кода в следующих примерах отсутствуют функции фактического декодирования!
 
-For this you need to do this:
+Для этого нужно сделать следующее:
 1. `import r2lang`
-2. Make a function with  subfunctions:
+2. Создайте функцию с подфункциями:
    - `load`
    - `load_bytes`
    - `destroy`
@@ -161,7 +158,7 @@ For this you need to do this:
    - `binsym`
    - `info`
 
-   and returning plugin structure - for RAsm plugin
+   и вернуть структуру плагина (для плагина RAsm)
 ```python
 def le_format(a):
     def load(binf):
@@ -177,11 +174,10 @@ def le_format(a):
         except:
             return [0]
 ```
-and so on. Please be sure of the parameters for each function and format of returns.
-Note, that functions `entries`, `sections`, `imports`, `relocs` returns a list of special
-formed dictionaries - each with a different type.
-Other functions return just a list of numerical values, even if single element one.
-There is a special function, which returns information about the file - `info`:
+и т.д. Please be sure of the parameters for each function and format of returns.
+Обратите внимание, что функции `entries`, `sections`, `imports`, `relocs` возвращают список словарей специального вида, каждый со своим типом.
+Другие функции возвращают только список числовых значений, даже всего один элемент.
+Есть специальная функция, которая возвращает информацию о файле - `info`:
 ```python
     def info(binf):
         return [{
@@ -199,8 +195,7 @@ There is a special function, which returns information about the file - `info`:
                 }]
 ```
 
-3. This structure should contain a pointers to the most important functions like
-`check_bytes`, `load` and `load_bytes`, `entries`, `relocs`, `imports`.
+3. Эта структура должна содержать указатели на наиболее важные функции, такие как `check_bytes`, `load`, `load_bytes`, `entries`, `relocs` и `imports`.
 
 ```python
     return {
@@ -221,7 +216,7 @@ There is a special function, which returns information about the file - `info`:
             "info" : info,
     }
 ```
-4. Then you need to register it as a file format plugin:
+4. Затем вам нужно зарегистрировать его как плагин формата файла:
 
 ```python
 print("Registering OS/2 LE/LX plugin...")

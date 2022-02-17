@@ -1,12 +1,12 @@
-# Testing the plugin
+# Тестирование плагина
 
-This plugin is used by rasm2 and r2. You can verify that the plugin is properly loaded with this command:
+Этот плагин используется rasm2 и r2. Вы можете проверить, правильно ли загружен плагин, с помощью этой команды:
 ```
 $ rasm2 -L | grep mycpu
 _d  mycpu        My CPU disassembler  (LGPL3)
 ```
 
-Let's open an empty file using the 'mycpu' arch and write some random code there.
+Давайте откроем пустой файл архитектуры 'mycpu' и напишем там какой-нибудь случайный код.
 
 ```
 $ r2 -
@@ -25,7 +25,7 @@ $ r2 -
            0x00000010    1382         add r8, r2
            0x00000012    7f15         ret
 ```
-Yay! it works.. and the mandatory oneliner too!
+Ура! заработало... и обязательный однострочник тоже!
 
 ```
 r2 -nqamycpu -cwoR -cpd' 10' -

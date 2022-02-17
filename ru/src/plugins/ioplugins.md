@@ -1,28 +1,28 @@
-# IO plugins
+# Плагины ввода-вывода
 
-All access to files, network, debugger and all input/output in general is wrapped by an IO abstraction layer that allows radare to treat all data as if it were just a file.
+Весь доступ к файлам, сети, отладчику и вводу/выводу другого вида представлен специальным уровнем абстракции, позволяющий radare обрабатывать все данные как файл.
 
-IO plugins are the ones used to wrap the open, read, write and 'system' on virtual file systems. You can make radare understand anything as a plain file. E.g. a socket connection, a remote radare session, a file, a process, a device, a gdb session.
+Плагины ввода-вывода представляют операции открытия, чтения, записи и 'system' в виде виртуальных файловых системах. Можно заставить radare обрабатывать что угодно как простой файл. Примерами выступают сокетные соединения, удаленный сеанс radare, файлы, процессы, устройства, сеансы gdb.
 
-So, when radare reads a block of bytes, it is the task of an IO plugin to get these bytes from any place and put them into internal buffer. An IO plugin is chosen by a file's URI to be opened. Some examples:
+Таким образом, когда radare считывает блок байтов, задача плагина ввода-вывода заключается в том, чтобы получить эти байты откуда-нибудь, поместить их во внутренний буфер. Плагин ввода-вывода выбирается по URI открываемого файла. Примеры:
 
-* Debugging URIs
+* URI отладки
 ```
 $ r2 dbg:///bin/ls<br />
 $ r2 pid://1927
 ```
-* Remote sessions
+* Удаленные сеансы
 ```
 $ r2 rap://:1234<br />
 $ r2 rap://<host>:1234//bin/ls
 ```
-* Virtual buffers
+* Виртуальные буферы
 ```
 $ r2 malloc://512<br />
-shortcut for
+сокращение для
 $ r2 -
 ```
-You can get a list of the radare IO plugins by typing `radare2 -L`:
+Получение списка плагинов ввода-вывода в radare - `radare2 -L`:
 ```
 $ r2 -L
 rw_  ar       Open ar/lib files [ar|lib]://[file//path] (LGPL3)

@@ -1,58 +1,55 @@
-# Plugins
+# Плагины
 
-radare2 is implemented on top of a bunch of libraries, almost every of those
-libraries support plugins to extend the capabilities of the library or add
-support for different targets.
+radare2 реализован на основе библиотек, в том числе поддерживающих плагины для расширения их возможностей или добавления поддержка новых архитектур и форматов.
 
-This section aims to explain what are the plugins, how to write them and use them
+В этом разделе объясняется, что такое плагины, их реализация и использование
 
-## Types of plugins
+## Типы плагинов
 ```
 $ ls libr/*/p | grep : | awk -F / '{ print $2 }'
-anal      # analysis plugins
-asm       # assembler/disassembler plugins
-bin       # binary format parsing plugins
-bp        # breakpoint plugins
-core      # core plugins (implement new commands)
-crypto    # encrypt/decrypt/hash/...
-debug     # debugger backends
-egg       # shellcode encoders, etc
-fs        # filesystems and partition tables
-io        # io plugins
-lang      # embedded scripting languages
-parse     # disassembler parsing plugins
-reg       # arch register logic
+anal      # плагины анлиза
+asm       # плагины ассемблирования/дизассемблирования
+bin       # плагины синтаксического анализа форматов
+bp        # плагины точек останов
+core      # плагины ядра (новые команды)
+crypto    # шифрование/дешифрование/хэши/...
+debug     # плагины отладки
+egg       # shellcode encoders, и т.д.
+fs        # файловые системы и таблицы партиций
+io        # плагины вводв-вывода
+lang      # встроенные языки сценариев
+parse     # синтаксический анализ результатов дизассемблирования
+reg       # регистровая логика архитектуры
 ```
 
-## Listing plugins
+## Получение списка плагинов
 
-Some r2 tools have the `-L` flag to list all the plugins associated to the
-functionality.
+Некоторые инструменты r2 поддерживают флаг `-L` для вывода всех плагинов во видам реализованных функций.
 ```
-rasm2 -L    # list asm plugins
-r2 -L       # list io plugins
-rabin2 -L   # list bin plugins
-rahash2 -L  # list hash/crypto/encoding plugins
+rasm2 -L    # перечень плагинов asm
+r2 -L       # перечень плагинов io
+rabin2 -L   # перечень плагинов bin
+rahash2 -L  # перечень плагинов хэш/шифрование/дешифрования
 ```
-There are more plugins in r2land, we can list them from inside r2, and this is
-done by using the `L` suffix.
+В проекте r2land есть другие плагины, можно получить списоки прямо r2, это
+делается при помощи группы команд `L` .
 
-Those are some of the commands:
+Вот некоторые из команд:
 ```
-L          # list core plugins
-iL         # list bin plugins
-dL         # list debug plugins
-mL         # list fs plugins
-ph         # print support hash algoriths
+L          # перечень плагинов ядра (core)
+iL         # перечень плагинов bin
+dL         # перечень плагинов debug
+mL         # перечень плагинов fs
+ph         # вывести перечень поддерживаемых алгоритмов хеширования
 ```
 
-You can use the `?` as value to get the possible values in the associated eval vars.
+Использование `?` в качестве значения в выражении выдает возможные варианты значений для переменых среды.
 
 ```
-e asm.arch=?   # list assembler/disassembler plugins
-e anal.arch=?  # list analysis plugins
+e asm.arch=?   # список плагинов ассемблирования/дизассемблирования
+e anal.arch=?  # список плагинов анализа
 ```
-## Notes
+## Примечания
 
-Note there are some inconsistencies that most likely will be fixed in the future radare2 versions.
+Обратите внимание, по ходу развития проекта выявляются некоторые противоречия, они исправляются в новых версиях radare2.
 

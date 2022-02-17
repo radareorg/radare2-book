@@ -1,10 +1,10 @@
-## Implementing a new format
+## Реализация нового формата
 
-### To enable virtual addressing
+### Включение виртуальной адресации
 
 In `info` add `et->has_va = 1;` and `ptr->srwx` with the `R_BIN_SCN_MAP;` attribute
 
-### Create a folder with file format name in libr/bin/format
+### Создайте папку с именем формата файла в libr/bin/format
 
 **Makefile:**
 
@@ -99,7 +99,7 @@ R_API RLibStruct radare_plugin = {
 
 ```
 
-### Some Examples
+### Примеры
 
 * XBE - https://github.com/radareorg/radare2/pull/972
 * COFF - https://github.com/radareorg/radare2/pull/645

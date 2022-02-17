@@ -1,16 +1,16 @@
-## Write a debugger plugin
+## Реализация плагина отладчика
 
-* Adding the debugger registers profile into the shlr/gdb/src/core.c
-* Adding the registers profile and architecture support in the libr/debug/p/debug_native.c and libr/debug/p/debug_gdb.c
-* Add the code to apply the profiles into the function `r_debug_gdb_attach(RDebug *dbg, int pid)`
+* Добавление профиля регистров отладчика в shlr/gdb/src/core.c
+* Добавление поддержки профиля и архитектуры регистров в libr/debug/p/debug_native.c и libr/debug/p/debug_gdb.c
+* Добавьте код для профилей в функцию `r_debug_gdb_attach(RDebug *dbg, int pid)`
 
-If you want to add support for the gdb, you can see the register profile in the active gdb session using command `maint print registers`.
+Если добавить поддержку gdb, тогда можно будет видеть профиль регистров в активном сеансе gdb, используя команду `maint print registers`.
 
-## More to come..
+## То ли еще будет.
 
-* Related article: http://radare.today/posts/extending-r2-with-new-plugins/
+* Статья по теме: http://radare.today/posts/extending-r2-with-new-plugins/
 
-Some commits related to "Implementing a new architecture"
+Некоторые коммиты, связанные с «Реализацией новой архитектуры»
 
 * Extensa: https://github.com/radareorg/radare2/commit/6f1655c49160fe9a287020537afe0fb8049085d7
 * Malbolge: https://github.com/radareorg/radare2/pull/579
@@ -25,8 +25,8 @@ Some commits related to "Implementing a new architecture"
 * V810: https://github.com/radareorg/radare2/pull/2899
 * TMS320: https://github.com/radareorg/radare2/pull/596
 
-## Implementing a new pseudo architecture
+## Реализация новой псевдоархитектуры
 
-This is an simple plugin for z80 that you may use as example:
+Простой плагин для Z80, который можно использовать в качестве примера:
 
 https://github.com/radareorg/radare2/commit/8ff6a92f65331cf8ad74cd0f44a60c258b137a06

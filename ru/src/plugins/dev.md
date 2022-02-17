@@ -1,24 +1,24 @@
-## Implementing a new architecture
+## Реализация новой архитектуры
 
-radare2 splits the logic of a CPU into several modules. You should write more than one plugin to get full support for a specific arch. Let's see which are those:
+radare2 разделяет логику описания процессора на несколько модулей. Нужно реализовать несколько плагинов, чтобы получить полную поддержку для конкретной архитектуры. Посмотрим, какие они:
 
-* r_asm : assembler and disassembler
-* r_anal : code analysis (opcode,type,esil,..)
-* r_reg : registers
-* r_syscall : system calls
-* r_debug : debugger
+* r_asm : ассемблер и дизассемблер
+* r_anal : анализ кода (оп-код, типы, esil, ...)
+* r_reg : регистры
+* r_syscall : системные вызовы
+* r_debug : отладчик
 
-The most basic feature you usually want to support from a specific architecture is the disassembler. You first need to read into a human readable form the bytes in there.
+Основной функцией, поддерживаемой для определенной архитектуры, является дизассемблер. Сначала нужно представить байты в форме, воспринимаемой человеком.
 
-Bear in mind that plugins can be compiled static or dynamically, this means that the arch will be embedded inside the core libraries or it will distributed as a separated shared library.
+Плагины компилируются как статически, так и динамически, т.е. поддержка архитектуры будет или встроена в ядро или будет динамической библиотекой.
 
-To configure which plugins you want to compile use the `./configure-plugins` script which accepts the flags --shared and --static to specify them. You can also add it manually inside the `plugins.def.cfg` and then remove the `plugins.cfg` and run `./configure-plugins` again to update the `libr/config.mk` and `libr/config.h`.
+Чтобы настроить перечень плагинов для сборки используйте скрипт `./configure-plugins`, принимающий флаги --shared и --static. Можете перечислить их вручную внутри `plugins.def.cfg` затем удалить `plugins.cfg`, запустить `./configure-plugins` для обновления `libr/config.mk` и `libr/config.h`.
 
-You may find some examples of external plugins in [radare2-extras](https://github.com/radareorg/radare2-extras) repository.
+Есть примеры внешних плагинов в репозитории [radare2-extras](https://github.com/radareorg/radare2-extras) .
 
-## Writing the r_asm plugin
+## Реализация плагина r_asm
 
-The official way to make third-party plugins is to distribute them into a separate repository. This is a sample disasm plugin:
+Официальным способом создания плагинов является их публикация в отдельном репозиторий. Пример плагина дизассемблирования:
 
 ```Makefile
 $ cd my-cpu
@@ -127,7 +127,7 @@ struct r_lib_struct_t radare_plugin = {
 #endif
 ```
 
-To build and install this plugin just type this:
+Соборка и установка плагина - команды
 
 ```
 $ make

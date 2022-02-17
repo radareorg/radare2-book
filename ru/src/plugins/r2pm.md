@@ -1,10 +1,8 @@
-# Creating an r2pm package of the plugin
+# Реализация пакета r2pm для плагина
 
-As you remember radare2 has its own [packaging manager](../tools/r2pm/intro.md) and we can easily
-add newly written plugin for everyone to access.
+Напомним, что в radare2 включен собственный [менеджер пакетов](../tools/r2pm/intro.md),  можно легко добавлять новые плагины, чтобы они были доступны всем.
 
-All packages are located in [radare2-pm](https://github.com/radareorg/radare2-pm) repository, and have
-very simple text format.
+Все пакеты расположены в репозитории [radare2-pm](https://github.com/radareorg/radare2-pm), для описания его структуры используется очень простой текстовый формат.
 
 ```
 R2PM_BEGIN
@@ -26,6 +24,6 @@ R2PM_UNINSTALL() {
 R2PM_END
 ```
 
-Then add it in the `/db` directory of radare2-pm repository and send a pull request to the mainline.
+Затем добавьте его в каталог `/db` репозитория radare2-pm и отправьте pull-запрос.
 
 

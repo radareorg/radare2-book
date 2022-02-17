@@ -1,10 +1,8 @@
-## Implementing a new disassembly plugin
+## Реализация плагина дизассемблирования
 
-Radare2 has modular architecture, thus adding support for a new architecture is very easy, if you
-are fluent in C. For various reasons it might be easier to implement it out of the tree. For this we
-will need to create single C file, called `asm_mycpu.c` and makefile for it.
+Архитектура Radare2 модульная, поэтому реализация поддержки новой архитектуры делается очень просто, если свободно владеть С. По множеству причин реализацию еще проще сделать из дерева исходников radare2. Для этого требуется создать всего один файл C, называемый `asm_mycpu.c` и соответсвующий Makefile.
 
-The key thing of RAsm plugin is a structure
+Ключевым моментом плагина RAsm является структура
 ```c
 RAsmPlugin r_asm_plugin_mycpu = {
 	.name = "mycpu",
@@ -17,8 +15,7 @@ RAsmPlugin r_asm_plugin_mycpu = {
 };
 ```
 
-where `.disassemble` is a pointer to disassembly function, which accepts the bytes buffer
-and length:
+где `.disassemble` — это указатель на функцию дизассемблирования,  принимающую буфер байтов и его длину:
 
 ```c
 static int disassemble(RAsm *a, RAsmOp *op, const ut8 *buf, int len)
@@ -94,28 +91,28 @@ R_API RLibStruct radare_plugin = {
 #endif
 ```
 
-After compiling radare2 will list this plugin in the output:
+После компиляции radare2 упомянет плагин в списоке плагинов вывода:
 ```
 _d__  _8_32      mycpu        LGPL3   MYCPU
 ```
 
-### Moving plugin into the tree
+### Перемещение плагина в дерево исходников radare2
 
-Pushing a new architecture into the main branch of r2 requires to modify several files in order to make it fit into the way the rest of plugins are built.
+Добавление новой архитектуры в основную ветвь r2 требует изменения нескольких файлов, что обеспечивает плагину правильную интеграцию аналогично остальным плагинам.
 
-List of affected files:
+Список файлов, требующих изменения:
 
-* `plugins.def.cfg` : add the `asm.mycpu` plugin name string in there
-* `libr/asm/p/mycpu.mk` : build instructions
-* `libr/asm/p/asm_mycpu.c` : implementation
-* `libr/include/r_asm.h` : add the struct definition in there
+* `plugins.def.cfg` : добавить название плагина в виде строки `asm.mycpu`
+* `libr/asm/p/mycpu.mk` : инструкции сборки
+* `libr/asm/p/asm_mycpu.c` : реализация
+* `libr/include/r_asm.h` : добавить определение структуры
 
-Check out how the NIOS II CPU disassembly plugin was implemented by reading those commits:
+Сравните результат с плагином дизассемблирования для процессора NIOS II по следущим коммитам:
 
 Implement RAsm plugin:
 https://github.com/radareorg/radare2/commit/933dc0ef6ddfe44c88bbb261165bf8f8b531476b
 
-Implement RAnal plugin:
+Реализация плагина RAnal:
 https://github.com/radareorg/radare2/commit/ad430f0d52fbe933e0830c49ee607e9b0e4ac8f2
 
 

@@ -1,15 +1,10 @@
-## Implementing a new analysis plugin
+## Реализация нового плагина анализа
 
-After implementing disassembly plugin, you might have noticed that output
-is far from being good - no proper highlighting, no reference lines
-and so on. This is because radare2 requires every architecture plugin
-to provide also analysis information about every opcode. At the moment
-the implementation of disassembly and opcodes analysis is separated between
-two modules - RAsm and RAnal. Thus we need to write an analysis plugin too.
-The principle is very similar - you just need to create a C file and
-corresponding Makefile.
+После реализации плагина дизассемблирования, его вывод бывает далеко неидеальным - нет правильной подсветки, нет "опорных линий"
+и т.д. Radare2 требует от каждого архитектурного плагина предоставлять также аналитическую информацию о каждом оп-коде. На данный момент реализация дизассемблирования и анализа оп-кодов разделена на два модуля - RAsm и RAnal. Таким образом, требуется реализовать плагин анализа.
+Принцип очень похож - реализовать C-файл и соответствующий Makefile.
 
-They structure of RAnal plugin looks like
+Структура плагина RAnal выглядит так -
 
 ```c
 RAnalPlugin r_anal_plugin_v810 = {
@@ -24,11 +19,8 @@ RAnalPlugin r_anal_plugin_v810 = {
 };
 ```
 
-Like with disassembly plugin there is a key function - `mycpu_op` which scans the opcode and builds
-RAnalOp structure. On the other hand, in this example analysis plugins also performs uplifting to
-ESIL, which is enabled in `.esil = true` statement. Thus, `mycpu_op` obliged to fill the
-corresponding RAnalOp ESIL field for the opcodes. Second important thing for ESIL uplifting and
-emulation - register profile, like in debugger, which is set within `set_reg_profile` function.
+Аналогично плагину дизассемблирования, есть ключевая функция - `mycpu_op`, сканирущая оп-код и создающая структуру RAnalOp. В этом примере плагины анализа также выполняют описание оп-кода командами
+ESIL (uplifting), так как включен `.esil = true`. Таким образом, `mycpu_op` обязан заполнять соответствующее ESIL-поле структуры RAnalOp для оп-кодов. Вторая важная вещь для кодирования оп-кодов в ESIL и выполнения эмуляции - регистровый профиль, подобно тому, как в отладчике, он задается внутри функции `set_reg_profile`.
 
 **Makefile**
 
@@ -106,14 +98,14 @@ R_API RLibStruct radare_plugin = {
 };
 #endif
 ```
-After compiling radare2 will list this plugin in the output:
+После компиляции radare2 упомянет плагин в списоке плагинов вывода:
 ```
 _dA_  _8_16      snes        LGPL3   SuperNES CPU
 ```
 
 **snes_op_table**.h: https://github.com/radareorg/radare2/blob/master/libr/asm/arch/snes/snes_op_table.h
 
-Example:
+Пример:
 
 * **6502**: https://github.com/radareorg/radare2/commit/64636e9505f9ca8b408958d3c01ac8e3ce254a9b
 * **SNES**: https://github.com/radareorg/radare2/commit/60d6e5a1b9d244c7085b22ae8985d00027624b49

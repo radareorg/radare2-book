@@ -1,8 +1,6 @@
-# Debugging
+# Отладка
 
-It is common to have an issues when you write a plugin, especially if you do this for the first
-time. This is why debugging them is very important. The first step for debugging is
-to set an environment variable when running radare2 instance:
+Часто при проектировании плагинов возникают проблемы, особенно если вы делаете это для первый раз. Поэтому возможность их отладки очень важна. Первым шагом для отладки является задание переменной среды при запуске экземпляра radare2:
 ```
 R_DEBUG=yes r2 /bin/ls
 Loading /usr/local/lib/radare2/2.2.0-git//bin_xtr_dyldcache.so
@@ -28,6 +26,6 @@ Cannot open /usr/local/lib/radare2/2.2.0-git/2.2.0-git
 Cannot open directory '/usr/local/lib/radare2-extras/2.2.0-git'
 Cannot open directory '/usr/local/lib/radare2-bindings/2.2.0-git'
 USER CONFIG loaded from /home/user/.config/radare2/radare2rc
- -- In visual mode press 'c' to toggle the cursor mode. Use tab to navigate
+ -- В визуальном режиме используйте клавишу 'c', для переключения в режим курсора. Используйте TAB для навигации
 [0x00005520]>
 ```
