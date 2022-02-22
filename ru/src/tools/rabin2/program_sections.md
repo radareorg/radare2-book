@@ -50,4 +50,3 @@ fs sections
 "f section..gnu.version 1 0x00001574"
 "f section..gnu.version_r 1 0x00001678"
 ```
-
