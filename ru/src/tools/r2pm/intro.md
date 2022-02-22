@@ -37,35 +37,35 @@ Already up to date.
 r2pm -h
 Usage: r2pm [init|update|cmd] [...]
 Commands:
- -I,info                     show information about a package
- -i,install <pkgname>        install package in your home (pkgname=all)
- -gi,global-install <pkg>    install package system-wide
- -gu,global-uninstall <pkg>  uninstall pkg from systemdir
+ -I,info                     показать информацию о пакете
+ -i,install <pkgname>        установить пакет в домашний каталог (pkgname=all)
+ -gi,global-install <pkg>    установить пакет в систему
+ -gu,global-uninstall <pkg>  удалить пакет из системной папки
  -u,uninstall <pkgname>      r2pm -u baleful (-uu to force)
- -l,list                     list installed pkgs
- -r,run [cmd ...args]        run shell command with R2PM_BINDIR in PATH
- -s,search [<keyword>]       search in database
- -t,test FX,XX,BR BID        check in Travis regressions
- -v,version                  show version
- -h,help                     show this message
- -H variable                 show value of given variable
- -c,clean ([git/dir])        clear source cache (GITDIR)
- -ci (pkgname)               clean install of given package
- -cp                         clean the user's home plugin directory
- -d,doc [pkgname]            show documentation for given package
- -w <pkgname>                what/where is installed
+ -l,list                     перечислить установленные пакеты
+ -r,run [cmd ...args]        запустить команды оболочки при помощи R2PM_BINDIR в PATH
+ -s,search [<keyword>]       искать в базе данных
+ -t,test FX,XX,BR BID        загрузить регрессии Travis-а
+ -v,version                  показать версию
+ -h,help                     показать это сообщение
+ -H variable                 показать значение заданной переменной
+ -c,clean ([git/dir])        очистить исходный кэш (GITDIR)
+ -ci (pkgname)               очистить данные инсталляции заданного пакета
+ -cp                         очистить папку плагинов пользователя
+ -d,doc [pkgname]            показать документацию для заданного пакета
+ -w <pkgname>                что и где установлено
  init | update ..            инициализация/обновление базы данных
- cd [git/dir]                cd into given git (see 'r2pm ls')
- ls                          ls all cloned git repos in GITDIR
- suicide                     self remove all (home + system) installations of r2
- cache                       cache contents of r2 -H to make r2pm r2-independent
+ cd [git/dir]                перейти в заданный git (смотри 'r2pm ls')
+ ls                          перечислить все склонированные git-репозитории в GITDIR
+ suicide                     удалить всю установку r2, включая себя, домашний директорий, систему
+ cache                       содержимое кэша r2, -H чтобы сделать r2pm независимым от r2
 Environment:
- SUDO=sudo                    use this tool as sudo
- R2PM_PLUGDIR=~/.local/share/radare2/plugins   # default value, home-install for plugins
- R2PM_BINDIR=~/.local/share/radare2/prefix/bin # bindir in r2's PATH
- R2PM_PLUGDIR=/usr/lib/radare2/last/           # for system-wide plugin installs
- R2PM_DBDIR=~/.local/share/radare2/r2pm/db     # location of the db
- R2PM_GITDIR=~/.local/share/radare2/r2pm/git   # cloned git repositories
+ SUDO=sudo                   использовать эту программу как sudo
+ R2PM_PLUGDIR=~/.local/share/radare2/plugins   # значение по умолчанию, установка в домашний директорий для плагинов
+ R2PM_BINDIR=~/.local/share/radare2/prefix/bin # папка с бинариками r2, PATH
+ R2PM_PLUGDIR=/usr/lib/radare2/last/           # для системной установки устаноленные плагины
+ R2PM_DBDIR=~/.local/share/radare2/r2pm/db     # месторасположение базы данных
+ R2PM_GITDIR=~/.local/share/radare2/r2pm/git   # репозитории клонированных git
 ```
 
 Обычный сценарий его использования заключается в установке новых плагинов, например `lang-python3` (который используется для создания плагинов r2 на Python):
