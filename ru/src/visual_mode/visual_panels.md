@@ -19,53 +19,53 @@
 ## Команды
 ```
 |Visual Ascii Art Panels:
-| |      split the current panel vertically
-| -      split the current panel horizontally
-| :      run r2 command in prompt
-| ;      add/remove comment
-| _      start the hud input mode
-| \      show the user-friendly hud
+| |      разделить панел вертикально
+| -      разделить панель горизонтально
+| :      выполнить команду при помощи командной строки r2
+| ;      добавить/удалить коментарий
+| _      запуск hud-режима (input)
+| \      показать user-friendly hud
 | ?      показать справку
 | !      запустить игру r2048
-| .      seek to PC or entrypoint
-| *      show decompiler in the current panel
-| "      create a panel from the list and replace the current one
-| /      highlight the keyword
-| (      toggle snow
-| &      toggle cache
-| [1-9]  follow jmp/call identified by shortcut (like ;[1])
-| ' '    (space) toggle graph / panels
-| tab    go to the next panel
-| Enter  start Zoom mode
-| a      toggle auto update for decompiler
-| b      browse symbols, flags, configurations, classes, ...
-| c      toggle cursor
-| C      toggle color
-| d      define in the current address. Same as Vd
-| D      show disassembly in the current panel
-| e      change title and command of current panel
-| f      set/add filter keywords
-| F      remove all the filters
-| g      go/seek to given offset
-| G      go/seek to highlight
-| i      insert hex
-| hjkl   move around (left-down-up-right)
-| HJKL   move around (left-down-up-right) by page
-| m      select the menu panel
-| M      open new custom frame
-| n/N    seek next/prev function/flag/hit (scr.nkey)
-| p/P    rotate panel layout
-| q      quit, or close a tab
-| Q      close all the tabs and quit
-| r      toggle callhints/jmphints/leahints
-| R      randomize color palette (ecr)
-| s/S    step in / step over
-| t/T    tab prompt / close a tab
-| u/U    undo / redo seek
-| w      start Window mode
-| V      go to the graph mode
-| xX     show xrefs/refs of current function from/to data/code
-| z      swap current panel with the first one
+| .      установить смещение равное PC или на точку входа
+| *      показать декомпилятор в текущей панели
+| "      создать панель из списка и заменть текщее
+| /      подсветить ключевые слова
+| (      включить/выключить "снег"
+| &      включить/выключить кэш
+| [1-9]  следовать на целевой адрес jmp/call, задаваемый ярлыком (например ;[1])
+| ' '    (пробел) включить/выключить граф управления / режим панелей
+| tab    перейти на следующую панель
+| Enter  запуск режима Zoom
+| a      включить/выключить автообновление декомпилятора
+| b      просмотр символов, флагов, конфигурации, классов, ...
+| c      включить/выключить курсор
+| C      включить/выключить цветную тему
+| d      задать сущность по текущему адресу, аналогично Vd
+| D      показать дизассемблирование в текущей панели
+| e      сменить заголовок и "команду" текущей панели
+| f      задасть/добавить ключевые слова фильтра
+| F      удалить все фильтры
+| g      перейти/установить на смещение на заданный адрес
+| G      перейти/установить нв подсвеченное
+| i      вставить шеснадцатеричный код
+| hjkl   перемещение изобраение в панели (навигация, влево-вниз-вверх-вправо)
+| HJKL   перемещение изобраение в панели (навигация, влево-вниз-вверх-вправо) постранично
+| m      выбрать панель меню
+| M      открыть новую панель
+| n/N    установить смещение следующей/предыдущей функции/флаг/хит (scr.nkey)
+| p/P    повернуть расположение элементов на панели
+| q      выход или закрыть вкладку
+| Q      закрыть все вкладки и выйти
+| r      включить/выключить хинты вызов/переход/загрузка адреса
+| R      сгенерировать палитру из случайных цветов (ecr)
+| s/S    step in / step over (отладка)
+| t/T    открыть комендную строку / закрыть ее
+| u/U    undo / redo установки смещения
+| w      запуск оконного режима
+| V      перейти в режим графа
+| xX     показать xrefs/refs текущей функции от/в данные/лщв
+| z      сменить текущую панель с первой
 ```
 
 ## Базовые функции
