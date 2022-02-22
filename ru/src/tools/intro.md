@@ -1,12 +1,12 @@
-# Tools
+# Инструменты
 
-Radare2 is not just the only tool provided by the radare2 project. The rest if chapters in this book are focused on explaining the use of the radare2 tool, this chapter will focus on explaining all the other companion tools that are shipped inside the radare2 project.
+Radare2 - это не единственный инструмент, предоставляемый проектом radare2. Остальные главы в этой книге сосредоточены на объяснении использования инструмента radare2, эта глава будет сосредоточена на объяснении сопутствующих инструментов, которые поставляются вместе проекта radare2.
 
-All the functionalities provided by the different APIs and plugins have also different tools to allow to use them from the commandline and integrate them with shellscripts easily.
+Все функциональные возможности, предоставляемые различными API и плагинами, включают различные инструменты, позволяющие легко использовать их из командной строки и легко интегрировать их с скриптами ОС.
 
-Thanks to the ortogonal design of the framework it is possible to do all the things that r2 is able from different places:
+Благодаря ортоганальному дизайну фреймворка можно делать все то, что умеет r2 из разных мест:
 
-* these companion tools
-* native library apis
-* scripting with r2pipe
-* the r2 shell
+* сопутствующие инструменты
+* API нативных библиотек
+* написание сценариев с помощью r2pipe
+* оболочка R2

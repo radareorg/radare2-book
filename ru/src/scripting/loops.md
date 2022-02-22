@@ -1,14 +1,13 @@
-# Loops
+# Циклы
 
-One of the most common task in automation is looping through something,
-there are multiple ways to do this in radare2.
+Одной из наиболее распространенных задач в автоматизации является циклическая обработка, есть несколько способов сделать это в radare2.
 
-We can loop over flags:
+Можно перебрать флаги:
 ```
 @@ flagname-regex
 ```
 
-For example, we want to see function information with `afi` command:
+Например, мы хотим видеть информацию о функции с помощью команды `afi`:
 ```
 [0x004047d6]> afi
 #
@@ -33,23 +32,22 @@ args: 0
 diff: type: new
 [0x004047d6]>
 ```
-Now let's say, for example, that we'd like see a particular field from this output for all functions found by analysis. We can do that with a loop over all function flags (whose names begin with `fcn.`):
+Теперь предположим, например, что мы хотели бы видеть определенное поле из этого вывода для всех функций, найденных в результате анализа. Можем сделать это с помощью цикла по всем флагам функций (имя которых начинается с`fcn.`):
 ```
 [0x004047d6]> fs functions
 [0x004047d6]> afi @@ fcn.* ~name
 ```
-This command will extract the `name` field from the `afi` output of every flag with a name
-matching the regexp `fcn.*`.
-There are also a predefined loop called `@@f`, which runs your command on every functions found by r2:
+Эта команда извлекает поле `имя` из вывода `afi` каждого флага с именем, соответствующим регулярному выражению `fcn.*`.
+Есть также предопределенный цикл, называемый `@@f`, запускающий команду для каждой функции, найденной r2:
 ```
 [0x004047d6]> afi @@f ~name
-```  
+```
 
-We can also loop over a list of offsets, using the following syntax:
+Также можно просмотреть список смещений, используя следующий синтаксис:
 ```
 @@=1 2 3 ... N
 ```
-For example, say we want to see the opcode information for 2 offsets: the current one, and at current + 2:
+Например, предположим, что мы хотим увидеть информацию о коде операции для двух смещений: текущего и текущего + 2:
 
 ```
 [0x004047d6]> ao @@=$$ $$+2
@@ -78,11 +76,9 @@ cond: al
 family: cpu
 [0x004047d6]>
 ```
-Note we're using the `$$` variable which evaluates to the current offset. Also note
-that `$$+2` is evaluated before looping, so we can use the simple arithmetic expressions.
+Обратите внимание, что используется переменная `$$`, вычисляющая текущее смещение. Также обратите внимание, что `$$+2` вычисляется перед циклом, поэтому мы можем использовать простые арифметические выражения.
 
-A third way to loop is by having the offsets be loaded from a file. This file should contain
-one offset per line.
+Третий способ создания циклов — загрузка смещений из файла. Файл должен содержать одно смещение на строку.
 ```
 [0x004047d0]> ?v $$ > offsets.txt
 [0x004047d0]> ?v $$+2 >> offsets.txt
@@ -94,7 +90,7 @@ xor ebp, ebp
 mov r9, rdx
 ```
 
-radare2 also offers various `foreach` constructs for looping. One of the most useful is for looping through all the instructions of a function:
+radare2 также предлагает различные конструкции `foreach`. Одним из наиболее полезных является перебор всех инструкций функции:
 ```
 [0x004047d0]> pdf
 ╒ (fcn) entry0 42
@@ -130,33 +126,32 @@ mov rdi, main
 call sym.imp.__libc_start_main
 hlt
 ```
-In this example the command `pi 1` runs over all the instructions in the current function (entry0).
-There are other options too (not complete list, check `@@?` for more information):
- - `@@k sdbquery` - iterate over all offsets returned by that sdbquery
- - `@@t`- iterate over on all threads (see dp)
- - `@@b` - iterate over all basic blocks of current function (see afb)
- - `@@f` - iterate over all functions (see aflq)
+В этом примере команда `pi 1` выполняет все инструкции в текущей функции (entry0).
+Есть и другие варианты (неполный список, смотрите инструкции `@@?`):
+- `@@k sdbquery` - iterate over all offsets returned by that sdbquery
+- `@@t`- iterate over on all threads (see dp)
+- `@@b` - iterate over all basic blocks of current function (see afb)
+- `@@f` - iterate over all functions (see aflq)
 
-The last kind of looping lets you loop through predefined iterator types:
+Последний вид циклов позволяет перебирать предопределенные типы итераторов:
 
- - symbols
- - imports
- - registers
- - threads
- - comments
- - functions
- - flags
+- символы
+- импорты
+- реестры
+- нити
+- комментарии
+- функции
+- флаги
 
-This is done using the `@@@` command. The previous example of listing information about functions can also be done using the `@@@` command:
+Это делается с помощью команды `@@@`. Предыдущий пример вывода информации о функциях также можно выполнить с помощью команды `@@@`:
 
 ```
 [0x004047d6]> afi @@@ functions ~name
 ```
-This will extract `name` field from `afi` output and will output a huge list of
-function names. We can choose only the second column, to remove the redundant `name:` on every line:
+В результате удается извлечь поле `имя` из вывода `afi` и выведет огромный список названий функций. Можно выбрать только второй столбец, убрать лишнее, `имя:` на каждой строке:
 ```
 [0x004047d6]> afi @@@ functions ~name[1]
 ```
 
-**Beware, @@@ is not compatible with JSON commands.**
+**Осторожно, @@@ не совместим с командами JSON.**
 

@@ -1,88 +1,88 @@
-# Visual Mode
+# Визуальный режим
 
-The visual mode is a more user-friendly interface alternative to radare2's command-line prompt. It allows easy navigation, has a cursor mode for selecting bytes, and offers numerous key bindings to simplify debugger use.
-To enter visual mode, use `V` command. To exit from it back to command line, press `q`.
+Визуальный режим является более удобной альтернативой интерфейсу командной строки radare2. Он обеспечивает удобную навигацию, поддерживает режим курсора для выбора байтов и предлагает множество привязок клавиш для упрощения использования отладчика.
+Чтобы войти в визуальный режим, используйте команду `V` . Чтобы выйти из него обратно в командную строку, нажмите клавишу `q`.
 
-## Navigation
+## Навигация
 
-Navigation can be done using HJKL or arrow keys and PgUp/PgDown keys. It also understands usual Home/End keys.
-Like in Vim the movements can be repeated by preceding the navigation key with the number, for
-example `5j` will move down for 5 lines, or `2l` will move 2 characters right.
+Навигация может осуществляться с помощью HJKL или клавиш со стрелками и PgUp/PgDown. Он также понимает обычные клавиши Home/End.
+Как в Vim, действия можно повторять, предваряя навигационную клавишу номером, например, `5j` будет двигаться вниз на пять строк, а `2l` будет перемещаться на два символа вправо.
 
-![Visual Mode](visualmode.png)
+![Визуальный режим](visualmode.png)
 
-## print modes aka panels
+## режимы отображения (панели)
 
-The Visual mode uses "print modes" which are basically different panel that you can rotate. By default those are:
+Визуальный режим использует «режимы отображения», представляемые панелями, содержимое которых настраивается. По умолчанию это:
 
 ↻ **Hexdump panel** -> **Disassembly panel** → **Debugger panel** → **Hexadecimal words dump panel** → **Hex-less hexdump panel** → **Op analysis color map panel** → **Annotated hexdump panel** ↺.
 
-Notice that the top of the panel contains the command which is used, for example for the disassembly panel:
+Обратите внимание, что верхняя часть панели содержит команду, которая используется, например, для дизассемблерирования:
 
 ```
 [0x00404890 16% 120 /bin/ls]> pd $r @ entry0
 ```
 
-## Getting Help
+## Получение инструкций
 
-To see help on all key bindings defined for visual mode, press `?`:
+Чтобы просмотреть справку по всем ключевым привязкам, определенным для визуального режима, нажмите `?`:
 ```
-Visual mode help:
- ?        show this help
- ??       show the user-friendly hud
- %        in cursor mode finds matching pair, or toggle autoblocksz
- @        redraw screen every 1s (multi-user view)
- ^        seek to the begining of the function
- !        enter into the visual panels mode
- _        enter the flag/comment/functions/.. hud (same as VF_)
- =        set cmd.vprompt (top row)
- |        set cmd.cprompt (right column)
- .        seek to program counter
- \        toggle visual split mode
- "        toggle the column mode (uses pC..)
- /        in cursor mode search in current block
- :cmd     run radare command
- ;[-]cmt  add/remove comment
- 0        seek to beginning of current function
- [1-9]    follow jmp/call identified by shortcut (like ;[1])
+Справка по визуальному режиму:
+ ?        показать эту справку
+ ??       показать удобный для пользователя hud
+ %        в режиме курсора находит подходящую пару или переключает автоблокировку
+ @        перерисовывать экран каждые 1 с (многопользовательский вид)
+ ^        установить смещение на начало функции
+ !        войти в режим визуальных панелей
+ _        введите флаг/комментарий/функции/.. hud (то же, что и VF_)
+ =        задать cmd.vprompt (верхняя строка)
+ |        задать cmd.cprompt (правый столбец)
+ .        установить смещение на значения программноммного счетчика
+ \        переключить режим визуального разделения
+ "        переключите режим столбца (использует pC..)
+ /        в режиме курсора поиск в текущем блоке
+ :cmd     выполнить команду радара
+ ;[-]cmt  добавить/удалить комментарий
+ 0        установить смещение на начало текущей функции
+ [1-9]    следовать jmp/call, обозначенному ярлыком (например ;[1])
  ,file    add a link to the text file
- /*+-[]   change block size, [] = resize hex.cols
- </>      seek aligned to block size (seek cursor in cursor mode)
- a/A      (a)ssemble code, visual (A)ssembler
- b        browse symbols, flags, configurations, classes, ...
- B        toggle breakpoint
- c/C      toggle (c)ursor and (C)olors
- d[f?]    define function, data, code, ..
- D        enter visual diff mode (set diff.from/to
- e        edit eval configuration variables
- f/F      set/unset or browse flags. f- to unset, F to browse, ..
- gG       go seek to begin and end of file (0-$s)
- hjkl     move around (or HJKL) (left-down-up-right)
- i        insert hex or string (in hexdump) use tab to toggle
- mK/'K    mark/go to Key (any key)
- M        walk the mounted filesystems
- n/N      seek next/prev function/flag/hit (scr.nkey)
- g        go/seek to given offset
- O        toggle asm.pseudo and asm.esil
- p/P      rotate print modes (hex, disasm, debug, words, buf)
- q        back to radare shell
- r        refresh screen / in cursor mode browse comments
- R        randomize color palette (ecr)
+ /*+-[]   изменить размер блока, [] = изменить размер hex.cols
+ </>      поиск в соответствии с размером блока (поиск курсора в режиме курсора)
+ a/A      (a)ссемблировать код, визуальный (A)ссемблер
+ b        просматривать символы, флаги, конфигурации, классы, ...
+ B        включить/выключить точку останова
+ c/C      переключатель (c)ursor и (C)olors
+ d[f?]    определить функцию, данные, код, ..
+ D        войти в режим визуального сравнения (установить diff.from/to)
+ e        редактирование конфигурационных переменных среды
+ f/F      устанавить/удалить или просматривать флаги. f - удаление, F - просмотр, ...
+ gG       установить смещение на начало и конец файла (0-$s)
+ hjkl     перемещение (или HJKL) (влево-вниз-вверх-вправо)
+ i        вставка шеснадцатеричного кода или строки (in hexdump), используйте tab для переключения
+ mK/'K    пометить/перейти к ключу (любой ключ)
+ M        обзор подмонтированной файловой системы
+ n/N      установить смещение на следующую/предыдущую функцию/флаг/хит (scr.nkey)
+ g        установить смещение на заданное смещение
+ O        переключить режимы отображения asm.pseudo и asm.esil
+ p/P      переключение режимов отображения (hex, disasm, debug, words, buf)
+ q        возврат к командной строке радара
+ r        обновить экран / в режиме курсора - просмотр комментариев
+ R        слуйчным образом перенастроить палитру цветов (ecr)
  sS       step / step over
- t        browse types
- T        enter textlog chat console (TT)
- uU       undo/redo seek
+ t        просмотр типов
+ T        вход в текстовый журнал чата консоли (TT)
+ uU       undo/redo установки смещения
  v        visual function/vars code analysis menu
- V        (V)iew graph using cmd.graph (agv?)
- wW       seek cursor to next/prev word
- xX       show xrefs/refs of current function from/to data/code
- yY       copy and paste selection
- z        fold/unfold comments in disassembly
- Z        toggle zoom mode
- Enter    follow address of jump/call
-Function Keys: (See 'e key.'), defaults to:
-  F2      toggle breakpoint
-  F4      run to cursor
+ V        (V)просмотр графа управления с использованием cmd.graph (agv?)
+ wW       установить курсор на следующее/предыдущее слово
+ xX       показывает xrefs/refs текущей функции из/в данные/код
+ yY       копирование и вставка выбранного региона
+ z        fold/unfold комментариев в дизассемблерировании
+ Z        включение/выключение масштабирования
+ Enter    установить адрес на цель jump/call
+
+Функциональные клавиши: (см. 'e key.'), по умолчанию:
+  F2      включить/выключить точку останова
+  F4      выполнить до курсора
   F7      single step
   F8      step over
   F9      continue

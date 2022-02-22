@@ -1,32 +1,32 @@
-## Assembler
+## Ассемблирование
 
-Assembling is the action to take a computer instruction in human readable form (using mnemonics) and convert that into a bunch of bytes that can be executed by a machine.
+Ассемблирование - это действие, чтобы взять компьютерную инструкцию в читаемой человеком форме (с использованием мнемоники) и преобразовать ее в кучу байтов, которые могут быть выполнены машиной.
 
-In radare2, the assembler and disassembler logic is implemented in the r_asm_* API, and can be used with the pa and pad commands from the commandline as well as using `rasm2`.
+В radare2 логика ассемблера и дизассемблера реализована в API r_asm_* и может использоваться с командами pa и pad из командной строки, а также с помощью `rasm2`.
 
-Rasm2 can be used to quickly copy-paste hexpairs that represent a given machine instruction. The following line is assembling this mov instruction for x86/32.
+Rasm2 можно использовать для быстрого копирования и вставки шеснадцатеричных кодов, представляющих заданную машинную инструкцию. Следующая строка собирает инструкцию mov для x86/32.
 
 ```
 $ rasm2 -a x86 -b 32 'mov eax, 33'
 b821000000
 ```
 
-Apart from the specifying the input as an argument, you can also pipe it to rasm2:
+Помимо указания входных данных в качестве аргумента, можно также передать их в rasm2:
 
 ```
 $ echo 'push eax;nop;nop' | rasm2 -f -
 5090
 ```
 
-As you have seen, rasm2 can assemble one or many instructions. In line by separating them with a semicolon `;`, but can also read that from a file, using generic nasm/gas/.. syntax and directives. You can check the rasm2 manpage for more details on this.
+Как вы видели, rasm2 может собирать одну или несколько инструкций. В строке, разделяя их точкой с запятой `;`, но также может прочитать это из файла, используя общий nasm/gas/.. синтаксис и директивы. Вы можете проверить справочную страницу rasm2 для получения более подробной информации об этом.
 
-The `pa` and `pad` are a subcommands of print, what means they will only print assembly or disassembly. In case you want to actually write the instruction it is required to use `wa` or `wx` commands with the assembly string or bytes appended.
+Команды `pa` и `pad` являются подкомандами печати, что означает, что они будут печатать только сборку или разборку. Хотите написать инструкцию? - необходимо использовать команды `wa` или `wx` с добавлением строки сборки или байтов.
 
-The assembler understands the following input languages and their flavors: `x86` (Intel and AT&T variants), `olly` (OllyDBG syntax), `powerpc` (PowerPC), `arm` and `java`. For Intel syntax, rasm2 tries to mimic NASM or GAS.
+Ассемблер понимает следующие языки ввода и их разновидности: `x86` (варианты Intel и AT&T), `olly` (синтаксис OllyDBG), `powerpc` (PowerPC), `arm` и `java`. Для синтаксиса Intel rasm2 имитирует NASM и GAS.
 
-There are several examples in the rasm2 source code directory. Consult them to understand how you can assemble a raw binary file from a rasm2 description.
+В каталоге исходного кода rasm2 есть несколько примеров. Обратитесь к ним, чтобы понять, как ассемблируются необработанный двоичный файл из описания rasm2.
 
-Lets create an assembly file called `selfstop.rasm`:
+Создадим файл сборки с именем `selfstop.rasm`:
 
 ```asm
 ;
@@ -52,13 +52,13 @@ selfstop:
   popa
   ret
 ;
-; The call injection
+; Инъекция вызова
 ;
 
   ret
 ```
 
-Now we can assemble it in place:
+Теперь можно собрать его на месте (in place):
 
 ```
 [0x00000000]> e asm.bits = 32
@@ -79,11 +79,11 @@ Now we can assemble it in place:
 	   0x0000001d    c3           ret
 ```
 
-### Visual mode
+### Визуальный режим
 
-Assembling also is accessible in radare2 visual mode through pressing `A` key to insert the assembly in the current offset.
+Ассемблирование также доступно в визуальном режиме radare2 путем нажатия клавиши `A` для вставки генерированного кода в текущее смещение.
 
-The cool thing of writing assembly using the visual assembler interface that the changes are done in memory until you press enter.
+Классная вещь в ассемблировании с помощью визуального интерфейса ассемблера, что изменения вносятся в памяти, пока не будет нажат enter.
 
-So you can check the size of the code and which instructions is overlapping before commiting the changes.
+Таким образом, можно проверить размер кода и то, какие инструкции перекрываются, прежде чем фиксировать изменения.
 

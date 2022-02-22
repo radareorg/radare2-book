@@ -1,32 +1,32 @@
-## Colors
+## Цветовая раскрасска
 
-Console access is wrapped in API that permits to show the output of any command as ANSI, W32 Console or HTML formats. This allows radare's core to run inside environments with limited displaying capabilities, like kernels or embedded devices. It is still possible to receive data from it in your favorite format.
+Консольный доступ заключен в API, позволяющий отображать выходные данные любой команды при помощи ANSI, W32 Console или HTML. Это позволяет ядру радара работать в средах с ограниченными возможностями отображения, таких как ядра или встроенные устройства. С них по-прежнему можно получать данные в любимом формате.
 
-To enable colors support by default, add a corresponding configuration option to the .radare2 configuration file:
+Чтобы включить поддержку цветов по умолчанию, добавьте соответствующий параметр конфигурации в конфигурационный файл .radare2:
 ```
 $ echo 'e scr.color=1' >> ~/.radare2rc
 ```
-Note that enabling colors is not a boolean option. Instead, it is a number because there are different color depth levels. This is:
+Обратите внимание, что включение цветов не является boolean-параметром. Это число, и оно обозначает разные уровни глубины цвета. This is:
 
-* 0: black and white
-* 1: 16 basic ANSI colors
-* 2: 256 scale colors
-* 3: 24bit true color
+* 0: Черно-белый
+* 1: 16 основных цветов ANSI
+* 2: 256 цветов в виде шкалы
+* 3: 24-битный труколор
 
-The reason for having such user-defined options is because there's no standard or portable way for the terminal programs to query the console to determine the best configuration, same goes for charset encodings, so r2 allows you to choose that by hand.
+Причина наличия таких настроек заключается в том, что нет стандартного или портативного способа для терминальных программ запрашивать консоль для определения наилучшей конфигурации, то же самое касается кодировок наборов символов, поэтому r2 позволяет выбрать это вручную.
 
-Usually, serial consoles may work with 0 or 1, while xterms may support up to 3. RCons will try to find the closest color scheme for your theme when you choose a different them with the `eco` command.
+Обычно последовательные консоли работают с 0 или 1, в то время как xterms могут поддерживать до 3. RCons попытается найти наиболее близкую цветовую схему для вашей темы, когда вы выберете другую их с помощью команды `eco`.
 
-It is possible to configure the color of almost any element of disassembly output. For *NIX terminals, r2 accepts color specification in RGB format. To change the console color palette use `ec` command.
+Есть возможность настроить цвет практически любого элемента вывода дизассемблера. Для терминалов *NIX r2 принимает спецификацию цвета в формате RGB. Для изменения цветовой палитры консоли используйте команду `ec` .
 
-Type `ec` to get a list of all currently used colors. Type `ecs` to show a color palette to pick colors from:
+Введите `ec`, чтобы получить список всех используемых в данный момент цветов. Введите `ecs`, чтобы отобразить цветовую палитру для выбора цветов:
 
 ![img](r2pal.png)
 
-## Themes
+## Темы
 
-You can create your own color theme, but radare2 have its own predefined ones. Use the `eco` command to list or select them.
+Можно создать свою собственную цветовую тему, но у radare2 есть уже предопределенные. Используйте команду `eco`, чтобы перечислить и выбрать из их.
 
-After selecting one, you can compare between the color scheme of the shell and the current theme by pressing Ctrl-Shift and then right arrow key for the toggle.
+После выбора одной можно сравнить ее цветовую схему с текущей темой, нажав клавиши CTRL+SHIFT, а затем клавишу со стрелкой вправо для переключателя.
 
-In visual mode use the `R` key to randomize colors or choose the next theme in the list.
+В визуальном режиме используйте клавишу `R` для рандомизации цветов или выбора следующей темы в списке.

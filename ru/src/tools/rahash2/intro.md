@@ -1,42 +1,42 @@
-# rahash2
+# Программа rahash2
 
-The rahash2 tool can be used to compute checksums of files, disk devices or strings. By block or entirely using many different hash algorithms.
+Инструмент rahash2 можно использовать для вычисления контрольных сумм файлов, дисковых устройств или строк. Блоком или полностью с использованием множества различных хэш-алгоритмов.
 
-This tool is also capable of doing some encoding/decoding operations like base64 and xor encryption.
+Этот инструмент также способен выполнять некоторые операции кодирования / декодирования, такие как шифрование base64 и xor (гаммирование).
 
-This is an example usage:
+Вот пример использования:
 
 ```
 $ rahash2 -a md5 -s "hello world"
 ```
 
-Note that rahash2 also permits to read from stdin in a stream, so you don't need 4GB of ram to compute the hash of a 4GB file.
+Обратите внимание, что rahash2 также позволяет считывать из stdin в потоке, поэтому вам не нужно 4 ГБ оперативной памяти для вычисления хэша файла размером 4 ГБ.
 
-## Hashing by blocks
+## Хеширование по блокам
 
-When doing forensics, it is useful to compute partial checksums. The reason for that is because you may want to split a huge file into small portions that are easier to identify by contents or regions in the disk.
+При проведении криминалистики полезно вычислять частичные контрольные суммы. Причина этого заключается в том, что можно разделить огромный файл на небольшие части, которые легче идентифицировать по содержимому или областям на диске.
 
-This will spot the same hash for blocks containing the same contents. For example, if is filled with zeros.
+При этом будет обнаружен один и тот же хэш для блоков, содержащих одно и то же содержимое. Например, если заполняется нулями.
 
-It can also be used to find which blocks have changed between more than one sample dump.
+Его также можно использовать для определения того, какие блоки изменились между более чем одним дампом образца.
 
-This can be useful when analyzing ram dumps from a virtual machine for example. Use this command for this:
+Это быть полезно при анализе дампов оперативной памяти с виртуальной машины. Используйте команду:
 
 ```
 $ rahash2 -B 1M -b -a sha256 /bin/ls
 ```
 
-## Hashing with rabin2
+## Хеширование при помощи rabin2
 
-The rabin2 tool parses the binary headers of the files, but it also have the ability to use the rhash plugins to compute checksum of sections in the binary.
+Инструмент rabin2 анализирует двоичные заголовки файлов, но он также имеет возможность использовать плагины rhash для вычисления контрольной суммы разделов в двоичном файле.
 
 ```
 $ rabin2 -K md5 -S /bin/ls
 ```
 
-## Obtaining hashes within radare2 session
+## Получение хэшей в сеансе radare2
 
-To calculate a checksum of current block when running radare2, use the `ph` command. Pass an algorithm name to it as a parameter. An example session:
+Вычисление контрольной суммы текущего блока при запуске radare2 - команда `ph`. Название алгоритма передается в качестве параметра. Пример сеанса:
 
 ```
 $ radare2 /bin/ls
@@ -45,7 +45,7 @@ $ radare2 /bin/ls
 d2994c75adaa58392f953a448de5fba7
 ```
 
-You can use all hashing algorithms supported by `rahash2`:
+Можно использовать все алгоритмы хеширования, поддерживаемые `rahash2`:
 
 ```
 [0x00000000]> ph?
@@ -89,7 +89,7 @@ crc64xz
 crc64iso
 ```
 
-The `ph` command accepts an optional numeric argument to specify length of byte range to be hashed, instead of default block size. For example:
+Команда `ph` принимает необязательный числовой аргумент для указания длины диапазона байтов, подлежащего хэшированию, вместо размера блока по умолчанию. Например:
 
 ```
 [0x08049A80]> ph md5 32

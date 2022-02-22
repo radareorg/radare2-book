@@ -1,12 +1,10 @@
-# Virtual Tables
+# Виртуальные таблицы
 
-There is a basic support of virtual tables parsing (RTTI and others).
-The most important thing before you start to perform such kind of analysis
-is to check if the `anal.cpp.abi` option is set correctly, and change if needed.
+Есть базовая поддержка анализа виртуальных таблиц (RTTI и др.).
+Самое главное, прежде чем вы начнете выполнять такой анализ, надо проверить, что параметр `anal.cpp.abi` установлен правильно.
 
-All commands to work with virtual tables are located in the `av` namespace.
-Currently, the support is very basic, allowing you only to inspect
-parsed tables.
+Все команды для работы с виртуальными таблицами находятся в пространстве имен `av`.
+В настоящее время поддержка проста, она позволяет только проверять  проанализированные таблицы.
 
 ```
 |Usage: av[?jr*] C++ vtables and RTTI
@@ -17,8 +15,4 @@ parsed tables.
 | avra[j]      search for vtables and try to parse RTTI at each of them
 ```
 
-The main commands here are `av` and `avr`. `av` lists all virtual tables
-found when r2 opened the file. If you are not happy with the result
-you may want to try to parse virtual table at a particular address with
-`avr` command. `avra` performs the search and parsing of all virtual
-tables in the binary, like r2 does during the file opening.
+Основные команды - `av` и `avr`. Команда `av` перечисляет все найденные виртуальные таблицы в открытом файле. Если вы недовольны результатом, можно попытаться проанализировать виртуальную таблицу по определенному адресу с помощью `avr`. Команда `avra` выполняет поиск и анализ всех виртуальных таблиц в бинарном файле, как это делает r2 при открытии файла.

@@ -1,16 +1,16 @@
-# Code Analysis
+# Анализ кода
 
-Code analysis is a common technique used to extract information from assembly code.
+Анализ кода является распространенным методом, используемым для извлечения информации из ассемблерного кода.
 
-Radare2 has different code analysis techniques implemented in the core and available in different commands.
+Radare2 включает различные методы анализа кода, реализованные в ядре и доступные в разных командах.
 
-As long as the whole functionalities of r2 are available with the API as well as using commands. This gives you the ability to implement your own analysis loops using any programming language, even with r2 oneliners, shellscripts, or analysis or core native plugins.
+Все функциональные возможности r2 доступны как с API, так и с помощью команд. Это дает вам возможность реализовать свои собственные циклы анализа, используя любой язык программирования, даже при помощи командной строки r2, скриптов в ОС, реализовать собственные алгоритмы при помощи нативных плагинов.
 
-The analysis will show up the internal data structures to identify basic blocks, function trees and to extract opcode-level information.
+Анализ покажет внутренние структуры данных для идентификации основных блоков, вызовов функций и извлечения информации на уровне оп-кода.
 
-The most common radare2 analysis command sequence is `aa`, which stands for "analyze all". That all is referring to all symbols and entry-points. If your binary is stripped you will need to use other commands like `aaa`, `aab`, `aar`, `aac` or so.
+Наиболее распространенной последовательностью команд анализа radare2 является `aa`, что расшифровывается как «analyze all». Это относится ко всем символам и точкам входа. Если в двоичном файле удалены (stripped) символы, нужно использовать другие команды, такие как `aaa`, `aab`, `aar`, `aac` и им подобные.
 
-Take some time to understand what each command does and the results after running them to find the best one for your needs.
+Изучите, что делает каждая команда и результаты после их выполнения, чтобы подобрать лучший набор для ваших нужд.
 
 ```
 [0x08048440]> aa
@@ -64,23 +64,17 @@ Take some time to understand what each command does and the results after runnin
 \     0x080486d4    c3           ret
 ```
 
-In this example, we analyze the whole file (`aa`) and then print disassembly of the `main()` function (`pdf`).
-The `aa` command belongs to the family of auto analysis commands and performs only the most basic
-auto analysis steps. In radare2 there are many different types of the auto analysis commands with a
-different analysis depth, including partial emulation: `aa`, `aaa`, `aab`, `aaaa`, ...
-There is also a mapping of those commands to the r2 CLI options: `r2 -A`, `r2 -AA`, and so on.
+В этом примере анализируется весь файл (`aa`), а затем печатается дизассемблирование функции `main()` (`pdf`).
+Команда `aa` относится к семейству команд автоанализа и выполняет только самые основные этапы автоматического анализа. В radare2 существует множество различных типов команд автоанализа с
+различной глубиной анализа, включая частичную эмуляцию: `aa`, `aaa`, `aab`, `aaaa`, ...
+Существует также сопоставление этих команд с параметрами интерфейса командной строки r2: `r2 -A`, `r2 -AA` и так далее.
 
-It is a common sense that completely automated analysis can produce non sequitur results, thus
-radare2 provides separate commands for the particular stages of the analysis allowing fine-grained
-control of the analysis process. Moreover, there is a treasure trove of configuration variables
-for controlling the analysis outcomes. You can find them in `anal.*` and `emu.*`
-cfg variables' namespaces.
+Здравый смысл заключается в том, что полностью автоматизированный анализ может дать противоречивые результаты. radare2 предоставляет отдельные команды для конкретных этапов анализа, что позволяет контролировать процесс анализа. Существует сокровищница конфигурационных переменных для управления результатами анализа. Их можной найти в конфигурационных переменых пространства имен `anal.*` и `emu.*` .
 
-## Analyze functions
+## Анализ функций
 
-One of the most important "basic" analysis commands is the set of `af` subcommands. `af` means
-"analyze function". Using this command you can either allow automatic analysis of the particular
-function or perform completely manual one.
+Одной из наиболее важных «базовых» команд анализа является набор команд `af`. `af` значит "анализ функций" (analyze function). С помощью этой команды вы можете запустить автоматический анализ конкретной
+функции, но и вручную тоже можно.
 
 ```
 [0x00000000]> af?
@@ -114,22 +108,20 @@ Usage: af
 | afv[absrx]?                           manipulate args, registers and variables in function
 | afx                                   list function references
 ```
-You can use `afl` to list the functions found by the analysis.
+Используйте `afl` для перечисления функций, найденных в анализе.
 
-There are a lot of useful commands under `afl` such as `aflj`, which lists the function in JSON format and `aflm`, which lists the functions in the syntax found in makefiles.
+Есть много полезных команд под `afl`, таких как `aflj`, который перечисляет функцию в формате JSON и `aflm`, который перечисляет функции в синтаксисе, аналогичном makefiles.
 
-There's also `afl=`, which displays ASCII-art bars with function ranges.
+Есть также `afl=`, отображающий ASCII-арт-схему памяти с занимаемым местом функциями.
 
-You can find the rest of them under `afl?`.
+Остальные команды можно найти под `afl?`.
 
-Some of the most challenging tasks while performing a function analysis are merge, crop and resize.
-As with other analysis commands you have two modes: semi-automatic and manual.
-For the semi-automatic, you can use `afm <function name>` to merge the current function with
-the one specified by name as an argument, `aff` to readjust the function after analysis changes or function edits,
-`afu <address>` to do the resize and analysis of the current function until the specified address.
+Некоторые из наиболее сложных задач при выполнении анализа функций — это слияние, обрезка и изменение размера.
+Как и в случае с другими командами анализа, есть два режима: полуавтоматический и ручной.
+Для полуавтоматического можно использовать `afm <function name>` для объединения текущей функции с другой, указанной по имени в аргументе,  `aff` перенастроить функцию после проведенных изменений или редактирования функции, `afu <address>` - изменение размера и анализ текущей функции до указанного адреса.
 
-Apart from those semi-automatic ways to edit/analyze the function, you can hand craft it in the manual mode with `af+` command and edit basic blocks of it using `afb` commands.
-Before changing the basic blocks of the function it is recommended to check the already presented ones:
+Помимо этих полуавтоматических способов редактирования / анализа функции,  можно создавать ее в ручном режиме с помощью команды `af+` и редактировать основные блоки с помощью команд `afb`.
+Перед изменением основных блоков функции рекомендуется проверить уже имеющиеся:
 
 ```
 [0x00003ac0]> afb
@@ -141,8 +133,8 @@ Before changing the basic blocks of the function it is recommended to check the 
 0x00003ba8 0x00003bf9 00:0000 81
 ```
 
-### Hand craft function
-before start, let's prepare a binary file first, for example:
+### Анализ функции вручную
+Давайте сначала подготовим двоичный файл, например:
 ```C
 int code_block()
 {
@@ -154,11 +146,11 @@ int code_block()
   return result;
 }
 ```
-then compile it with `gcc -c example.c -m32 -O0 -fno-pie`, we will get the object file `example.o`. open it with radare2. 
+затем скомпилируйте его `gcc -c example.c -m32 -O0 -fno-pie`, получим объектный файл `example.o`. откройте его с помощью radare2.
 
-since we haven't analyzed it yet, the `pdf` command will not print out the disassembly here:
+поскольку он не проанализирован, команда `pdf` не будет показывать дизассемблирование:
 ```
-$ r2 example.o 
+$ r2 example.o
 [0x08000034]> pdf
 p: Cannot find function at 0x08000034
 [0x08000034]> pd
@@ -181,38 +173,38 @@ p: Cannot find function at 0x08000034
             0x0800005c      c3             ret
 
 ```
-our goal is to hand craft a function with the following structure
+Наша цель состоит в том, чтобы вручную создать функцию со следующей структурой
 
 ![analyze_one](analyze_one.png)
 
 
-create a function at 0x8000034 named code_block:
+создайте функцию в 0x8000034 с именем code_block:
 ```
 [0x8000034]> af+ 0x8000034 code_block
 ```
 
-In most cases, we use jump or call instructions as code block boundaries. so the range of first block is from `0x08000034 push ebp` to `0x08000048 jmp 0x8000052`.
-use `afb+` command to add it. 
+В большинстве случаев используем инструкции jump или call в качестве границ блоков кода. таким образом, диапазон первого блока составляет от `0x08000034 push ebp` до `0x08000048 jmp 0x8000052`.
+используйте команду `afb+`, чтобы добавить его.
 
 ```
 [0x08000034]> afb+ code_block 0x8000034 0x800004a-0x8000034 0x8000052
 ```
 
-note that the basic syntax of `afb+` is `afb+ function_address block_address block_size [jump] [fail]`. the final instruction of this block points to a new address(jmp 0x8000052), thus we add the address of jump target (0x8000052) to reflect the jump info.
+Обратите внимание, что базовым синтаксисом `afb+` является `afb+ function_address block_address block_size [jump] [fail]`. последняя инструкция этого блока указывает на новый адрес (jmp 0x8000052), поэтому добавляем адрес назначения перехода (0x8000052), чтобы отразить информацию о переходе.
 
-the next block (0x08000052 ~ 0x08000056) is more likeyly an if conditional statement which has two branches. It will jump to 0x800004a if `jle-less or equal`, otherwise (the fail condition) jump to next instruction -- 0x08000058.:
+следующий блок (0x08000052 ~ 0x08000056) является скорее условным оператором if, который включает две ветви. Он перейдет к 0x800004a если `jle - меньше или равно`, в противном случае (условие fail) перейдет к следующей инструкции - 0x08000058.:
 
 ```
 [0x08000034]> afb+ code_block 0x8000052 0x8000058-0x8000052 0x800004a 0x8000058
 ```
 
-follow the control flow and create the remaining two blocks (two branches) :
+следуйте потоку управления и создайте оставшиеся два блока (две ветви):
 ```
 [0x08000034]> afb+ code_block 0x800004a 0x8000052-0x800004a 0x8000052
 [0x08000034]> afb+ code_block 0x8000058 0x800005d-0x8000058
 ```
 
-check our work:
+проверьте результат:
 ```
 [0x08000034]> afb
 0x08000034 0x0800004a 00:0000 22 j 0x08000052
@@ -224,23 +216,21 @@ check our work:
 
 ![handcraft_one](handcraft_one.png)
 
-There are two very important commands for this: `afc` and `afB`. The latter is a must-know command for some platforms like ARM. It provides a way to change the "bitness" of the particular function. Basically, allowing to select between ARM and Thumb modes.
+Для этого есть две очень важные команды: `afc` и `afB`. Последнее является обязательной командой для некоторых платформ, таких как ARM. Он предоставляет способ изменения "bitness" конкретной функции. , позволяя выбирать между режимами ARM и Thumb.
 
-`afc` on the other side, allows to manually specify function calling convention. You can find more information on its usage in [calling_conventions](calling_conventions.md).
+Команда `afc` позволяет вручную указать соглашение о вызове функции. Более подробную информацию о его использовании в [calling_conventions](calling_conventions.md).
 
-## Recursive analysis
+## Рекурсивный анализ
 
-There are 5 important program wide half-automated analysis commands:
+Существует пять важных команд полуавтоматизированного анализа по всей программе:
 
- - `aab` - perform basic-block analysis ("Nucleus" algorithm)
- - `aac` - analyze function calls from one (selected or current function)
- - `aaf` - analyze all function calls
- - `aar` - analyze data references
- - `aad` - analyze pointers to pointers references
+- `aab` - выполнение базово-блочного анализа (алгоритм "Nucleus")
+- `aac` - анализ вызовов функций из одной (выбранной или текущей функции)
+- `aaf` - анализ всех вызовов функций
+- `aar` - анализ ссылок на данные
+- `aad` - анализ указателей на ссылки указателей
 
-Those are only generic semi-automated reference searching algorithms. Radare2 provides a
-wide choice of manual references' creation of any kind. For this fine-grained control
-you can use `ax` commands.
+Это только общие полуавтоматические алгоритмы поиска ссылок. Radare2 обеспечивает широкий выбор инструментов ручного задания ссылок. Детальное управление разметкой - использование команды `ax` .
 
 ```
 Usage: ax[?d-l*]   # see also 'afx?'
@@ -267,9 +257,9 @@ Usage: ax[?d-l*]   # see also 'afx?'
 | axs addr [at]   add string ref
 ```
 
-The most commonly used `ax` commands are `axt` and `axf`, especially as a part of various r2pipe
-scripts. Lets say we see the string in the data or a code section and want to find all places
-it was referenced from, we should use `axt`:
+Наиболее часто используемыми командами группы `ax` являются `axt` и `axf`, особенно в составе различных сценариев r2pipe.
+ Допустим, видим строку в разделе данных или кода и хотим найти все места
+ссылок на нее, используем `axt`:
 
 ```
 [0x0001783a]> pd 2
@@ -289,7 +279,7 @@ sub.strlen_d50 0x5de0 [STRING] lea rcx, str.02x
 (nofunc) 0x17838 [CODE] jae str.02x
 ```
 
-There are also some useful commands under `axt`. Use `axtg` to generate radare2 commands which will help you to create graphs according to the XREFs.
+Есть также несколько полезных команд под `axt`. Используйте `axtg` для генерации команд radare2, которые помогут вам создавать графики в соответствии с XREF.
 
 ```
 [0x08048320]> s main
@@ -299,9 +289,9 @@ agn 0x80483e0 "main"
 age 0x8048337 0x80483e0
 ```
 
-Use `axt*` to split the radare2 commands and set flags on those corresponding XREFs.
+Используйте `axt*` для разделения команд radare2 и установки флагов на соответствующих XREF.
 
-Also under `ax` is `axg`, which finds the path between two points in the file by showing an XREFs graph to reach the location or function. For example:
+Также под `ax` находится `axg`, который находит путь между двумя точками в файле, показывая график XREFs для достижения местоположения или функции. Например:
 
 ```
 :> axg sym.imp.printf
@@ -311,129 +301,101 @@ Also under `ax` is `axg`, which finds the path between two points in the file by
     - 0x08048337 fcn 0x08048320 entry0
   - 0x08048425 fcn 0x080483e0 main
 ```
-Use `axg*` to generate radare2 commands which will help you to create graphs using `agn` and `age` commands, according to the XREFs.
+Используйте `axg*` для генерации команд radare2, которые помогут вам создавать графики с использованием команд `agn` и `age` в соответствии с XREF.
 
-Apart from predefined algorithms to identify functions there is a way to specify
-a function prelude with a configuration option `anal.prelude`. For example, like
-`e anal.prelude = 0x554889e5` which means
+Помимо предопределенных алгоритмов для идентификации функций есть способ указать "прелюдию" функции с параметром конфигурации `anal.prelude`. Например `e anal.prelude = 0x554889e5` что означает
 
 ```
 push rbp
 mov rbp, rsp
 ```
 
-on x86\_64 platform. It should be specified _before_ any analysis commands.
+на платформе x86\_64. Она должна быть указана _перед_ любыми командами анализа.
 
-## Configuration
+## Конфигурация
 
-Radare2 allows to change the behavior of almost any analysis stages or commands.
-There are different kinds of the configuration options:
+Radare2 позволяет изменять поведение практически любых этапов анализа или команд.
+Существуют различные типы параметров конфигурации:
 
- - Flow control
- - Basic blocks control
- - References control
- - IO/Ranges
- - Jump tables analysis control
- - Platform/target specific options
+- Управление потоком
+- Управление основными блоками
+- Элемент управления ссылками
+- IO/Диапазоны
+- Управление анализом таблиц переходов
+- Конкретные параметры платформы/процессора
 
-### Control flow configuration
+### Конфигурация потока управления
 
-Two most commonly used options for changing the behavior of control flow analysis in radare2 are
-`anal.hasnext` and `anal.jmp.after`. The first one allows forcing radare2 to continue the analysis
-after the end of the function, even if the next chunk of the code wasn't called anywhere, thus
-analyzing all of the available functions. The latter one allows forcing radare2 to continue
-the analysis even after unconditional jumps.
+Двумя наиболее часто используемыми вариантами изменения поведения анализа потока управления в radare2 являются: `anal.hasext` и `anal.jmp.after`. Первый позволяет заставить radare2 продолжить анализ после окончания функции, даже если следующий кусок кода не вызвается откуда-либо, что означает анализ всех доступных функций. Последний позволяет заставить radare2 продолжать анализ даже после безусловных переходов.
 
-In addition to those we can also set `anal.jmp.indir` to follow the indirect jumps, continuing analysis;
-`anal.pushret` to analyze `push ...; ret` sequence as a jump; `anal.nopskip` to skip the NOP
-sequences at a function beginning.
+В дополнение к ним мы также `anal.jmp.indir` для отслеживания косвенных переходов, продолжая анализ; `anal.pushret` для анализа `push ...; ret` sequence как переход; `anal.nopskip` для пропуска NOP последовательности в начале функции.
 
-For now, radare2 also allows you to change the maximum basic block size with `anal.bb.maxsize` option
-. The default value just works in most use cases, but it's useful to increase that for example when
-dealing with obfuscated code. Beware that some of basic blocks
-control options may disappear in the future in favor of more automated ways to set those.
+На данный момент radare2 также позволяет изменять максимальный базовый размер блока с помощью опции `anal.bb.maxsize`. Значение по умолчанию работает в большинстве случаев использования, но полезно увеличить его при работе с обфускированным кодом. Обратите внимание, что некоторые из настроек управления базовыми блоками  могут быть изменеы в будущем в пользу более автоматизированных способов их установки.
 
-For some unusual binaries or targets, there is an option `anal.noncode`. Radare2 doesn't try
-to analyze data sections as a code by default. But in some cases - malware, packed binaries,
-binaries for embedded systems, it is often a case. Thus - this option.
+Для некоторых необычных двоичных файлов или архитектур есть опция `anal.noncode`. По умолчанию Radare2 не пытается анализировать разделы данных в виде кода. Но в некоторых случаях – вредоносное ПО, упакованные двоичные файлы, двоичные файлы для встраиваемых систем - требуют проводить такй анализ. Thus - this option.
 
-### Reference control
+### Управление ссылками
 
-The most crucial options that change the analysis results drastically. Sometimes some can be
-disabled to save the time and memory when analyzing big binaries.
+Наиболее важные настройки, кардинально меняющие результаты анализа. Некоторые настройки можно отключить для экономии времени и памяти при анализе больших двоичных файлов.
 
-- `anal.jmp.ref` - to allow references creation for unconditional jumps
-- `anal.jmp.cref` - same, but for conditional jumps
-- `anal.datarefs` - to follow the data references in code
-- `anal.refstr` - search for strings in data references
-- `anal.strings` - search for strings and creating references
+- `anal.jmp.ref` - разрешить создание ссылок на безусловные переходы
+- `anal.jmp.cref` - то же самое, но для условных переходов
+- `anal.datarefs` - для отслеживания ссылок на данные в коде
+- `anal.refstr` - поиск строк в ссылках на данные
+- `anal.strings` - поиск строк и создание ссылок
 
-Note that strings references control is disabled by default because it increases the analysis time.
+Управление ссылками на строки по умолчанию отключен, так как увеличивает время анализа.
 
-### Analysis ranges
+### Диапазоны анализа
 
-There are a few options for this:
+Настройки:
 
-- `anal.limits` - enables the range limits for analysis operations
-- `anal.from` - starting address of the limit range
-- `anal.to` - the corresponding end of the limit range
-- `anal.in` - specify search boundaries for analysis. You can set it to `io.maps`, `io.sections.exec`, `dbg.maps` and many more. For example:
-  - To analyze a specific memory map with `anal.from` and `anal.to`, set `anal.in = dbg.maps`.
-  - To analyze in the boundaries set by `anal.from` and `anal.to`, set `anal.in=range`.
-  - To analyze in the current mapped segment or section, you can put `anal.in=bin.segment` or `anal.in=bin.section`, respectively.
-  - To analyze in the current memory map, specify `anal.in=dbg.map`.
-  - To analyze in the stack or heap, you can set `anal.in=dbg.stack` or `anal.in=dbg.heap`.
-  - To analyze in the current function or basic block, you can specify `anal.in=anal.fcn` or `anal.in=anal.bb`.
+- `anal.limits` - позволяет использовать пределы диапазона для операций анализа
+- `anal.from` - начальный адрес предельного диапазона
+- `anal.to` - соответствующий конец предельного диапазона
+- `anal.in` - границы поиска для анализа. Вы можете установить [его/их] на `io.maps`, `io.sections.exec`, `dbg.maps` и многие другие. Например:
+   - Чтобы проанализировать конкретную карту памяти с помощью `anal.from` и `anal.to`, установите `anal.in = dbg.maps`.
+   - Для анализа в границах, задайте `anal.from` и `anal.to`, установите `anal.in=range`.
+   - Для анализа в текущем отображаемом сегменте или разделе можно поместить `anal.in=bin.segment` или `anal.in=bin.section` соответственно.
+   - Для анализа в текущей карте памяти укажите `anal.in=dbg.map`.
+   - Для анализа в стеке или куче можно задать `anal.in=dbg.stack` или `anal.in=dbg.heap`.
+   - Для анализа в текущей функции или базовом блоке можно указать `anal.in=anal.fcn` или `anal.in=anal.bb`.
 
-Please see `e anal.in=??` for the complete list.
+Пожалуйста, смотрите полный список `e anal.in=??`.
 
-### Jump tables
+### Таблицы переходов
 
-Jump tables are one of the trickiest targets in binary reverse engineering. There are hundreds
-of different types, the end result depending on the compiler/linker and LTO stages of optimization.
-Thus radare2 allows enabling some experimental jump tables detection algorithms using `anal.jmp.tbl`
-option. Eventually, algorithms moved into the default analysis loops once they start to work on
-every supported platform/target/testcase.
-Two more options can affect the jump tables analysis results too:
+Таблицы переходов являются одной из самых сложных целей в двоичном реверс-инжиниринге. Их есть сотни различных типов, конечный результат зависит от компилятора/компоновщика и этапов оптимизации LTO.
+Radare2 позволяет включить некоторые экспериментальные алгоритмы обнаружения таблиц прыжков с использованием `anal.jmp.tbl`. В конце концов, алгоритмы переходят в циклы анализа таблиц переходов по умолчанию на каждой поддерживаемой платформе/тесткейсе.
+Еще две настройки также могут повлиять на результаты анализа таблиц переходов:
 
-- `anal.jmp.indir` - follow the indirect jumps, some jump tables rely on them
-- `anal.datarefs` - follow the data references, some jump tables use those
+- `anal.jmp.indir` - отслеживать непрямые переходы, некоторые таблицы переходов опираются на них
+- `anal.datarefs` - отслеживать ссылки на данные, некоторые таблицы переходов используют их
 
-### Platform specific controls
+### Элементы управления, специфичные для платформы
 
-There are two common problems when analyzing embedded targets: ARM/Thumb detection and MIPS GP
-value. In case of ARM binaries radare2 supports some auto-detection of ARM/Thumb mode switches, but
-beware that it uses partial ESIL emulation, thus slowing the analysis process. If you will not
-like the results, particular functions' mode can be overridden with `afB` command.
+Существует две распространенные проблемы при анализе встроенных прхитектур: обнаружение ARM/Thumb и значения MIPS GP. В случае двоичных файлов ARM radare2 поддерживает автоматическое обнаружение переключателей режима ARM/Thumb, но имейте ввиду, что он использует частичную эмуляцию ESIL, тем самым замедляя процесс анализа. Если результаты вам не нравиться, определенные режимы для функций могут быть переопределены `afB` .
 
-The MIPS GP problem is even trickier. It is a basic knowledge that GP value can be different not only
-for the whole program, but also for some functions. To partially solve that there are options
-`anal.gp` and `anal.gpfixed`. The first one sets the GP value for the whole program or particular
-function. The latter allows to "constantify" the GP value if some code is willing to change its
-value, always resetting it if the case. Those are heavily experimental and might be changed in the
-future in favor of more automated analysis.
+Проблема MIPS GP еще сложнее. Известно, что значение GP может быть разным не только
+для всей программы, но также и для отдельных функций. Частично проблему решают настройки `anal.gp` и `anal.gpfixed`. Первый устанавливает значение GP для всей программы или конкретной
+функция. Второй позволяет «фиксировать» значение GP, если какой-то код захочет изменить его, всегда сбрасывая его, если факт смены обнаружен. Они в значительной степени экспериментальны и могут быть изменены в
+будущем в пользу более автоматизированного анализа.
 
-## Visuals
+## Визуальный подход
 
-One of the easiest way to see and check the changes of the analysis commands and variables
-is to perform a scrolling in a `Vv` special visual mode, allowing functions preview:
+Один из самых простых способов увидеть и проверить изменения команд анализа и переменных заключается в выполнении прокрутки в специальном визуальном режиме `Vv`, позволяющем выполнять функции предварительного просмотра:
 
 ![vv](code_analysis_vv.png)
 
-When we want to check how analysis changes affect the result in the case of big functions, we can
-use minimap instead, allowing to see a bigger flow graph on the same screen size. To get into
-the minimap mode type `VV` then press `p` twice:
+Когда надо проверить, как изменения анализа влияют на результат в случае больших функций, вместо этого можно использовать мини-карту, позволяющую видеть общий граф управления на том же размере экрана. Чтобы войти в режим мини-карты введите `VV`, затем дважды нажмите клавишу `p`:
 
 ![vv2](code_analysis_vv2.png)
 
-This mode allows you to see the disassembly of each node separately, just navigate between them using `Tab` key.
+Этот режим позволяет увидеть разборку каждого узла в отдельности, просто перемещаясь между ними с помощью клавиши `Tab` .
 
-## Analysis hints
+## Подсказки по анализу
 
-It is not an uncommon case that analysis results are not perfect even after you tried every single
-configuration option. This is where the "analysis hints" radare2 mechanism comes in. It allows
-to override some basic opcode or meta-information properties, or even to rewrite the whole opcode
-string. These commands are located under `ah` namespace:
+Нередки случаи, когда результаты анализа не идеальны даже после того, как вы попробовали все до единого, включая параметры конфигурации. Именно здесь появляется механизм «analysis hints» radare2. Это позволяет переопределить некоторые основные свойства оп-кода или метаданных или даже переписать всю строку оп-кода. Эти команды расположены в пространстве имен `ah`:
 
 ```
 Usage: ah[lba-]  Analysis Hints
@@ -465,7 +427,7 @@ Usage: ah[lba-]  Analysis Hints
 | ahv val            change opcode's val field (useful to set jmptbl sizes in jmp rax)
 ```
 
-One of the most common cases is to set a particular numeric base for immediates:
+Один из наиболее распространенных случаев - установка определенной числовой базы для немедленных чисел:
 
 ```
 [0x00003d54]> ahi?
@@ -494,8 +456,7 @@ Usage: ahi [2|8|10|10u|16|bodhipSs] [@ offset]   Define numeric base
 0x00003d59      3d13010000     cmp eax, 0x113
 ```
 
-It is notable that some analysis stages or commands add the internal analysis hints,
-which can be checked with `ah` command:
+Примечательно, что некоторые этапы анализа или команды добавляют подсказки внутреннего анализа, которые можно проверить с помощью команды `ah` :
 
 ```
 [0x00003d54]> ah
@@ -504,10 +465,9 @@ which can be checked with `ah` command:
  ahi 2 @ 0x3d54
 ```
 
-Sometimes we need to override jump or call address, for example in case of tricky
-relocation, which is unknown for radare2, thus we can change the value manually.
-The current analysis information about a particular opcode can be checked with `ao` command.
-We can use `ahc` command for performing such a change:
+Иногда нам нужно переопределить адрес перехода или вызова, например, в случае замысловатого перемещения, неизвестное radare2, можно изменить значение вручную.
+Текущую аналитическую информацию о конкретном оп-коде можно проверить с помощью команды `ao` .
+Используем команду `ahc` для выполнения такого изменения:
 
 ```
 [0x00003cee]> pd 2
@@ -559,11 +519,9 @@ stackop: null
  0x00003cee - 0x00003cee => jump: 0x5382
 ```
 
-As you can see, despite the unchanged disassembly view the jump address in opcode was changed
-(`jump` option).
+Как видите, несмотря на неизменный вид дизассемблирования, адрес перехода в опкоде был изменен (настройка `jump`).
 
-If anything of the previously described didn't help, you can simply override shown disassembly with anything you
-like:
+Если что-то из ранее описанного не помогло, можно просто переопределить показанное дизассемблирование чем-либо, что вам нравиться:
 
 ```
 [0x00003d54]> pd 2

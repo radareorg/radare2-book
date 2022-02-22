@@ -1,13 +1,12 @@
-# Macros
+# Макросы
 
-Apart from simple sequencing and looping, radare2 allows to write
-simple macros, using this construction:
+Помимо просто последовательности команд и циклов, radare2 позволяет записывать простые макросы, используя конструкцию:
 ```
 [0x00404800]> (qwe; pd 4; ao)
 ```
 
-This will define a macro called 'qwe' which runs sequentially first 'pd 4' then 'ao'.
-Calling the macro using syntax `.(macro)` is simple:
+Эта форма определяет макрос под названием 'qwe', запускающий последовательно сначала 'pd 4', затем 'ao'.
+Вызов макроса с использованием синтаксиса `.(макрос)`:
 
 ```
 [0x00404800]> (qwe; pd 4; ao)
@@ -31,21 +30,20 @@ family: cpu
 [0x00404800]>
 ```
 
-To list available macroses simply call `(*`:
+Чтобы просмотреть доступные макросы, вызовите `(*`:
 ```
 [0x00404800]> (*
 (qwe ; pd 4; ao)
 ```
 
-And if want to remove some macro, just add '-' before the name:
+А если хотите удалить какой-то макрос, просто добавьте '-' перед названием:
 ```
 [0x00404800]> (-qwe)
 Macro 'qwe' removed.
 [0x00404800]>
 ```
 
-Moreover, it's possible to create a macro that takes arguments, which comes in handy in some
-simple scripting situations. To create a macro that takes arguments you simply add them to macro definition.
+Можно создать макрос, принимающий аргументы, - удобный механизм при создании простых сценариев. Чтобы создать макрос, принимающий аргументы, просто добавьте их в определение макроса.
 
 ```
 [0x00404800]
@@ -59,25 +57,25 @@ simple scripting situations. To create a macro that takes arguments you simply a
 0x004047d9	and rsp, 0xfffffffffffffff0
 [0x004047d6]>
 ```
-As you can see, the arguments are named by index, starting from 0: $0, $1, ...
+Как видите, аргументы называются по индексу, начиная с 0: $0, $1, ...
 
-# Aliases
+# Псевдонимы
 
-radare2 also offers aliases which might help you save time by quickly executing your most used commands. They are under `$?`
+radare2 также включает псевдонимы, помогающие сэкономить время, быстро выполняя наиболее часто используемые команды. Они находятся в `$?`
 
-The general usage of the feature is: `$alias=cmd`
+Общее использование функции - `$alias=cmd`
 
 ```
 [0x00404800]> $disas=pdf
 ```
 
-The above command will create an alias `disas` for `pdf`. The following command prints the disassembly of the main function.
+Приведенная выше команда создаст псевдоним `disas` для `pdf`. Следующая команда выводит разборку основной функции.
 
 ```
 [0x00404800]> $disas @ main
 ```
 
-Apart from commands, you can also alias a text to be printed, when called.
+Помимо команд, вы также можете назвать текст, который будет напечатан при вызове.
 
 ```
 [0x00404800]> $my_alias=$test input
@@ -85,7 +83,7 @@ Apart from commands, you can also alias a text to be printed, when called.
 test input
 ```
 
-To undefine alias, use `$alias=`:
+Чтобы отменить определение псевдонима используйте `$alias=`:
 ```
 [0x00404800]> $pmore='b 300;px'
 [0x00404800]> $
@@ -95,13 +93,13 @@ $pmore
 
 ```
 
-A single `$` in the above will list all defined aliases. It's also possible check the aliased command of an alias:
+Один `$` в приведенном выше списке будет перечислять все определенные псевдонимы. Также можно проверить команду псевдонима:
 ```
 [0x00404800]> $pmore?
 b 200; px
 ```
 
-Can we create an alias contains alias ? The answer is yes:
+Можно ли создать псевдоним, уже содержащий псевдоним? Ответ - да.
 ```
 [0x00404800]> $pStart='s 0x0;$pmore'
 [0x00404800]> $pStart
@@ -119,5 +117,5 @@ Can we create an alias contains alias ? The answer is yes:
 0x000000a0  1c00 0000 0000 0000 0100 0000 0000 0000  ................
 0x000000b0  0100 0000 0400 0000 0000 0000 0000 0000  ................
 0x000000c0  0000 0000 0000 0000                      ........
-[0x00000000]> 
+[0x00000000]>
 ```

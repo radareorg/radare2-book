@@ -1,10 +1,9 @@
-# Managing variables
+# Управление переменными
 
-Radare2 allows managing local variables, no matter their location, stack or registers.
-The variables' auto analysis is enabled by default but can be disabled with `anal.vars`
-configuration option.
+Radare2 позволяет управлять локальными переменными независимо от их местоположения, стека или регистров.
+Автоматический анализ переменных включен по умолчанию, но его можно отключить с помощью настройки `anal.vars`.
 
-The main variables commands are located in `afv` namespace:
+Основные команды управляемые переменных находятся в пространстве имен `afv`:
 
 ```
 Usage: afv  [rbs]
@@ -24,10 +23,8 @@ Usage: afv  [rbs]
 | afvx                          show function variable xrefs (same as afvR+afvW)
 ```
 
-`afvr`, `afvb` and `afvs` commands are uniform but allow manipulation of
-register-based arguments and variables, BP/FP-based arguments and variables,
-and SP-based arguments and variables respectively.
-If we check the help for `afvr` we will get the way two others commands works too:
+команды `afvr`, `afvb` и `afvs` унифицированы, но позволяют манипулировать регистровыми аргументами и переменными, аргументами и переменными на основе BP/FP, аргументами и переменными, индексируемыми SP.
+Если посмотреть инструкции для команды `afvr` увидим, что есть и другие:
 
 ```
 |Usage: afvr [reg] [type] [name]
@@ -40,21 +37,11 @@ If we check the help for `afvr` we will get the way two others commands works to
 | afvrs [reg] [addr]          define argument set reference
 ```
 
-Like many other things variables detection is performed by radare2 automatically, but results
-can be changed with those arguments/variables control commands. This kind of analysis
-relies heavily on preloaded function prototypes and the calling-convention, thus loading symbols
-can improve it. Moreover, after changing something we can rerun variables analysis with
-`afva` command. Quite often variables analysis is accompanied with
-[types analysis](types.md), see `afta` command.
+Как и многие другие программные объекты, обнаружение переменных происходит автоматически, результаты можно изменить с помощью этих команд управления аргументами/переменными. Этот вид анализа в значительной степени полагается на предварительно загруженные прототипы функций и соглашение о вызовах, таким образом загружая символы, дополнительно улучшаем результаты анализа. Более того, внеся изменения можно перезапустить анализ переменных с помощью команды `afva`. Довольно часто анализ переменных сопровождается [анализом типов](types.md), ознакомьтесь с инструкциями командой `afta`.
 
-The most important aspect of reverse engineering - naming things. Of course, you can rename
-variable too, affecting all places it was referenced. This can be achieved with `afvn` for
-_any_ type of argument or variable. Or you can simply remove the variable or argument with
-`afv-` command.
+Самый важный аспект реверс-инжиниринга — именование программных объектов и сущностей. Можно переименовать переменные, после чего поменяются все ссылки на переменную в текстах дизассемблирования, например. Это достигается при помощи `afvn` для _любых_ типов аргументов функций или переменных. Можно просто удалить переменную или аргумент с помощью команды `afv-`.
 
-As mentioned before the analysis loop relies heavily on types information while performing
-variables analysis stages. Thus comes next very important command - `afvt`, which
-allows you to change the type of variable:
+Как упоминалось ранее, цикл анализа в значительной степени зависит от информации о типах при анализе переменных. Следующая очень важная команда - `afvt` позволяет изменить тип переменной:
 
 ```
 [0x00003b92]> afvs
@@ -82,10 +69,7 @@ var int local_47h @ rsp+0x47
 var int local_48h @ rsp+0x48
 ```
 
-Less commonly used feature, which is still under heavy development - distinction between
-variables being read and written. You can list those being read with `afvR` command and those
-being written with `afvW` command. Both commands provide a list of the places those operations
-are performed:
+Менее часто используемый инструмент, находящаяся в стадии интенсивной разработки, — построение списков переменных, которые читаются и изменяются. Команда `afvR` перечисляет переменные, которые читаются, а `afvW` - изменяются. Обе команды предоставляют список адресов, где эти операции выполняются:
 
 ```
 [0x00003b92]> afvR
@@ -113,11 +97,11 @@ local_32h
 [0x00003b92]>
 ```
 
-## Type inference
+## Вывод типа
 
-The type inference for local variables and arguments is well integrated with the command `afta`.
+Вывод типа для локальных переменных и аргументов хорошо интегрирован с командой `afta`.
 
-Let's see an example of this with a simple [hello_world](https://github.com/radareorg/radare2book/tree/master/examples/hello_world) binary
+Посмотрим пример с простым бинариком [hello_world](https://github.com/radareorg/radare2book/tree/master/examples/hello_world)
 
 ```
 [0x000007aa]> pdf
@@ -142,7 +126,7 @@ Let's see an example of this with a simple [hello_world](https://github.com/rada
 | 0x000007cf  call sym.imp.strlen         ; size_t strlen(const char *s)
 ```
 
-* After applying `afta`
+* После применения `afta`
 
 ```
 [0x000007aa]> afta
@@ -169,14 +153,14 @@ Let's see an example of this with a simple [hello_world](https://github.com/rada
 | 0x000007cf  call sym.imp.strlen         ; size_t strlen(const char *s)
 ```
 
-It also extracts type information from format strings like `printf ("fmt : %s , %u , %d", ...)`, the format specifications are extracted from `anal/d/spec.sdb`
+Также извлекается информация о типе из строк формата, таких как `printf("fmt: %s, %u, %d",...)`, спецификаций формата извлекаются из `анал/d/spec.sdb`
 
-You could create a new profile for specifying a set of format chars depending on different libraries/operating systems/programming languages like this :
+Можно создать новый профиль для указания набора символов определения формата в зависимости от различных библиотек/операционных систем/языков программирования, например:
 
 ```
 win=spec
 spec.win.u32=unsigned int
 ```
-Then change your default specification to newly created one using this config variable `e anal.spec = win`
+Затем измените спецификацию по умолчанию на вновь созданную, используя переменную конфигурации `e anal.spec = win`
 
-For more information about primitive and user-defined types support in radare2 refer to [types](types.md) chapter.
+Для получения дополнительной информации о поддержке примитивных и определяемых пользователем типов в radare2 читайте раздел [типы](types.md).

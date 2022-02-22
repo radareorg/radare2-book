@@ -1,11 +1,11 @@
-## Search Automation
+## Автоматизация поиска
 
-The `cmd.hit` configuration variable is used to define a radare2 command to be executed when a matching entry is found by the search engine. If you want to run several commands, separate them with `;`. Alternatively, you can arrange them in a separate script, and then invoke it as a whole with `. script-file-name` command.
-For example:
+Переменная конфигурации `cmd.hit` используется для определения команды radare2, выполняющуюся в момент, когда соответствие найдено поисковой системой. Если вы хотите выполнить несколько команд, разделяцте их `;`. Можно задать команды в отдельном сценарии, а затем выполнить его целиком с помощью команды `.  script-file-name`.
+Например:
 ```
 [0x00404888]> e cmd.hit = p8 8
 [0x00404888]> / lib
-Searching 3 bytes from 0x00400000 to 0x0041ae08: 6c 69 62
+Поиск трех байтов с 0x00400000 до 0x0041ae08: 6c 69 62
 hits: 9
 0x00400239 hit4_0 "lib64/ld-linux-x86-64.so.2"
 31ed4989d15e4889

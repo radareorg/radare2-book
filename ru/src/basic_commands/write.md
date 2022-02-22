@@ -1,14 +1,14 @@
-## Writing Data
+## Сохранение данных
 
-Radare can manipulate a loaded binary file in many ways. You can resize the file, move and copy/paste bytes, insert new bytes (shifting data to the end of the block or file), or simply overwrite bytes. New data may be given as a wide-string, assembler instructions, or the data may be read in from another file.
+Radare может манипулировать загруженным двоичным файлом различными способами. Можно изменять размер файла, перемещать и копировать/вставлять байты, вставлять новые байты (перемещая данные в конец блока или файла) или просто перезаписывать байты. Новые данные могут быть предоставлены в виде строки специального вида, инструкций ассемблера, или они могут быть считаны из другого файла.
 
-Resize the file using the `r` command. It accepts a numeric argument. A positive value sets a new size for the file. A negative one will truncate the file to the current seek position minus N bytes.
+Изменения размера файла - команды `r` . Он принимает числовой аргумент. Положительное значение задает новый размер файла. Отрицательное значение приведет к усечению файла до текущей позиции поиска за вычетом N байтов.
 
 ```
 r 1024      ; resize the file to 1024 bytes
 r -10 @ 33  ; strip 10 bytes at offset 33
 ```
-Write bytes using the `w` command. It accepts multiple input formats like inline assembly, endian-friendly dwords, files, hexpair files, wide strings:
+Сохранение (запись в файл) байтов - команда `w`. Он принимает несколько форматов ввода, таких как результаты ассемблирования, дружественные к порядку байтов DWORD, файлы, шестнадцатеричные файлы, широкие строки:
 
 ```
 [0x00404888]> w?
@@ -32,7 +32,7 @@ Usage: w[x] [str] [<file] [<<EOF] [@addr]
 | wh r2                whereis/which shell command
 | wm f0ff              set binary mask hexpair to be used as cyclic write mask
 | wo[?] hex            write in block with operation. 'wo?' fmi
-| wp[?] -|file         apply radare patch file. See wp? fmi
+| wp[?] -|file         apply radare patch file. Посмотрим справку wp? fmi
 | wr 10                write 10 random bytes
 | ws pstring           write 1 byte for length and then the string
 | wt[f][?] file [sz]   write to file (from current seek, blocksize or sz bytes)
@@ -43,7 +43,7 @@ Usage: w[x] [str] [<file] [<<EOF] [@addr]
 | wz string            write zero terminated string (like w + \x00)
 ```
 
-Some examples:
+Примеры:
 
 ```
  [0x00000000]> wx 123456 @ 0x8048300
@@ -51,10 +51,9 @@ Some examples:
  [0x00000000]> wa jmp 0x8048320
 ```
 
-### Write Over
+### Сохранение поверх существующих данных
 
-The `wo` command (write over) has many subcommands, each combines the existing data with the new data using
-an operator. The command is applied to the current block. Supported operators include XOR, ADD, SUB...
+Команда `wo` (write over) имеет множество подкоманд, каждая комбинирует существующие данные с новыми данными. Команда применяется к текущему блоку. Поддерживаемые операторы включают XOR, ADD, SUB...
 
 ```
 [0x4A13B8C0]> wo?
@@ -81,7 +80,7 @@ an operator. The command is applied to the current block. Supported operators in
 |  wo4  4=  4 byte endian swap
 ```
 
-It is possible to implement cipher-algorithms using radare core primitives and `wo`. A sample session performing xor(90) + add(01, 02):
+Возможна реализация шифро-алгоритмов с использованием примитивов ядра radare и `wo`. Пример сеанса, выполняющего xor(90) + add(01, 02):
 
 ```
 [0x7fcd6a891630]> px

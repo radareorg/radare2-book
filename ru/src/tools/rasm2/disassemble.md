@@ -1,32 +1,32 @@
-## Disassembler
+## Дизассемблер
 
-Disassembling is the inverse action of assembling. Rasm2 takes hexpair as an input (but can also take a file in binary form) and show the human readable form.
+Разборка — это обратное действие ассемблированию. Rasm2 принимает шестнадцатеричный код в качестве входных данных (но также может принимать файл в двоичной форме) и показывает человекочитаемую форму.
 
-To do this we can use the `-d` option of rasm2 like this:
+Для этого используется флаг `-d` для rasm2 следующим образом:
 
 ```
 $ rasm2 -a x86 -b 32 -d '90'
 nop
 ```
 
-Rasm2 also have the `-D` flag to show the disassembly like `-d` does, but includes offset and bytes.
+В Rasm2 также есть флаг `-D` для отображения дизассемблирования, как это делает `-d`, результат включает смещение и байты.
 
-In radare2 there are many commands to perform a disassembly from a specific place in memory.
+В radare2 есть много команд для выполнения разборки из определенного места в памяти.
 
-You might be interested in trying if you want different outputs for later parsing with your scripts, or just grep to find what you are looking for:
+Можно попробовать использовать разные флаги для генерирования вариантов дизассемблерирования для последующего синтаксического анализа внешними скриптами, или grep, чтобы найти то, что вы ищете:
 
 ### pd N
 
-Disassemble N instructions
+Дизассемблировать N инструктций
 
 ### pD N
 
-Disassemble N bytes
+Дизассемблировать N байт
 
 ### pda
 
-Disassemble all instructions (seeking 1 byte, or the minimum alignment instruction size), which can be useful for ROP
+Дизассемблировать все инструкции (смещаяясь на 1 байт или минимальный размер инструкции выравнивания), что полезно для ROP
 
 ## pi, pI
 
-Same as `pd` and `pD`, but using a simpler output.
+То же самое, что `pd` и `pD`, но с использованием более простого вывода.

@@ -1,8 +1,7 @@
-# Syscalls
+# Системные вызовы
 
-Radare2 allows manual search for assembly code looking like a syscall operation.
-For example on ARM platform usually they are represented by the `svc` instruction,
-on the others can be a different instructions, e.g. `syscall` on x86 PC.
+Radare2 позволяет вручную искать ассемблерный код, похожий на операцию системного вызова.
+Например, на платформе ARM они обычно представлены инструкциями `svc`, на других архитектурах могут быть другие варианты, например `системный вызов` на x86 ПК.
 ```
 [0x0001ece0]> /ad/ svc
 ...
@@ -11,10 +10,8 @@ on the others can be a different instructions, e.g. `syscall` on x86 PC.
 0x00018a0e   # 2: svc 0x82
 ...
 ```
-Syscalls detection is driven by `asm.os`, `asm.bits`, and `asm.arch`. Be sure
-to setup those configuration options accordingly. You can use `asl` command
-to check if syscalls' support is set up properly and as you expect.
-The command lists syscalls supported for your platform.
+Обнаружение системных вызовов управляется `asm.os`, `asm.bits`, а также `asm.arch`. Роверьте соответствие настроек параметров конфигурации. Можно использовать команду `asl` для проверки правильности настроек поддержки системных вызовов.
+Команда перечисляет системные вызовы, поддерживаемые вашей платформой.
 ```
 [0x0001ece0]> asl
 ...
@@ -24,8 +21,7 @@ sd_softdevice_is_enabled = 0x80.18
 ...
 ```
 
-If you setup ESIL stack with `aei` or `aeim`, you can use `/as` command to search
-the addresses where particular syscalls were found and list them.
+Если настроен стек ESIL с помощью `aei` или `aeim`, можно использовать команду `/as` для поиска адресов детектированных системных вызовов, и перечислить их.
 ```
 [0x0001ece0]> aei
 [0x0001ece0]> /as
@@ -34,13 +30,10 @@ the addresses where particular syscalls were found and list them.
 0x00018a0e sd_ble_gap_sec_info_reply
 ...
 ```
-To reduce searching time it is possible to [restrict the
-searching](../search_bytes/configurating_the_search.md) range for
-only executable segments or sections with `/as @e:search.in=io.maps.x`
+Для сокращения времени поиска можно [ограничить диапазон поиска](../search_bytes/configurating_the_search.md) на только сегменты кода или сегьутеы с `/as @e:search.in=io.maps.x`.
 
-Using the [ESIL emulation](emulation.md) radare2 can print syscall arguments
-in the disassembly output. To enable the linear (but very rough) emulation use
-`asm.emu` configuration variable:
+Используя [эмуляцию ESIL](emulation.md) в radare2 можно печатать аргументы системного вызова в дизассемблировании. Чтобы включить линейную (но очень грубую) эмуляцию, используйте
+переменную конфигурации `asm.emu`:
 ```
 [0x0001ece0]> e asm.emu=true
 [0x0001ece0]> s 0x000187c2
@@ -49,9 +42,7 @@ in the disassembly output. To enable the linear (but very rough) emulation use
 [0x000187c2]>
 ```
 
-In case of executing `aae` (or `aaaa` which calls `aae`) command
-radare2 will push found syscalls to a special `syscall.` flagspace,
-which can be useful for automation purpose:
+В случае выполнения команды `аае` (или `аааа`, который вызывает `аае`) radare2 будет помещать найденные системные вызовы в специальное пространство флагов `syscall.`, что полезо для автоматизации:
 ```
 [0x000187c2]> fs
 0    0 * imports
@@ -67,7 +58,7 @@ which can be useful for automation purpose:
 ...
 ```
 
-It also can be interactively navigated through within HUD mode (`V_`)
+По нему также можно интерактивно перемещаться в режиме HUD (`V_`).
 ```
 0> syscall.sd_ble_gap_disconnect
  - 0x000187b2  syscall.sd_ble_gap_disconnect
@@ -77,10 +68,10 @@ It also can be interactively navigated through within HUD mode (`V_`)
    0x0002ac36  syscall.sd_ble_gap_disconnect.3
 ```
 
-When debugging in radare2, you can use `dcs` to continue execution until the next syscall. You can also run `dcs*` to trace all syscalls.
+При отладке в radare2 можно использовать `dcs` для продолжения выполнения до следующего системного вызова. Также можено запустить `dcs*` для отслеживания всех системных вызовов.
 ```
 [0xf7fb9120]> dcs*
-Running child until syscalls:-1 
+Running child until syscalls:-1
 child stopped with signal 133
 --> SN 0xf7fd3d5b syscall 45 brk (0xffffffda)
 child stopped with signal 133
@@ -90,7 +81,7 @@ child stopped with signal 133
 child stopped with signal 133
 ```
 
-radare2 also has a syscall name to syscall number utility. You can return the syscall name of a given syscall number or vice versa, without leaving the shell.
+В radare2 включена функция преобразования имени системного вызова в номер системного вызова. Можно получить имя системного вызова для заданного номера и наоборот.
 
 ```
 [0x08048436]> asl 1
@@ -101,4 +92,4 @@ exit
 0x80,4,3,iZi
 ```
 
-See `as?` for more information about the utility.
+Почитайте `as?` для получения дополнительной информации о функции.

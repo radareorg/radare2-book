@@ -1,43 +1,43 @@
-## Block Size
+## Размер блока
 
-The block size determines how many bytes radare2 commands will process when not given an explicit size argument. You can temporarily change the block size by specifying a numeric argument to the print commands. For example `px 20`.
+Размер блока определяет, сколько байтов будут обрабатывать команды radare2, если не задан явный аргумент размера. Можно временно изменять размер блока, указав числовой аргумент для команд вывода. Например `px 20`.
 
 ```
 [0x00000000]> b?
-Usage: b[f] [arg]  # Get/Set block size
-| b 33     set block size to 33
-| b eip+4  numeric argument can be an expression
-| b        display current block size
-| b+3      increase blocksize by 3
-| b-16     decrease blocksize by 16
-| b*       display current block size in r2 command
-| bf foo   set block size to flag size
-| bj       display block size information in JSON
-| bm 1M    set max block size
+Usage: b[f] [arg]  # Узнать/установить размер блока
+| b 33     установить размер блока 33
+| b eip+4  числовой аргумент может быть выражением
+| b        показать теекущий размер блока
+| b+3      увеличить размер длока на 3
+| b-16     уменьшить размер блока на 16
+| b*       показать текущий размер блока в r2
+| bf foo   установить размер блока равным размеру флага
+| bj       представить информацию о размере блока в виде JSON
+| bm 1M    установить максимальный размер блока
 ```
 
-The `b` command is used to change the block size:
+Команда `b` используется для изменения размера блока:
 
 ```
-[0x00000000]> b 0x100   # block size = 0x100
+[0x00000000]> b 0x100   # размер блока = 0x100
 [0x00000000]> b+16      #  ... = 0x110
 [0x00000000]> b-32      #  ... = 0xf0
 ```
 
-The `bf` command is used to change the block size to value specified by a flag. For example, in symbols, the block size of the flag represents the size of the function. To make that work, you have to either run function analysis `af` (which is included in `aa`) or manually seek and define some functions e.g. via `Vd`.
+Команда `bf` используется для изменения размера блока на значение, указанное флагом. Например, в символах размер блока флага представляет размер функции. Чтобы это работало, нужно запустить анализ функций `af`, входящий в `aa`) или вручную найти и определить функции при помощи `Vd` .
 
 ```
-[0x00000000]> bf sym.main    # block size = sizeof(sym.main)
-[0x00000000]> pD @ sym.main  # disassemble sym.main
+[0x00000000]> bf sym.main    # размер блока = sizeof(sym.main)
+[0x00000000]> pD @ sym.main  # дизассемблировать sym.main
 ```
 
-You can combine two operations in a single `pdf` command. Except that `pdf` neither uses nor affects global block size.
+Совместить две операции в одной - команда `pdf`. Кроме `pdf` никакие другие команды не влияют на размер глобального блока.
 
 ```
-[0x00000000]> pdf @ sym.main  # disassemble sym.main
+[0x00000000]> pdf @ sym.main  # дизассемблировать sym.main
 ```
 
-Another way around is to use special variables `$FB` and `$FS` which denote Function's Beginning and Size at the current seek. Read more about [Usable variables](../refcard/intro.md#usable-variables-in-expression).
+Другой способ - использовать специальные переменные `$FB` и `$FS`, обозначающие начало и размер функции при выполнении seek. Подробнее ищите в [Используемые переменные](../refcard/intro.md#usable-variables-in-expression).
 
 ```
 [0x00000000]> s sym.main + 0x04
@@ -50,4 +50,4 @@ Another way around is to use special variables `$FB` and `$FS` which denote Func
 ╰           0x00001f97      c3                 ret
 ```
 
-Note: don't put space after `!` size designator. See also [Command Format](../first_steps/command_format.md).
+Примечание: не ставьте пробел после `!`. Смотрите также [Формат команды](../first_steps/command_format.md).

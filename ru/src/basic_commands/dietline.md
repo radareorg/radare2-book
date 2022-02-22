@@ -1,60 +1,52 @@
 # Dietline
 
-Radare2 comes with the lean [readline](https://en.wikipedia.org/wiki/GNU_Readline)-like input capability through the lean library to handle the command edition and history navigation. It allows users to perform cursor movements, search the
-history, and implements autocompletion. Moreover, due to the radare2 portability, dietline provides
-the uniform experience among all supported platforms. It is used in all radare2 subshells - main
-prompt, SDB shell, visual prompt, and offsets prompt. It also implements the most common features
-and keybindings compatible with the GNU Readline.
+Radare2 поставляется с [readline](https://en.wikipedia.org/wiki/GNU_Readline)-подобной командной строкой ввода, реализованная на основе "бережливого" принципа навигацией по истории и редактирования содержимого. Она позволяет пользователям передвигать курсор, перебирать предыдущие команды, обеспечивает автодополнение. Благодаря портативности Radare2, Dietline обеспечивает единый пользовательский интерфейс для всех поддерживаемых платформ. Он используется во всех подоболочках Rarade2 - основной командной строки, оболочки SDB, визуальных подсказок и подсказкзок смещения. Также реализованы наиболее распространенные функции и сочетания клавиш, совместимые с GNU Readline.
 
-Dietline supports two major configuration modes : Emacs-mode and Vi-mode. 
+Dietline поддерживает два основных режима конфигурации: режимы Emacs и Vi.
 
-It also supports the famous `Ctrl-R` reverse history search. Using `TAB` key it allows to scroll through the
-autocompletion options.
+Он также поддерживает знаменитый `Ctrl-R`, обратный поиск по истории. Клавиша `TAB` позволяет прокручивать варианты автодополнения.
 
-# Autocompletion
+# Автодополнение
 
-In the every shell and radare2 command autocompletion is supported. There are multiple modes of it -
-files, flags, and SDB keys/namespaces. To provide the easy way to select possible completion options
-the scrollable popup widget is available. It can be enabled with `scr.prompt.popup`, just set it to
-the `true`.
+В каждой оболочке и Radare2 поддерживается автодополнение команд. Есть несколько режимов - файлы, флаги и ключи/пространства имен SDB. Простой способ выбора возможных вариантов завершения - прокручиваемый всплывающий виджет. Он включается с помощью `scr.prompt.popup`, просто установите его в `true`.
 
-# Emacs (default) mode
+# Режим Emacs (по умолчанию)
 
-By default dietline mode is compatible with readline Emacs-like mode key bindings. Thus active are:
+По умолчанию режим dietline совместим с привязками клавиш режима readline, подобного Emacs. Таким образом, активны:
 
-## Moving 
+## Перемещение
 - `Ctrl-a` - move to the beginning of the line
 - `Ctrl-e` - move to the end of the line
 - `Ctrl-b` - move one character backward
 - `Ctrl-f` - move one character forward
 
-## Deleting
+## Удаление
 - `Ctrl-w` - delete the previous word
 - `Ctrl-u` - delete the whole line
 - `Ctrl-h` - delete a character to the left
 - `Ctrl-d` - delete a character to the right
 - `Alt-d` - cuts the character after the cursor
 
-## Killing and Yanking 
+## Killing and Yanking
 - `Ctrl-k` - kill the text from point to the end of the line.
 - `Ctrl-x` - kill backward from the cursor to the beginning of the current line.
-- `Ctrl-t` - kill from point to the end of the current word, or if between words, to the end of the next word. Word boundaries are the same as forward-word.
+- `Ctrl-t` - kill from point to the end of the current word, or if between words, to the end of the next word. Границы слова такие же, как в forward-word.
 - `Ctrl-w` - kill the word behind point, using white space as a word boundary. The killed text is saved on the kill-ring.
 - `Ctrl-y` - yank the top of the kill ring into the buffer at point.
-- `Ctrl-]` - rotate the kill-ring, and yank the new top. You can only do this if the prior command is yank or yank-pop.
+- `Ctrl-]` - rotate the kill-ring, and yank the new top. Вращение можно делать только если предыдущая команда была yank или yank-pop.
 
-## History
+## История
 - `Ctrl-r` - the reverse search in the command history
 
-# Vi mode
+# Режим Vi
 
-Radare2 also comes with in vi mode that can be enabled by toggling `scr.prompt.vi`. The various keybindings available in this mode are:
+Radare2 также поставляется с режимом vi, подключаемый при помощи `scr.prompt.vi`. В этом режиме доступны сочетания клавиш:
 
-## Entering command modes
+## Вход в командные режимы
 - `ESC` - enter into the control mode
 - `i` - enter into the insert mode
 
-## Moving
+## Перемещение
 - `j` - acts like up arrow key
 - `k` - acts like down arrow key
 - `a` - move cursor forward and enter into insert mode
@@ -76,8 +68,8 @@ Radare2 also comes with in vi mode that can be enabled by toggling `scr.prompt.v
 - `dl` - delete a character to the right
 - `d$` - kill the text from point to the end of the line.
 - `d^` - kill backward from the cursor to the beginning of the current line.
-- `de` - kill from point to the end of the current word, or if between words, to the end of the next word. Word boundaries are the same as forward-word.
+- `de` - kill from point to the end of the current word, or if between words, to the end of the next word. Границы слова такие же, как в forward-word.
 - `p` - yank the top of the kill ring into the buffer at point.
 - `c` - acts similar to d based commands, but goes into insert mode in the end by prefixing the commands with numbers, the command is performed multiple times.
 
-If you are finding it hard to keep track of which mode you are in, just set `scr.prompt.mode=true` to update the color of the prompt based on the vi-mode.
+Если непонятно, в каком режиме вы находитесь, установите `scr.prompt.mode=true`, произойдет обновление цвета подсказки в зависимости от режима vi.

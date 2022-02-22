@@ -1,25 +1,22 @@
-# Rarun2
+# Программа Rarun2
 
-Rarun2 is a tool allowing to setup a specified execution environment - redefine stdin/stdout, pipes,
-change the environment variables and other settings useful to craft the boundary conditions you need to run
-a binary for debugging.
+Rarun2 - это инструмент, позволяющий настроить специальную среду выполнения - переопределить stdin/stdout, каналы, переменные среды и других параметров, полезных для формирования ограниченной среды, в которой предполагается выполнить двоичный файл для отладки.
 
 ```
 $ rarun2 -h
 Usage: rarun2 -v|-t|script.rr2 [directive ..]
 ```
 
-It takes the text file in key=value format to specify the execution environment.
-Rarun2 can be used as both separate tool or as a part of radare2.
-To load the rarun2 profile in radare2 you need to use either `-r` to load
-the profile from file or `-R` to specify the directive from string.
+Для указания среды выполнения используется текстовый файл в формате key=value.
+Rarun2 используется как в качестве отдельного инструмента, так и в составе radare2.
+Для загрузки профиля rarun2 в radare2 необходимо использовать либо `-r` для загрузки профиля из файла, либо `-R` - указание директивы из строки.
 
-The format of the profile is very simple. Note the most important keys - `program` and `arg*`
+Формат профиля очень прост. Наиболее важные ключи - `program` и `arg*`
 
-One of the most common usage cases - redirect the output of debugged program in radare2.
-For this you need to use `stdio`, `stdout`, `stdin`, `input`, and a couple similar keys.
+Один из наиболее распространенных вариантов использования - перенаправление вывода отлаженной программы в radare2.
+Для этого нужно использовать `stdio`, `stdout`, `stdin`, `input` и пару подобных клавиш.
 
-Here is the basic profile example:
+Вот базовый пример профиля:
 
 ```
 program=/bin/ls

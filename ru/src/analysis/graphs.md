@@ -1,10 +1,10 @@
-# Graph commands
+# Команды графа управления
 
-When analyzing data it is usually handy to have different ways to represent it in order to get new perspectives to allow the analyst to understand how different parts of the program interact.
+При анализе данных обычно удобно иметь разные способы их представления, чтобы получить новые перспективы, позволяющие аналитику понять, как взаимодействуют различные части программы.
 
-Representing basic block edges, function calls, string references as graphs show a very clear view of this information.
+Представление ребер базовых блоков (далее, просто блоков), вызовов функций, строковых ссылок в виде графов показывает очень четкое представление этой информации.
 
-Radare2 supports various types of graph available through commands starting with `ag`:
+Radare2 поддерживает различные типы графов, доступные с помощью команд, начинающихся с `ag`:
 
 ```
 [0x00005000]> ag?
@@ -37,62 +37,60 @@ Output formats:
 | w [path]                Write to path or display graph image (see graph.gv.format and graph.web)
 ```
 
-The structure of the commands is as follows: `ag <graph type> <output format>`.
+Структура команд следующая: `ag <graph type> <output format>`.
 
-For example, `agid` displays the imports graph in dot format, while `aggj`
-outputs the custom graph in JSON format.
+Например, `agid` отображает граф импорта в точечном формате, а `aggj` выводит конкретный граф в формате JSON.
 
-Here's a short description for every output format available:
+Вот краткое описание для каждого доступного формата вывода:
 
-### Ascii Art ** (e.g. `agf`)
+### Ascii Art ** (например, `agf`)
 
-Displays the graph directly to stdout using ASCII art to represent blocks and edges.
+Выводит граф на stdout, используя ASCII-art для представления блоков и ребер.
 
-_Warning: displaying large graphs directly to stdout might prove to be computationally expensive and will make r2 not responsive for some time. In case of a doubt, prefer using the interactive view (explained below)._
+_Предупреждение: отображение больших графов в stdout может оказаться вычислительно дорогостоящим, r2 может перестать реагировать в течение некоторого времени._ В случае сомнений, используйте интерактивное представление (рассматривается ниже).
 
-### Interactive Ascii Art (e.g. `agfv`)
+### Интерактивный Ascii-art (например, `agfv`)
 
-Displays the ASCII graph in an interactive view similar to `VV` which allows to move the screen, zoom in / zoom out, ...
+Отображает граф в ASCII в интерактивном представлении, аналогичном `VV`, позволяющее перемещать экран, увеличивать/уменьшать, ...
 
-### Tiny Ascii Art (e.g. `agft`)
+### Крошечный Ascii-art (например, `agft`)
 
-Displays the ASCII graph directly to stdout in tiny mode (which is the same as reaching the maximum zoom out level in the interactive view).
+Отображает график ASCII непосредственно в stdout в этом режиме (что аналогично достижению максимального уровня уменьшения масштаба в интерактивном представлении).
 
-### Graphviz dot	(e.g. `agfd`)
+### Graphviz dot (например, `agfd`)
 
-Prints the dot source code representing the graph, which can be interpreted by programs such as [graphviz](https://graphviz.gitlab.io/download/) or online viewers like [this](http://www.webgraphviz.com/)
+Печатает исходный код dot, представляющий граф, интерпретируемый программами типа [graphviz](https://graphviz.gitlab.io/download/) или онлайн-вьюверами, подобными [этому](http://www.webgraphviz.com/).
 
-### JSON	(e.g. `agfj`)
+### JSON (например, `agfj`)
 
-Prints a JSON string representing the graph.
+Выводит строку JSON, представляющую граф.
 
-- In case of the `f` format (basic blocks of function), it will have detailed information about the function and will also contain the disassembly of the function (use `J` format for the formatted disassembly.
+- В случае формата `f` (блоки функции), будет отображена подробно информация о функции, ее дизассемблирование (используйте формат `J` для форматированного дизассемблирования.
 
-- In all other cases, it will only have basic information about the nodes of the graph (id, title, body, and edges).
+- Во всех остальных случаях он будет содержать только основную информацию об узлах графа (идентификатор, заголовок, тело и ребра).
 
-### Graph Modelling Language (e.g. `agfg`)
+### Язык моделирования графа (например, `agfg`)
 
-Prints the GML source code representing the graph, which can be interpreted by programs such as [yEd](https://www.yworks.com/products/yed/download)
+Выводит исходный код GML, представляющий граф, интерпретируемый, например,[yEd](https://www.yworks.com/products/yed/download)
 
-### SDB key-value (e.g. `agfk`)
+### Ключ-значение SDB (например, `agfk`)
 
-Prints key-value strings representing the graph that was stored by sdb (radare2's string database).
+Печатает строки "ключ-значение", представляющие граф, сохраненный в sdb (строковая база данных radare2).
 
-### R2 custom graph commands (e.g. `agf*`)
+### Пользовательские команды R2 для графа (например, `agf*`)
 
-Prints r2 commands that would recreate the desired graph. The commands to construct the graph are `agn [title] [body]` to add a node and `age [title1] [title2]` to add an edge.
-The `[body]` field can be expressed in base64 to include special formatting (such as newlines).
+Печатает команды r2, которые воссоздают нужный граф. Команды для построения графа: `agn [title] [body]` - добавление узла и `age [title1] [title2]` - добавление ребра.
+Поле `[body]` можно представлять в base64 для включения специального форматирования (например, новых строк).
 
-To easily execute the printed commands, it is possible to prepend a dot to the command (`.agf*`).
+Чтобы выполнять напечатанные команды, можно добавить точку к команде (`.agf*`).
 
-### Web / image	(e.g. `agfw`)
+### Веб / изображение (например, `agfw`)
 
-Radare2 will convert the graph to dot format, use the `dot` program to convert it to a `.gif` image and then try to find an already installed viewer on your system (`xdg-open`, `open`, ...) and display the graph there.
+Radare2 преобразует график в формат dot, использя программу `dot` можно преобразовать его в `.gif`-изображение, а затем результат можно просмотреть в вашей операционной системе (`xdg-open`, `open`, ...).
 
-The extension of the output image can be set with the `graph.extension` config variable. Available extensions are `png, jpg, gif, pdf, ps`.
+Расширение выходного изображения задается с помощью переменной `конфигурации graph.extension`. Доступны расширения `png, jpg, gif, pdf, ps`.
 
-_Note: for particularly large graphs, the most recommended extension is `svg` as it will produce images of much smaller size_
+_Примечание: для особенно больших графиков рекомендуемым расширением является `svg`, так как оно будет производить изображения гораздо меньшего размера._
 
-If `graph.web` config variable is enabled, radare2 will try to display the graph using the browser (_this feature is experimental and unfinished, and
-disabled by default._)
+Если переменная конфигурации `graph.web` включена, radare2 попытается отобразить график с помощью браузера (_эта функция является экспериментальной и незавершенной, отключена по умолчанию._)
 

@@ -1,6 +1,6 @@
-## Rasign2
+## Программа Rasign2
 
-The `rasign2` tool allows you to quickly create signature files. To create a SDB signature file named `libc_sigs2.sdb` for the `libc.so.6` binary, simply run:
+Инструмент `rasign2` позволяет быстро создавать файлы сигнатур. Чтобы создать файл сигнатуры SDB с именем `libc_sigs2.sdb` для двоичного файла `libc.so.6` просто выполните:
 
 ```
 $ rasign2 -o libc_sigs2.sdb libc.so.6
@@ -8,7 +8,7 @@ $ rasign2 -o libc_sigs2.sdb libc.so.6
 generated zignatures: 2870
 ```
 
-The above is equivalent to:
+Вышесказанное эквивалентно:
 
 ```
 $ r2 libc.so.6
@@ -19,7 +19,7 @@ generated zignatures: 2870
 [0x00024330]> zos libc_sigs.sdb  # write zignatures to a file
 ```
 
-The '-a' flag can be added to increase the amount of analysis performed. This will result in more functions discovered and more zignatures created.
+Флаг '-a' добавляется для выбора более глубокого анализа. Это приведет к большему количеству обнаруженных функций и созданию большего количества сигнатур.
 
 ```
 $ rasign2 -a -o /tmp/libc_sigs2.sdb libc.so.6
@@ -31,12 +31,12 @@ $ rasign2 -a -o /tmp/libc_sigs2.sdb libc.so.6
 [x] Type matching analysis for all functions (aaft)
 [x] Propagate noreturn information
 [x] Use -AA or aaaa to perform additional experimental analysis.
-generated zignatures: 2955
+сгенерированных сигнатур: 2955
 ```
 
-### Output types
+### Типы результатов
 
-There are 3 different output methods. Using `-o` to create an SDB is shown above. The `-r` flag will print the discovered signatures to stdout as r2 commands.
+Существует три метода вывода результата. Использование `-o` для создания SDB показано выше. Флаг `-r` напечатает обнаруженные подписи в stdout в виде команд r2.
 
 ```
 $ rasign2 -r hello_world  |grep main
@@ -51,7 +51,7 @@ za main t func.main.ret=int func.main.args=3 func.main.arg.0="int,argc" func.mai
 za main h 44004dffff87483150d4f315ea8426b4d0c471ce4c56176c874513b24d0266b4
 ```
 
-The `-j` flag will print results in JSON format.
+Флаг `-j` представит результаты в формате JSON.
 
 ```
 rasign2 -j hello_world
@@ -60,7 +60,7 @@ generated zignatures: 17
 [{"name":"main","bytes":"554889e54883ec20488d051b01000048894...
 ```
 
-See the help menu for more details:
+Смотрите меню справки для получения более подробной информации:
 
 ```
 rasign2 -h

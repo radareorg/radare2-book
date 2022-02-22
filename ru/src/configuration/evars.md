@@ -1,29 +1,29 @@
-## Configuration Variables
+## Переменные конфигурации
 
-Below is a list of the most frequently used configuration variables. You can get a complete list by issuing `e` command without arguments. For example, to see all variables defined in the "cfg" namespace, issue `e cfg.` (mind the ending dot). You can get help on any eval configuration variable by using `e? cfg.`
+Ниже приведен список наиболее часто используемых конфигурационных переменных. Gолный список получается, выполнив команду `e` без аргументов. Например, чтобы увидеть все переменные, определенные в пространстве имен "cfg", задайте `e cfg.` (обратите внимание на конечную точку). Получить инструктцию по любой переменной конфигурации с помощью `e?` cfg.`
 
-The `e??` command to get help on all the evaluable configuration variables of radare2. As long as the output of this command is pretty large you can combine it with the internal grep `~` to filter for what you are looking for:
+Команда `e??` показывает описание всех ценных переменнх конфигурации radare2. Количество выдаваемых данных этой команды довольно велико, вы можете комбинировать их с внутренним grep `~` для фильтрации того, что вы ищете:
 
 ![e??~color](../img/configuration/e--color.png)
 
-The Visual mode has an eval browser that is accessible through the `Vbe` command.
+Визуальный интерфейс включает браузер переменных среды, доступный с помощью команды `Vbe`.
 
 ### asm.arch
 
-Defines the target CPU architecture used for disassembling (`pd`, `pD` commands) and code analysis (`a` command). You can find the list of possible values by looking at the result of `e asm.arch=?` or `rasm2 -L`.
-It is quite simple to add new architectures for disassembling and analyzing code. There is an interface for that. For x86, it is used to attach a number of third-party disassembler engines, including GNU binutils, Udis86 and a few handmade ones.
+Задает архитектуру целевого процессора для дизассемблирования (`pd`, `pD`) и анализа кода (`a`). Список возможных значений для конкретной переменной показывается при помощи `e asm.arch=?` или `rasm2 -L`.
+Добавить новые архитектуры для разборки и анализа кода довольно просто. Для этого есть интерфейс. Для x86 он используется для присоединения ряда сторонних дизассемблерных движков, включая GNU binutils, Udis86 и несколько реализованных вручную.
 
 ### asm.bits
 
-Determines width in bits of registers for the current architecture. Supported values: 8, 16, 32, 64. Note that not all target architectures support all combinations for asm.bits.
+Определяет ширину регистров в битах для текущей архитектуры. Поддерживаемые значения: 8, 16, 32, 64. Обратите внимание, что не все целевые архитектуры поддерживают все комбинации asm.bits.
 
 ### asm.syntax
 
-Changes syntax flavor for disassembler between Intel and AT&T. At the moment, this setting affects Udis86 disassembler for Intel 32/Intel 64 targets only. Supported values are `intel` and `att`.
+Изменяется синтаксический диалект дизассемблера между Intel и AT&T. На данный момент этот параметр влияет на дизассемблер Udis86 только для архитектур Intel 32/Intel 64. Поддерживаются значения `intel` и `att`.
 
 ### asm.pseudo
 
-A boolean value to set the psuedo syntax in the disassembly. "False" indicates a native one, defined by the current architecture, "true" activates a pseudocode strings format. For example, it'll transform :
+Логическое значение для задания псевдо-синтаксиса при дизассемблировании. «False» указывает на родной, определенный текущей архитектурой, «true» активирует формат строк псевдокода. Например, он преобразует:
 
 ```
 │           0x080483ff      e832000000     call 0x8048436
@@ -32,7 +32,7 @@ A boolean value to set the psuedo syntax in the disassembly. "False" indicates a
 │           0x0804840c      83f800         cmp eax, 0
 │           0x0804840f      7405           je 0x8048416
 ```
-to
+в
 
 ```
 │           0x080483ff      e832000000     0x8048436 ()
@@ -41,45 +41,45 @@ to
 │           0x0804840c      83f800         var = eax - 0
 │           0x0804840f      7405           if (!var) goto 0x8048416
 ```
-It can be useful while disassembling obscure architectures.
+Он может быть полезен при разборке малоизвестных архитектур.
 
 ### asm.os
 
-Selects a target operating system of currently loaded binary. Usually, OS is automatically detected by `rabin -rI`. Yet, `asm.os` can be used to switch to a different syscall table employed by another OS.
+Задает целевую операционную систему загруженного в данный момент двоичного файла. Обычно ОС автоматически определяется `rabin -rI`. Тем не менее, `asm.os` используется для переключения на таблицу системных вызовов конкретной операционной системы.
 
 ### asm.flags
 
-If defined to "true", disassembler view will have flags column.
+Если задано значение "true", представление дизассемблера будет включать столбец флагов.
 
 ### asm.lines.call
 
-If set to "true", draw lines at the left of the disassemble output (`pd`, `pD` commands) to graphically represent control flow changes (jumps and calls) that are targeted inside current block. Also, see `asm.lines.out`.
+Если задано значение "true", рисует линии слева от вывода дизассемблирования (`pd`, `pD` ), чтобы графически представить поток управления (переходы и вызовы), которые входят внутрь текущего блока. Кроме того, см. `asm.lines.out`.
 
 ### asm.lines.out
 
-When defined as "true", the disassembly view will also draw control flow lines that go outside of the block.
+Если равно «true» представление дизассемблера также будет рисовать поток, выходящий за пределы блока.
 
 ### asm.linestyle
 
-A boolean value which changes the direction of control flow analysis. If set to "false", it is done from top to bottom of a block; otherwise, it goes from bottom to top. The "false" setting seems to be a better choice for improved readability and is the default one.
+Логическое значение, изменяющее направление анализа потока управления. Если задано значение "false", производится сверху вниз блока; в противном случае он идет снизу вверх. Настройка «false», по-видимому, является лучшим выбором для улучшения читаемости и является настройкой по умолчанию.
 
 ### asm.offset
 
-Boolean value which controls the visibility of offsets for individual disassembled instructions.
+Логическое значение, которое управляет видимостью смещений для отдельно дизассемблерированных инструкций.
 
 ### asm.trace
 
-A boolean value that controls displaying of tracing information (sequence number and counter) at the left of each opcode. It is used to assist with programs trace analysis.
+Логическое значение, управляющее отображением информации трассировки (порядковый номер и счетчик) слева от каждого оп-кода. Используется в анализе трассировки программ.
 
 ### asm.bytes
 
-A boolean value used to show or hide displaying of raw bytes of instructions.
+Логическое значение, используемое для отображения или скрытия raw-байтов инструкций.
 
 ### asm.sub.reg
 
-A boolean value used to replace register names with arguments or their associated role alias.
+Логическое значение, используемое для замены имен регистров аргументами или связанным с ними псевдонимом роли.
 
-For example, if you have something like this:
+Например, если у вас есть что-то вроде этого:
 
 ```
 │           0x080483ea      83c404         add esp, 4
@@ -88,7 +88,7 @@ For example, if you have something like this:
 │           0x080483fc      83c408         add esp, 8
 │           0x08048404      31c0           xor eax, eax
 ```
-This variable changes it to:
+Gеременная изменяет предсталение на:
 ```
 │           0x080483ea      83c404         add SP, 4
 │           0x080483ed      68989a0408     push 0x8049a98
@@ -99,20 +99,20 @@ This variable changes it to:
 
 ### asm.sub.jmp
 
-A boolean value used to substitute jump, call and branch targets in disassembly.
+Логическое значение, используемое для замены целевых объектов перехода, вызова и ветвления при дизассемблировании.
 
-For example, when turned on, it'd display `jal 0x80001a40` as `jal fcn.80001a40` in the disassembly.
+Например, во включенном режиме он будет отображать `jal 0x80001a40` как `jal fcn.80001a40` в дизассемблировании.
 
 ### asm.sub.rel
 
-A boolean value which substitutes pc relative expressions in disassembly. When turned on, it shows the references as string references.
+Логическое значение, которое заменяет относительные выражения pc при дизассемблировании. Если этот параметр включен, ссылки отображаются как строковые ссылки.
 
-For example:
+Например:
 
 ```
 0x5563844a0181      488d3d7c0e00.  lea rdi, [rip + 0xe7c]    ; str.argv__2d_:__s
 ```
-When turned on, this variable lets you display the above instruction as:
+Если эта переменная включена, она позволяет отобразить приведенную выше инструкцию следующим образом:
 
 ```
 0x5563844a0181      488d3d7c0e00.  lea rdi, str.argv__2d_:__s    ; 0x5563844a1004 ; "argv[%2d]: %s\n"
@@ -120,9 +120,9 @@ When turned on, this variable lets you display the above instruction as:
 
 ### asm.sub.section
 
-Boolean which shows offsets in disassembly prefixed with the name of the section or map.
+Логический, который показывает смещения в дизассемблировании с префиксом названия раздела или карты.
 
-That means, from something like:
+Это означает, из чего-то вроде:
 
 ```
 0x000067ea      488d0def0c01.  lea rcx, [0x000174e0]
@@ -134,42 +134,42 @@ to the one below, when toggled on.
 
 ### asm.sub.varonly
 
-Boolean which substitutes the variable expression with the local variable name.
+Boolean, который заменяет выражение переменной именем локальной переменной.
 
-For example: `var_14h` as `rbp - var_14h`, in the disassembly.
+Например: `var_14h` как `rbp - var_14h` в дизассемблировании.
 
 ### cfg.bigendian
 
-Change endianness. "true" means big-endian, "false" is for little-endian.
-"file.id" and "file.flag" both to be true.
+Изменение порядка байтов. «истинный» означает биг-эндиан, «ложный» означает литл-эндиан.
+"file.id" и "file.flag" должны быть правдой.
 
 ### cfg.newtab
 
-If this variable is enabled, help messages will be displayed along with command names in tab completion for commands.
+Если эта переменная включена, сообщения справки будут отображаться вместе с именами команд в автодополнении.
 
 ### scr.color
 
-This variable specifies the mode for colorized screen output: "false" (or 0) means no colors, "true" (or 1) means 16-colors mode, 2 means 256-colors mode, 3 means 16 million-colors mode. If your favorite theme looks weird, try to bump this up.
+Эта переменная задает режим вывода "в цвете" или нет: «false» (или 0) означает отсутствие цветов, «true» (или 1) означает 16-цветной режим, 2 означает 256-цветовой режим, 3 означает режим 16 миллионов цветов. Если ваша любимая тема выглядит странно, попробуйте увеличить число.
 
 ### scr.seek
 
-This variable accepts a full-featured expression or a pointer/flag (eg. eip). If set, radare will set seek position to its value on startup.
+Переменная принимает выражение или указатель/флаг (например. eip). Если установлено, radare установит начальное смещение это значение при запуске.
 
 ### scr.scrollbar
-If you have set up any [flagzones](http://book.rada.re/basic_commands/flags.html#flag-zones) (`fz?`), this variable will let you display the scrollbar with the flagzones, in Visual mode. Set it to `1` to display the scrollbar at the right end, `2` for the top and `3` to display it at the bottom.
+Если настроены какие-либо [зоны флагов](http://book.rada.re/basic_commands/flags.html#flag-zones) (`fz?`), эта переменная позволит вам отобразить полосу прокрутки с флагзонами в визуальном режиме. Установите значение в `1`, чтобы отобразить полосу прокрутки справа, `2` для верхней части экрана и `3` - снизу.
 
 ### scr.utf8
 
-A boolen variable to show UTF-8 characters instead of ANSI.
+Логическая переменная для отображения символов UTF-8 вместо ANSI.
 
 ### cfg.fortunes
 
-Enables or disables "fortune" messages displayed at each radare start.
+Включает или отключает сообщения «фортуны», отображаемые при каждом запуске радара.
 
 ### cfg.fortunes.type
 
-Fortunes are classified by type. This variable determines which types are allowed for displaying when `cfg.fortunes` is `true`, so they can be fine-tuned on what's appropriate for the intended audience. Current types are `tips`, `fun`, `nsfw`, `creepy`.
+Высказывания Фортуны классифицируются по типу. Эта переменная определяет, какие типы разрешены для отображения, когда `cfg.fortunes` `true`, их можно настроить на целевую аудиторию. Текущие типы - `это советы` (tips), `веселье` (fun), `nsfw`, `жуткие` (creepy).
 
 ### stack.size
 
-This variable lets you set the size of stack in bytes.
+Эта переменная позволяет задать размер стека в байтах.

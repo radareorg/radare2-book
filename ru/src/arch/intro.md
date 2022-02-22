@@ -1,8 +1,5 @@
-# Architectures
+# Архитектуры
 
-This chapter covers architecture specific topics.
+В этой главе рассматриваются темы, связанные с архитектурой.
 
-Even though most examples in the radare2 book are showing Intel x86 code,
-radare2 supports an extensive list of computer architectures. The concepts
-of radare2 apply to all architectures, but there are a few differences in
-the configuration and usage.
+Несмотря на то, что большинство примеров в книге radare2 показаны на коде Intel x86, radare2 поддерживает обширный список компьютерных архитектур. Концепции radare2 применимы ко всем архитектурам, но есть несколько отличий в конфигурации и использования.

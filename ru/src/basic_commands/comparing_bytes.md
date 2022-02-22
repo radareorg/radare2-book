@@ -1,14 +1,14 @@
-## Comparing Bytes
+## Сравнение байтов
 
-For most generic reverse engineering tasks like finding the differences between two binary files, which bytes has changed, find differences in the graphs of the code analysis results, and other diffing operations you can just use radiff2:
+Для большинства общих задач обратного проектирования, таких как поиск различий между двумя двоичными файлами, какие байты были изменены, поиск различий в графах результатов анализа кода и другие операции сравнения, можно реализовывать при помощи radiff2:
 
 ```
 $ radiff2 -h
 ```
 
-Inside r2, the functionalities exposed by radiff2 are available with the `c` command.
+Внутри r2 функциональные возможности, предоставляемые radiff2, доступны при помощи команды `c`.
 
-`c` (short for "compare") allows you to compare arrays of bytes from different sources. The command accepts input in a number of formats and then compares it against values found at current seek position.
+Команда `c` (сокращение от «compare») позволяет сравнивать массивы байтов из разных источников. Команда принимает ввод в нескольких форматах, а затем сравнивает его со значениями, найденными в текущей позиции поиска.
 
 ```
 [0x00404888]> c?
@@ -38,7 +38,7 @@ Usage: c[?dfx] [argument]   # Compare
 | cl|cls|clear             Clear screen, (clear0 to goto 0, 0 only)
 ```
 
-To compare memory contents at current seek position against a given string of values, use `cx`:
+Чтобы сравнить содержимое памяти в текущей позиции поиска с заданной строкой значений, используйте`cx`:
 
 ```
 [0x08048000]> p8 4
@@ -50,20 +50,20 @@ Compare 3/4 equal bytes
 [0x08048000]>
 ```
 
-Another subcommand of the `c` command is `cc` which stands for "compare code".
-To compare a byte sequence with a sequence in memory:
+Еще одна команда группы `с` - `cc` «compare code».
+Сравнение последовательности байтов с последовательностью в памяти:
 
 ```
 [0x4A13B8C0]> cc 0x39e8e089 @ 0x4A13B8C0
 ```
 
-To compare contents of two functions specified by their names:
+Сравнение содержимого двух функций, указанных по именам:
 
 ```
 [0x08049A80]> cc sym.main2 @ sym.main
 ```
 
-`c8` compares a quadword from the current seek (in the example below, 0x00000000) against a math expression:
+Команда `с8` сравнивает quadword по текущему смещению (в приведенном ниже примере 0x00000000) с математическим выражением:
 
 ```
 [0x00000000]> c8 4
@@ -74,7 +74,7 @@ Compare 1/8 equal bytes (0%)
 0x00000002 (byte=03)   4c 'L'  ->  00 ' '
 ```
 
-The number parameter can, of course, be math expressions which use flag names and anything allowed in an expression:
+Параметр number может быть математическим выражением, в котором используются имена флагов и все, что разрешено в выражении:
 
 ```
 [0x00000000]> cx 7f469046
@@ -84,7 +84,7 @@ Compare 2/4 equal bytes
 0x00000002 (byte=03)   4c 'L'  ->  90 ' '
 ```
 
-You can use the compare command to find differences between a current block and a file previously dumped to a disk:
+Вы можете использовать команду сравнения, чтобы найти различия между текущим блоком и файлом, ранее сброшенным на диск:
 
 ```
 r2 /bin/true

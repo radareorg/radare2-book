@@ -1,7 +1,6 @@
-# Signatures
+# Сигнатуры
 
-Radare2 has its own format of the signatures, allowing to both load/apply and
-create them on the fly. They are available under the `z` command namespace:
+Radare2 реализует собственный формат сигнатур, позволяющий как их загружать/применять, так и создавать на лету. Они доступны в пространстве имен команд `z`:
 
 ```
 [0x00000000]> z?
@@ -24,10 +23,9 @@ Usage: z[*j-aof/cs] [args]   # Manage zignatures
 | zs[?]        manage zignspaces
 | zi           show zignatures matching information
 ```
-To load the created signature file you need to load it from SDB file using `zo` command or
-from the compressed SDB file using `zoz` command.
+Для загрузки созданного файла сигнатур необходимо загрузить его из SDB-файла с помощью команды `zo` или из сжатого SDB-файла - `zoz`.
 
-To create signature you need to make function first, then you can create it from the function:
+Для создания сигнатуры нужно сначала определить функцию, затем из нее сигнатуру:
 ```
 r2 /bin/ls
 [0x000051c0]> aaa # this creates functions, including 'entry0'
@@ -39,8 +37,8 @@ entry:
   offset: 0x000051c0
 [0x000051c0]>
 ```
-As you can see it made a new signature with a name `entry` from a function `entry0`.
-You can show it in JSON format too, which can be useful for scripting:
+Как видите, сделана новая сигнатура с именем `entry` из функции `entry0`.
+Также можете показать сигнатуру в формате JSON, полезный для сценариев:
 ```
 [0x000051c0]> zj~{}
 [
@@ -60,14 +58,14 @@ You can show it in JSON format too, which can be useful for scripting:
 ]
 [0x000051c0]>
 ```
-To remove it just run `z-entry`.
+Чтобы удалить его, просто запустите `z-entry`.
 
-If you want, instead, to save all created signatures, you need to save it into the SDB file using command `zos myentry`.
+Если надо сохранить все созданные подписи, сохраняйте их в SDB-файл с помощью команды `zos myentry`.
 
-Then we can apply them. Lets open a file again:
+Позже их можно применить. Давайте снова откроем файл:
 ```
 r2 /bin/ls
- -- Log On. Hack In. Go Anywhere. Get Everything.
+ -- Войти. Взломать. Перейти куда угодно. Получить все.
 [0x000051c0]> zo myentry
 [0x000051c0]> z
 entry:
@@ -76,8 +74,7 @@ entry:
   offset: 0x000051c0
 [0x000051c0]>
 ```
-This means that the signatures were successfully loaded from the file `myentry` and now we can
-search matching functions:
+Это означает, что подписи успешно загружены из файла `myentry` и теперь можно искать совпадающие функции:
 ```
 [0x000051c0]> z.
 [+] searching 0x000051c0 - 0x000052c0
@@ -85,9 +82,9 @@ search matching functions:
 hits: 1
 [0x000051c0]>
 ```
-Note that `z.` command just checks the signatures against the current address.
-To search signatures across the all file we need to do a bit different thing.
-There is an important moment though, if we just run it "as is" - it wont find anything:
+Обратите внимание, что команда `z.` просто проверяет сигнатуру по текущему адресу.
+Чтобы искать сигнатуры по всему файлу, нужно сделать другую команду.
+Есть важный момент, если просто запустить его «как есть», он ничего не найдет:
 ```
 [0x000051c0]> z/
 [+] searching 0x0021dfd0 - 0x002203e8
@@ -95,7 +92,7 @@ There is an important moment though, if we just run it "as is" - it wont find an
 hits: 0
 [0x000051c0]>
 ```
-Note the searching address - this is because we need to [adjust the searching](../search_bytes/configurating_the_search.md) range first:
+Обратите внимание на поисковый адрес - нам нужно сначала [настроить диапазон поиска](../search_bytes/configurating_the_search.md):
 ```
 [0x000051c0]> e search.in=io.section
 [0x000051c0]> z/
@@ -104,9 +101,8 @@ Note the searching address - this is because we need to [adjust the searching](.
 hits: 1
 [0x000051c0]>
 ```
-We are setting the search mode to `io.section` (it was `file` by default) to search in the current
-section (assuming we are currently in the `.text` section of course).
-Now we can check, what radare2 found for us:
+Мы устанавливаем режим поиска в `io.section` (это был `файл` по умолчанию) на поиск в текущей секции (при условии, что мы в настоящее время находимся в разделе `.text</g>).
+Теперь можно пjcvjnhtnm, что radare2 нашел для нас:
 ```
 [0x000051c0]> pd 5
 ;-- entry0:
@@ -118,37 +114,33 @@ Now we can check, what radare2 found for us:
 0x000051c9      4883e4f0       and rsp, 0xfffffffffffffff0
 [0x000051c0]>
 ```
-Here we can see the comment of `entry0`, which is taken from the ELF parsing, but also the
-`sign.bytes.entry_0`, which is exactly the result of matching signature.
+Здесь видно комментарий `entry0`, который взят из разбора ELF, а также
+`sign.bytes.entry_0`, которая является именно результатом совпадения сигнатуры.
 
-Signatures configuration stored in the `zign.` config vars' namespace:
+Конфигурация сигнатур хранится в переменных настройки среды в пространстве имен `zign.`:
 ```
 [0x000051c0]> e? zign.
-       zign.autoload: Autoload all zignatures located in ~/.local/share/radare2/zigns
-          zign.bytes: Use bytes patterns for matching
-   zign.diff.bthresh: Threshold for diffing zign bytes [0, 1] (see zc?)
-   zign.diff.gthresh: Threshold for diffing zign graphs [0, 1] (see zc?)
-          zign.graph: Use graph metrics for matching
-           zign.hash: Use Hash for matching
-          zign.maxsz: Maximum zignature length
-          zign.mincc: Minimum cyclomatic complexity for matching
-          zign.minsz: Minimum zignature length for matching
-         zign.offset: Use original offset for matching
-         zign.prefix: Default prefix for zignatures matches
-           zign.refs: Use references for matching
-      zign.threshold: Minimum similarity required for inclusion in zb output
-          zign.types: Use types for matching
+       zign.autoload: Автозагрузка всех зигнатур, расположенных в ~/.local/share/radare2/zigns
+          zign.bytes: Использование шаблонов байтов для сопоставления
+   zign.diff.bthresh: Пороговое значение для дифференциации zign-байтов [0, 1] (см. zc?)
+   zign.diff.gthresh: Порог для дифференцированных графиков zign [0, 1] (см. zc?)
+          zign.graph: Использование метрик графа для сопоставления
+           zign.hash: Использование хэша для сопоставления
+          zign.maxsz: Максимальная длина сигнатуры
+          zign.mincc: Минимальная цикломатическая сложность для сопоставления
+          zign.minsz: Минимальная длина сигнатуры для сопоставления
+         zign.offset: Используйте исходное смещение для сопоставления
+         zign.prefix: Префикс по умолчанию для совпадений сигнатур
+           zign.refs: Использолать ссылки для сопоставления
+      zign.threshold: Минимальное сходство, необходимое для включения в результаты zb
+          zign.types: Использование типов для сопоставления
 [0x000051c0]>
 ```
 
-## Finding Best Matches `zb`
+## Поиск лучших совпадений `zb`
 
-Often you know the signature should exist somewhere in a binary but `z/` and
-`z.` still fail. This is often due to very minor differences between the
-signature and the function. Maybe the compiler switched two instructions, or
-your signature is not for the correct function version. In these situations the
-`zb` commands can still help point you in the right direction by listing near
-matches.
+Часть бывает, что сигнатура должна существовать где-то в двоичном файле, но `z/` и `z.` все еще терпят неудачу. Это часто связано с очень незначительными различиями между
+сигнатурой и функцией. Может быть компилятор переключил две инструкции или сигнатура не для подходящей версии функции. В этих ситуациях команды `zb` по-прежнему могут помочь указать вам правильное направление, перечислив примерные совпадения.
 
 ```
 [0x000040a0]> zb?
@@ -157,8 +149,8 @@ Usage: zb[r?] [args]  # search for closest matching signatures
 | zbr zigname [n]  search for n most similar functions to zigname
 ```
 
-The `zb` (zign best) command will show the top 5 closest signatures to a
-function. Each will contain a score between 1.0 and 0.0.
+Команда `zb` (zign best) покажет пять наиболее близких сигнатур к
+функция. Каждый из них будет содержать оценку от 1,0 до 0,0.
 
 ```
 [0x0041e390]> s sym.fclose
@@ -170,15 +162,11 @@ function. Each will contain a score between 1.0 and 0.0.
 0.62532  0.34800 B  0.90264 G   sym.__cxa_finalize
 ```
 
-In the above example, `zb` correctly associated the `sym.fclose` signature to
-the current function. The `z/` and `z.` command would have failed to match here
-since both the `B`yte and `G`raph scores are less then 1.0. A 30% separation
-between the first and second place results is also a good indication of a
-correct match.
+В приведенном выше примере `zb` правильно связал подпись `sym.fclose` с текущей функцией. Команды `z/` и `z.` не сработали бы здесь,
+так как оценки `B`yte и `Gh`rap меньше 1,0. Разница 30% между результатами первого и второго места также является хорошим показателем правильного соответствия.
 
-The `zbr` (zign best reverse) accepts a zignature name and attempts to find the
-closet matching functions. Use an analysis command, like `aa` to find functions
-first.
+`Zbr` (zign best reverse) принимает имя сигнатуры и пытается найти
+наиболее близкое соотеетствие. Используйте команду анализа, например `aa`, чтобы найти сначал функции.
 
 ```
 [0x00401b20]> aa

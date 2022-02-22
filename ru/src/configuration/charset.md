@@ -1,15 +1,15 @@
-## Charset
+## Кодировка
 
-Sometimes, a binary can contain custom characters in another charsets than ascii. It is as example the case of the gameboy. The gameboy has his own custom charset for each game. To select as example a custom charset corresponding to the game pokemon red and blue of the gameboy, do:
+Иногда двоичный файл содержит пользовательские символы в других кодировках, отличных от ascii. В качестве примера можно привести случай с геймбоем. Геймбой имеет свою собственную кодировку для каждой игры. Чтобы выбрать в качестве примера пользовательскую кодировку, соответствующую игре pokemon красного и синего геймбоя, выполните следующие действия:
 
 ```
 e cfg.charset=pokered;
 ```
 
-You can now do commands such as `ps` and `w` with custom charset.
+Теперь можно выполнять такие команды, как `ps` и `w` с пользовательской кодировкой.
 
-Sadly, as you can imagine, very often the charset will be missing. There can not be as many plugin as there are games for gameboy. If the charset does not exists yet, fell free to write it. See the chapters `plugins` and then `charset``to read about charsets.
+Очень часто необхоимая кодировка может отсутствовать. Плагинов не может быть столько же, сколько игр для gameboy. Если кодировка еще не существует, можно смело ее реализовать. Смотрите разделы книги о `плагинах` и затем 'charset'' о кодировках.
 
-It works of course for each architecture. Not only the gameboy.
+Кодировки реализуемы без условно для каждой архитектуры. Не только для геймбоя.
 
-You can also use visual mode with the custom charset for single char encodings.
+Можно также использовать визуальный режим с указанной ранее однобайтовой кодировкой символов.

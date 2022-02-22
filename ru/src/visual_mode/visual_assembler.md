@@ -1,15 +1,15 @@
-# Visual Assembler
+# Визуальный ассемблер
 
-You can use Visual Mode to assemble code using `A`.
-For example let's replace the `push` by a `jmp`:
+Визуальный режим можно использовать для ассемблирования кода - клавиша `A`.
+Например, давайте заменим `push` на `jmp`:
 
-![Before](before.png)
+![Было](before.png)
 
-Notice the preview of the disassembly and arrows:
+Обратите внимание на предварительный просмотр дизассемблерирования и стрелок:
 
-![After](after.png)
+![После](after.png)
 
-You need to open the file in writing mode (`r2 -w` or `oo+`) in order to patch the file.
-You can also use the cache mode: `e io.cache = true` and `wc?`.
+Нужно открыть файл в режиме записи (`r2 -w` или `oo+`), только так можно вносить исправления в файл.
+Также можно использовать режим кэширования: `e io.cache = true` и `wc?`.
 
-Remember that patching files in debug mode only patch the memory not the file.
+Помните, что исправление файлов в режиме отладки только исправляет память, а не файл.

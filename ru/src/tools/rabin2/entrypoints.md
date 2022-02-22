@@ -1,6 +1,6 @@
-## Code Entrypoints
+## Точки ввода в код
 
-The `-e` option passed to rabin2 will show entrypoints for given binary. Two examples:
+Флаг `-e`, переданный rabin2, покажет точки входа для данного двоичного файла. Два примера:
 ```
 $ rabin2 -e /bin/ls
 [Entrypoints]

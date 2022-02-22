@@ -1,6 +1,6 @@
-## Examples
+## Примеры
 
-The rahash2 tool can be used to calculate checksums and has functions of byte streams, files, text strings.
+Инструмент rahash2 используется для вычисления контрольных сумм и имеет функции байтовых потоков, файлов, текстовых строк.
 
 ```
 $ rahash2 -h
@@ -10,13 +10,13 @@ Usage: rahash2 [-rBhLkv] [-b S] [-a A] [-c H] [-E A] [-s S] [-f O] [-t O] [file]
  -B          show per-block hash
  -c hash     compare with this hash
  -e          swap endian (use little endian)
- -E algo     encrypt. Use -S to set key and -I to set IV
- -D algo     decrypt. Use -S to set key and -I to set IV
+ -E algo     encrypt. Используйте -S для установки ключа и -I для установки IV
+ -D algo     decrypt. Используйте -S для установки ключа и -I для установки IV
  -f from     start hashing at given address
  -i num      repeat hash N iterations
  -I iv       use give initialization vector (IV) (hexa or s:string)
  -S seed     use given seed (hexa or s:string) use ^ to prefix (key for -E)
-             (- will slurp the key from stdin, the @ prefix points to a file
+             (- загрузит ключ из stdin, префикс @ указывает на файл
  -k          show hash using the openssh's randomkey algorithm
  -q          run in quiet mode (-qq to show only the hash)
  -L          list all available algorithms (see -a)
@@ -27,16 +27,16 @@ Usage: rahash2 [-rBhLkv] [-b S] [-a A] [-c H] [-E A] [-s S] [-f O] [-t O] [file]
  -v          show version information
 ```
 
-To obtain an MD5 hash value of a text string, use the `-s` option:
+Чтобы получить хэш-значение MD5 текстовой строки, используйте параметр `-s` :
 
 ```
 $ rahash2 -q -a md5 -s 'hello world'
 5eb63bbbe01eeed093cb22bb8f5acdc3
 ```
 
-It is possible to calculate hash values for contents of files. But do not attempt to do it for very large files because rahash2 buffers the whole input in memory before computing the hash.
+Можно вычислить хэш-значения для содержимого файлов. Не пытайтесь сделать это для очень больших файлов, потому что rahash2 буферизует весь вход в памяти перед вычислением хэша.
 
-To apply all algorithms known to rahash2, use `all` as an algorithm name:
+Чтобы применить все алгоритмы, известные для rahash2, используйте `all` в качестве имени алгоритма:
 
 ```
 $ rahash2 -a all /bin/ls

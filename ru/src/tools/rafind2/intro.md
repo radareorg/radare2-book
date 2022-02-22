@@ -1,6 +1,6 @@
-# rafind2
+# Программа rafind2
 
-Rafind2 is the command line fronted of the `r_search` library. Which allows you to search for strings, sequences of bytes with binary masks, etc
+Rafind2 — это командная строка библиотеки `r_search`. Она позволяет искать строки, последовательности байтов с двоичными масками и т.д.
 
 ```
 $ rafind2 -h
@@ -27,7 +27,7 @@ Usage: rafind2 [-mXnzZhqv] [-a align] [-b sz] [-f/t from/to] [-[e|s|S] str] [-x 
  -Z         show string found on each search hit
 ```
 
-That's how to use it, first we'll search for "lib" inside the `/bin/ls` binary.
+Вот как его использовать, сначала найдем "lib" внутри двоичного файла `/bin/ls`.
 ```
 $ rafind2 -s lib /bin/ls
 0x5f9
@@ -36,15 +36,15 @@ $ rafind2 -s lib /bin/ls
 ...
 $
 ```
-Note that the output is pretty minimal, and shows the offsets where the string `lib` is found. We can then use this output to feed other tools.
+Обратите внимание, что выходные данные довольно минималистичны и показывают смещения там, где находится строка `lib`. Можно использовать этот вывод для подачи других инструментов.
 
-Counting results:
+Результаты подсчета:
 
 ```
 $ rafind2 -s lib /bin/ls | wc -l
 ```
 
-Displaying results with context:
+Отображение результатов с контекстом:
 
 ```
 $ export F=/bin/ls
@@ -62,14 +62,14 @@ $ for a in `rafind2 -s lib $F` ; do \
 0x000006ef  6c69 6200 0000 0000 .. lib......&......
 ```
 
-rafind2 can also be used as a replacement of `file` to identify the mimetype of a file using the internal magic database of radare2.
+rafind2 также может быть использован в качестве замены `file` для идентификации mimetype файла с помощью внутренней магической базы данных radare2.
 
 ```
 $ rafind2 -i /bin/ls
 0x00000000 1 Mach-O
 ```
 
-Also works as a `strings` replacement, similar to what you do with rabin2 -z, but without caring about parsing headers and obeying binary sections.
+Также утилита работает как замена `strings`, аналогично тому, что вы делаете с rabin2 -z, но без заботы о разборе заголовков и подчинении двоичным разделам.
 
 ```
 $ rafind2 -z /bin/ls| grep http

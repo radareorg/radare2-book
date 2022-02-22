@@ -1,5 +1,4 @@
-rabin2 allows you to do some modifications/extraction operations on a file. You do so with **-O** option 
-and one of the predefined strings to specify the required operation. All the possible strings are:
+rabin2 позволяет выполнять некоторые операции модификации/извлечения файла. Делается это с помощью флага **-O** и одной из предопределенных строк для указания требуемой операции. Все возможные строки:
 
 ```
 $ rabin2 -O h
@@ -13,16 +12,16 @@ Operation string:
   Change Permissions: p/.data/rwx
   Show LDID entitlements: C
 ```
-Let's run some examples.
+Давайте рассмотрим несколько примеров.
 
-Change the entry point to 0x8041111 of *somefile.bin*:
+Изменить точку входа на 0x8041111 в файле *somefile.bin*:
 
 ``` $rabin2  e/0x8041111  somefile.bin ```
 
-Set permissions rwx (instead of the default rw) on the .bss segment of *somefile.bin*:
+Установка разрешения rwx (вместо rw по умолчанию) для сегмента .bss файла *somefile.bin*:
 
 ```$rabin2 p/.bss/rwx   somefile.bin```
 
-Dump a given section (*.text*) of the file (*somefile.bin*) as a hexadecimal stream:
+Сделать дамп заданного раздела (*.text*) файла (*somefile.bin*) в виде шестнадцатеричного потока:
 
 ```$rabin2 d/S/.text somefile.bin```

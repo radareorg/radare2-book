@@ -1,10 +1,10 @@
-# Print Modes
+# Режимы отображения данных
 
-One of the key features of radare2 is displaying information in many formats. The goal is to offer a selection of display choices to interpret binary data in the best possible way.
+Одной из ключевых особенностей radare2 является отображение информации во многих форматах. Цель состоит в том, чтобы предложить выбор вариантов отображения для наилучшей интерпретации двоичных данных.
 
-Binary data can be represented as integers, shorts, longs, floats, timestamps, hexpair strings, or more complex formats like C structures, disassembly listings, decompilation listing, be a result of an external processing...
+Двоичные данные представляются в виде целых чисел, shorts, longs, floats, timestamps, шестнадцатеричных строк или более сложных форматов, таких как структуры C, списки дизассемблирования, списки декомпиляции, результатов внешней обработки ...
 
-Below is a list of available print modes listed by `p?`:
+Ниже приведен список доступных режимов печати, перечисленных `в p?`:
 
 ```
 [0x00005310]> p?
@@ -45,7 +45,7 @@ Below is a list of available print modes listed by `p?`:
 [0x00005310]>
 ```
 
-Tip: when using json output, you can append the `~{}` to the command to get a pretty-printed version of the output:
+Совет: при использовании вывода json можно добавлять `~{}` к команде, чтобы получить красиво напечатанную версию вывода:
 
 ```
 [0x00000000]> oj
@@ -64,32 +64,32 @@ Tip: when using json output, you can append the `~{}` to the command to get a pr
 ]
 ```
 
-For more on the magical powers of `~` see the help in `?@?`, and the [Command Format](../first_steps/command_format.md) chapter earlier in the book.
+Для получения дополнительной информации о функциональным возможностям `~` смотрите инструкцию в `?@?`, а также главу [Формат команды](../first_steps/command_format.md) в книге.
 
-### Hexadecimal View
+### Шестнадцатеричный вид
 
-`px` gives a user-friendly output showing 16 pairs of numbers per row with offsets and raw representations:
+`px` дает удобный вывод, показывающий 16 пар чисел в строке со смещениями и raw-представлениями:
 
 ![hexprint](print_modes_px.png)
 
-#### Show Hexadecimal Words Dump (32 bits)
+#### Шестнадцатеричный дамп слов (32 бита)
 
 ![wordprint](print_modes_pxw.png)
 
-#### 8 bits Hexpair List of Bytes
+#### 8-битовый шестнадцатеричный список байтов
 
 ```
 [0x00404888]> p8 16
 31ed4989d15e4889e24883e4f0505449
 ```
 
-#### Show Hexadecimal Quad-words Dump (64 bits)
+#### Шестнадцатеричный дамп из Quad-слов (64 бита)
 
 ![pxq](print_modes_pxq.png)
 
-### Date/Time Formats
+### Форматы даты/времени
 
-Currently supported timestamp output modes are:
+В настоящее время поддерживаются следующие режимы вывода timestamp-ов:
 
 ```
 [0x00404888]> pt?
@@ -101,7 +101,7 @@ Currently supported timestamp output modes are:
 | ptn  print NTFS time (64 bit `cfg.bigendian`) Since January 1, 1601
 ```
 
-For example, you can 'view' the current buffer as timestamps in the ntfs time:
+Например, вы можете представить текущий буфер как временные метки во времени NTFS:
 
 ```
 [0x08048000]> e cfg.bigendian = false
@@ -112,7 +112,7 @@ For example, you can 'view' the current buffer as timestamps in the ntfs time:
 20:05:13001 09:29:21 +0000
 ```
 
-As you can see, the endianness affects the result. Once you have printed a timestamp, you can grep the output, for example, by year:
+Как видите, порядок байтов влияет на результат. После того, как вы напечатали timestamp, можно профильтовать grep-ом выходные данные, например, по годам:
 
 ```
 [0x08048000]> pt ~1974 | wc -l
@@ -121,30 +121,30 @@ As you can see, the endianness affects the result. Once you have printed a times
 27:04:2022 16:15:43 +0000
 ```
 
-The default date format can be configured using the `cfg.datefmt` variable. Formatting rules for it follow the well known strftime(3) format. Check the manpage for more details, but these are the most important:
+Формат даты по умолчанию можно настроить с помощью переменной `cfg.datefmt`. Правила форматирования следуют хорошо известному формату strftime(3). Ознакомьтесь со справочной страницей, вот наиболее важное:
 
 ```
-%a  The abbreviated name of the day of the week according to the current locale.
-%A  The full name of the day of the week according to the current locale.
-%d  The day of the month as a decimal number (range 01 to 31).
-%D  Equivalent to %m/%d/%y.  (Yecch—for Americans only).
-%H  The hour as a decimal number using a 24-hour clock (range 00 to 23).
-%I  The hour as a decimal number using a 12-hour clock (range 01 to 12).
-%m  The month as a decimal number (range 01 to 12).
-%M  The minute as a decimal number (range 00 to 59).
-%p  Either "AM" or "PM" according to the given time value.
-%s  The number of seconds since the Epoch, 1970-01-01 00:00:00  +0000 (UTC). (TZ)
-%S  The second as a decimal number (range 00 to 60).  (The range is up to 60 to allow for occasional leap seconds.)
-%T  The time in 24-hour notation (%H:%M:%S).  (SU)
-%y  The year as a decimal number without a century (range 00 to 99).
-%Y  The year as a decimal number including the century.
-%z  The +hhmm or -hhmm numeric timezone (that is, the hour and minute offset from UTC). (SU)
-%Z  The timezone name or abbreviation.
+%a  Сокращенное название дня недели в соответствии с текущим языковым стандартом.
+%A  Полное название дня недели в соответствии с текущим языковым стандартом.
+%d  День месяца в виде десятичного числа (диапазон от 01 до 31).
+%D  Эквивалентно %m/%d/%y.  (Yecch — только для американцев).
+%H  Час в виде десятичного числа с использованием 24-часового формата (диапазон от 00 до 23).
+%I  Час в виде десятичного числа с использованием 12-часового формата (диапазон от 01 до 12).
+%m  Месяц в виде десятичного числа (диапазон от 01 до 12).
+%M  Минута в виде десятичного числа (диапазон от 00 до 59).
+%p  Либо "AM", либо "PM" в соответствии с заданным значением времени.
+%s  Количество секунд со времен Эпохи, 1970-01-01 00:00:00 +0000 (UTC). (ТЗ)
+%S Секунда в виде десятичного числа (диапазон от 00 до 60).  (Диапазон составляет до 60 секунд, что позволяет время от времени использовать високосные секунды.)
+%T  Время в 24-часовой нотации (%H:%M:%S).  (SU)
+%y  Год в виде десятичного числа без века (диапазон от 00 до 99).
+%Y  Год в виде десятичного числа, включая век.
+%z  Числовой часовой пояс +hhmm или -hhmm (то есть часовое и минутное смещение от UTC). (SU)
+%Z  Название или аббревиатура часового пояса.
 ```
 
-### Basic Types
+### Основные типы.
 
-There are print modes available for all basic types. If you are interested in a more complex structure, type `pf??` for format characters and `pf???` for examples:
+Существуют режимы печати, доступные для всех базовых типов. Если вас интересует более сложная структура, введите `pf??` для символов формата и `pf???` для примеров:
 
 ```
 [0x00499999]> pf??
@@ -177,7 +177,7 @@ There are print modes available for all basic types. If you are interested in a 
 |  X       show formatted hexpairs
 |  z       null terminated string
 |  Z       null terminated wide string
-|  ?       data structure `pf ? (struct_name)example_name`
+|  ?       структура данных 'pf ? (struct_name)example_name`
 |  *       next char is pointer (honors asm.bits)
 |  +       toggle show flags for each offset
 |  :       skip 4 bytes
@@ -186,7 +186,7 @@ There are print modes available for all basic types. If you are interested in a 
 |  ,       rewind 1 byte
 ```
 
-Use triple-question-mark `pf???` to get some examples using print format strings.
+Используйте тройной вопросительный знак `pf???`, чтобы получить некоторые примеры с использованием строк формата печати.
 
 ```
 [0x00499999]> pf???
@@ -210,13 +210,13 @@ Use triple-question-mark `pf???` to get some examples using print format strings
 | pf ;..x                                      Print value located 6 bytes from current offset
 | pf [10]z[3]i[10]Zb                           Print an fixed size str, widechar, and var
 | pfj +F @ 0x14                                Print the content at given offset with flag
-| pf n2                                        print signed short (2 bytes) value. Use N instead of n for printing unsigned values
+| pf n2                                        print signed short (2 bytes) value. Используйте N вместо n для печати беззнаковых значений
 | pf [2]? (plop)structname @ 0                 Prints an array of structs
 | pf eqew bigWord beef                         Swap endianness and print with given labels
 | pf.foo rr (eax)reg1 (eip)reg2                Create object referencing to register values
 | pf tt troll plop                             print time stamps with labels troll and plop
 ```
-Some examples are below:
+Ниже приведены примеры:
 ```
 [0x4A13B8C0]> pf i
 0x00404888 = 837634441
@@ -226,9 +226,9 @@ Some examples are below:
 0x00404888 = 837634432.000000
 ```
 
-### High-level Languages Views
+### Высокоуровневые представления в виде языков программирования
 
-Valid print code formats for human-readable languages are:
+Допустимые форматы печати для языков:
 
 * `pc`     C
 * `pc*`    print 'wx' r2 commands
@@ -251,9 +251,9 @@ Valid print code formats for human-readable languages are:
 * `pcy`    yara
 * `pcz`    Swift
 
-If we need to create a .c file containing a binary blob, use the `pc` command, that creates this output. The default size is like in many other commands: the block size, which can be changed with the `b` command.
+Если нужно создать файл .c, содержащий BLOB, используйте команду `pc`. Размер по умолчанию такой же, как и в многих других командах: размер блока можно изменить с помощью команды `b` .
 
-We can also just temporarily override this block size by expressing it as an argument.
+Также можно просто временно переопределить этот размер блока, выразив его в качестве аргумента.
 
 ```
 [0xB7F8E810]> pc 32
@@ -262,16 +262,16 @@ unsigned char buffer[_BUFFER_SIZE] = {
 0x89, 0xe0, 0xe8, 0x49, 0x02, 0x00, 0x00, 0x89, 0xc7, 0xe8, 0xe2, 0xff, 0xff, 0xff, 0x81, 0xc3, 0xd6, 0xa7, 0x01, 0x00, 0x8b, 0x83, 0x00, 0xff, 0xff, 0xff, 0x5a, 0x8d, 0x24, 0x84, 0x29, 0xc2 };
 ```
 
-That cstring can be used in many programming languages, not just C.
+Структура cstring может использоваться во многих языках программирования, а не только в C.
 
 ```
 [0x7fcd6a891630]> pcs
 "\x48\x89\xe7\xe8\x68\x39\x00\x00\x49\x89\xc4\x8b\x05\xef\x16\x22\x00\x5a\x48\x8d\x24\xc4\x29\xc2\x52\x48\x89\xd6\x49\x89\xe5\x48\x83\xe4\xf0\x48\x8b\x3d\x06\x1a
 ```
 
-### Strings
+### Строки
 
-Strings are probably one of the most important entry points when starting to reverse engineer a program because they usually reference information about functions' actions (asserts, debug or info messages...). Therefore, radare supports various string formats:
+Строки, вероятно, являются одной из наиболее важных точек входа при начале реверс-инжениринга программы, поскольку они обычно ссылаются на информацию о действиях функций (утверждения, отладка или информационные сообщения ...). Поэтому radare поддерживает различные строковые форматы:
 
 ```
 [0x00000000]> ps?
@@ -291,7 +291,7 @@ Strings are probably one of the most important entry points when starting to rev
 | psz[j]   print zero-terminated string
 ```
 
-Most strings are zero-terminated. Below there is an example using the debugger to continue the execution of a program until it executes the 'open' syscall. When we recover the control over the process, we get the arguments passed to the syscall, pointed by %ebx. In the case of the 'open' call, it is a zero terminated string which we can inspect using `psz`.
+Большинство строк заканчиваются нулем. Ниже приведен пример использования отладчика для продолжения выполнения программы до тех пор, пока не выполнится системный вызов 'open'. Как только контроль за процесом восстановлен, получаем аргументы, переданные в системный вызов, на которые указывает %ebx. В случае вызова 'open' это строка с нулевым окончанием, проверим с помощью `psz`.
 
 ```
 [0x4A13B8C0]> dcs open
@@ -306,9 +306,9 @@ Most strings are zero-terminated. Below there is an example using the debugger t
 /etc/ld.so.cache
 ```
 
-### Print Memory Contents
+### Печать содержимого памяти
 
-It is also possible to print various packed data types using the `pf` command:
+Печать различных упакованных типов данных делется с помощью команды `pf`:
 
 ```
 [0xB7F08810]> pf xxS @ rsp
@@ -317,7 +317,7 @@ It is also possible to print various packed data types using the `pf` command:
 0x7fff0d29da38 = 0x7fff0d29da38 -> 0x0d29f7ee /bin/ls
 ```
 
-This can be used to look at the arguments passed to a function. To achieve this, simply pass a 'format memory string' as an argument to `pf`, and temporally change the current seek position/offset using `@`. It is also possible to define arrays of structures with `pf`. To do this, prefix the format string with a numeric value. You can also define a name for each field of the structure by appending them as a space-separated arguments list.
+Это можно использовать для просмотра аргументов, передаваемых функции. Передайте 'строку, описывающую формат в памяти' в качестве аргумента в `pf` и временно измените текущую позицию поиска/смещение с помощью `@`. Также можно определить массивы структур с помощью `pf`. Для этого добавьте к строке форматирования префикс с числовым значением. Можно также определять имена для каждого поля структуры, добавив их в виде списка аргументов, разделенных пробелами.
 
 ```
 [0x4A13B8C0]> pf 2*xw pointer type @ esp
@@ -332,7 +332,7 @@ This can be used to look at the arguments passed to a function. To achieve this,
 }
 ```
 
-A practical example for using `pf` on a binary of a GStreamer plugin:
+Практический пример использования `pf` в двоичном файле плагина GStreamer:
 
 ```
 $ radare2 /usr/lib/gstreamer-1.0/libgstflv.so
@@ -357,11 +357,11 @@ sym.gst_plugin_flv_get_desc ();
  release_datetime : (*0x19cf6)0x000213c8 = "2020-12-06"
 ```
 
-### Disassembly
+### Дизассемблирование
 
-The `pd` command is used to disassemble code. It accepts a numeric value to specify how many instructions should be disassembled. The `pD` command is similar but instead of a number of instructions, it decompiles a given number of bytes.
+Команда `pd` используется для дизассемблирования кода. Она принимает числовое значение, указывающее, сколько инструкций должно быть разобрано. Команда `pD` аналогична, но вместо нескольких инструкций она декомпилирует заданное количество байтов.
 
-* `d` : disassembly N opcodes   count of opcodes
+* `d` : дизассемблирование N оп-кодов, количество оп-кодов
 * `D` : asm.arch disassembler   bsize bytes
 
 ```
@@ -370,9 +370,9 @@ The `pd` command is used to disassemble code. It accepts a numeric value to spec
 0x00404888    31ed         xor ebp, ebp
 ```
 
-### Selecting Target Architecture
+### Выбор целевой архитектуры
 
-The architecture flavor for the disassembler is defined by the `asm.arch` eval variable. You can use `e asm.arch=??` to list all available architectures.
+Целевая архитектура дизассемблера определяется переменной `asm.arch`. Можно использовать `e asm.arch=??` для перечисления всех доступных архитектур.
 
 ```
 [0x00005310]> e asm.arch=??
@@ -402,9 +402,9 @@ _d__  _32        lanai       GPL3    LANAI
 ...
 ```
 
-### Configuring the Disassembler
+### Настройка дизассемблера
 
-There are multiple options which can be used to configure the output of the disassembler. All these options are described in `e? asm.`
+Существует несколько вариантов настроек вывода дизассемблера. Все эти опции описаны в `e?` asm.`
 
 ```
 [0x00005310]> e? asm.
@@ -423,16 +423,15 @@ asm.cmt.fold: Fold comments, toggle with Vz
 ...
 ```
 
-Currently there are 136 `asm.` configuration variables so we do not list them all.
+В настоящее время существует 136 переменных конфигурации `asm.`, не будем перечислять их все.
 
-### Disassembly Syntax
+### Синтаксис дизассемблера
 
-The `asm.syntax` variable is used to change the flavor of the assembly syntax used by a disassembler engine. To switch between Intel and AT&T representations:
+Переменная `asm.syntax` используется для изменения стиля синтаксиса сборки, используемого механизмом дизассемблера. Чтобы переключиться между представлениями Intel и AT&T:
 
 ```
 e asm.syntax = intel
 e asm.syntax = att
 ```
 
-You can also check `asm.pseudo`, which is an experimental pseudocode view,
-and `asm.esil` which outputs [ESIL](../disassembling/esil.md) ('Evaluable Strings Intermediate Language'). ESIL's goal is to have a human-readable representation of every opcode semantics. Such representations can be evaluated (interpreted) to emulate effects of individual instructions.
+Вы также можете попробовать `asm.pseudo`, являющихся экспериментальным представлением псевдокода, и `asm.esil`, выводящий [ESIL](../disassembling/esil.md) ('Evaluable Strings Intermediate Language'). Цель ESIL состоит в том, чтобы иметь удобное представление семантики оп-кодов. Такие варианты представления данных полезны для интерпретированы отдельных инструкций.

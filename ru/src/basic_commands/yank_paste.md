@@ -1,22 +1,22 @@
-## Yank/Paste
+## Сохранение/Вставка
 
-Radare2 has an internal clipboard to save and write portions of memory loaded from the current io layer.
+Radare2 имеет свой буфер обмена для сохранения и записи частей памяти, загруженных из текущего слоя ввода-вывода.
 
-This clipboard can be manipulated with the `y` command.
+Этим буфером обмена можно манипулировать с помощью команды `y` (yank).
 
-The two basic operations are
+Двумя основными операциями являются:
 
-* copy (yank)
-* paste
+* Копирование (yank)
+* Вставка (paste)
 
-The yank operation will read N bytes (specified by the argument) into the clipboard. We can later use the `yy` command to paste what we read before into a file.
+Операция  yank прочитает N байт (заданных аргументом) в буфер обмена. Затем используя команду `yy`, делаем вставку сохраненного ранее блока в файл.
 
-You can yank/paste bytes in visual mode selecting them with the cursor mode (`Vc`) and then using the `y` and `Y` key bindings which are aliases for `y` and `yy` commands of the command-line interface.
+Можно сохранять/втавлять (yank/paste) байты в визуальном режиме, выбирая их в режиме курсора (`Vc`), а затем используя привязки клавиш `y` и `Y`, являющиеся псевдонимами для команд `y` и `yy` интерфейса командной строки.
 
 ```
 [0x00000000]> y?
-Usage: y[ptxy] [len] [[@]addr]   # See wd? for memcpy, same as 'yf'.
-| y!              open cfg.editor to edit the clipboard
+Usage: y[ptxy] [len] [[@]addr]   # See wd? для memcpy, то же самое, что и 'yf'.
+| y!              открытие cfg.editor для редактирования содержания буфера обмена
 | y 16 0x200      copy 16 bytes into clipboard from 0x200
 | y 16 @ 0x200    copy 16 bytes into clipboard from 0x200
 | y 16            copy 16 bytes into clipboard
@@ -38,7 +38,7 @@ Usage: y[ptxy] [len] [[@]addr]   # See wd? for memcpy, same as 'yf'.
 | yz [len]        copy nul-terminated string (up to blocksize) into clipboard
 ```
 
-Sample session:
+Пример сессии:
 
 ```
 [0x00000000]> s 0x100    ; seek at 0x100
@@ -47,7 +47,7 @@ Sample session:
 [0x00000200]> yy         ; pastes 100 bytes
 ```
 
-You can perform a yank and paste in a single line by just using the `yt` command (yank-to). The syntax is as follows:
+Можно выполнить сохранение и вставку в одной строке, используя команду `yt` (yank-to). Вот её синтаксис:
 
 ```
 [0x4A13B8C0]> x

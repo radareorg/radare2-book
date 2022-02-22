@@ -1,14 +1,10 @@
-# ragg2
+# Программа ragg2
 
-ragg2 stands for `radare2 egg`, this is the basic block to construct relocatable
-snippets of code to be used for injection in target processes when doing exploiting.
+Название ragg2 расшифровывается как `radare2 egg`, это основной блок для построения перемещаемого фрагменты кода, используемые для внедрения в целевые процессы при эксплуатации.
 
-ragg2 compiles programs written in a simple high-level language into tiny binaries
-for x86, x86-64, and ARM.
+Программа ragg2 компилирует программы, написанные на простом языке высокого уровня, в крошечные двоичные файлы для x86, x86-64 и ARM.
 
-By default it will compile it's own `ragg2` language, but you can also compile C
-code using GCC or Clang shellcodes depending on the file extension. Lets create
-C file called `a.c`:
+По умолчанию он будет компилировать свой собственный язык `ragg2`, но также можно скомпилировать и C-код, используя GCC или Clang в шелл-код в зависимости от расширения файла. Создадим C-файл под названием `a.c`:
 ```c
 int main() {
 	write(1, "Hello World\n", 13);
@@ -39,7 +35,7 @@ $ rasm2 -a x86 -b 32 -D e900000000488d3516000000bf01000000b80400000248c7c20d0000
 0x0000002c   3                   640a00  or al, byte fs:[eax]
 ```
 
-## Compiling ragg2 example
+## Пример компиляции ragg2
 
 ```
 $ cat hello.r
@@ -73,7 +69,7 @@ $ rasm2 -a x86 -b 64 -D 48c7c00200000050488b3c2448c7c0010000000f054883c408c3
 0x00000019   1                       c3  ret
 ```
 
-## Tiny binaries
+## Крошечные двоичные файлы
 
-You can create them using the `-F` flag in ragg2, or the `-C` in rabin2.
+Можно создать их, используя флаг `-F` в ragg2 и `-C` в rabin2.
 

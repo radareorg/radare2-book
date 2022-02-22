@@ -1,6 +1,6 @@
-## List Libraries
+## Список библиотек
 
-Rabin2 can list libraries used by a binary with the `-l` option:
+Rabin2 перечисляет библиотеки, используемые двоичным файлом, параметр - `-l`:
 ```
 $ rabin2 -l `which r2`
 [Linked libraries]
@@ -29,7 +29,7 @@ libc.so.6
 
 22 libraries
 ```
-Lets check the output with `ldd` command:
+Давайте проверим вывод с помощью команды `ldd`:
 ```
 $ ldd `which r2`
 linux-vdso.so.1 (0x00007fffba38e000)
@@ -66,4 +66,4 @@ libutil.so.1 => /lib64/libutil.so.1 (0x00007f94af4ff000)
 libz.so.1 => /lib64/libz.so.1 (0x00007f94af2e8000)
 ```
 
-If you compare the outputs of `rabin2 -l` and `ldd`, you will notice that rabin2 lists fewer libraries than `ldd`. The reason is that rabin2 does not follow and does not show dependencies of libraries. Only direct binary dependencies are shown.
+Если вы сравните выходы `rabin2 -l` и `ldd`, вы заметите, что rabin2 перечисляет меньше библиотек, чем `ldd`. Причина в том, что rabin2 не следует и не показывает зависимостей библиотек. Отображаются только прямые двоичные зависимости.

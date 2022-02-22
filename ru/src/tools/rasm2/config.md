@@ -1,13 +1,13 @@
-## Disassembler Configuration
+## Конфигурация дизассемблера
 
-The assembler and disassembler have many small switches to tweak the output.
+Ассемблер и дизассемблер имеют множество небольших переключателей для настройки выхода.
 
-Those configurations are available through the `e` command. Here there are the most common ones:
+Конфигурация доступна с помощью команды `e`. Вот наиболее распространенные из них:
 
-* asm.bytes - show/hide bytes
-* asm.offset - show/hide offset
-* asm.lines - show/hide lines
-* asm.ucase - show disasm in uppercase
+* asm.bytes - показать/скрыть байты
+* asm.offset - показать/скрыть смещение
+* asm.lines - показать/скрыть номера строк
+* asm.ucase - показать дизассемблерированный код в верхнем регистре
 * ...
 
-Use the `e??asm.` for more details.
+Использовать `e??asm.` для получения более подробной информации.

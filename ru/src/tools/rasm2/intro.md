@@ -1,6 +1,6 @@
-# Rasm2
+# Утилита Rasm2
 
-`rasm2` is an inline assembler/disassembler. Initially, `rasm` tool was designed to be used for binary patching. Its main function is to get bytes corresponding to given machine instruction opcode.
+Программа `rasm2` является ассемблером/дизассемблером. Изначально инструмент `rasm` разработан для выполнения двоичного патчинга. Основная функция заключается в получении байтов, соответствующих заданной машинной инструкции (оп-кода).
 
 ```
 $ rasm2 -h
@@ -30,18 +30,18 @@ Usage: rasm2 [-ACdDehLBvw] [-a arch] [-b bits] [-o addr] [-s syntax]
  -r           output in radare commands
  -s [syntax]  Select syntax (intel, att)
  -v           Show version information
- -w           What's this instruction for? describe opcode
- If '-l' value is greater than output length, output is padded with nops
- If the last argument is '-' reads from stdin
-Environment:
- RASM2_NOPLUGINS  do not load shared plugins (speedup loading)
- RASM2_ARCH       same as rasm2 -a
- RASM2_BITS       same as rasm2 -b
- R_DEBUG          if defined, show error messages and crash signal
+ -w           What's this instruction for? описание опкода
+ Если значение '-l' больше выходной длины, вывод заполняется nop-ами
+ Если последний аргумент '-' читается из stdin
+Окружающая среда:
+ RASM2_NOPLUGINS  не загружать динамические плагины (ускорение загрузки)
+ RASM2_ARCH       то же, что и rasm2 -a
+ RASM2_BITS       то же, что и rasm2 -b
+ R_DEBUG          отображат ли сообщения об ошибках и сигнал о сбое
 
 ```
 
-Plugins for supported target architectures can be listed with the `-L` option. Knowing a plugin name, you can use it by specifying its name to the `-a` option
+Плагины для поддерживаемых целевых архитектур перечисляются, используя флаг `-L`. Плагин используется, указывая его имя в опции `-a`
 
 ```
 $ rasm2 -L
@@ -106,7 +106,7 @@ _dAe  32         xtensa      GPL3    XTensa CPU
 adA_  8          z80         GPL     Zilog Z80
 ```
 
-> Note that "ad" in the first column means both assembler and disassembler are offered by a corresponding  plugin. "_d" indicates disassembler, "a_" means only assembler is available.
+> Обратите внимание, что «ad» в первой колонке означает, что и ассемблер и дизассемблер поддерживаются плагином. "_d" - доступен только дизассемблер, "a_" - доступен только ассемблер.
 
 
 

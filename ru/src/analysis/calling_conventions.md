@@ -1,7 +1,7 @@
-# Calling Conventions
+# Соглашения вызова функции
 
-Radare2 uses calling conventions to help in identifying function formal arguments and return types. 
-It is used also as a guide for basic function prototype and type propagation.
+Radare2 использует соглашения о вызове, чтобы помочь в определении формальных аргументов функции и возвращаемых типов.
+Он также используется в качестве логической основы для базового прототипирования функций и вывода типа.
 
 ```
 [0x00000000]> afc?
@@ -19,14 +19,14 @@ It is used also as a guide for basic function prototype and type propagation.
 [0x00000000]>
 ```
 
-* To list all available calling conventions for current architecture using `afcl` command
+* Вывод списка всех доступных соглашений о вызовах для текущей архитектуры - команда `afcl`
 
 ```
 [0x00000000]> afcl
 amd64
 ms
 ```
-* To display function prototype of standard library functions you have `afcf` command 
+* Для отображения прототипа функции стандартной библиотеки у вас есть команда `afcf`
 
 ```
 [0x00000000]> afcf printf
@@ -35,7 +35,7 @@ int printf(const char *format)
 char *fgets(char *s, int size, FILE *stream)
 ```
 
-All this information is loaded via sdb under `/libr/anal/d/cc-[arch]-[bits].sdb`
+Вся эта информация загружается через sdb в `/libr/anal/d/cc-[arch]-[bits].sdb`
 
 ```
 default.cc=amd64
@@ -50,8 +50,8 @@ cc.ms.argn=stack
 cc.ms.ret=rax
 ```
 
-`cc.x.argi=rax` is used to set the ith argument of this calling convention to register name `rax`
+`cc.x.argi=rax` используется для задания i-го аргумента функции, регистрации имени `rax`
 
-`cc.x.argn=stack` means that all the arguments (or the rest of them in case there was argi for any i as counting number) will be stored in stack from left to right
+`cc.x.argn=stack` означает, что все аргументы (или остальные аргументы в случае наличия argi для любого i) будут храниться в стеке слева направо
 
-`cc.x.argn=stack_rev` same as `cc.x.argn=stack` except for it means argument are passed right to left
+`cc.x.argn=stack_rev` то же, что `и cc.x.argn=stack`, но аргументы передаются справа налево

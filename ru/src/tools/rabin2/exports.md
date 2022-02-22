@@ -1,6 +1,6 @@
-## Exports
+## Экспорты
 
-Rabin2 is able to find exports. For example:
+Rabin2 способен находить экспорты. Например:
 ```
 $ rabin2 -E /usr/lib/libr_bin.so | head
 [Exports]

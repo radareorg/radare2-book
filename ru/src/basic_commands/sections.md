@@ -1,8 +1,8 @@
-## Sections
+## Секции:
 
-The concept of sections is tied to the information extracted from the binary. We can display this information by using the `i` command.
+Понятие секций (разделов) привязано к информации, извлекаемой из двоичного кода. Информация отображается с помощью команды `i`.
 
-Displaying information about sections:
+Отображение информации о секциях:
 
 ```
 [0x00005310]> iS
@@ -21,23 +21,23 @@ Displaying information about sections:
 ...
 ```
 
-As you may know, binaries have sections and maps. The sections define the contents of a portion of the file that can be mapped in memory (or not). What is mapped is defined by the segments.
+Как вы, возможно, знаете, двоичные файлы состоят из секций и карт памяти. Секции определяют содержимое части файла, отображаемое в память (или нет). То, что отображается, определяется сегментами.
 
-Before the IO refactoring done by condret, the `S` command was used to manage what we now call maps. Currently the `S` command is deprecated because `iS` and `om` should be enough.
+До рефакторинга ввода-вывода, выполненного condret, команда `S` использовалась для управления так называемыми картами. В настоящее время команда `S` устарела, поскольку `iS` и `om` теперь достаточно.
 
-Firmware images, bootloaders and binary files usually place various sections of a binary at different addresses in memory. To represent this behavior, radare offers the `iS`. Use `iS?` to get the help message. To list all created sections use `iS` (or `iSj` to get the json format). The `iS=` will show the region bars in ascii-art.
+Образы прошивок, загрузчики и двоичные файлы обычно размещают различные разделы двоичного файла по разным адресам в памяти. Чтобы представить это поведение, радар предлагает `iS`. Используйте `iS?` для получения дополнительных инструкций. Для перечисления всех созданных секций используйте `iS` (или `iSj` для получения формата json). Команда `iS=` покажет карту разделов в ascii-art.
 
-You can create a new mapping using the `om` subcommand as follows:
+С помощью подкоманды `om` можно создать новое отображение следующим образом:
 ```
 om fd vaddr [size] [paddr] [rwx] [name]
 ```
 
-For Example:
+Пример:
 ```
 [0x0040100]> om 4 0x00000100 0x00400000 0x0001ae08 rwx test
 ```
 
-You can also use `om` command to view information about mapped sections:
+Также можно использовать команду `om` для просмотра сведений об отображаемых разделах:
 
 ```
 [0x00401000]> om
@@ -47,12 +47,12 @@ You can also use `om` command to view information about mapped sections:
  3 fd: 3 +0x00002000 0x00002000 - 0x0000211f r-- fmap.LOAD2
  2 fd: 3 +0x00002de8 0x00003de8 - 0x0000402f r-- fmap.LOAD3
  1 fd: 4 +0x00000000 0x00004030 - 0x00004037 rw- mmap.LOAD3
- ```
-Use `om?` to get all the possible subcommands. To list all the defined maps use `om` (or `omj` to get the json format or `om*` to get the r2 commands format). To get the ascii art view use `om=`. 
+```
+Используйте `om?`, чтобы получить все возможные подкоманды. Чтобы перечислить все ранее определенные карты, используйте `om` (или `omj` для получения в формат json, `om*` для получения формата команд r2). Чтобы получить представление в ascii art, используйте `om=`.
 
-It is also possible to delete the mapped section using the `om-mapid` command.
+Также можно удалить сопоставленный участок с помощью команды `om-mapid`.
 
-For Example:
+Пример:
 ```
 [0x00401000]> om-6
 ```

@@ -1,11 +1,11 @@
-# R2pipe
+# Программа R2pipe
 
-The r2pipe api was initially designed for NodeJS in order to support reusing the web's r2.js API from the commandline. The r2pipe module permits interacting with r2 instances in different methods:
+API r2pipe был первоначально разработан для NodeJS, чтобы поддерживать повторное использование веб-API r2.js из командной строки. Модуль r2pipe позволяет взаимодействовать с экземплярами r2 различными методами:
 
 
-* spawn pipes (r2 -0)
-* http queries (cloud friendly)
-* tcp socket (r2 -c)
+* потоки после spawn (r2 -0)
+* запросы http (удобный для облаков)
+* сокет tcp (r2 -c)
 
 ```
          pipe spawn async http tcp rap json
@@ -25,7 +25,7 @@ dlang     x     -     -    -    -    -   x
 perl      x     -     -    -    -    -   -
 ```
 
-Examples
+Примеры
 ========
 
 Python
@@ -47,13 +47,13 @@ print(r2.cmdj("aflj"))  # evaluates JSONs and returns an object
 NodeJS
 ------
 
-Use this command to install the r2pipe bindings
+Используйте команду для установки привязок r2pipe
 
 ```
 $ npm install r2pipe
 ```
 
-Here's a sample hello world
+Вот пример hello world
 
 ```node
 const r2pipe = require('r2pipe');
@@ -70,7 +70,7 @@ r2pipe.open('/bin/ls', (err, res) => {
 });
 ```
 
-Checkout the GIT repository for more examples and details.
+Ознакомьтесь с репозиторием GIT для получения дополнительных примеров и сведений.
 
 https://github.com/radareorg/radare2-r2pipe/blob/master/nodejs/r2pipe/README.md
 
@@ -174,14 +174,14 @@ Erlang
 -export([main/1]).
 
 main(_Args) ->
-  %% adding r2pipe to modulepath, set it to your r2pipe_erl location
+  %% добавление r2pipe в modulepath, задайте расположение r2pipe_erl
   R2pipePATH = filename:dirname(escript:script_name()) ++ "/ebin",
   true = code:add_pathz(R2pipePATH),
 
-  %% initializing the link with r2
+  %% инициализация ссылки с помощью r2
   H = r2pipe:init(lpipe),
 
-  %% all work goes here
+  %% вся работа идет здесь
   io:format("~s", [r2pipe:cmd(H, "i")]).
 ```
 
@@ -196,10 +196,10 @@ showMainFunction ctx = do
   L.putStr =<< cmd ctx "pD `fl $$`"
 
 main = do
-  -- Run r2 locally
-  open "/bin/ls" >>= showMainFunction
-  -- Connect to r2 via HTTP (e.g. if "r2 -qc=h /bin/ls" is running)
-  open "http://127.0.0.1:9090" >>= showMainFunction
+  -- Запуск r2 локально
+  открыть "/bin/ls" >>= showMainFunction
+  -- Соединение с r2 via HTTP (e.g. if "r2 -qc=h /bin/ls" is running)
+  открытие "http://127.0.0.1:9090" >>= showMainFunction
 ```
 
 Dotnet

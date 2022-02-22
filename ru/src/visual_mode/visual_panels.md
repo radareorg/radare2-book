@@ -1,22 +1,22 @@
-# Visual Panels
+# Визуальные панели
 
-## Concept
+## Концепция
 
-Visual Panels is characterized by the following core functionalities:
+Визуальные панели характеризуются следующими основными функциональными возможностями:
 
-1. Split Screen
-2. Display multiple screens such as Symbols, Registers, Stack, as well as custom panels
-3. Menu will cover all those commonly used commands for you so that you don't have to memorize any of them
+1. Разделение экрана
+2. Отображение нескольких экранов, таких как символы, регистры, стек, а также пользовательские панели
+3. Меню охватывает все эти часто используемые команды, так что вам не нужно запоминать ни одну из них.
 
-CUI met some useful GUI as the menu, that is Visual Panels.
+Для CUI разработаны полезные графические интерфейсы в качестве меню, то есть визуальные панели.
 
-Panels can be accessed by using `v` or by using `!` from the visual mode.
+Доступ к панелям можно получить с помощью команды `v` или с помощью `!` из визуального режима.
 
-## Overview
+## Обзор
 
-![Panels Overview](panels_overview.png)
+![Обзор панелей](panels_overview.png)
 
-## Commands
+## Команды
 ```
 |Visual Ascii Art Panels:
 | |      split the current panel vertically
@@ -25,8 +25,8 @@ Panels can be accessed by using `v` or by using `!` from the visual mode.
 | ;      add/remove comment
 | _      start the hud input mode
 | \      show the user-friendly hud
-| ?      show this help
-| !      run r2048 game
+| ?      показать справку
+| !      запустить игру r2048
 | .      seek to PC or entrypoint
 | *      show decompiler in the current panel
 | "      create a panel from the list and replace the current one
@@ -57,7 +57,7 @@ Panels can be accessed by using `v` or by using `!` from the visual mode.
 | p/P    rotate panel layout
 | q      quit, or close a tab
 | Q      close all the tabs and quit
-| r      toggle callhints/jmphints/leahints 
+| r      toggle callhints/jmphints/leahints
 | R      randomize color palette (ecr)
 | s/S    step in / step over
 | t/T    tab prompt / close a tab
@@ -68,25 +68,25 @@ Panels can be accessed by using `v` or by using `!` from the visual mode.
 | z      swap current panel with the first one
 ```
 
-## Basic Usage
+## Базовые функции
 
-Use `tab` to move around the panels until you get to the targeted panel. Then, use `hjkl`, just like in vim, to scroll the panel you are currently on.
-Use `S` and `s` to step over/in, and all the panels should be updated dynamically while you are debugging.
-Either in the Registers or Stack panels, you can edit the values by inserting hex. This will be explained later.
-While hitting `tab` can help you moving between panels, it is highly recommended to use `m` to open the menu.
-As usual, you can use `hjkl` to move around the menu and will find tons of useful stuff there.
-You can also press `"` to quickly browse through the different options View offers and change the contents of the selected panel.
+Используйте клавишу `TAB` для перемещения по панелям, пока не дойдете до целевой. Используйте `hjkl` для прокручивания панели, на которой вы сейчас находитесь.
+Используйте `S` и `s` для step over/in, и все панели должны динамически обновляться во время отладки.
+На панелях «Регистры» или «Стек» значения можно редактировать, вставив шестнадцатеричный формат. Об этом будет рассказано позже.
+Использование `tab` позволяет вам перемещаться между панелями, настоятельно рекомендуется использовать `m` для открытия меню.
+Как обычно, вы можете использовать `hjkl` для перемещения по меню и найдете там тонны полезных вещей.
+Также можно нажать `"` для быстрого просмотра различных настроек просмотра предложений и изменения содержимого выбранной панели.
 
-## Split Screen
+## Разделение экрана
 
-`|` is for the vertical and `-` is for the horizontal split. You can delete any panel by pressing `X`.
+`|` для вертикального и `-` для горизонтального разделения. Можно удалить любую панель, нажав клавишу `X`.
 
-Split panels can be resized from Window Mode, which is accessed with `w`.
+Размер разделенных панелей может быть изменен из оконного режима, доступ к которому осуществляется с помощью `w`.
 
-## Window Mode Commands
+## Команды оконного режима
 ```
-|Panels Window mode help:
-| ?      show this help
+|Справка по панели оконный режима:
+| ?      показать эту справку
 | ??     show the user-friendly hud
 | Enter  start Zoom mode
 | c      toggle cursor
@@ -96,28 +96,28 @@ Split panels can be resized from Window Mode, which is accessed with `w`.
 | q      quit Window mode
 ```
 
-## Edit Values
+## Изменение значений
 
-Either in the Register or Stack panel, you can edit the values. Use `c` to activate cursor mode and you can move the cursor by pressing `hjkl`, as usual. Then, hit `i`, just like the insert mode of vim, to insert a value.
+На панели «Регистр» или «Стек» можно редактировать значения. Используйте `c` для активации режима курсора, и вы можете перемещать курсор, нажав `hjkl`, как обычно. Затем нажмите `i`, как и в режиме вставки vim, чтобы вставить значение.
 
-## Tabs
-Visual Panels also offer tabs to quickly access multiple forms of information easily. Press `t` to enter Tab Mode. All the tabs numbers will be visible in the top right corner.
+## Вкладки
+Визуальные панели также предлагают вкладки для быстрого доступа к нескольким формам информации. Нажмите клавишу `t`, чтобы войти в режим вкладок. Номера вкладок будут видны в правом верхнем углу.
 
-By default you will have one tab and you can press `t` to create a new tab with the same panels and `T` to create a new panel from scratch.
+По умолчанию показывается одна вкладка, можно нажать `t` для создания новой вкладки с теми же панелями, и `T`, чтобы создать новую чистую панель.
 
-For traversing through the tabs, you can type in the tab number while in Tab Mode.
+Для обхода вкладок можно ввести номер вкладки.
 
-And pressing `-` deletes the tab you are in.
+И нажатие `-` удаляет вкладку, в которой вы находитесь.
 
-## Saving layouts
-You can save your custom layout of your visual panels either by picking the option 'Save Layout' from the File menu of the menu bar or by running:
+## Сохранение макетов
+Можно сохранить пользовательский макет визуальных панелей, выбрав опцию «Сохранить макет» в меню «Файл» строки меню, либо выполнив:
 ```
 v= test
 ```
-Where `test` is the name with which you'd like to save it.
+Где `test` — это имя, под которым вы хотите сохранить настройки.
 
-You can open a saved layout by passing the name as the parameter to `v`:
+Сохраненный макет можно открыть, передав имя в качестве параметра `v`:
 ```
 v test
 ```
-More about that can be found under `v?`.
+Дополнительные инструкции можно узнать в разделе `v?`.

@@ -1,6 +1,6 @@
-## Imports
+## Импорты
 
-Rabin2 is able to find imported objects by an executable, as well as their offsets in its PLT. This information is useful, for example, to understand what external function is invoked by `call` instruction. Pass `-i` flag to rabin2 to get a list of imports. An example:
+Rabin2 способен находить импортированные объекты по исполняемому файлу, а также их смещения в своем PLT. Эта информация полезна, например, для понимания того, какая внешняя функция вызывается инструкцией `call`. Передайте флаг `-i` rabin2, чтобы получить список импортов. Пример:
 
 ```
 $ rabin2 -i /bin/ls

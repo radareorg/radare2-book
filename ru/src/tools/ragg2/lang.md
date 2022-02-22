@@ -1,46 +1,46 @@
-# Syntax of the language
+# Синтаксис языка
 
-The code of r\_egg is compiled as in a flow. It is a one-pass compiler;
+Код r\_egg компилируется как будто бы он в потоке. Это однопроходный компилятор;
 
-this means that you have to define the proper stackframe size at the
+это означает, что необходимо определить правильный размер фрейма стека на уровне
 
-beginning of the function, and you have to define the functions in
+начала функции, нужно определить функции в
 
-order to avoid getting compilation errors.
+во избежание ошибок компиляции.
 
-The compiler generates assembly code for x86-{32,64} and arm. But it aims
+Компилятор генерирует ассемблерный код для x86-{32,64} и ARM. Но он преследует целью
 
-to support more platforms. This code is the compiled with r\_asm and
+поддержать большее количество платформ. Этот код компилируется с помощью r\_asm и
 
-injected into a tiny binary with r\_bin.
+добавляется в крошечный двоичный файл с r\_bin.
 
-You may like to use r\_egg to create standalone binaries, position-
+Можно использовать r\_egg для создания автономных двоичных файлов, не зависящих от
 
-independent raw eggs to be injected on running processes or to patch
+смещения, сырого кода для инъекций в запущенные процессы или вносить правки
 
-on-disk binaries.
+в двоичные файлы на диске.
 
-The generated code is not yet optimized, but it's safe to be executed
+Сгенерированный неоптимизирован, но безопасен для выполнения
 
-at any place in the code.
+в любом месте кода.
 
-## Preprocessor
+## Препроцессор
 
-### Aliases
+### Псевдонимы
 
-Sometimes you just need to replace at compile time a single entity on
+Иногда нужно заменить во время компиляции одну сущность на
 
-multiple places. Aliases are translated into 'equ' statements in assembly
+в нескольких местах. Псевдонимы переводятся в операторы 'equ' в сборке
 
-language. This is just an assembler-level keyword redefinition.
+языка Это просто переопределение ключевого слова на уровне ассемблера.
 
 ` AF_INET@alias(2);`
 
 ` printf@alias(0x8053940);`
 
-### Includes
+### Включения в текст
 
-Use `cat(1)` or the preprocessor to concatenate multiple files to be compiled.
+Используйте `cat(1)` или препроцессор для объединения нескольких скомпилируемых файлов.
 
 ` INCDIR@alias("/usr/include/ragg2");`
 
@@ -48,11 +48,11 @@ Use `cat(1)` or the preprocessor to concatenate multiple files to be compiled.
 
 
 
-### Hashbang
+### Хашбанг
 
-eggs can use a hashbang to make them executable.
+яйца могут использовать хэшбанг, чтобы сделать их исполняемыми.
 
- `$ head -n1 hello.r`
+`$ head -n1 hello.r`
 
 ` #!/usr/bin/ragg2 -X`
 
@@ -62,11 +62,11 @@ eggs can use a hashbang to make them executable.
 
 ### Main
 
-The execution of the code is done as in a flow. The first function to be
+Выполнение кода выполняется как в потоке. Первая функция, которая должна
 
-defined will be the first one to be executed. If you want to run main\(\)
+определяться, будет первой выполненной. Если надо запустить main\(\)
 
-just do like this:
+просто сделайте так:
 
 ` #!/usr/bin/ragg2 -X`
 
@@ -81,44 +81,44 @@ just do like this:
 
 
 
-### Function definition
+### Определение функции
 
-You may like to split up your code into several code blocks. Those blocks
+Если надо разделить свой код на несколько блоков кода. Блоки кода
 
-are bound to a label followed by root brackets '{ ... }'
+привязаны к метке, за которой следуют корневые скобки '{ ... }'
 
-### Function signatures
+### Сигнатуры функций
 
 `name@type(stackframesize,staticframesize) { body }`
 
-`name` : name of the function to define
+`name` : имя определяемой функции
 
-`type` : see function types below
+`type`  : см. типы функций ниже
 
-`stackframesize` : get space from stack to store local variables
+`stackframesize` : получение пространства из стека для хранения локальных переменных
 
-`staticframesize` : get space from stack to store static variables \(strings\)
+`staticframesize` : получение пространства из стека для хранения статических переменных \(strings\)
 
-`body` : code of the function
+`body` : код функции
 
 
-### Function types
+### Типы функций
 
- `alias`   Used to create aliases
+`alias`   Используется для создания псевдонимов
 
- `data` ; the body of the block is defined in .data
+`data` ; тело блока определяется в .data
 
- `inline` ; the function body is inlined when called
+`inline` ; тело функции встраивается в вызывающий код (inlined) при вызове
 
- `global` ; make the symbol global
+`global` ; сделать символ глобальным
 
- `fastcall` ; function that is called using the fast calling convention
+`fastcall` ; функция, вызываемая с помощью соглашения о быстром вызове
 
- `syscall`  ; define syscall calling convention signature
+`syscall`  ; определение соглашения о вызове для системного вызова
 
-### Syscalls
+### Системные вызовы
 
-r\_egg offers a syntax sugar for defining syscalls. The syntax is like this:
+r\_egg предлагает синтаксический сахар для определения системных вызовов. Синтаксис выглядит следующим образом:
 
 ` exit@syscall(1);`
 
@@ -136,21 +136,21 @@ r\_egg offers a syntax sugar for defining syscalls. The syntax is like this:
 
 ` }`
 
-### Libraries
+### Библиотеки
 
-At the moment there is no support for linking r\_egg programs to system
+На данный момент отсутствует поддержка связывания r\_egg программ с системными
 
-libraries. but if you inject the code into a program \(disk/memory\) you
+библиотеками. Но если вы вставляете код в программу \(диск/память\),
 
-can define the address of each function using the @alias syntax.
+нужно определить адрес каждой функции, используя синтаксис @alias.
 
 
 
-### Core library
+### Основная библиотека
 
-There's a work-in-progress libc-like library written completely in r\_egg
+Ведется разработка библиотеки, похожую на библиотеку libc, полностью реализованную на r\_egg
 
-### Variables
+### Переменные
 
 `.arg`
 
@@ -174,43 +174,43 @@ There's a work-in-progress libc-like library written completely in r\_egg
 
 `.sp`
 
-__Attention:__ All the numbers after `.var` and `.arg` mean the offset with the
+__Внимание:__ Все числа после `.var` и `.arg` означают смещение с
 
-top of stack, not variable symbols.
+верхней части стека, а не символы переменных.
 
-### Arrays
+### Массивы
 
-Supported as raw pointers. TODO: enhance this feature
+Поддерживается в виде raw-указателей. TODO: улучшить эту функцию
 
-### Tracing
+### Отслеживание
 
-Sometimes r\_egg programs will break or just not work as expected. Use the
+Иногда r\_egg-программы ломаются или просто не работают так, как ожидалось. Используйте
 
-'trace' architecture to get a arch-backend call trace:
+архитектуру 'trace', чтобы получить трассировку вызова arch-backend:
 
 ` $ ragg2 -a trace -s yourprogram.r`
 
-### Pointers
+### Указатели
 
-TODO: Theorically '\*' is used to get contents of a memory pointer.
+TODO: Теоретически '\*' используется для получения содержимого указателя памяти.
 
-### Virtual registers
+### Виртуальные регистры
 
 TODO: a0, a1, a2, a3, sp, fp, bp, pc
 
-### Math operations
+### Математические операции
 
-Ragg2 supports local variables assignment by math operating, including
+Ragg2 поддерживает назначение локальных переменных математическими операциями, в том числе
 
-the following operators:
+следующие операторы:
 
 `+` `-` `*` `/` `&` `|` `^`
 
-### Return values
+### Возвращаемые значения
 
-The return value is stored in the a0 register, this register is set when
+Возвращаемое значение хранится в регистре a0, этот регистр устанавливается, когда
 
-calling a function or when typing a variable name without assignment.
+вызов функции или при вводе имени переменной без присвоения.
 
 ```
 $ cat test.r
@@ -229,41 +229,41 @@ $ echo $?
 7
 ```
 
-### Traps
+### Ловушки (traps)
 
-Each architecture have a different instruction to break the execution of
+Каждая архитектура имеет отдельную инструкцию для прерывания выполнения
 
-the program. REgg language captures calls to 'break\(\)' to run the emit\_trap
+программы. Язык REgg записывает вызовы 'break\(\)' для запуска emit\_trap
 
-callback of the selected arch. The
-
-
-` break()`; --&gt; compiles into 'int3' on x86
-
-` break;` --&gt; compiles into 'int3' on x86
+обратный вызов для выбранной архитектуры. Функция
 
 
-### Inline assembly
+` break()`; --&gt; компилируется в 'int3' на x86
 
-Lines prefixed with ':' char are just inlined in the output assembly.
+` break;` --&gt; компилируется в 'int3' на x86
+
+
+### Встроенный ассемблер
+
+Строки с префиксом ':' char просто встроены в выходную сборку.
 
 ` : jmp 0x8048400`
 
 ` : .byte 33,44`
 
-### Labels
+### Метки
 
-You can define labels using the `:` keyword like this:
+Вы можете определить метки, используя ключевое слово `:` следующим образом:
 
 ` :label_name:`
 
-` /* loop forever */`
+` /* бесконечный цикл */`
 
 ` goto(label_name`\)
 
-### Control flow
+### Управление исполненим
 
-` goto (addr)` -- branch execution
+` goto (addr)` -- ветвление
 
 ` while (cond)`
 
@@ -271,16 +271,16 @@ You can define labels using the `:` keyword like this:
 
 ` if (cond) { body } else { body }`
 
-` break ()` -- executes a trap instruction
+` break ()` -- выполняет инструкцию trap
 
-### Comments
+### Комментарии
 
-Supported syntax for comments are:
+Поддерживаемый синтаксис для комментариев:
 
-` /* multiline comment */'`
+` /* многострочный комментарий */'`
 
-` // single line comment`
+` // однострочный комментарий`
 
-` # single line comment`
+` # однострочный комментарий`
 
 

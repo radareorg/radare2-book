@@ -1,6 +1,6 @@
-# Encoding with rahash2
+# Кодирование с помощью rahash2
 
-As mentioned before, this tool also provide the tooling needed to encode and decode between different encodings
+Как упоминалось ранее, программа также предоставляет инструменты, необходимые для кодирования и декодирования между различными кодировками.
 
 ```
 $ rahash2 -L | grep ^e
@@ -9,17 +9,17 @@ e  base91
 e  punycode
 ```
 
-For example, to encode a string into base64 use the following line:
+Например, чтобы закодировать строку в base64, используйте следующую строку:
 
 ```
 $ rahash2 -E base64 -s hello
 ```
 
-You can decode it by using the -D flag instead of -E.
+Можно декодировать его, используя флаг -D вместо -E.
 
-## Encryption/Decryption
+## Шифрование/расшифровка
 
-For encrypting data check the crypto hash plugins:
+Для шифрования данных проверьте крипто хэш - плагины:
 
 ```
 $ rahash2 -L | grep ^c
@@ -38,7 +38,7 @@ c  xor
 c  serpent-ecb
 ```
 
-Here's an example usage to encrypt a string using rahash2:
+Вот пример использования для шифрования строки с помощью rahash2:
 
 ```
 $ rahash2 -E xor -S s:password -s hello | hexdump -C

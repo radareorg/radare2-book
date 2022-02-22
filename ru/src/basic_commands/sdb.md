@@ -1,24 +1,24 @@
-# SDB
+# База данных строк
 
-SDB stands for String DataBase. It's a simple key-value database that only operates with strings created by pancake. It is used in many parts of r2 to have a disk and in-memory database which is small and fast to manage using it as a hashtable on steroids.
+SDB расшифровывается как String DataBase. SDB - это простая база данных "ключ-значение", работающая только со строками и созданная pancake. Она используется во многих частях r2, база данных реализуется на диске и в памяти, является небольшой и быстрой для управления, используется как хеш-таблица на стероидах.
 
-SDB is a simple string key/value database based on djb’s cdb disk storage and supports JSON and arrays introspection.
+SDB — это простая база данных строковых ключей/значений, основанная на дисковом хранилище djb cdb и поддерживающая JSON и интроспекцию массивов.
 
-There’s also the sdbtypes: a vala library that implements several data structures on top of an sdb or a memcache instance.
+Также есть sdbtypes: библиотека vala, реализующая несколько структур данных поверх SDB или memcache.
 
-SDB supports:
-    
-- namespaces (multiple sdb paths)
-- atomic database sync (never corrupted)
-- bindings for vala, luvit, newlisp and nodejs
-- commandline frontend for sdb databases
-- memcache client and server with sdb backend
-- arrays support (syntax sugar)
-- json parser/getter
+SDB поддерживает:
+
+- пространства имен (несколько путей sdb)
+- атомарная синхронизация базы данных
+- привязки для vala, luvit, newlisp и nodejs
+- Интерфейс командной строки для баз данных sdb
+- клиент и сервер memcache с бэкэндом sdb
+- поддержка массивов (синтаксический сахар)
+- парсер/интеграция json
 
 
-## Usage example
-Let's create a database!
+## Пример использования
+Создание базы данных!
 
 ```
 $ sdb d hello=world
@@ -26,7 +26,7 @@ $ sdb d hello
 world
 ```
 
-Using arrays:
+Использование массивов:
 ```
 $ sdb - '[]list=1,2' '[0]list' '[0]list=foo' '[]list' '[+1]list=bar'
 1
@@ -37,7 +37,7 @@ bar
 2
 ```
 
-Let's play with json:
+Потестируем json:
 ```
 $ sdb d g='{"foo":1,"bar":{"cow":3}}'
 $ sdb d g?bar.cow
@@ -46,7 +46,7 @@ $ sdb - user='{"id":123}' user?id=99 user?id
 99
 ```
 
-Using the command line without any disk database:
+Используя командную строку без дисковой базы данных:
 ```
 $ sdb - foo=bar foo a=3 +a -a
 bar
@@ -63,16 +63,16 @@ a=3
 -a
 3
 ```
-Remove the database
+Удаление базы данных
 ```
 $ rm -f d
 
 ```
 
-## So what ?
-So, you can now do this inside your radare2 sessions!
+## Зачем она?
+Теперь можно базу внутри сеансов radare2!
 
-Let's take a simple binary, and check what is already _sdbized_.
+Давайте возьмем простой двоичный файл и проверим, что уже _SDB_-изировано.
 ```
 $ cat test.c
 int main(){
@@ -96,7 +96,7 @@ fd.6
 [0x08048320]> k bin/fd.6/*
 archs=0:0:x86:32
 ```
-The file corresponding to the sixth file descriptor is a x86_32 binary. 
+Файл, соответствующий шестому дескриптору файла, является двоичным файлом x86_32.
 
 ```
 [0x08048320]> k anal/meta/*
@@ -105,44 +105,44 @@ meta.s.0x80484d0=12,SGVsbG8gd29ybGQ=
 [0x08048320]> ?b64- SGVsbG8gd29ybGQ=
 Hello world
 ```
-Strings are stored encoded in base64.
+Строки хранятся в кодировке base64.
 
 ---
 
-## More Examples
+## Еще примеры
 
 
-List namespaces
+Пространства имен
 ```
 k **
 ```
-List sub-namespaces
+Подпространства имен
 ```
 k anal/**
 ```
-List keys
+Ключи
 ```
 k *
 k anal/*
 ```
-Set a key
+Задание ключа
 ```
 k foo=bar
 ```
-Get the value of a key
+Получение значения ключа
 ```
 k foo
 ```
 
-List all syscalls
+Список всех системных вызовов
 ```
 k syscall/*~^0x
 ```
-List all comments
+Список всех комментариев
 ```
 k anal/meta/*~.C.
 ```
-Show a comment at given offset:
+Показать комментарий при заданном смещении:
 ```
 k %anal/meta/[1]meta.C.0x100005000
 ```

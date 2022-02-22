@@ -1,18 +1,18 @@
-## Rax2
+## Программа Rax2
 
-The `rax2` utility comes with the radare framework and aims to be a minimalistic expression evaluator for the shell. It is useful for making base conversions between floating point values, hexadecimal representations, hexpair strings to ascii, octal to integer. It supports endianness and can be used as a shell if no arguments are given.
+Утилита `rax2` - часть пакета radare и стремится быть минималистичным вычислителем выражений для командной строки ОС. Программа полезна для выполнения базовых преобразований между значениями с плавающей запятой, шестнадцатеричными представлениями, шестнадцатеричными строками в ascii, восьмеричными в целочисленными. Поддерживается порядок байтов и может использоваться в качестве оболочки, если аргументы не приведены.
 
-This is the help message of rax2, this tool can be used in the command-line or interactively (reading the values from stdin), so it can be used as a multi-base calculator.
+Инструкции rax2, инструмент использоваться в командной строке или в интерактивном режиме, считывая значения из stdin, поэтому его можно использовать как многобазовый калькулятор.
 
-Inside r2, the functionality of rax2 is available under the ? command. For example:
+Внутри r2 функциональность rax2 доступна под командой ? command. Например:
 
 ```
 [0x00000000]> ? 3+4
 ```
 
-As you can see, the numeric expressions can contain mathematical expressions like addition, substraction, .. as well as group operations with parenthesis.
+Как видите, числовые выражения могут содержать математические выражения, такие как сложение, вычитание, ... а также операции со скобками.
 
-The syntax in which the numbers are represented define the base, for example:
+Синтаксис, в котором представлены числа, определяет систему счисления, например:
 
 * 3 : decimal, base 10
 * 0xface : hexadecimal, base 16
@@ -20,7 +20,7 @@ The syntax in which the numbers are represented define the base, for example:
 * 2M : units, 2 megabytes
 * ...
 
-This is the help message of rax2 -h, which will show you a bunch more syntaxes
+Справочное сообщение rax2 -h, которое покажет вам еще кучу синтаксисов
 
 ```
 $ rax2 -h
@@ -71,7 +71,7 @@ Usage: rax2 [options] [expr ...]
   -v      version              ;  rax2 -v
 ```
 
-Some examples:
+Примеры:
 ```
 $ rax2 3+0x80
 0x83

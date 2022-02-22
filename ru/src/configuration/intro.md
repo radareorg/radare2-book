@@ -1,25 +1,24 @@
-# Configuration
+# Конфигурация
 
-The core reads `~/.config/radare2/radare2rc` while starting. You can add `e` commands to this file to tune the radare2 configuration to your taste.
+Ядро читает `~/.config/radare2/radare2rc` во время запуска. Можете добавлять `е` команды в этот файл для настройки конфигурацию Radare2 по своему вкусу.
 
-To prevent radare2 from parsing this file at startup, pass it the `-N` option.
+Для предотвращения загрузки этого файла при запуске, установите флаг командной строки `-N`.
 
-All the configuration of radare2 is done with the `eval` commands. A typical startup configuration file looks like this:
+Вся конфигурация radare2 выполняется с помощью команд установки `переменных среды`. Типичный файл конфигурации запуска выглядит так:
 ```sh
 $ cat ~/.radare2rc
 e scr.color = 1
 e dbg.bep   = loader
 ```
-The configuration can also be changed with `-e` <config=value> command-line option. This way you can adjust configuration from the command line, keeping the .radare2rc file intact. For example, to start with empty configuration and then adjust `scr.color` and `asm.syntax` the following line may be used:
+Конфигурацию также можно изменить с помощью флагов формата `-е` <config=value> в строке параметров при звапуске. Таким образом, можно подправить конфигурацию из командной строки, сохранив файл .radare2rc нетронутым. Например, чтобы начать с пустой конфигурации, а затем настроить `scr.color` а также `asm.syntax` можно использовать следующую строку:
 ```sh
 $ radare2 -N -e scr.color=1 -e asm.syntax=intel -d /bin/ls
 ```
-Internally, the configuration is stored in a hash table. The variables are grouped in namespaces: `cfg.`, `file.`, `dbg.`, `scr.` and so on.
+Внутри конфигурация хранится в хеш-таблице. Переменные сгруппированы в пространства имен: `cfg.`, `file.`, `dbg.`, `scr.` и так далее.
 
-To get a list of all configuration variables just type `e` in the command line
-prompt. To limit the output to a selected namespace, pass it with an ending dot to `e`. For example, `e file.` will display all variables defined inside the "file" namespace.
+Чтобы получить список всех переменных конфигурации, просто введите `е` в командной строке r2. Чтобы ограничить вывод выбранным пространством имен, передайте его с точкой в конце `е <имя пространства>.` Например, `е file.` отобразит все переменные, определенные внутри пространства имен «file».
 
-To get help about `e` command type `e?`:
+Чтобы получить инструкции о команде `e` - `e?`:
 
 ```
 Usage: e [var[=value]]  Evaluable vars
@@ -46,7 +45,7 @@ Usage: e [var[=value]]  Evaluable vars
 | evj [key]       list config vars in verbose format in JSON
 ```
 
-A simpler alternative to the `e` command is accessible from the visual mode. Type `Ve` to enter it, use arrows (up, down, left, right) to navigate the configuration, and `q` to exit it. The start screen for the visual configuration edit looks like this:
+Более простая альтернатива команде `e` доступна из визуального режима. Набеите `Ve` чтобы войти в этот режим, используйте стрелки (вверх, вниз, влево, вправо) для навигации по конфигурации и `q`, чтобы выйти из него. В начале экран визуального редактирования конфигурации выглядит так:
 
 ```
 [EvalSpace]
@@ -71,8 +70,7 @@ A simpler alternative to the `e` command is accessible from the visual mode. Typ
        io
 ```
 
-For configuration values that can take one of several values, you can use the `=?` operator to get a list
-of valid values:
+Для значений конфигурации, которые могут принимать одно из нескольких значений, вы можете использовать `=?`, оператор для получения списка допустимых значений:
 
 ```
 [0x00000000]> e scr.nkey = ?

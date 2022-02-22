@@ -1,8 +1,8 @@
-# Binary Diffing
+# Бинарное сравнение
 
-This section is based on the http://radare.today article "[binary diffing](https://radareorg.github.io/blog/posts/binary-diffing/)"
+Этот раздел основан на http://radare.today статье "[двоичное сравнение](https://radareorg.github.io/blog/posts/binary-diffing/)"
 
-Without any parameters, `radiff2` by default shows what bytes are changed and their corresponding offsets:
+Без каких-либо параметров `radiff2` по умолчанию показывает, какие байты изменены и соответствующие им смещения:
 ```
 $ radiff2 genuine cracked
 0x000081e0 85c00f94c0 => 9090909090 0x000081e0
@@ -14,20 +14,20 @@ sete al
 ```
 Notice how the two jumps are nop'ed.
 
-For bulk processing, you may want to have a higher-level overview of differences. This is why radare2 is able to compute the distance and the percentage of similarity between two files with the `-s` option:
+Для массовой обработки может потребоваться более высокоуровневый обзор различий. Вот почему radare2 может вычислять расстояние и процент сходства между двумя файлами с помощью опции `-s`:
 ```
 $ radiff2 -s /bin/true /bin/false
 similarity: 0.97
 distance: 743
 ```
 
-If you want more concrete data, it's also possible to count the differences, with the `-c` option:
+Если вам нужны более конкретные данные, также можно подсчитать различия с помощью параметра `-c`:
 ```
 $ radiff2 -c genuine cracked
 2
 ```
 
-If you are unsure whether you are dealing with similar binaries, with `-C` flag you can check there are matching functions. It this mode, it will give you three columns for all functions: "First file offset", "Percentage of matching" and "Second file offset".
+Если нет уверености, похожи ли двоичные файлы, с флагом `-C` можно проверить, есть ли соответствующие функции. В этом режиме, он даст вам три столбца для всех функций: «Смещение первого файла», «Процент совпадения» и «Смещение второго файла».
 
 ```
 $ radiff2 -C /bin/false /bin/true
@@ -39,8 +39,8 @@ $ radiff2 -C /bin/false /bin/true
   fcn.000045e0   24 0x45e0 | UNMATCH  (0.916667) | 0x45f0    24 fcn.000045f0
   ...
 ```
-Moreover, we can ask radiff2 to perform analysis first - adding `-A` option will run `aaa` on the binaries.
-And we can specify binaries architecture for this analysis too using
+Можно попросить radiff2 сначала выполнить анализ - флаг `-A` запустит `aaa` на двоичных файлах.
+И мы можем указать архитектуру двоичных файлов для этого анализа, используя
 ```
 $ radiff2 -AC -a x86 /bin/true /bin/false | grep UNMATCH
 [x] Analyze all flags starting with sym. and entry0 (aa)
@@ -60,16 +60,16 @@ $ radiff2 -AC -a x86 /bin/true /bin/false | grep UNMATCH
                           fcn.00003a50  120 0x3a50 | UNMATCH  (0.125000) | 0x3a60   120 fcn.00003a60
 ```
 
-And now a cool feature : radare2 supports graph-diffing, à la [DarunGrim](http://www.darungrim.org/), with the `-g` option. You can either give it a symbol name, of specify two offsets, if the function you want to diff is named differently in compared files. For example, `radiff2 -md -g main /bin/true /bin/false | xdot -` will show differences in `main()` function of Unix `true` and `false` programs. You can compare it to `radiff2 -md -g main /bin/false /bin/true | xdot -` (Notice the order of the arguments) to get the two versions.
-This is the result:
+Теперь классная функция: radare2 поддерживает сревнения графов, как в [DarunGrim](http://www.darungrim.org/), флаг - `-g` . Можно присвоить имя символа, указав два смещения, если функция, которую вы хотите различить, называется по-разному в сравниваемых файлах. Например, `radiff2 -md -g main /bin/true /bin/false | xdot -` покажет различия в функции `main()` программ Unix `true` и `false`. Можно сравнить его с `radiff2 -md -g main /bin/false /bin/true | xdot -` (обратите внимание на порядок аргументов), чтобы получить две версии.
+Вот, что из этого получилось:
 
-![/bin/true vs /bin/false](img/true_false2.png)
+![/bin/true против /bin/false](img/true_false2.png)
 
-Parts in yellow indicate that some offsets do not match. The grey piece means a perfect match. The orange one highlights a strong difference. If you look closely, you will see that the left part of the picture has `mov eax, 0x1; pop rbx; pop rbp; ret`, while the right one has `xor edx, edx; pop rbx; pop rbp; ret`.
+Части желтого цвета указывают, что некоторые смещения не совпадают. Серый кусок означает идеальное соответствие. Оранжевый подчеркивает сильную разницу. Если вы присмотритесь, то увидите, что в левой части картинки есть `mov eax, 0x1; pop rbx; pop rbp; ret`, в то время как в правой части есть `xor edx, edx; pop rbx; pop rbp; ret`.
 
-Binary diffing is an important feature for reverse engineering. It can be used to analyze [security updates](https://en.wikipedia.org/wiki/Patch_Tuesday), infected binaries, firmware changes and more...
+Двоичное дифференциация является важной функцией для обратного проектирования. Его можно использовать для анализа [обновлений безопасности](https://en.wikipedia.org/wiki/Patch_Tuesday), зараженных двоичных файлов, изменений прошивки и многого другого...
 
-We have only shown the code analysis diffing functionality, but radare2 supports additional types of diffing between two binaries: at byte level, deltified similarities, and more to come.
+Мы показали только функции анализа кода, но radare2 поддерживает дополнительные типы сравнения между двумя двоичными файлами: на уровне байтов, дельтифицированные сходства и многое другое в будущем.
 
-We have plans to implement more kinds of bindiffing algorithms into r2, and why not, add support for ASCII art graph diffing and better integration with the rest of the toolkit.
+Есть планы по внедрению большего количества видов алгоритмов в r2, а почему бы и нет, добавить поддержку дифференциации ASCII-арт-графов и лучшую интеграцию с остальной частью инструментария.
 

@@ -1,12 +1,11 @@
-## Radare2 package manager
+## Менеджер пакетов Radare2
 
-Radare2 has its own package manager for managing external plugins (mainly from
-[radare2-extras](https://github.com/radareorg/radare2-extras)). As most of the package managers it allows you to install, remove or update packages (plugins). There is one restriction though - currently it supports only the compilation from sources, so providing the toolchan, necessary build tools and dependencies for each plugin is the user responsibility. It might change in the future.
+Radare2 имеет собственный менеджер пакетов для управления внешними плагинами (в основном от [radare2-extra](https://github.com/radareorg/radare2-extras)). Как и большинство менеджеров пакетов, он позволяет устанавливать, удалять или обновлять пакеты (плагины). Однако есть одно ограничение - в настоящее время он поддерживает только компиляцию из исходных кодов, поэтому предоставление инструментария, инструментов сборки и зависимостей для каждого плагина является ответственностью пользователя. Это может измениться в будущем.
 
 ```
-$ r2pm -h
-$R2PM_DBDIR: No such file or directory.
-Run 'r2pm init' to initialize the package repository
+$ r2pm -ч
+$R2PM_DBDIR: Нет такого файла или каталога.
+Запустите 'r2pm init' для инициализации репозитория пакетов
 $ r2pm init
 git clone https://github.com/radareorg/radare2-pm
 Cloning into 'radare2-pm'...
@@ -16,11 +15,10 @@ remote: Total 147 (delta 26), reused 57 (delta 7), pack-reused 0
 Receiving objects: 100% (147/147), 42.68 KiB | 48.00 KiB/s, done.
 Resolving deltas: 100% (26/26), done.
 /home/user/.local/share/radare2/r2pm/git/radare2-pm
-r2pm database initialized. Use 'r2pm update' to update later today
+r2pm database initialized. Используйте 'r2pm update' для обновления
 ```
 
-As you noticed, the packages database located at [radare2-pm](https://github.com/radareorg/radare2-pm)
-repository. At any point of the time we can update the database using `r2pm update`:
+Как вы заметили, база данных пакетов расположена по адресу [radare2-pm](https://github.com/radareorg/radare2-pm). В любой момент времени мы можем обновить базу данных с помощью `r2pm update`:
 
 ```
 r2pm update
@@ -34,7 +32,7 @@ Updating /home/user/.local/share/radare2/r2pm/db ...
 Already up to date.
 ```
 
-There are many commands available now:
+Теперь доступно множество команд:
 ```
 r2pm -h
 Usage: r2pm [init|update|cmd] [...]
@@ -56,7 +54,7 @@ Commands:
  -cp                         clean the user's home plugin directory
  -d,doc [pkgname]            show documentation for given package
  -w <pkgname>                what/where is installed
- init | update ..            initialize/update database
+ init | update ..            инициализация/обновление базы данных
  cd [git/dir]                cd into given git (see 'r2pm ls')
  ls                          ls all cloned git repos in GITDIR
  suicide                     self remove all (home + system) installations of r2
@@ -70,8 +68,7 @@ Environment:
  R2PM_GITDIR=~/.local/share/radare2/r2pm/git   # cloned git repositories
 ```
 
-The usual scenario of using it is to install new plugins, for example `lang-python3` (which is used
-for writing r2 plugins in Python):
+Обычный сценарий его использования заключается в установке новых плагинов, например `lang-python3` (который используется для создания плагинов r2 на Python):
 
 ```
 $ r2pm -i lang-python3
@@ -81,17 +78,16 @@ cp -f lang_python3.so ~/.config/radare2/plugins
 ...
 ```
 
-Note that if we used `-i` switch it installs the plugin in the `$HOME` directory, in case of `-gi`
-it will install the plugin systemwide (requires `sudo`).
+Обратите внимание, что если использовали флаг `-i`, он устанавливает плагин в каталог `$HOME`, в случае `-gi` он устанавливается плагин по всей системе (`требуется sudo`).
 
-After this we will be able to see the plugin in the list of installed:
+После этого видим плагин в списке установленных:
 
 ```
 $ r2pm -l
 lang-python3
 ```
 
-To uninstall the plugin just simply run
+Чтобы удалить плагин, просто запустите
 
 ```
 $ r2pm -u lang-python3

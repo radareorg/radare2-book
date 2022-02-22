@@ -1,10 +1,9 @@
-# Types
+# Типы данных
 
-Radare2 supports the C-syntax data types description.
-Those types are parsed by a C11-compatible parser and stored in
-the internal SDB, thus are introspectable with `k` command.
+Radare2 поддерживает описание типов данных при помощи синтаксиса языка C.
+Описания анализируются синтаксическим анализатором, совместимым с C11, и сохраняются в внутренний SDB, и доступны для интроспекции при помощи команды `k`.
 
-Most of the related commands are located in `t` namespace:
+Большинство связанных команд находятся в пространстве имен `t`:
 
 ```
 [0x00000000]> t?
@@ -36,14 +35,9 @@ Most of the related commands are located in `t` namespace:
 | tt[?]                      List all loaded typedefs
 ```
 
-Note that the basic (atomic) types are not those from C standard -
-not `char`, `_Bool`, or `short`. Because those types can be different
-from one platform to another, radare2 uses `definite` types like as
-`int8_t` or `uint64_t` and will convert `int` to `int32_t` or `int64_t`
-depending on the binary or debuggee platform/compiler.
+Обратите внимание, что базовые (атомарные) типы не соответствуют стандарту C - нет `char`, `_Bool` и `short`. Эти типы могут быть разными на разных платформах, radare2 использует `строго определенные` типы, такие как `int8_t` или `uint64_t`, и конвертирует `int` в `int32_t` или в `int64_t` в зависимости от бинарной или отлаживаемой платформы/компилятора.
 
-Basic types can be listed using `t` command. For the structured types
-you need to use `ts`, for unions use `tu` and for enums — `te`.
+Базовые типы перечисляются с помощью команды `t`. Для типов структур нужно использовать `ts`, для юнионов - `tu`, а для перечислений — `te`.
 
 ```
 [0x00000000]> t
@@ -73,12 +67,12 @@ unsigned short
 void *
 ```
 
-### Loading types
+### Загрузка типов
 
-There are three easy ways to define a new type:
-* Directly from the string using `td` command
-* From the file using `to <filename>` command
-* Open  an `$EDITOR` to type the definitions in place using `to -`
+Есть три способа определить новый тип:
+* Непосредственно из командной строки с помощью команы `td`.
+* Из файла с помощью `to <имя файла>`.
+* Открыть `$EDITOR` для ввода определений с помощью `to -`
 
 ```
 [0x00000000]> "td struct foo {char* a; int b;}"
@@ -94,7 +88,7 @@ foo
 S1
 ```
 
-Also note there is a config option to specify include directories for types parsing
+radare2 позволяет органризовать директорий для хранения описанй типов и включений.
 
 ```
 [0x00000000]> e? dir.types
@@ -103,13 +97,12 @@ dir.types: Default path to look for cparse type files
 /usr/include
 ```
 
-### Printing types
+### Печати структур
 
-Notice below we have used `ts` command, which basically converts
-the C type description (or to be precise it's SDB representation)
-into the sequence of `pf` commands. See more about [print format](../basic_commands/print_modes.md).
+Обратите внимание, что ниже мы использовали команду `ts`, преобразующая описание типа C (или, если быть точным, представление SDB)
+ в последовательность `pf`-команд. Смотрите подробнее о [печати структур](../basic_commands/print_modes.md).
 
-The `tp` command uses the `pf` string to print all the members of type at the current offset/given address:
+Команда `tp` использует строку `pf` для печати всех полей типа по текущему смещению/данному адресу:
 
 ```
 [0x00000000]> "td struct foo {char* a; int b;}"
@@ -126,7 +119,7 @@ pf zd a b
  b : 0x00000016 = 23
 ```
 
-Also, you could fill your own data into the struct and print it using `tpx` command
+Можно также заполнить свои данные в структуре и распечатать их, используя команду `tpx`.
 
 ```
 [0x00000000]> tpx foo 414243440010000000
@@ -134,10 +127,9 @@ Also, you could fill your own data into the struct and print it using `tpx` comm
  b : 0x00000005 = 16
 ```
 
-### Linking Types
+### Типы ссылок
 
-The `tp` command just performs a temporary cast. But if we want to link some address or variable
-with the chosen type, we can use `tl` command to store the relationship in SDB.
+Команда `tp` просто выполняет приведение типов. Но если надо связать какой-то адрес или переменную с выбранным типом можно использовать команду `tl` для сохранения этого отношения в SDB.
 
 ```
 [0x000051c0]> tl S1 = 0x51cf
@@ -148,7 +140,7 @@ with the chosen type, we can use `tl` command to store the relationship in SDB.
  z : 0x000051eb = 4464399
 ```
 
-Moreover, the link will be shown in the disassembly output or visual mode:
+Причем ссылка будет показана в дизассемблированном выводе или визуальном режиме:
 
 ```
 [0x000051c0 15% 300 /bin/ls]> pd $r @ entry0
@@ -171,14 +163,14 @@ Moreover, the link will be shown in the disassembly output or visual mode:
  0x00005202      mov rbp, rsp
 ```
 
-Once the struct is linked, radare2 tries to propagate structure offset in the function at current offset, to run this analysis on whole program or at any targeted functions after all structs are linked you have `aat` command:
+После того, как структура связана, radare2 пытается распространить смещение структуры в функции по текущему смещению, чтобы запустить этот анализ во всей программе или в любых целевых функциях после того, как все структуры будут связаны - команда `aat`:
 
 ```
 [0x00000000]> aa?
 | aat [fcn]           Analyze all/given function to convert immediate to linked structure offsets (see tl?)
 ```
 
-Note sometimes the emulation may not be accurate, for example as below :
+Иногда эмуляция может быть неточной, например, как показано ниже:
 
 ````
 |0x000006da  push rbp
@@ -191,33 +183,31 @@ Note sometimes the emulation may not be accurate, for example as below :
 
 ````
 
-The return value of `malloc` may differ between two emulations, so you have to set the hint for return value manually using `ahr` command, so run `tl` or `aat` command after setting up the return value hint.
+Возвращаемое значение `malloc` может отличаться между двумя эмуляциями, нужно установить подсказку для возвращаемого значения вручную, используя команду `ahr`, потом запускать `tl` или `aat` после настройки подсказки.
 
 ```
 [0x000006da]> ah?
-| ahr val            set hint for return value of a function
+| ahr val            установить подсказку для возвращаемого значения функции
 ```
 
 ### Structure Immediates
 
-There is one more important aspect of using types in radare2 - using `aht` you
-can change the immediate in the opcode to the structure offset.
-Lets see a simple example of [R]SI-relative addressing
+Есть еще один важный аспект использования типов в Radare2 — использование `aht`, можно изменять immediate-значение в коде операции на смещение структуры.
+Рассмотрим простой пример [RSI]-относительной адресации
 
 ```
 [0x000052f0]> pd 1
 0x000052f0      mov rax, qword [rsi + 8]    ; [0x8:8]=0
 ```
-Here `8` - is some offset in the memory, where `rsi` probably holds
-some structure pointer. Imagine that we have the following structures
+Здесь `8` - некоторое смещение в памяти, где `rsi` вероятно, держит некоторый указатель структуры. Представьте, что у нас есть следующие структуры
 ```
 
 [0x000052f0]> "td struct ms { char b[8]; int member1; int member2; };"
 [0x000052f0]> "td struct ms1 { uint64_t a; int member1; };"
 [0x000052f0]> "td struct ms2 { uint16_t a; int64_t b; int member1; };"
 ```
-Now we need to set the proper structure member offset instead of `8` in this instruction.
-At first, we need to list available types matching this offset:
+Теперь нам нужно установить правильное смещение члена структуры вместо `8` в этой инструкции.
+Сначала нужно перечислить доступные типы, соответствующие этому смещению:
 
 ```
 [0x000052f0]> ahts 8
@@ -225,9 +215,8 @@ ms.member1
 ms1.member1
 ```
 
-Note, that `ms2` is not listed, because it has no members with offset `8`.
-After listing available options we can link it to the chosen offset at
-the current address:
+Обратите внимание, что `ms2` не указан, так как в нем нет элементов со смещением `8`.
+После перечисления доступных вароантов, можем связать их с выбранным смещением по адресу текущий адрес:
 
 ```
 [0x000052f0]> aht ms1.member1
@@ -235,9 +224,9 @@ the current address:
 0x000052f0      488b4608       mov rax, qword [rsi + ms1.member1]    ; [0x8:8]=0
 ```
 
-### Managing enums
+### Управление перечислениями
 
-* Printing all fields in enum using `te` command
+* Печать всех полей в перечислении с использованием `te` команда
 
 ```
 [0x00000000]> "td enum Foo {COW=1,BAR=2};"
@@ -246,7 +235,7 @@ COW = 0x1
 BAR = 0x2
 ```
 
-* Finding matching enum member for given bitfield and vice-versa
+* Поиск соответствующего члена перечисления для заданного битового поля и наоборот
 
 ```
 [0x00000000]> te Foo 0x1
@@ -255,9 +244,9 @@ COW
 0x1
 ```
 
-## Internal representation
+## Внутреннее представительство
 
-To see the internal representation of the types you can use `tk` command:
+Чтобы увидеть внутреннее представление типов используйте команду `tk`:
 
 ```
 [0x000051c0]> tk~S1
@@ -272,8 +261,7 @@ struct.S1.z.meta=0
 [0x000051c0]>
 ```
 
-Defining primitive types requires an understanding of basic `pf` formats,
-you can find the whole list of format specifier in `pf??`:
+Определение примитивных типов требует понимания основных форматов `pf`, список спецификаторов формата - `pf??`:
 
 ```
 -----------------------------------------------------
@@ -306,7 +294,7 @@ there are basically 3 mandatory keys for defining basic data types:
 `type.X.size=size_in_bits`
 For example, let's define `UNIT`, according to [Microsoft documentation](https://msdn.microsoft.com/en-us/library/windows/desktop/aa383751%28v=vs.85%29.aspx#UINT)
 `UINT` is just equivalent of standard C `unsigned int` (or `uint32_t` in terms of TCC engine).
-It will be defined as:
+Он будет определяться как:
 
 ```
 UINT=type
@@ -314,13 +302,12 @@ type.UINT=d
 type.UINT.size=32
 ```
 
-Now there is an optional entry:
+Теперь есть необязательная запись:
 
 `X.type.pointto=Y`
 
-This one may only be used in case of pointer `type.X=p`, one good example is LPFILETIME definition,
-it is a pointer to `_FILETIME` which happens to be a structure.
-Assuming that we are targeting only 32-bit windows machine, it will be defined as the following:
+Это можно использовать только в случае указателя `type.Х=р`, хорошим примером является определение LPFILETIME - это указатель на `_FILETIME`, которая оказывается структурой.
+Предполагая, что мы нацелены только на 32-разрядную машину Windows, она будет определена следующим образом:
 
 ```
 LPFILETIME=type
@@ -329,21 +316,19 @@ type.LPFILETIME.size=32
 type.LPFILETIME.pointto=_FILETIME
 ```
 
-This last field is not mandatory because sometimes the data structure
-internals will be proprietary, and we will not have a clean representation for it.
+Последнее поле не является обязательным, поскольку иногда в структурах данных внутренности бывают проприетарными, и у нас нет для них четкого представления.
 
-There is also one more optional entry:
+Также есть еще одна необязательная запись:
 
 ```
 type.UINT.meta=4
 ```
 
-This entry is for integration with C parser and carries the type class information:
-integer size, signed/unsigned, etc.
+Эта запись предназначена для интеграции с синтаксическим анализатором C и содержит информацию о классе типов: целочисленный размер, знаковый/беззнаковый и т.д.
 
-### Structures
+### Структуры
 
-Those are the basic keys for structs (with just two elements):
+Это основные ключи для структур (всего два элемента):
 
 ```
 X=struct
@@ -352,10 +337,9 @@ struct.X.a=a_type,a_offset,a_number_of_elements
 struct.X.b=b_type,b_offset,b_number_of_elements
 ```
 
-The first line is used to define a structure called `X`, the second line
-defines the elements of `X` as comma separated values. After that, we just define each element info.
+Первая строка используется для определения структуры, называемой `X`, вторая строка определяет элементы `X` как значения, разделенные запятыми. После этого просто определяем информацию о каждом элементе.
 
-For example. we can have a struct like this one:
+Для примера. у нас может быть такая структура:
 
 ```
 struct _FILETIME {
@@ -364,7 +348,7 @@ struct _FILETIME {
 }
 ```
 
-assuming we have `DWORD` defined, the struct will look like this
+полагая, что `DWORD` определено, структура будет выглядеть так
 
 ```
  _FILETIME=struct
@@ -373,16 +357,15 @@ struct._FILETIME.dwLowDateTime=DWORD,0,0
 struct._FILETIME.dwHighDateTime=DWORD,4,0
 ```
 
-Note that the number of elements field is used in case of arrays only
-to identify how many elements are in arrays, other than that it is zero by default.
+Обратите внимание, что поле количества элементов используется только в случае массивов для определения количества элементов в массивах, по умолчанию оно равно нулю.
 
-### Unions
+### Юнионы
 
-Unions are defined exactly like structs the only difference is that you will replace the word `struct` with the word `union`.
+Юнионы определяются точно так же, как структуры, с той лишь разницей, что вы заменяете слово `struct` на `union`.
 
-### Function prototypes
+### Прототипы функций
 
-Function prototypes representation is the most detail oriented and the most important one of them all. Actually, this is the one used directly for type matching
+Представление прототипов функций является наиболее подробным и наиболее важным среди всех определений. На самом деле, это тот, который используется непосредственно для сопоставления типов.
 
 ```
 X=func
@@ -395,13 +378,13 @@ func.X.ret=Return_type
 func.X.cc=calling_convention
 ```
 
-It should be self-explanatory. Let's do strncasecmp as an example for x86 arch for Linux machines. According to man pages, strncasecmp is defined as the following:
+Это и так понятно. Определим strncasecmp в качестве примера для архитектуры x86 для машин с Linux. Согласно справочным манам, strncasecmp определяется следующим образом:
 
 ```
 int strcasecmp(const char *s1, const char *s2, size_t n);
 ```
 
-When converting it into its sdb representation it will look like the following:
+При преобразовании его в представление sdb он будет выглядеть следующим образом:
 
 ```
 strcasecmp=func
@@ -413,11 +396,11 @@ func.strcasecmp.ret=int
 func.strcasecmp.cc=cdecl
 ```
 
-Note that the `.cc` part is optional and if it didn't exist the default calling-convention for your target architecture will be used instead.
-There is one extra optional key
+Обратите внимание, что `.cc` часть является необязательной, и если она не используется, то использоваться соглашение о вызовах по умолчанию для вашей целевой архитектуры.
+Есть еще один дополнительный необязательный ключ
 
 ```
 func.x.noreturn=true/false
 ```
 
-This key is used to mark functions that will not return once called, such as `exit` and `_exit`.
+Этот ключ используется для обозначения функций, которые не возвращаются после вызова, например `exit` и `_exit`.

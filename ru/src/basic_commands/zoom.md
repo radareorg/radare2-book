@@ -1,8 +1,8 @@
-## Zoom
+## Масштабирование
 
-The zoom is a print mode that allows you to get a global view of the whole file or a memory map on a single screen. In this mode, each byte represents `file_size/block_size` bytes of the file. Use the `pz` command, or just use `Z` in the visual mode to toggle the zoom mode.
+Масштабирование — это режим печати, который позволяет получить глобальное представление всего файла или карты памяти на одном экране. В этом режиме каждый байт картинки представляет блок `file_size/block_size` байт файла. Используйте команду `pz` или просто `Z` в визуальном режиме, чтобы переключить режим масштабирования.
 
-The cursor can be used to scroll faster through the zoom out view. Pressing `z` again will zoom-in at the cursor position.
+Курсор можно использовать для более быстрой прокрутки в режиме уменьшения масштаба. Повторное нажатие `z` приведет к увеличению масштаба в положении курсора.
 
 ```
 [0x004048c5]> pz?
@@ -20,7 +20,7 @@ The cursor can be used to scroll faster through the zoom out view. Pressing `z` 
 | pzh           head (first byte value); This is the default mode
 ```
 
-Let's see some examples:
+Рассмотрим несколько примеров:
 
 ```
 [0x08049790]> e zoom.byte=h
@@ -64,7 +64,7 @@ Let's see some examples:
 0x00000050  2b30 4741 422f 382a 1e22 0f17 0f10 3913
 ```
 
-You can limit zooming to a range of bytes instead of the whole bytespace. Change `zoom.from` and `zoom.to` eval variables:
+Масштабирование можно ограничить диапазоном байтов, и не показывать всё пространство. Измените переменные среды `zoom.from` и `zoom.to`:
 
 ```
 [0x00003a04]> e? zoom.

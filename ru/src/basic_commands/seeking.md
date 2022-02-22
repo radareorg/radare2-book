@@ -1,10 +1,10 @@
-## Seeking
+## Установка базового всмещения
 
-To move around the file we are inspecting we will need to change the offset at which we are using the `s` command.
+Чтобы перемещаться по проверяемому файлу, требуется изменять смещение при помощи команды `s` .
 
-The argument is a math expression that can contain flag names, parenthesis, addition, substraction, multiplication of immediates of contents of memory using brackets.
+Аргумент представляет собой математическое выражение, которое может содержать имена флагов, скобки, сложение, вычитание, умножение непосредственных значений содержимого памяти с помощью скобок.
 
-Some example commands:
+Несколько примеров использования команд:
 
 ```
 [0x00000000]> s 0x10
@@ -14,31 +14,31 @@ Some example commands:
 [0x00000014]>
 ```
 
-Observe how the prompt offset changes. The first line moves the current offset to the address 0x10.
+Посмотрите, как изменяется смещение в левой части командной строке. Первая строка устанавливает текущее смещение по адресу 0x10.
 
-The second does a relative seek 4 bytes forward.
+Вторая смещает адрес на 4 байт вперед (относительное смещение).
 
-And finally, the last 2 commands are undoing, and redoing the last seek operations.
+И, наконец, последние две команды отменяют и заново выполняют (redoing) последние операции установки адреса (seek).
 
-Instead of using just numbers, we can use complex expressions, or basic arithmetic operations to represent the address to seek.
+Вместо использования исключительно числовых значений, можем использовать сложные выражения или основные арифметические операции для представления адреса.
 
-To do this, check the ?$? Help message which describes the internal variables that can be used in the expressions. For example, this is the same as doing s+4 .
+Для этого ознакомьтесь с выводом команды ?$? - справочное сообщение, описывающее внутренние переменные, потенциально используемые в выражениях. Например, следующие выражение делает то же самое что и s+4 .
 
 ```
 [0x00000000]> s $$+4
 ```
 
-From the debugger (or when emulating) we can also use the register names as references. They are loaded as flags with the `.dr*` command, which happens under the hood.
+В отладчике (или в режиме эмуляции) можно использовать имена регистров в качестве адресов. Они представляются в виде флагов с помощью команды `.dr*`.
 
 ```
 [0x00000000]> s rsp+0x40
 ```
 
-Here's the full help of the `s` command. We will explain in more detail below.
+Вот полная справка по команде `s`. We will explain in more detail below.
 
 ```
 [0x00000000]> s?
-Usage: s    # Help for the seek commands. See ?$? to see all variables
+Usage: s    # Help for the seek commands. Смотрите инструкции ?$? с перечнем всех переменных
 | s                 Print current address
 | s.hexoff          Seek honoring a base from core->offset
 | s:pad             Print current address with N padded zeros (defaults to 8)
@@ -58,7 +58,7 @@ Usage: s    # Help for the seek commands. See ?$? to see all variables
 | sC[?] string      Seek to comment matching given string
 | sf                Seek to next function (f->addr+f->size)
 | sf function       Seek to address of specified function
-| sf.               Seek to the beginning of current function
+| sf.               Установить адрес смещения на начало текущей функции
 | sg/sG             Seek begin (sg) or end (sG) of section or file
 | sl[?] [+-]line    Seek to line
 | sn/sp ([nkey])    Seek to next/prev location, as specified by scr.nkey
@@ -70,63 +70,62 @@ Usage: s    # Help for the seek commands. See ?$? to see all variables
 > s 10+0x80   ; seek at 0x80+10
 ```
 
-If you want to inspect the result of a math expression, you can evaluate it using the `?` command. Simply pass the expression as an argument. The result can be displayed in hexadecimal, decimal, octal or binary formats.
+Если надо проверить результат математического выражения, можно вычислить его с помощью команды `?`. Просто передайте выражение в качестве аргумента. Результат может отображаться в шестнадцатеричном, десятичном, восьмеричном или двоичном форматах.
 
 ```
 > ? 0x100+200
 0x1C8 ; 456d ; 710o ; 1100 1000
 ```
 
-There are also subcommands of `?` that display the output in one specific format (base 10, base 16 ,...). See `?v` and `?vi`.
+Существуют также подкоманды `?`, отображающие результаты в одном конкретном формате (по базе 10, 16 ,...). Смотрите `?v` и `?vi`.
 
-In the visual mode, you can press `u` (undo) or `U` (redo) inside the seek history to return back to previous or forward to the next location.
+В визуальном режиме можно нажать `u` (undo) или `U` (redo) внутри истории адресов смещений - перемещение в обоих направлениях по местоположения.
 
-## Open file
+## Открыть файл
 
-As a test file, let's use a simple `hello_world.c` compiled in Linux ELF format.
-After we compile it let's open it with radare2:
+В качестве тестового файла воспользуемся простым `hello_world.c`, скомпилированным в формате Linux ELF.
+После сборки компилятором, откроем его с помощью radare2:
 
 ```
 $ r2 hello_world
 ```
 
-Now we have the command prompt:
+Теперь у нас есть командная строка:
 
 ```
 [0x00400410]>
 ```
 
-And it is time to go deeper.
+Идем углубже.
 
-## Seeking at any position
+## Перемещение смещения на любые адреса
 
-All seeking commands that take an address as a command parameter can use any numeral base
-such as hex, octal, binary or decimal.
+Все команды перемещения, принимающие адрес в качестве параметра, могут использовать любую ситсему счисления, например, шестнадцатеричную, восьмеричную, двоичную или десятичную.
 
-Seek to an address 0x0. An alternative command is simply `0x0`
+Установка к адреса 0x0. Альтернативный вариант - просто `0x0`
 
 ```
 [0x00400410]> s 0x0
 [0x00000000]>
 ```
 
-Print current address:
+Показать текущий адрес:
 ```
 [0x00000000]> s
 0x0
 [0x00000000]>
 ```
 
-There is an alternate way to print current position: `?v $$`.
+Существует альтернативный способ печати текущей позиции: `?v $$`.
 
-Seek N positions forward, space is optional:
+Перемещение на N позиций вперед, пробел необязателен:
 
 ```
 [0x00000000]> s+ 128
 [0x00000080]>
 ```
 
-Undo last two seeks to return to the initial address:
+Отмена последних двух смещений, возврат к исходному адресу:
 
 ```
 [0x00000080]> s-
@@ -134,9 +133,9 @@ Undo last two seeks to return to the initial address:
 [0x00400410]>
 ```
 
-We are back at _0x00400410_.
+Мы вернулись к _0x00400410_.
 
-There's also a command to show the seek history:
+Есть также команда - показать историю смещений:
 
 ```
 [0x00400410]> s*

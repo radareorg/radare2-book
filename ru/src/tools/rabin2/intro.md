@@ -1,7 +1,7 @@
-# Rabin2 — Show Properties of a Binary
+# Rabin2 — свойства двоичного файла
 
-Under this bunny-arabic-like name, radare hides a powerful tool to handle binary files, to get information on imports, sections, headers and other data. Rabin2 can present it in several formats accepted by other tools, including radare2 itself.
-Rabin2 understands many file formats: Java CLASS, ELF, PE, Mach-O or any format supported by plugins, and it is able to obtain symbol import/exports, library dependencies, strings of data sections, xrefs,  entrypoint address, sections, architecture type.
+Под этим именем radare скрывает мощный инструмент для обработки двоичных файлов, для получения информации об импорте, разделах, заголовках и других данных. Rabin2 может представить его в нескольких форматах, принятых другими инструментами, включая сам radare2.
+Rabin2 понимает многие форматы файлов: Java CLASS, ELF, PE, Mach-O или любой формат, поддерживаемый плагинами, и он может получать импорт / экспорт символов, зависимости библиотеки, строки разделов данных, внешние ссылки, адрес точки входа, разделы, тип архитектуры.
 
 ```
 $ rabin2 -h
@@ -39,8 +39,8 @@ Usage: rabin2 [-AcdeEghHiIjlLMqrRsSvVxzZ] [-@ at] [-a arch] [-b bits] [-B addr]
  -o [str]        output file/folder for write operations (out by default)
  -O [str]        write/extract operations (-O help)
  -p              show physical addresses
- -P              show debug/pdb information
- -PP             download pdb file for binary
+ -P              показать отладочную/pdb информацию,
+ -PP             загрузить файл pdb.
  -q              be quiet, just show fewer data
  -qq             show less info (no offset/size for -z for ex.)
  -Q              show load address used by dlopen (non-aslr libs)

@@ -1,9 +1,7 @@
-# Data and Code Analysis
+# Анализ данных и кода
 
-Radare2 has a very rich set of commands and configuration options to perform data and code analysis,
-to extract useful information from a binary, like pointers, string references,
-basic blocks, opcode data, jump targets, cross references and much more.
-These operations are handled by the `a` (analyze) command family:
+Radare2 имеет очень богатый набор команд и параметров конфигурации для выполнения анализа данных и кода, извлекать полезную информацию из двоичного файла, такую как указатели, строковые ссылки, базовые блоки, данные оп-кодов, назначения переходов, перекрестные ссылки и многое другое.
+Эти операции обрабатываются семейством коман д`a` (analyze):
 
 ```
 |Usage: a[abdefFghoprxstc] [...]
@@ -31,16 +29,15 @@ These operations are handled by the `a` (analyze) command family:
 | ax[?]              manage refs/xrefs (see also afx?)
 ```
 
-In fact, `a` namespace is one of the biggest in radare2 tool and allows to control
-very different parts of the analysis:
+Фактически, пространство имен `a` является одним из самых больших в инструменте radare2 и позволяет управлять разными частями процедуры анализа:
 
- - Code flow analysis
- - Data references analysis
- - Using loaded symbols
- - Managing different type of graphs, like CFG and call graph
- - Manage variables
- - Manage types
- - Emulation using ESIL VM
- - Opcode introspection
- - Objects information, like virtual tables
+- Code flow analysis
+- Анализ ссылок на данные
+- Использование загруженных символов
+- Управление различными типами графов, таких как CFG и граф вызовов
+- Управление переменными
+- Управление типами
+- Эмуляция с помощью виртуальной машины ESIL
+- Интроспекция оп-кодов
+- Информация об объектах, например виртуальных таблиц
 

@@ -1,6 +1,6 @@
-## Searching Backwards
+## Поиск в обратном направлении
 
-Sometimes you want to find a keyword backwards. This is, before the current offset, to do this you can seek back and search forward by adding some search.from/to restrictions, or use the `/b` command.
+Иногда надо найти ключевое слово в обратном направлении. Для этого можно искать в обратном направлении, искать вперед, добавляя некоторые ограничения search.from/to или использовать команду `/b` .
 
 ```
 [0x100001200]> / nop
@@ -13,7 +13,7 @@ Sometimes you want to find a keyword backwards. This is, before the current offs
 [0x100004f50]>
 ```
 
-Note that `/b` is doing the same as `/`, but backward, so what if we want to use `/x` backward? We can use `/bx`, and the same goes for other search subcommands:
+Обратите внимание, что `/b` делает то же самое, что и `/`, но в обратном направлении, так что, если надо использовать `/x` в обратном направлении? Можно использовать `/bx`, аналогичной другим поисковым подкомандам:
 
 ```
 [0x100001200]> /x 90

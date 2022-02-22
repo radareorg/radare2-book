@@ -1,19 +1,13 @@
-# Symbols
+# Символы
 
-Radare2 automatically parses available imports and exports sections in the binary,
-moreover, it can load additional debugging information if present.
-Two main formats are supported: DWARF and PDB (for Windows binaries).
-Note that, unlike many tools radare2 doesn't rely on Windows API to parse
-PDB files, thus they can be loaded on any other supported platform - e.g.
-Linux or OS X.
+Radare2 автоматически анализирует доступные разделы импорта и экспорта в двоичном файле, он также может загружать дополнительную отладочную информацию.
+Поддерживаются два основных формата: DWARF и PDB (для двоичных файлов Windows).
+Обратите внимание, что, в отличие от многих инструментов, raide2 не использует Windows API для анализа PDB-файлов, поэтому их можно загружать на любую другую поддерживаемую платформ, включая Линукс или ОС Х.
 
-DWARF debug info loads automatically by default because usually it's stored
-right in the executable file. PDB is a bit of a different beast - it is always
-stored as a separate binary, thus the different logic of handling it.
+Отладочная информация DWARF загружается автоматически по умолчанию, поскольку обычно она сохраняется прямо в исполняемом файле. PDB используется немного по-другому, так как он всегда хранится как отдельный двоичный файл.
 
-At first, one of the common scenarios is to analyze the file from Windows distribution.
-In this case, all PDB files are available on the Microsoft server, which is by default
-is in options. See all pdb options in radare2:
+Одним из распространенных сценариев является анализ файла из дистрибутива Windows.
+В этом случае все файлы PDB доступны на сервере Microsoft, который по умолчанию есть в настройках. Посмотреть все параметры pdb в радаре2:
 
 ```
 pdb.autoload = 0
@@ -22,36 +16,29 @@ pdb.server = https://msdl.microsoft.com/download/symbols
 pdb.useragent = Microsoft-Symbol-Server/6.11.0001.402
 ```
 
-Using the variable `pdb.server` you can change the address where radare2 will try to
-download the PDB file by the GUID stored in the executable header.
-You can make use of multiple symbol servers by separating each URL with a semi-colon:
+Используя переменную `pdb.server` можете изменить адрес, по которому Radare2 будет пытаться загрузить PDB по GUID, хранящемуся в заголовке исполняемого файла.
+Можно использовать несколько серверов, предоставляющих символы, разделив их URL-ы точкой с запятой:
 ```
 e pdb.server = https://msdl.microsoft.com/download/symbols;https://symbols.mozilla.org/
 ```
-On Windows,  you can also use local network share paths (UNC paths) as symbol servers.
+В Windows можно также использовать общие сетевые пути (UNC-пути) в качестве серверов символов.
 
-Usually, there is no reason to change default `pdb.useragent`, but who knows where
-could it be handy?
+Обычно нет причин менять значение по умолчанию `pdb.useragent`, но кто знает...?
 
-Because those PDB files are stored as "cab" archives on the server, `pdb.extract=1`
-says to automatically extract them.
+Поскольку файлы PDB хранятся на сервере в виде CAB-архивов `pdb.extract=1` настраивает ядро на автоматическую их распаковку.
 
-Note that for the automatic downloading to work you need "cabextract" tool, and wget/curl installed.
+Обратите внимание, что для автоматической загрузки вам нужен инструмент «cabextract» и установленный wget/curl.
 
-Sometimes you don't need to do that from the radare2 itself, thus - two handy
-rabin2 options:
+Иногда нужно грузить символы не в radare2, а в других инструментах, например в rabin2:
 
 ```
- -P              show debug/pdb information
- -PP             download pdb file for binary
+ -P              показать отладочную/pdb информацию,
+ -PP             загрузить файл pdb.
 ```
 
-where `-PP` automatically downloads the pdb for the selected binary, using those
-`pdb.*` config options. `-P` will dump the contents of the PDB file, which is useful
-sometimes for a quick understanding of the symbols stored in it.
+Здесь `-PP` автоматически загружает pdb для выбранного двоичного файла, используя настройки в `pdb.*`. `-P` сбросит дамп файла PDB, его можно открыть и почитать, посмотреть хранящихся в нем символы.
 
-Apart from the basic scenario of just opening a file, PDB information can be additionally
-manipulated by the `id` commands:
+Помимо основного сценария простого открытия файла, информацией PDB можно дополнительно манипулировать при помощи команды `id`:
 
 ```
 [0x000051c0]> id?
@@ -64,18 +51,12 @@ manipulated by the `id` commands:
 | idpd             Download pdb file on remote server
 ```
 
-Where `idpi` is basically the same as `rabin2 -P`.
-Note that `idp` can be also used not only in the static analysis mode, but also
-in the debugging mode, even if connected via WinDbg.
+Здесь `idpi` такой же как `rabin2 -P`.
+Команду `idp` также можно использовать не только во время статического анализа, но и в режиме отладки, даже если подключен через WinDbg.
 
-For simplifying the loading PDBs, especially for the processes with many linked DLLs,
-radare2 can autoload all required PDBs automatically - you need just set the
-`e pdb.autoload=true` option. Then if you load some file in debugging mode
-in Windows, using `r2 -d file.exe` or `r2 -d 2345` (attach to pid 2345), all
-related PDB files will be loaded automatically.
+Для упрощения загрузки PDB, особенно для процессов с большим количеством связанных DLL, radare2 может автоматически загружать все необходимые PDB - вам нужно просто установить `e pdb.autoload=true`. Затем, если вы откроите какой-либо файл в режиме отладки в Windows, используя `r2 -d файл.exe` или ` р2 -d 2345` (присоединиться к pid 2345), все связанные PDB-файлы будут загружены автоматически.
 
-DWARF information loading, on the other hand, is completely automated. You don't
-need to run any commands/change any options:
+Загрузка информации DWARF полностью автоматизирована. Не нужно запускать какие-либо команды/изменять параметры:
 
 ```
 r2 `which rabin2`
@@ -130,5 +111,5 @@ r2 `which rabin2`
 0x000024dd  push rbp                    ; .//rabin2.c:27
 ```
 
-As you can see, it loads function names and source line information.
+Как видите, загружаются имена функций и информация об исходной строке.
 

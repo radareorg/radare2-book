@@ -1,8 +1,8 @@
-# Searching for Bytes
+# Поиск байтов
 
-The radare2 search engine is based on work done by esteve, plus multiple features implemented on top of it. It supports multiple keyword searches, binary masks, and hexadecimal values. It automatically creates flags for search hit locations ease future referencing.
+Поисковая система radare2 основана на работе, проделанной esteve, плюс несколько функций, реализованных поверх нее. Он поддерживает поиск по нескольким ключевым словам, двоичным маскам и шестнадцатеричным значениям. Он автоматически создает флаги для поисковых местоположений, облегчая будущие ссылки.
 
-Search is initiated by `/` command.
+Поиск инициируется командой `/`.
 ```
 [0x00000000]> /?
 |Usage: /[!bf] [arg]Search stuff (see 'e??search' for options)
@@ -48,6 +48,6 @@ anal.depth)
 | /z min max              search for strings of given size
 ```
 
-Because everything is treated as a file in radare2, it does not matter whether you search in a socket, a remote device, in process memory, or a file.
+Поскольку в radare2 все рассматривается как файл, не имеет значения, выполняете ли поиск в сокете, удаленном устройстве, в памяти процесса или в файле.
 
-note that '/*' starts multiline comment. It's not for searching. type '*/' to end comment.
+обратите внимание, что '/*' запускает многострочный комментарий. Это не для поиска. введите '*/', чтобы закончить комментарий.

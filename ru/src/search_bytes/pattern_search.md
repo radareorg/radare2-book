@@ -1,13 +1,13 @@
-## Pattern Matching Search
+## Поиск по сопоставлению шаблонов
 
-The `/p` command allows you to apply repeated pattern searches on IO backend storage. It is possible to identify repeated byte sequences without explicitly specifying them. The only command's parameter sets minimum detectable pattern length.
-Here is an example:
+Команда `/p` позволяет делать повторный поиск шаблонов к серверному хранилищу ввода-вывода. Можно идентифицировать повторяющиеся последовательности байтов без явного их указания. Единственный параметр команды задает минимальную обнаруживаемую длину шаблона.
+Пример:
 ```
 [0x00000000]> /p 10
 ```
-This command output will show different patterns found and how many times each of them is encountered.
+Вывод команды покажет различные найденные шаблоны и сколько раз каждый из них встречается.
 
-It is possible to search patterns with a known difference between consecutive bytes with `/d` command. For example, the command to search all the patterns with the first and second bytes having the first bit which differs and the second and third bytes with the second bit which differs is:
+Возможен поиск шаблонов с известной разницей между последовательными байтами с помощью команды `/d`. Например, команда для поиска всех шаблонов с первым и вторым байтами, имеющими первый бит, который отличается, и второй и третий байты со вторым битом, который отличается:
 
 ```
 [0x00000000]> /d 0102

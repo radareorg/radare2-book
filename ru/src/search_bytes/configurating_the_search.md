@@ -1,16 +1,16 @@
-## Configuring Search Options
+## Настройка параметров поиска
 
-The radare2 search engine can be configured through several configuration variables, modifiable with the `e` command.
+Поисковая система radare2 настраивается с помощью нескольких конфигурационных переменных, изменяемых с помощью команды `e`.
 ```
 e cmd.hit = x         ; radare2 command to execute on every search hit
 e search.distance = 0 ; search string distance
-e search.in = [foo]   ; pecify search boundarie. Supported values are listed under e search.in=??
+e search.in = [foo]   ; pecify search boundarie. Поддерживаемые значения перечислены в разделе e search.in=??
 e search.align = 4    ; only show search results aligned by specified boundary.
 e search.from = 0     ; start address
 e search.to = 0       ; end address
 e search.asmstr = 0   ; search for string instead of assembly
 e search.flags = true ; if enabled, create flags on hits
 ```
-The `search.align` variable is used to limit valid search hits to certain alignment. For example, with `e search.align=4` you will see only hits found at 4-bytes aligned offsets.
+Переменная `search.align` используется для ограничения допустимых поисковых запросов определенным выравниванием. Например, при помощи `e search.align=4` будут выведены только результаты, найденные при 4-байтовых смещениях.
 
-The `search.flags` boolean variable instructs the search engine to flag hits so that they can be referenced later. If a currently running search is interrupted with `Ctrl-C` keyboard sequence, current search position is flagged with `search_stop`.
+Логическая переменная `search.flags` инструктирует поисковую систему помечать результаты (hits), чтобы на них ссылаться позже. Если текущий поиск прерывается с помощью последовательности клавиш `Ctrl-C`, текущая позиция поиска помечается `search_stop`.

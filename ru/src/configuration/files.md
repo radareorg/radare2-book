@@ -1,8 +1,6 @@
-## Files
+## Файлы
 
-Use `r2 -H` to list all the environment variables that matter to know where it will
-be looking for files. Those paths depend on the way (and operating system) you have
-built r2 for.
+Используйте `r2 -H` для перечисления всех переменных среды, управляющих поиском файлов на диске. Путь поиска зависит от настроек вашей сборки r2 и операционной системы.
 
 ```
 R2_PREFIX=/usr
@@ -19,23 +17,22 @@ USER_PLUGINS=/home/user/.local/share/radare2/plugins
 USER_ZIGNS=/home/user/.local/share/radare2/zigns
 ```
 
-## RC Files
+## Файлы RC
 
-RC files are r2 scripts that are loaded at startup time. Those files must be in 3 different places:
+RC-файлы — это сценарии r2, которые загружаются во время запуска. Эти файлы должны находиться в трех разных местах:
 
-### System
+### Системная
 
-radare2 will first try to load /usr/share/radare2/radare2rc
+radare2 сначала попытается загрузить /usr/share/radare2/radare2rc
 
-### Your Home
+### В домашнем директории
 
-Each user in the system can have its own r2 scripts to run on startup to select the color scheme, and other custom options by having r2 commands in there.
+Каждый пользователь в системе может настраивать свои собственные сценарии r2 для запуска, например, выбор цветовой схемы, а также другие параметры, задаваемые там командами r2.
 
 * ~/.radare2rc
 * ~/.config/radare2/radare2rc
 * ~/.config/radare2/radare2rc.d/
 
-### Target file
+### Целевой файл
 
-If you want to run a script everytime you open a file, just create a file with the same name of the file
-but appending `.r2` to it.
+Если надо запускать сценарий каждый раз при открытии файла, просто создайте файл с тем же именем, что и бинарный файл, но добавляя к нему `.r2` .

@@ -1,19 +1,19 @@
-# Visual Disassembly
+# Визуальный дизассемблер
 
-## Navigation
+## Навигация
 
-Move within the Disassembly using arrow keys or `hjkl`. Use `g` to seek directly to a flag or an offset, type it when requested by the prompt: `[offset]>`.
-Follow a jump or a call using the `number` of your keyboard `[0-9]` and the number on the right in disassembly to follow a call or a jump. In this example typing `1` on the keyboard would follow the call to `sym.imp.__libc_start_main` and therefore, seek at the offset of this symbol.
+Перемещение внутри дизассемблирования осуществляется с помощью клавиш со стрелками или `hjkl`. Используйте `g` для смещения непосредственно к флагу или адресу, введите его в командной строки: `[offset]>`.
+Переходы по jump и call - клавиши `цифр` на клавиатуре `[0-9]` и номер справа в окне дизассемблерирования. В этом примере ввод `1` на клавиатуре будет следовать за вызовом `sym.imp.__libc_start_main` и, следовательно, устанавливать смещение на адрес этого символа.
 
 ```
 0x00404894      e857dcffff     call sym.imp.__libc_start_main ;[1]
 ```
 
-Seek back to the previous location using `u`, `U` will allow you to redo the seek.
+Вернуться на предыдущее смещение - клавиша `u`, `U` -  повторение поиска.
 
-## `d` as define
+## `d` - определить
 
-`d` can be used to change the type of data of the current block, several basic types/structures are available as well as more advanced one using `pf` template:
+Клавиша `d` используется для изменения типа данных текущего блока, доступно несколько основных типов/структур, а также более продвинутый с использованием шаблона `pf` :
 
 ```
 d → ...
@@ -28,7 +28,7 @@ d → d
 ...
 ```
 
-To improve code readability you can change how radare2 presents numerical values in disassembly, by default most of disassembly display numerical value as hexadecimal. Sometimes you would like to view it as a decimal, binary or even custom defined constant. To change value format you can use `d` following by `i` then choose what base to work in, this is the equivalent to `ahi`:
+Для улучшения удобочитаемости кода можно изменить способ представления числовых значений radare2 при дизассемблировании, по умолчанию большинство вариантов отображают числовое значение как шестнадцатеричное. Иногда надо числа представлять в десятичной, двоичной системах счисления и даже печатать пользовательские константы. Чтобы изменить формат значения используется `d`, за которым следует ` i`, затем надо выбрать, в какой системе счисления работать, это эквивалентно `ahi`:
 
 ```
 d → i → ...
@@ -39,98 +39,97 @@ d → i →  2
 0x004048f7      48c1e83f       shr rax, '?'
 ```
 
-### Usage of the Cursor for Inserting/Patching...
+### Использование курсора для вставки/исправления...
 
-Remember that, to be able to actually edit files loaded in radare2, you have to start it with the `-w` option. Otherwise a file is opened in read-only mode.
+Помните, что возможность редактировать файла доступна тлоько, если фал загружен в radare2 с использованием флага `-w`. В противном случае файл открывается в режиме "только для чтения".
 
-Pressing lowercase `c` toggles the cursor mode. When this mode is active, the currently selected byte (or byte range) is highlighted.
+При нажатии строчной буквы `c` переключается режим курсора. Когда этот режим активен, выделенный в данный момент байт (или диапазон байтов) подсвечивается.
 
-![Cursor at 0x00404896](cursor.png)
+![Курсор по адресу 0x00404896](cursor.png)
 
-The cursor is used to select a range of bytes or simply to point to a byte. You can use the cursor to create a named flag at specifc location. To do so, seek to the required position, then press `f` and enter a name for a flag.
-If the file was opened in write mode using the `-w` flag or the `o+` command, you can also use the cursor to overwrite a selected range with new values. To do so, select a range of bytes (with HJKL and SHIFT key pressed), then press `i` and enter the hexpair values for the new data. The data will be repeated as needed to fill the range selected. For example:
+Курсор используется для выбора диапазона байтов или просто для указания конкретного байта. Курсор можно использовать для создания именованного флага по указанному смещению. Для этого установитье смещение, затем нажмите клавишу `f` и введите имя флага.
+Если файл был открыт в режиме записи (флаг `-w` или команды `o+`), то курсор может перезаписывать выбранный диапазон новыми значениями. Для этого выберите диапазон байтов (при нажатии клавиш HJKL и SHIFT), затем нажмите клавишу `i` и введите шестнадцатеричные значения для новых данных. Данные будут повторяться по мере необходимости для заполнения выбранного диапазона. Например:
 ```
-<select 10 bytes in visual mode using SHIFT+HJKL>
-<press 'i' and then enter '12 34'>
+<выбрать 10 байт в визуальном режиме, используя SHIFT+HJKL>
+<нажать 'i' и затем ввести '12 34'>
 ```
-The 10 bytes you have selected will be changed to "12 34 12 34 12 ...".
+Выбранные десять байт будут изменены на "12 34 12 34 12 12...".
 
 
-The Visual Assembler is a feature that provides a live-preview while you type in new instructions to patch
-into the disassembly. To use it, seek or place the cursor at the wanted location and hit the 'A' key. To provide multiple instructions, separate them with semicolons, `;`.
+Визуальный ассемблер — это функция, которая обеспечивает предварительный просмотр в реальном времени при вводе новых инструкций по исправлению
+в ассемблерном коде. Чтобы использовать его, найдите или поместите курсор в нужное место и нажмите клавишу «A». Чтобы ввести несколько инструкций подряд, разделите их точкой с запятой, `;`.
 
 ## XREF
 
-When radare2 has discovered a XREF during the analysis, it will show you the information in the Visual Disassembly using `XREF` tag:
+Когда radare2 обнаружит XREF во время анализа, он покажет вам информацию в визуальном дизассемблерировании с помощью тега `XREF` :
 
 ```
 ; DATA XREF from 0x00402e0e (unk)
 str.David_MacKenzie:
 ```
 
-To see where this string is called, press `x`, if you want to jump to the location where the data is used then press the corresponding number [0-9] on your keyboard. (This functionality is similar to `axt`)
+Чтобы увидеть, где вызывается эта строка, нажмите `x`, если вы хотите перейти к месту, где используются данные, затем нажмите соответствующую цифру [0-9] на клавиатуре. (Эта функциональность аналогична `axt`)
 
-`X` corresponds to the reverse operation aka `axf`.
+`X` соответствует обратной операции `axf`.
 
-## Function Argument display
+## Отображение аргументов функции
 
-To enable this view use this config var `e dbg.funcarg = true`
+Чтобы включить это представление, используйте переменную конфигурации `e dbg.funcarg = true`
 
 ![funcarg](funcarg.png)
 
-## Add a comment
+## Добавление комментария
 
-To add a comment press `;`.
+Чтобы добавить комментарий, нажмите `;`.
 
-## Type other commands
+## Введите другие команды
 
-Quickly type commands using `:`.
+Чтобы вводить команды, используйте `:`.
 
-## Search
+## Поиск
 
-`/`: allows highlighting of strings in the current display.
-`:cmd` allows you to use one of the "/?" commands that perform more specialized searches.
+`/`: позволяет подсвечивать строки на текущем дисплее.
+`:cmd` позволяет использовать одну из команд "/?", выполняющие специализированный поиск.
 
 ## The HUDS
 
 ### The "UserFriendly HUD"
 
-The "UserFriendly HUD" can be accessed using the `??` key-combination. This HUD acts as an interactive Cheat Sheet that one can use to more easily find and execute commands. This HUD is particularly useful for new-comers. For experienced users, the other HUDS which are more activity-specific may be more useful.
+Доступ к "UserFriendly HUD" можно получить с помощью комбинации клавиш `??`. Этот HUD действует как интерактивная шпаргалка, которую можно использовать для более легкого поиска и выполнения команд. Он особенно полезен для новичков. Для опытных пользователей другие HUD-ы, более специфичные для конкретной деятельности, более полезны.
 
-### The "flag/comment/functions/.. HUD"
+### Флаги/комментарии/функции/.. HUD"
 
-This HUD can be displayed using the `_` key, it shows a list of all the flags defined and lets you jump to them. Using the keyboard you can quickly filter the list down to a flag that contains a specific pattern.
+Этот HUD отображается с помощью клавиши `_`, он показывает список всех определенных флагов и позволяет переходить к ним. С помощью клавиатуры вы можете быстро отфильтровать список до флага, который содержит определенный шаблон.
 
-Hud input mode can be closed using ^C. It will also exit when backspace is pressed when the user input string is empty.
+Режим ввода HUD можно закрыть с помощью ^C. Он также завершится при нажатии backspace, когда строка ввода пользователя пуста.
 
-## Tweaking the Disassembly
+## Настройка дизассемблерирования
 
-The disassembly's look-and-feel is controlled using the "asm.* configuration keys, which can be
-changed using the `e` command. All configuration keys can also be edited through the Visual Configuration Editor.
+Внешний вид дизассемблирования контролируется с помощью конфигурационных ключей "asm.*", изменяемых с помощью команды `e`. Все ключи конфигурации также можно редактировать с помощью редактора визуальной конфигурации.
 
-## Visual Configuration Editor
+## Визуальный редактор конфигурации
 
-This HUD can be accessed using the `e` key in visual mode. The editor allows you to easily examine and change radare2's configuration. For example, if you want to change something about the disassembly display, select `asm` from the list, navigate to the item you wish to modify it, then select it by hitting `Enter`.
-If the item is a boolean variable, it will toggle, otherwise you will be prompted to provide a new value.
-
-
-![First Select asm](select_asm.png)
+Доступ к этому HUD можно получить с помощью клавиши `e` в визуальном режиме. Редактор позволяет легко просматривать и изменять конфигурацию radare2. Например, если вы хотите что-то изменить в дисплее дизассемблерирования, выберите `asm` из списка, перейдите к элементу, который вы хотите изменить, а затем выберите его, нажав `Enter`.
+Если элемент является логической переменной, он будет переключаться, в противном случае надо будет предложено ввести новое значение.
 
 
-Example switch to pseudo disassembly:
-
-![Pseudo disassembly disabled](pseudo_disable.png)
+![Выберите сначала asm](select_asm.png)
 
 
-![Pseudo disassembly enabled](pseudo_enable.png)
+Пример переключения на псевдоразборку:
 
-Following are some example of eval variable related to disassembly.
+![Псевдодизассемблирование запрещено](pseudo_disable.png)
 
-## Examples
 
-#### asm.arch: Change Architecture && asm.bits: Word size in bits at assembler
+![Псевдодизассемблирование разрешено](pseudo_enable.png)
 
-You can view the list of all arch using `e asm.arch=?`
+Ниже приведены некоторые примеры настроек переменных среды, связанных с дизассемблерированием.
+
+## Примеры
+
+#### asm.arch: Изменение архитектуры && asm.bits: Размер слова в битах на ассемблере
+
+Просмотр списка всех дуг с помощью `e asm.arch=?`
 
 ```
 e asm.arch = dalvik
@@ -150,10 +149,10 @@ e asm.bits = 16
 0000:4876      48             dec ax
 0000:4877      89e2           mov dx, sp
 ```
-This latest operation can also be done using `&` in Visual mode.
+Последняя операция также может быть выполнена с помощью `&` в визуальном режиме.
 
 
-#### asm.pseudo: Enable pseudo syntax
+#### asm.pseudo: Включить псевдосинтакс
 
 ```
 e asm.pseudo = true
@@ -164,7 +163,7 @@ e asm.pseudo = true
 0x00404879      4883e4f0       rsp &= 0xfffffffffffffff0
 ```
 
-#### asm.syntax: Select assembly syntax (intel, att, masm...)
+#### asm.syntax: Выбор синтаксиса дизассемблерирования (intel, att, masm...)
 
 ```
 e asm.syntax = att
@@ -175,7 +174,7 @@ e asm.syntax = att
 0x00404879      4883e4f0       and $0xfffffffffffffff0, %rsp
 ```
 
-#### asm.describe: Show opcode description
+#### asm.describe: Показать описание оп-кода
 
 ```
 e asm.describe = true

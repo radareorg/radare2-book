@@ -1,20 +1,20 @@
-## Flags
+## Флаги
 
-Flags are conceptually similar to bookmarks. They associate a name with a given offset in a file. Flags can be grouped into 'flag spaces'. A flag space is a namespace for flags, grouping together flags of similar characteristics or type. Examples for flag spaces: sections, registers, symbols.
+Флаги концептуально похожи на закладки. Они связывают имя с заданным смещением в файле. Флаги группируются в «пространства флагов». Пространство флагов — это пространство имен для флагов, объединяющее флаги со схожими характеристиками или типом. Примеры для флаговых пространств: секции (sections), регистры (registers), символы (symbols).
 
-To create a flag:
+Создание флага:
 
 ```
 [0x4A13B8C0]> f flag_name @ offset
 ```
 
-You can remove a flag by appending the `-` character to command. Most commands accept `-` as argument-prefix as an indication to delete something.
+Удаление флага - добавление символа `-` к команде. Большинство команд принимают `-` как аргумент-префикс как указание на удаление чего-либо.
 
 ```
 [0x4A13B8C0]> f-flag_name
 ```
 
-To switch between or create new flagspaces use the `fs` command:
+Для переключения между пространствами флагов или создания новых используйте команду `fs`:
 
 ```
 [0x00005310]> fs?
@@ -28,7 +28,7 @@ To switch between or create new flagspaces use the `fs` command:
 | fs-*          remove all flagspaces
 | fs+foo        push previous flagspace and set
 | fs-           pop to the previous flagspace
-| fs-.          remove the current flagspace
+| fs-.          удаление текущего пространства флагов
 | fsq           list flagspaces in quiet mode
 | fsm [addr]    move flags at given address to the current flagspace
 | fss           display flagspaces stack
@@ -45,7 +45,7 @@ To switch between or create new flagspaces use the `fs` command:
 [0x00005310]>
 ```
 
-Here there are some command examples:
+Вот несколько примеров команд:
 
 ```
 [0x4A13B8C0]> fs symbols ; select only flags in symbols flagspace
@@ -55,12 +55,11 @@ Here there are some command examples:
 [0x4A13B8C0]> f-myflag  ; delete the flag called 'myflag'
 ```
 
-You can rename flags with `fr`.
+Переименовывание флагов с помощью `fr` .
 
-### Local flags
+### Локальные флаги
 
-Every flag name should be unique for addressing reasons. But it is quite a common need
-to have the flags, for example inside the functions, with simple and ubiquitous names like `loop` or `return`. For this purpose you can use so called "local" flags, which are tied to the function where they reside. It is possible to add them using `f.` command:
+Каждое имя флага должно быть уникальным по понятным причинам. Часто надо задавать флаги, например внутри функций, с простыми и вездесущими именами, такими как `loop` или `return`. Здесь можно использовать так называемые «локальные» флаги, которые привязаны к функции, в которой они находятся. Их можно добавить с помощью команды `f.`:
 
 ```
 [0x00003a04]> pd 10
@@ -97,14 +96,14 @@ to have the flags, for example inside the functions, with simple and ubiquitous 
 [0x00003a04]>
 ```
 
-### Flag Zones
+### Флаги зон
 
-radare2 offers flag zones, which lets you label different offsets on the scrollbar, for making it easier to navigate through large binaries. You can set a flag zone on the current seek using:
+Radare2 реализует механизм флагов зон, позволяющие помечать различные смещения на полосе прокрутки, чтобы упростить навигацию по большим двоичным файлам. Установка флага зоны по текущему смещению:
 
 ```
 [0x00003a04]> fz flag-zone-name
 ```
 
-Set `scr.scrollbar=1` and go to the Visual mode, to see your flag zone appear on the scrollbar on the right end of the window.
+Установите `scr.scrollbar=1` и перейдите в визуальный режим, зона флага появляется на полосе прокрутки с правой стороны окна.
 
-See `fz?` for more information.
+Посмотрите инструкцию - `fz?`.

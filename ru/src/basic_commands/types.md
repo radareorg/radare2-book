@@ -1,6 +1,6 @@
-## Working with data types
+## Работа с типами данных
 
-Radare2 can also work with data types. You can use standard C data types or define your own using C. Currently, there is a support for structs, unions, function signatures, and enums.
+Radare2 также может работать с типами данных. Можно использовать стандартные типы данных C или определять собственные с помощью C. В настоящее время существует поддержка структур, юнионов, сигнатур функций и перечислений.
 
 ```
 [0x00000000]> t?
@@ -32,27 +32,27 @@ Usage: t   # cparse types commands
 | tt[?]                      List all loaded typedefs
 ```
 
-### Defining new types
+### Определение новых типов
 
-There are three different methods to define new types:
+Существует три различных метода определения новых типов:
 
-1. Defining a new type from r2 shell immediately, to do this you will use `td` command, and put the whole line between double quotes. For example:
+1. Определение нового типа из оболочки r2 - используйте команду `td`, а всю строку возмите в двойные кавычками. Например:
 
 `"td struct person {int age; char *name; char *address;};"`
 
-2. You can also use `to -` to open a text editor and write your own types in there. This is preferable when you got too many types to define.
+2. Также можно использовать `to -`, чтобы открыть текстовый редактор для представления в нем требуемых типов. Этот подход удобен, когда у вас слишком много типов.
 
-3. Radare2 also supports loading header files using the command `to` followed by a path to the header file you want to load.
+3. Radare2 также поддерживает загрузку заголовочных файлов с помощью команды `to`, путь к файлу заголовка - параметр команды.
 
-You can View loaded types in r2 using `ts` for structures, `tu` for unions, `tf` for function signatures, `te` for enums.
+Можно просматривать загруженные типы в r2, используя `ts` для структур, `tu` для юнионов, `tf` для сигнатур функций, `te` для перечислений.
 
-You can also cast pointers to data types and view data in there accordingly with `tp`. EX:
+Также можно преобразовывать (cast) указатели в типы данных и затем просматривать данные - команда `tp`. Пример:
 
 ```
 [0x00400511]> tp person = 0x7fff170a46b0
        age : 0x7fff170a46b0 = 20
        name : (*0x4005b0) 0x7fff170a46b4 = My name
        address : (*0x4005b8) 0x7fff170a46bc = My age
-[0x00400511]> 
+[0x00400511]>
 ```
 

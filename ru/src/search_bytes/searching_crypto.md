@@ -1,7 +1,7 @@
-## Searching for Cryptography materials
+## Поиск криптографических данных
 
-### Searching AES keys
-radare2 is capable of finding **expanded AES** keys with `/ca` command. It searches from current seek position up to the `search.distance` limit, or until end of file is reached. You can interrupt current search by pressing `Ctrl-C`. For example, to look for AES keys in a memory dump:
+### Поиск ключей AES
+radare2 способен находить **расширенные ключи AES** с помощью команды `/ca`. Он выполняет поиск от текущей позиции поиска до предела `search.distance` или до конеца файла. Можно прервать текущий поиск, нажав `Ctrl-C`. Например, чтобы найти ключи AES в дампе памяти:
 
 ```
 0x00000000]> /ca
@@ -10,10 +10,10 @@ hits: 1
 0x000000fb hit0_0 6920e299a5202a6d656e636869746f2a
 ```
 
-The output length gives you the size of the AES key used: 128, 192 or 256 bits. If you are simply looking for plaintext AES keys in your binary, `/ca` will not find them they must have been expanded by the key expansion algorithm.
+Полученная длина соответсвует размеру используемого ключа AES: 128, 192 или 256 бит. Если вы просто ищете ключи AES в виде открытого текста в двоичном файле, `/ca` не найдет их, они должны быть расшифрованы алгоритмом расширения ключей.
 
-### Searching private keys and certificates
-`/cr` command implements the search of private keys (RSA and ECC). `/cd` command implements a similar feature to search certificates.
+### Поиск закрытых ключей и сертификатов
+Команда `/cr` реализует поиск закрытых ключей (RSA и ECC). Команда `/cd` реализует аналогичную функцию поиска сертификатов.
 
 ```
 [0x00000000]> /cr
@@ -22,10 +22,10 @@ hits: 2
 0x000000fa hit1_0 302e020100300506032b657004220420fb3d588296fed5694ff7049eafb74490bf4bc6467ee11a08...
 ```
 
-### Entropy analysis
-`p=e` might give some hints if high entropy sections are found trying to cover up a hardcoded secret. 
+### Энтропийный анализ
+`p=e` дают подсказки, указывая участки с высокой энтропией, пытающиеся скрыть жестко закодированный секрет.
 
-There is the possibility to delimit entropy sections for later use with `\s` command:
+Есть возможность разграничить участки энтропии для последующего использования с помощью команды `\s`:
 
 ```
 [0x00000000]> b
@@ -50,4 +50,4 @@ f entropy_section_5 0x00002000 0x0144d374
 f entropy_section_6 0x00002000 0x0144f374
 ```
 
-The blocksize is increased to 4096 bytes from the default 100 bytes so that the entropy search `/s` can work on reasonably sized chunks for entropy analysis. The sections flags can be applied with the dot operator, `./s*` and then looped through `px 32 @@ entropy*`.
+Размер блока увеличивается до 4096 байт со 100 байт по умолчанию, чтобы энтропийный поиск `/s` мог работать на блоках разумного размера. Флаги разделов могут быть применены с помощью оператора dot `./s*`, и затем перечисляемы при помощи `px 32 @@ entropy*`.

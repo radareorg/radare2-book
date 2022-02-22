@@ -1,6 +1,6 @@
-## Symbols (Exports)
+## Символы (Экспорты)
 
-With rabin2, the generated symbols list format is similar to the imports list. Use the `-s` option to get it:
+В rabin2 формат списка сгенерированных символов аналогичен списку импорта. Используйте параметр `-s` для получения экспортов:
 
 ```
 rabin2 -s /bin/ls | head
@@ -19,7 +19,7 @@ nth paddr       vaddr      bind   type   size lib name
 118 0x0001f5e0 0x0021f5e0 GLOBAL  OBJ  8 program_short_name
 ```
 
-With the `-sr` option rabin2 produces a radare2 script instead. It can later be passed to the core to automatically flag all symbols and to define corresponding byte ranges as functions and data blocks.
+С опцией `-sr` rabin2 создает сценарий radare2. Позже он может быть передан в ядро, чтобы автоматически помечать все символы и определять соответствующие диапазоны байтов как функции и блоки данных.
 
 ```
 $ rabin2 -sr /bin/ls | head

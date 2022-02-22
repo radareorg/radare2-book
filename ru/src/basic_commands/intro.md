@@ -1,33 +1,33 @@
-# Basic Commands
+# Основные команды
 
-Most command names in radare are derived from action names. They should be easy to remember, as they are short. Actually, all commands are single letters. Subcommands or related commands are specified using the second character of the command name. For example, `/ foo` is a command to search plain string, while `/x 90 90` is used to look for hexadecimal pairs.
+Большинство имен команд в radare являются производными от названий действий. Их легко запомнить, так как они короткие. На самом деле, все команды являются одиночными буквами. Подкоманды или связанные команды задаются с помощью второго символа в названии. Например, `/ foo` — это команда для поиска строки, а `/x 90 90` используется для поиска шестнадцатеричных пар.
 
-The general format for a valid command (as explained in the [Command Format](../first_steps/command_format.md) chapter) looks like this:
+Общий формат команды (как описано в главе [Формат команды](../first_steps/command_format.md)) выглядит следующим образом:
 
 ```
 [.][times][cmd][~grep][@[@iter]addr!size][|>pipe] ; ...
 ```
 
-For example,
+Например,
 
 ```
-> 3s +1024    ; seeks three times 1024 from the current seek
+> 3s +1024    ; ищет три раза 1024 из текущего смещения
 ```
 
-If a command starts with `=!`, the rest of the string is passed to the currently loaded IO plugin (a debugger, for example). Most plugins provide help messages with `=!?` or `=!help`.
+Если команда начинается с `=!`, остальная часть строки передается загруженному в данный момент подключаемому модулю (например, отладчику). Большинство плагинов предоставляют инструкции при помощи `=!?` или `=!help`.
 
 ```
 $ r2 -d /bin/ls
-> =!help      ; handled by the IO plugin
+> =!help      ; обрабатывается плагином ввода-вывода
 ```
 
-If a command starts with `!`, posix_system() is called to pass the command to your shell. Check `!?` for more options and usage examples.
+Если команда начинается с `!`, вызывается posix_system() для передачи команды в оболочку. Ознакомьтесь `!?` для получения дополнительных вариантов и примеров использования.
 
 ```
-> !ls         ; run `ls` in the shell
+> !ls         ; запустить `ls` в операционной системе
 ```
 
-The meaning of the arguments (iter, addr, size) depends on the specific command. As a rule of thumb, most commands take a number as an argument to specify the number of bytes to work with, instead of the currently defined block size. Some commands accept math expressions or strings.
+Значение аргументов (iter, addr, size) зависит от конкретной команды. Как правило, большинство команд принимают число в качестве аргумента, чтобы указать количество байтов для работы, а не текущий размер блока. Некоторые команды принимают математические выражения или строки.
 
 ```
 > px 0x17     ; show 0x17 bytes in hexs at current seek
@@ -35,14 +35,14 @@ The meaning of the arguments (iter, addr, size) depends on the specific command.
 > / lib       ; search for 'lib' string.
 ```
 
-The `@` sign is used to specify a temporary offset location or a seek position at which the command is executed, instead of current seek position. This is quite useful as you don't have to seek around all the time.
+Знак `@` используется для указания временного адреса или смещения, в которой выполняется команда, вместо текущей позиции поиска. Очень удобно, так как вам не нужно переустанавливать смещение всякий раз.
 
 ```
 > p8 10 @ 0x4010  ; show 10 bytes at offset 0x4010
 > f patata @ 0x10 ; set 'patata' flag at offset 0x10
 ```
 
-Using `@@` you can execute a single command on a list of flags matching the glob. You can think of this as a foreach operation:
+Используя `@@`, можно выполнить одну команду над списком флагов, подобно glob. Можете воспринимать это как foreach:
 
 ```
 > s 0
@@ -50,14 +50,14 @@ Using `@@` you can execute a single command on a list of flags matching the glob
 > p8 20 @@ hit0_*   ; show 20 hexpairs at each search hit
 ```
 
-The `>` operation is used to redirect the output of a command into a file (overwriting it if it already exists).
+Операция `>` используется для перенаправления выходных данных команды в файл (перезаписи его, если он уже существует).
 
 ```
 > pr > dump.bin   ; dump 'raw' bytes of current block to file named 'dump.bin'
 > f  > flags.txt  ; dump flag list to 'flags.txt'
 ```
 
-The `|` operation (pipe) is similar to what you are used to expect from it in a *NIX shell: an output of one command as input to another.
+Операция `|` (канал) аналогична тому, что в оболочке *NIX: cnfylfhnysq вывод одной команды в качестве входных данных для другой.
 
 ```
 [0x4A13B8C0]> f | grep section | grep text
@@ -65,13 +65,13 @@ The `|` operation (pipe) is similar to what you are used to expect from it in a 
 0x080d24b0 512 section._text_end
 ```
 
-You can pass several commands in a single line by separating them with a semicolon `;`:
+Можно передать несколько команд в одной строке, разделив их точкой с запятой `;`:
 
 ```
 > px ; dr
 ```
 
-Using `_`, you can print the result that was obtained by the last command.
+С помощью `_` можно распечатать результат, полученный последней командой.
 
 ```
 [0x00001060]> axt 0x00002004

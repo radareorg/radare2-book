@@ -1,12 +1,12 @@
-# Visual Configuration Editor
+# Визуальный редактор конфигурации
 
-`Ve` or `e` in visual mode allows you to edit radare2 configuration visually.
-For example, if you want to change the assembly display just select `asm` in the list and choose your assembly display flavor.
+Команда `Ve` или `e` в визуальном режиме позволяют редактировать конфигурацию radare2 визуально.
+Например, если вы хотите изменить режим отображения дизассемблерирования, выберите `asm` в списке и выберите вариант отображения.
 
-![First Select asm](select_asm.png)
+![Выберите сначала asm](select_asm.png)
 
-Example switch to pseudo disassembly:
+Пример переключения на псевдоразборку:
 
-![Pseudo disassembly disabled](pseudo_disable.png)
+![Псевдодизассемблирование запрещено](pseudo_disable.png)
 
-![Pseudo disassembly enabled](pseudo_enable.png)
+![Псевдодизассемблирование разрешено](pseudo_enable.png)
