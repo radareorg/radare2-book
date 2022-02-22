@@ -1,9 +1,8 @@
 # Плагины Python
 
-Необходимым условием для реализации модулей расширения на языке Python для radare2 является установка плагина r2lang: `r2pm -i lang-python`.
-Обратим внимание, что ради читабельности кода в следующих примерах отсутствуют функции фактического декодирования!
+Необходимым условием для реализации модулей расширения на языке Python для radare2 является установка плагина r2lang: `r2pm -i lang-python`. Обратим внимание, что ради читабельности кода в следующих примерах отсутствуют фактическая реализация функций!
 
-Для этого нужно сделать следующее:
+Нужно сделать следующее:
 1. `import r2lang` и `from r2lang import R` (модуль констант)
 2. Далее для плагина RAsm реализуем функцию с двумя подфункциями - `assemble` и `disassemble`, она также должна возвращать структуру, представляющую плагин
 ```python
@@ -76,7 +75,7 @@ def mycpu_anal(a):
         return [4, result]
 
 ```
-5. This structure should contain a pointers to these 2 functions - `set_reg_profile` and `op`
+5. Эта структура должна содержать указатели на две функции `set_reg_profile` и `op`:
 
 ```python
     return {
@@ -90,7 +89,7 @@ def mycpu_anal(a):
             "op" : op,
     }
 ```
-6. (Необязательный шаг) Чтобы добавить дополнительную информацию о размерах операций и выравнивании добавьте подфункцию `archinfo` и поместите ее указатель в структуре
+6. (Необязательный шаг) Чтобы добавить дополнительную информацию о размерах операций и выравнивании добавьте подфункцию `archinfo` и поместите ее указатель в структуре:
 
 ```python
 def mycpu_anal(a):
@@ -136,29 +135,29 @@ r2 -I mycpu.py some_file.bin
 
 Смотрите также:
 
-* [Python](https://github.com/radareorg/radare2-bindings/blob/master/libr/lang/p/test-py-asm.py)
-* [Javascript](https://github.com/radareorg/radare2-bindings/blob/master/libr/lang/p/dukasm.js)
+* [Python](https://github.com/radareorg/radare2-bindings/blob/master/libr/lang/p/test-py-asm.py),
+* [Javascript](https://github.com/radareorg/radare2-bindings/blob/master/libr/lang/p/dukasm.js).
 
 ### Реализация плагина формата в Python
 
-Обратим внимание, что ради читабельности кода в следующих примерах отсутствуют функции фактического декодирования!
+Обратим внимание, что ради читабельности кода в следующих примерах отсутствуют конкретные реализации функции!
 
-Для этого нужно сделать следующее:
-1. `import r2lang`
+Нужно выполнить:
+1. `import r2lang`,
 2. Создайте функцию с подфункциями:
-   - `load`
-   - `load_bytes`
-   - `destroy`
-   - `check_bytes`
-   - `baddr`
-   - `entries`
-   - `sections`
-   - `imports`
-   - `relocs`
-   - `binsym`
-   - `info`
+   - `load`,
+   - `load_bytes`,
+   - `destroy`,
+   - `check_bytes`,
+   - `baddr`,
+   - `entries`,
+   - `sections`,
+   - `imports`,
+   - `relocs`,
+   - `binsym`,
+   - `info`,
 
-   и вернуть структуру плагина (для плагина RAsm)
+   вернуть структуру плагина (для плагина RAsm):
 ```python
 def le_format(a):
     def load(binf):
@@ -174,9 +173,7 @@ def le_format(a):
         except:
             return [0]
 ```
-и т.д. Please be sure of the parameters for each function and format of returns.
-Обратите внимание, что функции `entries`, `sections`, `imports`, `relocs` возвращают список словарей специального вида, каждый со своим типом.
-Другие функции возвращают только список числовых значений, даже всего один элемент.
+Проверяйте параметры всех функций и форматы возвращаемых ими данных. Обратите внимание, что функции `entries`, `sections`, `imports`, `relocs` возвращают список словарей специального вида, каждый со своим типом. Другие функции возвращают только список числовых значений, даже если оно всего одно.
 Есть специальная функция, которая возвращает информацию о файле - `info`:
 ```python
     def info(binf):
@@ -216,7 +213,7 @@ def le_format(a):
             "info" : info,
     }
 ```
-4. Затем вам нужно зарегистрировать его как плагин формата файла:
+4. Затем нужно зарегистрировать новый плагин формата файла:
 
 ```python
 print("Registering OS/2 LE/LX plugin...")
