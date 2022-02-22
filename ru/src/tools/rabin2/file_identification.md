@@ -32,7 +32,7 @@ subsys   linux
 va       true
 ```
 
-Чтобы заставить rabin2 выдавать информацию в формате, понятном основная программе radare2, добавте флаг `-Ir`:
+Чтобы заставить rabin2 выдавать информацию в формате, понятном основной программе radare2, добавьте флаг `-Ir`:
 ```
 $ rabin2 -Ir /bin/ls
 e cfg.bigendian=false
@@ -44,4 +44,3 @@ e asm.os=linux
 e asm.arch=x86
 e asm.pcalign=0
 ```
-
