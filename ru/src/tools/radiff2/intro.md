@@ -1,50 +1,49 @@
-# Radiff2
+# Программа Radiff2
 
 Radiff2 - это инструмент, предназначенный для сравнения двоичных файлов, подобно тому, как обычный `diff` сравнивает текстовые файлы.
 ```
 $ radiff2 -h
 Usage: radiff2 [-abBcCdjrspOxuUvV] [-A[A]] [-g sym] [-m graph_mode][-t %] [file] [file]
-  -a [arch]  specify architecture plugin to use (x86, arm, ..)
-  -A [-A]    run aaa or aaaa after loading each binary (see -C)
-  -b [bits]  specify register size for arch (16 (thumb), 32, 64, ..)
-  -B         output in binary diff (GDIFF)
-  -c         count of changes
-  -C         graphdiff code (columns: off-A, match-ratio, off-B) (see -A)
-  -d         use delta diffing
-  -D         show disasm instead of hexpairs
-  -e [k=v]   set eval config var value for all RCore instances
-  -g [sym|off1,off2]   graph diff of given symbol, or between two offsets
-  -G [cmd]   run an r2 command on every RCore instance created
-  -i         diff imports of target files (see -u, -U and -z)
-  -j         output in json format
-  -n         print bare addresses only (diff.bare=1)
-  -m [aditsjJ]  choose the graph output mode
-  -O         code diffing with opcode bytes only
-  -p         use physical addressing (io.va=0)
-  -q         quiet mode (disable colors, reduce output)
-  -r         output in radare commands
-  -s         compute edit distance (no substitution, Eugene W. Myers' O(ND) diff algorithm)
-  -ss        compute Levenshtein edit distance (substitution is allowed, O(N^2))
-  -S [name]  sort code diff (name, namelen, addr, size, type, dist) (only for -C or -g)
-  -t [0-100] set threshold for code diff (default is 70%)
-  -x         show two column hexdump diffing
-  -X         show two column hexII diffing
-  -u         unified output (---+++)
-  -U         unified output using system 'diff'
-  -v         show version information
-  -V         be verbose (current only for -s)
-  -z         diff on extracted strings
-  -Z         diff code comparing zignatures
+  -a [arch]  указать архитектурный плагин для использования (x86, arm, ..)
+  -A [-A]    запустить aaa или aaaa после загрузки каждого бинарика (смотри -C)
+  -b [bits]  указать размер регистров для архитектуры (16, 32, 64, ..)
+  -B         вывод в двоичном diff (GDIFF)
+  -c         количество изменений
+  -C         выполнить сравнения графов управления (колонки: смещение-A, оценка сходства, смещение-B) (смотри -A)
+  -d         использовать delta diffing
+  -D         выводить дизассемблирование вместо шеснадцатеричного кода
+  -e [k=v]   установить значение переменной среды для всех экземплярах RCore
+  -g [sym|off1,off2]   сравнение графа заданного символа или двух смещений
+  -G [cmd]   запустить команду r2 на каждом созданном экземпляре RCore
+  -i         импортировать diff-ы  целевых файлов (смотри -u, -U и -z)
+  -j         выводить результат в формте json
+  -n         печатать только адреса (diff.bare=1)
+  -m [aditsjJ]  выбрать режим вывода графа
+  -O         производить сравнение между байтами оп-кодов
+  -p         использовать физическую адресацию (io.va=0)
+  -q         тихий режим (обесцетить вывод и его объем)
+  -r         вывести результат в виде команд radare
+  -s         вычислить расстояние редактирование (без подстановки, алгоритм  сравнения Eugene W. Myer O(ND))
+  -ss        вычислить расстояние редактирование Левенштейна (замена разрешена, O(N^2))
+  -S [name]  сортировать код diff (имя, длина имени, адрес, размер, тип, расстояние) (только для -C или -g)
+  -t [0-100] установить порог для кода diff (по умолчанию 70%)
+  -x         показать две колонки различий в шеснадцатеричном виде
+  -X         показать две колонки различий hexII
+  -u         унифицированный формат вывода (---+++)
+  -U         унифицированный вывод, используя системный 'diff'
+  -v         показать версию
+  -V         больше информации (сейчас только для -s)
+  -z         сравнение экстрагированных строк
+  -Z         сравнение кода в виде сигнатур
 
-Graph Output formats: (-m [mode])
-  <blank/a>  Ascii art
-  s          r2 commands
+Форматы вывода графа управления: (-m [mode])
+  <blank/a>  Ascii-art
+  s          команды r2
   d          Graphviz dot
   g          Graph Modelling Language (gml)
   j          json
-  J          json with disarm
+  J          json с disarm
   k          SDB key-value
   t          Tiny ascii art
-  i          Interactive ascii art
+  i          Интерактивный ascii-art
 ```
-
