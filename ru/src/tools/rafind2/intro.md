@@ -5,29 +5,29 @@ Rafind2 — это командная строка библиотеки `r_searc
 ```
 $ rafind2 -h
 Usage: rafind2 [-mXnzZhqv] [-a align] [-b sz] [-f/t from/to] [-[e|s|S] str] [-x hex] -|file|dir ..
- -a [align] only accept aligned hits
- -b [size]  set block size
- -e [regex] search for regex matches (can be used multiple times)
- -f [from]  start searching from address 'from'
- -h         show this help
- -i         identify filetype (r2 -nqcpm file)
- -j         output in JSON
- -m         magic search, file-type carver
- -M [str]   set a binary mask to be applied on keywords
- -n         do not stop on read errors
- -r         print using radare commands
- -s [str]   search for a specific string (can be used multiple times)
- -S [str]   search for a specific wide string (can be used multiple times). Assumes str is UTF-8.
- -t [to]    stop search at address 'to'
- -q         quiet - do not show headings (filenames) above matching contents (default for searching a single file)
- -v         print version and exit
- -x [hex]   search for hexpair string (909090) (can be used multiple times)
- -X         show hexdump of search results
- -z         search for zero-terminated strings
- -Z         show string found on each search hit
+ -a [align] принимать только выровненные хиты
+ -b [size]  установить размер блока
+ -e [regex] поиск соответствий regex (может быть использовано несколько раз)
+ -f [from]  начать поиск с адреса 'from'
+ -h         показать это сообщение
+ -i         идентифицировать тип файла (r2 -nqcpm файл)
+ -j         выводить в формате JSON
+ -m         поиск магических последовательностей, идентификация типа файла
+ -M [str]   задать бинарную маску, применяемую к ключевым словам
+ -n         не останавливаться при наличии ошибок чтения
+ -r         вывести результат в виде команд radare
+ -s [str]   поиск заданной строки (может быть использовано несколько раз)
+ -S [str]   поиск заданной wide-строки (может быть использовано несколько раз), предполагается кодировка UTF-8.
+ -t [to]    остановить поиск на адресе 'to'
+ -q         тихий режим, не показывать заголовки в результатах (имена файлов), совпадающий контент (по умолчанию для поиска в одном файле)
+ -v         напечатать версию и выйти
+ -x [hex]   поиск шнадцатеричных строк (909090) (может быть использовано несколько раз)
+ -X         выводить результат в виде шестнадцатеричного дампа
+ -z         поиск строк, заканчивающихся нулем
+ -Z         показывать строки для каждого хита
 ```
 
-Вот как его использовать, сначала найдем "lib" внутри двоичного файла `/bin/ls`.
+Вот как его использовать: сначала найдем "lib" внутри двоичного файла `/bin/ls`.
 ```
 $ rafind2 -s lib /bin/ls
 0x5f9
@@ -62,14 +62,14 @@ $ for a in `rafind2 -s lib $F` ; do \
 0x000006ef  6c69 6200 0000 0000 .. lib......&......
 ```
 
-rafind2 также может быть использован в качестве замены `file` для идентификации mimetype файла с помощью внутренней магической базы данных radare2.
+Rafind2 также может быть использован в качестве замены `file` для идентификации mimetype файла с помощью внутренней базы данных магических последовательностей radare2.
 
 ```
 $ rafind2 -i /bin/ls
 0x00000000 1 Mach-O
 ```
 
-Также утилита работает как замена `strings`, аналогично тому, что вы делаете с rabin2 -z, но без заботы о разборе заголовков и подчинении двоичным разделам.
+Также утилита работает как замена `strings` аналогично rabin2 -z, но без анализа заголовков и двоичных разделов.
 
 ```
 $ rafind2 -z /bin/ls| grep http
