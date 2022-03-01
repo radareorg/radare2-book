@@ -13,7 +13,7 @@ $ rasign2 -o libc_sigs2.sdb libc.so.6
 ```
 $ r2 libc.so.6
 [0x00024330]> aa # анализировать файл, производя поиск функций
-[x] Анализ всех флагов категории sym. и entry0 (aa)
+[x] Анализ флагов категории sym. и entry0 (aa)
 [0x00024330]> zg  # генерировать сигнатуры для нйденных функций
 сгенерировано сигнатур: 2870
 [0x00024330]> zos libc_sigs.sdb  # сохранить сигнатуры в файл
@@ -23,7 +23,7 @@ $ r2 libc.so.6
 
 ```
 $ rasign2 -a -o /tmp/libc_sigs2.sdb libc.so.6
-[x] Анализ всех флагов категории sym. и entry0 (aa)
+[x] Анализ флагов категории sym. и entry0 (aa)
 [x] Анализ вызовов функций (aac)
 [x] Анализ длин блоков инструкций ссылок (aar)
 [x] Анализ ссылок objc
@@ -40,7 +40,7 @@ $ rasign2 -a -o /tmp/libc_sigs2.sdb libc.so.6
 
 ```
 $ rasign2 -r hello_world  |grep main
-[x] Анализ всех флагов категории sym. и entry0 (aa)
+[x] Анализ флагов категории sym. и entry0 (aa)
 сгенерированных сигнатур:  17
 za main b 554889e54883ec20488d051b010000488945e8488d0516010000488945f0488b45e84889c7e88cfeffff8945e0488b45f04889c7e87dfeffff8945e48b55e08b45e401d083c00148984889c7e875feffff488945f848837df800743e488b55e8488b45f84889d64889c7e827feffff488b55f0488b45f84889d64889c7e854feffff488b45f84889c7e818feffff488b45f84889c7e8ecfdffff90c9c3:ffffffffffffffffff000000000000ffffffffff000000000000ffffffffffffffffffffffff00000000ffffffffffffffffffffff00000000ffffffffffffffffffffffffffffffffffffffff00000000ffffffffffffffffffff00ffffffffffffffffffffffffffffff00000000ffffffffffffffffffffffffffffff00000000ffffffffffffffff00000000ffffffffffffffff00000000ffffff
 za main g cc=2 nbbs=3 edges=3 ebbs=1 bbsum=157
