@@ -1,30 +1,29 @@
 ## Примеры
 
-Инструмент rahash2 используется для вычисления контрольных сумм и имеет функции байтовых потоков, файлов, текстовых строк.
+Инструмент rahash2 используется для вычисления контрольных сумм, хэшей,  включает функции хеширование байтовых потоков, блоков, файлов, текстовых строк.
 
 ```
 $ rahash2 -h
 Usage: rahash2 [-rBhLkv] [-b S] [-a A] [-c H] [-E A] [-s S] [-f O] [-t O] [file] ...
- -a algo     comma separated list of algorithms (default is 'sha256')
- -b bsize    specify the size of the block (instead of full file)
- -B          show per-block hash
- -c hash     compare with this hash
- -e          swap endian (use little endian)
- -E algo     encrypt. Используйте -S для установки ключа и -I для установки IV
- -D algo     decrypt. Используйте -S для установки ключа и -I для установки IV
- -f from     start hashing at given address
- -i num      repeat hash N iterations
- -I iv       use give initialization vector (IV) (hexa or s:string)
- -S seed     use given seed (hexa or s:string) use ^ to prefix (key for -E)
-             (- загрузит ключ из stdin, префикс @ указывает на файл
- -k          show hash using the openssh's randomkey algorithm
- -q          run in quiet mode (-qq to show only the hash)
- -L          list all available algorithms (see -a)
- -r          output radare commands
- -s string   hash this string instead of files
- -t to       stop hashing at given address
- -x hexstr   hash this hexpair string instead of files
- -v          show version information
+ -a algo     список алгоритмов, разделенных запятой (по умолчанию 'sha256')
+ -b bsize    задать размер блока данных (вместо файла целиком)
+ -B          показать хэши по блокам
+ -c hash     сравнить с хэшем, переданным в параметре
+ -e          переключить проядок батов (swap endian) (использовать little endian)
+ -E algo     шифровать, используйте -S для установки ключа и -I для установки вектора инициализации
+ -D algo     расшифровать, используйте -S для установки ключа и -I для установки вектора инициализации
+ -f from     начать хэширование по заданному адресу
+ -i num      повтороить хэширование num раз
+ -I iv       использвать заданный вектор инициализации (IV) (шестнадцатеричный или s:строковый)
+ -S seed     задать начальное зерно (seed) (шестнадцатеричный или s:строковый), используйте ^ для задания префикса (ключа для -E),  "-" загрузит ключ с stdin, префикс @ указывает на файл
+ -k          показать хэш, используя алгоритм randomkey из библиотеки openssh
+ -q          запуск в "тихом" режиме (-qq показывает только результаты)
+ -L          перечислить все доступные алгоритмы (смотрите -a)
+ -r          вывести в виде команд radare
+ -s string   хэшировать строку вместо файлов
+ -t to       остановить хэширование на заданном адресе
+ -x hexstr   хэшировать заданный блок байтов, заданных в шестнадцатеричном виде
+ -v          показать версию программы и дополнительную информацию
 ```
 
 Чтобы получить хэш-значение MD5 текстовой строки, используйте параметр `-s` :
@@ -34,9 +33,7 @@ $ rahash2 -q -a md5 -s 'hello world'
 5eb63bbbe01eeed093cb22bb8f5acdc3
 ```
 
-Можно вычислить хэш-значения для содержимого файлов. Не пытайтесь сделать это для очень больших файлов, потому что rahash2 буферизует весь вход в памяти перед вычислением хэша.
-
-Чтобы применить все алгоритмы, известные для rahash2, используйте `all` в качестве имени алгоритма:
+Можно вычислить хэш-значения для содержимого файлов. Не пытайтесь проводить хэширование очень больших файлов в такой форме, так как rahash2 буферизует весь вход в памяти перед вычислением хэша. Чтобы надо применить все алгоритмы хэширования, известные rahash2, используйте `all` в качестве имени алгоритма:
 
 ```
 $ rahash2 -a all /bin/ls
