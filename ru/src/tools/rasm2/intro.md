@@ -1,47 +1,47 @@
 # Утилита Rasm2
 
-Программа `rasm2` является ассемблером/дизассемблером. Изначально инструмент `rasm` разработан для выполнения двоичного патчинга. Основная функция заключается в получении байтов, соответствующих заданной машинной инструкции (оп-кода).
+Программа `rasm2` является ассемблером/дизассемблером. Изначально инструмент `rasm` разработан для внесения исправлений (patching) в двоичный файл. Основная функция заключается в получении кодов байтов, соответствующих заданной машинной инструкции (оп-кода).
 
 ```
 $ rasm2 -h
 Usage: rasm2 [-ACdDehLBvw] [-a arch] [-b bits] [-o addr] [-s syntax]
              [-f file] [-F fil:ter] [-i skip] [-l len] 'code'|hex|-
- -a [arch]    Set architecture to assemble/disassemble (see -L)
- -A           Show Analysis information from given hexpairs
- -b [bits]    Set cpu register size (8, 16, 32, 64) (RASM2_BITS)
- -B           Binary input/output (-l is mandatory for binary input)
- -c [cpu]     Select specific CPU (depends on arch)
- -C           Output in C format
- -d, -D       Disassemble from hexpair bytes (-D show hexpairs)
- -e           Use big endian instead of little endian
- -E           Display ESIL expression (same input as in -d)
- -f [file]    Read data from file
- -F [in:out]  Specify input and/or output filters (att2intel, x86.pseudo, ...)
- -h, -hh      Show this help, -hh for long
- -i [len]     ignore/skip N bytes of the input buffer
- -j           output in json format
- -k [kernel]  Select operating system (linux, windows, darwin, ..)
- -l [len]     Input/Output length
- -L           List Asm plugins: (a=asm, d=disasm, A=analyze, e=ESIL)
- -o [offset]  Set start address for code (default 0)
- -O [file]    Output file name (rasm2 -Bf a.asm -O a)
- -p           Run SPP over input for assembly
- -q           quiet mode
- -r           output in radare commands
- -s [syntax]  Select syntax (intel, att)
- -v           Show version information
- -w           What's this instruction for? описание опкода
- Если значение '-l' больше выходной длины, вывод заполняется nop-ами
+ -a [arch]    Задать архитектуру для процедур ассемблирования/дисассемблирования (смотрите -L)
+ -A           Показать результаты анализа заданных шеснадцатеричных кодов
+ -b [bits]    Задать разрядность регистров процессора (8, 16, 32, 64) (RASM2_BITS)
+ -B           Вывод/ввод в двоичном виде (-l обязателен для двоичного вывода)
+ -c [cpu]     Задать конкретный CPU (зависит от архитектуры)
+ -C           Вывод в формате C
+ -d, -D       Дизассемблировать из шестнадцатеричных кодов байтов (-D показывать оп-коды)
+ -e           Задать прямой порядок (big endian) вместо обратного (little endian) порядок байтов
+ -E           Выводить ESIL-выражения (вход тот же как в -d)
+ -f [file]    Прочитать данные из файла
+ -F [in:out]  Задать входной и/или выходной фильтр (att2intel, x86.pseudo, ...)
+ -h, -hh      Показать данное сообщение, -hh дает больше информации
+ -i [len]     Игнорировать/пропустить len байт входных данных
+ -j           Выводить в формате json
+ -k [kernel]  Задать операционную систему  (linux, windows, darwin, ..)
+ -l [len]     Длина ввода/вывода
+ -L           Перечислить плагины Asm: (a-ассемлирование, d-дизассемблирование, A-анализ, e-ESIL)
+ -o [offset]  Задать начальное смещение (по умлочанию 0)
+ -O [file]    Имя выходного файла (rasm2 -Bf a.asm -O a)
+ -p           Выполнить SPP над входными данными для ассемблирования
+ -q           "Тихий" режим
+ -r           Представить результат в виде команд radare
+ -s [syntax]  Задать синтаксис (intel, att)
+ -v           Показать информацию о версии
+ -w           Описание семантики оп-кода (что делает инструкция)
+ Если значение '-l' больше длины вывода, вывод заполняется nop-ами
  Если последний аргумент '-' читается из stdin
-Окружающая среда:
+Переменные среды:
  RASM2_NOPLUGINS  не загружать динамические плагины (ускорение загрузки)
  RASM2_ARCH       то же, что и rasm2 -a
  RASM2_BITS       то же, что и rasm2 -b
- R_DEBUG          отображат ли сообщения об ошибках и сигнал о сбое
+ R_DEBUG          отображать ли сообщения об ошибках и сигнал о сбое
 
 ```
 
-Плагины для поддерживаемых целевых архитектур перечисляются, используя флаг `-L`. Плагин используется, указывая его имя в опции `-a`
+Плагины для поддерживаемых архитектур перечисляются, используя флаг `-L`. Используемый плагин указывается именем в флаге `-a`
 
 ```
 $ rasm2 -L
@@ -107,6 +107,5 @@ adA_  8          z80         GPL     Zilog Z80
 ```
 
 > Обратите внимание, что «ad» в первой колонке означает, что и ассемблер и дизассемблер поддерживаются плагином. "_d" - доступен только дизассемблер, "a_" - доступен только ассемблер.
-
 
 
