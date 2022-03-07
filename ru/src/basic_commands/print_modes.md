@@ -1,51 +1,49 @@
 # Режимы отображения данных
 
-Одной из ключевых особенностей radare2 является отображение информации, представляя ее в разных форматах. Цель состоит в том, чтобы предложить выбор вариантов отображения для наилучшей интерпретации двоичных данных.
+Одной из ключевых особенностей radare2 является отображение информации, представляя ее в разных форматах. Цель состоит в том, чтобы предложить выбор вариантов отображения для наилучшей интерпретации двоичных данных. Двоичные данные представляют целые числа (int), shorts, longs, floats, timestamps, шестнадцатеричных строк или более сложных форматов, таких как структуры C, дизассемблированием, декомпиляцией, результатами внешних обработок и др.
 
-Двоичные данные представляются в виде целых чисел, shorts, longs, floats, timestamps, шестнадцатеричных строк или более сложных форматов, таких как структуры C, дизассемблированием, декомпиляцией, результатами внешних обработок и др.
-
-Ниже приведен список доступных режимов отображения, перечисленных в `p?` (печать):
+Ниже приведен список доступных режимов отображения, перечисленных в `p?` (print):
 
 ```
 [0x00005310]> p?
 |Usage: p[=68abcdDfiImrstuxz] [arg|len] [@addr]
-| p[b|B|xb] [len] ([S])   bindump N bits skipping S bytes
-| p[iI][df] [len]         print N ops/bytes (f=func) (see pi? and pdi)
-| p[kK] [len]             print key in randomart (K is for mosaic)
-| p-[?][jh] [mode]        bar|json|histogram blocks (mode: e?search.in)
-| p2 [len]                8x8 2bpp-tiles
-| p3 [file]               print stereogram (3D)
-| p6[de] [len]            base64 decode/encode
-| p8[?][j] [len]          8bit hexpair list of bytes
-| p=[?][bep] [N] [L] [b]  show entropy/printable chars/chars bars
-| pa[edD] [arg]           pa:assemble  pa[dD]:disasm or pae: esil from hex
-| pA[n_ops]               show n_ops address and type
-| pb[?] [n]               bitstream of N bits
-| pB[?] [n]               bitstream of N bytes
-| pc[?][p] [len]          output C (or python) format
-| pC[aAcdDxw] [rows]      print disassembly in columns (see hex.cols and pdi)
-| pd[?] [sz] [a] [b]      disassemble N opcodes (pd) or N bytes (pD)
-| pf[?][.nam] [fmt]       print formatted data (pf.name, pf.name $<expr>)
-| pF[?][apx]              print asn1, pkcs7 or x509
-| pg[?][x y w h] [cmd]    create new visual gadget or print it (see pg? for details)
-| ph[?][=|hash] ([len])   calculate hash for a block
-| pj[?] [len]             print as indented JSON
-| pm[?] [magic]           print libmagic data (see pm? and /m?)
-| po[?] hex               print operation applied to block (see po?)
-| pp[?][sz] [len]         print patterns, see pp? for more help
-| pq[?][is] [len]         print QR code with the first Nbytes
-| pr[?][glx] [len]        print N raw bytes (in lines or hexblocks, 'g'unzip)
-| ps[?][pwz] [len]        print pascal/wide/zero-terminated strings
-| pt[?][dn] [len]         print different timestamps
-| pu[?][w] [len]          print N url encoded bytes (w=wide)
-| pv[?][jh] [mode]        show variable/pointer/value in memory
-| pwd                     display current working directory
-| px[?][owq] [len]        hexdump of N bytes (o=octal, w=32bit, q=64bit)
-| pz[?] [len]             print zoom view (see pz? for help)
+| p[b|B|xb] [len] ([S])   вывести двоичный дамп N-бит, пропустив S байт
+| p[iI][df] [len]         вывести N оп-кодов/байт (f=func) (смотрите pi? и pdi)
+| p[kK] [len]             распечатать ключ в виде random-art (K - использовать мозайку)
+| p-[?][jh] [mode]        bar|json|гистограммные-блоки (режим: e?search.in)
+| p2 [len]                представить плитками 8x8, 2bpp (2 бита на пиксель)
+| p3 [file]               Напечатать стереограмму (3D)
+| p6[de] [len]            кодирование/декодирование base64
+| p8[?][j] [len]          список 8bit-овых шестнадцатеричных байтов
+| p=[?][bep] [N] [L] [b]  построить диаграмму энтропии/печатных символов/символов
+| pa[edD] [arg]           pa:ассоциирование pa[dD]:дизассемблирование или pae: ESIL-инструкции из шестнадцатеричных байтов
+| pA[n_ops]               показать n_ops-адресс и тип
+| pb[?] [n]               вывести в битовом представлении N бит
+| pB[?] [n]               вывести в битовом представлении N байт
+| pc[?][p] [len]          представить в формате C (или python)
+| pC[aAcdDxw] [rows]      показать дизассемблирование в виде колонок (смотрите hex.cols и pdi)
+| pd[?] [sz] [a] [b]      дизассемблировать N оп-кодов (pd) или N байт (pD)
+| pf[?][.nam] [fmt]       распечатать отформатированные данные (pf.name, pf.name $<expr>)
+| pF[?][apx]              распечатать asn1, pkcs7 или x509
+| pg[?][x y w h] [cmd]    создать новый визуальный гаджет или распечатать его (смотри инструкцию в pg?)
+| ph[?][=|hash] ([len])   вычислить хэш для блока
+| pj[?] [len]             распечатать в виде JSON с отступами
+| pm[?] [magic]           распечатать данные libmagic (смотрите pm? и /m?)
+| po[?] hex               распечатать операцию, применяемую к блоку (смотрите po?)
+| pp[?][sz] [len]         распечатать шаблоны, инструкция в pp?
+| pq[?][is] [len]         распечатать QR-код для первых N байт
+| pr[?][glx] [len]        распечатать N байт в raw-формате (в виде строк или шестнадцатеричных кодов, 'g'unzip)
+| ps[?][pwz] [len]        распечатать строкии в форматах pascal/wide/zero-terminated
+| pt[?][dn] [len]         распечатать различные timestamp-ы
+| pu[?][w] [len]          распечатать N байт в кодировке url (w=wide)
+| pv[?][jh] [mode]        показать переменную/указатель/значение в памяти
+| pwd                     показать текущий рабочий директорий
+| px[?][owq] [len]        вывести дамп N шестнадцатеричных байт (o=octal, w=32bit, q=64bit)
+| pz[?] [len]             распечатать вид zoom (инструкция в pz?)
 [0x00005310]>
 ```
 
-Совет: при использовании вывода json можно добавлять `~{}` к команде, чтобы получить красиво напечатанную версию вывода:
+Совет: при использовании вывода json можно добавлять `~{}` к команде, которая оформит красивые отступы:
 
 ```
 [0x00000000]> oj
@@ -64,11 +62,11 @@
 ]
 ```
 
-Для получения дополнительной информации о функциональным возможностям `~` смотрите инструкцию в `?@?`, а также главу [Формат команды](../first_steps/command_format.md) в книге.
+Для получения дополнительной информации о функциональных возможностях `~` смотрите инструкцию в `?@?`, а также главу [Формат команды](../first_steps/command_format.md) в этой книге.
 
 ### Шестнадцатеричный вид
 
-`px` дает удобный вывод, показывающий 16 пар чисел в строке со смещениями и raw-представлениями:
+`px` дает удобный вывод, показывающий 16 пар чисел в строке со смещениями и raw-представлении:
 
 ![hexprint](print_modes_px.png)
 
@@ -76,7 +74,7 @@
 
 ![wordprint](print_modes_pxw.png)
 
-#### 8-битовый шестнадцатеричный список байтов
+#### 8-битовый шестнадцатеричный набор байтов
 
 ```
 [0x00404888]> p8 16
@@ -94,14 +92,14 @@
 ```
 [0x00404888]> pt?
 |Usage: pt [dn]  print timestamps
-| pt.  print current time
-| pt   print UNIX time (32 bit `cfg.bigendian`) Since January 1, 1970
-| ptd  print DOS time (32 bit `cfg.bigendian`) Since January 1, 1980
-| pth  print HFS time (32 bit `cfg.bigendian`) Since January 1, 1904
-| ptn  print NTFS time (64 bit `cfg.bigendian`) Since January 1, 1601
+| pt.  распечатать текущее время
+| pt   распечатать время UNIX (32 бит `cfg.bigendian`) с 1 января 1970
+| ptd  распечатать время DOS (32 бит `cfg.bigendian`) с 1 января 1980
+| pth  распечатать время HFS (32 бит `cfg.bigendian`) с 1 января 1904
+| ptn  распечатать время NTFS (64 бит `cfg.bigendian`) с с 1 января 1601
 ```
 
-Например, вы можете представить текущий буфер как временные метки во времени NTFS:
+Например, можно представить текущий буфер в виде временных меток во времени NTFS:
 
 ```
 [0x08048000]> e cfg.bigendian = false
@@ -112,7 +110,7 @@
 20:05:13001 09:29:21 +0000
 ```
 
-Как видите, порядок байтов влияет на результат. После того, как вы напечатали timestamp, можно профильтовать grep-ом выходные данные, например, по годам:
+Как видите, порядок байтов влияет на результат. После того, timestamp напечатан, можно профильтовать grep-ом выходные данные, например, по номеру года:
 
 ```
 [0x08048000]> pt ~1974 | wc -l
@@ -121,7 +119,7 @@
 27:04:2022 16:15:43 +0000
 ```
 
-Формат даты по умолчанию можно настроить с помощью переменной `cfg.datefmt`. Правила форматирования следуют хорошо известному формату strftime(3). Ознакомьтесь со справочной страницей, вот наиболее важное:
+Формат даты по умолчанию можно настроить с помощью переменной `cfg.datefmt`. Правила форматирования следуют хорошо известному формату strftime(3). Покажем справочную страницу, вот наиболее важное:
 
 ```
 %a  Сокращенное название дня недели в соответствии с текущим языковым стандартом.
@@ -134,7 +132,7 @@
 %M  Минута в виде десятичного числа (диапазон от 00 до 59).
 %p  Либо "AM", либо "PM" в соответствии с заданным значением времени.
 %s  Количество секунд со времен Эпохи, 1970-01-01 00:00:00 +0000 (UTC). (ТЗ)
-%S Секунда в виде десятичного числа (диапазон от 00 до 60).  (Диапазон составляет до 60 секунд, что позволяет время от времени использовать високосные секунды.)
+%S  Секунда в виде десятичного числа (диапазон от 00 до 60).  (Диапазон составляет до 60 секунд, что позволяет время от времени использовать високосные секунды.)
 %T  Время в 24-часовой нотации (%H:%M:%S).  (SU)
 %y  Год в виде десятичного числа без века (диапазон от 00 до 99).
 %Y  Год в виде десятичного числа, включая век.
@@ -142,7 +140,7 @@
 %Z  Название или аббревиатура часового пояса.
 ```
 
-### Основные типы.
+### Основные типы
 
 Существуют режимы печати, доступные для всех базовых типов. Если вас интересует более сложная структура, введите `pf??` для символов формата и `pf???` для примеров:
 
@@ -150,71 +148,71 @@
 [0x00499999]> pf??
 |pf: pf[.k[.f[=v]]|[v]]|[n]|[0|cnt][fmt] [a0 a1 ...]
 | Format:
-|  b       byte (unsigned)
-|  B       resolve enum bitfield (see t?)
-|  c       char (signed byte)
-|  C       byte in decimal
-|  d       0xHEX value (4 bytes) (see 'i' and 'x')
-|  D       disassemble one opcode
-|  e       temporally swap endian
-|  E       resolve enum name (see t?)
-|  f       float value (4 bytes)
-|  F       double value (8 bytes)
-|  i       signed integer value (4 bytes) (see 'd' and 'x')
-|  n       next char specifies size of signed value (1, 2, 4 or 8 byte(s))
-|  N       next char specifies size of unsigned value (1, 2, 4 or 8 byte(s))
-|  o       octal value (4 byte)
-|  p       pointer reference (2, 4 or 8 bytes)
-|  q       quadword (8 bytes)
-|  r       CPU register `pf r (eax)plop`
-|  s       32bit pointer to string (4 bytes)
-|  S       64bit pointer to string (8 bytes)
-|  t       UNIX timestamp (4 bytes)
-|  T       show Ten first bytes of buffer
+|  b       байт (unsigned)
+|  B       интерпретировать битовое enum-поле (смотрите t?)
+|  c       char (байт со знаком)
+|  C       байт в десятичном виде
+|  d       значение 0xHEX (4 байта) (смотрите 'i' и 'x')
+|  D       дизассемблирование одного оп-кода
+|  e       временно сменить порядок байтов
+|  E       представить в виде имени из enum (смотрите t?)
+|  f       значение float (4 байта)
+|  F       значение double (8 байт)
+|  i       целове значение со знаком (4 байта) (смотрите 'd' и 'x')
+|  n       следующий символ задает размер значения со знаком (1, 2, 4 или 8 байт)
+|  N       следующий символ задает размер значения без знака (1, 2, 4 или 8 байт)
+|  o       восьмеричное значение (4 байта)
+|  p       указатель (2, 4 или 8 байт)
+|  q       quadword (8 байт)
+|  r       регистр CPU `pf r (eax)plop`
+|  s       32-битовый указатель на строку (4 байта)
+|  S       64-битовый указатель на строку (8 байт)
+|  t       UNIX timestamp (4 байта)
+|  T       показать первых десять (Ten) байт буфера
 |  u       uleb128 (variable length)
-|  w       word (2 bytes unsigned short in hex)
-|  x       0xHEX value and flag (fd @ addr) (see 'd' and 'i')
-|  X       show formatted hexpairs
-|  z       null terminated string
-|  Z       null terminated wide string
-|  ?       структура данных 'pf ? (struct_name)example_name`
-|  *       next char is pointer (honors asm.bits)
-|  +       toggle show flags for each offset
-|  :       skip 4 bytes
-|  .       skip 1 byte
-|  ;       rewind 4 bytes
-|  ,       rewind 1 byte
+|  w       слово (2 байта, unsigned short в шестнадцатеричном виде)
+|  x       значение в 0xHEX и флаг (fd @ addr) (смотрите 'd' и 'i')
+|  X       отформатированный шестнадцатеричный дамп
+|  z       строка, заканчивающаяся 0
+|  Z       wide-строка, заканчивающаяся 0
+|  ?       структура данных 'pf ? (имя_структуры)иня_экземпляра`
+|  *       следующий символ - указатель (учитывает asm.bits)
+|  +       включить/выключить вывод флага для каждого смещения
+|  :       пропустить 4 байта
+|  .       пропустить 1 байт
+|  ;       отступить назад на 4 байтов
+|  ,       отступить назад на 1 байт
 ```
 
-Используйте тройной вопросительный знак `pf???`, чтобы получить некоторые примеры с использованием строк формата печати.
+Используйте тройной вопросительный знак `pf???` для просмотра примеров с использованием формата печати строк (printf).
 
 ```
 [0x00499999]> pf???
 |pf: pf[.k[.f[=v]]|[v]]|[n]|[0|cnt][fmt] [a0 a1 ...]
-| Examples:
-| pf 3xi foo bar                               3-array of struct, each with named fields: 'foo' as hex, and 'bar' as int
-| pf B (BitFldType)arg_name`                   bitfield type
-| pf E (EnumType)arg_name`                     enum type
-| pf.obj xxdz prev next size name              Define the obj format as xxdz
-| pf obj=xxdz prev next size name              Same as above
-| pf *z*i*w nb name blob                       Print the pointers with given labels
-| pf iwq foo bar troll                         Print the iwq format with foo, bar, troll as the respective names for the fields
-| pf 0iwq foo bar troll                        Same as above, but considered as a union (all fields at offset 0)
-| pf.plop ? (troll)mystruct                    Use structure troll previously defined
-| pfj.plop @ 0x14                              Apply format object at the given offset
-| pf 10xiz pointer length string               Print a size 10 array of the xiz struct with its field names
-| pf 5sqw string quad word                     Print an array with sqw struct along with its field names
-| pf {integer}? (bifc)                         Print integer times the following format (bifc)
-| pf [4]w[7]i                                  Print an array of 4 words and then an array of 7 integers
-| pf ic...?i foo bar "(pf xw yo foo)troll" yo  Print nested anonymous structures
-| pf ;..x                                      Print value located 6 bytes from current offset
-| pf [10]z[3]i[10]Zb                           Print an fixed size str, widechar, and var
-| pfj +F @ 0x14                                Print the content at given offset with flag
-| pf n2                                        print signed short (2 bytes) value. Используйте N вместо n для печати беззнаковых значений
-| pf [2]? (plop)structname @ 0                 Prints an array of structs
-| pf eqew bigWord beef                         Swap endianness and print with given labels
-| pf.foo rr (eax)reg1 (eip)reg2                Create object referencing to register values
-| pf tt troll plop                             print time stamps with labels troll and plop
+| Примеры:
+| pf 3xi foo bar                               массив из трех структур, в каждой три поля: 'foo' в шестнадцатеричном виде и 'bar' в виде целого числа
+| pf B (BitFldType)arg_name`                   тип битовых полей
+| pf E (EnumType)arg_name`                     тип enum
+| pf.obj xxdz prev next size name              определить формат obj как xxdz
+| pf obj=xxdz prev next size name              то же, что и выше
+| pf *z*i*w nb name blob                       распечатать указатели с заданными именами
+| pf iwq foo bar troll                         распечатать в формате iwq, foo, bar, troll - соответствующие поля структуры
+| pf 0iwq foo bar troll                        то же, что выше, но представляющих юнион (все поля на смещении 0)
+| pf.plop ? (troll)mystruct                    использовать структуру troll, определенную ранее
+| pfj.plop @ 0x14                              применить формат к заданному смещению
+| pf 10xiz pointer length string               распечатать 10 ячеек массива структур формата xiz с соответствующими полями
+| pf 5sqw string quad word                     распечатать массив элементов формата sqw с соответствующими полями
+| pf {integer}? (bifc)                         распечатать integer раз формат (bifc)
+| pf [4]w[7]i                                  распечатать массив из четырех слов и за ним массив из семи целых чисел
+| pf ic...?i foo bar "(pf xw yo foo)troll" yo  распечатать вложенные непоименнованные структуры
+| pf ;..x                                      распечатать значение, расположенное через шесть байт от текущего смещения
+| pf [10]z[3]i[10]Zb                           распечатать строку фиксированного размера, widechar и переменную
+| pfj +F @ 0x14                                распечатать содержимое по заданному смещению с флагом
+| pf n2                                        распечатать знаковое короткое целое (2 байта) значение. Используйте N вместо n для печати беззнаковых значений
+| pf [2]? (plop)structname @ 0                 Песатает массив структур
+| pf eqew bigWord beef                         переключить порядок байтов, печать с использованием полей
+| pf.foo rr (eax)reg1 (eip)reg2                создать объект ссылающийся на значение в регистре
+| pf tt troll plop                             распечатать timestamp-ы, используя поля troll и plop
 ```
 Ниже приведены примеры:
 ```
@@ -226,20 +224,20 @@
 0x00404888 = 837634432.000000
 ```
 
-### Высокоуровневые представления в виде языков программирования
+### Высокоуровневые представления в синтаксисе языков программирования
 
-Допустимые форматы печати для языков:
+Допустимые форматы печати, использующие высокоуровневый синтаксис:
 
 * `pc`     C
-* `pc*`    print 'wx' r2 commands
-* `pch`    C half-words (2 byte)
-* `pcw`    C words (4 byte)
-* `pcd`    C dwords (8 byte)
-* `pci`    C array of bytes with instructions
+* `pc*`    печать команд 'wx' r2
+* `pch`    C half-words (2 байта)
+* `pcw`    слова C (4 байта)
+* `pcd`    C dwords (8 байт)
+* `pci`    массив байт C с инструкциями
 * `pca`    GAS .byte blob
-* `pcA`    .bytes with instructions in comments
-* `pcs`    string
-* `pcS`    shellscript that reconstructs the bin
+* `pcA`    .bytes с инструкциями в комментариях
+* `pcs`    строка
+* `pcS`    скрипт оболочки операционной системы, воссоздающий бинарные данные
 * `pcj`    json
 * `pcJ`    javascript
 * `pco`    Objective-C
@@ -251,9 +249,7 @@
 * `pcy`    yara
 * `pcz`    Swift
 
-Если нужно создать файл .c, содержащий BLOB, используйте команду `pc`. Размер по умолчанию такой же, как и в многих других командах: размер блока можно изменить с помощью команды `b` .
-
-Также можно просто временно переопределить этот размер блока, выразив его в качестве аргумента.
+Если нужно создать файл .c, содержащий BLOB, используйте команду `pc`. Размер по умолчанию такой же, как и в многих других командах: размер блока можно изменить с помощью команды `b`. Также можно просто временно переопределить этот размер блока, выразив его в качестве аргумента.
 
 ```
 [0xB7F8E810]> pc 32
@@ -271,24 +267,24 @@ unsigned char buffer[_BUFFER_SIZE] = {
 
 ### Строки
 
-Строки, вероятно, являются одной из наиболее важных точек входа при начале реверс-инжениринга программы, поскольку они обычно ссылаются на информацию о действиях функций (утверждения, отладка или информационные сообщения ...). Поэтому radare поддерживает различные строковые форматы:
+С анализа строк, вероятно, начинается каждый реверс-инжениринг программы, поскольку на них обычно ссылается код тела функции: конкретные операторы, отладочная информация и другие сообщения. Поэтому radare поддерживает различные строковые форматы:
 
 ```
 [0x00000000]> ps?
-|Usage: ps[bijqpsuwWxz+] [N]  Print String
-| ps       print string
-| ps+[j]   print libc++ std::string (same-endian, ascii, zero-terminated)
-| psb      print strings in current block
-| psi      print string inside curseek
-| psj      print string in JSON format
-| psp[j]   print pascal string
-| psq      alias for pqs
-| pss      print string in screen (wrap width)
-| psu[zj]  print utf16 unicode (json)
-| psw[j]   print 16bit wide string
-| psW[j]   print 32bit wide string
-| psx      show string with escaped chars
-| psz[j]   print zero-terminated string
+|Usage: ps[bijqpsuwWxz+] [N]  Печать строки
+| ps       печать строки
+| ps+[j]   печать строки libc++ std::string (same-endian, ascii, zero-terminated)
+| psb      печать строк, найденных в текущем блоке
+| psi      печать строки внутри ткущего смещения
+| psj      печать строки в формате JSON
+| psp[j]   печать pascal-строки
+| psq      синоним для pqs
+| pss      печать строки на экран, вставляя переносы
+| psu[zj]  печать utf16-юникода (json)
+| psw[j]   печать wide-строку 16-бит
+| psW[j]   печать wide-строку 32-бит
+| psx      показать строку при помощи escape-последовательностей
+| psz[j]   печать строки, заканчивающихся нулем
 ```
 
 Большинство строк заканчиваются нулем. Ниже приведен пример использования отладчика для продолжения выполнения программы до тех пор, пока не выполнится системный вызов 'open'. Как только контроль за процесом восстановлен, получаем аргументы, переданные в системный вызов, на которые указывает %ebx. В случае вызова 'open' это строка с нулевым окончанием, проверим с помощью `psz`.
@@ -308,7 +304,7 @@ unsigned char buffer[_BUFFER_SIZE] = {
 
 ### Печать содержимого памяти
 
-Печать различных упакованных типов данных делется с помощью команды `pf`:
+Печать различных упакованных типов данных делается с помощью команды `pf`:
 
 ```
 [0xB7F08810]> pf xxS @ rsp
@@ -317,7 +313,7 @@ unsigned char buffer[_BUFFER_SIZE] = {
 0x7fff0d29da38 = 0x7fff0d29da38 -> 0x0d29f7ee /bin/ls
 ```
 
-Это можно использовать для просмотра аргументов, передаваемых функции. Передайте 'строку, описывающую формат в памяти' в качестве аргумента в `pf` и временно измените текущую позицию поиска/смещение с помощью `@`. Также можно определить массивы структур с помощью `pf`. Для этого добавьте к строке форматирования префикс с числовым значением. Можно также определять имена для каждого поля структуры, добавив их в виде списка аргументов, разделенных пробелами.
+Форматы можно использовать для просмотра аргументов, передаваемых функции. Передайте строку, описывающую формат в  аргумент `pf` и задайте смещение при помощи `@`. Также можно определять массивы структур. Для этого добавьте к строке форматирования префикс с числовым значением. Можно также определять имена для каждого поля структуры, добавив их в виде списка аргументов, разделенных пробелами.
 
 ```
 [0x4A13B8C0]> pf 2*xw pointer type @ esp
@@ -361,8 +357,8 @@ sym.gst_plugin_flv_get_desc ();
 
 Команда `pd` используется для дизассемблирования кода. Она принимает числовое значение, указывающее, сколько инструкций должно быть разобрано. Команда `pD` аналогична, но вместо нескольких инструкций она декомпилирует заданное количество байтов.
 
-* `d` : дизассемблирование N оп-кодов, количество оп-кодов
-* `D` : asm.arch disassembler   bsize bytes
+* `d` : дизассемблирование N оп-кодов, количество оп-кодов,
+* `D` : дизассемблировать N байт, учитывая asm.arch
 
 ```
 [0x00404888]> pd 1
@@ -404,22 +400,22 @@ _d__  _32        lanai       GPL3    LANAI
 
 ### Настройка дизассемблера
 
-Существует несколько вариантов настроек вывода дизассемблера. Все эти опции описаны в `e?` asm.`
+Существует несколько вариантов настроек вывода дизассемблера. Все настройки описаны в `e?` asm.`
 
 ```
 [0x00005310]> e? asm.
-asm.anal: Analyze code and refs while disassembling (see anal.strings)
-asm.arch: Set the arch to be used by asm
-asm.assembler: Set the plugin name to use when assembling
-asm.bbline: Show empty line after every basic block
-asm.bits: Word size in bits at assembler
-asm.bytes: Display the bytes of each instruction
-asm.bytespace: Separate hexadecimal bytes with a whitespace
-asm.calls: Show callee function related info as comments in disasm
-asm.capitalize: Use camelcase at disassembly
-asm.cmt.col: Column to align comments
-asm.cmt.flgrefs: Show comment flags associated to branch reference
-asm.cmt.fold: Fold comments, toggle with Vz
+asm.anal:        Анализировать код и ссылки при дизассемблировании (смотрите anal.strings)
+asm.arch:        Задать архитектуру, используемую при ассемблировании
+asm.assembler:   Установить имя плагина для использования во время ассемблирования
+asm.bbline:      Добавить пустую строку между базовыми блоками
+asm.bits:        Размер слова в битах при ассемблировании
+asm.bytes:       Показать байтовое представление для каждой инструкции
+asm.bytespace:   Разделять шестнадцатеричное представление пробелами
+asm.calls:       Показать информацию, релевантную вызываемой функции в виде комментариев в дизассемблировании
+asm.capitalize:  Использовать CamelCase при дизассемблировании
+asm.cmt.col:     Колонка выравнивания коментариев
+asm.cmt.flgrefs: Показать флаг-комментарий, ассоциированный с ветвлением
+asm.cmt.fold:    Скрыть комментарии, переключается при помощи Vz
 ...
 ```
 
@@ -427,11 +423,11 @@ asm.cmt.fold: Fold comments, toggle with Vz
 
 ### Синтаксис дизассемблера
 
-Переменная `asm.syntax` используется для изменения стиля синтаксиса сборки, используемого механизмом дизассемблера. Чтобы переключиться между представлениями Intel и AT&T:
+Переменная `asm.syntax` используется для изменения диалекта ассемблера, используемого механизмом дизассемблера. Чтобы переключиться между представлениями Intel и AT&T:
 
 ```
 e asm.syntax = intel
 e asm.syntax = att
 ```
 
-Вы также можете попробовать `asm.pseudo`, являющихся экспериментальным представлением псевдокода, и `asm.esil`, выводящий [ESIL](../disassembling/esil.md) ('Evaluable Strings Intermediate Language'). Цель ESIL состоит в том, чтобы иметь удобное представление семантики оп-кодов. Такие варианты представления данных полезны для интерпретированы отдельных инструкций.
+Также можно попробовать `asm.pseudo`, являющийся экспериментальным представлением псевдокода, и `asm.esil`, выводящий [ESIL](../disassembling/esil.md) ('Evaluable Strings Intermediate Language'). Цель ESIL состоит в том, чтобы иметь удобное представление семантики оп-кодов. Такие варианты представления данных полезны для интерпретации отдельных инструкций.
