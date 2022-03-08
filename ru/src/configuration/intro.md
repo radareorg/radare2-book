@@ -17,7 +17,7 @@ $ radare2 -N -e scr.color=1 -e asm.syntax=intel -d /bin/ls
 Чтобы получить инструкции о команде `e` - `e?`:
 
 ```
-Usage: e [var[=value]]  Evaluable vars
+Usage: e [var[=value]]  # Переменные
 | e?asm.bytes     показать описание
 | e??             перечислить конфигурационные переменные с описаниями
 | e a             получить значение переменной 'a'
