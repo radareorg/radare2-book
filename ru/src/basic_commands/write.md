@@ -1,46 +1,46 @@
 ## Сохранение данных
 
-Radare может манипулировать загруженным двоичным файлом различными способами. Можно изменять размер файла, перемещать и копировать/вставлять байты, вставлять новые байты (перемещая данные в конец блока или файла) или просто перезаписывать байты. Новые данные могут быть предоставлены в виде строки специального вида, инструкций ассемблера, или они могут быть считаны из другого файла.
+Radare может манипулировать загруженным двоичным файлом. Можно изменять размер файла, перемещать и копировать/вставлять байты, вставлять новые байты (перемещая данные в конец блока или файла) или просто перезаписывать байты. Новые данные могут быть предоставлены в виде строки специального вида, инструкций ассемблера, или они могут быть считаны из другого файла.
 
-Изменения размера файла - команды `r` . Он принимает числовой аргумент. Положительное значение задает новый размер файла. Отрицательное значение приведет к усечению файла до текущей позиции поиска за вычетом N байтов.
+Изменения размера файла - команды `r`. Она принимает числовой аргумент. Положительное значение задает новый размер файла. Отрицательное значение приведет к усечению файла до текущей позиции поиска за вычетом N байтов.
 
 ```
-r 1024      ; resize the file to 1024 bytes
-r -10 @ 33  ; strip 10 bytes at offset 33
+r 1024      ; установить размер файла равным 1024 байт
+r -10 @ 33  ; вырезать десять байт по смещению 33
 ```
-Сохранение (запись в файл) байтов - команда `w`. Он принимает несколько форматов ввода, таких как результаты ассемблирования, дружественные к порядку байтов DWORD, файлы, шестнадцатеричные файлы, широкие строки:
+Сохранение (запись в файл) байтов - команда `w`. Она поддерживает несколько форматов входных данных, таких как результаты ассемблирования, дружественные к порядку байтов DWORD, файлы, шестнадцатеричные файлы, широкие строки:
 
 ```
 [0x00404888]> w?
-Usage: w[x] [str] [<file] [<<EOF] [@addr]  
-| w[1248][+-][n]       increment/decrement byte,word..
-| w foobar             write string 'foobar'
-| w0 [len]             write 'len' bytes with value 0x00
-| w6[de] base64/hex    write base64 [d]ecoded or [e]ncoded string
-| wa[?] push ebp       write opcode, separated by ';' (use '"' around the command)
-| waf f.asm            assemble file and write bytes
-| waF f.asm            assemble file and write bytes and show 'wx' op with hexpair bytes of assembled code
-| wao[?] op            modify opcode (change conditional of jump. nop, etc)
-| wA[?] r 0            alter/modify opcode at current seek (see wA?)
-| wb 010203            fill current block with cyclic hexpairs
-| wB[-]0xVALUE         set or unset bits with given value
-| wc                   list all write changes
-| wc[?][jir+-*?]       write cache undo/commit/reset/list (io.cache)
-| wd [off] [n]         duplicate N bytes from offset at current seek (memcpy) (see y?)
-| we[?] [nNsxX] [arg]  extend write operations (insert instead of replace)
-| wf[fs] -|file        write contents of file at current offset
-| wh r2                whereis/which shell command
-| wm f0ff              set binary mask hexpair to be used as cyclic write mask
-| wo[?] hex            write in block with operation. 'wo?' fmi
-| wp[?] -|file         apply radare patch file. Посмотрим справку wp? fmi
-| wr 10                write 10 random bytes
-| ws pstring           write 1 byte for length and then the string
-| wt[f][?] file [sz]   write to file (from current seek, blocksize or sz bytes)
-| wts host:port [sz]   send data to remote host:port via tcp://
-| ww foobar            write wide string 'f\x00o\x00o\x00b\x00a\x00r\x00'
-| wx[?][fs] 9090       write two intel nops (from wxfile or wxseek)
-| wv[?] eip+34         write 32-64 bit value honoring cfg.bigendian
-| wz string            write zero terminated string (like w + \x00)
+Usage: w[x] [str] [<file] [<<EOF] [@addr]
+| w[1248][+-][n]       увеличит/уменьшить на 1 байт, слово..
+| w foobar             запись строки 'foobar'
+| w0 [len]             запись 'len' байт значениями 0x00
+| w6[de] base64/hex    запись base64-декодированной или -кодированной строки
+| wa[?] push ebp       запись оп-кодов, разделеных символом ';' (окружите команду '"'-ками)
+| waf f.asm            ассоциировать файл и результат записать
+| waF f.asm            ассоциировать файл и результат записать, затем показать ('wx') оп-коды в шестнадцатеричном виде полученного кода
+| wao[?] op            изменить оп-код (изменить условия переходов (jump), вставить nop и др.)
+| wA[?] r 0            изменить/заменить оп-код по текущему смещению (смотрите wA?)
+| wb 010203            заполнить текущий блок шестнадцатеричными данными циклично
+| wB[-]0xVALUE         установить или сбросить биты заданным значением
+| wc                   перечислить все изменения, относящиеся к записи
+| wc[?][jir+-*?]       показать кэш команд undo/commit/reset/list (плагин io.cache)
+| wd [off] [n]         сдублировать N байт (memcpy), расположенных в текущем смещении, также смотрите y?
+| we[?] [nNsxX] [arg]  выполнять операции "запись" в режиме вставки (extend write)
+| wf[fs] -|file        записать содержимое файла по текущему смещению
+| wh r2                команды операционной системы whereis/which
+| wm f0ff              установить двоичную маску в виде шестнадцатеричного кода для использования в последющих командах записи
+| wo[?] hex            запись в блок при помощи операций. Инструкции - 'wo?' fmi
+| wp[?] -|file         применить заплатку radare из файла. Инструкции - wp? fmi
+| wr 10                запись десяти случайных байтов
+| ws pstring           запись одного байта длины и затем строки
+| wt[f][?] file [sz]   запись в файл (с текущего смещения, размером blocksize или sz байт)
+| wts host:port [sz]   отправить данные на удаленную рабочую станцию host:port по tcp://
+| ww foobar            запись wide-строки 'f\x00o\x00o\x00b\x00a\x00r\x00'
+| wx[?][fs] 9090       запись двух intel-овских оп-кодов (с wxfile или wxseek)
+| wv[?] eip+34         запись 32-64-товых значений с учетом cfg.bigendian
+| wz string            запись строки, заканчивающейся нулем (аналогично w + \x00)
 ```
 
 Примеры:
@@ -53,34 +53,34 @@ Usage: w[x] [str] [<file] [<<EOF] [@addr]
 
 ### Сохранение поверх существующих данных
 
-Команда `wo` (write over) имеет множество подкоманд, каждая комбинирует существующие данные с новыми данными. Команда применяется к текущему блоку. Поддерживаемые операторы включают XOR, ADD, SUB...
+Команда `wo` (write over) имеет множество подкоманд, каждая комбинирует существующие данные с новыми данными. Команда применяется к текущему блоку. Поддерживаемые операторы включают XOR, ADD, SUB, ...
 
 ```
 [0x4A13B8C0]> wo?
 |Usage: wo[asmdxoArl24] [hexpairs] @ addr[:bsize]
-|Example:
-|  wox 0x90   ; xor cur block with 0x90
-|  wox 90     ; xor cur block with 0x90
-|  wox 0x0203 ; xor cur block with 0203
-|  woa 02 03  ; add [0203][0203][...] to curblk
-|  woe 02 03  ; create sequence from 2 to 255 with step 3
-|Supported operations:
-|  wow  ==  write looped value (alias for 'wb')
-|  woa  +=  addition
-|  wos  -=  substraction
-|  wom  *=  multiply
-|  wod  /=  divide
-|  wox  ^=  xor
-|  woo  |=  or
-|  woA  &=  and
-|  woR  random bytes (alias for 'wr $b'
-|  wor  >>= shift right
-|  wol  <<= shift left
-|  wo2  2=  2 byte endian swap
-|  wo4  4=  4 byte endian swap
+|Примеры:
+|  wox 0x90   ; выполнить операцию xor 0x90 с текущим блоком
+|  wox 90     ; выполнить операцию xor 0x90 с текущим блоком
+|  wox 0x0203 ; выполнить операцию xor 0203 с текущим блоком
+|  woa 02 03  ; добавить [0203][0203][...] к текущему блоку
+|  woe 02 03  ; создать последовательность от 2 до 255 с шагом 3
+|Поддерживаемые операции:
+|  wow  ==  запись циклического значения (псевдоним для 'wb')
+|  woa  +=  сложение
+|  wos  -=  вычитание
+|  wom  *=  умножение
+|  wod  /=  деление
+|  wox  ^=  xor (исключающее или)
+|  woo  |=  or (или)
+|  woA  &=  and (и)
+|  woR  сгенерировать случайные байты (псевдоним для 'wr $b')
+|  wor  >>= сдвиг вправо
+|  wol  <<= сдвиг влево
+|  wo2  2=  2-байтовый обмен
+|  wo4  4=  4-байтовый обмен
 ```
 
-Возможна реализация шифро-алгоритмов с использованием примитивов ядра radare и `wo`. Пример сеанса, выполняющего xor(90) + add(01, 02):
+Возможна реализация алгоритмов шифрования с использованием команд ядра radare и `wo`. Пример сеанса, выполняющего xor(90) + add(01, 02):
 
 ```
 [0x7fcd6a891630]> px
