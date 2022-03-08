@@ -1,53 +1,50 @@
 # Поиск байтов
 
-Поисковая система radare2 основана на работе, проделанной esteve, плюс несколько функций, реализованных поверх нее. Он поддерживает поиск по нескольким ключевым словам, двоичным маскам и шестнадцатеричным значениям. Он автоматически создает флаги для поисковых местоположений, облегчая будущие ссылки.
+Поисковая система radare2 поддерживает поиск по нескольким ключевым словам, двоичным маскам и шестнадцатеричным значениям. Автором подсистемы является esteve, также несколько функций реализована поверх нее. Подсистема автоматически создает флаги для найденных *вхождений* (hits), позволяя ссылаться на них далее.
 
 Поиск инициируется командой `/`.
 ```
 [0x00000000]> /?
-|Usage: /[!bf] [arg]Search stuff (see 'e??search' for options)
-|Use io.va for searching in non virtual addressing spaces
-| / foo\x00               search for string 'foo\0'
-| /j foo\x00              search for string 'foo\0' (json output)
-| /! ff                   search for first occurrence not matching, command modifier
-| /!x 00                  inverse hexa search (find first byte != 0x00)
-| /+ /bin/sh              construct the string with chunks
-| //                      repeat last search
-| /a jmp eax              assemble opcode and search its bytes
-| /A jmp                  find analyzed instructions of this type (/A? for help)
-| /b                      search backwards, command modifier, followed by other command
-| /B                      search recognized RBin headers
-| /c jmp [esp]            search for asm code matching the given string
-| /ce rsp,rbp             search for esil expressions matching
-| /C[ar]                  search for crypto materials
-| /d 101112               search for a deltified sequence of bytes
-| /e /E.F/i               match regular expression
-| /E esil-expr            offset matching given esil expressions %%= here
-| /f                      search forwards, command modifier, followed by other command
-| /F file [off] [sz]      search contents of file with offset and size
-| /g[g] [from]            find all graph paths A to B (/gg follow jumps, see search.count and
-anal.depth)
-| /h[t] [hash] [len]      find block matching this hash. See ph
-| /i foo                  search for string 'foo' ignoring case
-| /m magicfile            search for matching magic file (use blocksize)
-| /M                      search for known filesystems and mount them automatically
-| /o [n]                  show offset of n instructions backward
-| /O [n]                  same as /o, but with a different fallback if anal cannot be used
-| /p patternsize          search for pattern of given size
-| /P patternsize          search similar blocks
-| /r[erwx][?] sym.printf  analyze opcode reference an offset (/re for esil)
-| /R [grepopcode]         search for matching ROP gadgets, semicolon-separated
-| /s                      search for all syscalls in a region (EXPERIMENTAL)
-| /v[1248] value          look for an `cfg.bigendian` 32bit value
-| /V[1248] min max        look for an `cfg.bigendian` 32bit value in range
-| /w foo                  search for wide string 'f\0o\0o\0'
-| /wi foo                 search for wide string ignoring case 'f\0o\0o\0'
-| /x ff..33               search for hex string ignoring some nibbles
-| /x ff0033               search for hex string
-| /x ff43:ffd0            search for hexpair with mask
-| /z min max              search for strings of given size
+|Usage: /[!bf] [arg] # Инструменты поиска (Инструкция по настройке - 'e??search')
+|Используйте io.va для поиска в невиртуализированных адресных пространствах
+| / foo\x00               поиск строки 'foo\0'
+| /j foo\x00              поиск строки 'foo\0' с вфводом в json
+| /! ff                   поиск первого вхождения, не соответствующего критерию поиска, модификатор команды
+| /!x 00                  найти первый байт != 0x00
+| /+ /bin/sh              конструировать строку из кусков
+| //                      повторить предыдущую операцию поиска
+| /a jmp eax              ассемблировать оп-код и попытаться найти его байты
+| /A jmp                  найти проанализированные инструкции данного типа (инструкция - /A?)
+| /b                      поиск в обратном направлении, модификатор команды, за которым следует команда
+| /B                      поиск в распознанных заголовках RBin
+| /c jmp [esp]            поиск инструкций, соответствующих заданной строке
+| /ce rsp,rbp             поиск соответствующих критерию esil-выражений
+| /C[ar]                  поиск криптографических материалов
+| /d 101112               поиск дельтифицированной последовательности из N байт
+| /e /E.F/i               проверка соответствия регулярному выражению
+| /E esil-expr            смещение подходящего критерию esil-выражения %%= here
+| /f                      поиск вперед, модификатор команды, за которым идет команда
+| /F file [off] [sz]      поиск в содержимом файла, ограниченный смещением и размером
+| /g[g] [from]            найти все пути в графе из A в B (/gg следует по jump-ам, смотрите search.count и anal.depth)
+| /h[t] [hash] [len]      найти блок, для которого подходит заданых хэш, подробности в ph
+| /i foo                  поиск строки 'foo', игнорируя размер букв
+| /m magicfile            поиск подходящего "magic file" (используйте blocksize)
+| /M                      поиск известных файловых систем и монтировать их автоматически
+| /o [n]                  показать смещение в n инструкций в обратном направлении
+| /O [n]                  аналогично /o, но используется другая функция обработки ошибки, если стандартная не может быть использована
+| /p patternsize          искать шаблон заданного размера
+| /P patternsize          искать подобные блоки
+| /r[erwx][?] sym.printf  анализировать оп-код, ссылающийся на смещение (/re для esil)
+| /R [grepopcode]         поиск соответствий для ROP gadgets, разделяются точкой с запятой
+| /s                      поиск всех системных вызовов в регионе (ЭКСПЕРИМЕНТАЛЬНАЯ функция)
+| /v[1248] value          поиск 32-битового значения с учетом `cfg.bigendian`
+| /V[1248] min max        поиск 32-битового значения с учетом `cfg.bigendian`, ограничен диапазоном
+| /w foo                  поиск wide-строки 'f\0o\0o\0'
+| /wi foo                 поиск wide-строки, игнорируя размер букв 'f\0o\0o\0'
+| /x ff..33               поиск шестнадцатеричных данных, игнорируя некоторые позиции символов
+| /x ff0033               поиск шестнадцатеричных данных
+| /x ff43:ffd0            поиск шестнадцатеричных данных с маской
+| /z min max              поиск шестнадцатеричных данных, ограничен размером
 ```
 
-Поскольку в radare2 все рассматривается как файл, не имеет значения, выполняете ли поиск в сокете, удаленном устройстве, в памяти процесса или в файле.
-
-обратите внимание, что '/*' запускает многострочный комментарий. Это не для поиска. введите '*/', чтобы закончить комментарий.
+Поскольку в radare2 все рассматривается как файл, то не имеет значения, выполняете ли вы поиск в сокете, на удаленном устройстве, в памяти процесса или в файле. Следующая синтаксическая структура '/*' запускает многострочный комментарий, а не команду поиска. Введите '*/', чтобы закончить комментарий.
