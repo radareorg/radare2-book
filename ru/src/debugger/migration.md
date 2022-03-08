@@ -18,7 +18,7 @@
 
 ## Как установить аргументы/переменные среды/загрузить динамическую библиотеку в сеансе отладки radare
 
-Используйте `rarun2` (`libpath=$PWD:/tmp/lib`, `arg2=hello`, `setenv=FOO=BAR` ...), инструкции - `rarun2 -h` / `man rarun2`
+Используйте `rarun2` (`libpath=$PWD:/tmp/lib`, `arg2=hello`, `setenv=FOO=BAR` ...), инструкции - `rarun2 -h` / `man rarun2`.
 
 ## Как запускать скрипты в radare2 ?
 
