@@ -1,11 +1,10 @@
 # Программа R2pipe
 
-API r2pipe был первоначально разработан для NodeJS, чтобы поддерживать повторное использование веб-API r2.js из командной строки. Модуль r2pipe позволяет взаимодействовать с экземплярами r2 различными методами:
+API r2pipe первоначально разработан для NodeJS, чтобы поддерживать повторное использование веб-API r2.js из командной строки. Модуль r2pipe позволяет взаимодействовать с процессами r2 различными методами:
 
-
-* потоки после spawn (r2 -0)
-* запросы http (удобный для облаков)
-* сокет tcp (r2 -c)
+* потоки после spawn (r2 -0),
+* запросы http (удобный для облачных сервисов),
+* сокет tcp (r2 -c).
 
 ```
          pipe spawn async http tcp rap json
@@ -41,19 +40,19 @@ import r2pipe
 r2 = r2pipe.open("/bin/ls")
 r2.cmd('aa')
 print(r2.cmd("afl"))
-print(r2.cmdj("aflj"))  # evaluates JSONs and returns an object
+print(r2.cmdj("aflj"))  # вычисляет JSON-ы и возвращает объект
 ```
 
 NodeJS
 ------
 
-Используйте команду для установки привязок r2pipe
+Используйте команду для установки модулей привязки к r2pipe
 
 ```
 $ npm install r2pipe
 ```
 
-Вот пример hello world
+Вот пример "hello world":
 
 ```node
 const r2pipe = require('r2pipe');
@@ -70,7 +69,7 @@ r2pipe.open('/bin/ls', (err, res) => {
 });
 ```
 
-Ознакомьтесь с репозиторием GIT для получения дополнительных примеров и сведений.
+В репозитории GIT есть другие примеры и дополнительные сведения.
 
 https://github.com/radareorg/radare2-r2pipe/blob/master/nodejs/r2pipe/README.md
 
@@ -198,7 +197,7 @@ showMainFunction ctx = do
 main = do
   -- Запуск r2 локально
   открыть "/bin/ls" >>= showMainFunction
-  -- Соединение с r2 via HTTP (e.g. if "r2 -qc=h /bin/ls" is running)
+  -- Соединение с r2 через HTTP (например, если "r2 -qc=h /bin/ls" запущен)
   открытие "http://127.0.0.1:9090" >>= showMainFunction
 ```
 
@@ -279,8 +278,7 @@ if let r2p = R2Pipe(url:nil) {
 }
 ```
 
-Vala
-
+Vaal
 ----
 
 ```vala
