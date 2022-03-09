@@ -1,1 +1,0 @@
-![cover](cover.png)

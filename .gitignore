@@ -6,6 +6,7 @@ book/
 _book/
 _book/*
 img/*
+translations/*/img/*
 .*.swp
 .*.swo
 *.un~

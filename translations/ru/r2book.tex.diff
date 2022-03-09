@@ -1,0 +1,46 @@
+--- r2book.tex-orig	2022-03-09 20:45:57.038939960 +0800
++++ r2book.tex.tmp	2022-03-09 20:44:23.539866561 +0800
+@@ -108,14 +108,41 @@
+ \setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+ \ifLuaTeX
+   \usepackage{selnolig}  % disable illegal ligatures
++  \usepackage{luatextra}
++  \usepackage{minted}
++  \usemintedstyle{tango}
++  \setminted{fontsize=\footnotesize,mathescape}
++  \usepackage{unicode-math}
++  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
++  \usepackage{polyglossia}
++  \setmainlanguage{russian}
++  \setotherlanguage{english}
++  \setkeys{russian}{babelshorthands=true}
++  \newfontfamily{\cyrillicfont}{Times New Roman} 
++  \newfontfamily{\cyrillicfontrm}{Times New Roman}
++  \newfontfamily{\cyrillicfonttt}{Fira Mono}
++  \newfontfamily{\cyrillicfontsf}{Fira Sans}
++  \setmainfont{Times New Roman}
++  \setmathfont{Latin Modern Math}
++  \setsansfont{Linux Biolinum O}
++  \setmonofont{Fira Mono}
+ \fi
+ 
++\makeatletter
++\newcommand{\verbatimfont}[1]{\def\verbatim@font{#1}}%
++\makeatother
++\graphicspath{{img/}}
++
++
+ \author{}
+ \date{}
+ 
+ \begin{document}
+-
+-![cover](cover.png)
++\verbatimfont{\footnotesize\ttfamily}
++% ![cover](cover.png)
++\thispagestyle{empty}
++\includegraphics{cover.jpg}
++\clearpage
+ 
+ {
+ \setcounter{tocdepth}{5}

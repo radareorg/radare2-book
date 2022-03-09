@@ -1,0 +1,418 @@
+\selectlanguage *{russian}
+\contentsline {section}{Введение}{9}{section*.2}%
+\contentsline {subsection}{История проекта}{9}{section*.3}%
+\contentsline {subsection}{Пакет программ radare2}{10}{section*.4}%
+\contentsline {subsubsection}{Программа radare2}{10}{section*.5}%
+\contentsline {subsubsection}{Программа rabin2}{10}{section*.6}%
+\contentsline {subsubsection}{Программа rasm2}{10}{section*.7}%
+\contentsline {paragraph}{Примеры}{10}{section*.8}%
+\contentsline {subsubsection}{Программа rahash2}{11}{section*.9}%
+\contentsline {subsubsection}{Примеры}{11}{section*.10}%
+\contentsline {subsubsection}{Программа radiff2}{11}{section*.11}%
+\contentsline {subsubsection}{Программа rafind2}{11}{section*.12}%
+\contentsline {subsubsection}{Программа ragg2}{11}{section*.13}%
+\contentsline {paragraph}{Примеры}{11}{section*.14}%
+\contentsline {subsubsection}{Программа rarun2}{11}{section*.15}%
+\contentsline {paragraph}{Пример скрипта rarun2}{12}{section*.16}%
+\contentsline {paragraph}{Подключение программы к сокету}{12}{section*.17}%
+\contentsline {paragraph}{Отладка программы, перенаправив stdio в другой терминал}{12}{section*.18}%
+\contentsline {subsubsection}{Программа rax2}{12}{section*.19}%
+\contentsline {paragraph}{Примеры}{12}{section*.20}%
+\contentsline {subsection}{Загрузка radare2}{12}{section*.21}%
+\contentsline {subsubsection}{Сборка при помощи meson + ninja}{13}{section*.22}%
+\contentsline {subsubsection}{Вспомогательные скрипты}{13}{section*.23}%
+\contentsline {subsubsection}{Очистка директория сборки}{13}{section*.24}%
+\contentsline {subsection}{Компиляция и переносимость}{13}{section*.25}%
+\contentsline {subsubsection}{Статическая сборка}{14}{section*.26}%
+\contentsline {subsubsection}{Сборка при помощи Meson}{14}{section*.27}%
+\contentsline {subsubsection}{Установка в Docker}{14}{section*.28}%
+\contentsline {subsection}{Деинсталляция старых установок Radare2}{14}{section*.29}%
+\contentsline {subsection}{Windows}{14}{section*.30}%
+\contentsline {subsubsection}{Необходимые ресурсы и инструменты}{14}{section*.31}%
+\contentsline {subsubsection}{Последовательность шагов}{14}{section*.32}%
+\contentsline {paragraph}{Установка Visual Studio 2015 или более поздней версии}{14}{section*.33}%
+\contentsline {paragraph}{Установка Python 3 и Meson при помощи пакетного менеджера Conda}{14}{section*.34}%
+\contentsline {subparagraph}{Создание среды (environment) Python для Radare2}{14}{section*.35}%
+\contentsline {subparagraph}{Установка Meson}{15}{section*.36}%
+\contentsline {paragraph}{Установка Git for Windows}{15}{section*.37}%
+\contentsline {paragraph}{Загрузка исходного кода Radare2}{15}{section*.38}%
+\contentsline {paragraph}{Компилирование Radare2 Code}{15}{section*.39}%
+\contentsline {paragraph}{Заметки о параметрах сборки}{15}{section*.40}%
+\contentsline {paragraph}{Как убедится, что Radare2 запускается из любой папки}{16}{section*.41}%
+\contentsline {paragraph}{Примечания по настройке общесистемных (system-wide) переменных среды}{16}{section*.42}%
+\contentsline {subsection}{Android}{16}{section*.43}%
+\contentsline {subsubsection}{Необходимые инструменты}{16}{section*.44}%
+\contentsline {subsubsection}{Последовательность шагов}{16}{section*.45}%
+\contentsline {paragraph}{Загрузка и распаковка Android NDK}{16}{section*.46}%
+\contentsline {paragraph}{Использование Make}{16}{section*.47}%
+\contentsline {subparagraph}{Указание месторасположение NDK}{16}{section*.48}%
+\contentsline {subparagraph}{Компилирование и создание архива tar.gz, загрузка в подключенное устройство android}{16}{section*.49}%
+\contentsline {paragraph}{Использование Meson}{16}{section*.50}%
+\contentsline {subparagraph}{Создание кросс-файл для мезона}{16}{section*.51}%
+\contentsline {subparagraph}{Компилирование при помощи meson + ninja}{17}{section*.52}%
+\contentsline {subparagraph}{Копирование файлов на свое устройство Android, запуск приложения}{17}{section*.53}%
+\contentsline {section}{Интерфейсы пользователя}{17}{section*.54}%
+\contentsline {subsection}{Базовое использование Radare2}{18}{section*.55}%
+\contentsline {subsection}{Аргументы командной строки}{19}{section*.56}%
+\contentsline {subsubsection}{Частые варианты использования}{20}{section*.57}%
+\contentsline {subsection}{Формат команды}{20}{section*.58}%
+\contentsline {subsection}{Выражения}{21}{section*.59}%
+\contentsline {section}{Основные команды отладчика}{22}{section*.60}%
+\contentsline {subsection}{Улучшение книги Radare2}{23}{section*.61}%
+\contentsline {subsubsection}{Книга Radare2}{23}{section*.62}%
+\contentsline {section}{Конфигурация}{24}{section*.63}%
+\contentsline {subsection}{Цветовая раскраска в интерфейсе}{25}{section*.64}%
+\contentsline {subsection}{Темы}{25}{section*.65}%
+\contentsline {subsection}{Переменные конфигурации}{25}{section*.66}%
+\contentsline {subsubsection}{Переменная asm.arch}{25}{section*.67}%
+\contentsline {subsubsection}{Переменная asm.bits}{25}{section*.68}%
+\contentsline {subsubsection}{Переменная asm.syntax}{25}{section*.69}%
+\contentsline {subsubsection}{Переменная asm.pseudo}{27}{section*.70}%
+\contentsline {subsubsection}{Переменная asm.os}{27}{section*.71}%
+\contentsline {subsubsection}{Переменная asm.flags}{27}{section*.72}%
+\contentsline {subsubsection}{Переменная asm.lines.call}{27}{section*.73}%
+\contentsline {subsubsection}{Переменная asm.lines.out}{27}{section*.74}%
+\contentsline {subsubsection}{Переменная asm.linestyle}{27}{section*.75}%
+\contentsline {subsubsection}{Переменная asm.offset}{27}{section*.76}%
+\contentsline {subsubsection}{Переменная asm.trace}{27}{section*.77}%
+\contentsline {subsubsection}{Переменная asm.bytes}{28}{section*.78}%
+\contentsline {subsubsection}{Переменная asm.sub.reg}{28}{section*.79}%
+\contentsline {subsubsection}{Переменная asm.sub.jmp}{28}{section*.80}%
+\contentsline {subsubsection}{Переменная asm.sub.rel}{28}{section*.81}%
+\contentsline {subsubsection}{Переменная asm.sub.section}{28}{section*.82}%
+\contentsline {subsubsection}{Переменная asm.sub.varonly}{28}{section*.83}%
+\contentsline {subsubsection}{Переменная cfg.bigendian}{28}{section*.84}%
+\contentsline {subsubsection}{Переменная cfg.newtab}{28}{section*.85}%
+\contentsline {subsubsection}{Переменная scr.color}{28}{section*.86}%
+\contentsline {subsubsection}{Переменная scr.seek}{29}{section*.87}%
+\contentsline {subsubsection}{Переменная scr.scrollbar}{29}{section*.88}%
+\contentsline {subsubsection}{Переменная scr.utf8}{29}{section*.89}%
+\contentsline {subsubsection}{Переменная cfg.fortunes}{29}{section*.90}%
+\contentsline {subsubsection}{Переменная cfg.fortunes.type}{29}{section*.91}%
+\contentsline {subsubsection}{Переменная stack.size}{29}{section*.92}%
+\contentsline {subsection}{Файлы radare2}{29}{section*.93}%
+\contentsline {subsection}{Файлы RC}{29}{section*.94}%
+\contentsline {subsubsection}{Целевой файл}{29}{section*.95}%
+\contentsline {section}{Основные команды}{30}{section*.96}%
+\contentsline {subsection}{Установка базового смещения}{30}{section*.97}%
+\contentsline {subsection}{Открыть файл}{31}{section*.98}%
+\contentsline {subsection}{Перемещение смещения на любые адреса}{32}{section*.99}%
+\contentsline {subsection}{Размер блока}{32}{section*.100}%
+\contentsline {subsection}{Секции}{33}{section*.101}%
+\contentsline {subsection}{Отображение файлов}{33}{section*.102}%
+\contentsline {section}{Режимы отображения данных}{34}{section*.103}%
+\contentsline {subsubsection}{Шестнадцатеричный вид}{35}{section*.104}%
+\contentsline {paragraph}{Шестнадцатеричный дамп слов (32 бита)}{35}{figure.6}%
+\contentsline {paragraph}{8-битовый шестнадцатеричный набор байтов}{36}{section*.106}%
+\contentsline {paragraph}{Шестнадцатеричный дамп из Quad-слов (64 бита)}{36}{figure.7}%
+\contentsline {subsubsection}{Форматы даты/времени}{36}{section*.108}%
+\contentsline {subsubsection}{Основные типы}{37}{section*.109}%
+\contentsline {subsubsection}{Высокоуровневые представления в синтаксисе языков программирования}{38}{section*.110}%
+\contentsline {subsubsection}{Строки}{38}{section*.111}%
+\contentsline {subsubsection}{Печать содержимого памяти}{39}{section*.112}%
+\contentsline {subsubsection}{Дизассемблирование}{39}{section*.113}%
+\contentsline {subsubsection}{Выбор целевой архитектуры}{40}{section*.114}%
+\contentsline {subsubsection}{Настройка дизассемблера}{40}{section*.115}%
+\contentsline {subsubsection}{Синтаксис дизассемблера}{40}{section*.116}%
+\contentsline {subsection}{Флаги}{40}{section*.117}%
+\contentsline {subsubsection}{Локальные флаги}{41}{section*.118}%
+\contentsline {subsubsection}{Зоны флагов}{42}{section*.119}%
+\contentsline {subsection}{Сохранение данных}{42}{section*.120}%
+\contentsline {subsubsection}{Сохранение поверх существующих данных}{43}{section*.121}%
+\contentsline {subsection}{Масштабирование}{43}{section*.122}%
+\contentsline {subsection}{Сохранение/Вставка}{44}{section*.123}%
+\contentsline {subsection}{Сравнение байтов}{45}{section*.124}%
+\contentsline {section}{База данных строк}{46}{section*.125}%
+\contentsline {subsection}{Пример использования}{46}{section*.126}%
+\contentsline {subsection}{Применения базы данных}{47}{section*.127}%
+\contentsline {subsection}{Еще примеры}{47}{section*.128}%
+\contentsline {section}{Dietline}{48}{section*.129}%
+\contentsline {section}{Автодополнение}{48}{section*.130}%
+\contentsline {section}{Режим Emacs (по умолчанию)}{48}{section*.131}%
+\contentsline {subsection}{Перемещение}{48}{section*.132}%
+\contentsline {subsection}{Удаление}{48}{section*.133}%
+\contentsline {subsection}{Killing and Yanking}{48}{section*.134}%
+\contentsline {subsection}{История}{48}{section*.135}%
+\contentsline {section}{Режим Vi}{49}{section*.136}%
+\contentsline {subsection}{Вход в командные режимы}{49}{section*.137}%
+\contentsline {subsection}{Перемещение}{49}{section*.138}%
+\contentsline {subsection}{Удаление и вставка}{49}{section*.139}%
+\contentsline {section}{Визуальный режим}{49}{section*.140}%
+\contentsline {subsection}{Навигация}{49}{section*.141}%
+\contentsline {subsection}{режимы отображения (панели)}{49}{section*.142}%
+\contentsline {subsection}{Получение инструкций}{51}{section*.143}%
+\contentsline {section}{Визуальный дизассемблер}{51}{section*.144}%
+\contentsline {subsection}{Навигация}{51}{section*.145}%
+\contentsline {subsection}{Команда \texttt {d} - определить}{52}{section*.146}%
+\contentsline {subsubsection}{Использование курсора для вставки/исправления\ldots {}}{52}{section*.147}%
+\contentsline {subsection}{Перекрасные ссылки}{53}{section*.148}%
+\contentsline {subsection}{Отображение аргументов функции}{53}{section*.149}%
+\contentsline {subsection}{Добавление комментария}{54}{section*.150}%
+\contentsline {subsection}{Введите другие команды}{54}{section*.151}%
+\contentsline {subsection}{Поиск}{54}{section*.152}%
+\contentsline {subsection}{HUD-ы}{54}{section*.153}%
+\contentsline {subsubsection}{UserFriendly HUD}{54}{section*.154}%
+\contentsline {subsubsection}{HUD для флагов/комментариев/функций/\ldots {}}{54}{section*.155}%
+\contentsline {subsection}{Настройка дизассемблирования}{54}{section*.156}%
+\contentsline {subsection}{Визуальный редактор конфигурации}{54}{section*.157}%
+\contentsline {subsection}{Примеры}{54}{section*.158}%
+\contentsline {paragraph}{asm.arch: Изменение архитектуры \&\& asm.bits: Размер слова в битах на ассемблере}{54}{section*.159}%
+\contentsline {paragraph}{asm.pseudo: Включить псевдосинтаксис}{58}{section*.160}%
+\contentsline {paragraph}{asm.syntax: Выбор синтаксиса дизассемблирования (intel, att, masm\ldots )}{58}{section*.161}%
+\contentsline {paragraph}{asm.describe: Показать описание оп-кода}{58}{section*.162}%
+\contentsline {section}{Визуальный ассемблер}{58}{section*.163}%
+\contentsline {section}{Визуальный редактор конфигурации}{58}{section*.164}%
+\contentsline {section}{Визуальные панели}{58}{section*.165}%
+\contentsline {subsection}{Концепция}{58}{section*.166}%
+\contentsline {subsection}{Обзор}{58}{section*.167}%
+\contentsline {subsection}{Команды}{58}{section*.168}%
+\contentsline {subsection}{Базовые функции}{65}{section*.169}%
+\contentsline {subsection}{Разделение экрана}{65}{section*.170}%
+\contentsline {subsection}{Команды оконного режима}{65}{section*.171}%
+\contentsline {subsection}{Изменение значений}{65}{section*.172}%
+\contentsline {subsection}{Вкладки}{65}{section*.173}%
+\contentsline {subsection}{Сохранение макетов}{65}{section*.174}%
+\contentsline {section}{Поиск байтов}{65}{section*.175}%
+\contentsline {subsection}{Обычный поиск}{66}{section*.176}%
+\contentsline {subsection}{Настройка параметров поиска}{67}{section*.177}%
+\contentsline {subsection}{Поиск сопоставлением с шаблоном}{67}{section*.178}%
+\contentsline {subsection}{Автоматизация обработки найденных вхождений}{68}{section*.179}%
+\contentsline {subsection}{Поиск в обратном направлении}{68}{section*.180}%
+\contentsline {subsection}{Поиск в результатах ассемблирования}{69}{section*.181}%
+\contentsline {subsection}{Поиск криптографических данных}{69}{section*.182}%
+\contentsline {subsubsection}{Поиск ключей AES}{69}{section*.183}%
+\contentsline {subsubsection}{Поиск закрытых ключей и сертификатов}{69}{section*.184}%
+\contentsline {subsubsection}{Энтропийный анализ}{69}{section*.185}%
+\contentsline {section}{Дизассемблирование}{70}{section*.186}%
+\contentsline {subsection}{Добавление метаданных к тексту дизассемблера}{71}{section*.187}%
+\contentsline {section}{ESIL}{72}{section*.188}%
+\contentsline {subsection}{Использование ESIL}{73}{section*.189}%
+\contentsline {subsection}{ESIL-команды}{73}{section*.190}%
+\contentsline {subsubsection}{Набор инструкций ESIL}{73}{section*.191}%
+\contentsline {subsubsection}{Флаги ESIL}{79}{section*.192}%
+\contentsline {subsection}{Синтаксис и команды}{79}{section*.193}%
+\contentsline {subsection}{Порядок аргументов для неассоциативных операций}{80}{section*.194}%
+\contentsline {subsubsection}{Специальные указания}{80}{section*.195}%
+\contentsline {subsubsection}{Экспресс-анализ}{80}{section*.196}%
+\contentsline {subsubsection}{Флаги ЦП}{80}{section*.197}%
+\contentsline {subsubsection}{Переменные}{80}{section*.198}%
+\contentsline {subsubsection}{Битовые массивы}{80}{section*.199}%
+\contentsline {subsubsection}{Арифметика}{81}{section*.200}%
+\contentsline {subsubsection}{Битовая арифметика}{81}{section*.201}%
+\contentsline {subsubsection}{Поддержка устройств с плавающей запятой}{81}{section*.202}%
+\contentsline {subsubsection}{Обработка префикса x86 REP в ESIL}{81}{section*.203}%
+\contentsline {paragraph}{Пример использования:}{81}{section*.204}%
+\contentsline {subsubsection}{Нереализованные/необработанные инструкции}{81}{section*.205}%
+\contentsline {subsubsection}{Пример дизассемблирования ESIL:}{81}{section*.206}%
+\contentsline {subsubsection}{Интроспекция}{82}{section*.207}%
+\contentsline {subsubsection}{API HOOKS}{82}{section*.208}%
+\contentsline {section}{Анализ данных и кода}{82}{section*.209}%
+\contentsline {section}{Анализ кода}{83}{section*.210}%
+\contentsline {subsection}{Анализ функций}{84}{section*.211}%
+\contentsline {subsubsection}{Анализ функции вручную}{85}{section*.212}%
+\contentsline {subsection}{Рекурсивный анализ}{87}{section*.213}%
+\contentsline {subsection}{Конфигурация}{89}{section*.214}%
+\contentsline {subsubsection}{Конфигурация потока управления}{89}{section*.215}%
+\contentsline {subsubsection}{Управление ссылками}{89}{section*.216}%
+\contentsline {subsubsection}{Диапазоны анализа}{89}{section*.217}%
+\contentsline {subsubsection}{Таблицы переходов}{89}{section*.218}%
+\contentsline {subsubsection}{Элементы управления, специфичные для платформы}{90}{section*.219}%
+\contentsline {subsection}{Визуальный подход}{90}{section*.220}%
+\contentsline {subsection}{Подсказки по анализу}{90}{section*.221}%
+\contentsline {section}{Управление переменными}{93}{section*.222}%
+\contentsline {subsection}{Вывод типа}{94}{section*.223}%
+\contentsline {section}{Типы данных}{95}{section*.224}%
+\contentsline {subsubsection}{Загрузка типов}{96}{section*.225}%
+\contentsline {subsubsection}{Распечатка структур}{96}{section*.226}%
+\contentsline {subsubsection}{Типы ссылок}{97}{section*.227}%
+\contentsline {subsubsection}{Structure Immediates}{97}{section*.228}%
+\contentsline {subsubsection}{Управление перечислениями}{98}{section*.229}%
+\contentsline {subsection}{Внутреннее представление}{98}{section*.230}%
+\contentsline {subsubsection}{Структуры}{99}{section*.231}%
+\contentsline {subsubsection}{Юнионы}{99}{section*.232}%
+\contentsline {subsubsection}{Прототипы функций}{99}{section*.233}%
+\contentsline {section}{Соглашения вызова функции}{100}{section*.234}%
+\contentsline {section}{Виртуальные таблицы}{101}{section*.235}%
+\contentsline {section}{Системные вызовы}{101}{section*.236}%
+\contentsline {section}{Эмуляция ESIL}{102}{section*.237}%
+\contentsline {subsection}{Эмуляция в цикле анализа}{103}{section*.238}%
+\contentsline {section}{Символы}{104}{section*.239}%
+\contentsline {section}{Сигнатуры}{105}{section*.240}%
+\contentsline {subsection}{Поиск лучших совпадений \texttt {zb}}{107}{section*.241}%
+\contentsline {section}{Команды графа управления}{108}{section*.242}%
+\contentsline {subsubsection}{Ascii Art ** (например, \texttt {agf})}{108}{section*.243}%
+\contentsline {subsubsection}{Интерактивный Ascii-art (например, \texttt {agfv})}{108}{section*.244}%
+\contentsline {subsubsection}{Крошечный Ascii-art (например, \texttt {agft})}{108}{section*.245}%
+\contentsline {subsubsection}{Graphviz dot (например, \texttt {agfd})}{109}{section*.246}%
+\contentsline {subsubsection}{JSON (например, \texttt {agfj})}{109}{section*.247}%
+\contentsline {subsubsection}{Язык моделирования графа (например, \texttt {agfg})}{109}{section*.248}%
+\contentsline {subsubsection}{Ключ-значение SDB (например, \texttt {agfk})}{109}{section*.249}%
+\contentsline {subsubsection}{Пользовательские команды R2 для графа (например, \texttt {agf*})}{109}{section*.250}%
+\contentsline {subsubsection}{Веб / изображение (например, \texttt {agfw})}{109}{section*.251}%
+\contentsline {subsection}{Скрипты}{109}{section*.252}%
+\contentsline {section}{Итераторы}{111}{section*.253}%
+\contentsline {section}{Макросы}{113}{section*.254}%
+\contentsline {section}{Псевдонимы}{113}{section*.255}%
+\contentsline {section}{Программа R2pipe}{114}{section*.256}%
+\contentsline {section}{Примеры}{114}{section*.257}%
+\contentsline {subsection}{Python}{114}{section*.258}%
+\contentsline {subsection}{NodeJS}{114}{section*.259}%
+\contentsline {subsection}{Go}{115}{section*.260}%
+\contentsline {subsection}{Rust}{115}{section*.261}%
+\contentsline {subsection}{Ruby}{115}{section*.262}%
+\contentsline {subsection}{Perl}{116}{section*.263}%
+\contentsline {subsection}{Erlang}{116}{section*.264}%
+\contentsline {subsection}{Haskell}{116}{section*.265}%
+\contentsline {subsection}{Dotnet}{116}{section*.266}%
+\contentsline {subsection}{Java}{117}{section*.267}%
+\contentsline {subsection}{Swift}{117}{section*.268}%
+\contentsline {subsection}{Vaal}{118}{section*.269}%
+\contentsline {subsection}{NewLisp}{118}{section*.270}%
+\contentsline {subsection}{Dlang}{118}{section*.271}%
+\contentsline {section}{Отладчик}{118}{section*.272}%
+\contentsline {section}{Начало работы}{119}{section*.273}%
+\contentsline {subsection}{Небольшая сессия в отладчике Radeone2}{119}{section*.274}%
+\contentsline {section}{Переход с IDA, GDB и WinDBG}{119}{section*.275}%
+\contentsline {subsection}{Как запустить программу с помощью отладчика}{119}{section*.276}%
+\contentsline {subsection}{}{119}{section*.277}%
+\contentsline {subsection}{Как присоединиться/отсоединиться от исполняющегося процесса? (gdb -p)}{120}{section*.278}%
+\contentsline {subsection}{}{120}{section*.279}%
+\contentsline {subsection}{Как установить аргументы/переменные среды/загрузить динамическую библиотеку в сеансе отладки radare}{120}{section*.280}%
+\contentsline {subsection}{Как запускать скрипты в radare2 ?}{120}{section*.281}%
+\contentsline {subsection}{Как показать исходный код подобно gdb?}{120}{section*.282}%
+\contentsline {section}{сочетания клавиш}{120}{section*.283}%
+\contentsline {subsection}{Эквивалент команды gdb ``set-follow-fork-mode''}{123}{section*.284}%
+\contentsline {section}{Общие функции}{123}{section*.285}%
+\contentsline {section}{Регистры}{123}{section*.286}%
+\contentsline {section}{Карты памяти}{125}{section*.287}%
+\contentsline {section}{Куча}{126}{section*.288}%
+\contentsline {section}{Файлы}{127}{section*.289}%
+\contentsline {section}{Отладка в обратном направлении}{127}{section*.290}%
+\contentsline {section}{Сообщения Windows}{128}{section*.291}%
+\contentsline {section}{Возможности удаленного доступа}{129}{section*.292}%
+\contentsline {section}{Отладка при помощи gdbserver-а}{130}{section*.293}%
+\contentsline {section}{Отладка в режиме ядра с WinDBG KD}{131}{section*.294}%
+\contentsline {subsection}{Настройка KD в Windows}{132}{section*.295}%
+\contentsline {subsubsection}{Последовательный порт}{132}{section*.296}%
+\contentsline {subsubsection}{Сеть}{132}{section*.297}%
+\contentsline {subsection}{Подключение к интерфейсу KD на r2}{132}{section*.298}%
+\contentsline {subsubsection}{Последовательный порт}{132}{section*.299}%
+\contentsline {subsubsection}{Сеть}{132}{section*.300}%
+\contentsline {subsection}{Использование KD}{133}{section*.301}%
+\contentsline {section}{WinDBG бэкенд для Windows (DbgEng)}{133}{section*.302}%
+\contentsline {subsection}{Использование плагина}{133}{section*.303}%
+\contentsline {section}{Инструменты}{133}{section*.304}%
+\contentsline {subsection}{Программа Rax2}{134}{section*.305}%
+\contentsline {section}{Программа rafind2}{135}{section*.306}%
+\contentsline {section}{Программа Rarun2}{136}{section*.307}%
+\contentsline {section}{Rabin2 --- свойства двоичного файла}{137}{section*.308}%
+\contentsline {subsection}{Идентификация свойств файла}{138}{section*.309}%
+\contentsline {subsection}{Точки ввода в код}{138}{section*.310}%
+\contentsline {subsection}{Импорты}{138}{section*.311}%
+\contentsline {subsection}{Экспорты}{139}{section*.312}%
+\contentsline {subsection}{Символы (Экспорты)}{139}{section*.313}%
+\contentsline {subsection}{Список библиотек}{140}{section*.314}%
+\contentsline {subsection}{Строки}{140}{section*.315}%
+\contentsline {subsection}{Секции программ}{141}{section*.316}%
+\contentsline {section}{Программа Radiff2}{142}{section*.317}%
+\contentsline {section}{Бинарное сравнение}{142}{section*.318}%
+\contentsline {section}{Утилита Rasm2}{143}{section*.319}%
+\contentsline {subsection}{Ассемблирование}{146}{section*.320}%
+\contentsline {subsubsection}{Визуальный режим}{147}{section*.321}%
+\contentsline {subsection}{Дизассемблер}{147}{section*.322}%
+\contentsline {subsubsection}{pd N}{147}{section*.323}%
+\contentsline {subsubsection}{pD N}{147}{section*.324}%
+\contentsline {subsubsection}{pda}{147}{section*.325}%
+\contentsline {subsection}{pi, pI}{147}{section*.326}%
+\contentsline {subsection}{Конфигурирование дизассемблера}{147}{section*.327}%
+\contentsline {section}{Программа ragg2}{148}{section*.328}%
+\contentsline {subsection}{Пример компиляции ragg2}{148}{section*.329}%
+\contentsline {subsection}{Маленькие двоичные файлы}{149}{section*.330}%
+\contentsline {section}{Синтаксис языка}{149}{section*.331}%
+\contentsline {subsection}{Препроцессор}{149}{section*.332}%
+\contentsline {subsubsection}{Псевдонимы}{149}{section*.333}%
+\contentsline {subsubsection}{Включения в текст}{149}{section*.334}%
+\contentsline {subsubsection}{Хашбанг}{149}{section*.335}%
+\contentsline {subsubsection}{Main}{149}{section*.336}%
+\contentsline {subsubsection}{Определение функции}{149}{section*.337}%
+\contentsline {subsubsection}{Сигнатуры функций}{150}{section*.338}%
+\contentsline {subsubsection}{Типы функций}{150}{section*.339}%
+\contentsline {subsubsection}{Системные вызовы}{150}{section*.340}%
+\contentsline {subsubsection}{Библиотеки}{150}{section*.341}%
+\contentsline {subsubsection}{Основная библиотека}{150}{section*.342}%
+\contentsline {subsubsection}{Переменные}{150}{section*.343}%
+\contentsline {subsubsection}{Массивы}{151}{section*.344}%
+\contentsline {subsubsection}{Отслеживание}{151}{section*.345}%
+\contentsline {subsubsection}{Указатели}{151}{section*.346}%
+\contentsline {subsubsection}{Виртуальные регистры}{151}{section*.347}%
+\contentsline {subsubsection}{Математические операции}{151}{section*.348}%
+\contentsline {subsubsection}{Возвращаемые значения}{151}{section*.349}%
+\contentsline {subsubsection}{Ловушки (traps)}{151}{section*.350}%
+\contentsline {subsubsection}{Встроенный ассемблер}{151}{section*.351}%
+\contentsline {subsubsection}{Метки}{152}{section*.352}%
+\contentsline {subsubsection}{Управление исполнением}{152}{section*.353}%
+\contentsline {subsubsection}{Комментарии}{152}{section*.354}%
+\contentsline {section}{Программа rahash2}{152}{section*.355}%
+\contentsline {subsection}{Блочное хеширование}{152}{section*.356}%
+\contentsline {subsection}{Хеширование при помощи rabin2}{152}{section*.357}%
+\contentsline {subsection}{Получение хэшей в сеансе radare2}{152}{section*.358}%
+\contentsline {subsection}{Примеры}{153}{section*.359}%
+\contentsline {section}{Плагины}{154}{section*.360}%
+\contentsline {subsection}{Типы плагинов}{154}{section*.361}%
+\contentsline {subsection}{Получение списка плагинов}{154}{section*.362}%
+\contentsline {subsection}{Примечания}{155}{section*.363}%
+\contentsline {section}{Плагины ввода-вывода}{155}{section*.364}%
+\contentsline {subsection}{Реализация плагина дизассемблирования}{156}{section*.365}%
+\contentsline {subsubsection}{Перемещение плагина в дерево исходников radare2}{157}{section*.366}%
+\contentsline {subsection}{Реализация нового плагина анализа}{157}{section*.367}%
+\contentsline {subsection}{Реализация нового формата двоичного файла}{159}{section*.368}%
+\contentsline {subsubsection}{Включение виртуальной адресации}{159}{section*.369}%
+\contentsline {subsubsection}{Оформление папки с именем формата файла в libr/bin/format}{159}{section*.370}%
+\contentsline {subsubsection}{Примеры}{160}{section*.371}%
+\contentsline {subsection}{Реализация плагина отладчика}{161}{section*.372}%
+\contentsline {subsection}{То ли еще будет!}{161}{section*.373}%
+\contentsline {subsection}{Реализация новой псевдоархитектуры}{161}{section*.374}%
+\contentsline {section}{Плагины Python}{161}{section*.375}%
+\contentsline {subsubsection}{Реализация плагина формата в Python}{163}{section*.376}%
+\contentsline {section}{Отладка}{164}{section*.377}%
+\contentsline {section}{Тестирование плагина}{165}{section*.378}%
+\contentsline {section}{Реализация пакета r2pm для плагина}{165}{section*.379}%
+\contentsline {section}{Задачи Crackmes}{165}{section*.380}%
+\contentsline {section}{Задачки IOLI CrackMes}{165}{section*.381}%
+\contentsline {section}{IOLI 0x00}{166}{section*.382}%
+\contentsline {section}{IOLI 0x01}{166}{section*.383}%
+\contentsline {section}{IOLI 0x02}{168}{section*.384}%
+\contentsline {section}{IOLI 0x03}{171}{section*.385}%
+\contentsline {section}{IOLI 0x04}{174}{section*.386}%
+\contentsline {section}{0x04}{174}{section*.387}%
+\contentsline {section}{IOLI 0x05}{175}{section*.388}%
+\contentsline {section}{IOLI 0x06}{178}{section*.389}%
+\contentsline {section}{IOLI 0x07}{181}{section*.390}%
+\contentsline {section}{IOLI 0x08}{184}{section*.391}%
+\contentsline {section}{IOLI 0x09}{184}{section*.392}%
+\contentsline {subsection}{Avatao R3v3rs3 4}{184}{section*.393}%
+\contentsline {subsection}{.radare2}{185}{section*.394}%
+\contentsline {subsection}{.first\_steps}{186}{section*.395}%
+\contentsline {subsection}{.main}{187}{section*.396}%
+\contentsline {subsection}{.vmloop}{195}{section*.397}%
+\contentsline {subsubsection}{instr\_A}{204}{section*.398}%
+\contentsline {subsubsection}{instr\_S}{209}{section*.399}%
+\contentsline {subsubsection}{instr\_I}{211}{section*.400}%
+\contentsline {subsubsection}{instr\_D}{211}{section*.401}%
+\contentsline {subsubsection}{instr\_P}{211}{section*.402}%
+\contentsline {subsubsection}{instr\_X}{212}{section*.403}%
+\contentsline {subsubsection}{instr\_J}{212}{section*.404}%
+\contentsline {subsection}{.bytecode}{214}{section*.405}%
+\contentsline {subsection}{.outro}{214}{section*.406}%
+\contentsline {section}{Справочная карта Radare2}{217}{section*.407}%
+\contentsline {subsection}{Руководство по выживанию}{217}{section*.408}%
+\contentsline {subsection}{Флаги}{217}{section*.409}%
+\contentsline {subsection}{Пространство флагов}{217}{section*.410}%
+\contentsline {subsection}{Информация}{217}{section*.411}%
+\contentsline {subsection}{Печать строк}{218}{section*.412}%
+\contentsline {subsection}{Визуальный режим}{218}{section*.413}%
+\contentsline {subsection}{Поиск}{219}{section*.414}%
+\contentsline {subsection}{Сохранения (сломано)}{219}{section*.415}%
+\contentsline {subsection}{Использование переменных в выражениях}{219}{section*.416}%
+\contentsline {subsection}{Авторы и активные участники}{220}{section*.417}%
+\contentsline {subsubsection}{Книга radare2}{220}{section*.418}%

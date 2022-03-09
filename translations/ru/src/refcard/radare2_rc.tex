@@ -1,0 +1,232 @@
+
+% Radare2 Quick Reference Card
+% Copyright (c) 2014 Thanat0s
+% TeX Format
+
+
+% Note:  Comment the following line (\input outopt.tex) if you want
+% to generate yourself the card, either in DVI or PDF format.
+% Uncomment the three next lines for PDF generation.
+% Command for DVI : tex radare2_rc.tex
+% Command for PDF : pdftex radare2_rc.tex
+
+% \input outopt.tex
+
+% \pdfoutput=1
+\pdfpageheight=21cm
+\pdfpagewidth=29.7cm
+
+% Font definitions
+\font\bigbf=cmbx12
+\font\smallrm=cmr8
+\font\smalltt=cmtt8
+\font\tinyit=cmmi5
+
+\def\\{\hfil\break}
+
+\def\title#1{\hfil{\bf #1}\hfil\par\vskip 2pt\hrule}
+\def\cm#1#2{{\tt#1} \dotfill {#2}\par}
+\def\cmlong#1#2{{\tt#1}\\{}\indent{~~~}#2\par}
+\def\cn#1{\hfill$\lfloor$ #1\par}
+\def\sect#1{\vskip 0.7cm {\it#1\/}\par}
+
+% Characters definitions
+\def\bs{$\backslash$}
+\def\backspace{$\leftarrow$}
+\def\ctrl{{\rm\char94}\kern-1pt}
+\def\enter{$\hookleftarrow$}
+\def\or{\thinspace{\tinyit{or}}\thinspace}
+\def\key#1{$\langle${\rm{\it#1\/}}$\rangle$}
+\def\rapos{\char125}
+\def\lapos{\char123}
+\def\bt{\`{}}
+\def\plus{$+$}
+\def\lbracket{\char123}
+\def\rbracket{\char125}
+\def\tild{\char126}
+\def\hat{\char94}
+\def\percent{\char37}
+\def\dollar{\char36}
+\def\atsign{\char64}
+\def\andsign{\char38}
+\def\vertbar{\char124}
+\def\placeholder{\lt{}\char43\char43\gt{}}
+\def\brplaceholder{\lbracket{}\placeholder\rbracket{}}
+
+% Three columns definitions
+\parindent 0pt
+\nopagenumbers
+\hoffset=-1.56cm
+\voffset=-1.54cm
+\newdimen\fullhsize
+\fullhsize=27.9cm
+\hsize=8.5cm
+\vsize=19cm
+\def\fullline{\hbox to\fullhsize}
+\let\lr=L
+\newbox\leftcolumn
+\newbox\midcolumn
+\output={
+  \if L\lr
+    \global\setbox\leftcolumn=\columnbox
+    \global\let\lr=M
+  \else\if M\lr
+    \global\setbox\midcolumn=\columnbox
+    \global\let\lr=R
+  \else
+    \tripleformat
+    \global\let\lr=L
+  \fi\fi
+  \ifnum\outputpenalty>-20000
+  \else
+    \dosupereject
+  \fi}
+\def\tripleformat{
+  \shipout\vbox{\fullline{\box\leftcolumn\hfil\box\midcolumn\hfil\columnbox}}
+  \advancepageno}
+\def\columnbox{\leftline{\pagebody}}
+
+% Card content
+% Header
+%\hrule\vskip 3pt
+\title{Radare2 REFERENCE CARD}
+
+\sect{Survival Guide}
+\cm{aa}{auto analyse}
+\cm{pdf@fcn{\key{Tab}}}{Disassemble function}
+\cm{f fcn{\key{Tab}}}{List functions}
+\cm{f str{\key{Tab}}}{List strings}
+\cm{fr [flagname] [newname]}{Rename flag}
+\cm{psz [offset]}{Print string}
+\cm{arf [flag]}{Find cross ref for a flag}
+
+\sect{Flagspaces}
+\cm{fs}{display flagspaces}
+\cm{fs *}{select all flagspace}
+\cm{fs [sections]}{select one flagspace}
+
+\sect{Flags}
+\cm{f}{list flags}
+\cm{fj}{display flags in json}
+\cm{fl}{show flag length}
+\cm{fx}{show hexdump of flag}
+\cm{fC [name] [cmt]}{set flag comment}
+
+\sect{Infos}
+\cm{ii}{Info on imports}
+\cm{iI}{Info on binary}
+\cm{ie}{Display entrypoint}
+\cm{iS}{Display sections}
+\cm{ir}{Display relocations}
+
+\sect{Print string}
+\cm{psz [offset]}{Print stringZ'}
+\cm{psb [offset]}{Print strings in current block}
+\cm{psx [offset]}{Show string with scaped chars}
+\cm{psp [offset]}{Print pascal string}
+\cm{psw [offset]}{Print wide string}
+
+\sect{Visual mode}
+\cm{V}{Enter visual mode}
+\cm{p/P}{rotate modes (hex, disasm, debug, words, buf)}
+\cm{c}{toggle (c)ursor}
+\cm{q}{back to radare shell}
+\cm{hjkl}{move around (or HJKL) (left-down-up-right)}
+\cm{Enter}{follow address of jump/call}
+\cm{sS}{step / step over}
+\cm{o}{go/seek to given offset}
+\cm{.}{seek to program counter}
+\cm{/}{in cursor mode search in current block}
+\cm{:cmd}{run radare command}
+\cm{;[-]cmt}{add/remove comment}
+\cm{/*+-[]}{change block size, [] = resize hex.cols}
+\cm{$>$||$<$}{seek aligned to block size}
+\cm{i/a/A}{(i)nsert hex, (a)ssemble code, visual (A)ssembler}
+\cm{b/B}{toggle breakpoint / automatic block size}
+\cm{d[f?]}{define function, data, code, ..}
+\cm{D}{enter visual diff mode (set diff.from/to)}
+\cm{e}{edit eval configuration variables}
+\cm{f/F}{set/unset flag}
+\cm{gG}{go seek to begin and end of file (0-\dollar{}s)}
+\cm{mK/'K}{mark/go to Key (any key)}
+\cm{M}{walk the mounted filesystems}
+\cm{n/N}{seek next/prev function/flag/hit (scr.nkey)}
+\cm{o}{go/seek to given offset}
+\cm{C}{toggle (C)olors}
+\cm{R}{randomize color palette (ecr)}
+\cm{t}{track flags (browse symbols, functions..)}
+\cm{T}{browse anal info and comments}
+\cm{v}{visual code analysis menu}
+\cm{V/W}{(V)iew graph (agv?), open (W)ebUI}
+\cm{uU}{undo/redo seek}
+\cm{x}{show xrefs to seek between them}
+\cm{yY}{copy and paste selection}
+\cm{z}{toggle zoom mode}
+
+\sect{Searching}
+\cm{/ foo\bs{}00}{search for string 'foo\bs{}0'}
+\cm{/b}{search backwards}
+\cm{//}{repeat last search}
+\cm{/w foo}{search for wide string 'f\bs{}0o\bs{}0o\bs{}0'}
+\cm{/wi foo}{search for wide string ignoring case}
+\cm{/! ff}{search for first occurrence not matching}
+\cm{/i foo}{search for string 'foo' ignoring case}
+\cm{/e /E.F/i}{match regular expression}
+\cm{/x a1b2c3}{search for bytes, same as {\tt/x A1 B2 C3}}
+\cm{/x a1..c3}{search for bytes ignoring some nibbles}
+\cm{/x a1b2:fff3}{search for bytes with mask}
+\cm{/d 101112}{search for a deltified sequence of bytes}
+\cm{/!x 00}{inverse hexa search (find first byte != 0x00)}
+\cm{/c jmp [esp]}{search for asm code (see search.asmstr)}
+\cm{/a jmp eax}{assemble opcode and search its bytes}
+\cm{/A}{search for AES expanded keys}
+\cm{/r sym.printf}{analyze opcode reference an offset}
+\cm{/R}{search for ROP gadgets}
+\cm{/P}{show offset of previous instruction}
+\cm{/m magicfile}{search for matching magic file}
+\cm{/p patternsize}{search for pattern of given size}
+\cm{/z min max}{search for strings of given size}
+\cm{/v[?248] num}{look for a asm.bigendian 32bit value}
+
+\sect{Saving}
+\cm{Po [file]}{open project}
+\cm{Ps [file]}{save project}
+\cm{Pi [file]}{show project informations}
+
+
+\sect{Usable variables in expression}
+\cm{\dollar{}\dollar{}}{here (current virtual seek)}
+\cm{\dollar{}o}{here (current disk io offset)}
+\cm{\dollar{}s}{file size}
+\cm{\dollar{}b}{block size}
+\cm{\dollar{}w}{get word size, 4 if asm.bits=32, 8 if 64}
+\cm{\dollar{}c,\dollar{}r}{get width and height of terminal}
+\cm{\dollar{}S}{section offset}
+\cm{\dollar{}SS}{section size}
+\cm{\dollar{}j}{jump address (jmp 0x10, jz 0x10 =$>$ 0x10)}
+\cm{\dollar{}f}{jump fail address (jz 0x10 =$>$ next instruction)}
+\cm{\dollar{}I}{number of instructions of current function}
+\cm{\dollar{}F}{current function size}
+\cm{\dollar{}Jn}{get nth jump of function}
+\cm{\dollar{}Cn}{get nth call of function}
+\cm{\dollar{}Dn}{get nth data reference in function}
+\cm{\dollar{}Xn}{get nth xref of function}
+\cm{\dollar{}m}{opcode memory reference (mov eax,[0x10] =$>$ 0x10)}
+\cm{\dollar{}l}{opcode length}
+\cm{\dollar{}e}{1 if end of block, else 0}
+\cm{\dollar{}ev}{get value of eval config variable}
+\cm{\dollar{}?}{last comparision value}
+
+% Footer
+\vfill \hrule\smallskip
+{\smallrm This card may be freely distributed under
+the terms of the GNU general public licence ---
+Copyright \copyright\ {\oldstyle 2014} by Thanat0s - v0.1 -}
+
+% Ending
+\supereject
+\if L\lr \else\null\vfill\eject\fi
+\if L\lr \else\null\vfill\eject\fi
+\bye
+
+% EOF
