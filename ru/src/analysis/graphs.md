@@ -23,11 +23,11 @@
 
 Форматы вывода:
 | <blank>                 Псевдографика Ascii
-| *                       команды r2
-| d                       формат dot Graphviz-а
-| g                       формат gml (Graph Modelling Language)
-| j                       json ('J' для форматированного дизассемблирования)
-| k                       ключ-значение SDB
+| *                       Команды r2
+| d                       Формат dot Graphviz-а
+| g                       Формат gml (Graph Modelling Language)
+| j                       JSON ('J' для форматированного дизассемблирования)
+| k                       Ключ-значение SDB
 | t                       Крошечный ascii-art
 | v                       Интерактивный ascii-art
 | w [path]                Записать в файл или показать на экране изображение (смотрите graph.gv.format и graph.web)
