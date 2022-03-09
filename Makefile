@@ -12,7 +12,7 @@ node_modules:
 CHAPTERS=$(shell grep -Eoi '\([^\)]+' src/SUMMARY.md | sed -e 's,^.,src/,')
 PANDOC_PDF_OPTIONS+=-V papersize:a3
 PANDOC_PDF_OPTIONS+=-V geometry:margin=1.5cm
-PANDOC_PDF_OPTIONS+=--pdf-engine=xelatex
+PANDOC_PDF_OPTIONS+=--pdf-engine=lualatex
 PANDOC_PDF_OPTIONS+=--resource-path=img
 PANDOC_PDF_OPTIONS+=--toc-depth=5 --toc
 PANDOC_PDF_OPTIONS+=-B src/COVER.md
@@ -30,6 +30,16 @@ pdf:
 	rm -rf img ; mkdir -p img ; for a in $(shell find src | grep png$$) ; do cp $$a img ; done
 	cp cover.jpg img
 	pandoc $(CHAPTERS) $(PANDOC_OPTIONS) -o r2book.pdf
+	rm -rf img
+
+latex:
+	# Cant add images because of this bug: https://github.com/jgm/pandoc/issues/3752
+	# pandoc src/**/*.md --verbose --pdf-engine=xelatex -o r2book.pdf
+	# pandoc  src/**/*.md --pdf-engine=xelatex -o r2book.pdf
+	rm -rf img ; mkdir -p img ; for a in $(shell find src | grep png$$) ; do cp $$a img ; done
+	cp cover.jpg img
+	pandoc $(CHAPTERS) $(PANDOC_OPTIONS) -s -o r2book.tex
+	lualatex r2book.tex
 	rm -rf img
 
 epub:
