@@ -83,10 +83,10 @@ Radare2 также реализует собственный gdbserver:
 ```
 $ r2 -
 [0x00000000]> =g?
-|Usage:  =[g] [...] # gdb server
+|Usage:  =[g] [...] # сервер gdb
 | gdbserver:
 | =g port file [args]   взаимодействуя через  'port', отлаживать 'file', используя gdbserver
-| =g! port file [args] то же, что выше, но с выдачей сообщений протокола отладки (например, gdbserver --remote-debug)
+| =g! port file [args]  то же, что выше, но с выдачей сообщений протокола отладки (например, gdbserver --remote-debug)
 ```
 
 Запускать его так:
