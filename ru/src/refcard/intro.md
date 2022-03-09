@@ -1,166 +1,154 @@
-# Radare2 Reference Card
+# Справочная карта Radare2
 
-This chapter is based on the Radare 2 reference card by Thanat0s, which is under the GNU GPL. Original license is as follows:
+Этот раздел книги основан на справочной карте, разработанной Thanat0s-ом, лицензия - GNU GPL. Первоначальная лицензия была следующая:
 
 ```
-This card may be freely distributed under the terms of the GNU
-general public licence — Copyright by Thanat0s - v0.1 -
+Эту карточку можно свободно распространять в соответствии с общей публичной лицензией GNU, Copyright Thanat0s - v0.1 -
 ```
 
-## Survival Guide
+## Руководство по выживанию
 
-Those are the basic commands you will want to know and use for moving
-around a binary and getting information about it.
+Здесь приведены базовые команды, которые необходимо выучить для перемещения по двоичному файлу, получения о нем информации.
 
-| Command                 | Description                             |
+| Команда                 | Описание                                |
 |:------------------------|:----------------------------------------|
-| s (tab)                 | Seek to a different place               |
-| x [nbytes]              | Hexdump of nbytes, $b by default        |
-| aa                      | Auto analyze                            |
-| pdf@ [funcname](Tab)    | Disassemble function (main, fcn, etc.)  |
-| f fcn(Tab)              | List functions                          |
-| f str(Tab)              | List strings                            |
-| fr [flagname] [newname] | Rename flag                             |
-| psz [offset]~grep       | Print strings and grep for one          |
-| axF [flag]              | Find cross reference for a flag         |
+| s (tab)                 | Установить смещение куда-либо           |
+| x [nbytes]              | Шестнадцатеричный дамп n байтов, $b по умолчанию  |
+| aa                      | Анализировать автоматически             |
+| pdf@ [funcname](Tab)    | Дизассемблировать функцию (main, fcn, и т.д.)  |
+| f fcn(Tab)              | Перечислить функции                     |
+| f str(Tab)              | Перечислить строки                      |
+| fr [flagname] [newname] | Переименовать флаг                      |
+| psz [offset]~grep       | Вывод строки и grep-пинг нужной         |
+| axF [flag]              | Найти перекрестные ссылки на флаг       |
 
-## Flags
+## Флаги
 
-Flags are like bookmarks, but they carry some extra information like size, tags or associated flagspace. Use the `f` command to list, set, get them.
+Флаг - это закладка в коде бинарного файла, но с дополнительной информацией, в частности, размер, теги и ассоциированное с ним пространство флагов. Команда `f` используется для перечисления, задания флагов, а также получения информации о них.
 
-| Command             | Description           |
+| Команда             | Описание              |
 |:--------------------|:----------------------|
-| f                   | List flags            |
-| fd $$               | Describe an offset    |
-| fj                  | Display flags in JSON |
-| fl                  | Show flag length      |
-| fx [flagname]       | Show hexdump of flag  |
-| fC [name] [comment] | Set flag comment      |
+| f                   | Перечислить флаги     |
+| fd $$               | Показать информацию о смещении    |
+| fj                  | Показать флаги в формате JSON |
+| fl                  | Показать длину флага  |
+| fx [flagname]       | Показать шестнадцатеричный дамп флага  |
+| fC [name] [comment] | Показать комментарий о флаге  |
 
-## Flagspaces
+## Пространство флагов
 
-Flags are created into a flagspace, by default none is selected,
-and listing flags will list them all. To display a subset of flags
-you can use the `fs` command to restrict it.
+Флаги создаются в пространствах имен, по умолчанию пространство не выбрано, и команда перечисления флагов будет показывать их все. Если требуются флаги из конкретного подмножества, используется команда `fs`, позволяющая задавать ограничения.
 
-| Command       | Description           |
+| Команда       | Описание              |
 |:--------------|:----------------------|
-| fs            | Display flagspaces    |
-| fs *          | Select all flagspaces |
-| fs [space]    | Select one flagspace  |
+| fs            | Показать пространства флагов    |
+| fs *          | Выбрать все пространства флагов |
+| fs [space]    | Выбрать пространство флагов  |
 
-## Information
+## Информация
 
-Binary files have information stored inside the headers. The `i`
-command uses the RBin api and allows us to the same things rabin2
-do. Those are the most common ones.
+Двоичные файлы включают в себя важную информацию, хранящуюся в заголовках. Команда `i` использует API RBin и позволяет получать информацию в rabin2. Вот наиболее часто используемые команды.
 
-| Command | Description              |
+| Команда | Описание                 |
 |:--------|:-------------------------|
-| ii      | Information on imports   |
-| iI      | Info on binary           |
-| ie      | Display entrypoint       |
-| iS      | Display sections         |
-| ir      | Display relocations      |
-| iz      | List strings (izz, izzz) |
+| ii      | Информация об импортах   |
+| iI      | Информация о двоичном коде |
+| ie      | Показать точку входа     |
+| iS      | Показать секции          |
+| ir      | Показать переопределения |
+| iz      | Перечислить строки (izz, izzz) |
 
-## Print string
+## Печать строк
 
-There are different ways to represent a string in memory. The `ps` command
-allows us to print it in utf-16, pascal, zero terminated, .. formats.
+Существуют различные способы представления строк в памяти. Команда `ps` позволяет печатать их в кодировке utf-16, в форматах pascal, С (заканчивающихся нулем), и др.
 
-| Command      | Description                    |
+| Команда      | Описание                       |
 |:-------------|:-------------------------------|
-| psz [offset] | Print zero terminated string   |
-| psb [offset] | Print strings in current block |
-| psx [offset] | Show string with scaped chars  |
-| psp [offset] | Print pascal string            |
-| psw [offset] | Print wide string              |
+| psz [offset] | Печать строки С (с нулем на конце)   |
+| psb [offset] | Печать строки в текущем блоке |
+| psx [offset] | Показать строку с использованием escape-последовательностей  |
+| psp [offset] | Печать строки pascal           |
+| psw [offset] | Печать wide-строки             |
 
 
-## Visual mode
+## Визуальный режим
 
-The visual mode is the standard interactive interface of radare2.
+Визуальный режим поддерживает интерактивный режим взаимодействия с radare2. Вход в этот режим - команда `v` или `V`, после чего большинство операций выполняется клавишами клавиатуры.
 
-To enter in visual mode use the `v` or `V` command, and then you'll only
-have to press keys to get the actions happen instead of commands.
-
-| Command        | Description                                       |
+| Команда        | Описание                                          |
 |:---------------|:--------------------------------------------------|
-| V              | Enter visual mode                                 |
-| p/P            | Rotate modes (hex, disasm, debug, words, buf)     |
-| c              | Toggle (c)ursor                                   |
-| q              | Back to Radare shell                              |
-| hjkl           | Move around (or HJKL) (left-down-up-right)        |
-| Enter          | Follow address of jump/call                       |
-| sS             | Step/step over                                    |
-| o              | Toggle asm.pseudo and asm.esil                    |
-| .              | Seek to program counter                           |
-| /              | In cursor mode, search in current block           |
-| :cmd           | Run radare command                                |
-| ;[-]cmt        | Add/remove comment                                |
-| /*+-[]         | Change block size, [] = resize hex.cols           |
-| <,>            | Seek aligned to block size                        |
-| i/a/A          | (i)nsert hex, (a)ssemble code, visual (A)ssembler |
-| b              | Toggle breakpoint                                 |
-| B              | Browse evals, symbols, flags, classes, ...        |
-| d[f?]          | Define function, data, code, ..                   |
-| D              | Enter visual diff mode (set diff.from/to)         |
-| e              | Edit eval configuration variables                 |
-| f/F            | Set/unset flag                                    |
-| gG             | Go seek to begin and end of file (0-$s)           |
-| mK/’K          | Mark/go to Key (any key)                          |
-| M              | Walk the mounted filesystems                      |
-| n/N            | Seek next/prev function/flag/hit (scr.nkey)       |
-| C              | Toggle (C)olors                                   |
-| R              | Randomize color palette (ecr)                     |
-| tT             | Tab related. see also [tab](visual_panels.md)     |
-| v              | Visual code analysis menu                         |
-| V              | (V)iew graph (agv?)                               |
-| wW             | Seek cursor to next/prev word                     |
-| uU             | Undo/redo seek                                    |
-| x              | Show xrefs of current func from/to data/code      |
-| yY             | Copy and paste selection                          |
-| z              | fold/unfold comments in diassembly                |
+| V              | Вход в визуальный режим                           |
+| p/P            | Смена режимов отображения (hex, disasm, debug, words, buf)     |
+| c              | Включить/выключить курсор (c)                     |
+| q              | Вернуться в командную строку radare2              |
+| hjkl           | Перемещение области на экране (или HJKL)  (влево-вниз-вверх-вправо)        |
+| Enter          | Перейти по адресу jump-а или call                 |
+| sS             | Step/step over (отладка)                          |
+| o              | Переключиться между asm.pseudo и asm.esil                    |
+| .              | Установить смещение на адрес в программном счетчике  |
+| /              | В режиме курсора провести поиск в текущем блоке   |
+| :cmd           | Запустить команду radare                          |
+| ;[-]cmt        | Добавить или удалить комментарий                  |
+| /*+-[]         | Изменить размер блока, [] = resize hex.cols       |
+| <,>            | Поиск с учетом выравнивания размер блока          |
+| i/a/A          | вставить (i) hex, (a)ссемблировать код, визуальный (A)ссемблер |
+| b              | Включить/выключить точку останова                 |
+| B              | Просмотр evals, symbols, flags, classes, ...      |
+| d[f?]          | Задать функцию, описать данные, код, ...          |
+| D              | Вход в режим визуального сравнения (установить diff.from/to)  |
+| e              | Редактировать конфигурационные переменные         |
+| f/F            | Задать/удалить флаг                               |
+| gG             | Установить смещение на начало или конец файла (0-$s)  |
+| mK/’K          | Пометить/перейти на Ключ (любой ключ)             |
+| M              | Обойти подмонтированные файловые системы          |
+| n/N            | Установить смещение на следующую/предыдущую функцию/флаг/вхождение поиска (scr.nkey)       |
+| C              | Переключить отображение с цвете или ч/б           |
+| R              | Сгенерировать случайную палитру цветов (ecr)      |
+| tT             | Управление панелями на экране. Читайте раздел [Панели](visual_panels.md)    |
+| v              | Меню анализа кода в визуальном режиме             |
+| V              | Просмотр графа (agv?)                             |
+| wW             | Переместить курсов на следующее/предыдущее слово  |
+| uU             | Отменить/повторить установку смещения             |
+| x              | Показать перекрестные ссылки (xrefs) для текущей функции из/в данные/код |
+| yY             | Копирование и вставка выделения     |
+| z              | скрыть/раскрыть комментарии в дизассемблировании |
 
 
-## Searching
+## Поиск
 
-There are many situations where we need to find a value inside a binary
-or in some specific regions. Use the `e search.in=?` command to choose
-where the `/` command may search for the given value.
+Возникает много разных задач, где требуется найти значение внутри двоичного файла или в конкретных областях. Синтаксическая структура `e search.in=?` позволяет указывать, где команда `/` будет осуществлять поиск заданного значения.
 
-| Command        | Description                                   |
+| Команда        | Описание                                   |
 |:---------------|:----------------------------------------------|
-| / foo\00       | Search for string ’foo\0’                     |
-| /b             | Search backwards                              |
-| //             | Repeat last search                            |
-| /w foo         | Search for wide string ’f\0o\0o\0’            |
-| /wi foo        | Search for wide string ignoring case          |
-| /! ff          | Search for first occurrence not matching      |
-| /i foo         | Search for string ’foo’ ignoring case         |
-| /e /E.F/i      | Match regular expression                      |
-| /x a1b2c3      | Search for bytes; spaces and uppercase nibbles are allowed, same as /x A1 B2 C3|
-| /x a1..c3      | Search for bytes ignoring some nibbles (auto-generates mask, in this example: ff00ff)|
-| /x a1b2:fff3   | Search for bytes with mask (specify individual bits)|
-| /d 101112      | Search for a deltified sequence of bytes      |
-| /!x 00         | Inverse hexa search (find first byte != 0x00) |
-| /c jmp [esp]   | Search for asm code (see search.asmstr)       |
-| /a jmp eax     | Assemble opcode and search its bytes          |
-| /A             | Search for AES expanded keys                  |
-| /r sym.printf  | Analyze opcode reference an offset            |
-| /R             | Search for ROP gadgets                        |
-| /P             | Show offset of previous instruction           |
-| /m magicfile   | Search for matching magic file                |
-| /p patternsize | Search for pattern of given size              |
-| /z min max     | Search for strings of given size              |
-| /v[?248] num   | Look for a asm.bigendian 32bit value          |
+| / foo\00       | Поиск строки ’foo\0’                     |
+| /b             | Поиск в обратном направлении |
+| //             | повторить предыдущий поиск |
+| /w foo         | Поиск wide-строки ’f\0o\0o\0’            |
+| /wi foo        | Поиск wide-строки, игнорируя размер букв          |
+| /! ff          | Поиск первых несоответствующих вхождений      |
+| /i foo         | Поиск строки ’foo’,игнорируя размер букв      |
+| /e /E.F/i      | Сопоставить с регулярным выражением |
+| /x a1b2c3      | Поиск байтов; пробелы и [0-9a-fA-F] допустимы, аналогично /x A1 B2 C3 |
+| /x a1..c3      | Поиск байтов, игнорируя некоторые hex-числа (автоматически сгенерированная маска, в этом примере: ff00ff)|
+| /x a1b2:fff3   | Поиск байтов по маске (указываются индивидуальные биты) |
+| /d 101112      | Поиск дельтифицированной последовательности байтов |
+| /!x 00         | Инверсный поиск hex (найти первый байт != 0x00) |
+| /c jmp [esp]   | Поиск ассемблерного кода (смотрите search.asmstr) |
+| /a jmp eax     | Ассемблировать оп-код и искать его байты |
+| /A             | Поиск открытых AES-ключей |
+| /r sym.printf  | Анализировать, куда ссылается оп-код          |
+| /R             | Поиск гаджетов ROP |
+| /P             | Показать смещение предыдущей инструкции |
+| /m magicfile   | Поиск следующего magic-файла                |
+| /p patternsize | Поиск шаблона заданного размера |
+| /z min max     | Поиск строки заданного размера |
+| /v[?248] num   | Поиск 32-битового значения, учитывая asm.bigendian |
 
-## Saving (Broken)
+## Сохранения (сломано)
 
-This feature has broken and not been resolved at the time of writing these words (Nov.16th 2020). check [#Issue 6945: META - Project files](https://github.com/radareorg/radare2/issues/6945) and [#Issue 17034](https://github.com/radareorg/radare2/issues/17034) for more details.
+Эти функции не работают так, как указано в спецификации на момент написания книги (16 ноября 2020). Дополнительная информация - [#Ошибка 6945: META - Project files](https://github.com/radareorg/radare2/issues/6945) и [#Ошибка 17034](https://github.com/radareorg/radare2/issues/17034).
 
-To save your analysis for now, write your own script which records the function name, variable name, etc. for example:
+Чтобы записать результаты анализа (пока проблемы не решены) напишите себе скрипт, который будет сохранять имя функции, имена переменных, и т.д., например:
 ```sh
 vim sample_A.r2
 
@@ -174,55 +162,51 @@ afvn iter var_04h
 
 ```
 
-## Usable variables in expression
+## Использование переменных в выражениях
 
-The `?$?` command will display the variables that can be used in any math
-operation inside the r2 shell. For example, using the `? $$` command to evaluate
-a number or `?v` to just the value in one format.
+Команда `?$?` показывает переменные, которые можно использовать в математических операциях в командной строки r2. Например, команда `? $$` вычисляет число, а `?v` - печатает значение в одном из форматов. Все команды r2 принимают эти переменные в качестве параметров.
 
-All commands in r2 that accept a number supports the use of those variables.
-
-| Command       | Description                                      |
+| Команда                 | Описание|
 |:--------------|:-------------------------------------------------|
-| $$            | here (current virtual seek)|
-| $$$           | current non-temporary virtual seek|
-| $?            | last comparison value|
-| $alias=value  | alias commands (simple macros)|
-| $b            | block size|
-| $B            | base address (aligned lowest map address)|
-| $f            | jump fail address (e.g. jz 0x10 => next instruction)|
-| $fl           | flag length (size) at current address (fla; pD $l @ entry0)|
-| $F            | current function size|
-| $FB           | begin of function|
-| $Fb           | address of the current basic block|
-| $Fs           | size of the current basic block|
-| $FE           | end of function|
-| $FS           | function size|
-| $Fj           | function jump destination|
-| $Ff           | function false destination|
-| $FI           | function instructions|
-| $c,$r         | get width and height of terminal|
-| $Cn           | get nth call of function|
-| $Dn           | get nth data reference in function|
-| $D            | current debug map base address ?v $D @ rsp|
-| $DD           | current debug map size|
-| $e            | 1 if end of block, else 0|
-| $j            | jump address (e.g. jmp 0x10, jz 0x10 => 0x10)|
-| $Ja           | get nth jump of function|
-| $Xn           | get nth xref of function|
-| $l            | opcode length|
-| $m            | opcode memory reference (e.g. mov eax,[0x10] => 0x10)|
-| $M            | map address (lowest map address)|
-| $o            | here (current disk io offset)|
+| $$            | here (текущее смещение в виртуальном адресном пространстве)|
+| $$$           | текущее невременное виртуальное смещение |
+| $?            | последний результат сравнения |
+| $alias=value  | задать синоним (простейшие макросы)|
+| $b            | размер блока|
+| $B            | базовый адрес (выровненный наименьший адрес отображения)|
+| $f            | адрес перехода jump, если условие ложно (jz 0x10 => следующая инструкция)|
+| $fl           | длина флага (размер), ассоциированного с данным адресом (fla; pD $l @ entry0)|
+| $F            | размер текущей функции|
+| $FB           | начало функции|
+| $Fb           | адрес текущего базового блока|
+| $Fs           | размер текущего базового блока|
+| $FE           | конец функция|
+| $FS           | размер функции|
+| $Fj           | целевой адрес перехода из функции|
+| $Ff           | целевой false-адрес функции|
+| $FI           | инструкции функции|
+| $c,$r         | получить ширину и высоту терминала|
+| $Cn           | получить n-тый вызов функции|
+| $Dn           | получить n-ю ссылку на данные в функции|
+| $D            | текущий адрес базы отображения в режиме отладки ?v $D @ rsp|
+| $DD           | текущий размер отображения в режиме отладки|
+| $e            | 1 если в конце блока, иначе 0|
+| $j            | адрес jump-а (например, jmp 0x10, jz 0x10 => 0x10)|
+| $Ja           | получить n-тый jump функции|
+| $Xn           | получить n-ый xref функции|
+| $l            | длина оп-кода|
+| $m            | ссылка оп-кода на память (например, mov eax,[0x10] => 0x10)|
+| $M            | адрес отображения (наименьший адрес отображения)|
+| $o            | here (текущее смещение на диске, io)|
 | $p            | getpid()|
-| $P            | pid of children (only in debug)|
-| $s            | file size|
-| $S            | section offset|
-| $SS           | section size|
-| $v            | opcode immediate value (e.g. lui a0,0x8010 => 0x8010)|
-| $w            | get word size, 4 if asm.bits=32, 8 if 64, ...|
-| ${ev}         | get value of eval config variable|
-| $r{reg}       | get value of named register|
-| $k{kv}        | get value of an sdb query value|
-| $s{flag}      | get size of flag|
-| RNum          | $variables usable in math expressions|
+| $P            | pid дочернего процесса (только в отладчике)|
+| $s            | размер файла|
+| $S            | смещение секции|
+| $SS           | размер секции|
+| $v            | immediate-значение оп-кода (например, lui a0,0x8010 => 0x8010)|
+| $w            | получить размер слова, 4 если asm.bits=32, 8 если 64, ...|
+| ${ev}         | значение конфигурационной переменной|
+| $r{reg}       | значение поименованного регистра|
+| $k{kv}        | получить ответ на запрос к sdb|
+| $s{flag}      | размер флага|
+| RNum          | переменные формата $variables, полезные в математических выражениях|
