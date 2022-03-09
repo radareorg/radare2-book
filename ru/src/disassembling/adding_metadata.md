@@ -20,32 +20,32 @@ Radare предлагает несколько способов хранения
 
 ```
 [0x00404cc0]> C?
-| Usage: C[-LCvsdfm*?][*?] [...]   # Metadata management
-| C                                              list meta info in human friendly form
-| C*                                             list meta info in r2 commands
-| C*.                                            перечень метаданных, привязанных к текущему смещению, команды r2
-| C- [len] [[@]addr]                             delete metadata at given address range
-| C.                                             list meta info of current offset in human friendly form
-| CC! [@addr]                                    edit comment with $EDITOR
-| CC[?] [-] [comment-text] [@addr]               add/remove comment
-| CC.[addr]                                      show comment in current address
-| CCa[-at]|[at] [text] [@addr]                   add/remove comment at given address
-| CCu [comment-text] [@addr]                     add unique comment
-| CF[sz] [fcn-sign..] [@addr]                    function signature
-| CL[-][*] [file:line] [addr]                    show or add 'code line' information (bininfo)
-| CS[-][space]                                   manage meta-spaces to filter comments, etc..
-| C[Cthsdmf]                                     list comments/types/hidden/strings/data/magic/formatted in human friendly form
-| C[Cthsdmf]*                                    list comments/types/hidden/strings/data/magic/formatted in r2 commands
-| Cd[-] [size] [repeat] [@addr]                  hexdump data array (Cd 4 10 == dword [10])
-| Cd. [@addr]                                    show size of data at current address
-| Cf[?][-] [sz] [0|cnt][fmt] [a0 a1...] [@addr]  format memory (see pf?)
-| Ch[-] [size] [@addr]                           hide data
-| Cm[-] [sz] [fmt..] [@addr]                     magic parse (see pm?)
-| Cs[?] [-] [size] [@addr]                       add string
-| Ct[?] [-] [comment-text] [@addr]               add/remove type analysis comment
-| Ct.[@addr]                                     show comment at current or specified address
-| Cv[bsr][?]                                     add comments to args
-| Cz[@addr]                                      add string (see Cs?)
+| Usage: C[-LCvsdfm*?][*?] [...]   # Управление метаданными
+| C                                              перечислить метаданные в виде текста
+| C*                                             перечислить метаданные в виде команд r2
+| C*.                                            перечень метаданных, привязанных к текущему смещению, ыормат команд r2
+| C- [len] [[@]addr]                             удалить метаданные, привязанные к заданному диапазону адресов
+| C.                                             перечислить метаданные, привязанные к текущему смещению в виде текста
+| CC! [@addr]                                    редактировать комментарий при помощи $EDITOR-а
+| CC[?] [-] [comment-text] [@addr]               добавить/удалить комментарий
+| CC.[addr]                                      показат комментарий, привязанный к текущему адресу
+| CCa[-at]|[at] [text] [@addr]                   добавить/удалить комментарий, привязанный к текущему адресу
+| CCu [comment-text] [@addr]                     добавить уникальный комментарий
+| CF[sz] [fcn-sign..] [@addr]                    сигнатура функции
+| CL[-][*] [file:line] [addr]                    показать или добавить 'code line'-информацию (bininfo)
+| CS[-][space]                                   управление meta-пространствами для фильтрации комментариев и т.п.
+| C[Cthsdmf]                                     перечислить комментарии/типы/скрытое/строки/данные/magic-и в виде текста
+| C[Cthsdmf]*                                    перечислить комментарии/типы/скрытое/строки/данные/magic-и в виде команд r2
+| Cd[-] [size] [repeat] [@addr]                  сделать шестнадцатеричный дамп массива данных (Cd 4 10 == dword [10])
+| Cd. [@addr]                                    показать размер данныз по текущему адресу
+| Cf[?][-] [sz] [0|cnt][fmt] [a0 a1...] [@addr]  задать формат области память (смотрите pf?)
+| Ch[-] [size] [@addr]                           скрыть данные
+| Cm[-] [sz] [fmt..] [@addr]                     распознать magic (смотрите pm?)
+| Cs[?] [-] [size] [@addr]                       добавить строку
+| Ct[?] [-] [comment-text] [@addr]               добавить/удалить комментарий об анализе типа
+| Ct.[@addr]                                     показать содержимое по текущему смещению или заданному адресу
+| Cv[bsr][?]                                     добавить комментарий к аргументу функции
+| Cz[@addr]                                      добавить строку (смотрите Cs?)
 ```
 
 Добавление комментария к определенной строке/адресу - команда `Ca` :
