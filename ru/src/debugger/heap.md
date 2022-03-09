@@ -41,23 +41,25 @@ Heap Layout
 
 ```
 [0x00000000]> dmh?
-|Usage:  dmh # Memory map heap
-| dmh                 List chunks in heap segment
-| dmh [malloc_state]  List heap chunks of a particular arena
-| dmha                List all malloc_state instances in application
-| dmhb                Display all parsed Double linked list of main_arena's bins instance
-| dmhb [bin_num|bin_num:malloc_state]          Display parsed double linked list of bins instance from a particular arena
-| dmhbg [bin_num]     Display double linked list graph of main_arena's bin [Under developemnt]
-| dmhc @[chunk_addr]  Display malloc_chunk struct for a given malloc chunk
-| dmhf                Display all parsed fastbins of main_arena's fastbinY instance
-| dmhf [fastbin_num|fastbin_num:malloc_state]  Display parsed single linked list in fastbinY instance from a particular arena
-| dmhg                Display heap graph of heap segment
-| dmhg [malloc_state] Display heap graph of a particular arena
-| dmhi @[malloc_state]Display heap_info structure/structures for a given arena
-| dmhm                List all elements of struct malloc_state of main thread (main_arena)
-| dmhm [malloc_state] List all malloc_state instance of a particular arena
-| dmht                Display all parsed thead cache bins of main_arena's tcache instance
-| dmh?                Показать справку карты кучи
+|Usage:  dmh # Куча, отображение памяти
+| dmh                 Перечислить куски в сегменте кучи
+| dmh [malloc_state]  Перечислить куски в области (arena)
+| dmha                Перечислить все экземпляры malloc_state в приложении
+| dmhb                Показать все найденные двунаправленные списки кусков в main_arena-е
+| dmhb [bin_num|bin_num:malloc_state]
+|                     Показать все найденные двунаправленные списки кусков в конкретной области
+| dmhbg [bin_num]     Показать граф двунаправленных списков кусков в main_arena [в разработке]
+| dmhc @[chunk_addr]  Показать структуру malloc_chunk для заданного malloc-куска
+| dmhf                Показать все найденные fastbin-ы в main_arena fastbinY-е
+| dmhf [fastbin_num|fastbin_num:malloc_state]
+|                     Показать найденные двунаправленные списки в fastbinY-е из конкретной области
+| dmhg                Показать граф сегмента кучи
+| dmhg [malloc_state] Показать граф конкретной области
+| dmhi @[malloc_state]Показать heap_info-структуры для заданной области
+| dmhm                Показать все элементы структуры malloc_state основной нити (main_arena)
+| dmhm [malloc_state] Перечислить все malloc_state-ы конкретной области
+| dmht                Показать все найденные thead cache bins в tcache-е main_arena-ы
+| dmh?                Показать инструкцию по построению карты кучи
 ```
 
 Чтобы напечатать безопасные (safe-linked) списки (glibc >= 2.32) с разыменованными указателями, переменная `dbg.glibc.demangle` должна равняться истине.

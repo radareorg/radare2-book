@@ -6,28 +6,28 @@
 
 ```
 [0x55f2104cf620]> dm?
-Usage: dm   # Memory maps commands
-| dm                               List memory maps of target process
-| dm address size                  Allocate <size> bytes at <address> (anywhere if address is -1) in child process
-| dm=                              List memory maps of target process (ascii-art bars)
+Usage: dm   # Команды управления картами памяти
+| dm                               Перечислить карты памяти процесса
+| dm address size                  Выделить <size> байт по <address>-у (где угодно, если адрес = -1) в дочернем процессе
+| dm=                              Перечислить карты памяти процесса в виде  ascii-art
 | dm.                              Показать название карты, содержащей текущий адрес
-| dm*                              List memmaps in radare commands
-| dm- address                      Deallocate memory map of <address>
-| dmd[a] [file]                    Dump current (all) debug map region to a file (from-to.dmp) (see Sd)
-| dmh[?]                           Show map of heap
-| dmi [addr|libname] [symname]     List symbols of target lib
-| dmi* [addr|libname] [symname]    List symbols of target lib in radare commands
+| dm*                              Перечислить карты памятив в ыормате команд  radare
+| dm- address                      Освободить карту памяти по <address>-у
+| dmd[a] [file]                    Сделать дамп текущего (всех) регионов отладочной карты в файл (from-to.dmp) (смотрите Sd)
+| dmh[?]                           Показать карту кучи (heap)
+| dmi [addr|libname] [symname]     Перечислить символы ы библиотеке
+| dmi* [addr|libname] [symname]    Перечислить символы ы библиотеке в формате команд radare
 | dmi.                             Список ближайших к текущему адресу символов
-| dmiv                             Show address of given symbol for given lib
-| dmj                              List memmaps in JSON format
-| dml <file>                       Load contents of file into the current map region
-| dmm[?][j*]                       List modules (libraries, binaries loaded in memory)
-| dmp[?] <address> <size> <perms>  Change page at <address> with <size>, protection <perms> (perm)
-| dms[?] <id> <mapaddr>            Take memory snapshot
-| dms- <id> <mapaddr>              Restore memory snapshot
-| dmS [addr|libname] [sectname]    List sections of target lib
-| dmS* [addr|libname] [sectname]   List sections of target lib in radare commands
-| dmL address size                 Allocate <size> bytes at <address> and promote to huge page
+| dmiv                             Показать адреса заданного сивола указанной библиотеки
+| dmj                              Перечислить карты памяти в формате JSON
+| dml <file>                       Загрузить содержимое файла в текущий регион карты памяти
+| dmm[?][j*]                       Перечислить модули (библиотеки, двоичные файлы в памяти)
+| dmp[?] <address> <size> <perms>  Изменить страницу по <address>-у: изменить <size>, защиту <perms>
+| dms[?] <id> <mapaddr>            Сделать снимок памяти
+| dms- <id> <mapaddr>              Восстановить из снимка памяти
+| dmS [addr|libname] [sectname]    Перечислить секции заданной библиотеки
+| dmS* [addr|libname] [sectname]   Перечислить секции заданной библиотеки в формате команд radare
+| dmL address size                 Выделить <size> байт по <address>-у и объявить результат huge-страницей
 ```
 
 В этой главе рассмотрим только наиболее полезные команды группы `dm`, используя простые примеры. Будем использовать программу `helloworld` для Linux, для других видов архитектур все будет выглядеть аналогично.

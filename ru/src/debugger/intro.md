@@ -20,7 +20,7 @@ $ r2 -d /bin/ls
 Usage: =!cmd args
  =!ptrace   - использовать ptrace io
  =!mem      - использовать /proc/pid/mem io, если возможно
- =!pid      - показать целевой pid
+ =!pid      - показать pid
  =!pid <#>  - выбрать новый pid
 ```
 
@@ -29,28 +29,28 @@ Usage: =!cmd args
 Базовая справка по отладчику доступна по команде 'd?':
 
 ```
-Usage: d   # Debug commands
-| db[?]                    Breakpoints commands
-| dbt[?]                   Display backtrace based on dbg.btdepth and dbg.btalgo
-| dc[?]                    Continue execution
-| dd[?]                    File descriptors (!fd in r1)
-| de[-sc] [perm] [rm] [e]  Debug with ESIL (see de?)
-| dg <file>                Generate a core-file (WIP)
-| dH [handler]             Transplant process to a new handler
-| di[?]                    Show debugger backend information (See dh)
-| dk[?]                    List, send, get, set, signal handlers of child
-| dL[?]                    List or set debugger handler
-| dm[?]                    Show memory maps
-| do[?]                    Open process (reload, alias for 'oo')
-| doo[args]                Reopen in debug mode with args (alias for 'ood')
-| doof[file]               Reopen in debug mode from file (alias for 'oodf')
-| doc                      Close debug session
-| dp[?]                    List, attach to process or thread id
-| dr[?]                    Cpu registers
-| ds[?]                    Step, over, source line
-| dt[?]                    Display instruction traces
-| dw <pid>                 Block prompt until pid dies
-| dx[?]                    Inject and run code on target process (See gs)
+Usage: d   # Команды отладчика
+| db[?]                    Управление точками останова
+| dbt[?]                   Показать трассировку стека, учитывая значения в dbg.btdepth и dbg.btalgo
+| dc[?]                    Продолжить выполнение (c)
+| dd[?]                    Файловые дескрипторы (!fd в r1)
+| de[-sc] [perm] [rm] [e]  Отладить при помощи ESIL (смотрите de?)
+| dg <file>                Сгенерировать core-файл (WIP)
+| dH [handler]             Трансплантировать процесс на новый обработчик
+| di[?]                    Показать информацию о механизме отладчика (смотрите dh)
+| dk[?]                    Перечислить, отправить, получить, задать обработчик сигнала у дочернего процесса
+| dL[?]                    Перечислить или установить обработчик отладчика
+| dm[?]                    Показать карты памяти
+| do[?]                    Открыть процесс (перезагрузить, псевдоним для 'oo')
+| doo[args]                Открыть в режиме отладки с аргументами (псевдоним для 'ood')
+| doof[file]               Открыть в режиме отладки из файла (псевдоним для 'oodf')
+| doc                      Закрыть сессию отладки
+| dp[?]                    Перечислить, присоединиться к процессу или нити по идентификатору
+| dr[?]                    Регистры процессора
+| ds[?]                    Сделать шаг отладки (step, step over), исходный код
+| dt[?]                    Показать трассировку инструкций
+| dw <pid>                 Блокировать командную строку, пока процесс не завершился
+| dx[?]                    Добавить и запустить код в процесс (смотрите gs)
 ```
 
 Чтобы перезапустить сеанс отладки, можно ввести `oo` или `оо+` в зависимости от задачи.

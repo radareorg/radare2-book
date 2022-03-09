@@ -60,17 +60,17 @@ packet size: 64 bytes
 ```
 [0x7ff659d9fcc0]> =!?
 Usage: =!cmd args
- =!pid             - show targeted pid
- =!pkt s           - send packet 's'
- =!monitor cmd     - hex-encode monitor command and pass to target interpreter
- =!rd              - show reverse debugging availability
- =!dsb             - step backwards
- =!dcb             - continue backwards
- =!detach [pid]    - detach from remote/detach specific pid
- =!inv.reg         - invalidate reg cache
- =!pktsz           - get max packet size used
- =!pktsz bytes     - set max. размер пакета в байтах
- =!exec_file [pid] - get file which was executed for current/specified pid
+ =!pid             - показать pid
+ =!pkt s           - послать пакет 's'
+ =!monitor cmd     - закодировать в шестнадцатеричный вид команду монитора и передать ее интерпретатору
+ =!rd              - показать, есть ли возможность выполнять отладку в обратном направлении
+ =!dsb             - шаг назад
+ =!dcb             - продолжить в обратном направлении
+ =!detach [pid]    - отсоединиться от удаленного или локального процесса по pid
+ =!inv.reg         - сбросить кэш регистров
+ =!pktsz           - показать размер максимального использованного пакета
+ =!pktsz bytes     - установить размер максимального пакета в байтах
+ =!exec_file [pid] - показать файл, который был запущен в текущем или заданным по pid процессе
 ```
 
 Заметим, что `=!dsb` и `=!dcb` доступны только в специальных реализациях gdbserver, таких, как [rr Мозиллы](https://github.com/mozilla/rr), gdbserver по умолчанию не включает поддержку удаленной реверс-отладки.
