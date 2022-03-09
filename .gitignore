@@ -5,6 +5,7 @@ publish.sh
 book/
 _book/
 _book/*
+img/*
 .*.swp
 .*.swo
 *.un~
