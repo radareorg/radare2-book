@@ -29,6 +29,7 @@
    * [Zoom](basic_commands/zoom.md)
    * [Yank/Paste](basic_commands/yank_paste.md)
    * [Comparing Bytes](basic_commands/comparing_bytes.md)
+      * [Watching for Changes](basic_commands/cmp_watchers.md)
    * [SDB](basic_commands/sdb.md)
    * [Dietline](basic_commands/dietline.md)
 * [Visual mode](visual_mode/intro.md)
