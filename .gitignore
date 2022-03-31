@@ -13,3 +13,5 @@ _book/*
 *.rej
 *.bak
 *.log
+r2book.pdf
+r2book.epub
