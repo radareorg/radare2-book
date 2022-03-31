@@ -1,4 +1,4 @@
-all:
+all: pdf epub
 
 pdf_old: node_modules
 	npm run build
