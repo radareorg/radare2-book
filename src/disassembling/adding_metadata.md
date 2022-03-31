@@ -103,10 +103,10 @@ will create a link. It will be shown in the disassembly comments:
 
 ```
 [0x00003af7 11% 290 /bin/ls]> pd $r @ main+55 # 0x3af7
-│0x00003af7  call sym.imp.setlocale        ;[1] ; ,(locale-help.txt) ; char *setlocale(int category, const char *locale)
-│0x00003afc  lea rsi, str.usr_share_locale ; 0x179cc ; "/usr/share/locale"
-│0x00003b03  lea rdi, [0x000179b2]         ; "coreutils"
-│0x00003b0a  call sym.imp.bindtextdomain   ;[2] ; char *bindtextdomain(char *domainname, char *dirname)
+|0x00003af7  call sym.imp.setlocale        ;[1] ; ,(locale-help.txt) ; char *setlocale(int category, const char *locale)
+|0x00003afc  lea rsi, str.usr_share_locale ; 0x179cc ; "/usr/share/locale"
+|0x00003b03  lea rdi, [0x000179b2]         ; "coreutils"
+|0x00003b0a  call sym.imp.bindtextdomain   ;[2] ; char *bindtextdomain(char *domainname, char *dirname)
 ```
 
 Note `,(locale-help.txt)` appeared in the comments, if we press `,` again in the visual mode, it

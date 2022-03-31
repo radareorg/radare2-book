@@ -11,11 +11,11 @@ example `5j` will move down for 5 lines, or `2l` will move 2 characters right.
 
 ![Visual Mode](visualmode.png)
 
-## print modes aka panels
+## Print Modes, a.k.a. Panels
 
-The Visual mode uses "print modes" which are basically different panel that you can rotate. By default those are:
+The Visual mode uses "print modes" which are basically different panels that you can rotate. By default those are:
 
-↻ **Hexdump panel** -> **Disassembly panel** → **Debugger panel** → **Hexadecimal words dump panel** → **Hex-less hexdump panel** → **Op analysis color map panel** → **Annotated hexdump panel** ↺.
+**Hexdump panel** -> **Disassembly panel** -> **Debugger panel** -> **Hexadecimal words dump panel** -> **Hex-less hexdump panel** -> **Op analysis color map panel** -> **Annotated hexdump panel** -> **Hexdump panel** -> **[...]**
 
 Notice that the top of the panel contains the command which is used, for example for the disassembly panel:
 
