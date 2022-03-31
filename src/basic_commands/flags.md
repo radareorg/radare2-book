@@ -64,36 +64,36 @@ to have the flags, for example inside the functions, with simple and ubiquitous 
 
 ```
 [0x00003a04]> pd 10
-│      0x00003a04      48c705c9cc21.  mov qword [0x002206d8], 0xffffffffffffffff ;
+|      0x00003a04      48c705c9cc21.  mov qword [0x002206d8], 0xffffffffffffffff ;
 [0x2206d8:8]=0
-│      0x00003a0f      c60522cc2100.  mov byte [0x00220638], 0     ; [0x220638:1]=0
-│      0x00003a16      83f802         cmp eax, 2
-│  .─< 0x00003a19      0f84880d0000   je 0x47a7
-│  │   0x00003a1f      83f803         cmp eax, 3
-│ .──< 0x00003a22      740e           je 0x3a32
-│ ││   0x00003a24      83e801         sub eax, 1
-│.───< 0x00003a27      0f84ed080000   je 0x431a
-││││   0x00003a2d      e8fef8ffff     call sym.imp.abort           ; void abort(void)
-││││   ; CODE XREF from main (0x3a22)
-││╰──> 0x00003a32      be07000000     mov esi, 7
+|      0x00003a0f      c60522cc2100.  mov byte [0x00220638], 0     ; [0x220638:1]=0
+|      0x00003a16      83f802         cmp eax, 2
+|  .─< 0x00003a19      0f84880d0000   je 0x47a7
+|  |   0x00003a1f      83f803         cmp eax, 3
+| .──< 0x00003a22      740e           je 0x3a32
+| ||   0x00003a24      83e801         sub eax, 1
+|.───< 0x00003a27      0f84ed080000   je 0x431a
+||||   0x00003a2d      e8fef8ffff     call sym.imp.abort           ; void abort(void)
+||||   ; CODE XREF from main (0x3a22)
+||╰──> 0x00003a32      be07000000     mov esi, 7
 [0x00003a04]> f. localflag @ 0x3a32
 [0x00003a04]> f.
 0x00003a32 localflag   [main + 210]
 [0x00003a04]> pd 10
-│      0x00003a04      48c705c9cc21.  mov qword [0x002206d8], 0xffffffffffffffff ;
+|      0x00003a04      48c705c9cc21.  mov qword [0x002206d8], 0xffffffffffffffff ;
 [0x2206d8:8]=0
-│      0x00003a0f      c60522cc2100.  mov byte [0x00220638], 0     ; [0x220638:1]=0
-│      0x00003a16      83f802         cmp eax, 2
-│  .─< 0x00003a19      0f84880d0000   je 0x47a7
-│  │   0x00003a1f      83f803         cmp eax, 3
-│ .──< 0x00003a22      740e           je 0x3a32                    ; main.localflag
-│ ││   0x00003a24      83e801         sub eax, 1
-│.───< 0x00003a27      0f84ed080000   je 0x431a
-││││   0x00003a2d      e8fef8ffff     call sym.imp.abort           ; void abort(void)
-││││   ; CODE XREF from main (0x3a22)
-││`──>  .localflag:
-││││   ; CODE XREF from main (0x3a22)
-││`──> 0x00003a32      be07000000     mov esi, 7
+|      0x00003a0f      c60522cc2100.  mov byte [0x00220638], 0     ; [0x220638:1]=0
+|      0x00003a16      83f802         cmp eax, 2
+|  .─< 0x00003a19      0f84880d0000   je 0x47a7
+|  |   0x00003a1f      83f803         cmp eax, 3
+| .──< 0x00003a22      740e           je 0x3a32                    ; main.localflag
+| ||   0x00003a24      83e801         sub eax, 1
+|.───< 0x00003a27      0f84ed080000   je 0x431a
+||||   0x00003a2d      e8fef8ffff     call sym.imp.abort           ; void abort(void)
+||||   ; CODE XREF from main (0x3a22)
+||`──>  .localflag:
+||||   ; CODE XREF from main (0x3a22)
+||`──> 0x00003a32      be07000000     mov esi, 7
 [0x00003a04]>
 ```
 

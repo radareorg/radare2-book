@@ -98,24 +98,24 @@ radare2 also offers various `foreach` constructs for looping. One of the most us
 ```
 [0x004047d0]> pdf
 ╒ (fcn) entry0 42
-│; UNKNOWN XREF from 0x00400018 (unk)
-│; DATA XREF from 0x004064bf (sub.strlen_460)
-│; DATA XREF from 0x00406511 (sub.strlen_460)
-│; DATA XREF from 0x0040b080 (unk)
-│; DATA XREF from 0x0040b0ef (unk)
-│0x004047d0  xor ebp, ebp
-│0x004047d2  mov r9, rdx
-│0x004047d5  pop rsi
-│0x004047d6  mov rdx, rsp
-│0x004047d9  and rsp, 0xfffffffffffffff0
-│0x004047dd  push rax
-│0x004047de  push rsp
-│0x004047df  mov r8, 0x4136c0
-│0x004047e6  mov rcx, 0x413660      ; "AWA..AVI..AUI..ATL.%.. "
+|; UNKNOWN XREF from 0x00400018 (unk)
+|; DATA XREF from 0x004064bf (sub.strlen_460)
+|; DATA XREF from 0x00406511 (sub.strlen_460)
+|; DATA XREF from 0x0040b080 (unk)
+|; DATA XREF from 0x0040b0ef (unk)
+|0x004047d0  xor ebp, ebp
+|0x004047d2  mov r9, rdx
+|0x004047d5  pop rsi
+|0x004047d6  mov rdx, rsp
+|0x004047d9  and rsp, 0xfffffffffffffff0
+|0x004047dd  push rax
+|0x004047de  push rsp
+|0x004047df  mov r8, 0x4136c0
+|0x004047e6  mov rcx, 0x413660      ; "AWA..AVI..AUI..ATL.%.. "
 0A..AVI..AUI.
-│0x004047ed  mov rdi, main          ; "AWAVAUATUH..S..H...." @
+|0x004047ed  mov rdi, main          ; "AWAVAUATUH..S..H...." @
 0
-│0x004047f4  call sym.imp.__libc_start_main
+|0x004047f4  call sym.imp.__libc_start_main
 ╘0x004047f9  hlt
 [0x004047d0]> pi 1 @@i
 mov r9, rdx

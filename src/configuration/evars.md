@@ -26,20 +26,20 @@ Changes syntax flavor for disassembler between Intel and AT&T. At the moment, th
 A boolean value to set the psuedo syntax in the disassembly. "False" indicates a native one, defined by the current architecture, "true" activates a pseudocode strings format. For example, it'll transform :
 
 ```
-│           0x080483ff      e832000000     call 0x8048436
-│           0x08048404      31c0           xor eax, eax
-│           0x08048406      0205849a0408   add al, byte [0x8049a84]
-│           0x0804840c      83f800         cmp eax, 0
-│           0x0804840f      7405           je 0x8048416
+|           0x080483ff      e832000000     call 0x8048436
+|           0x08048404      31c0           xor eax, eax
+|           0x08048406      0205849a0408   add al, byte [0x8049a84]
+|           0x0804840c      83f800         cmp eax, 0
+|           0x0804840f      7405           je 0x8048416
 ```
 to
 
 ```
-│           0x080483ff      e832000000     0x8048436 ()
-│           0x08048404      31c0           eax = 0
-│           0x08048406      0205849a0408   al += byte [0x8049a84]
-│           0x0804840c      83f800         var = eax - 0
-│           0x0804840f      7405           if (!var) goto 0x8048416
+|           0x080483ff      e832000000     0x8048436 ()
+|           0x08048404      31c0           eax = 0
+|           0x08048406      0205849a0408   al += byte [0x8049a84]
+|           0x0804840c      83f800         var = eax - 0
+|           0x0804840f      7405           if (!var) goto 0x8048416
 ```
 It can be useful while disassembling obscure architectures.
 
@@ -82,19 +82,19 @@ A boolean value used to replace register names with arguments or their associate
 For example, if you have something like this:
 
 ```
-│           0x080483ea      83c404         add esp, 4
-│           0x080483ed      68989a0408     push 0x8049a98
-│           0x080483f7      e870060000     call sym.imp.scanf
-│           0x080483fc      83c408         add esp, 8
-│           0x08048404      31c0           xor eax, eax
+|           0x080483ea      83c404         add esp, 4
+|           0x080483ed      68989a0408     push 0x8049a98
+|           0x080483f7      e870060000     call sym.imp.scanf
+|           0x080483fc      83c408         add esp, 8
+|           0x08048404      31c0           xor eax, eax
 ```
 This variable changes it to:
 ```
-│           0x080483ea      83c404         add SP, 4
-│           0x080483ed      68989a0408     push 0x8049a98
-│           0x080483f7      e870060000     call sym.imp.scanf
-│           0x080483fc      83c408         add SP, 8
-│           0x08048404      31c0           xor A0, A0
+|           0x080483ea      83c404         add SP, 4
+|           0x080483ed      68989a0408     push 0x8049a98
+|           0x080483f7      e870060000     call sym.imp.scanf
+|           0x080483fc      83c408         add SP, 8
+|           0x08048404      31c0           xor A0, A0
 ```
 
 ### asm.sub.jmp
