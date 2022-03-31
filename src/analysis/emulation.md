@@ -30,13 +30,13 @@ variable, to check if the program uplifted correctly, and to grasp how ESIL work
 |     0x00001668  lea rax, obj.__progname      ; 0x207220
 |     0x0000166f  cmp rax, rdi
 |     0x00001672  mov rbp, rsp
-| .─< 0x00001675  je 0x1690
+| .-< 0x00001675  je 0x1690
 | |   0x00001677  mov rax, qword [reloc._ITM_deregisterTMCloneTable] ; [0x206fd8:8]=0
 | |   0x0000167e  test rax, rax
-|.──< 0x00001681  je 0x1690
+|.--< 0x00001681  je 0x1690
 |||   0x00001683  pop rbp
 |||   0x00001684  jmp rax
-|``─> 0x00001690  pop rbp
+|``-> 0x00001690  pop rbp
 `     0x00001691  ret
 [0x00001660]> e asm.esil=true
 [0x00001660]> pdf
@@ -48,13 +48,13 @@ variable, to check if the program uplifted correctly, and to grasp how ESIL work
 |     0x00001668  0x205bb1,rip,+,rax,=
 |     0x0000166f  rdi,rax,==,$z,zf,=,$b64,cf,=,$p,pf,=,$s,sf,=,$o,of,=
 |     0x00001672  rsp,rbp,=
-| .─< 0x00001675  zf,?{,5776,rip,=,}
+| .-< 0x00001675  zf,?{,5776,rip,=,}
 | |   0x00001677  0x20595a,rip,+,[8],rax,=
 | |   0x0000167e  0,rax,rax,&,==,$z,zf,=,$p,pf,=,$s,sf,=,$0,cf,=,$0,of,=
-|.──< 0x00001681  zf,?{,5776,rip,=,}
+|.--< 0x00001681  zf,?{,5776,rip,=,}
 |||   0x00001683  rsp,[8],rbp,=,8,rsp,+=
 |||   0x00001684  rax,rip,=
-|``─> 0x00001690  rsp,[8],rbp,=,8,rsp,+=
+|``-> 0x00001690  rsp,[8],rbp,=,8,rsp,+=
 `     0x00001691  rsp,[8],rip,=,8,rsp,+=
 ```
 
@@ -112,13 +112,13 @@ register and memory values in disassembly comments:
 |     0x00001668  lea rax, obj.__progname ; 0x207220 ; rax=0x207220 -> 0x464c457f
 |     0x0000166f  cmp rax, rdi            ; zf=0x1 -> 0x2464c45 ; cf=0x0 ; pf=0x1 -> 0x2464c45 ; sf=0x0 ; of=0x0
 |     0x00001672  mov rbp, rsp            ; rbp=0xfffffffffffffff8
-| .─< 0x00001675  je 0x1690               ; rip=0x1690 -> 0x1f0fc35d ; likely
+| .-< 0x00001675  je 0x1690               ; rip=0x1690 -> 0x1f0fc35d ; likely
 | |   0x00001677  mov rax, qword [reloc._ITM_deregisterTMCloneTable] ; [0x206fd8:8]=0 ; rax=0x0
 | |   0x0000167e  test rax, rax           ; zf=0x1 -> 0x2464c45 ; pf=0x1 -> 0x2464c45 ; sf=0x0 ; cf=0x0 ; of=0x0
-|.──< 0x00001681  je 0x1690               ; rip=0x1690 -> 0x1f0fc35d ; likely
+|.--< 0x00001681  je 0x1690               ; rip=0x1690 -> 0x1f0fc35d ; likely
 |||   0x00001683  pop rbp                 ; rbp=0xffffffffffffffff -> 0x4c457fff ; rsp=0x0
 |||   0x00001684  jmp rax                 ; rip=0x0 ..
-|``─> 0x00001690  pop rbp                 ; rbp=0x10102464c457f ; rsp=0x8 -> 0x464c457f
+|``-> 0x00001690  pop rbp                 ; rbp=0x10102464c457f ; rsp=0x8 -> 0x464c457f
 `     0x00001691  ret                     ; rip=0x0 ; rsp=0x10 -> 0x3e0003
 ```
 
