@@ -47,7 +47,7 @@ Another way around is to use special variables `$FB` and `$FS` which denote Func
 |           0x00001ec6      4889e5             mov rbp, rsp
 |           0x00001ec9      4881ecc0000000     sub rsp, 0xc0
 ...
-╰           0x00001f97      c3                 ret
+\           0x00001f97      c3                 ret
 ```
 
 Note: don't put space after `!` size designator. See also [Command Format](../first_steps/command_format.md).
