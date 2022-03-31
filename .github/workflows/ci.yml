@@ -1,5 +1,10 @@
 name: Make PDF using pandoc
 
+on:
+  push:
+    branches:
+      - master
+
 jobs:
   make_pdf:
     runs-on: ubuntu-latest
