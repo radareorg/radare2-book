@@ -42,7 +42,7 @@ Another way around is to use special variables `$FB` and `$FS` which denote Func
 ```
 [0x00000000]> s sym.main + 0x04
 [0x00001ec9]> pD @ $FB !$FS  # disassemble current function
-╭ 211: int main (int argc, char **argv, char **envp);
+/ 211: int main (int argc, char **argv, char **envp);
 |           0x00001ec5      55                 push rbp
 |           0x00001ec6      4889e5             mov rbp, rsp
 |           0x00001ec9      4881ecc0000000     sub rsp, 0xc0
