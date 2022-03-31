@@ -8,7 +8,7 @@ if and how it changed.
 Usage: cw [args]  Manage compare watchers; See if and how memory changes
 | cw??            Show more info about watchers
 | cw addr sz cmd  Add a compare watcher
-| cw[*q] [addr]   Show compare watchers (*=r2 commands, q=quiet)
+| cw[*qj] [addr]   Show compare watchers (*=r2 commands, q=quiet)
 | cwd [addr]      Delete watcher
 | cwr [addr]      Revert watcher
 | cwu [addr]      Update watcher
