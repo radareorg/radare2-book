@@ -97,7 +97,7 @@ mov r9, rdx
 radare2 also offers various `foreach` constructs for looping. One of the most useful is for looping through all the instructions of a function:
 ```
 [0x004047d0]> pdf
-╒ (fcn) entry0 42
+/ (fcn) entry0 42
 |; UNKNOWN XREF from 0x00400018 (unk)
 |; DATA XREF from 0x004064bf (sub.strlen_460)
 |; DATA XREF from 0x00406511 (sub.strlen_460)
@@ -116,7 +116,7 @@ radare2 also offers various `foreach` constructs for looping. One of the most us
 |0x004047ed  mov rdi, main          ; "AWAVAUATUH..S..H...." @
 0
 |0x004047f4  call sym.imp.__libc_start_main
-╘0x004047f9  hlt
+\0x004047f9  hlt
 [0x004047d0]> pi 1 @@i
 mov r9, rdx
 pop rsi

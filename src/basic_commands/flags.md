@@ -75,7 +75,7 @@ to have the flags, for example inside the functions, with simple and ubiquitous 
 |.---< 0x00003a27      0f84ed080000   je 0x431a
 ||||   0x00003a2d      e8fef8ffff     call sym.imp.abort           ; void abort(void)
 ||||   ; CODE XREF from main (0x3a22)
-||\--> 0x00003a32      be07000000     mov esi, 7
+||`--> 0x00003a32      be07000000     mov esi, 7
 [0x00003a04]> f. localflag @ 0x3a32
 [0x00003a04]> f.
 0x00003a32 localflag   [main + 210]
