@@ -9,4 +9,4 @@ improving the contents.
 
 
 [![mdbook](https://github.com/radareorg/radare2-book/actions/workflows/mdbook.yml/badge.svg)](https://github.com/radareorg/radare2-book/actions/workflows/mdbook.yml)
-[![pandoc](https://github.com/radareorg/radare2-book/actions/workflows/pandoc.yml/badge.svg)](https://github.com/radareorg/radare2-book/actions/workflows/pandoc.yml)
+[![CI document uploads](https://github.com/radareorg/radare2-book/actions/workflows/ci.yml/badge.svg)](https://github.com/radareorg/radare2-book/actions/workflows/ci.yml)
