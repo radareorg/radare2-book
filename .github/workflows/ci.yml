@@ -1,4 +1,4 @@
-name: Make PDF using pandoc
+name: Create documents with make
 
 on:
   push:
@@ -8,8 +8,6 @@ on:
 jobs:
   make_all:
     runs-on: ubuntu-latest
-    env:
-      ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
     steps:
       - uses: actions/checkout@v2
       - run: |
@@ -18,3 +16,4 @@ jobs:
       - uses: actions/upload-artifact@master
         with:
           path: r2book.*
+          name: r2book.zip
