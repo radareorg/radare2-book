@@ -19,6 +19,6 @@ What started as a one-man project, with some eventual contributions, gradually e
 
 Instructing users to report their issues allows the project to define new directions to evolve in. Everything is managed in [radare2's GitHub](https://github.com/radareorg/radare2) and discussed in the Telegram channel.
 
-The project remains active at the time of writing this book, and there are several side projects that provide, among other things, a graphical user interface ([Cutter](https://github.com/radareorg/cutter)), a decompiler ([r2dec](https://github.com/wargio/r2dec-js), [radeco](https://github.com/radareorg/radeco)), Frida integration ([r2frida](https://github.com/nowsecure/r2frida)), Yara, Unicorn, Keystone, and many other projects indexed in the [r2pm](https://github.com/radareorg/radare2-pm) (the radare2 package manager).
+The project remains active at the time of writing this book, and there are several side projects that provide, among other things, a graphical user interface ([Iaito](https://github.com/radareorg/iaito)), a decompiler ([r2dec](https://github.com/wargio/r2dec-js), [radeco](https://github.com/radareorg/radeco)), Frida integration ([r2frida](https://github.com/nowsecure/r2frida)), Yara, Unicorn, Keystone, and many other projects indexed in the [r2pm](https://github.com/radareorg/radare2-pm) (the radare2 package manager).
 
 Since 2016, the community gathers once a year in [r2con](https://www.radare.org/con/), a congress around radare2 that takes place in Barcelona.
