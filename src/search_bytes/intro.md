@@ -1,8 +1,9 @@
 # Searching for Bytes
 
-The radare2 search engine is based on work done by esteve, plus multiple features implemented on top of it. It supports multiple keyword searches, binary masks, and hexadecimal values. It automatically creates flags for search hit locations ease future referencing.
+The radare2 search engine is based on work done by esteve, plus multiple features implemented on top of it. It supports multiple keyword searches, binary masks, and hexadecimal values. It automatically creates flags for search hit locations to ease future referencing.
 
-Search is initiated by `/` command.
+Searching is accessed with `/` command.
+
 ```
 [0x00000000]> /?
 |Usage: /[!bf] [arg]Search stuff (see 'e??search' for options)
@@ -50,4 +51,67 @@ anal.depth)
 
 Because everything is treated as a file in radare2, it does not matter whether you search in a socket, a remote device, in process memory, or a file.
 
-note that '/*' starts multiline comment. It's not for searching. type '*/' to end comment.
+Note that '/\*' is not a command - it starts a multiline comment. Type '\*/' to end the comment after it's opened.
+
+## Search Options
+
+Options are controlled by the `search.` variables.
+
+```
+[0x00000000]> e??search
+        search.align: only catch aligned search hits
+        search.chunk: chunk size for /+ (default size is asm.bits/8
+   search.contiguous: accept contiguous/adjacent search hits
+     search.distance: search string distance
+    search.esilcombo: stop search after N consecutive hits
+        search.flags: all search results are flagged, otherwise only printed
+         search.from: search start address
+           search.in: specify search boundaries
+        search.kwidx: store last search index count
+      search.maxhits: maximum number of hits (0: no limit)
+      search.overlap: look for overlapped search hits
+       search.prefix: prefix name in search hits label
+         search.show: show search results
+           search.to: search end address
+      search.verbose: make the output of search commands verbose
+```
+
+Perhaps the most important search variable is `search.in` - it controls where
+your search is occuring. If you aren't finding hits you expect, check this
+variable first. Note the difference between `map` and `maps` - `map` will only
+search the map that you are currently in, while `maps` will search all memory
+maps, with options to narrow the search by permissions.
+
+```
+[0x00000000]> e search.in=?
+raw
+block
+bin.section
+bin.sections
+bin.sections.rwx
+bin.sections.r
+bin.sections.rw
+bin.sections.rx
+bin.sections.wx
+bin.sections.x
+io.map
+io.maps
+io.maps.rwx
+io.maps.r
+io.maps.rw
+io.maps.rx
+io.maps.wx
+io.maps.x
+dbg.stack
+dbg.heap
+dbg.map
+dbg.maps
+dbg.maps.rwx
+dbg.maps.r
+dbg.maps.rw
+dbg.maps.rx
+dbg.maps.wx
+dbg.maps.x
+anal.fcn
+anal.bb
+```
