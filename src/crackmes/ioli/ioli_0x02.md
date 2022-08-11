@@ -213,7 +213,7 @@ we can:
 [0x0804856c]> ps
 %d
 ```
-it's exactly the format string of `scanf()`. But r2dec does not recognize the second argument (eax) which is a pointer. it points to var_4h and means out input will store in var_4h.
+it's exactly the format string of `scanf()`. But r2dec does not recognize the second argument (eax) which is a pointer. it points to var_4h and means our input will store in var_4h.
 
 we can easily write out pseudo code here.
 ```C
