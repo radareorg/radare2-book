@@ -1,16 +1,16 @@
 ## Searching for Cryptography materials
 
-### Searching AES keys
-radare2 is capable of finding **expanded AES** keys with `/ca` command. It searches from current seek position up to the `search.distance` limit, or until end of file is reached. You can interrupt current search by pressing `Ctrl-C`. For example, to look for AES keys in a memory dump:
+### Searching expanded keys
+radare2 is capable of finding **expanded** keys with `/ca` command for AES and SM4 block ciphers. It searches from current seek position up to the `search.distance` limit, or until end of file is reached. You can interrupt current search by pressing `Ctrl-C`. For example, to look for AES keys in a memory dump:
 
 ```
-0x00000000]> /ca
+0x00000000]> /ca aes
 Searching 40 bytes in [0x0-0x1ab]
 hits: 1
 0x000000fb hit0_0 6920e299a5202a6d656e636869746f2a
 ```
 
-The output length gives you the size of the AES key used: 128, 192 or 256 bits. If you are simply looking for plaintext AES keys in your binary, `/ca` will not find them they must have been expanded by the key expansion algorithm.
+For AES, the output length gives you the size of the AES key used: 128, 192 or 256 bits. If you are simply looking for plaintext AES keys in your binary, `/ca` will not find them they must have been expanded by the key expansion algorithm.
 
 ### Searching private keys and certificates
 `/cr` command implements the search of private keys (RSA and ECC). `/cd` command implements a similar feature to search certificates.
