@@ -55,3 +55,192 @@ rwd  windbg   Attach to a KD debugger (windbg://socket) (LGPL3)
 rwd  winedbg  Wine-dbg io and debug.io plugin for r2 (MIT)
 rw_  zip      Open zip files [apk|ipa|zip|zipall]://[file//path] (BSD)
 ```
+
+An example of how to write a plugin is available in this commit: [here](https://github.com/radareorg/radare2/pull/20574/commits/f9abd3026c37961a485656447eff7bff616322bf).
+
+
+##1)Write r2 IO plugin with Makefile (for Linux only)
+
+To write an IO plugin in radare2, in `radare2/libr/io/p/`, create a file `dap.mk`. Put there:
+
+```Makefile
+OBJ_DAP=io_dap.o
+
+STATIC_OBJ+=${OBJ_DAP}
+TARGET_DAP=io_dap.${EXT_SO}
+ALL_TARGETS+=${TARGET_DAP}
+
+ifeq (${WITHPIC},0)
+LINKFLAGS+=../../util/libr_util.a
+LINKFLAGS+=../../io/libr_io.a
+else
+LINKFLAGS+=-L../../util -lr_util
+LINKFLAGS+=-L.. -lr_io
+endif
+
+${TARGET_DAP}: ${OBJ_DAP}
+	${CC} $(call libname,io_dap) ${OBJ_DAP} ${CFLAGS} \
+		${LINKFLAGS} ${LDFLAGS_LIB} $(LDFLAGS)
+```
+
+Edit the file `radare2/libr/io/p/dap.c`:
+
+```c
+#include <r_userconf.h>
+#include <r_io.h>
+#include <r_lib.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <errno.h>
+
+#include "io_dap.h"
+
+#define URI_PREFIX "foo://"
+
+extern RIOPlugin r_io_plugin_dap; // forward declaration
+
+static bool __plugin_open(RIO *io, const char *pathname, bool many) {
+    return (strncmp(pathname, URI_PREFIX, strlen(URI_PREFIX)) == 0);
+}
+
+static RIODesc *__open(RIO *io, const char *pathname, int flags, int mode) {
+    RIODesc *ret = NULL;
+    RIOFoo *rio_foo = NULL;
+
+    printf("%s\n", __func__);
+
+    if (!__plugin_open(io, pathname, 0))
+        return ret;
+
+    return r_io_desc_new (io, &r_io_plugin_dap, pathname, flags, mode, rio_foo);
+}
+
+static int __close(RIODesc *fd) {
+    RIOFoo *rio_foo = NULL;
+
+    printf("%s\n", __func__);
+    if (!fd || !fd->data)
+        return -1;
+
+    rio_foo = fd->data;
+    // destroy
+    return true;
+}
+
+static ut64 __lseek(RIO *io, RIODesc *fd, ut64 offset, int whence) {
+    printf("%s, offset: %lx, io->off: %lx\n", __func__, offset, io->off);
+
+    if (!fd || !fd->data)
+        return -1;
+
+    switch (whence) {
+    case SEEK_SET:
+        io->off = offset;
+        break;
+    case SEEK_CUR:
+        io->off += (int)offset;
+        break;
+    case SEEK_END:
+        io->off = UT64_MAX;
+        break;
+    }
+    return io->off;
+}
+
+static int __read(RIO *io, RIODesc *fd, ut8 *buf, int len) {
+    RIOFoo *rio_foo = NULL;
+
+    printf("%s, offset: %lx\n", __func__, io->off);
+
+    if (!fd || !fd->data)
+        return -1;
+
+    rio_foo = fd->data;
+
+    return 0;
+}
+
+static int __write(RIO *io, RIODesc *fd, const ut8 *buf, int len) {
+    printf("%s\n", __func__);
+
+    return 0;
+}
+
+static int __getpid(RIODesc *fd) {
+    RIOFoo *rio_foo = NULL;
+
+    printf("%s\n", __func__);
+    if (!fd || !fd->data)
+        return -1;
+
+    rio_foo = fd->data;
+    return 0;
+}
+
+static int __gettid(RIODesc *fd) {
+    printf("%s\n", __func__);
+    return 0;
+}
+
+static char *__system(RIO *io, RIODesc *fd, const char *command) {
+    printf("%s command: %s\n", __func__, command);
+    // io->cb_printf()
+    return NULL;
+}
+
+RIOPlugin r_io_plugin_dap = {
+    .name = "dap",
+    .desc = "IO Foo plugin",
+    .license = "LGPL",
+    .check = __plugin_open,
+    .open = __open,
+    .close = __close,
+    .seek = __lseek,
+    .read = __read,
+    .write = __write,
+    .getpid = __getpid,
+    .system = __system,
+    .isdbg = true,  // # --d flag
+};
+
+#ifndef R2_PLUGIN_INCORE
+R_API RLibStruct radare_plugin = {
+    .type = R_LIB_TYPE_IO,
+    .data = &r_io_plugin_dap,
+    .version = R2_VERSION
+};
+#endif
+```
+
+Do not forget to include your definition of `r_io_plugin_dap` in `libr/include/r_io.h`:
+At this line: [here](https://github.com/radareorg/radare2/blob/f9abd3026c37961a485656447eff7bff616322bf/libr/include/r_io.h#L590), add:
+```c
+extern RIOPlugin r_io_plugin_dap;
+```
+
+At last but not least, for the Makefile (not for meson), in `dist/plugins-cfg/plugins.def.cfg`, add `io.dap` after `io.debug`.
+
+##2)Write r2 plugin for radare2:
+
+Edit `radare2/libr/io/meson.build` and in `r_io_sources = [...` add `'p/io_dap.c',`. And in `radare2/libr/meson.build`, add `'dap'` in `io_plugins += [`.
+
+##3)Insert the plugin in radare2
+
+Edit `radare2/dist/plugins-cfg/plugins.def.cfg` and add `io.dap` in the list.
+
+##4)Add dap.h
+
+Now, if you need to use some data and structures, edit the file `radare2/libr/io/p/dap.h` for:
+
+```c
+#ifndef LIBR_IO_P_IO_DAP_H_
+#define LIBR_IO_P_IO_DAP_H_
+
+typedef struct {
+	int x;
+} RIOFoo;
+
+#endif /* LIBR_IO_P_IO_DAP_H_ */
+```
+
+This tutorial is based on [this one by Wensel](https://wenzel.github.io/2018/04/15/radare2-io-plugin-tutorial.html).
