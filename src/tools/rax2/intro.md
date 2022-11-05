@@ -1,6 +1,6 @@
 ## Rax2
 
-The `rax2` utility comes with the radare framework and aims to be a minimalistic expression evaluator for the shell. It is useful for making base conversions between floating point values, hexadecimal representations, hexpair strings to ascii, octal to integer. It supports endianness and can be used as a shell if no arguments are given.
+The `rax2` utility comes with the radare framework and aims to be a minimalistic expression evaluator for the shell. It is useful for making base conversions between floating point values, hexadecimal representations, hexpair strings to ascii, octal to integer. It supports endianness conversion.
 
 This is the help message of rax2, this tool can be used in the command-line or interactively (reading the values from stdin), so it can be used as a multi-base calculator.
 
@@ -72,39 +72,48 @@ Usage: rax2 [options] [expr ...]
 ```
 
 Some examples:
-```
+
+Calculator:
+```sh
 $ rax2 3+0x80
 0x83
+$ rax2 -d "1<<8"
+256
 ```
+
+Base conversion:
+```sh
+$ rax2 '=2' 73303325
+100010111101000010100011101b
 ```
-$ rax2 0x80+3
-131
-```
-```
-$ echo 0x80+3 | rax2
-131
-```
-```
+The single quote for `'=2'` is not mandatory for bash but is necessary for some shell like zsh.
+
+Conversion in hex string
+```sh
 $ rax2 -s 4142
 AB
-```
-```
 $ rax2 -S AB
 4142
-```
-```
 $ rax2 -S < bin.foo
 ...
 ```
-```
+
+Endianess conversion:
+```sh
 $ rax2 -e 33
 0x21000000
-```
-```
 $ rax2 -e 0x21000000
 33
 ```
+
+Base64 deconding
+```sh
+$ rax2 -D ZQBlAA== | rax2 -S
+65006500
 ```
+
+Randomart:
+```sh
 $ rax2 -K 90203010
 +--[0x10302090]---+
 |Eo. .            |
