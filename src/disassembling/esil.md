@@ -138,7 +138,7 @@ TRAP  | src | Trap | Trap signal |
 --- | --- | --- | --- | ----------------------------------------------
 =[]<br>=[\*]<br>=[1]<br>=[2]<br>=[4]<br>=[8] | src,dst | poke |\*dst=src | <br>&gt; "ae 0xdeadbeef,0x10000,=[4],"<br><br>&gt; pxw 4@0x10000<br>0x00010000  0xdeadbeef                                ....<br><br>&gt; "ae 0x0,0x10000,=[4],"<br><br>&gt; pxw 4@0x10000<br>0x00010000  0x00000000
 []<br>[\*]<br>[1]<br>[2]<br>[4]<br>[8] | src | peek | stack=\*src | <br>&gt; w test@0x10000<br><br>&gt; "ae 0x10000,[4],"<br>0x74736574<br><br>&gt; ar r_00=0x10000<br><br>&gt; "ae r_00,[4],"<br>0x74736574
-&#x7c;=[]<br>&#x7c;=[1]<br>&#x7c;=[2]<br>&#x7c;=[4]<br>&#x7c;=[8] | reg | nombre | code | &gt; <br>&gt;
+&#x7c;=[]<br>&#x7c;=[1]<br>&#x7c;=[2]<br>&#x7c;=[4]<br>&#x7c;=[8] | reg | name | code | &gt; <br>&gt;
 SWAP |  | Swap | Swap two top elements | SWAP
 DUP | | Duplicate | Duplicate top element in stack | DUP
 NUM | | Numeric | If top element is a reference <br> (register name, label, etc),<br> dereference it and push its real value | NUM
