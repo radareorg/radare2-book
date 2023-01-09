@@ -92,7 +92,8 @@ Use `=!rd` to print the currently available reverse debugging capabilities.
 If you are interested in debugging radare2's interaction with gdbserver you can use
 `=!monitor set remote-debug 1` to turn on logging of gdb's remote protocol packets in
 gdbserver's console and `=!monitor set debug 1` to show general debug messages from
-gdbserver in it's console.
+gdbserver in it's console. You can also increase log level using `e log.level=5` and
+monitor GDB client/server messages on radare2's side.
 
 radare2 also provides its own gdbserver implementation:
 
@@ -102,7 +103,6 @@ $ r2 -
 |Usage:  =[g] [...] # gdb server
 | gdbserver:
 | =g port file [args]   listen on 'port' debugging 'file' using gdbserver
-| =g! port file [args]  same as above, but debug protocol messages (like gdbserver --remote-debug)
 ```
 
 So you can start it as:
