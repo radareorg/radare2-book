@@ -17,7 +17,7 @@ around a binary and getting information about it.
 | s (tab)                 | Seek to a different place               |
 | x [nbytes]              | Hexdump of nbytes, $b by default        |
 | aa                      | Auto analyze                            |
-| pdf@ [funcname](Tab)    | Disassemble function (main, fcn, etc.)  |
+| pdf@ [funcname]\(Tab)   | Disassemble function (main, fcn, etc.)  |
 | f fcn(Tab)              | List functions                          |
 | f str(Tab)              | List strings                            |
 | fr [flagname] [newname] | Rename flag                             |
