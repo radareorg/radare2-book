@@ -61,7 +61,7 @@ uninstall:
 #include <r_lib.h>
 #include <r_asm.h>
 
-static int disassemble(RAsm *a, RAsmOp *op, const ut8 *buf, int len) {
+static int disassemble(RAsm *a, RAnalOp *op, const ut8 *buf, int len) {
 	struct op_cmd cmd = {
 		.instr = "",
 		.operands = ""
