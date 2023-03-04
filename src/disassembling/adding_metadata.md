@@ -3,7 +3,7 @@
 The typical work involved in reversing binary files makes powerful annotation capabilities essential.
 Radare offers multiple ways to store and retrieve such metadata.
 
-By following common basic UNIX principles, it is easy to write a small utility in a scripting language which uses `objdump`, `otool` or any other existing utility to obtain information from a binary and to import it into radare. For example, take a look at `idc2r.py` shipped with [radare2ida](https://github.com/radareorg/radare2ida). To use it, invoke it as `idc2r.py file.idc > file.r2`. It reads an IDC file exported from an IDA Pro database and produces an r2 script containing the same comments, names of functions and other data. You can import the resulting 'file.r2' by using the dot `.` command of radare:
+By following common basic UNIX principles, it is easy to write a small utility in a scripting language which uses `objdump`, `otool` or any other existing utility to obtain information from a binary and to import it into radare. For example, take a look at `idc2r.py` shipped with [radare2ida](https://github.com/radareorg/radare2-extras/tree/master/r2ida). To use it, invoke it as `idc2r.py file.idc > file.r2`. It reads an IDC file exported from an IDA Pro database and produces an r2 script containing the same comments, names of functions and other data. You can import the resulting 'file.r2' by using the dot `.` command of radare:
 ```
 [0x00000000]> . file.r2
 ```
