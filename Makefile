@@ -40,3 +40,19 @@ epub:
 	cp cover.jpg img
 	pandoc $(CHAPTERS) $(PANDOC_EPUB_OPTIONS) -o r2book.epub
 	rm -rf img
+
+MD2GMI=md2gmi/md2gmi
+
+md2gmi:
+	git clone https://github.com/n0x1m/md2gmi
+
+$(MD2GMI): md2gmi
+	cd md2gmi && go build .
+
+gmi: $(MD2GMI)
+	rm -rf gmi
+	mkdir -p gmi
+	for a in $(shell find src -type d) ; do b=`echo $$a |sed -e 's,src/,gmi/,'`; mkdir -p $$b ; done
+	for a in $(shell find src | grep md$$) ; do b=`echo $$a |sed -e 's,src/,gmi/,' -e 's,md$$,gmi,'` ; $(MD2GMI) -o $$b < $$a; done
+
+.PHONY: gmi
