@@ -4,8 +4,8 @@ This book is an updated version (started by maijin) of the original
 radare1 book (written by pancake). Please contribute by updating and
 improving the contents.
 
-* Github: [https://github.com/radareorg/radare2-book](https://github.com/radareorg/radare2-book)
-* Online: [https://book.rada.re/](https://book.rada.re/)
+* [Github](https://github.com/radareorg/radare2-book)
+* [Read it Online](https://book.rada.re/)
 
 
 [![mdbook](https://github.com/radareorg/radare2-book/actions/workflows/mdbook.yml/badge.svg)](https://github.com/radareorg/radare2-book/actions/workflows/mdbook.yml)

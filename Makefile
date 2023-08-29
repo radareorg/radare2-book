@@ -54,5 +54,6 @@ gmi: $(MD2GMI)
 	mkdir -p gmi
 	for a in $(shell find src -type d) ; do b=`echo $$a |sed -e 's,src/,gmi/,'`; mkdir -p $$b ; done
 	for a in $(shell find src | grep md$$) ; do b=`echo $$a |sed -e 's,src/,gmi/,' -e 's,md$$,gmi,'` ; $(MD2GMI) -o $$b < $$a; done
+	cp -f gmi/intro.gmi gmi/index.gmi
 
 .PHONY: gmi

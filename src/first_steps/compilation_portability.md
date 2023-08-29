@@ -8,41 +8,59 @@ Compared to core, the debugger feature is more restrictive portability-wise. If 
 
 Note that there are I/O plugins that use GDB, WinDbg, or Wine as back-ends, and therefore rely on presence of corresponding third-party tools (in case of remote debugging - just on the target machine).
 
-To build on a system using `acr` and `GNU Make` (e.g. on *BSD systems):
-```
+To build on a system using `acr` and `GNU Make` (e.g. on *BSD systems*):
+
+```sh
 $ ./configure --prefix=/usr
 $ gmake
 $ sudo gmake install
 ```
+
 There is also a simple script to do this automatically:
-```
+
+```sh
 $ sys/install.sh
 ```
+
 ### Static Build
 
 You can build radare2 statically along with all other tools with the command:
-```
+
+```sh
 $ sys/static.sh
 ```
+
 ### Meson build
 
-You can use meson + ninja to build:
+You can use meson/ninja to build (or muon/samu):
+
+```sh
+$ meson b && ninja -C b
 ```
+
+There's a helper script in sys/ to make the meson experience a little bit simpler:
+
+```sh
 $ sys/meson.py --prefix=/usr --shared --install
 ```
+
 If you want to build locally:
-```
+
+```sh
 $ sys/meson.py --prefix=/home/$USER/r2meson --local --shared --install
 ```
+
 ### Docker
 
-Radare2 repository ships a [Dockerfile](https://github.com/radareorg/radare2/blob/master/Dockerfile) that you can use with Docker.
+Radare2 repository ships a [Dockerfile](https://github.com/radareorg/radare2/blob/master/dist/docker/Dockerfile) that you can use with Docker.
 
-This dockerfile is also used by Remnux distribution from SANS, and is available on the docker [registryhub](https://registry.hub.docker.com/u/remnux/radare2/).
+This dockerfile also used by Remnux distribution from SANS, and is available on the docker [registryhub](https://registry.hub.docker.com/u/remnux/radare2/).
+
+Checkout the Makefile in this directory to understand how to use it without too much hussle
 
 ## Cleaning Up Old Radare2 Installations
-```
+
+```sh
 ./configure --prefix=/old/r2/prefix/installation
 make purge
 ```
-

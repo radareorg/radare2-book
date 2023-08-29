@@ -6,7 +6,8 @@ updated by many contributors over the Internet.
 
 Check the Github site to add new contents or fix typos:
 
-* Github: [https://github.com/radareorg/radare2-book](https://github.com/radareorg/radare2-book)
-* PDF: [GHA Artifacts](https://github.com/radareorg/radare2-book/releases)
-* EPUB: [GHA Artifacts](https://github.com/radareorg/radare2-book/releases)
-* Online: [https://book.rada.re/](https://book.rada.re/)
+* [GitHub](https://github.com/radareorg/radare2-book)
+* [PDF](https://github.com/radareorg/radare2-book/releases)
+* [EPUB](https://github.com/radareorg/radare2-book/releases)
+* [Read it Online](https://book.rada.re/)
+* [Read it on Gemini](gemini://radare.org/book)
