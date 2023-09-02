@@ -101,7 +101,7 @@
 * [Plugins](plugins/intro.md)
    * [IO plugins](plugins/ioplugins.md)
    * [Asm plugins](plugins/dev-asm.md)
-   * [Charset plugins](plugins/dev-charseta.md)
+   * [Charset plugins](plugins/dev-charset.md)
    * [Analysis plugins](plugins/dev-anal.md)
    * [Bin plugins](plugins/dev-bin.md)
    * [Other plugins](plugins/dev-other.md)
