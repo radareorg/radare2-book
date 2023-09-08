@@ -21,7 +21,7 @@ $ r2 -d /bin/ls
 > =!help      ; handled by the IO plugin
 ```
 
-If a command starts with `!`, posix_system() is called to pass the command to your shell. Check `!?` for more options and usage examples.
+If a command starts with `!`, the POSIX `system()` C function is called to pass the command to your shell. Check `!?` for more options and usage examples.
 
 ```
 > !ls         ; run `ls` in the shell
