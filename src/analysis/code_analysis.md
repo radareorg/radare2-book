@@ -142,7 +142,7 @@ Before changing the basic blocks of the function it is recommended to check the 
 ```
 
 ### Hand craft function
-before start, let's prepare a binary file first, for example:
+Before we start, let's prepare a binary file first. Write in `example.c`:
 ```C
 int code_block()
 {
@@ -154,9 +154,9 @@ int code_block()
   return result;
 }
 ```
-then compile it with `gcc -c example.c -m32 -O0 -fno-pie`, we will get the object file `example.o`. open it with radare2. 
+then compile with `gcc -c example.c -m32 -O0 -fno-pie`, and open the object file `example.o` with radare2. 
 
-since we haven't analyzed it yet, the `pdf` command will not print out the disassembly here:
+Since we haven't analyzed it yet, the `pdf` command will not print out the disassembly here:
 ```
 $ r2 example.o 
 [0x08000034]> pdf
@@ -181,7 +181,7 @@ p: Cannot find function at 0x08000034
             0x0800005c      c3             ret
 
 ```
-our goal is to hand craft a function with the following structure
+our goal is to handcraft a function with the following structure
 
 ![analyze_one](analyze_one.png)
 
