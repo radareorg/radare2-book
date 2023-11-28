@@ -14,3 +14,5 @@ e search.flags = true ; if enabled, create flags on hits
 The `search.align` variable is used to limit valid search hits to certain alignment. For example, with `e search.align=4` you will see only hits found at 4-bytes aligned offsets.
 
 The `search.flags` boolean variable instructs the search engine to flag hits so that they can be referenced later. If a currently running search is interrupted with `Ctrl-C` keyboard sequence, current search position is flagged with `search_stop`.
+
+The `search.in` variable specifies search boundaries. To search entire memory, use `e search.in = dbg.maps`. The default value is `dbg.map`.
