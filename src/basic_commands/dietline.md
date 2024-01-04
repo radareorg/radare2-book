@@ -65,19 +65,45 @@ Radare2 also comes with in vi mode that can be enabled by toggling `scr.prompt.v
 - `$` - move to the end of the line
 - `h` - move one character backward
 - `l` - move one character forward
+- `b` - move cursor to the beginning of the current word, of if between word boundaries, to the beginning of the previous word.
+- `B` - same as `b`, but only counting white-space as word boundary
+- `e` - move cursor the end of the current word, or if between boundaries, to the end of the next word
+- `E` - same as `e`, but only counting white-space as word boundary
+- `w` - move cursor to the beginning of the next word
+- `W` - same as `w`, but only counting white-space as word boundary
+- `f<char>` - move cursor forward to the first `<char>` found. For example `fj` will move the cursor to the first `j` character found (if it found one)
+- `F<char>` - same as `f<char>`, but search backwards
+- `t<char>` - same as `f<char>` but stop before `<char>`. For example `tj` will move the cursor forward to the character just before `j`
+- `T<char>` - same as `t<char>`, but search backwards
 
 ## Deleting and Yanking
 - `x` - cuts the character
-- `dw` - delete the current word
-- `diw` - deletes the current word.
+- `dw` - delete the current word from the current position
+- `diw` - delete inside the current word
 - `db` - delete the previous word
-- `D` - delete the whole line
+- `D` - delete from the current cursor position to the end of line
+- `C` - same as `D`, but enter insert mode after
+- `dd` - delete the whole line (from any position)
+- `cc` - same as `dd`, but enter insert mode after
 - `dh` - delete a character to the left
 - `dl` - delete a character to the right
-- `d$` - kill the text from point to the end of the line.
-- `d^` - kill backward from the cursor to the beginning of the current line.
+- `d$` - same as `D`
+- `d^` - delete from the current cursor position to the beginning of line
 - `de` - kill from point to the end of the current word, or if between words, to the end of the next word. Word boundaries are the same as forward-word.
+- `df<char>` - delete from current position to the position of the first `<char>` encountered
+- `dF<char>` - same as `df<char>`, but delete backwards
+- `dt<char>` - delete from current position to the position of the character right before the first `<char>` encountered
+- `dT<char>` - same as `dt<char>`, but delete backwards
+- `di"` - delete everything between two `"` characters
+- `di'` - delete everything between two `'` characters
+- `di(` - delete everything between `(` and `)` characters
+- `di[` - delete everything between `[` and `]` characters
+- `di{` - delete everything between `{` and `}` characters
+- `di<` - delete everything between `<` and `>` characters
 - `p` - yank the top of the kill ring into the buffer at point.
-- `c` - acts similar to d based commands, but goes into insert mode in the end by prefixing the commands with numbers, the command is performed multiple times.
+- `c` - all `d` commands have their `c` counterpart which enters insert mode after deleting
+
+## Other
+- `~` - swap the case of the current character and move one character forward
 
 If you are finding it hard to keep track of which mode you are in, just set `scr.prompt.mode=true` to update the color of the prompt based on the vi-mode.
