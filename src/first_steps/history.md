@@ -1,6 +1,6 @@
 ## History
 
-In 2006, Sergi Àlvarez (aka pancake) was working as a forensic analyst. Since he wasn't allowed to use the company software for his personal needs, he decided to write a small tool-a hexadecimal editor-with very basic characteristics:
+In 2006, Sergi Àlvarez (aka pancake) is the author of radare and radare2, the project started when he was working as a forensic analyst. Since he wasn't allowed to use the company software for his personal needs, he decided to write a small tool-a hexadecimal editor-with very basic characteristics:
 
 * be extremely portable (unix friendly, command line, c, small)
 * open disk devices, this is using 64bit offsets

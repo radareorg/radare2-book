@@ -26,6 +26,7 @@ It is used also as a guide for basic function prototype and type propagation.
 amd64
 ms
 ```
+
 * To display function prototype of standard library functions you have `afcf` command 
 
 ```
