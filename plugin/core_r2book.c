@@ -401,9 +401,11 @@ static int r_cmd_r2book(void *user, const char *input) {
 
 // PLUGIN Definition Info
 RCorePlugin r_core_plugin_r2book = {
-	.name = "r2book",
-	.desc = "Adds r2book, r2books and r2h commands",
-	.license = "LGPL3",
+	.meta = {
+		.name = "r2book",
+		.desc = "Adds r2book, r2books and r2h commands",
+		.license = "LGPL3",
+	},
 	.call = r_cmd_r2book,
 };
 
