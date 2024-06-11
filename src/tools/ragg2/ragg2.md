@@ -210,8 +210,13 @@ The '-b' option can be used to specify the bits. One can see the supported archi
 The '-r' flag can be used to generate binary output instead of the above hex-string style output.
 
 ```sh
-$ ragg2 -f raw -r code1.c
-�1��D$�^1҉$��Y�D�|$�H�t$��T$��T$��T$�H�t$�H�t$ЋT$��T$̋|$�H�t$ЋT$̸H�D$�H�D$����L$ȋD$�É|$��|$��|$��|$��<H�D$�H�D$����L$��D$��Hello World
+$ ragg2 -f raw -r code1.c | rax2 -S
+efbfbd31efbfbdefbfbd4424efbfbd5e31d28924efbfbdefbfbd59efbfbd44efbfbd7c24efbfbd48efbfbd
+7424efbfbdefbfbd5424efbfbdefbfbd5424efbfbdefbfbd5424efbfbd48efbfbd7424efbfbd48efbfbd74
+24d08b5424efbfbdefbfbd5424cc8b7c24efbfbd48efbfbd7424d08b5424ccb848efbfbd4424efbfbd48ef
+bfbd4424efbfbdefbfbdefbfbdefbfbd4c24c88b4424efbfbdc3897c24efbfbdefbfbd7c24efbfbdefbfbd
+7c24efbfbdefbfbd7c24efbfbdefbfbd3c48efbfbd4424efbfbd48efbfbd4424efbfbdefbfbdefbfbdefbf
+bd4c24efbfbdefbfbd4424efbfbdefbfbd48656c6c6f20576f726c640a
 ```
 
 ```
