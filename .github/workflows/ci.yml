@@ -3,16 +3,22 @@ name: Create documents with make
 on:
   push:
     branches:
+      - '*'
 
 jobs:
-  make_all:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - run: |
-          sudo apt install pandoc texlive texlive-latex-extra
-          make
-      - uses: actions/upload-artifact@master
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install dependencies
+        run: |
+          sudo apt-get --assume-yes update
+          sudo apt-get --assume-yes install pandoc texlive texlive-latex-extra
+      - name: Build ebooks
+        run: make
+      - name: Pub
+        uses: actions/upload-artifact@v4
         with:
+          name: r2book
           path: r2book.*
-          name: r2book.zip
