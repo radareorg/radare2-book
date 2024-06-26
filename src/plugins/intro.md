@@ -6,7 +6,19 @@ support for different targets.
 
 This section aims to explain what are the plugins, how to write them and use them
 
+## Most Famous Plugins
+
+All of them can be installed via r2pm.
+
+* [r2frida](r2frida.md) - Frida and radare2 better together
+* r2ghidra - use the Ghidra decompiler from radare2
+* r2dec - a decompiler written in JS for r2
+* r2yara - loading, scanning and creating Yara rules
+
 ## Types of plugins
+
+See [r2skel](r2skel.md)
+
 ```
 $ ls libr/*/p | grep : | awk -F / '{ print $2 }'
 anal      # analysis plugins
