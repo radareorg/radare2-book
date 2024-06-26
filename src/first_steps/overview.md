@@ -1,6 +1,6 @@
 ## The Framework
 
-The Radare2 project is a set of small command-line utilities that can be used together or independently.
+The Radare2 project provides a collection of command-line tools, APIs and scripting capabilities that focus on several aspects of reverse engineering.
 
 This chapter will give you a quick understanding of them, but you can check the dedicated sections for each tool at the end of this book. 
 
@@ -19,19 +19,17 @@ A program to extract information from executable binaries, such as ELF, PE, Java
 A command line assembler and disassembler for multiple architectures (including Intel x86 and x86-64, MIPS, ARM, PowerPC, Java, and myriad of others).
 
 #### Examples
+
 ```
 $ rasm2 -a java 'nop'
 00
-```
-```
+
 $ rasm2 -a x86 -d '90'
 nop
-```
-```
+
 $ rasm2 -a x86 -b 32 'mov eax, 33'
 b821000000
-```
-```
+
 $ echo 'push eax;nop;nop' | rasm2 -f -
 509090
 ```
@@ -58,9 +56,19 @@ A binary diffing utility that implements multiple algorithms. It supports byte-l
 
 A program to find byte patterns in files.
 
+Implements the most common subcommand of the radare2's `/` (search) command.
+
 ### ragg2
 
-A frontend for r_egg. ragg2 compiles programs written in a simple high-level language into tiny binaries for x86, x86-64, and ARM.
+Ragg2 is a versatile tool primarily serving as a shellcode compiler.
+
+The tool is written on top of the `r_egg` library which can construct exploit payloads from the commandline, adding paddings, nops, sequences of bytes, compile small relocatable programs and even apply transformations to avoid some specific characters.
+
+The `ragg2-cc` tool can compile C programs into raw linear instructions that are relocatable and are useful for injecting them in target processes or use them in exploits.
+
+This feature is conceptually based on shellforge4, but only linux/osx x86-32/64 platforms are supported.
+
+It can also compile a specific low level domain specific language and generate tiny binaries without the need of any system compiler or toolchain as exemplified below:
 
 #### Examples
 
@@ -99,7 +107,8 @@ permissions, directories, and overridden default file descriptors. rarun2 is use
 * Test suites
 
 #### Sample rarun2 script
-```
+
+```bash
 $ cat foo.rr2
 #!/usr/bin/rarun2
 program=./pp400
@@ -110,7 +119,8 @@ chdir=/tmp
 ./foo.rr2
 ```
 
-#### Connecting a Program with a Socket
+#### Using a program via TCP/IP
+
 ```
 $ nc -l 9999
 $ rarun2 program=/bin/ls connect=localhost:9999
@@ -126,15 +136,17 @@ $ tty ; clear ; sleep 999999
 ```
 
 2 - Create a new file containing the following rarun2 profile named foo.rr2:
-```
+
+```sh
 #!/usr/bin/rarun2
 program=/bin/ls
 stdio=/dev/ttys010
 ```
 
 3 - Launch the following radare2 command:
-```
-r2 -r foo.rr2 -d /bin/ls
+
+```bash
+$ r2 -r foo.rr2 -d /bin/ls
 ```
 
 ### rax2
