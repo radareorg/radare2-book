@@ -2,6 +2,7 @@
 title = "The Official Radare2 Book"
 author = "pancake <pancake@nopcode.org>"
 description = "The Official Radare2 Book"
+language = "en"
 
 [build]
 create-missing = false
