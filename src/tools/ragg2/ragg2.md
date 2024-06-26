@@ -1,20 +1,24 @@
 # ragg2
 
-ragg2 stands for `radare2 egg`, this is the basic block to construct relocatable
-snippets of code to be used for injection in target processes when doing exploiting.
+ragg2 stands for `radare2's egg compiler`, it's the basic tool to compile relocatable snippets of code and modify paddings and inject sequences in order to be used for injection in target processes when doing exploiting.
 
-ragg2 compiles programs written in a simple high-level language into tiny binaries
-for x86, x86-64, and ARM.
+ragg2 compiles programs written in a simple high-level language into tiny binaries for x86, x86-64, and ARM.
 
-By default it will compile it's own `ragg2` language, but you can also compile C
-code using GCC or Clang shellcodes depending on the file extension. Lets create
-C file called `a.c`:
+The final bytestream can be rendered in a variety of output formats, including raw binary, C arrays, and various executable formats. This flexibility allows users to generate code that can be easily integrated into different types of projects or testing scenarios. Additionally, ragg2 can perform operations like encoding and encryption on the generated shellcode, which can be useful for evading detection or bypassing security measures in controlled testing environments.
+
+## Example
+
+By default it will compile it's own `ragg2` language, but you can also compile C code using GCC or Clang shellcodes depending on the file extension. Lets create C file called `a.c`:
+
 ```c
 int main() {
 	write(1, "Hello World\n", 13);
 	return 0;
 }
 ```
+
+That small C program can be compiled with ragg2 like this:
+
 ```
 $ ragg2 -a x86 -b32 a.c
 e900000000488d3516000000bf01000000b80400000248c7c20d0000000f0531c0c348656c6c6f20576f726c640a00
@@ -72,6 +76,7 @@ $ rasm2 -a x86 -b 64 -D 48c7c00200000050488b3c2448c7c0010000000f054883c408c3
 0x00000015   4                 4883c408  add rsp, 8
 0x00000019   1                       c3  ret
 ```
+
 ## Injectable machine code in different forms
 
 Consider the following program:
@@ -100,6 +105,8 @@ $ cat code1
 eb0e66666666662e0f1f84000000000050bf01000000488d359f000000ba0d000000e81900000031ff89442404e85e00000031d289042489d059c30f1f440000897c24fc48897424f0895424ec8b5424fc895424dc488b7424f048897424d08b5424ec895424cc8b7c24dc488b7424d08b5424ccb8010000000f0548894424e0488b4424e089c1894c24c88b4424c8c3897c24fc8b7c24fc897c24ec8b7c24ecb83c0000000f0548894424f0488b4424f089c1894c24e88b4424e8c348656c6c6f20576f726c640a00
 ```
 
+Printing as in raw
+
 ```sh
 $ ragg2 -o code1.raw code1.c
 $ cat code1.raw
@@ -113,7 +120,6 @@ The above is a basic 'raw' output. ragg2 offers a number of output format option
 ```
 
 The following is 'c' format output - shellcode which can be readily used in your C program.
-
 
 ```sh
 $ ragg2 -f c -o code1.c.c code1.c
@@ -183,7 +189,7 @@ $ ./code1_f.elf
 Hello World
 ```
 
-OR
+or
 
 ```sh
 $ ragg2 -f mach0 -o code1_f.mach0 code1.c
@@ -191,7 +197,7 @@ $ file code1_f.mach0
 code1_f.mach0: Mach-O 64-bit x86_64 executable
 ```
 
-Same with 'pe' format.
+Same with the 'PE' format.
 
 In the above examples, the target architecture is the architecture of your machine. But target architecture can explicitly be specified using the '-a' option.
 
