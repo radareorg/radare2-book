@@ -30,10 +30,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Install mdBook
-        run: |
-          curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf -y | sh
-          rustup update
-          cargo install --version ${MDBOOK_VERSION} mdbook
+        run: curl -Ls "https://github.com/rust-lang/mdBook/releases/download/v${MDBOOK_VERSION}/mdbook-v${MDBOOK_VERSION}-x86_64-unknown-linux-gnu.tar.gz" | tar -C /usr/local/bin/ -xzf -
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
