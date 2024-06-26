@@ -1,24 +1,27 @@
 # Emulation
 
-One of the most important things to remember in reverse engineering is
-a core difference between static analysis and dynamic analysis. As many already
-know, static analysis suffers from the path explosion problem, which is impossible
-to solve even in the most basic way without at least partial emulation.
+Understanding the distinction between static analysis and dynamic analysis is crucial in reverse engineering. radare2 uses two different kind of instruction information to perform static analysis:
 
-Thus, many professional reverse engineering tools use code emulation while
-performing an analysis of binary code, and radare2 is no different here.
+* OpType, Instruction Family plus other static details
+* ESIL expression associated
 
-For partial emulation (or imprecise full emulation) radare2 uses its own
-intermediate language and virtual machine called [ESIL](../disassembling/esil.md).
+Radare2 employs its own intermediate language and virtual machine, known as ESIL, for partial emulation (or imprecise full emulation).
 
-Radare2 supports this kind of partial emulation for all platforms that
-implement ESIL "uplifting" (x86/x86_64, ARM, arm64, MIPS, powerpc, sparc, AVR, 8051, Gameboy, ...).
+Radare2's [ESIL](../disassembling/esil.md) supports partial emulation across all platforms by evaluating those expressions.
 
-One of the most common usages of such emulation is to calculate
-indirect jumps and conditional jumps.
+## Use Cases
 
-To see the ESIL representation of a program, one can use the `ao` command or enable the `asm.esil` configuration
-variable to check if the program was correctly uplifted and to grasp how ESIL works:
+There are many use cases for ESIL in radare2, not just bare code emulation:
+
+* Resolve indirect branches
+* Determine the likelity of a branch
+* Search memory addresses matching complex nested conditionals
+* Find out computed pointer references (`aae` or `/re`)
+* Execution of a function portion
+* Simulate behaviour of syscalls and imports
+* r2wars (let's play!)
+
+To view the ESIL representation of your program, use the `ao~esil` command or enable the `asm.esil` configuration variable. This will let you verify how the code is uplifted from assembly to ESIL and understand better how that works internally.
 
 ```
 [0x00001660]> pdf
@@ -58,6 +61,8 @@ variable to check if the program was correctly uplifted and to grasp how ESIL wo
 `     0x00001691  rsp,[8],rip,=,8,rsp,+=
 ```
 
+## Commands
+
 To manually set up imprecise ESIL emulation, run the following sequence of commands:
 
 - `aei` to initialize the ESIL VM
@@ -65,10 +70,7 @@ To manually set up imprecise ESIL emulation, run the following sequence of comma
 - `aeip` to set the initial ESIL VM IP (instruction pointer)
 - a sequence of `aer` commands to set the initial register values.
 
-While performing emulation, please remember that the ESIL VM cannot emulate external calls
-system calls, nor SIMD instructions. Thus, the most common scenario is to
-emulate only a small chunk of code like encryption, decryption, unpacking, or
-a calculation.
+While performing emulation, please remember that the ESIL VM cannot emulate external calls system calls, nor SIMD instructions. Thus, the most common scenario is to emulate only a small chunk of code like encryption, decryption, unpacking, or a calculation.
 
 After successfully setting up the ESIL VM, we can interact with it like a normal debugging session.
 The command interface for the ESIL VM is almost identical to the debugging interface:
@@ -89,7 +91,48 @@ In addition to normal emulation, it's also possible to record and replay session
 
 You can read more about this operation mode in the [Reverse Debugging](../debugger/revdebug.md) chapter.
 
-## Emulation in analysis loop
+## Options
+
+The emulation can be triggered at analysis, runtime or at will with full manual control, in other words, the user can decide what and how to use ESIL.
+
+To change some of the behaviours of the emulation engine in radare2 you can use the following options:
+
+`[0x00000000]> e??esil.`
+
+- esil.addr.size: maximum address size in accessed by the ESIL VM
+- esil.breakoninvalid: break esil execution when instruction is invalid
+- esil.dfg.mapinfo: use mapinfo for esil dfg
+- esil.dfg.maps: set ro maps for esil dfg
+- esil.exectrap: trap when executing code in non-executable memory
+- esil.fillstack: initialize ESIL stack with (random, debruijn, sequence, zeros, ...)
+- esil.gotolimit: maximum number of gotos per ESIL expression
+- esil.iotrap: invalid read or writes produce a trap exception
+- esil.maxsteps: If !=0 defines the maximum amount of steps to perform on aesu/aec/..
+- esil.mdev.range: specify a range of memory to be handled by cmd.esil.mdev
+- esil.nonull: prevent memory read, memory write at null pointer
+- esil.prestep: step before esil evaluation in `de` commands
+- esil.romem: set memory as read-only for ESIL
+- esil.stack.addr: set stack address in ESIL VM
+- esil.stack.depth: number of elements that can be pushed on the esilstack
+- esil.stack.pattern: specify fill pattern to initialize the stack (0, w, d, i)
+- esil.stack.size: set stack size in ESIL VM
+- esil.stats: statistics from ESIL emulation stored in sdb
+- esil.timeout: a timeout (in seconds) for when we should give up emulating
+- esil.verbose: show ESIL verbose level (0, 1, 2)
+
+## Problems
+
+There are several situations where emulation will not work as expected or solve your problems. It is important to understand those situations to avoid undesired surprises and know how to workaround them.
+
+* Path explossion (too many execution or unknown paths to follow)
+* Incorrect stack size or contents (aeim)
+* Thread local storage (custom segments or memory layouts) not defined
+* Unimplemented instructions (Use ahe to set analysis hints)
+* Undefined behaviour (analy
+* Custom Ops (requires esil plugins)
+* Don't go into Syscall / Imports implementations
+
+## Emulation in the Analysis Loop
 
 Aside from manual emulation, automatic emulation is also possible in the analysis loop.
 For example, the `aaaa` command performs the ESIL emulation stage, among others.
@@ -124,15 +167,26 @@ calculated register and memory values as comments in the disassembly:
 
 Note the comments containing `likely`, which indicate conditional jumps likely to be taken by ESIL emulation.
 
-Apart from the basic ESIL VM setup, you can change its behavior with other options located
-in the `emu.` and `esil.` configuration namespaces.
+Apart from the basic ESIL VM setup, you can change its behavior with other options located in the `emu.` and `esil.` configuration namespaces.
 
-For manipulating ESIL working with memory and the stack, you may use the following options:
+## Debugging with ESIL
 
-- `esil.stack` to enable or disable a temporary stack for `asm.emu` mode
-- `esil.stack.addr` to set stack address in the ESIL VM (like `aeim` command)
-- `esil.stack.size` to set stack size in the ESIL VM (like `aeim` command)
-- `esil.stack.depth` limits the number of elements that can be pushed onto the esilstack
-- `esil.romem` sets memory as read-only for ESIL
-- `esil.fillstack` and `esil.stack.pattern` fill the ESIL stack with various patterns when initialized (random, debrujn, sequence, zeros, ...)
-- `esil.nonull` prevents memory read, memory write at null pointer
+The debugger APIs can be configured to use different backends, to communicate with a local or remote GDB server, use the native debugger, a specific virtualization or emulation engine like Unicorn or BOCHS, but there's also an ESIL backend.
+
+```
+[0x00000000]> dL
+0  ---  bf       LGPL3
+1  ---  bochs    LGPL3
+2  ---  esil     LGPL3
+3  ---  evm      LGPL3
+4  ---  gdb      LGPL3
+5  ---  io       MIT
+6  dbg  native   LGPL3
+7  ---  null     MIT
+8  ---  qnx      LGPL3
+9  ---  rap      LGPL3
+[0x00000000]> dL esil
+[0x00000000]>
+```
+
+After this command, you can use any of the `d` sub-commands to change register values, step or skip instructions, set breakpoints, etc. but using the internal emulation logic of ESIL.
