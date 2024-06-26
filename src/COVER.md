@@ -1,3 +1,3 @@
 cover
-![cover](cover.jpg)
+![cover](../cover.jpg)
 cover2
