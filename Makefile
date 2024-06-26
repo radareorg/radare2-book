@@ -16,7 +16,7 @@ CHAPTERS=$(shell grep -Eoi '\([^\)]+' src/SUMMARY.md | sed -e 's,^.,src/,')
 PANDOC_OPTIONS+=-f markdown+rebase_relative_paths
 PANDOC_OPTIONS+=--metadata-file=metadata.yaml
 PANDOC_OPTIONS+=--toc-depth=5 --toc
-PANDOC_OPTIONS+=-V papersize:a3
+PANDOC_OPTIONS+=-V papersize:a5
 PANDOC_OPTIONS+=-V geometry:margin=1.5cm
 
 # PDF: Add cover and hide title text page
