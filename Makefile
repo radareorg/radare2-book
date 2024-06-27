@@ -1,6 +1,6 @@
 all: pdf epub
 
-.PHONY: epub pdf pdf_old gmi
+.PHONY: epub pdf pdf_old gmi texi info
 
 pdf_old: node_modules
 	npm run build
@@ -30,6 +30,15 @@ pdf:
 
 epub:
 	pandoc $(CHAPTERS) $(PANDOC_OPTIONS) $(PANDOC_EPUB_OPTIONS) -o r2book.epub
+
+texi:
+	pandoc $(CHAPTERS) $(PANDOC_OPTIONS) -o r2book.texi
+	sed -i -E 's,@uref\{[0-9a-z/_-]+gemini://,@uref\{gemini://,gI' r2book.texi # fix gemini link
+
+info: texi
+	rm -f r2book.info r2book.info.gz
+	makeinfo --force --no-split r2book.texi
+	gzip -9n r2book.info
 
 MD2GMI=md2gmi/md2gmi
 
