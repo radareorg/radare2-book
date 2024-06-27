@@ -15,3 +15,5 @@ _book/*
 *.log
 r2book.pdf
 r2book.epub
+r2book.texi
+r2book.info*
