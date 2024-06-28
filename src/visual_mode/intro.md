@@ -32,7 +32,7 @@ Visual mode help:
  ??       show the user-friendly hud
  %        in cursor mode finds matching pair, or toggle autoblocksz
  @        redraw screen every 1s (multi-user view)
- ^        seek to the begining of the function
+ ^        seek to the beginning of the function
  !        enter into the visual panels mode
  _        enter the flag/comment/functions/.. hud (same as VF_)
  =        set cmd.vprompt (top row)

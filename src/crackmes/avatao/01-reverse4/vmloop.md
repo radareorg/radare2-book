@@ -146,7 +146,7 @@ of *vmloop*.
 
 As I've mentioned previously, the function itself is pretty short, and easy to
 read, especially with our annotations. But a promise is a promise, so here is
-how we can create the missing bacic blocks for the instructions:
+how we can create the missing basic blocks for the instructions:
 
 ```
 [0x00400ec0]> afb+ 0x00400a45 0x00400a80 0x00400ab6-0x00400a80 0x400c15

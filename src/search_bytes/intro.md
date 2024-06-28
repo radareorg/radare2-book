@@ -77,7 +77,7 @@ Options are controlled by the `search.` variables.
 ```
 
 Perhaps the most important search variable is `search.in` - it controls where
-your search is occuring. If you aren't finding hits you expect, check this
+your search is occurring. If you aren't finding hits you expect, check this
 variable first. Note the difference between `map` and `maps` - `map` will only
 search the map that you are currently in, while `maps` will search all memory
 maps, with options to narrow the search by permissions.

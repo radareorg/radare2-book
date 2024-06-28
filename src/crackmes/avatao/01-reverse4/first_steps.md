@@ -118,7 +118,7 @@ d 0x400db4 mov edi, str.You_won__The_flag_is:__s_n
 d 0x400dd2 mov edi, str.Your_getting_closer_
 ```
 
-> ***r2 tip***: We can list crossreferences to addresses using the *axt [addr]*
+> ***r2 tip***: We can list cross-references to addresses using the *axt [addr]*
 > command (similarly, we can use *axf* to list references from the address).
 > The *@@* is an iterator, it just runs the command once for every arguments
 > listed.

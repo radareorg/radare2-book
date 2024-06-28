@@ -22,7 +22,7 @@ nth paddr      vaddr      len size section type  string
 3   0x0000057f 0x0804857f 18  19   .rodata ascii Invalid Password!\n
 ```
 
-similar to 0x01, no explicity password string here. so it's time to analyze it with r2.
+similar to 0x01, no explicit password string here. so it's time to analyze it with r2.
 ```
 [0x08048330]> aa
 [x] Analyze all flags starting with sym. and entry0 (aa)
