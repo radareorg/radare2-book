@@ -41,4 +41,4 @@ you could just reverse engineer the quick'n'dirty one I've used during the CTF:
 
 Keep in mind though, that it was written on-the-fly, parallel to the reversing
 phase - for example there are parts that was written without the knowledge of
-all possible instructions. This means that the code is ugly and unefficient.
+all possible instructions. This means that the code is ugly and inefficient.

@@ -10,7 +10,7 @@ Inside r2, the functionality of rax2 is available under the ? command. For examp
 [0x00000000]> ? 3+4
 ```
 
-As you can see, the numeric expressions can contain mathematical expressions like addition, substraction, .. as well as group operations with parenthesis.
+As you can see, the numeric expressions can contain mathematical expressions like addition, subtraction, .. as well as group operations with parenthesis.
 
 The syntax in which the numbers are represented define the base, for example:
 
@@ -98,7 +98,7 @@ $ rax2 -S < bin.foo
 ...
 ```
 
-Endianess conversion:
+Endianness conversion:
 ```sh
 $ rax2 -e 33
 0x21000000
@@ -106,7 +106,7 @@ $ rax2 -e 0x21000000
 33
 ```
 
-Base64 deconding
+Base64 decoding
 ```sh
 $ rax2 -D ZQBlAA== | rax2 -S
 65006500

@@ -51,7 +51,7 @@ Lets read main node-by-node! The first block looks like this:
 ![main bb-0c63](img/main/bb-0c63.png)
 
 We can see that the program reads a word (2 bytes) into the local variable named
-*local_10_6*, and than compares it to 0xbb8. Thats 3000 in decimal:
+*local_10_6*, and than compares it to 0xbb8. That's 3000 in decimal:
 
 ```
 [0x00400c63]> ? 0xbb8

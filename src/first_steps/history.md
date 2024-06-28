@@ -1,6 +1,6 @@
 ## History
 
-In 2006, Sergi Àlvarez (aka pancake) while working as a forensic analyst he decided to write a small tool to recover some deleted files from an HFS+ disk by accident. As long as using the privative software from work it was a good toy project, following the concept of a block-based hexadecimal editor interface with a very simple repl to enter commands to search for byte patterns and dump the results to disk. And have the folllowing characteristics:
+In 2006, Sergi Àlvarez (aka pancake) while working as a forensic analyst he decided to write a small tool to recover some deleted files from an HFS+ disk by accident. As long as using the privative software from work it was a good toy project, following the concept of a block-based hexadecimal editor interface with a very simple repl to enter commands to search for byte patterns and dump the results to disk. And have the following characteristics:
 
 * be extremely portable (unix friendly, command line, c, small)
 * open disk devices, this is using 64bit offsets
@@ -13,7 +13,7 @@ Since then, the project has evolved to provide a complete framework for analyzin
 
 The need for scripting showed the fragility of the initial design: a monolithic tool made the API hard to use, and so a deep refactoring was needed. In 2009 radare2 (r2) was born as a fork of radare1. The refactor added flexibility and dynamic features. This enabled much better integration, paving the way to use r2 [from different programming languages](https://github.com/radareorg/radare2-bindings). Later on, the [r2pipe API](https://github.com/radareorg/radare2-r2pipe) allowed access to radare2 via pipes from any language, and the [r2papi](https://github.com/radareorg/radare2-r2papi) provided an idiomatic and high level interface to use r2 through r2pipe from a large list of programming languages.
 
-What started as a one-man project, with some eventual contributions, gradually evolved into a big community-based project around 2014. The number of users was growing fast, changing roles and contribution rules to ease the maintainance as much as possible.
+What started as a one-man project, with some eventual contributions, gradually evolved into a big community-based project around 2014. The number of users was growing fast, changing roles and contribution rules to ease the maintenance as much as possible.
 
 It's important to instruct users to report their issues, as well as help developers willing to contribute to understand the codebase. The whole development is managed in [radare2's GitHub](https://github.com/radareorg/radare2) and discussed in the Telegram and Discord channels.
 

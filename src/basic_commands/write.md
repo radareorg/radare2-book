@@ -68,13 +68,13 @@ an operator. The command is applied to the current block. Supported operators in
 |Supported operations:
 |  wow  ==  write looped value (alias for 'wb')
 |  woa  +=  addition
-|  wos  -=  substraction
+|  wos  -=  subtraction
 |  wom  *=  multiply
 |  wod  /=  divide
 |  wox  ^=  xor
 |  woo  |=  or
 |  woA  &=  and
-|  woR  random bytes (alias for 'wr $b'
+|  woR  random bytes (alias for 'wr $b')
 |  wor  >>= shift right
 |  wol  <<= shift left
 |  wo2  2=  2 byte endian swap

@@ -47,7 +47,7 @@ Pressing lowercase `c` toggles the cursor mode. When this mode is active, the cu
 
 ![Cursor at 0x00404896](cursor.png)
 
-The cursor is used to select a range of bytes or simply to point to a byte. You can use the cursor to create a named flag at specifc location. To do so, seek to the required position, then press `f` and enter a name for a flag.
+The cursor is used to select a range of bytes or simply to point to a byte. You can use the cursor to create a named flag at specific location. To do so, seek to the required position, then press `f` and enter a name for a flag.
 If the file was opened in write mode using the `-w` flag or the `o+` command, you can also use the cursor to overwrite a selected range with new values. To do so, select a range of bytes (with HJKL and SHIFT key pressed), then press `i` and enter the hexpair values for the new data. The data will be repeated as needed to fill the range selected. For example:
 ```
 <select 10 bytes in visual mode using SHIFT+HJKL>
