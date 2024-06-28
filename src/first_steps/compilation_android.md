@@ -5,98 +5,101 @@ Radare2 can be cross-compiled for other architectures/systems as well, like Andr
 ### Prerequisites
 
 * Python 3
-* Meson
-* Ninja
+* Make
 * Git
-* Android NDK
+* Binutils
+* pkg-config
 
 ### Step-by-step
 
-#### Download and extract the Android NDK
+#### Download and Install Termux App
 
-Download the Android NDK from the [official site](https://developer.android.com/ndk) and extract it somewhere on your system (e.g. `/tmp/android-ndk`)
+Download the Termux application from the [official site](https://github.com/termux/termux-app/releases) and install it.
 
-#### Make
+#### Update & Upgrade
 
-##### Specify NDK base path
-
+First time installation of termux require updating the repo to fetch all the available packages.
 ```
-$ echo NDK=/tmp/android-ndk  > ~/.r2androidrc
-```
-
-##### Compile + create tar.gz + push it to connected android device
-
-```
-./sys/android-build.sh arm64-static
+$ pkg update && pkg upgrade -y
 ```
 
-You can build for different architectures by changing the argument to
-`./sys/android-build.sh`. Run the script without any argument to see the
-accepted values.
+##### Install required packages
 
-#### Meson
 
-##### Create a cross-file for meson
-
-Meson needs a configuration file that describes the cross compilation environment (e.g. `meson-android.ini`).
-You can adjust it as necessary, but something like the following should be a good starting point:
 ```
-[binaries]
-c       = '/tmp/android-ndk/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android28-clang'
-cpp     = '/tmp/android-ndk/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android28-clang++'
-ar      = '/tmp/android-ndk/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android-ar'
-as      = '/tmp/android-ndk/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android-as'
-ranlib  = '/tmp/android-ndk/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android-ranlib'
-ld      = '/tmp/android-ndk/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android-ld'
-strip   = '/tmp/android-ndk/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android-strip'
-pkgconfig = 'false'
-
-[properties]
-sys_root = '/tmp/android-ndk/sysroot'
-
-[host_machine]
-system = 'android'
-cpu_family = 'arm'
-cpu = 'aarch64'
-endian = 'little'
+$ pkg install build-essential git python3 binutils wget pkg-config
 ```
+build-essential contains all the required build tool like make,gcc etc.
 
-##### Compile with meson + ninja
+##### Download or clone Radare2 repo
 
-Now setup the build directory with meson as usual:
 ```
-$ CFLAGS="-static" LDFLAGS="-static" meson --default-library static --prefix=/tmp/android-dir -Dblob=true build --cross-file ./meson-android.ini
+$ git clone https://github.com/radareorg/radare2
 ```
+If you are limited by disk space, you can either clone the repository with a depth of 1 by adding `--depth 1` in clone command or build from a tarball. Cloning the repository provides the most up-to-date code, whereas tarballs are only generated during releases, which may not contains latest update and bug fixes.
 
-A bit of explanation about all the options:
-* `CFLAGS="-static"`, `LDFLAGS="-static"`, `--default-library static`: this
-  ensure that libraries and binaries are statically compiled, so you do not need
-  to properly set LD_* environment variables in your Android environment to make
-  it find the right libraries. Binaries have everything they need inside.
-* `-Dblob=true`: it tells meson to compile just one binary with all the needed
-  code for running `radare2`, `rabin2`, `rasm2`, etc. and creates symbolic links to
-  those names. This avoids creating many statically compiled large binaries and
-  just create one that provides all features. You will still have `rabin2`,
-  `rasm2`, `rax2`, etc. but they are just symlinks to `radare2`.
-* `--cross-file ./meson-android.ini`: it describes how to compile radare2 for Android
 
-Then compile and install the project:
+##### Build and Installation
+
+Building and installing Radare2 after cloning the repository is straightforward using the following commands:
+
 ```
-$ ninja -C build
-$ ninja -C build install
+cd radare2
+sh sys/install.sh
 ```
+It will install required packages if you already didn't and start the installation.
 
-##### Move files to your android device and enjoy
-
-At this point you can copy the generated files in /tmp/android-dir to your Android device and running radare2 from it.
-For example:
 ```
-$ cd /tmp && tar -cvf radare2-android.tar.gz android-dir
-$ adb push radare2-android.tar.gz /data/local/tmp
-$ adb shell
-DEVICE:/ $ cd /data/local/tmp
-DEVICE:/data/local/tmp $ tar xvf radare2-android.tar.gz
-DEVICE:/data/local/tmp $ ./android-dir/bin/radare2
-Usage: r2 [-ACdfLMnNqStuvwzX] [-P patch] [-p prj] [-a arch] [-b bits] [-i file]
-          [-s addr] [-B baddr] [-m maddr] [-c cmd] [-e k=v] file|pid|-|--|=
+~/radare2 $ sh sys/install.sh
+/data/data/com.termux/files/home/radare2
+Termux environment detected. Installing necessary packages
+No mirror or mirror group selected. You might want to select one by running 'termux-change-repo'
+Checking availability of current mirror:
+[*] https://packages-cf.termux.dev/apt/termux-main: ok
+Hit:1 https://packages-cf.termux.dev/apt/termux-main stable InRelease
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+All packages are up to date.
+No mirror or mirror group selected. You might want to select one by running 'termux-change-repo'
+Checking availability of current mirror:
+[*] https://packages-cf.termux.dev/apt/termux-main: ok
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+git is already the newest version (2.45.2).
+build-essential is already the newest version (4.1).
+binutils is already the newest version (2.42).
+pkg-config is already the newest version (0.29.2-2).
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+/data/data/com.termux/files/home/radare2
+From https://github.com/radareorg/radare2
+ * branch            master     -> FETCH_HEAD
+Already up to date.
+[*] Finding make is /data/data/com.termux/files/usr/bin/make OK
+[*] Configuring the build system ... OK
+[*] Checking out capstone... OK
+[*] Checking out vector35-arm64... OK
+[*] Checking out vector35-armv7... OK
+[*] Running configure... OK
+[*] Ready. You can now run 'make'.
+configure-plugins: Loading ./plugins.cfg ..
+configure-plugins: Generating libr/config.h
+configure-plugins: Generating libr/asm/d/config.inc
+configure-plugins: Generating libr/config.mk
+........
+........
+cd "/data/data/com.termux/files/usr/lib/radare2/" && rm -f last && ln -fs 5.9.3 last
+cd "/data/data/com.termux/files/usr/share/radare2/" && rm -f last && ln -fs 5.9.3 last
+mkdir -p "/data/data/com.termux/files/usr/share/radare2/5.9.3/"
+/data/data/com.termux/files/usr/bin/sh ./configure-plugins --rm-static //data/data/com.termux/files/usr/lib/radare2/last/
+configure-plugins: Loading ./plugins.cfg ..
+Removed 0 shared plugins that are already static
+
+~/radare2 $ r2 -v
+radare2 5.9.3 275 @ linux-arm-64
+birth: git.5.9.2-146-g13ea460 2024-06-28__20:22:10
+commit: 13ea460b3ea28ef37361eb1d679561037c521d27
+options: gpl -O? cs:5 cl:2 make
+
 ```
