@@ -56,7 +56,7 @@
    * [Virtual Tables](analysis/vtables.md)
    * [Syscalls](analysis/syscalls.md)
    * [Emulation](analysis/emulation.md)
-   * [Symbols information](analysis/symbols.md)
+   * [Debug Symbols](analysis/debug_symbols.md)
    * [Signatures](signatures/zignatures.md)
    * [Graph commands](analysis/graphs.md)
 * [Scripting](scripting/intro.md)

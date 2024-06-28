@@ -1,4 +1,4 @@
-# Symbols
+# Debug Symbols
 
 Radare2 automatically parses available imports and exports sections in the binary,
 moreover, it can load additional debugging information if present.
