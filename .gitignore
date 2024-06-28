@@ -13,7 +13,9 @@ _book/*
 *.rej
 *.bak
 *.log
+gmi/
 r2book.pdf
 r2book.epub
 r2book.texi
 r2book.info*
+r2book-gmi.tar.gz

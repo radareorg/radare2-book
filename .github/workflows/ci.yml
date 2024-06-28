@@ -15,9 +15,10 @@ jobs:
         run: |
           sudo apt-get --assume-yes update
           sudo apt-get --assume-yes install pandoc texlive-xetex texinfo
+          go install github.com/n0x1m/md2gmi@latest
       - name: Build ebooks
-        run: make pdf epub info
-      - name: Pub
+        run: make pdf epub info gmi
+      - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: r2book
@@ -25,6 +26,7 @@ jobs:
             r2book.pdf
             r2book.epub
             r2book.info.gz
+            r2book-gmi.tar.gz
 
   # Release creation
   check_release:
@@ -77,3 +79,4 @@ jobs:
             r2book.pdf
             r2book.epub
             r2book.info.gz
+            r2book-gmi.tar.gz

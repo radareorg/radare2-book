@@ -40,17 +40,15 @@ info: texi
 	makeinfo --force --no-split r2book.texi
 	gzip -9n r2book.info
 
-MD2GMI=md2gmi/md2gmi
+GOPATH?=$(HOME)/go
+GOBIN?=$(GOPATH)/bin
+MD2GMI?=$(GOBIN)/md2gmi
 
-md2gmi:
-	git clone https://github.com/n0x1m/md2gmi
-
-$(MD2GMI): md2gmi
-	cd md2gmi && go build .
-
-gmi: $(MD2GMI)
+gmi:
+	@test -x $(MD2GMI) || (echo "ERROR: Missing md2gmi.\nTo install run: go install github.com/n0x1m/md2gmi@latest"; false)
 	rm -rf gmi
 	mkdir -p gmi
 	for a in $(shell find src -type d) ; do b=`echo $$a |sed -e 's,src/,gmi/,'`; mkdir -p $$b ; done
-	for a in $(shell find src | grep md$$) ; do b=`echo $$a |sed -e 's,src/,gmi/,' -e 's,md$$,gmi,'` ; $(MD2GMI) -o $$b < $$a; done
-	cp -f gmi/intro.gmi gmi/index.gmi
+	for a in $(shell find src -type f -name \*.md) ; do b=`echo $$a |sed -e 's,src/,gmi/,' -e 's,md$$,gmi,'` ; $(MD2GMI) -i $$a -o $$b; done
+	ln -v gmi/SUMMARY.gmi gmi/index.gmi
+	tar -czf r2book-gmi.tar.gz -C gmi .
