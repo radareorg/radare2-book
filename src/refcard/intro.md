@@ -1,11 +1,15 @@
 # Radare2 Reference Card
 
-This chapter is based on the Radare 2 reference card by Thanat0s, which is under the GNU GPL. Original license is as follows:
+This chapter is based on the Radare 2 reference card by Thanat0s, which is written under the GNU/GPL licence.
 
 ```
 This card may be freely distributed under the terms of the GNU
 general public licence — Copyright by Thanat0s - v0.1 -
 ```
+
+## Cheatsheets
+
+If you are looking for updated and ready to be printed cheatsheets please check the [radare2-cheatsheets](https://github.com/radareorg/radare2-cheatsheets) repository.
 
 ## Survival Guide
 

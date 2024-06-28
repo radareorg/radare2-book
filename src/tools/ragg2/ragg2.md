@@ -43,7 +43,50 @@ $ rasm2 -a x86 -b 32 -D e900000000488d3516000000bf01000000b80400000248c7c20d0000
 0x0000002c   3                   640a00  or al, byte fs:[eax]
 ```
 
-## Compiling ragg2 example
+## Help message
+
+Checking the help from the commandline will give you a wide understanding of what's the tool about and its capabilities
+
+```
+Usage: ragg2 [-FOLsrxhvz] [-a arch] [-b bits] [-k os] [-o file] [-I path]
+             [-i sc] [-E enc] [-B hex] [-c k=v] [-C file] [-p pad] [-q off]
+             [-S string] [-f fmt] [-nN dword] [-dDw off:hex] [-e expr] file|f.asm|-
+ -a [arch]       select architecture (x86, mips, arm)
+ -b [bits]       register size (32, 64, ..)
+ -B [hexpairs]   append some hexpair bytes
+ -c [k=v]        set configuration options
+ -C [file]       append contents of file
+ -d [off:dword]  patch dword (4 bytes) at given offset
+ -D [off:qword]  patch qword (8 bytes) at given offset
+ -e [egg-expr]   take egg program from string instead of file
+ -E [encoder]    use specific encoder. see -L
+ -f [format]     output format (raw, c, pe, elf, mach0, python, javascript)
+ -F              output native format (osx=mach0, linux=elf, ..)
+ -h              show this help
+ -i [shellcode]  include shellcode plugin, uses options. see -L
+ -I [path]       add include path
+ -k [os]         operating system's kernel (linux,bsd,osx,w32)
+ -L              list all plugins (shellcodes and encoders)
+ -n [dword]      append 32bit number (4 bytes)
+ -N [dword]      append 64bit number (8 bytes)
+ -o [file]       output file
+ -O              use default output file (filename without extension or a.out)
+ -p [padding]    add padding after compilation (padding=n10s32)
+                 ntas : begin nop, trap, 'a', sequence
+                 NTAS : same as above, but at the end
+ -P [size]       prepend debruijn pattern
+ -q [fragment]   debruijn pattern offset
+ -r              show raw bytes instead of hexpairs
+ -s              show assembler
+ -S [string]     append a string
+ -v              show version
+ -w [off:hex]    patch hexpairs at given offset
+ -x              execute
+ -X [hexpairs]   execute rop chain, using the stack provided
+ -z              output in C string syntax
+```
+
+## First Example
 
 ```
 $ cat hello.r
@@ -290,67 +333,4 @@ int main()
 }
 $ ragg2 -x code1.c
 Hello World
-```
-
-## Shellcode and Encoders
-
-ragg2 offers a few ready-made shellcodes and encoders.
-
-```sh
-$ ragg2 -L
-shellcodes:
-      exec : execute cmd=/bin/sh suid=false
-encoders:
-       xor : xor encoder for shellcode
-```
-
-Using the '-i' option, one can generate specify and generate the shellcode.
-
-```sh
-$ ragg2 -i exec
-31c048bbd19d9691d08c97ff48f7db53545f995257545eb03b0f05
-```
-
-Similar to the previous section, the output format(c, raw, elf etc.,) can be specified here too along with the architecture and bits.
-
-ragg2 offers an xor encoder too. The following are the relevant flags/options.
-
-```sh
-$ ragg2 -h
- -c [k=v]        set configuration options
- -E [encoder]    use specific encoder. see -L
- -L              list all plugins (shellcodes and encoders)
-```
-
-```sh
-$ ragg2 -E xor -c key=32 -i exec
-6a1b596a205be8ffffffffc15e4883c60d301e48ffc6e2f911e0689bf1bdb6b1f0acb7df68d7fb73747fb97277747e901b2f25
-```
-
-The same can be done with a .c or .r file output. The first one is the normal output(machine code) and the second is xor encoded.
-
-```sh
-$ ragg2 -a x86 -f raw code1.c
-eb0e66666666662e0f1f84000000000050bf01000000488d359f000000ba0d000000e81900000031ff89442404e85e00000031d289042489d059c30f1f440000897c24fc48897424f0895424ec8b5424fc895424dc488b7424f048897424d08b5424ec895424cc8b7c24dc488b7424d08b5424ccb8010000000f0548894424e0488b4424e089c1894c24c88b4424c8c3897c24fc8b7c24fc897c24ec8b7c24ecb83c0000000f0548894424f0488b4424f089c1894c24e88b4424e8c348656c6c6f20576f726c640a00
-
-$ ragg2 -E xor -c key=127 -a x86 -f raw code1.c
-6ac9596a7f5be8ffffffffc15e4883c60d301e48ffc6e2f994711919191919517060fb7f7f7f7f7f2fc07e7f7f7f37f24ae07f7f7fc5727f7f7f97667f7f7f4e80f63b5b7b97217f7f7f4eadf67b5bf6af26bc70603b7f7ff6035b8337f60b5b8ff62b5b93f42b5b83f62b5ba337f40b5b8f37f60b5baff42b5b93f62b5bb3f4035ba337f40b5baff42b5bb3c77e7f7f7f707a37f63b5b9f37f43b5b9ff6bef6335bb7f43b5bb7bcf6035b83f4035b83f6035b93f4035b93c7437f7f7f707a37f63b5b8f37f43b5b8ff6bef6335b97f43b5b97bc371a1313105f28100d131b757f
-```
-
-## Appending and patching data
-
-If you want to append/patch some bytes to your output, here are a few options ragg2 offers.
-
-```
- -B [hexpairs]   append some hexpair bytes
- -C [file]       append contents of file
- -d [off:dword]  patch dword (4 bytes) at given offset
- -D [off:qword]  patch qword (8 bytes) at given offset
- -n [dword]      append 32bit number (4 bytes)
- -N [dword]      append 64bit number (8 bytes)
- -p [padding]    add padding after compilation (padding=n10s32)
-                 ntas : begin nop, trap, 'a', sequence
-                 NTAS : same as above, but at the end
- -S [string]     append a string
- -w [off:hex]    patch hexpairs at given offset
 ```

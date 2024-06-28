@@ -96,6 +96,8 @@
       * [Configuration](tools/rasm2/config.md)
    * [Ragg2](tools/ragg2/ragg2.md)
       * [Language](tools/ragg2/lang.md)
+      * [Encoders](tools/ragg2/encoders.md)
+      * [Padding](tools/ragg2/padding.md)
    * [Rahash2](tools/rahash2/intro.md)
       * [Rahash Tool](tools/rahash2/rahash_tool.md)
 * [Plugins](plugins/intro.md)
