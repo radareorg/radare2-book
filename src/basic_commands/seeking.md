@@ -1,4 +1,4 @@
-## Seeking
+# Seeking
 
 To move around the file we are inspecting we will need to change the offset at which we are using the `s` command.
 
@@ -38,33 +38,40 @@ Here's the full help of the `s` command. We will explain in more detail below.
 
 ```
 [0x00000000]> s?
-Usage: s    # Help for the seek commands. See ?$? to see all variables
-| s                 Print current address
-| s.hexoff          Seek honoring a base from core->offset
-| s:pad             Print current address with N padded zeros (defaults to 8)
-| s addr            Seek to address
-| s-                Undo seek
-| s-*               Reset undo seek history
-| s- n              Seek n bytes backward
-| s--[n]            Seek blocksize bytes backward (/=n)
-| s+                Redo seek
-| s+ n              Seek n bytes forward
-| s++[n]            Seek blocksize bytes forward (/=n)
-| s[j*=!]           List undo seek history (JSON, =list, *r2, !=names, s==)
-| s/ DATA           Search for next occurrence of 'DATA'
-| s/x 9091          Search for next occurrence of \x90\x91
-| sa [[+-]a] [asz]  Seek asz (or bsize) aligned to addr
-| sb                Seek aligned to bb start
-| sC[?] string      Seek to comment matching given string
-| sf                Seek to next function (f->addr+f->size)
-| sf function       Seek to address of specified function
-| sf.               Seek to the beginning of current function
-| sg/sG             Seek begin (sg) or end (sG) of section or file
-| sl[?] [+-]line    Seek to line
-| sn/sp ([nkey])    Seek to next/prev location, as specified by scr.nkey
-| so [N]            Seek to N next opcode(s)
-| sr pc             Seek to register
-| ss                Seek silently (without adding an entry to the seek history)
+Usage: s   # Help for the seek commands. See ?$? to see all variables
+| s               print current address
+| s addr          seek to address
+| s.[?]hexoff     seek honoring a base from core->offset
+| s:pad           print current address with N padded zeros (defaults to 8)
+| s-              undo seek
+| s-*             reset undo seek history
+| s- n            seek n bytes backward
+| s--[n]          seek blocksize bytes backward (/=n)
+| s+              redo seek
+| s+ n            seek n bytes forward
+| s++[n]          seek blocksize bytes forward (/=n)
+| s[j*=!]         list undo seek history (JSON, =list, *r2, !=names, s==)
+| s/ DATA         search for next occurrence of 'DATA' (see /?)
+| s/x 9091        search for next occurrence of \x90\x91
+| sa ([+-]addr)   seek to block-size aligned address (addr=$$ if not specified)
+| sb ([addr])     seek to the beginning of the basic block
+| sC[?] string    seek to comment matching given string
+| sd ([addr])     show delta seek compared to all possible reference bases
+| sf              seek to next function (f->addr+f->size)
+| sf function     seek to address of specified function
+| sf.             seek to the beginning of current function
+| sfp             seek to the function prelude checking back blocksize bytes
+| sff             seek to the nearest flag backwards (uses fd and ignored the delta)
+| sg/sG           seek begin (sg) or end (sG) of section or file
+| sh              open a basic shell (aims to support basic posix syntax)
+| sl[?] [+-]line  seek to line
+| sn/sp ([nkey])  seek to next/prev location, as specified by scr.nkey
+| snp             seek to next function prelude
+| spp             seek to prev function prelude
+| so ([[-]N])     seek to N opcode(s) forward (or backward when N is negative), N=1 by default
+| sr PC           seek to register (or register alias) value
+| ss[?]           seek silently (without adding an entry to the seek history)
+| sort [file]     sort the contents of the file
 
 > 3s++        ; 3 times block-seeking
 > s 10+0x80   ; seek at 0x80+10
@@ -148,3 +155,14 @@ f undo_0 @ 0x400411
 f redo_0 @ 0x4005b4
 ```
 
+## Partial Seeks
+
+Another important `s` subcommand is the `s..` one which permits to seek to another address taking the higher nibbles of the current address as reference, this technique works great for kernel, aslr or large binaries where you really don't want to type different or large numbers everytime.
+
+```
+[0x100003a84]> s..00
+[0x100003a00]> s..3b00
+[0x100003b00]> s..0000
+[0x100000000]> s 0
+[0x00000000]>
+```
