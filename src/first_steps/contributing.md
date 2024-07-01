@@ -7,8 +7,8 @@ Suggested contributions include:
 
 * Crackme writeups
 * CTF writeups
-* Documentation on how to use Radare2
-* Documentation on developing for Radare2
+* Explain how to use Radare2
+* Documentation to help developers
 * Conference presentations/workshops using Radare2
 * Missing content from the Radare1 book updated to Radare2
 

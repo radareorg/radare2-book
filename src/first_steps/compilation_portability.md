@@ -1,10 +1,12 @@
 ## Compilation and Portability
 
-Currently the core of radare2 can be compiled on many systems and architectures, but the main development is done on GNU/Linux with GCC, and on MacOS X with clang. Radare is also known to compile on many different systems and architectures (including TCC and SunStudio).
+One of the main development principles of radare2 is its portability, therefor radare2 can be compiled on many systems and architectures. In order to achieve that and to extend flexibility we are maintaining two build systems: GNU Make and Meson.
 
-People often want to use radare as a debugger for reverse engineering. Currently, the debugger layer can be used on Windows, GNU/Linux (Intel x86 and x86_64, MIPS, and ARM), OS X, FreeBSD, NetBSD, and OpenBSD (Intel x86 and x86_64)..
+Most contributors use GNU/Linux with GCC or macOS with Clang, so those would be the better supported platforms, or at least the most tested. But it is also possible to build with TinyCC, Emscripten, Microsoft Visual Studio, SunStudio, ...)
 
-Compared to core, the debugger feature is more restrictive portability-wise. If the debugger has not been ported to your favorite platform, you can disable the debugger layer with the --without-debugger `configure` script option when compiling radare2.
+The debugger feature can be opt-out at compile time, this is because sometimes you are ont interested in having such feature in a specific build (web assembly, specific sandbox usage, etc) or maybe it is because you are porting radare2 on a platform that the debugger is not yet supported. Use the `--without-debugger` configure flag to do that.
+
+Currently, the debugger layer can be used on Windows, GNU/Linux (Intel x86 and x86_64, MIPS, and ARM), OS X, FreeBSD, NetBSD, and OpenBSD (Intel x86 and x86_64)..
 
 Note that there are I/O plugins that use GDB, WinDbg, or Wine as back-ends, and therefore rely on presence of corresponding third-party tools (in case of remote debugging - just on the target machine).
 
@@ -20,6 +22,14 @@ There is also a simple script to do this automatically:
 
 ```sh
 $ sys/install.sh
+```
+
+### Home builds
+
+To build and run radare2 in your home just run the sys/user.sh script.
+
+```sh
+$ sys/user.sh
 ```
 
 ### Static Build
