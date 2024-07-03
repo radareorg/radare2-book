@@ -5,8 +5,8 @@ The radare core accepts many flags from the command line.
 This is an excerpt from the usage help message:
 ```
 $ radare2 -h
-Usage: r2 [-ACdfLMnNqStuvwzX] [-P patch] [-p prj] [-a arch] [-b bits] [-i file]
-          [-s addr] [-B baddr] [-m maddr] [-c cmd] [-e k=v] file|pid|-|--|=
+Usage: r2 [-ACdfjLMnNqStuvwzX] [-P patch] [-p prj] [-a arch] [-b bits] [-c cmd]
+          [-s addr] [-B baddr] [-m maddr] [-i script] [-e k=v] file|pid|-|--|=
  --           run radare2 without opening any file
  -            same as 'r2 malloc://512'
  =            read file from stdin (use -i and -c to run cmds)
@@ -28,16 +28,17 @@ Usage: r2 [-ACdfLMnNqStuvwzX] [-P patch] [-p prj] [-a arch] [-b bits] [-i file]
  -H ([var])   display variable
  -i [file]    run script file
  -I [file]    run script file before the file is opened
+ -j           use json for -v, -L and maybe others
  -k [OS/kern] set asm.os (linux, macos, w32, netbsd, ...)
  -l [lib]     load plugin file
- -L           list supported IO plugins
-```
-```
+ -L, -LL      list supported IO plugins (-LL list core plugins)
  -m [addr]    map file at given address (loadaddr)
  -M           do not demangle symbol names
  -n, -nn      do not load RBin info (-nn only load bin structures)
  -N           do not load user settings and scripts
+ -NN          do not load any script or plugin
  -q           quiet mode (no prompt) and quit after -i
+ -qq          quit after running all -c and -i
  -Q           quiet mode (no prompt) and quit faster (quickLeak=true)
  -p [prj]     use project, list if no arg, load if no file
  -P [file]    apply rapatch file and quit
@@ -54,37 +55,60 @@ Usage: r2 [-ACdfLMnNqStuvwzX] [-P patch] [-p prj] [-a arch] [-b bits] [-i file]
  -z, -zz      do not load strings or load them even in raw
 ```
 
-### Common usage patterns
+### Common usages
 
-Open a file in write mode without parsing the file format headers.
-```
+At first sight it may seem like there are so many options and without some practical use cases it may feel a bit overwhelming, this sections aims to address that by sharing some of the most common ways to get started.
+
+Open a file in write mode and do not parse the headers (raw mode).
+
+```bash
 $ r2 -nw file
 ```
-Quickly get into an r2 shell without opening any file.
+
+Quickly get into the r2 shell opening a 1KB malloc virtual file, handy for testing things. note that a single dash is an alias for malloc://1024
+
 ```
 $ r2 -
 ```
+
 Specify which sub-binary you want to select when opening a fatbin file:
+
 ```
 $ r2 -a ppc -b 32 ls.fat
 ```
-Run a script before showing interactive command-line prompt:
+
+Run a script before entering the prompt:
+
 ```
 $ r2 -i patch.r2 target.bin
 ```
+
 Execute a command and quit without entering the interactive mode:
+
 ```
 $ r2 -qc ij hi.bin > imports.json
 ```
+
 Set the configuration variable:
+
 ```
 $ r2 -e scr.color=0 blah.bin
 ```
-Debug a program:
+
+Spawn and start debugging a program:
+
 ```
 $ r2 -d ls
 ```
-Use an existing project file:
+
+Attach to an already running process by its process id (PID):
+
+```
+$ r2 -d 1234
+```
+
+Load an existing project file:
+
 ```
 $ r2 -p test
 ```
