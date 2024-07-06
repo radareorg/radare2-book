@@ -1,5 +1,4 @@
-.instructionset
----------------
+### .instructionset
 
 We've now reversed all the VM instructions, and have a full understanding about
 how it works. Here is the VM's instruction set:

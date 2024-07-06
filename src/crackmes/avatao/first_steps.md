@@ -1,5 +1,4 @@
-.first_steps
-------------
+### .first_steps
 
 OK, enough of praising r2, lets start reversing this stuff. First, you have to
 know your enemy:

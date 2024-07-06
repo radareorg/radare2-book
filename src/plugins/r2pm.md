@@ -1,4 +1,4 @@
-# Packaging your plugins
+## Packaging your plugins
 
 As explained in more detail in the [package manager](../tools/r2pm/intro.md) chapter, it is recommended to use our tooling to make your plugin available for everyone.
 

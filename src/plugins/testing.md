@@ -1,7 +1,8 @@
-# Testing the plugin
+## Testing the plugin
 
 This plugin is used by rasm2 and r2. You can verify that the plugin is properly loaded with this command:
-```
+
+```bash
 $ rasm2 -L | grep mycpu
 _d  mycpu        My CPU disassembler  (LGPL3)
 ```
@@ -27,7 +28,7 @@ $ r2 -
 ```
 Yay! it works.. and the mandatory oneliner too!
 
-```
-r2 -nqamycpu -cwoR -cpd' 10' -
+```bash
+$ r2 -nqamycpu -cwoR -cpd' 10' -
 ```
 

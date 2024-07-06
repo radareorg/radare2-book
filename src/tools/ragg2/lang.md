@@ -1,4 +1,4 @@
-# Syntax of the language
+### Syntax of the language
 
 The code of r\_egg is compiled as in a flow. It is a one-pass compiler;
 
@@ -24,9 +24,11 @@ The generated code is not yet optimized, but it's safe to be executed
 
 at any place in the code.
 
-## Preprocessor
+#### Preprocessor
 
-### Aliases
+TODO
+
+#### Aliases
 
 Sometimes you just need to replace at compile time a single entity on
 
@@ -38,7 +40,7 @@ language. This is just an assembler-level keyword redefinition.
 
 ` printf@alias(0x8053940);`
 
-### Includes
+#### Includes
 
 Use `cat(1)` or the preprocessor to concatenate multiple files to be compiled.
 
@@ -46,9 +48,7 @@ Use `cat(1)` or the preprocessor to concatenate multiple files to be compiled.
 
 ` sys-osx.r@include(INCDIR);`
 
-
-
-### Hashbang
+#### Hashbang
 
 eggs can use a hashbang to make them executable.
 
@@ -60,7 +60,7 @@ eggs can use a hashbang to make them executable.
 
 ` Hello World!`
 
-### Main
+#### Main
 
 The execution of the code is done as in a flow. The first function to be
 
@@ -78,16 +78,13 @@ just do like this:
 
 ` ...`
 
-
-
-
-### Function definition
+#### Function definition
 
 You may like to split up your code into several code blocks. Those blocks
 
 are bound to a label followed by root brackets '{ ... }'
 
-### Function signatures
+#### Function signatures
 
 `name@type(stackframesize,staticframesize) { body }`
 
@@ -102,7 +99,7 @@ are bound to a label followed by root brackets '{ ... }'
 `body` : code of the function
 
 
-### Function types
+#### Function types
 
  `alias`   Used to create aliases
 
@@ -116,27 +113,24 @@ are bound to a label followed by root brackets '{ ... }'
 
  `syscall`  ; define syscall calling convention signature
 
-### Syscalls
+#### Syscalls
 
 r\_egg offers a syntax sugar for defining syscalls. The syntax is like this:
 
-` exit@syscall(1);`
+```
+exit@syscall(1);
 
-` @syscall() {`
+@syscall() {
+: mov eax, .arg
+: int 0x80
+}
 
-`` : mov eax, `.arg```
+main@global() {
+  exit (0);
+}
+```
 
-` : int 0x80`
-
-` }`
-
-` main@global() {`
-
-` exit (0);`
-
-` }`
-
-### Libraries
+#### Libraries
 
 At the moment there is no support for linking r\_egg programs to system
 
@@ -145,60 +139,49 @@ libraries. but if you inject the code into a program \(disk/memory\) you
 can define the address of each function using the @alias syntax.
 
 
-
-### Core library
+#### Core library
 
 There's a work-in-progress libc-like library written completely in r\_egg
 
-### Variables
+#### Variables
 
 `.arg`
-
 `.arg0`
-
 `.arg1`
-
 `.arg2`
-
 `.var0`
-
 `.var2`
-
 `.fix`
-
 `.ret ; eax for x86, r0 for arm`
-
 `.bp`
-
 `.pc`
-
 `.sp`
 
 __Attention:__ All the numbers after `.var` and `.arg` mean the offset with the
 
 top of stack, not variable symbols.
 
-### Arrays
+#### Arrays
 
 Supported as raw pointers. TODO: enhance this feature
 
-### Tracing
+#### Tracing
 
 Sometimes r\_egg programs will break or just not work as expected. Use the
 
 'trace' architecture to get a arch-backend call trace:
 
-` $ ragg2 -a trace -s yourprogram.r`
+`$ ragg2 -a trace -s yourprogram.r`
 
-### Pointers
+#### Pointers
 
 TODO: Theorically '\*' is used to get contents of a memory pointer.
 
-### Virtual registers
+#### Virtual registers
 
 TODO: a0, a1, a2, a3, sp, fp, bp, pc
 
-### Math operations
+#### Math operations
 
 Ragg2 supports local variables assignment by math operating, including
 
@@ -206,7 +189,7 @@ the following operators:
 
 `+` `-` `*` `/` `&` `|` `^`
 
-### Return values
+#### Return values
 
 The return value is stored in the a0 register, this register is set when
 
@@ -229,7 +212,7 @@ $ echo $?
 7
 ```
 
-### Traps
+#### Traps
 
 Each architecture have a different instruction to break the execution of
 
@@ -242,8 +225,7 @@ callback of the selected arch. The
 
 ` break;` --&gt; compiles into 'int3' on x86
 
-
-### Inline assembly
+#### Inline assembly
 
 Lines prefixed with ':' char are just inlined in the output assembly.
 
@@ -251,7 +233,7 @@ Lines prefixed with ':' char are just inlined in the output assembly.
 
 ` : .byte 33,44`
 
-### Labels
+#### Labels
 
 You can define labels using the `:` keyword like this:
 
@@ -261,7 +243,7 @@ You can define labels using the `:` keyword like this:
 
 ` goto(label_name`\)
 
-### Control flow
+#### Control flow
 
 ` goto (addr)` -- branch execution
 
@@ -273,14 +255,15 @@ You can define labels using the `:` keyword like this:
 
 ` break ()` -- executes a trap instruction
 
-### Comments
+#### Comments
 
 Supported syntax for comments are:
 
-` /* multiline comment */'`
+Multiline:
 
-` // single line comment`
+`/* multiline comment */'`
 
-` # single line comment`
+Singline line comments:
 
-
+* ` // single line comment`
+* ` # single line comment`

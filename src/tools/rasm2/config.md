@@ -1,4 +1,4 @@
-## Disassembler Configuration
+### Disassembler Configuration
 
 The assembler and disassembler have many small switches to tweak the output.
 

@@ -1,4 +1,4 @@
-## Write a debugger plugin
+## Debugger plugins
 
 * Adding the debugger registers profile into the shlr/gdb/src/core.c
 * Adding the registers profile and architecture support in the libr/debug/p/debug_native.c and libr/debug/p/debug_gdb.c
@@ -6,7 +6,7 @@
 
 If you want to add support for the gdb, you can see the register profile in the active gdb session using command `maint print registers`.
 
-## More to come..
+### More to come..
 
 * Related article: http://radare.today/posts/extending-r2-with-new-plugins/
 
@@ -24,9 +24,3 @@ Some commits related to "Implementing a new architecture"
 * HP-PA-RISC: https://github.com/radareorg/radare2/commit/f8384feb6ba019b91229adb8fd6e0314b0656f7b
 * V810: https://github.com/radareorg/radare2/pull/2899
 * TMS320: https://github.com/radareorg/radare2/pull/596
-
-## Implementing a new pseudo architecture
-
-This is an simple plugin for z80 that you may use as example:
-
-https://github.com/radareorg/radare2/commit/8ff6a92f65331cf8ad74cd0f44a60c258b137a06

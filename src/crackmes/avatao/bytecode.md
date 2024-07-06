@@ -1,5 +1,4 @@
-.bytecode
----------
+### .bytecode
 
 Well, we did the reverse engineering part, now we have to write a program for
 the VM with the instruction set described in the previous paragraph. Here is

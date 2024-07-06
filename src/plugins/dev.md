@@ -2,11 +2,11 @@
 
 radare2 splits the logic of a CPU into several modules. You should write more than one plugin to get full support for a specific arch. Let's see which are those:
 
-* r_asm : assembler and disassembler
-* r_anal : code analysis (opcode,type,esil,..)
-* r_reg : registers
-* r_syscall : system calls
-* r_debug : debugger
+* `r_asm` : assembler and disassembler
+* `r_anal` : code analysis (opcode,type,esil,..)
+* `r_reg` : registers
+* `r_syscall` : system calls
+* `r_debug` : debugger
 
 The most basic feature you usually want to support from a specific architecture is the disassembler. You first need to read into a human readable form the bytes in there.
 
@@ -16,7 +16,7 @@ To configure which plugins you want to compile use the `./configure-plugins` scr
 
 You may find some examples of external plugins in [radare2-extras](https://github.com/radareorg/radare2-extras) repository.
 
-## Writing the r_asm plugin
+### Writing the r_asm plugin
 
 The official way to make third-party plugins is to distribute them into a separate repository. This is a sample disasm plugin:
 

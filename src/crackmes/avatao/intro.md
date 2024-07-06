@@ -1,5 +1,4 @@
-Avatao R3v3rs3 4
-------
+## Avatao R3v3rs3 4
 
 After a few years of missing out on wargames at
 [Hacktivity](https://hacktivity.com), this year I've finally found the time to

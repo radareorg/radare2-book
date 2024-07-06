@@ -1,5 +1,4 @@
-IOLI 0x06
-=========
+### IOLI 0x06
 
 nearly a routine to check this binary (not complete output in the following):
 

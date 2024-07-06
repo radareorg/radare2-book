@@ -1,4 +1,4 @@
-# WinDBG Kernel-mode Debugging (KD)
+## WinDBG Kernel-mode Debugging (KD)
 
 The WinDBG KD interface support for r2 allows you to attach to VM running
 Windows and debug its kernel over a serial port or network.
@@ -9,7 +9,7 @@ debug Windows kernels without depending on Windows capabilities.
 Bear in mind that WinDBG KD support is still work-in-progress, and this is
 just an initial implementation which will get better in time.
 
-## Setting Up KD on Windows
+### Setting Up KD on Windows
 
 > For a complete walkthrough, refer to Microsoft's [documentation](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/setting-up-kernel-mode-debugging-in-windbg--cdb--or-ntsd).
 
@@ -70,29 +70,35 @@ which allows to enable kernel debugging:
 bcedit /set {globalsettings} advancedoptions true
 ```
 
-## Connecting to KD interface on r2
+### Connecting to KD interface on r2
 
-### Serial Port
+#### Serial Port
+
 Radare2 will use the `winkd` io plugin to connect to a socket file
 created by virtualbox or qemu. Also, the `winkd` debugger plugin and
 we should specify the x86-32 too. (32 and 64 bit debugging is supported)
+
 ```
 $ r2 -a x86 -b 32 -D winkd winkd:///tmp/winkd.pipe
 ```
 
 On Windows you should run the following line:
+
 ```
 $ radare2 -D winkd winkd://\\.\pipe\com_1
 ```
 
-### Network
+#### Network
+
 ```
 $ r2 -a x86 -b 32 -d winkd://<hostip>:<port>:w.x.y.z
 ```
 
-## Using KD
+### Using KD
+
 When connecting to a KD interface, r2 will send a breakin packet to interrupt
 the target and we will get stuck here:
+
 ```
 [0x828997b8]> pd 20
 	;-- eip:
@@ -118,7 +124,7 @@ In addition, the `dp` command can be used to list all processes, and
 `dpa` or `dp=` to attach to the process. This will display the base
 address of the process in the physical memory layout.
 
-# WinDBG Backend for Windows (DbgEng)
+### WinDBG Backend for Windows (DbgEng)
 
 On Windows, radare2 can use `DbgEng.dll` as a debugging backend,
 allowing it to make use of WinDBG's capabilities, supporting dump files,
@@ -130,7 +136,7 @@ You can use the debugging DLLs included on Windows or get the latest version fro
 
 > radare2 will try to load `dbgeng.dll` from the `_NT_DEBUGGER_EXTENSION_PATH` environment variable before using Windows' default library search path.
 
-## Using the plugin
+### Using the plugin
 
 To use the `windbg` plugin, pass the same command-line options as you would for `WinDBG` or `kd` (see Microsoft's [documentation](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/windbg-command-line-options)), quoting/escaping when necessary:
 

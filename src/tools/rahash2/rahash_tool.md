@@ -1,4 +1,4 @@
-## Examples
+### Examples
 
 The rahash2 tool can be used to calculate checksums and has functions of byte streams, files, text strings.
 

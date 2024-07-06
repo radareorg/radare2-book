@@ -1,4 +1,4 @@
-# Python plugins
+## Plugins in Python
 
 At first, to be able to write a plugins in Python for radare2 you need to install
 r2lang plugin: `r2pm -i lang-python`.
@@ -6,8 +6,10 @@ Note - in the following examples there are missing functions of the actual decod
 for the sake of readability!
 
 For this you need to do this:
+
 1. `import r2lang` and `from r2lang import R` (for constants)
 2. Make a function with 2 subfunctions - `assemble` and `disassemble` and returning plugin structure - for RAsm plugin
+
 ```python
 def mycpu(a):
     def assemble(s):
@@ -21,6 +23,7 @@ def mycpu(a):
         except:
             return [4, "unknown"]
 ```
+
 3. This structure should contain a pointers to these 2 functions - `assemble` and `disassemble`
 
 ```python
@@ -35,6 +38,7 @@ def mycpu(a):
             "disassemble" : disassemble,
     }
 ```
+
 4. Make a function with 2 subfunctions - `set_reg_profile` and `op` and returning plugin structure - for RAnal plugin
 
 ```python

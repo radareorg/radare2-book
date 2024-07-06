@@ -1,4 +1,6 @@
-## Implementing a new analysis plugin
+## Analysis plugins
+
+TODO: outdated section after 5.9.0
 
 After implementing disassembly plugin, you might have noticed that output
 is far from being good - no proper highlighting, no reference lines
@@ -117,4 +119,3 @@ Example:
 
 * **6502**: https://github.com/radareorg/radare2/commit/64636e9505f9ca8b408958d3c01ac8e3ce254a9b
 * **SNES**: https://github.com/radareorg/radare2/commit/60d6e5a1b9d244c7085b22ae8985d00027624b49
-

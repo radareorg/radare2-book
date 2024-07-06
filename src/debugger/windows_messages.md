@@ -1,4 +1,4 @@
-# Windows Messages
+## Windows Messages
 
 On Windows, you can use `dbW` while debugging to set a breakpoint for the message handler of a specific window.
 

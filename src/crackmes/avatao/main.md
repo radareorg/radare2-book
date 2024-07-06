@@ -1,5 +1,4 @@
-.main
------
+### .main
 
 As I was saying, I usually take a look at the entry point, so let's just do
 that:

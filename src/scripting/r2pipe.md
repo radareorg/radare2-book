@@ -1,4 +1,4 @@
-# R2pipe
+## R2pipe
 
 The r2pipe api was initially designed for NodeJS in order to support reusing the web's r2.js API from the commandline. The r2pipe module permits interacting with r2 instances in different methods:
 
@@ -25,11 +25,11 @@ dlang     x     -     -    -    -    -   x
 perl      x     -     -    -    -    -   -
 ```
 
-Examples
-========
+## Examples
 
-Python
-------
+Here there are some examples about scripting with r2pipe in different languages
+
+### Python
 
 ```
 $ pip install r2pipe
@@ -44,8 +44,7 @@ print(r2.cmd("afl"))
 print(r2.cmdj("aflj"))  # evaluates JSONs and returns an object
 ```
 
-NodeJS
-------
+### NodeJS
 
 Use this command to install the r2pipe bindings
 
@@ -74,8 +73,7 @@ Checkout the GIT repository for more examples and details.
 
 https://github.com/radareorg/radare2-r2pipe/blob/master/nodejs/r2pipe/README.md
 
-Go
---
+### Go
 
 ```
 $ r2pm -i r2pipe-go
@@ -107,8 +105,7 @@ func main() {
 }
 ```
 
-Rust
-----
+### Rust
 
 ```
 $ cat Cargo.toml
@@ -130,8 +127,8 @@ fn main() {
 }
 ```
 
-Ruby
-----
+### Ruby
+
 ```
 $ gem install r2pipe
 ```
@@ -147,8 +144,8 @@ puts r2p.cmd 'px 64'
 r2p.quit
 ```
 
-Perl
-----
+### Perl
+
 ```perl
 #!/usr/bin/perl
 
@@ -161,8 +158,8 @@ print $r->cmd ("px 64")."\n";
 $r->quit ();
 ```
 
-Erlang
-------
+### Erlang
+
 ```erlang
 #!/usr/bin/env escript
 %% -*- erlang -*-
@@ -185,8 +182,8 @@ main(_Args) ->
   io:format("~s", [r2pipe:cmd(H, "i")]).
 ```
 
-Haskell
--------
+### Haskell
+
 ```haskell
 import R2pipe
 import qualified Data.ByteString.Lazy as L
@@ -202,8 +199,8 @@ main = do
   open "http://127.0.0.1:9090" >>= showMainFunction
 ```
 
-Dotnet
-------
+### Dotnet
+
 ```csharp
 using System;
 using System.Collections.Generic;
@@ -239,8 +236,8 @@ namespace LocalExample {
 }
 ```
 
-Java
-----
+### Java
+
 ```java
 import org.radare.r2pipe.R2Pipe;
 
@@ -259,8 +256,8 @@ public class Test {
 }
 ```
 
-Swift
------
+### Swift
+
 ```swift
 if let r2p = R2Pipe(url:nil) {
   r2p.cmd ("?V", closure:{
@@ -279,9 +276,7 @@ if let r2p = R2Pipe(url:nil) {
 }
 ```
 
-Vala
-
-----
+### Vala
 
 ```vala
 public static int main (string[] args) {
@@ -303,8 +298,8 @@ public static int main (string[] args) {
 }
 ```
 
-NewLisp
--------
+### NewLisp
+
 
 ```lisp
 (load "r2pipe.lsp")
@@ -312,8 +307,8 @@ NewLisp
 (exit)
 ```
 
-Dlang
------
+### Dlang
+
 ```d
 import std.stdio;
 import r2pipe;

@@ -1,5 +1,4 @@
-.radare2
---------
+### .radare2
 
 I've decided to solve the reversing challenges using
 [radare2](http://www.radare.org/r/), a free and open source reverse engineering

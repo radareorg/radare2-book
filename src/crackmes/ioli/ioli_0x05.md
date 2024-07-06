@@ -1,5 +1,4 @@
-IOLI 0x05
-=========
+### IOLI 0x05
 
 check again, it uses `scanf()` to get our input and pass it to `check()` as parameter.
 

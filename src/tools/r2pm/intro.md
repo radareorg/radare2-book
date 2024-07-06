@@ -1,6 +1,6 @@
-## Package Manager
+## r2pm
 
-Radare2 has its own package manager for managing external plugins or tools that have a close relationship to radare2.
+Radare2 has its own **package manager** for managing external plugins or tools that have a close relationship to radare2.
 
 * Most packages are tested and maintained for UNIX systems
 * Some of them support Windows and even wasm (r2js)
@@ -9,7 +9,7 @@ Radare2 has its own package manager for managing external plugins or tools that 
 
 The [radare2-extras](https://github.com/radareorg/radare2-extras) repository contains a lot of third-party packages that aim to be updated and maintained (but also less used than the ones shipped in the main repository), so it's a great place to check before writing your own plugin as maybe this thing was done already by someone else.
 
-### Package Database
+#### Package Database
 
 ```
 $ r2pm -U
@@ -72,7 +72,7 @@ Commands:
  -v                show version
 ```
 
-### Sample Session
+#### Sample Session
 
 For example `lang-python3` (which is used for writing r2 plugins in Python):
 
@@ -88,13 +88,13 @@ Note that if we used `-i` switch it installs the plugin in the `$HOME` directory
 
 After this we will be able to see the plugin in the list of installed:
 
-```
+```bash
 $ r2pm -l
 lang-python3
 ```
 
 To uninstall the plugin just simply run
 
-```
+```bash
 $ r2pm -u lang-python3
 ```

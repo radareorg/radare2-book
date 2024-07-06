@@ -1,5 +1,4 @@
-IOLI 0x00
-=========
+### IOLI 0x00
 
 This is the first IOLI crackme, and the easiest one.
 

@@ -1,4 +1,6 @@
-## Implementing a new disassembly plugin
+## Arch Plugins
+
+TODO: this is outdated after 5.9.0
 
 Radare2 has modular architecture, thus adding support for a new architecture is very easy, if you
 are fluent in C. For various reasons it might be easier to implement it out of the tree. For this we
@@ -99,7 +101,7 @@ After compiling radare2 will list this plugin in the output:
 _d__  _8_32      mycpu        LGPL3   MYCPU
 ```
 
-### Moving plugin into the tree
+### Moving it into the main tree
 
 Pushing a new architecture into the main branch of r2 requires to modify several files in order to make it fit into the way the rest of plugins are built.
 
@@ -118,4 +120,8 @@ https://github.com/radareorg/radare2/commit/933dc0ef6ddfe44c88bbb261165bf8f8b531
 Implement RAnal plugin:
 https://github.com/radareorg/radare2/commit/ad430f0d52fbe933e0830c49ee607e9b0e4ac8f2
 
+### Implementing a new pseudo architecture
 
+This is an simple plugin for z80 that you may use as example:
+
+https://github.com/radareorg/radare2/commit/8ff6a92f65331cf8ad74cd0f44a60c258b137a06

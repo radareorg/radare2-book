@@ -1,7 +1,8 @@
-# Radiff2
+## Radiff2
 
 Radiff2 is a tool designed to compare binary files, similar to how regular `diff` compares text files.
-```
+
+```bash
 $ radiff2 -h
 Usage: radiff2 [-abBcCdjrspOxuUvV] [-A[A]] [-g sym] [-m graph_mode][-t %] [file] [file]
   -a [arch]  specify architecture plugin to use (x86, arm, ..)

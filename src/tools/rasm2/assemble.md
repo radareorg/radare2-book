@@ -1,4 +1,4 @@
-## Assembler
+### Assembler
 
 Assembling is the action to take a computer instruction in human readable form (using mnemonics) and convert that into a bunch of bytes that can be executed by a machine.
 

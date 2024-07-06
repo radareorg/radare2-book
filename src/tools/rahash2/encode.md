@@ -1,4 +1,4 @@
-# Encoding with rahash2
+### Encoding with rahash2
 
 As mentioned before, this tool also provide the tooling needed to encode and decode between different encodings
 
@@ -17,7 +17,7 @@ $ rahash2 -E base64 -s hello
 
 You can decode it by using the -D flag instead of -E.
 
-## Encryption/Decryption
+### Encryption/Decryption
 
 For encrypting data check the crypto hash plugins:
 

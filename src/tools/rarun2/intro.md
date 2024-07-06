@@ -1,10 +1,10 @@
-# Rarun2
+## Rarun2
 
 Rarun2 is a tool allowing to setup a specified execution environment - redefine stdin/stdout, pipes,
 change the environment variables and other settings useful to craft the boundary conditions you need to run
 a binary for debugging.
 
-```
+```bash
 $ rarun2 -h
 Usage: rarun2 -v|-t|script.rr2 [directive ..]
 ```

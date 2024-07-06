@@ -1,4 +1,4 @@
-# rahash2
+## rahash2
 
 The rahash2 tool can be used to compute checksums of files, disk devices or strings. By block or entirely using many different hash algorithms.
 
@@ -12,7 +12,7 @@ $ rahash2 -a md5 -s "hello world"
 
 Note that rahash2 also permits to read from stdin in a stream, so you don't need 4GB of ram to compute the hash of a 4GB file.
 
-## Hashing by blocks
+### Hashing by blocks
 
 When doing forensics, it is useful to compute partial checksums. The reason for that is because you may want to split a huge file into small portions that are easier to identify by contents or regions in the disk.
 
@@ -26,7 +26,7 @@ This can be useful when analyzing ram dumps from a virtual machine for example. 
 $ rahash2 -B 1M -b -a sha256 /bin/ls
 ```
 
-## Hashing with rabin2
+### Hashing with rabin2
 
 The rabin2 tool parses the binary headers of the files, but it also have the ability to use the rhash plugins to compute checksum of sections in the binary.
 
@@ -34,7 +34,7 @@ The rabin2 tool parses the binary headers of the files, but it also have the abi
 $ rabin2 -K md5 -S /bin/ls
 ```
 
-## Obtaining hashes within radare2 session
+### Obtaining hashes within radare2 session
 
 To calculate a checksum of current block when running radare2, use the `ph` command. Pass an algorithm name to it as a parameter. An example session:
 

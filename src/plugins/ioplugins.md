@@ -1,4 +1,4 @@
-# IO plugins
+## IO plugins
 
 All access to files, network, debugger and all input/output in general is wrapped by an IO abstraction layer that allows radare to treat all data as if it were just a file.
 
@@ -59,7 +59,7 @@ rw_  zip      Open zip files [apk|ipa|zip|zipall]://[file//path] (BSD)
 An example of how to write a plugin is available in this commit: [here](https://github.com/radareorg/radare2/pull/20574/commits/f9abd3026c37961a485656447eff7bff616322bf).
 
 
-##1)Write r2 IO plugin with Makefile (for Linux only)
+1) Write r2 IO plugin with Makefile (for Linux only)
 
 To write an IO plugin in radare2, in `radare2/libr/io/p/`, create a file `dap.mk`. Put there:
 
@@ -220,15 +220,15 @@ extern RIOPlugin r_io_plugin_dap;
 
 At last but not least, for the Makefile (not for meson), in `dist/plugins-cfg/plugins.def.cfg`, add `io.dap` after `io.debug`.
 
-##2)Write r2 plugin for radare2:
+2)Write r2 plugin for radare2:
 
 Edit `radare2/libr/io/meson.build` and in `r_io_sources = [...` add `'p/io_dap.c',`. And in `radare2/libr/meson.build`, add `'dap'` in `io_plugins += [`.
 
-##3)Insert the plugin in radare2
+3)Insert the plugin in radare2
 
 Edit `radare2/dist/plugins-cfg/plugins.def.cfg` and add `io.dap` in the list.
 
-##4)Add dap.h
+4)Add dap.h
 
 Now, if you need to use some data and structures, edit the file `radare2/libr/io/p/dap.h` for:
 

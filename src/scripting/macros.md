@@ -1,4 +1,4 @@
-# Macros
+## Macros
 
 Apart from simple sequencing and looping, radare2 allows to write
 simple macros, using this construction:
@@ -61,7 +61,7 @@ simple scripting situations. To create a macro that takes arguments you simply a
 ```
 As you can see, the arguments are named by index, starting from 0: $0, $1, ...
 
-# Aliases
+### Aliases
 
 radare2 also offers aliases which might help you save time by quickly executing your most used commands. They are under `$?`
 

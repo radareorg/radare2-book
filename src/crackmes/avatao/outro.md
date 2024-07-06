@@ -1,5 +1,4 @@
-.outro
-------
+### .outro
 
 Well, what can I say? Such VM, much reverse! :)
 

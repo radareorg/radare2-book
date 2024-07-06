@@ -1,4 +1,4 @@
-# Files
+## Files
 
 The radare2 debugger allows the user to list and manipulate the file descriptors from the target process.
 

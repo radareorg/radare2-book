@@ -1,4 +1,4 @@
-# Remote Access Capabilities
+## Remote Access Capabilities
 
 Radare can be run locally, or it can be started as a server process which is controlled by a local
 radare2 process. This is possible because everything uses radare's IO subsystem which abstracts access to system(), cmd() and all basic IO operations so to work over a network.

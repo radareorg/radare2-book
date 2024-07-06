@@ -1,4 +1,4 @@
-## Disassembler
+### Disassembler
 
 Disassembling is the inverse action of assembling. Rasm2 takes hexpair as an input (but can also take a file in binary form) and show the human readable form.
 

@@ -1,5 +1,4 @@
-IOLI 0x03
-=========
+### IOLI 0x03
 
 crackme 0x03, let's skip the string check part and analyze it directly.
 
@@ -64,7 +63,7 @@ Password OK!!! :)
 
 Take a look at `sym.test`. It's a two path conditional jump which compares two parameters and then do shift. We can guess that shift is most likely the decryption part (shift cipher, e.g. Caesar cipher).
 
-```C
+```c
 /* r2dec pseudo code output */
 /* ./crackme0x03 @ 0x804846e */
 #include <stdint.h>

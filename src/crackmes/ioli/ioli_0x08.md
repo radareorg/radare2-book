@@ -1,5 +1,4 @@
-IOLI 0x08
-=========
+### IOLI 0x08
 
 we can reverse it and find it's similar to 0x07, and use the same password to solve it:
 

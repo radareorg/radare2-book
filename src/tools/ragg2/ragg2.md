@@ -1,4 +1,4 @@
-# ragg2
+## ragg2
 
 ragg2 stands for `radare2's egg compiler`, it's the basic tool to compile relocatable snippets of code and modify paddings and inject sequences in order to be used for injection in target processes when doing exploiting.
 
@@ -6,7 +6,7 @@ ragg2 compiles programs written in a simple high-level language into tiny binari
 
 The final bytestream can be rendered in a variety of output formats, including raw binary, C arrays, and various executable formats. This flexibility allows users to generate code that can be easily integrated into different types of projects or testing scenarios. Additionally, ragg2 can perform operations like encoding and encryption on the generated shellcode, which can be useful for evading detection or bypassing security measures in controlled testing environments.
 
-## Example
+### Example
 
 By default it will compile it's own `ragg2` language, but you can also compile C code using GCC or Clang shellcodes depending on the file extension. Lets create C file called `a.c`:
 
@@ -43,7 +43,7 @@ $ rasm2 -a x86 -b 32 -D e900000000488d3516000000bf01000000b80400000248c7c20d0000
 0x0000002c   3                   640a00  or al, byte fs:[eax]
 ```
 
-## Help message
+### Help message
 
 Checking the help from the commandline will give you a wide understanding of what's the tool about and its capabilities
 
@@ -86,7 +86,7 @@ Usage: ragg2 [-FOLsrxhvz] [-a arch] [-b bits] [-k os] [-o file] [-I path]
  -z              output in C string syntax
 ```
 
-## First Example
+### First Example
 
 ```
 $ cat hello.r
@@ -120,7 +120,7 @@ $ rasm2 -a x86 -b 64 -D 48c7c00200000050488b3c2448c7c0010000000f054883c408c3
 0x00000019   1                       c3  ret
 ```
 
-## Injectable machine code in different forms
+### Injectable machine code in different forms
 
 Consider the following program:
 
