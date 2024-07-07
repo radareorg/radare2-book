@@ -2,7 +2,6 @@
 
 The r2pipe api was initially designed for NodeJS in order to support reusing the web's r2.js API from the commandline. The r2pipe module permits interacting with r2 instances in different methods:
 
-
 * spawn pipes (r2 -0)
 * http queries (cloud friendly)
 * tcp socket (r2 -c)
