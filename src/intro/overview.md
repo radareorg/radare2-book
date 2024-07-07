@@ -6,17 +6,57 @@ This chapter will give you a quick understanding of them, but you can check the 
 
 ### radare2
 
-The main tool of the whole framework. It uses the core of the hexadecimal editor and debugger. radare2 allows you to open a number of input/output sources as if they were simple, plain files, including disks, network connections, kernel drivers, processes under debugging, and so on.
+When you run the radare2 command, you're presented with an interactive shell that gives you access to all the functionalities of the radare2 framework by running mnemonic commands or scripts.
 
-It implements an advanced command line interface for moving around a file, analyzing data, disassembling, binary patching, data comparison, searching, replacing, and visualizing. It can be scripted with a variety of languages, including Python, Ruby, JavaScript, Lua, and Perl.
+At its core, radare2 lets you open various types of files and data sources, treating them all as if they were simple binary files. This includes executables, disk images, memory dumps, and even live processes or network connections.
+
+Once you've opened a file, radare2 provides a wide array of commands for exploration and analysis. You can navigate through the file's contents, view disassembled code, examine data structures, and even modify the binary on the fly.
+
+Some key features accessible through the radare2 command include:
+
+- Hex editing capabilities
+- Advanced code analysis and disassembly
+- Debugging functionality
+- Binary patching
+- Data visualization tools
+- Scripting support for automation and extending functionality
+
+The radare2 command serves as the primary interface to these features, offering a flexible and powerful environment for reverse engineering, malware analysis, exploit development, and general binary exploration.
 
 ### rabin2
 
-A program to extract information from executable binaries, such as ELF, PE, Java CLASS, Mach-O, plus any format supported by r2 plugins. rabin2 is used by the core to get data like exported symbols, imports, file information, cross references (xrefs), library dependencies, and sections.
+Another important tool distributed with radare2, rabin2 is designed to analyze binary files and extract various types of information from them. It supports a wide range of file formats (depending on which plugins are loaded or compiled in), the most famous ones are:
+
+- ELF (Executable and Linkable Format)
+- PE (Portable Executable)
+- Mach-O (Mach Object)
+- Java CLASS files
+
+Key features and uses of rabin2 include:
+
+* Extracting metadata: File type, architecture, OS, subsystem, etc.
+* Listing symbols: Both imported and exported symbols.
+* Displaying section information: Names, sizes, permissions, etc.
+* Showing library dependencies.
+* Extracting strings from the binary.
+* Identifying entry points and constructor/destructors.
+* Listing header structures and information.
+
+rabin2 can be used standalone from the command line or integrated within other radare2 tools. It's particularly useful for quick analysis of binaries without the need to fully load them into a debugger or disassembler. The information provided by rabin2 is often used by other parts of the radare2 framework to enhance analysis and provide context during reverse engineering tasks.
 
 ### rasm2
 
-A command line assembler and disassembler for multiple architectures (including Intel x86 and x86-64, MIPS, ARM, PowerPC, Java, and myriad of others).
+The command-line assembler and disassembler that is part of the radare2 framework. It supports a wide range of architectures and can be used independently of the main radare2 tool. Key features include:
+
+- Multi-architecture support: Can handle numerous architectures including x86, x86-64, ARM, MIPS, PowerPC, SPARC, and many others.
+- Bi-directional operation: Functions as both an assembler (converting human-readable assembly code to machine code) and a disassembler (converting machine code back to assembly).
+- Flexible input/output: Accepts input as hexadecimal strings, raw binary files, or text files containing assembly code.
+- Shellcode generation: Useful for security research and exploit development.
+- Inline assembly: Allows for quick assembly of individual instructions or small code snippets.
+- Syntax highlighting: Provides colored output for better readability when disassembling.
+- Plugins: Supports architecture-specific plugins for extended functionality.
+
+rasm2's simplicity and versatility make it a valuable tool for developers, security researchers, and reverse engineers working with low-level code across multiple architectures.
 
 #### Examples
 
@@ -36,27 +76,69 @@ $ echo 'push eax;nop;nop' | rasm2 -f -
 
 ### rahash2
 
-An implementation of a block-based hash tool. From small text strings to large disks, rahash2 supports multiple algorithms, including MD4, MD5, CRC16, CRC32, SHA1, SHA256, and others.
-rahash2 can be used to check the integrity or track changes of big files, memory dumps, or disks.
+Versatile command-line hashing tool that is part of the radare2 framework. It's designed to compute and verify cryptographic hashes and checksums for files, strings, or even large data streams like hard disks or network traffic.
+
+Key features of rahash2 include:
+
+**Multiple algorithms** Supports a wide range of hash algorithms, including MD4, MD5, SHA1, SHA256, SHA384, SHA512, CRC16, CRC32, and more.
+
+**Flexible input** Can hash data from files, standard input, or directly from command-line strings.
+
+**Block-based hashing** Can compute hashes for specific blocks or ranges within a file, which is ideal for forensics and checksuming large data.
+
+**Incremental hashing** Supports hashing of data streams or large files in chunks, useful for processing data that doesn't fit in memory.
+
+**Hash verification** and integrity checks comparing computed and provided hash.
+
+**Multiple hash outputs at once** Can compute and display multiple hash types simultaneously for the same input.
+
+**Integration with radare2: While it's a standalone tool, it integrates well with other radare2 utilities and can be used within r2 sessions.
+
+**Customizable output** Offers various output formats, including raw bytes, hexadecimal strings, or radare2 commands.
+
+**Encryption capabilities** Besides hashing, it also supports some basic encryption and decryption operations.
 
 ### Examples
+
+Here are few usage examples:
+
 ```
 $ rahash2 file
 file: 0x00000000-0x00000007 sha256: 887cfbd0d44aaff69f7bdbedebd282ec96191cce9d7fa7336298a18efc3c7a5a
 ```
+
+Algorithms can be selected by specifying them separated with the `-a` flag.
+
 ```
 $ rahash2 -a md5 file
 file: 0x00000000-0x00000007 md5: d1833805515fc34b46c2b9de553f599d
 ```
+
 ### radiff2
 
-A binary diffing utility that implements multiple algorithms. It supports byte-level or delta diffing for binary files, and code-analysis diffing to find changes in basic code blocks obtained from the radare code analysis.
+The commandline Binary Diffing utility of the radare2 reverse engineering framework. It is designed to compare and analyze differences between binary files or sections of binary data.
+
+Key features and capabilities of radiff2 include:
+
+* Compare byte-per-byte changes between two files
+* Delta diffing on files with different sizes, finding common sections
+* Code Analysis diffing, finding functions in common
+* Binary header comparing libraries, exports, etc
+* Visualization options: graphs, ascii art, plain text, json
+* Integration with radare2: Using the `c` command or running it with the `-r` flag.
+* Patch generation, writing r2 scripts that patch one file to update it like the other.
+
+radiff2 is particularly useful for cases where you need to identify and understand changes between different versions of binary files or compare potentially malicious files with known good versions.
 
 ### rafind2
 
-A program to find byte patterns in files.
+rafind2 is a command-line utility designed to search for byte patterns, strings, or hexadecimal values within binary files or any other type of file.
 
-Implements the most common subcommand of the radare2's `/` (search) command.
+This tool implements the most common subcommands of the radare2's `/` (search) operation.
+
+* Search for patterns, strings, binary data and regular expression
+* Run across multiple files
+* Output formats, showing offsets, json and even r2 commands
 
 ### ragg2
 
