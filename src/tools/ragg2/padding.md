@@ -1,6 +1,22 @@
 ### Padding and Patching
 
-If you want to append/patch some bytes to your output, here are a few options ragg2 offers.
+Ragg2, a tool in the radare2 suite, offers various options for padding and patching the generated bufferoutput. These options allow users to modify or extend the generated code in specific ways.
+
+* Appending Data:
+  * Append hex bytes (-B)
+  * Append file contents (-C)
+  * Append 32-bit or 64-bit numbers (-n, -N)
+  * Append strings (-S)
+
+* Patching Existing Data:
+ * Patch dword or qword at a given offset (-d, -D)
+ * Patch hex pairs at a given offset (-w)
+
+* Adding Padding:
+ * Add padding after compilation (-p)
+ * Options include NOP, trap instructions, or specific byte sequences
+
+From `ragg2 -h`:
 
 ```
  -B [hexpairs]   append some hexpair bytes
@@ -15,4 +31,3 @@ If you want to append/patch some bytes to your output, here are a few options ra
  -S [string]     append a string
  -w [off:hex]    patch hexpairs at given offset
 ```
-
