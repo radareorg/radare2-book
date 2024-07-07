@@ -1,4 +1,4 @@
-# Visual Assembler
+## Visual Assembler
 
 You can use Visual Mode to assemble code using `A`.
 For example let's replace the `push` by a `jmp`:

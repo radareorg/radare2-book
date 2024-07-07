@@ -1,4 +1,4 @@
-# Graph commands
+# Graph
 
 Uunderstanding the structure and flow of a program is crucial. While linear disassembly and text-based analysis have their place, graphs provide a powerful visual representation that can significantly enhance your understanding of complex code.
 

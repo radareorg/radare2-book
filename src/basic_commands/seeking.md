@@ -1,4 +1,4 @@
-# Seeking
+## Seeking
 
 To move around the file we are inspecting we will need to change the offset at which we are using the `s` command.
 
@@ -88,7 +88,7 @@ There are also subcommands of `?` that display the output in one specific format
 
 In the visual mode, you can press `u` (undo) or `U` (redo) inside the seek history to return back to previous or forward to the next location.
 
-## Open file
+### Open file
 
 As a test file, let's use a simple `hello_world.c` compiled in Linux ELF format.
 After we compile it let's open it with radare2:
@@ -105,7 +105,7 @@ Now we have the command prompt:
 
 And it is time to go deeper.
 
-## Seeking at any position
+### Seeking at any position
 
 All seeking commands that take an address as a command parameter can use any numeral base
 such as hex, octal, binary or decimal.
@@ -155,7 +155,7 @@ f undo_0 @ 0x400411
 f redo_0 @ 0x4005b4
 ```
 
-## Partial Seeks
+### Partial Seeks
 
 Another important `s` subcommand is the `s..` one which permits to seek to another address taking the higher nibbles of the current address as reference, this technique works great for kernel, aslr or large binaries where you really don't want to type different or large numbers everytime.
 

@@ -1,4 +1,4 @@
-# Debug Symbols
+### Debug Symbols
 
 Radare2 automatically parses available imports and exports sections in the binary,
 moreover, it can load additional debugging information if present.
@@ -131,4 +131,3 @@ r2 `which rabin2`
 ```
 
 As you can see, it loads function names and source line information.
-

@@ -1,4 +1,4 @@
-## Padding and Patching
+### Padding and Patching
 
 If you want to append/patch some bytes to your output, here are a few options ragg2 offers.
 

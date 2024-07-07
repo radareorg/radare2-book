@@ -1,4 +1,4 @@
-## Code Entrypoints
+### Code Entrypoints
 
 The `-e` option passed to rabin2 will show entrypoints for given binary. Two examples:
 ```

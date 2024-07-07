@@ -5,40 +5,44 @@
 ```
 $ rasm2 -h
 Usage: rasm2 [-ACdDehLBvw] [-a arch] [-b bits] [-o addr] [-s syntax]
-             [-f file] [-F fil:ter] [-i skip] [-l len] 'code'|hex|-
- -a [arch]    Set architecture to assemble/disassemble (see -L)
- -A           Show Analysis information from given hexpairs
- -b [bits]    Set cpu register size (8, 16, 32, 64) (RASM2_BITS)
- -B           Binary input/output (-l is mandatory for binary input)
- -c [cpu]     Select specific CPU (depends on arch)
- -C           Output in C format
- -d, -D       Disassemble from hexpair bytes (-D show hexpairs)
- -e           Use big endian instead of little endian
- -E           Display ESIL expression (same input as in -d)
- -f [file]    Read data from file
- -F [in:out]  Specify input and/or output filters (att2intel, x86.pseudo, ...)
- -h, -hh      Show this help, -hh for long
+             [-f file] [-F fil:ter] [-i skip] [-l len] 'code'|hex|0101b|-
+ -a [arch]    set architecture to assemble/disassemble (see -L)
+ -A           show Analysis information from given hexpairs
+ -b [bits]    set cpu register size (8, 16, 32, 64) (RASM2_BITS)
+ -B           binary input/output (-l is mandatory for binary input)
+ -c [cpu]     select specific CPU (depends on arch)
+ -C           output in C format
+ -d, -D       disassemble from hexpair bytes (-D show hexpairs)
+ -e           use big endian instead of little endian
+ -E           display ESIL expression (same input as in -d)
+ -f [file]    read data from file
+ -F [in:out]  specify input and/or output filters (att2intel, x86.pseudo, ...)
+ -h, -hh      show this help, -hh for long
  -i [len]     ignore/skip N bytes of the input buffer
  -j           output in json format
- -k [kernel]  Select operating system (linux, windows, darwin, ..)
- -l [len]     Input/Output length
- -L           List Asm plugins: (a=asm, d=disasm, A=analyze, e=ESIL)
- -o [offset]  Set start address for code (default 0)
- -O [file]    Output file name (rasm2 -Bf a.asm -O a)
- -p           Run SPP over input for assembly
+ -k [kernel]  select operating system (linux, windows, darwin, ..)
+ -l [len]     input/Output length
+ -L           list RAsm plugins: (a=asm, d=disasm, A=analyze, e=ESIL)
+ -LL          list RAnal plugins (see anal.arch=?) combines with -j
+ -o,-@ [addr] set start address for code (default 0)
+ -O [file]    output file name (rasm2 -Bf a.asm -O a)
+ -N           same as r2 -N (or R2_NOPLUGINS) (not load any plugin)
+ -p           run SPP over input for assembly
  -q           quiet mode
  -r           output in radare commands
- -s [syntax]  Select syntax (intel, att)
- -v           Show version information
- -w           What's this instruction for? describe opcode
+ -s [syntax]  select syntax (intel, att)
+ -v           show version information
+ -x           use hex dwords instead of hex pairs when assembling.
+ -w           what's this instruction for? describe opcode
  If '-l' value is greater than output length, output is padded with nops
  If the last argument is '-' reads from stdin
 Environment:
- RASM2_NOPLUGINS  do not load shared plugins (speedup loading)
- RASM2_ARCH       same as rasm2 -a
- RASM2_BITS       same as rasm2 -b
- R_DEBUG          if defined, show error messages and crash signal
-
+ R2_NOPLUGINS   do not load shared plugins (speedup loading)
+ R2_LOG_LEVEL=X    change the log level
+ R2_DEBUG          if defined, show error messages and crash signal
+ R2_DEBUG_ASSERT=1 lldb -- r2 to get proper backtrace of the runtime assert
+ RASM2_ARCH        same as rasm2 -a
+ RASM2_BITS        same as rasm2 -b
 ```
 
 Plugins for supported target architectures can be listed with the `-L` option. Knowing a plugin name, you can use it by specifying its name to the `-a` option
@@ -106,7 +110,4 @@ _dAe  32         xtensa      GPL3    XTensa CPU
 adA_  8          z80         GPL     Zilog Z80
 ```
 
-> Note that "ad" in the first column means both assembler and disassembler are offered by a corresponding  plugin. "_d" indicates disassembler, "a_" means only assembler is available.
-
-
-
+**NOTE** the "ad" in the first column means both assembler and disassembler are offered by a corresponding  plugin. "_d" indicates disassembler, "a_" means only assembler is available.

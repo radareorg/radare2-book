@@ -1,4 +1,4 @@
-## Program Sections
+### Sections
 
 Rabin2 called with the `-S` option gives complete information about the sections of an executable. For each section the index, offset, size, alignment, type and permissions, are shown. The next example demonstrates this:
 ```
@@ -50,4 +50,3 @@ fs sections
 "f section..gnu.version 1 0x00001574"
 "f section..gnu.version_r 1 0x00001678"
 ```
-

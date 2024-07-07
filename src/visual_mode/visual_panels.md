@@ -1,6 +1,6 @@
-# Visual Panels
+## Panels
 
-## Concept
+### Concept
 
 Visual Panels is characterized by the following core functionalities:
 
@@ -12,11 +12,11 @@ CUI met some useful GUI as the menu, that is Visual Panels.
 
 Panels can be accessed by using `v` or by using `!` from the visual mode.
 
-## Overview
+### Overview
 
 ![Panels Overview](panels_overview.png)
 
-## Commands
+### Commands
 ```
 |Visual Ascii Art Panels:
 | |      split the current panel vertically
@@ -68,7 +68,7 @@ Panels can be accessed by using `v` or by using `!` from the visual mode.
 | z      swap current panel with the first one
 ```
 
-## Basic Usage
+### Basic Usage
 
 Use `tab` to move around the panels until you get to the targeted panel. Then, use `hjkl`, just like in vim, to scroll the panel you are currently on.
 Use `S` and `s` to step over/in, and all the panels should be updated dynamically while you are debugging.
@@ -77,13 +77,14 @@ While hitting `tab` can help you moving between panels, it is highly recommended
 As usual, you can use `hjkl` to move around the menu and will find tons of useful stuff there.
 You can also press `"` to quickly browse through the different options View offers and change the contents of the selected panel.
 
-## Split Screen
+### Split Screen
 
 `|` is for the vertical and `-` is for the horizontal split. You can delete any panel by pressing `X`.
 
 Split panels can be resized from Window Mode, which is accessed with `w`.
 
-## Window Mode Commands
+### Window Mode Commands
+
 ```
 |Panels Window mode help:
 | ?      show this help
@@ -96,11 +97,12 @@ Split panels can be resized from Window Mode, which is accessed with `w`.
 | q      quit Window mode
 ```
 
-## Edit Values
+### Edit Values
 
 Either in the Register or Stack panel, you can edit the values. Use `c` to activate cursor mode and you can move the cursor by pressing `hjkl`, as usual. Then, hit `i`, just like the insert mode of vim, to insert a value.
 
-## Tabs
+### Tabs
+
 Visual Panels also offer tabs to quickly access multiple forms of information easily. Press `t` to enter Tab Mode. All the tabs numbers will be visible in the top right corner.
 
 By default you will have one tab and you can press `t` to create a new tab with the same panels and `T` to create a new panel from scratch.
@@ -109,15 +111,20 @@ For traversing through the tabs, you can type in the tab number while in Tab Mod
 
 And pressing `-` deletes the tab you are in.
 
-## Saving layouts
+### Saving layouts
+
 You can save your custom layout of your visual panels either by picking the option 'Save Layout' from the File menu of the menu bar or by running:
+
 ```
 v= test
 ```
+
 Where `test` is the name with which you'd like to save it.
 
 You can open a saved layout by passing the name as the parameter to `v`:
+
 ```
 v test
 ```
+
 More about that can be found under `v?`.

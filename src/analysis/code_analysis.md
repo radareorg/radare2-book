@@ -1,4 +1,4 @@
-# Code Analysis
+## Code Analysis
 
 Code analysis is the process of finding patterns, combining information from different sources and process the disassembly of the program in multiple ways in order to understand and extract more details of the logic behind the code.
 
@@ -76,7 +76,7 @@ control of the analysis process. Moreover, there is a treasure trove of configur
 for controlling the analysis outcomes. You can find them in `anal.*` and `emu.*`
 cfg variables' namespaces.
 
-## Analyze functions
+### Analyze functions
 
 One of the most important "basic" analysis commands is the set of `af` subcommands. `af` means
 "analyze function". Using this command you can either allow automatic analysis of the particular
@@ -142,6 +142,7 @@ Before changing the basic blocks of the function it is recommended to check the 
 ```
 
 ### Hand craft function
+
 Before we start, let's prepare a binary file first. Write in `example.c`:
 ```C
 int code_block()
@@ -228,7 +229,7 @@ There are two very important commands for this: `afc` and `afB`. The latter is a
 
 `afc` on the other side, allows to manually specify function calling convention. You can find more information on its usage in [calling_conventions](calling_conventions.md).
 
-## Recursive analysis
+### Recursive analysis
 
 There are 5 important program wide half-automated analysis commands:
 
@@ -324,7 +325,7 @@ mov rbp, rsp
 
 on x86\_64 platform. It should be specified _before_ any analysis commands.
 
-## Configuration
+### Configuration
 
 Radare2 allows to change the behavior of almost any analysis stages or commands.
 There are different kinds of the configuration options:
@@ -336,7 +337,7 @@ There are different kinds of the configuration options:
  - Jump tables analysis control
  - Platform/target specific options
 
-### Control flow configuration
+#### Control flow configuration
 
 Two most commonly used options for changing the behavior of control flow analysis in radare2 are
 `anal.hasnext` and `anal.jmp.after`. The first one allows forcing radare2 to continue the analysis
@@ -357,7 +358,7 @@ For some unusual binaries or targets, there is an option `anal.noncode`. Radare2
 to analyze data sections as a code by default. But in some cases - malware, packed binaries,
 binaries for embedded systems, it is often a case. Thus - this option.
 
-### Reference control
+#### Reference control
 
 The most crucial options that change the analysis results drastically. Sometimes some can be
 disabled to save the time and memory when analyzing big binaries.
@@ -370,7 +371,7 @@ disabled to save the time and memory when analyzing big binaries.
 
 Note that strings references control is disabled by default because it increases the analysis time.
 
-### Analysis ranges
+#### Analysis ranges
 
 There are a few options for this:
 
@@ -387,7 +388,7 @@ There are a few options for this:
 
 Please see `e anal.in=??` for the complete list.
 
-### Jump tables
+#### Jump tables
 
 Jump tables are one of the trickiest targets in binary reverse engineering. There are hundreds
 of different types, the end result depending on the compiler/linker and LTO stages of optimization.
@@ -399,7 +400,7 @@ Two more options can affect the jump tables analysis results too:
 - `anal.jmp.indir` - follow the indirect jumps, some jump tables rely on them
 - `anal.datarefs` - follow the data references, some jump tables use those
 
-### Platform specific controls
+#### Platform specific controls
 
 There are two common problems when analyzing embedded targets: ARM/Thumb detection and MIPS GP
 value. In case of ARM binaries radare2 supports some auto-detection of ARM/Thumb mode switches, but
@@ -428,7 +429,7 @@ the minimap mode type `VV` then press `p` twice:
 
 This mode allows you to see the disassembly of each node separately, just navigate between them using `Tab` key.
 
-## Analysis hints
+### Analysis hints
 
 It is not an uncommon case that analysis results are not perfect even after you tried every single
 configuration option. This is where the "analysis hints" radare2 mechanism comes in. It allows

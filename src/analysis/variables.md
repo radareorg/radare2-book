@@ -1,4 +1,4 @@
-# Managing variables
+## Managing variables
 
 Radare2 allows managing local variables, no matter their location, stack or registers.
 The variables' auto analysis is enabled by default but can be disabled with `anal.vars`
@@ -113,7 +113,7 @@ local_32h
 [0x00003b92]>
 ```
 
-## Type inference
+### Type inference
 
 The type inference for local variables and arguments is well integrated with the command `afta`.
 

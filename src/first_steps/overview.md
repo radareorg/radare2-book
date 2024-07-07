@@ -1,4 +1,4 @@
-## The Framework
+## Toolchain
 
 The Radare2 project provides a collection of command-line tools, APIs and scripting capabilities that focus on several aspects of reverse engineering.
 

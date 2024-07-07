@@ -1,4 +1,4 @@
-# SDB
+## SDB
 
 SDB stands for String DataBase. It's a simple key-value database that only operates with strings created by pancake. It is used in many parts of r2 to have a disk and in-memory database which is small and fast to manage using it as a hashtable on steroids.
 
@@ -17,17 +17,18 @@ SDB supports:
 - json parser/getter
 
 
-## Usage example
+### Usage example
 Let's create a database!
 
-```
+```bash
 $ sdb d hello=world
 $ sdb d hello
 world
 ```
 
 Using arrays:
-```
+
+```sh
 $ sdb - '[]list=1,2' '[0]list' '[0]list=foo' '[]list' '[+1]list=bar'
 1
 foo
@@ -38,7 +39,8 @@ bar
 ```
 
 Let's play with json:
-```
+
+```sh
 $ sdb d g='{"foo":1,"bar":{"cow":3}}'
 $ sdb d g?bar.cow
 3
@@ -47,7 +49,8 @@ $ sdb - user='{"id":123}' user?id=99 user?id
 ```
 
 Using the command line without any disk database:
-```
+
+```sh
 $ sdb - foo=bar foo a=3 +a -a
 bar
 4
@@ -63,13 +66,14 @@ a=3
 -a
 3
 ```
+
 Remove the database
-```
+
+```sh
 $ rm -f d
-
 ```
 
-## So what ?
+### So what ?
 So, you can now do this inside your radare2 sessions!
 
 Let's take a simple binary, and check what is already _sdbized_.
@@ -109,18 +113,22 @@ Strings are stored encoded in base64.
 
 ---
 
-## More Examples
-
+### More Examples
 
 List namespaces
+
 ```
 k **
 ```
+
 List sub-namespaces
+
 ```
 k anal/**
 ```
+
 List keys
+
 ```
 k *
 k anal/*

@@ -1,4 +1,4 @@
-## Strings
+### Strings
 
 The `-z` option is used to list readable strings found in the .rodata section of ELF binaries, or the .text section of PE files. Example:
 
@@ -34,4 +34,3 @@ Cs 5 @ 0x0001619a
 f str.pcdb_lswd 11 @ 0x00016250
 Cs 11 @ 0x00016250
 ```
-

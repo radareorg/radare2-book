@@ -1,6 +1,6 @@
-# Visual Disassembly
+## Visual Disassembly
 
-## Navigation
+### Navigation
 
 Move within the Disassembly using arrow keys or `hjkl`. Use `g` to seek directly to a flag or an offset, type it when requested by the prompt: `[offset]>`.
 Follow a jump or a call using the `number` of your keyboard `[0-9]` and the number on the right in disassembly to follow a call or a jump. In this example typing `1` on the keyboard would follow the call to `sym.imp.__libc_start_main` and therefore, seek at the offset of this symbol.
@@ -39,7 +39,7 @@ d → i →  2
 0x004048f7      48c1e83f       shr rax, '?'
 ```
 
-### Usage of the Cursor for Inserting/Patching...
+### Cursor mode
 
 Remember that, to be able to actually edit files loaded in radare2, you have to start it with the `-w` option. Otherwise a file is opened in read-only mode.
 
@@ -59,7 +59,7 @@ The 10 bytes you have selected will be changed to "12 34 12 34 12 ...".
 The Visual Assembler is a feature that provides a live-preview while you type in new instructions to patch
 into the disassembly. To use it, seek or place the cursor at the wanted location and hit the 'A' key. To provide multiple instructions, separate them with semicolons, `;`.
 
-## XREF
+### XREF
 
 When radare2 has discovered a XREF during the analysis, it will show you the information in the Visual Disassembly using `XREF` tag:
 
@@ -72,17 +72,17 @@ To see where this string is called, press `x`, if you want to jump to the locati
 
 `X` corresponds to the reverse operation aka `axf`.
 
-## Function Argument display
+### Function Argument display
 
 To enable this view use this config var `e dbg.funcarg = true`
 
 ![funcarg](funcarg.png)
 
-## Add a comment
+### Add a comment
 
 To add a comment press `;`.
 
-## Type other commands
+### Type other commands
 
 Quickly type commands using `:`.
 
@@ -108,7 +108,7 @@ Hud input mode can be closed using ^C. It will also exit when backspace is press
 The disassembly's look-and-feel is controlled using the "asm.* configuration keys, which can be
 changed using the `e` command. All configuration keys can also be edited through the Visual Configuration Editor.
 
-## Visual Configuration Editor
+### Visual Configuration Editor
 
 This HUD can be accessed using the `e` key in visual mode. The editor allows you to easily examine and change radare2's configuration. For example, if you want to change something about the disassembly display, select `asm` from the list, navigate to the item you wish to modify it, then select it by hitting `Enter`.
 If the item is a boolean variable, it will toggle, otherwise you will be prompted to provide a new value.
@@ -126,7 +126,7 @@ Example switch to pseudo disassembly:
 
 Following are some example of eval variable related to disassembly.
 
-## Examples
+### Examples
 
 #### asm.arch: Change Architecture && asm.bits: Word size in bits at assembler
 
@@ -185,5 +185,3 @@ e asm.describe = true
 0x00404876  mov rdx, rsp   ; moves data from src to dst
 0x00404879  and rsp, -0xf  ; binary and operation between src and dst, stores result on dst
 ```
-
-

@@ -1,4 +1,4 @@
-## File Properties Identification
+### File Properties Identification
 
 File type identification is done using `-I`. With this option, rabin2 prints information on a binary type, like its encoding, endianness, class, operating system:
 ```
@@ -44,4 +44,3 @@ e asm.os=linux
 e asm.arch=x86
 e asm.pcalign=0
 ```
-

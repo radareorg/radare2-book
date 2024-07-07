@@ -1,4 +1,4 @@
-# Data and Code Analysis
+# Analysis
 
 Radare2 has a very rich set of commands and configuration options to perform data and code analysis,
 to extract useful information from a binary, like pointers, string references,

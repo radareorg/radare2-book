@@ -1,11 +1,11 @@
-## Trobleshooting
+## Troubleshooting
 
 It is common to have an issues when you write a plugin, especially if you do this for the first time.
 
 This is why debugging them is very important. The first step for debugging is to set an environment variable when running radare2 instance:
 
-```
-R_DEBUG=yes r2 /bin/ls
+```sh
+$ R2_DEBUG=yes r2 /bin/ls
 Loading /usr/local/lib/radare2/2.2.0-git//bin_xtr_dyldcache.so
 Cannot find symbol 'radare_plugin' in library '/usr/local/lib/radare2/2.2.0-git//bin_xtr_dyldcache.so'
 Cannot open /usr/local/lib/radare2/2.2.0-git//2.2.0-git

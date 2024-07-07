@@ -1,4 +1,4 @@
-# Radare2 Reference Card
+# Reference Card
 
 This chapter is based on the Radare 2 reference card by Thanat0s, which is written under the GNU/GPL licence.
 

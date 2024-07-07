@@ -1,4 +1,4 @@
-# Basic Debugger Session
+## Basic Debugger Session
 
 To debug a program, start radare with the `-d` option. Note that you can attach to a running process by specifying its PID, or you can start a new program by specifying its name and parameters:
 
@@ -69,4 +69,3 @@ exit the help view, press `q`.
 A frequently used command is `dr`, which is used to read or write values of the target's general purpose registers.
 For a more compact register value representation you might use `dr=` command.
 You can also manipulate the hardware and the extended/floating point registers.
-

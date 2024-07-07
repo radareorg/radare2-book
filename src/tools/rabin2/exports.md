@@ -1,4 +1,4 @@
-## Exports
+### Exports
 
 Rabin2 is able to find exports. For example:
 ```

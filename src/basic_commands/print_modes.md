@@ -1,4 +1,4 @@
-# Print Modes
+## Print Modes
 
 One of the key features of radare2 is displaying information in many formats. The goal is to offer a selection of display choices to interpret binary data in the best possible way.
 

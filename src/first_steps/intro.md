@@ -1,4 +1,4 @@
-## Basic Radare2 Usage
+# Using Radare2
 
 The learning curve is usually somewhat steep at the beginning. Although after an hour of using it you should easily understand how most things work, and how to combine the various tools radare offers. You are encouraged to read the rest of this book to understand how some non-trivial things work, and to ultimately improve your skills.
 

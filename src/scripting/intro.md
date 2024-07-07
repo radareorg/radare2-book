@@ -1,4 +1,4 @@
-## Scripting
+# Scripting
 
 Radare2 provides a wide set of a features to automate boring work.
 It ranges from the simple sequencing of the commands to the calling

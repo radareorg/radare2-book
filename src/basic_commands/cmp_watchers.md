@@ -1,4 +1,4 @@
-# Comparison Watchers
+## Comparison Watchers
 
 Watchers are used to record memory at 2 different points in time, then report
 if and how it changed.
@@ -14,7 +14,7 @@ Usage: cw [args]  Manage compare watchers; See if and how memory changes
 | cwu [addr]      Update watcher
 ```
 
-## Basic watcher usage
+### Basic watcher usage
 
 First, create one with `cw addr sz cmd`. This will record `sz` bytes at `addr`.
 The command is stored and used to print the memory when shown.
@@ -53,7 +53,7 @@ will discard the existing watcher completely.
 0001000100100010001100110100010000000000000000000000000000000000
 ```
 
-## Reverting watcher state
+### Reverting State
 
 When you create a watcher, the data read from memory is marked as "new".
 Updating the watcher with `cwu` will mark this data as "old", and then read the
@@ -87,7 +87,7 @@ updating will still run the command, but it will not report changes.
 11223344
 ```
 
-## Overlapping watcher areas
+### Overlapping areas
 
 Watched memory areas may overlap with no ill effects, but may have unexpected
 results if you update some but not others.
@@ -112,7 +112,7 @@ cw 0x00000000 512 p8
 cw 0x00000100 16 p8 # differs
 ```
 
-## Watching for code modification
+### Watching for code modification
 
 Here is an example of using a disassembly command to watch code being modified.
 

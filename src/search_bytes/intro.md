@@ -1,4 +1,4 @@
-# Searching for Bytes
+# Searching
 
 The radare2 search engine is based on work done by esteve, plus multiple features implemented on top of it. It supports multiple keyword searches, binary masks, and hexadecimal values. It automatically creates flags for search hit locations to ease future referencing.
 

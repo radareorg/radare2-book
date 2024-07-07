@@ -1,4 +1,4 @@
-# ESIL
+## Introduction to ESIL
 
 ESIL stands for 'Evaluable Strings Intermediate Language'. It aims to describe a [Forth](https://en.wikipedia.org/wiki/Forth_%28programming_language%29)-like representation for every target CPU opcode semantics. ESIL representations can be evaluated (interpreted) in order to emulate individual instructions. Each command of an ESIL expression is separated by a comma. Its virtual machine can be described as this:
 ```
@@ -25,7 +25,7 @@ esp -= 4
 We can see that this corresponds to the x86 instruction `push ebp`! Isn't that cool?
 The aim is to be able to express most of the common operations performed by CPUs, like binary arithmetic operations, memory loads and stores, processing syscalls. This way if we can transform the instructions to ESIL we can see what a program does while it is running even for the most cryptic architectures you definitely don't have a device to debug on for.
 
-## Using ESIL
+### Using ESIL
 
 r2's visual mode is great to inspect the ESIL evaluations.
 
@@ -47,7 +47,7 @@ So if you want to take a look at how instructions are expressed in ESIL simply s
 
 In visual mode you can also toggle this by simply typing `O`.
 
-## ESIL Commands
+### ESIL Commands
 
 * "ae" : Evaluate ESIL expression.
 
@@ -169,8 +169,10 @@ jt     - jump target
 js     - jump target set
 ```
 
-## Syntax and Commands
+### Syntax and Commands
+
 A target opcode is translated into a comma separated list of ESIL expressions.
+
 ```
 xor eax, eax    ->    0,eax,=,1,zf,=
 ```
@@ -206,7 +208,7 @@ esil = r_str_replace (esil, " ", "", R_TRUE);
 
 Syscalls need special treatment. They are indicated by '$' at the beginning of an expression. You can pass an optional numeric value to specify a number of syscall. An ESIL emulator must handle syscalls. See (r_esil_syscall).
 
-## Arguments Order for Non-associative Operations
+### Arguments Order for Non-associative Operations
 
 As discussed on IRC, the current implementation works like this:
 

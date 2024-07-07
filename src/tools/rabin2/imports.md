@@ -1,4 +1,4 @@
-## Imports
+### Imports
 
 Rabin2 is able to find imported objects by an executable, as well as their offsets in its PLT. This information is useful, for example, to understand what external function is invoked by `call` instruction. Pass `-i` flag to rabin2 to get a list of imports. An example:
 

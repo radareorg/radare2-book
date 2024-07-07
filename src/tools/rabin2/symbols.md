@@ -1,4 +1,4 @@
-## Symbols (Exports)
+### Symbols and Exports
 
 With rabin2, the generated symbols list format is similar to the imports list. Use the `-s` option to get it:
 

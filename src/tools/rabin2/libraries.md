@@ -1,4 +1,4 @@
-## List Libraries
+### List Libraries
 
 Rabin2 can list libraries used by a binary with the `-l` option:
 ```

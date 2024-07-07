@@ -67,10 +67,3 @@ Radare2 repository ships a [Dockerfile](https://github.com/radareorg/radare2/blo
 This dockerfile also used by Remnux distribution from SANS, and is available on the docker [registryhub](https://registry.hub.docker.com/u/remnux/radare2/).
 
 Checkout the Makefile in this directory to understand how to use it without too much hussle
-
-## Cleaning Up Old Radare2 Installations
-
-```sh
-./configure --prefix=/old/r2/prefix/installation
-make purge
-```
