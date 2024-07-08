@@ -47,52 +47,43 @@ the base address too with `e bin.baddr`:
 $ r2 -e bin.baddr=<baddr> -e dbg.exe.path=<path> -d gdb://<host>:<port>
 ```
 
-Usually the gdbserver reports the maximum packet size it supports. Otherwise,
-radare2 resorts to sensible defaults. But you can specify the maximum packet
-size with the environment variable `R2_GDB_PKTSZ`. You can also check and set
-the max packet size during a session with the IO system, `=!`.
+Usually the gdbserver reports the maximum packet size it supports. Otherwise, radare2 resorts to sensible defaults. But you can specify the maximum packet size with the environment variable `R2_GDB_PKTSZ`. You can also check and set the max packet size during a session with the IO system, `:`.
 
 ```
 $ export R2_GDB_PKTSZ=512
 $ r2 -d gdb://<host>:<port>
 = attach <pid> <tid>
 Assuming filepath <path/to/exe>
-[0x7ff659d9fcc0]> =!pktsz
+[0x7ff659d9fcc0]> :pktsz
 packet size: 512 bytes
-[0x7ff659d9fcc0]> =!pktsz 64
-[0x7ff659d9fcc0]> =!pktsz
+[0x7ff659d9fcc0]> :pktsz 64
+[0x7ff659d9fcc0]> :pktsz
 packet size: 64 bytes
 ```
 
-The gdb IO system provides useful commands which might not fit into any
-standard radare2 commands. You can get a list of these commands with
-`=!?`. (Remember, `=!` accesses the underlying IO plugin's `system()`).
+The gdb IO system provides useful commands which might not fit into any standard radare2 commands. You can get a list of these commands with `:?`. (Remember, `:` accesses the underlying IO plugin's `system()`).
 
 ```
-[0x7ff659d9fcc0]> =!?
-Usage: =!cmd args
- =!pid             - show targeted pid
- =!pkt s           - send packet 's'
- =!monitor cmd     - hex-encode monitor command and pass to target interpreter
- =!rd              - show reverse debugging availability
- =!dsb             - step backwards
- =!dcb             - continue backwards
- =!detach [pid]    - detach from remote/detach specific pid
- =!inv.reg         - invalidate reg cache
- =!pktsz           - get max packet size used
- =!pktsz bytes     - set max. packet size as 'bytes' bytes
- =!exec_file [pid] - get file which was executed for current/specified pid
+[0x7ff659d9fcc0]> :?
+Usage: :cmd args
+ :pid             - show targeted pid
+ :pkt s           - send packet 's'
+ :monitor cmd     - hex-encode monitor command and pass to target interpreter
+ :rd              - show reverse debugging availability
+ :dsb             - step backwards
+ :dcb             - continue backwards
+ :detach [pid]    - detach from remote/detach specific pid
+ :inv.reg         - invalidate reg cache
+ :pktsz           - get max packet size used
+ :pktsz bytes     - set max. packet size as 'bytes' bytes
+ :exec_file [pid] - get file which was executed for current/specified pid
 ```
 
-Note that `=!dsb` and `=!dcb` are only available in special gdbserver implementations such
-as [Mozilla's rr](https://github.com/mozilla/rr), the default gdbserver doesn't include
-remote reverse debugging support.
-Use `=!rd` to print the currently available reverse debugging capabilities.
+Note that `:dsb` and `:dcb` are only available in special gdbserver implementations such as [Mozilla's rr](https://github.com/mozilla/rr), the default gdbserver doesn't include remote reverse debugging support.
 
-If you are interested in debugging radare2's interaction with gdbserver you can use
-`=!monitor set remote-debug 1` to turn on logging of gdb's remote protocol packets in
-gdbserver's console and `=!monitor set debug 1` to show general debug messages from
-gdbserver in it's console. You can also increase log level using `e log.level=5` and
+Use `:rd` to print the currently available reverse debugging capabilities.
+
+If you are interested in debugging radare2's interaction with gdbserver you can use `:monitor set remote-debug 1` to turn on logging of gdb's remote protocol packets in gdbserver's console and `:monitor set debug 1` to show general debug messages from gdbserver in it's console. You can also increase log level using `e log.level=5` and
 monitor GDB client/server messages on radare2's side.
 
 radare2 also provides its own gdbserver implementation:

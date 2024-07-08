@@ -1,10 +1,12 @@
-## Migration from ida, GDB or WinDBG
+## Migration from IDA, GDB or WinDBG
 
-### How to run the program using the debugger ##
+This chapter aims to ease that migration process for users coming from debuggers like IDA Pro, LLDB, GDB, or WinDBG. We'll explore how common debugging workflows and commands map between these tools and radare2, highlighting both similarities and key differences.
+
+### How to run the program using the debugger
 
 `r2 -d /bin/ls` - start in debugger mode => [[video](http://asciinema.org/a/12022)]
 
-### How do I attach/detach to running process ? (gdb -p) ##
+### How do I attach/detach to running process ? (gdb -p)
 
 `r2 -d <pid>` - attach to process
 
@@ -36,7 +38,7 @@ To get `#!python` and much more, just build [radare2-bindings](https://github.co
 
 `CL @ sym.main` - though the feature is highly experimental
 
-## shortcuts
+## Reference Commands
 
 | Command       | IDA Pro       | radare2        | r2 (visual mode) | GDB | WinDbg |
 | ------------- | ------------- |----------------|------------------|-----|-----|
@@ -119,12 +121,14 @@ To get `#!python` and much more, just build [radare2-bindings](https://github.co
 |search         |search menu    |`/?`            | Select the zone with the cursor `c` then `/`              | | `s`
 
 ### Equivalent of "set-follow-fork-mode" gdb command
+
 This can be done using 2 commands:
 
-1. `dcf` - until a fork happen
-2. then use `dp` to select what process you want to debug.
+* `dcf` - until a fork happen
+* Then use `dp` to select the process to debug.
 
 ### Common features
+
 - r2 accepts FLIRT signatures
 - r2 can connect to GDB, LLVM and WinDbg
 - r2 can write/patch in place
