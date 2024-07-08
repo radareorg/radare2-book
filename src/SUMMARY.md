@@ -142,5 +142,6 @@
        * [Instruction Set](crackmes/avatao/instructionset.md)
        * [Bytecode](crackmes/avatao/bytecode.md)
        * [Outro](crackmes/avatao/outro.md)
+   * [R2Wars](crackmes/r2wars/intro.md)
 * [Reference Card](refcard/intro.md)
 * [Acknowledgments](credits/credits.md)

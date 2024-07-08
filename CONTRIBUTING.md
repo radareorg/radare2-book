@@ -8,19 +8,19 @@ The easiest way to contribute to the book is by submiting pullrequests on the pr
 
 There are some basic rules (with its reasoning) to follow in order to contribute to the book.
 
-**Official documentation must be written in English**
+### Official documentation must be written in English
 
 Despite we value the importance of human languages, even the minoritary ones we must value the fact that the contributions are rare and having multiple translations of the book won't help on having it's contents upto date.
 
 Unofficial translations or third party books are more than welcome, but in this repository we focus on having a clear and unified guide to be used for everyone, and nowadays, English is the most accessible human language towards this.
 
-**Gender Language**
+### Gender Language
 
 We don't discriminate users by it's gender, race, age or beliefs. 
 
 So for example, avoid the use of gender-specific when writing instructions or explaning actions. (Use *they* instead of *he/she*)
 
-**AI and Language Models**
+### AI and Language Models
 
 The debate on AI is hot these days, and as an open project we must take position on this topic.
 
@@ -30,7 +30,7 @@ By providing a good context, prompt and setting the best role it is possible to 
 
 In other words use language models wisely. As a helper tool to better describe and organize the contents, always using those as templates for a proper review and rewrite.
 
-**Continuous Integration**
+### Continuous Integration
 
 There are few linting rules and CI checks, but the situation will be improved over time, patches that break the CI won't be accepted.
 
@@ -41,7 +41,7 @@ There are few linting rules and CI checks, but the situation will be improved ov
 
 Any help towards adding more checks in the CI are more than welcome.
 
-**Contents**
+### Contents
 
 Suggested contributions include:
 
