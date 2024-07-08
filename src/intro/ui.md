@@ -14,7 +14,7 @@ The current main radare2 GUI is Iaito. It is written in C++ using Qt and was ori
 
 ![Iaito screenshot](Iaito.png)
 
-### The Built-in Webserver
+### WebUI
 
 In addition, r2 includes an embedded webserver with a basic HTML/JS interface. Add `-c=H` to your command-line flags to automatically start the webserver and open it in your browser.
 

@@ -4,7 +4,7 @@ The Radare2 project provides a collection of command-line tools, APIs and script
 
 This chapter will give you a quick understanding of them, but you can check the dedicated sections for each tool at the end of this book. 
 
-### radare2
+**radare2**
 
 When you run the radare2 command, you're presented with an interactive shell that gives you access to all the functionalities of the radare2 framework by running mnemonic commands or scripts.
 
@@ -23,7 +23,30 @@ Some key features accessible through the radare2 command include:
 
 The radare2 command serves as the primary interface to these features, offering a flexible and powerful environment for reverse engineering, malware analysis, exploit development, and general binary exploration.
 
-### rabin2
+**rax2**
+
+A minimalistic mathematical expression evaluator for the shell that is useful for making base conversions between floating point values, hexadecimal representations, hexpair strings to ASCII, octal to integer, and more. It also supports endianness settings and can be used as an interactive shell if no arguments are given.
+
+Examples
+
+```
+$ rax2 1337
+0x539
+
+$ rax2 0x400000
+4194304
+
+$ rax2 -b 01111001
+y
+
+$ rax2 -S radare2
+72616461726532
+
+$ rax2 -s 617765736f6d65
+awesome
+```
+
+**rabin2**
 
 Another important tool distributed with radare2, rabin2 is designed to analyze binary files and extract various types of information from them. It supports a wide range of file formats (depending on which plugins are loaded or compiled in), the most famous ones are:
 
@@ -44,9 +67,9 @@ Key features and uses of rabin2 include:
 
 rabin2 can be used standalone from the command line or integrated within other radare2 tools. It's particularly useful for quick analysis of binaries without the need to fully load them into a debugger or disassembler. The information provided by rabin2 is often used by other parts of the radare2 framework to enhance analysis and provide context during reverse engineering tasks.
 
-### rasm2
+**rasm2**
 
-The command-line assembler and disassembler that is part of the radare2 framework. It supports a wide range of architectures and can be used independently of the main radare2 tool. Key features include:
+The command-line assembler and disassembler. It supports a wide range of architectures and can be used independently of the main radare2 tool. Key features include:
 
 - Multi-architecture support: Can handle numerous architectures including x86, x86-64, ARM, MIPS, PowerPC, SPARC, and many others.
 - Bi-directional operation: Functions as both an assembler (converting human-readable assembly code to machine code) and a disassembler (converting machine code back to assembly).
@@ -56,9 +79,7 @@ The command-line assembler and disassembler that is part of the radare2 framewor
 - Syntax highlighting: Provides colored output for better readability when disassembling.
 - Plugins: Supports architecture-specific plugins for extended functionality.
 
-rasm2's simplicity and versatility make it a valuable tool for developers, security researchers, and reverse engineers working with low-level code across multiple architectures.
-
-#### Examples
+For example assembling and disassembling a nop for java:
 
 ```
 $ rasm2 -a java 'nop'
@@ -74,31 +95,18 @@ $ echo 'push eax;nop;nop' | rasm2 -f -
 509090
 ```
 
-### rahash2
+**rahash2**
 
 Versatile command-line hashing tool that is part of the radare2 framework. It's designed to compute and verify cryptographic hashes and checksums for files, strings, or even large data streams like hard disks or network traffic.
 
-Key features of rahash2 include:
-
-**Multiple algorithms** Supports a wide range of hash algorithms, including MD4, MD5, SHA1, SHA256, SHA384, SHA512, CRC16, CRC32, and more.
-
-**Flexible input** Can hash data from files, standard input, or directly from command-line strings.
-
-**Block-based hashing** Can compute hashes for specific blocks or ranges within a file, which is ideal for forensics and checksuming large data.
-
-**Incremental hashing** Supports hashing of data streams or large files in chunks, useful for processing data that doesn't fit in memory.
-
-**Hash verification** and integrity checks comparing computed and provided hash.
-
-**Multiple hash outputs at once** Can compute and display multiple hash types simultaneously for the same input.
-
-**Integration with radare2: While it's a standalone tool, it integrates well with other radare2 utilities and can be used within r2 sessions.
-
-**Customizable output** Offers various output formats, including raw bytes, hexadecimal strings, or radare2 commands.
-
-**Encryption capabilities** Besides hashing, it also supports some basic encryption and decryption operations.
-
-### Examples
+* Supports a wide range of **hash algorithms**
+  * MD4, MD5, SHA1, SHA256, SHA384, SHA512, CRC16, CRC32, and more.
+* Input data from files, stdin, or command-line strings.
+* Block-based hashing
+* Incremental hashing for large files
+* Hash verification
+* Various output formats, including raw bytes, hexadecimal strings, or radare2 commands.
+* Basic encryption capabilities
 
 Here are few usage examples:
 
@@ -114,7 +122,7 @@ $ rahash2 -a md5 file
 file: 0x00000000-0x00000007 md5: d1833805515fc34b46c2b9de553f599d
 ```
 
-### radiff2
+**radiff2**
 
 The commandline Binary Diffing utility of the radare2 reverse engineering framework. It is designed to compare and analyze differences between binary files or sections of binary data.
 
@@ -130,7 +138,7 @@ Key features and capabilities of radiff2 include:
 
 radiff2 is particularly useful for cases where you need to identify and understand changes between different versions of binary files or compare potentially malicious files with known good versions.
 
-### rafind2
+**rafind2**
 
 rafind2 is a command-line utility designed to search for byte patterns, strings, or hexadecimal values within binary files or any other type of file.
 
@@ -140,7 +148,7 @@ This tool implements the most common subcommands of the radare2's `/` (search) o
 * Run across multiple files
 * Output formats, showing offsets, json and even r2 commands
 
-### ragg2
+**ragg2**
 
 Ragg2 is a versatile tool primarily serving as a shellcode compiler.
 
@@ -151,8 +159,6 @@ The `ragg2-cc` tool can compile C programs into raw linear instructions that are
 This feature is conceptually based on shellforge4, but only linux/osx x86-32/64 platforms are supported.
 
 It can also compile a specific low level domain specific language and generate tiny binaries without the need of any system compiler or toolchain as exemplified below:
-
-#### Examples
 
 ```
 $ cat hi.r
@@ -179,77 +185,6 @@ $ ./hi.c.bin
 Hello
 ```
 
-### rarun2
+**rarun2**
 
-A launcher for running programs within different environments, with different arguments,
-permissions, directories, and overridden default file descriptors. rarun2 is useful for:
-
-* Solving crackmes
-* Fuzzing
-* Test suites
-
-#### Sample rarun2 script
-
-```bash
-$ cat foo.rr2
-#!/usr/bin/rarun2
-program=./pp400
-arg0=10
-stdin=foo.txt
-chdir=/tmp
-#chroot=.
-./foo.rr2
-```
-
-#### Using a program via TCP/IP
-
-```
-$ nc -l 9999
-$ rarun2 program=/bin/ls connect=localhost:9999
-```
-
-#### Debugging a Program Redirecting the stdio into Another Terminal
-
-1 - open a new terminal and type 'tty' to get a terminal name:
-
-```
-$ tty ; clear ; sleep 999999
-/dev/ttyS010
-```
-
-2 - Create a new file containing the following rarun2 profile named foo.rr2:
-
-```sh
-#!/usr/bin/rarun2
-program=/bin/ls
-stdio=/dev/ttys010
-```
-
-3 - Launch the following radare2 command:
-
-```bash
-$ r2 -r foo.rr2 -d /bin/ls
-```
-
-### rax2
-
-A minimalistic mathematical expression evaluator for the shell that is useful for making base conversions between floating point values, hexadecimal representations, hexpair strings to ASCII, octal to integer, and more. It also supports endianness settings and can be used as an interactive shell if no arguments are given.
-
-#### Examples
-
-```
-$ rax2 1337
-0x539
-
-$ rax2 0x400000
-4194304
-
-$ rax2 -b 01111001
-y
-
-$ rax2 -S radare2
-72616461726532
-
-$ rax2 -s 617765736f6d65
-awesome
-```
+A launcher for running programs within different environments, with different arguments, permissions, directories, and overridden default file descriptors.

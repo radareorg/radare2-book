@@ -76,6 +76,8 @@
    * [Cryptographic Materials](search_bytes/searching_crypto.md)
 * [Disassembling](disassembling/intro.md)
    * [Adding Metadata](disassembling/adding_metadata.md)
+   * [Architectures](arch/intro.md)
+   * [Notes on 8051](arch/8051.md)
 * [Analysis](analysis/intro.md)
    * [Code Analysis](analysis/code_analysis.md)
    * [Variables](analysis/variables.md)

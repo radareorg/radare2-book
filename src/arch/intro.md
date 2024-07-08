@@ -1,4 +1,4 @@
-# Architectures
+## Architectures
 
 This chapter covers architecture specific topics.
 

@@ -1,8 +1,26 @@
 ## rahash2
 
-The rahash2 tool can be used to compute checksums of files, disk devices or strings. By block or entirely using many different hash algorithms.
+Versatile command-line hashing tool that is part of the radare2 framework. It's designed to compute and verify cryptographic hashes and checksums for files, strings, or even large data streams like hard disks or network traffic.
 
-This tool is also capable of doing some encoding/decoding operations like base64 and xor encryption.
+Key features of rahash2 include:
+
+**Multiple algorithms** Supports a wide range of hash algorithms, including MD4, MD5, SHA1, SHA256, SHA384, SHA512, CRC16, CRC32, and more.
+
+**Flexible input** Can hash data from files, standard input, or directly from command-line strings.
+
+**Block-based hashing** Can compute hashes for specific blocks or ranges within a file, which is ideal for forensics and checksuming large data.
+
+**Incremental hashing** Supports hashing of data streams or large files in chunks, useful for processing data that doesn't fit in memory.
+
+**Hash verification** and integrity checks comparing computed and provided hash.
+
+**Multiple hash outputs at once** Can compute and display multiple hash types simultaneously for the same input.
+
+**Integration with radare2: While it's a standalone tool, it integrates well with other radare2 utilities and can be used within r2 sessions.
+
+**Customizable output** Offers various output formats, including raw bytes, hexadecimal strings, or radare2 commands.
+
+**Encryption capabilities** Besides hashing, it also supports some basic encryption and decryption operations.
 
 This is an example usage:
 
