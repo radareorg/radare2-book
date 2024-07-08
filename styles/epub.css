@@ -10,6 +10,7 @@ pre {
 
 .markdown-section code, .markdown-section pre {
   line-height: 0.9;
+  font-size: 0.8em;
 }
 
 img {

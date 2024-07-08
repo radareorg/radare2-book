@@ -40,3 +40,14 @@ There are few linting rules and CI checks, but the situation will be improved ov
 * Contents must be Latex, Gemini and Markdown friendly
 
 Any help towards adding more checks in the CI are more than welcome.
+
+**Contents**
+
+Suggested contributions include:
+
+* Crackme writeups
+* CTF writeups
+* Explain how to use Radare2
+* Documentation to help developers
+* Conference presentations/workshops using Radare2
+* Missing content from the Radare1 book updated to Radare2
