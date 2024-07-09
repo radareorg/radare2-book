@@ -66,6 +66,7 @@
    * [Visual Disassembly](visual_mode/visual_disassembly.md)
    * [Visual Assembler](visual_mode/visual_assembler.md)
    * [Visual Configuration Editor](visual_mode/visual_configuration_editor.md)
+   * [Visual Menus](visual_mode/visual_menus.md)
    * [Visual Panels](visual_mode/visual_panels.md)
 * [Searching data](search/intro.md)
    * [Basic Searches](search/basic_searches.md)

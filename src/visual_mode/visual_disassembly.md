@@ -1,8 +1,19 @@
 ## Visual Disassembly
 
+The visual disassembler mode in radare2 is accessed by pressing 'p' after entering the V command. This mode displays the disassembled code in a structured format, making it easier to read and navigate through the program's instructions.
+
+In this view, users can scroll through the code, examine function calls, and identify control flow structures. The layout includes address information, machine code, and human-readable assembly instructions. This presentation helps in understanding the program's logic and behavior.
+
+The visual disassembler mode also offers various keybindings for quick actions such as jumping to specific addresses, adding comments, or setting breakpoints.
+
+In other words, it's like using the `pd` command from the shell but in an interactive way.
+
+For example, you can press the `spacebar` key to toggle between the control-flow-graph and linear disassembly listing. Or press the numeric comments `;[1]` in the jump/reference hints next to the instructions to quickly jump there.
+
 ### Navigation
 
 Move within the Disassembly using arrow keys or `hjkl`. Use `g` to seek directly to a flag or an offset, type it when requested by the prompt: `[offset]>`.
+
 Follow a jump or a call using the `number` of your keyboard `[0-9]` and the number on the right in disassembly to follow a call or a jump. In this example typing `1` on the keyboard would follow the call to `sym.imp.__libc_start_main` and therefore, seek at the offset of this symbol.
 
 ```
@@ -10,34 +21,6 @@ Follow a jump or a call using the `number` of your keyboard `[0-9]` and the numb
 ```
 
 Seek back to the previous location using `u`, `U` will allow you to redo the seek.
-
-## `d` as define
-
-`d` can be used to change the type of data of the current block, several basic types/structures are available as well as more advanced one using `pf` template:
-
-```
-d → ...
-0x004048f7      48c1e83f       shr rax, 0x3f
-d → b
-0x004048f7 .byte 0x48
-d → B
-0x004048f7 .word 0xc148
-d → d
-0x004048f7 hex length=165 delta=0
-0x004048f7  48c1 e83f 4801 c648 d1fe 7415 b800 0000
-...
-```
-
-To improve code readability you can change how radare2 presents numerical values in disassembly, by default most of disassembly display numerical value as hexadecimal. Sometimes you would like to view it as a decimal, binary or even custom defined constant. To change value format you can use `d` following by `i` then choose what base to work in, this is the equivalent to `ahi`:
-
-```
-d → i → ...
-0x004048f7      48c1e83f       shr rax, 0x3f
-d → i →  10
-0x004048f7      48c1e83f       shr rax, 63
-d → i →  2
-0x004048f7      48c1e83f       shr rax, '?'
-```
 
 ### Cursor mode
 
