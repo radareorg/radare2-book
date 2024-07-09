@@ -166,3 +166,48 @@ Another important `s` subcommand is the `s..` one which permits to seek to anoth
 [0x100000000]> s 0
 [0x00000000]>
 ```
+
+### Dereferencing pointers
+
+Sometimes programs store pointers in memory, these needs to be derefenced in order to follow them and see what are they pointing at.
+
+The r2 shell provides many ways to do this, that's because reading pointers from memory can be tricky and powerful it gives the power to the user to do it in the way that works the best for them.
+
+Use the `*` command, which acts like in C. It reads the the value from the given address (`$$` stands for current seek) and honors `asm.bits` and `cfg.bigendian`.
+
+```
+[0x004000c8]> s `*$$`
+[0x0040032e]>
+```
+
+This is the help message from the * command, which can be used as an alias for `wv` to write a value or to read from memory like the brackets syntax would do on any math expression in r2:
+
+```
+[0x100003a84]> *
+Usage: *<addr>[=[0x]value]  Pointer read/write data/values
+| *entry0=cc           write trap in entrypoint
+| *entry0+10=0x804800  write value in delta address
+| *entry0              read byte at given address
+| */                   end multiline comment. (use '/*' to start mulitiline comment
+[0x100003a84]>
+```
+
+Note that * can be also expressed as a math expression using the brackets syntax:
+
+```
+[0x100003a84]> ?v [$$]
+0xa9ba6ffcd503237f
+[0x100003a84]>
+```
+
+Alternatively you can always use data analysis (`ad`) and the periscoped hexdump (`pxr`) to analyze linked lists, nested structures, pointers and more!
+
+There are several more commands and features to follow and analyze pointers:
+
+* aav : analyze all values pointing to code or data in a given range
+* aaw : analyze all meta words (defined by Cd) as pointers to code
+* pdp : disassemble following pointers in stack for ropchain gadgets
+* pxw/pxq : word/qword hexdumps
+* ahp : set pointer hints for analysis
+* :iP : diversity pointer infromation from 
+* pxt : delta pointer table dumping, handy for manual switch table analysis
