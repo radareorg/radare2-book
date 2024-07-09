@@ -105,3 +105,44 @@ It is possible to implement cipher-algorithms using radare core primitives and `
 0x7fcd6a891650  c4da 1a6d e89a d959 9192 9159 1cb1 d959
 0x7fcd6a891660  9192 79cb 81da 1652 81da 1456 a252 7c77
 ```
+
+## Rapatches
+
+Human friendly text format to apply patches to binary files.
+
+### Patch format
+
+Those patches must be written in files and the syntax looks like the following:
+
+```
+^# -> comments
+. -> execute command
+! -> execute command
+OFFSET { code block }
+OFFSET "string"
+OFFSET 01020304
+OFFSET : assembly
++ {code}|"str"|0210|: asm
+```
+
+### Rapatch Example
+
+This script will run the `?e ..` command in r2 and then write the string 'Hello' at 0x200 offset
+
+```
+# rapatch example
+:?e hello world
+0x200 "Hello"
+```
+
+### Applying rapatches
+
+```
+$ r2 -P rapatch.txt target-program.txt
+```
+
+Or for scripted patching like `patch(1)`:
+
+```
+$ r2 -w -q -P rapatch.txt target-program.txt
+```
