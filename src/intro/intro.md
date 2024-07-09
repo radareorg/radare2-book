@@ -5,8 +5,8 @@ This is the official book of the radare project.
 *This is a collaborative and community-driven project, if you want to improve the status of the documentation check out the contributing chapter and submit pullrequests to the repository*
 
 * [GitHub](https://github.com/radareorg/radare2-book)
-* [PDF](https://github.com/radareorg/radare2-book/releases)
-* [EPUB](https://github.com/radareorg/radare2-book/releases)
+* [PDF](https://github.com/radareorg/radare2-book/releases/latest/download/r2book.pdf)
+* [EPUB](https://github.com/radareorg/radare2-book/releases/latest/download/r2book.epub)
 * [Online Version](https://book.rada.re/) - built with mdbook
 * [Read it on Gemini](gemini://radare.org/book) - md2gmi
 
