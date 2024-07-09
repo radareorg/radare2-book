@@ -7,6 +7,7 @@ There are a couple of keystrokes in Visual Mode that will lead to some menus wit
 * Rename current function (vdr)
 * Set the current offset as string (Vds)
 * Change base of the immediate in current instruction (Vdi)
+* Vbc - browse classes
 
 ### Vv visual analysis
 
