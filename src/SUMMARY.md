@@ -105,6 +105,7 @@
    * [Registers](debugger/registers.md)
    * [Memory Maps](debugger/memory_maps.md)
    * [Heap](debugger/heap.md)
+   * [Signals](debugger/signals.md)
    * [Files](debugger/files.md)
    * [Reverse Debugging](debugger/revdebug.md)
    * [Windows Messages](debugger/windows_messages.md)
