@@ -15,21 +15,16 @@ CHAPTERS=$(shell grep -Eoi '\([^\)]+' src/SUMMARY.md | sed -e 's,^.,src/,')
 
 PANDOC_OPTIONS+=-f markdown+rebase_relative_paths
 PANDOC_OPTIONS+=--metadata-file=metadata.yaml
-PANDOC_OPTIONS+=--toc-depth=5 --toc
-PANDOC_OPTIONS+=-V papersize:a5
-PANDOC_OPTIONS+=-V geometry:margin=1.5cm
 
 # PDF: Add cover and hide title text page
 PANDOC_PDF_OPTIONS+=-B cover.tex -V title:
 PANDOC_PDF_OPTIONS+=--pdf-engine=xelatex
 
-PANDOC_EPUB_OPTIONS+=--epub-cover-image=cover.jpg
-
 pdf:
 	pandoc $(CHAPTERS) $(PANDOC_OPTIONS) $(PANDOC_PDF_OPTIONS) -o r2book.pdf
 
 epub:
-	pandoc $(CHAPTERS) $(PANDOC_OPTIONS) $(PANDOC_EPUB_OPTIONS) -o r2book.epub
+	pandoc $(CHAPTERS) $(PANDOC_OPTIONS) -o r2book.epub
 
 texi:
 	pandoc $(CHAPTERS) $(PANDOC_OPTIONS) -o r2book.texi

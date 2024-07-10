@@ -1,3 +1,4 @@
+# Pandoc metadata file
 title: The Official Radare2 Book
 lang: en-US
 author:
@@ -8,3 +9,10 @@ keywords:
   - radare2
   - reversing
   - radare
+
+cover-image: cover.jpg
+toc: true
+toc-depth: 5
+papersize: a5
+geometry:
+  - margin=1.5cm

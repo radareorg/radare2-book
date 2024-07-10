@@ -1,3 +1,5 @@
+# mdBook configuration file
+
 [book]
 title = "The Official Radare2 Book"
 author = "pancake <pancake@nopcode.org>"
