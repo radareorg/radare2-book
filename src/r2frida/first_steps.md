@@ -130,9 +130,14 @@ And we can get the full ranges using `:dmm`:
 0x0000000107d00000 - 0x000000018ae40000 rwx /System/Library/Caches/com.apple.dyld/dyld_shared_cache_arm64
 ```
 
-## Enumerating Objective-C
+## Objective-C
+
+iOS and macOS apps are usually made or containing some objc metadata that is important for us to locate the methods of interest
+
 ### Classes
+
 We can list the ObjC classes in memory using the `:icl` command:
+
 ```
 [0x00000000]> :icl
 Obfuscator

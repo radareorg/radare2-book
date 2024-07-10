@@ -14,6 +14,7 @@ Most decompilers implement all the common subcommands that modify the output:
 
 * pdgo/pddo/pdco -> show offset of instruction associated with each line
 * pdga/pdda/pdca -> show two column disasm vs decompilation
+* pdgj/pddj/pdcj -> json output to use decompiler info from other tools
 
 ### PseudoDecompiler
 
