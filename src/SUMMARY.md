@@ -119,6 +119,7 @@
    * [Analysis plugins](plugins/dev-anal.md)
    * [Bin plugins](plugins/dev-bin.md)
    * [Charset plugins](plugins/dev-charset.md)
+   * [R2JS plugins](plugins/r2js.md)
    * [Python plugins](plugins/python.md)
    * [Other plugins](plugins/dev-other.md)
    * [Troubleshooting](plugins/troubles.md)
