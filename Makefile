@@ -15,6 +15,7 @@ CHAPTERS=$(shell grep -Eoi '\([^\)]+' src/SUMMARY.md | sed -e 's,^.,src/,')
 
 PANDOC_OPTIONS+=-f markdown+rebase_relative_paths
 PANDOC_OPTIONS+=--metadata-file=metadata.yaml
+PANDOC_OPTIONS+=--lua-filter=pandoc-filter.lua
 
 # PDF: Add cover and hide title text page
 PANDOC_PDF_OPTIONS+=-B cover.tex -V title:
@@ -28,7 +29,6 @@ epub:
 
 texi:
 	pandoc $(CHAPTERS) $(PANDOC_OPTIONS) -o r2book.texi
-	sed -i -E 's,@uref\{[0-9a-z/_-]+gemini://,@uref\{gemini://,gI' r2book.texi # fix gemini link
 
 info: texi
 	rm -f r2book.info r2book.info.gz
