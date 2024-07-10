@@ -32,7 +32,7 @@ Supported arithmetic operations are:
 
 * + : addition
 * - : subtraction
-* * : multiplication
+* (asterisk) : multiplication
 * / : division
 * % : modulus
 * & : binary and
