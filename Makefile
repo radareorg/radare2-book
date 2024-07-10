@@ -49,6 +49,10 @@ gmi:
 	rm -rf gmi
 	mkdir -p gmi
 	for a in $(shell find src -type d) ; do b=`echo $$a |sed -e 's,src/,gmi/,'`; mkdir -p $$b ; done
-	for a in $(shell find src -type f -name \*.md) ; do b=`echo $$a |sed -e 's,src/,gmi/,' -e 's,md$$,gmi,'` ; $(MD2GMI) -i $$a -o $$b; done
+	for a in $(shell find src -type f -name \*.md) ; do \
+		b=`echo $$a | sed -e 's,src/,gmi/,' -e 's,\.md,\.gmi,'` ; \
+		$(MD2GMI) -i $$a -o $$b; \
+		sed -e 's,\.md,\.gmi,' -i $$b; \
+	done
 	ln -v gmi/SUMMARY.gmi gmi/index.gmi
 	tar -czf r2book-gmi.tar.gz -C gmi .
