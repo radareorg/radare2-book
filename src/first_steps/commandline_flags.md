@@ -1,8 +1,9 @@
-## Command-line Options
+## Shell
 
-The radare core accepts many flags from the command line.
+The radare core takes several option flags from the system shell.
 
 This is an excerpt from the usage help message:
+
 ```
 $ radare2 -h
 Usage: r2 [-ACdfjLMnNqStuvwzX] [-P patch] [-p prj] [-a arch] [-b bits] [-c cmd]
@@ -55,7 +56,7 @@ Usage: r2 [-ACdfjLMnNqStuvwzX] [-P patch] [-p prj] [-a arch] [-b bits] [-c cmd]
  -z, -zz      do not load strings or load them even in raw
 ```
 
-### Common usages
+### Common Uses
 
 At first sight it may seem like there are so many options and without some practical use cases it may feel a bit overwhelming, this sections aims to address that by sharing some of the most common ways to get started.
 
