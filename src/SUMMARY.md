@@ -5,7 +5,7 @@
    * [Toolchain](intro/overview.md)
    * [User Interface](intro/ui.md)
    * [r2con](intro/r2con.md)
-   * [Contributing](intro/contributing.md)
+   * [Contribute](intro/contribute.md)
 * [Installation](install/intro.md)
    * [Downloading radare2](install/download.md)
    * [Compilation and Portability](install/build.md)
