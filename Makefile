@@ -54,5 +54,7 @@ gmi:
 		$(MD2GMI) -i $$a -o $$b; \
 		sed -e 's,\.md,\.gmi,' -i $$b; \
 	done
+	grep -v 134 < gmi/SUMMARY.gmi | grep -v '^-' > .a.a
+	mv .a.a gmi/SUMMARY.gmi
 	ln -v gmi/SUMMARY.gmi gmi/index.gmi
 	tar -czf r2book-gmi.tar.gz -C gmi .
