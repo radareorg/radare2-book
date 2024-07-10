@@ -1,10 +1,12 @@
 ## Expressions
 
-Expressions are mathematical representations of 64-bit numerical values.
-They can be displayed in different formats, be compared or used with all commands
-accepting numeric arguments. Expressions can use traditional arithmetic operations,
+Expressions are mathematical representations of 64-bit numerical values. These are handled anywhere RNum API is used, the api takes a string that can contain multiple math operations with different numeric bases and operations and computes the resulting value.
+
+They can be displayed in different formats, be compared or used with all commands accepting numeric arguments. Expressions can use traditional arithmetic operations,
 as well as binary and boolean ones.
+
 To evaluate mathematical expressions prepend them with command `?`:
+
 ```
 [0xb7f9d810]> ?vi 0x8048000
 134512640
@@ -25,15 +27,19 @@ float:  nanf
 double: nan
 trits   0t11112220022122120101211020120210210211201
 ```
+
 Supported arithmetic operations are:
 
- *  \+ : addition
- *  \- : subtraction
- *  \* : multiplication
- *  / : division
- *  % : modulus
- *  \>> : shift right
- *  << : shift left
+* + : addition
+* - : subtraction
+* * : multiplication
+* / : division
+* % : modulus
+* & : binary and
+* | : binary or
+* ^ : binary xor
+* >> : shift right
+* << : shift left
 
 ```
 [0x00000000]> ?vi 1+2+3
@@ -41,6 +47,7 @@ Supported arithmetic operations are:
 ```
 
 To use of binary OR should quote the whole command to avoid executing the `|` pipe:
+
 ```
 [0x00000000]> "? 1 | 2"
 hex     0x3
@@ -56,7 +63,12 @@ double: 0.000000
 trits   0t10
 ```
 
+Note that on modern r2 versions you can use the single quote at the begining of the command to avoid evaluating the rest of the expression:
+
+`'? 1 | 2` is the equivalent to `"? 1 | 2"`
+
 Numbers can be displayed in several formats:
+
 ```
 0x033   : hexadecimal can be displayed
 3334    : decimal
@@ -80,10 +92,14 @@ $b    block size
 ```
 
 Some more examples:
+
 ```
 [0x4A13B8C0]> ? $m + $l
 140293837812900 0x7f98b45df4a4 03771426427372244 130658.0G 8b45d000:04a4 140293837812900 10100100 140293837812900.0 -0.000000
 ```
+
+Disassembling the very next instruction after the current one
+
 ```
 [0x4A13B8C0]> pd 1 @ +$l
 0x4A13B8C2   call 0x4a13c000
