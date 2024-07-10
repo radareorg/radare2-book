@@ -143,6 +143,7 @@ In the case of GDB, XML format is choosen to describe all this information, in r
 
 Radare2 is able to parse the gdb xml register profile and generate one in the radare2 syntax when connecting to unknown targets that support those commands.
 
+
 ### Reading The Profile
 
 Let's check how the x86-16 (real mode) register profile looks like by typing the following command:
@@ -193,6 +194,18 @@ flg	if	.1	.454	0
 flg	df	.1	.455	0
 flg	of	.1	.456	0
 flg	rf	.1	.457	0
+```
+
+### Custom Register Profiles
+
+Register profiles are usually 'static', in the sense that users won't need to modify them because they are designed to work well with the selected debugger backend or the esil implementation for the given architecture. But sometimes, you may want to add support for a new target or fix a bug, add temporary registers, experiment with it, ..
+
+These are the commands you must use to dump the current register profile to a file, edit it and then load it again:
+
+```
+drp > profile.txt
+vim profile.txt
+drp profile.txt
 ```
 
 ### Understanding Each Row
@@ -275,3 +288,4 @@ Values can be stored and represented in different endianness when working in loc
 The way this information is represented in the reg profile is with a line starting with `^`. The next letter will tell the register profile the endianness to use which can be **b**ig, **l**ittle or **m**iddle.
 
 You can find an usage example for this feature in the register profile for the native debugger for s390x architecture.
+
