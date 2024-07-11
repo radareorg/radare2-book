@@ -13,13 +13,16 @@ node_modules:
 # CHAPTERS=$(shell find src -iname *.md)
 CHAPTERS=$(shell grep -Eoi '\([^\)]+' src/SUMMARY.md | sed -e 's,^.,src/,')
 
+# Global pandoc arguments
 PANDOC_OPTIONS+=-f markdown+rebase_relative_paths
 PANDOC_OPTIONS+=--metadata-file=metadata.yaml
 PANDOC_OPTIONS+=--lua-filter=pandoc-filter.lua
 
-# PDF: Add cover and hide title text page
-PANDOC_PDF_OPTIONS+=-B cover.tex -V title:
+# PDF specific pandoc arguments
 PANDOC_PDF_OPTIONS+=--pdf-engine=xelatex
+PANDOC_PDF_OPTIONS+=-H header.tex --listings
+## Add a cover and hide title text page
+PANDOC_PDF_OPTIONS+=-B cover.tex -V title:
 
 pdf:
 	pandoc $(CHAPTERS) $(PANDOC_OPTIONS) $(PANDOC_PDF_OPTIONS) -o r2book.pdf

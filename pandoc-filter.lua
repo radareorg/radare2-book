@@ -8,16 +8,3 @@ function Link(el)
   end
   return el
 end
-
--- Change CodeBlock size on latex
-function CodeBlock(block)
-  if FORMAT == "beamer" or FORMAT == "latex" then
-    return {
-      pandoc.RawInline('latex', '\\footnotesize'),
-      block,
-      pandoc.RawInline('latex', '\\normalsize')
-    }
-  else
-    return block
-  end
-end
