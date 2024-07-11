@@ -2,7 +2,7 @@
 
 Radiff2 is a tool designed to compare binary files, similar to how regular `diff` compares text files.
 
-```bash
+```
 $ radiff2 -h
 Usage: radiff2 [-abBcCdjrspOxuUvV] [-A[A]] [-g sym] [-m graph_mode][-t %] [file] [file]
   -a [arch]  specify architecture plugin to use (x86, arm, ..)
@@ -24,7 +24,7 @@ Usage: radiff2 [-abBcCdjrspOxuUvV] [-A[A]] [-g sym] [-m graph_mode][-t %] [file]
   -p         use physical addressing (io.va=0)
   -q         quiet mode (disable colors, reduce output)
   -r         output in radare commands
-  -s         compute edit distance (no substitution, Eugene W. Myers' O(ND) diff algorithm)
+  -s         compute edit distance (no substitution, Eugene W. Myers O(ND) diff algorithm)
   -ss        compute Levenshtein edit distance (substitution is allowed, O(N^2))
   -S [name]  sort code diff (name, namelen, addr, size, type, dist) (only for -C or -g)
   -t [0-100] set threshold for code diff (default is 70%)
