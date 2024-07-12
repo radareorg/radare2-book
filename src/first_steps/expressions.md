@@ -30,16 +30,20 @@ trits   0t11112220022122120101211020120210210211201
 
 Supported arithmetic operations are:
 
-* + : addition
-* - : subtraction
-* (asterisk) : multiplication
-* / : division
-* % : modulus
-* & : binary and
-* | : binary or
-* ^ : binary xor
-* >> : shift right
-* << : shift left
+```
+ +   addition
+ -   subtraction
+ *   multiplication
+ /   division
+ %   modulus
+ &   binary and
+ |   binary or
+ ^   binary xor
+ >>  shift right
+ <<  shift left
+```
+
+For example, using the `?vi` command we the the integer (base10) value resulting it from evaluating the given math expression
 
 ```
 [0x00000000]> ?vi 1+2+3
