@@ -1,8 +1,24 @@
-## Shell
+## Commandline
 
-The radare core takes several option flags from the system shell.
+Radare2 can be used directly from the command line, allowing you to run commands without entering the interactive mode. This is handy for quick tasks or when you want to include radare2 in shell scripts. You can perform analyses, extract information, or manipulate binary files with just a single line in your terminal.
 
-This is an excerpt from the usage help message:
+For example, if we want to show 10 bytes from the entrypoint directly from the system shell we can use:
+
+```
+$ r2 -q -c 'p8 10 @ entry0' /bin/ls
+```
+
+The `-q` flag is by definition the `quiet` mode, but when combined with `-c` it will return to the shell right after executing the specified commands.
+
+Command-line flags are options you add when starting radare2. These flags let you customize how radare2 behaves from the start. You can tell radare2 to analyze a file immediately, use a specific configuration, or set various other parameters. Understanding these flags helps you set up radare2 efficiently for different tasks.
+
+We can set some options at startup time with the `-e` flag like this:
+
+```
+r2 -e scr.color=0 -e io.cache=true /bin/ls
+```
+
+The help message, accessed by running radare2 with the -h flag, shows all available options. It's a quick reference for radare2's capabilities. By exploring this message, you can discover features you might not know about.
 
 ```
 $ radare2 -h
