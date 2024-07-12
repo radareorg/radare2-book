@@ -63,7 +63,38 @@ As you can see, the arguments are named by index, starting from 0: $0, $1, ...
 
 ### Aliases
 
-radare2 also offers aliases which might help you save time by quickly executing your most used commands. They are under `$?`
+The command to create, manage and run command aliases is the `$`. This is also the prefix used for aliases files, this chapter will dig 
+
+* Variable (like flags)
+* Commands (simplest macros)
+* Files (in-memory virtual files)
+
+You can find some interesting details and examples by checking the help message:
+
+``` console
+[0x100003a84]> $?
+Usage: $alias[=cmd] [args...]  Alias commands and data (See ?$? for help on $variables)
+| $                        list all defined aliases
+| $*                       list all defined aliases and their values, with unprintable characters escaped
+| $**                      same as above, but if an alias contains unprintable characters, b64 encode it
+| $foo:=123                alias for 'f foo=123'
+| $foo-=4                  alias for 'f foo-=4'
+| $foo+=4                  alias for 'f foo+=4'
+| $foo                     alias for 's foo' (note that command aliases can override flag resolution)
+| $dis=base64:AAA=         alias $dis to the raw bytes from decoding this base64 string
+| $dis=$hello world        alias $dis to the string after '$'
+| $dis=$hello\\nworld\\0a  string aliases accept double-backslash and hex escaping
+| $dis=-                   edit $dis in cfg.editor (use single-backslashes for escaping)
+| $dis=af                  alias $dis to the af command
+| "$dis=af;pdf"            alias $dis to run af, then pdf. you must quote the whole command.
+| $test=. /tmp/test.js     create command - rlangpipe script
+| $dis=                    undefine alias
+| $dis                     execute a defined command alias, or print a data alias with unprintable characters escaped
+| $dis?                    show commands aliased by $dis
+[0x100003a84]>
+```
+
+#### Command Aliases
 
 The general usage of the feature is: `$alias=cmd`
 
@@ -96,12 +127,14 @@ $pmore
 ```
 
 A single `$` in the above will list all defined aliases. It's also possible check the aliased command of an alias:
+
 ```
 [0x00404800]> $pmore?
 b 200; px
 ```
 
 Can we create an alias contains alias ? The answer is yes:
+
 ```
 [0x00404800]> $pStart='s 0x0;$pmore'
 [0x00404800]> $pStart
@@ -120,4 +153,34 @@ Can we create an alias contains alias ? The answer is yes:
 0x000000b0  0100 0000 0400 0000 0000 0000 0000 0000  ................
 0x000000c0  0000 0000 0000 0000                      ........
 [0x00000000]> 
+```
+
+#### File Aliases
+
+If a file accessed from the repl starts with the dollar sign it will be treated as a virtual one that lives in memory only for the current session of radare2. They are handy when you don't want to depend on the filesystem to create or read files. For example in webassembly environments or other sandboxed executions.
+
+```
+[0x00000000]> echo hello > $world
+[0x00000000]> cat $world
+hello
+[0x00000000]>
+[0x00000000]> $
+$world
+[0x00000000]> $world
+hello
+[0x00000000]> rm $world
+[0x00000000]> $
+[0x00000000]>
+```
+
+#### Variable Aliases
+
+This is a short syntax for accessing and modifying flags, use them as numeric variables.
+
+```
+[0x00000000]> $foo:=4
+[0x00000000]> s foo
+[0x00000004]> $foo+=4
+[0x00000004]> s foo
+[0x00000008]>
 ```
