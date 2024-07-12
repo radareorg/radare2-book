@@ -93,42 +93,39 @@ The [head](https://en.wikipedia.org/wiki/Head_%28Unix%29) command can be used to
 
 ```
 [0x00404800]> head 3 foodtypes.txt
-1 Protein
-2 Carbohydrate
-3 Fat
+Proteins
+Fats
+Carbohydrates
 [0x00404800]> tail 2 foodtypes.txt
-3 Shake
-4 Milk
-```
-
-The [join](https://en.wikipedia.org/wiki/Join_%28Unix%29) command could be used to merge two different files with common first field. 
-
-```
-[0x00404800]> cat foodtypes.txt
-1 Protein
-2 Carbohydrate
-3 Fat
-[0x00404800]> cat foods.txt
-1 Cheese 
-2 Potato
-3 Butter
-[0x00404800]> join foodtypes foods.txt
-1 Protein Cheese
-2 Carbohydrate Potato
-3 Fat Butter
+Probiotics
+Water
 ```
 
 Similarly, sorting the content is also possible with the [sort](https://en.wikipedia.org/wiki/Sort_%28Unix%29) command. A typical example could be:
 
 ```
-[0x00404800]> sort file
-eleven
-five
-five
-great
-one
-one
-radare
+[0x00404800]> cat foods.txt
+Lentils
+Avocado
+Brown rice
+Chia seeds
+Spinach
+Almonds
+Blueberries
+Broccoli
+Sauerkraut
+Cucumber
+[0x00404800]> sort foods.txt
+Almonds
+Avocado
+Blueberries
+Broccoli
+Brown rice
+Chia seeds
+Cucumber
+Lentils
+Sauerkraut
+Spinach
 ```
 
 The `?$?` command describes several helpful variables you can use to do similar actions even more
