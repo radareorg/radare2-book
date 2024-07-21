@@ -1,6 +1,6 @@
 ### IOLI 0x01
 
-This is the second IOLI crackme.
+This second challenge is designed to introduce you to more advanced reverse engineering techniques using Radare2. The objective is to find the correct password to unlock the program by examining the binary’s disassembly.
 
 ```
 $ ./crackme0x01
@@ -9,7 +9,43 @@ Password: test
 Invalid Password!
 ```
 
-Let's check for strings with rabin2.
+#### Hints
+
+To solve this challenge, this time you will need to go beyond searching for plaintext strings.
+
+Learn how to load the binary with radare2, analise the code and disassemble the main function.
+
+* Load the binary with radare2 and use the `-A` or `-AA` flags to analyze the program before showing the prompt.
+
+These flags will run `aa` or `aaa`. The more a's you append the deeper the analysis will be, so it will perform more actions, which in some cases it's useful, but in other can result on invalid results, learn about the differences and find the right balance for each target you face. For our needs `aa` should be probably enough.
+
+```console
+$ r2 -A crackme0x01
+```
+
+To disassemble the main function you can use the `pdf` command. You can learn about other disassembly commands by typing `pd?`.
+
+In the disassembled code, look for cmp (compare) instructions. These are often used to compare user input against hardcoded values. Identifying these values can help you find the correct password.
+
+You can practice a little the `|` (pipe operator) or the `~` (internal grep) special characters to `grep` directly the instructions you need:
+
+```console
+> s main
+> pdf~cmp
+```
+
+Usually the immediate values displayed in the disassembly are formatted in hexadecimal. Use the rax2 program or the `?` command to find out the representation in other bases (like base10)
+
+```console
+$ rax2 0x123
+291
+```
+
+Now it's probably a good time to make another blind guess trying the value by running the crackme and typing the number.
+
+#### Solution
+
+Let's go step by step to solve the second IOLI crackme. We can start by trying what we learned in the previous challenge by listing the strings with `rabin2`:
 
 ```
 $ rabin2 -z ./crackme0x01
@@ -26,63 +62,62 @@ This isn't going to be as easy as 0x00. Let's try disassembly with r2.
 
 ```
 $ r2 ./crackme0x01 
--- Use `zoom.byte=printable` in zoom mode ('z' in Visual mode) to find strings
 [0x08048330]> aa
+INFO: Analyze all flags starting with sym. and entry0 (aa)
+INFO: Analyze imports (af@@@i)
+INFO: Analyze entrypoint (af@ entry0)
+INFO: Analyze symbols (af@@@s)
+INFO: Recovering variables (afva@@@F)
+INFO: Analyze all functions arguments/locals (afva@@@F)
+[0x08048330]> -e asm.bytes=false  # dont show the bytes
 [0x08048330]> pdf@main
-            ; DATA XREF from entry0 @ 0x8048347
+       ; DATA XREF from entry0 @ 0x8048347
 / 113: int main (int argc, char **argv, char **envp);
-|           ; var int32_t var_4h @ ebp-0x4
-|           ; var int32_t var_sp_4h @ esp+0x4
-|           0x080483e4      55             push ebp
-|           0x080483e5      89e5           mov ebp, esp
-|           0x080483e7      83ec18         sub esp, 0x18
-|           0x080483ea      83e4f0         and esp, 0xfffffff0
-|           0x080483ed      b800000000     mov eax, 0
-|           0x080483f2      83c00f         add eax, 0xf                ; 15
-|           0x080483f5      83c00f         add eax, 0xf                ; 15
-|           0x080483f8      c1e804         shr eax, 4
-|           0x080483fb      c1e004         shl eax, 4
-|           0x080483fe      29c4           sub esp, eax
-|           0x08048400      c70424288504.  mov dword [esp], str.IOLI_Crackme_Level_0x01 ; [0x8048528:4]=0x494c4f49 ; "IOLI Crackme Level 0x01\n"
-|           0x08048407      e810ffffff     call sym.imp.printf         ; int printf(const char *format)
-|           0x0804840c      c70424418504.  mov dword [esp], str.Password: ; [0x8048541:4]=0x73736150 ; "Password: "
-|           0x08048413      e804ffffff     call sym.imp.printf         ; int printf(const char *format)
-|           0x08048418      8d45fc         lea eax, [var_4h]
-|           0x0804841b      89442404       mov dword [var_sp_4h], eax
-|           0x0804841f      c704244c8504.  mov dword [esp], 0x804854c  ; [0x804854c:4]=0x49006425
-|           0x08048426      e8e1feffff     call sym.imp.scanf          ; int scanf(const char *format)
-|           0x0804842b      817dfc9a1400.  cmp dword [var_4h], 0x149a
-|       ,=< 0x08048432      740e           je 0x8048442
-|       |   0x08048434      c704244f8504.  mov dword [esp], str.Invalid_Password ; [0x804854f:4]=0x61766e49 ; "Invalid Password!\n"
-|       |   0x0804843b      e8dcfeffff     call sym.imp.printf         ; int printf(const char *format)
-|      ,==< 0x08048440      eb0c           jmp 0x804844e
-|      |`-> 0x08048442      c70424628504.  mov dword [esp], str.Password_OK_: ; [0x8048562:4]=0x73736150 ; "Password OK :)\n"
-|      |    0x08048449      e8cefeffff     call sym.imp.printf         ; int printf(const char *format)
-|      |    ; CODE XREF from main @ 0x8048440
-|      `--> 0x0804844e      b800000000     mov eax, 0
-|           0x08048453      c9             leave
-\           0x08048454      c3             ret
+|      ; var int32_t var_4h @ ebp-0x4
+|      ; var int32_t var_sp_4h @ esp+0x4
+|      0x080483e4    push ebp
+|      0x080483e5    mov ebp, esp
+|      0x080483e7    sub esp, 0x18
+|      0x080483ea    and esp, 0xfffffff0
+|      0x080483ed    mov eax, 0
+|      0x080483f2    add eax, 0xf
+|      0x080483f5    add eax, 0xf
+|      0x080483f8    shr eax, 4
+|      0x080483fb    shl eax, 4
+|      0x080483fe    sub esp, eax
+|      0x08048400    mov dword [esp], str.IOLI_Crackme_Level_0x01
+|      0x08048407    call sym.imp.printf
+|      0x0804840c    mov dword [esp], str.Password:
+|      0x08048413    call sym.imp.printf
+|      0x08048418    lea eax, [var_4h]
+|      0x0804841b    mov dword [var_sp_4h], eax
+|      0x0804841f    mov dword [esp], 0x804854c
+|      0x08048426    call sym.imp.scanf
+|      0x0804842b    cmp dword [var_4h], 0x149a
+|  ,=< 0x08048432    je 0x8048442
+|  |   0x08048434    mov dword [esp], str.Invalid_Password
+|  |   0x0804843b    call sym.imp.printf
+| ,==< 0x08048440    jmp 0x804844e
+| |`-> 0x08048442    mov dword [esp], str.Password_OK_:
+| |    0x08048449    call sym.imp.printf
+| `--> 0x0804844e    mov eax, 0
+|      0x08048453    leave
+\      0x08048454    ret
 ```
 
-"aa" tells r2 to analyze the whole binary, which gets you symbol names, among things.
+The `aa` command instructs r2 to analyze the whole binary, which gets you symbol names, among things.
 
-"pdf" stands for
-
-*	Print
-
-*	Disassemble
-
-*	Function
+The `pdf` stands for "Print" "Disassembly" of the "Function". The `@` character will perform a temporal seek to the given address or symbol name.
 
 This will print the disassembly of the main function, or the `main()` that everyone knows. You can see several things as well: weird names, arrows, etc.
 
-*	"imp." stands for imports. Those are imported symbols, like printf()
-
-*	"str." stands for strings. Those are strings (obviously).
+* `imp.` stands for imports. (Functions imported from libraries, like `printf` which is in the libc)
+* `str.` stands for strings. (Usually those listed by the `iz` command)
 
 If you look carefully, you'll see a `cmp` instruction, with a constant, 0x149a. `cmp` is an x86 compare instruction, and the 0x in front of it specifies it is in base 16, or hex (hexadecimal).
 
 ```
+[0x08048330]> pdf@main~cmp
 0x0804842b    817dfc9a140. cmp dword [ebp + 0xfffffffc], 0x149a
 ```
 
