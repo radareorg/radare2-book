@@ -6,6 +6,12 @@ Binary builds can be downloaded from the release page or the github CI artifacts
 
 * https://github.com/radareorg/radare2/releases
 
+### Crosscompiling with Mingw
+
+The mingw builds are also possible, but release builds are made with the Microsoft compiler for maximum compatibility and standarization with other software you can use.
+
+If you want to build r2 for windows on linux you can use the `sys/mingw32.sh` script that will autodetect the mingw toolchain from your system and build all the .exe and .dll
+
 ### Prerequisites
 
 * 3 GB of free disk space
@@ -17,38 +23,26 @@ Binary builds can be downloaded from the release page or the github CI artifacts
 
 ### Step-by-Step
 
-#### Install Visual Studio 2015 (or higher)
+#### Install Visual Studio 2019 (or higher)
 
 Visual Studio must be installed with a Visual C++ compiler, supporting C++ libraries, and the appropriate Windows SDK for the target platform version.
 
-* Ensure `Programming Languages > Visual C++` is selected
-
-If you need a copy of Visual Studio, the Community versions are free and work great.
+You can find a copy of Visual Studio (the Community versions are free for download) in here:
 
 * [Download Visual Studio 2019](https://visualstudio.microsoft.com/downloads/)
 
-#### Install Python 3 and Meson via Conda
+#### Install Python 3
 
 Conda is our probably the best Python distribution for Windows. But you can skip the next steps if you have Python installed already
 
-* https://docs.conda.io/en/latest/miniconda.html
-* https://repo.anaconda.com/archive/
+You can install Python3 for Windows using [Conda](https://docs.conda.io/projects/conda/en/stable/), but also the [standard distribution](https://www.python.org/downloads/), choco, winget, etc. Choose the one you like the most
 
-##### Create a Python Environment for Radare2
+When python is installed ensure to set the bin directory in your PATH, so you can launch a CMD or Powershell and run `python3`.
 
-Follow these steps to create and activate a Conda environment named *r2*. All instructions from this point on will assume this name matches your environment, but you may change this if desired.
-
-1. Start > Anaconda Prompt
-2. `conda create -n r2 python=3`
-3. `activate r2`
-
-Any time you wish to enter this environment, open the Anaconda Prompt and re-issue `activate r2`. Conversely, `deactivate` will leave the environment.
-
-##### Install Meson
-
-Ensure Meson is version 0.48 or higher (`meson -v`)
+Now you are ready to install meson and ninja, the radare2 build tools with pip:
 
 ```
+pip install ninja
 pip install meson
 ```
 
@@ -71,7 +65,6 @@ Check the following options during the Wizard steps.
 * Use Windows' default console window (instead of Mintty)
 * Ensure `git --version` works after install
 
-
 #### Get Radare2 Code
 
 Follow these steps to clone the Radare2 git repository.
@@ -82,60 +75,10 @@ git clone https://github.com/radareorg/radare2
 
 #### Compile Radare2 Code
 
-Follow these steps to compile the Radare2 Code.
+The build process on windows has been heavily simplified to just 3 batch scripts:
 
-    * **Visual Studio 2017:**
+* preconfigure.bat : find vscode, checks for python installation etc
+* configure.bat : run the meson configure step.
+* make.bat : build radare2 and create `prefix` directory with the distributable folder.
 
-        Note 1: Change `Community` to either `Professional` or `Enterprise` in the command below depending on the version installed.
-
-        Note 2: Change `vcvars32.bat` to `vcvars64.bat` in the command below for the 64-bit version.
-
-         `"%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars32.bat"`
-
-4. Generate the build system with Meson:
-
-Meson takes some arguments to configure the build type, but in short you should be able to build r2 without any meson flag. For Visual Studio. Note: Change `Debug` to `Release` in the command below depending on the version desired.
-
-```
-meson b --buildtype debug --backend vs2019 --prefix %cd%\dest
-msbuild build\radare2.sln /p:Configuration=Debug /m
-```
-
-For Ninja (no visual studio interface required, just msvc compiler toolchain installed):
-
-```
-meson b
-ninja -C b
-```
-
-Finally run this line to install r2 into the given absolute prefix directory:
-
-```
-meson install -C build --no-rebuild
-```
-
-#### Build options notes
-
-The `/m[axcpucount]` switch creates one MSBuild worker process per logical processor on your machine. You can specify a numeric value (e.g. `/m:2`) to limit the number of worker processes if needed. (This should not be confused with the Visual C++ Compiler switch `/MP`.)
-
-If you get an error with the 32-bit install that says something along the lines of `error MSB4126: The specified solution configuration "Debug|x86" is invalid.` Get around this by adding the following argument to the command: `/p:Platform=Win32`
-
-Check your Radare2 version: `dest\bin\radare2.exe -v`
-
-#### Check That Radare2 Runs From All Locations
-
-Note that `r2` in UNIX systems is just a symlink to the `radare2` executable. So, in case you want to have it in Windows you can just `copy radare2.exe r2.exe` and add the directory into the system-wide PATH env var in the **File Explorer** settings.
-
-Open the `cmd.exe` console and type `r2 -v` to confirm the whole process was successful.
-
-#### Notes about setting up the system-wide env var
-
-1. In the file explorer go to the folder Radare2 was just installed in.
-2. From this folder go to `dest` > `bin` and keep this window open.
-3. Go to System Properties: In the Windows search bar enter `sysdm.cpl`.
-4. Go to `Advanced > Environment Variables`.
-5. Click on the PATH variable and then click edit (if it exists within both the user and system variables, look at the user version).
-6. Ensure the file path displayed in the window left open is listed within the PATH variable. If it is not add it and click `ok`.
-7. Log out of your Windows session.
-8. Open up a new Windows Command Prompt: type `cmd` in the search bar. Ensure that the current path is not in the Radare2 folder.
-9. Check Radare2 version from Command Prompt Window: `radare2 -v`
+You can run `make` from the root directory of the project everytime you modify the source code in case you are developing to get the new binaries ready to test in that directory.
