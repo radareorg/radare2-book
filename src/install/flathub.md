@@ -19,7 +19,7 @@ flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flat
 With Flatpak and the Flathub repository set up, you can install iaito by executing the following command in your terminal:
 
 ```sh
-flatpak install flathub io.github.radare.iaito
+flatpak install flathub org.radare.iaito
 ```
 
 During the installation process, you may be prompted to confirm the installation and to enter your user password. Flatpak will handle all necessary dependencies for iaito, ensuring a smooth installation process. Once the installation is complete, you can launch iaito using the following command:
