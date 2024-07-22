@@ -1,4 +1,4 @@
-## FlatHub
+## FlatHub releases
 
 The easiest way to get **iaito** and **radare2** installed in your Linux distro is by using Flatpak.
 

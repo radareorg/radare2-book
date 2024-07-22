@@ -1,4 +1,4 @@
-## Windows
+## Windows Builds
 
 To build `r2` on Windows you have to use the Meson build system. Despite being able to build r2 on Windows using cygwin, mingw or WSL using the acr/make build system it is not the recommended/official/supported method and may result on unexpected results.
 

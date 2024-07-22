@@ -1,4 +1,4 @@
-## Android
+## Compiling for Android
 
 Radare2 can be cross-compiled for other architectures/systems as well, like Android.
 

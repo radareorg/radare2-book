@@ -1,4 +1,4 @@
-## Compilation and Portability
+## Portability in Mind
 
 One of the main development principles of radare2 is its portability, therefor radare2 can be compiled on many systems and architectures. In order to achieve that and to extend flexibility we are maintaining two build systems: GNU Make and Meson.
 
