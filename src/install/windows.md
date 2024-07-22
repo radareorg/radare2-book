@@ -1,27 +1,33 @@
 ## Windows
 
-To build `r2` on Windows you have to use the Meson build system. Despite being able to build r2 on Windows using cygwin, mingw or wsl using the acr/make build system it is not the recommended/official/supported method and may result on unexpected results.
+To build `r2` on Windows you have to use the Meson build system. Despite being able to build r2 on Windows using cygwin, mingw or WSL using the acr/make build system it is not the recommended/official/supported method and may result on unexpected results.
 
-Binary builds can be downloaded from the release page or the github CI artifacts from every single commit for 32bit and 64bit Windows.
+Binary builds can be downloaded from the [release page](https://github.com/radareorg/radare2/releases) or when logged in, access the github CI artifacts that are built on every commit.
 
-* https://github.com/radareorg/radare2/releases
-
-### Crosscompiling with Mingw
+### Crosscompiling
 
 The mingw builds are also possible, but release builds are made with the Microsoft compiler for maximum compatibility and standarization with other software you can use.
 
-If you want to build r2 for windows on linux you can use the `sys/mingw32.sh` script that will autodetect the mingw toolchain from your system and build all the .exe and .dll
+If you want to build r2 for windows on linux you can use the `sys/mingw32.sh` script that will autodetect the mingw toolchain from your system and build all the .exe and .dll.
+
+Note that cygwin support was kind of removed some years ago and nowadays most users will opt for WSL or purely native builds that will work well even on ReactOS and many different versions of windows without special software installed.
 
 ### Prerequisites
 
+Building radare2 on Windows using Microsoft Visual Studio involves setting up several key tools. You will need to install Microsoft Visual Studio, along with the Meson build system and the Ninja build tool. These tools are necessary for configuring and compiling the radare2 source code.
+
+These are the requirements to get the environment ready.
+
 * 3 GB of free disk space
-* Visual Studio 2019 (or higher)
+* Visual Studio (2019 or higher)
 * Python 3
 * Meson
 * Ninja
 * Git
 
 ### Step-by-Step
+
+Follow these instructions to pull the build tools to get the project compiled on your Windows machine.
 
 #### Install Visual Studio 2019 (or higher)
 
@@ -52,9 +58,7 @@ All Radare2 code is managed via the Git version control system and [hosted on Gi
 
 Follow these steps to install Git for Windows.
 
-Download Git for Windows 
-
-* https://git-scm.com/download/win
+Download Git for Windows from the [official website](https://git-scm.com/download/win)
 
 Check the following options during the Wizard steps.
 
@@ -65,7 +69,7 @@ Check the following options during the Wizard steps.
 * Use Windows' default console window (instead of Mintty)
 * Ensure `git --version` works after install
 
-#### Get Radare2 Code
+#### Pull the code
 
 Follow these steps to clone the Radare2 git repository.
 
