@@ -51,3 +51,18 @@ f entropy_section_6 0x00002000 0x0144f374
 ```
 
 The blocksize is increased to 4096 bytes from the default 100 bytes so that the entropy search `/s` can work on reasonably sized chunks for entropy analysis. The sections flags can be applied with the dot operator, `./s*` and then looped through `px 32 @@ entropy*`.
+
+### Searching data matching hash digest
+
+Sometimes it is useful to search if some data blocks in a binary match a given digest. The command `/h` implement such feature. For example running the following command:
+
+```
+[0x00000000]> /h sha256 83264abaf298b9238ca63cb2fd9ff0f41a7a1520ee2a17c56df459fc806de1d6 512
+INFO: Searching sha256 for 512 byte length
+INFO: Search in range 0x00000000 and 0x00000284
+INFO: Carving 132 blocks:
+INFO: Found at 0x64
+f hash.sha256.83264abaf298b9238ca63cb2fd9ff0f41a7a1520ee2a17c56df459fc806de1d6 = 0x64
+```
+
+Launches a search of 512-bytes blocks of data in the binary which SHA256 hash would results in the digest `83264abaf298b9238ca63cb2fd9ff0f41a7a1520ee2a17c56df459fc806de1d6`. If a digest is found, the offset of its location is printed.
