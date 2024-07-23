@@ -88,7 +88,7 @@ We can also enumerate imports using `:ii`:
 0x7fa7d204c230 f strncmp /usr/lib/x86_64-linux-gnu/libc-2.31.so
 ```
 
-The same goes for exports using `:ie`:
+The same goes for exports using `:iE`:
 ```
 [0x100610000]> :iE
 0x10060c000 v _mh_execute_header
