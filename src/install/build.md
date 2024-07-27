@@ -60,10 +60,8 @@ If you want to build locally:
 $ sys/meson.py --prefix=/home/$USER/r2meson --local --shared --install
 ```
 
-### Docker
+### Docker build
 
 Radare2 repository ships a [Dockerfile](https://github.com/radareorg/radare2/blob/master/dist/docker/Dockerfile) that you can use with Docker.
 
-This dockerfile also used by Remnux distribution from SANS, and is available on the docker [registryhub](https://registry.hub.docker.com/u/remnux/radare2/).
-
-Checkout the Makefile in this directory to understand how to use it without too much hussle
+You can read more regarding the this build process as well as how to run it in the [Docker containers section](docker.md#git-version).
