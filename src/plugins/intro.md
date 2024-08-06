@@ -10,7 +10,7 @@ This section aims to explain what are the plugins, how to write them and use the
 
 All of them can be installed via r2pm.
 
-* [r2frida](r2frida.md) - Frida and radare2 better together
+* [r2frida](../r2frida/intro.md) - Frida and radare2 better together
 * r2ghidra - use the Ghidra decompiler from radare2
 * r2dec - a decompiler written in JS for r2
 * r2yara - loading, scanning and creating Yara rules

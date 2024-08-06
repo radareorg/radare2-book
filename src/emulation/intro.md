@@ -7,7 +7,7 @@ Understanding the distinction between static analysis and dynamic analysis is cr
 
 Radare2 employs its own intermediate language and virtual machine, known as ESIL, for partial emulation (or imprecise full emulation).
 
-Radare2's [ESIL](../disassembling/esil.md) supports partial emulation across all platforms by evaluating those expressions.
+Radare2's [ESIL](../emulation/esil.md) supports partial emulation across all platforms by evaluating those expressions.
 
 ## Use Cases
 

@@ -107,7 +107,7 @@ dir.types: Default path to look for cparse type files
 
 Notice below we have used `ts` command, which basically converts
 the C type description (or to be precise it's SDB representation)
-into the sequence of `pf` commands. See more about [print format](../basic_commands/print_modes.md).
+into the sequence of `pf` commands. See more about [print format](../commandline/print_modes.md).
 
 The `tp` command uses the `pf` string to print all the members of type at the current offset/given address:
 

@@ -2,7 +2,7 @@
 
 Most command names in radare are derived from action names. They should be easy to remember, as they are short. Actually, all commands are single letters. Subcommands or related commands are specified using the second character of the command name. For example, `/ foo` is a command to search plain string, while `/x 90 90` is used to look for hexadecimal pairs.
 
-The general format for a valid command (as explained in the [Command Format](../first_steps/command_format.md) chapter) looks like this:
+The general format for a valid command (as explained in the [Command Format](../first_steps/syntax.md) chapter) looks like this:
 
 ```
 [.][times][cmd][~grep][@[@iter]addr!size][|>pipe] ; ...
