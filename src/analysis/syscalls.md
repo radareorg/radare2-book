@@ -38,9 +38,9 @@ the addresses where particular syscalls were found and list them.
 ...
 ```
 
-To reduce searching time it is possible to [restrict the searching](../search_bytes/configurating_the_search.md) range for only executable segments or sections with `/as @e:search.in=io.maps.x`
+To reduce searching time it is possible to [restrict the searching](../search/configurating_the_search.md) range for only executable segments or sections with `/as @e:search.in=io.maps.x`
 
-Using the [ESIL emulation](emulation.md) radare2 can print syscall arguments in the disassembly output. To enable the linear (but very rough) emulation use `asm.emu` configuration variable:
+Using the [ESIL emulation](../emulation/intro.md) radare2 can print syscall arguments in the disassembly output. To enable the linear (but very rough) emulation use `asm.emu` configuration variable:
 ```
 [0x0001ece0]> e asm.emu=true
 [0x0001ece0]> s 0x000187c2

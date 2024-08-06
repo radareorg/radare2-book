@@ -64,7 +64,7 @@ Tip: when using json output, you can append the `~{}` to the command to get a pr
 ]
 ```
 
-For more on the magical powers of `~` see the help in `?@?`, and the [Command Format](../first_steps/command_format.md) chapter earlier in the book.
+For more on the magical powers of `~` see the help in `?@?`, and the [Command Format](../first_steps/syntax.md) chapter earlier in the book.
 
 ### Hexadecimal View
 
@@ -435,4 +435,4 @@ e asm.syntax = att
 ```
 
 You can also check `asm.pseudo`, which is an experimental pseudocode view,
-and `asm.esil` which outputs [ESIL](../disassembling/esil.md) ('Evaluable Strings Intermediate Language'). ESIL's goal is to have a human-readable representation of every opcode semantics. Such representations can be evaluated (interpreted) to emulate effects of individual instructions.
+and `asm.esil` which outputs [ESIL](../emulation/esil.md) ('Evaluable Strings Intermediate Language'). ESIL's goal is to have a human-readable representation of every opcode semantics. Such representations can be evaluated (interpreted) to emulate effects of individual instructions.

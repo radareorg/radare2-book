@@ -95,7 +95,7 @@ There is an important moment though, if we just run it "as is" - it wont find an
 hits: 0
 [0x000051c0]>
 ```
-Note the searching address - this is because we need to [adjust the searching](../search_bytes/configurating_the_search.md) range first:
+Note the searching address - this is because we need to [adjust the searching](../search/configurating_the_search.md) range first:
 ```
 [0x000051c0]> e search.in=io.section
 [0x000051c0]> z/

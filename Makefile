@@ -33,6 +33,9 @@ epub:
 texi:
 	pandoc $(CHAPTERS) $(PANDOC_OPTIONS) -o r2book.texi
 
+one r2book.md:
+	sh one.sh > r2book.md
+
 info: texi
 	rm -f r2book.info r2book.info.gz
 	makeinfo --force --no-split r2book.texi

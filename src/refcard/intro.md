@@ -118,7 +118,7 @@ have to press keys to get the actions happen instead of commands.
 | n/N            | Seek next/prev function/flag/hit (scr.nkey)       |
 | C              | Toggle (C)olors                                   |
 | R              | Randomize color palette (ecr)                     |
-| tT             | Tab related. see also [tab](visual_panels.md)     |
+| tT             | Tab related. see also [tab](../visual/visual_panels.md)     |
 | v              | Visual code analysis menu                         |
 | V              | (V)iew graph (agv?)                               |
 | wW             | Seek cursor to next/prev word                     |
