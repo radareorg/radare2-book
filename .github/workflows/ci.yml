@@ -80,6 +80,7 @@ jobs:
           generate_release_notes: true
           files: |
             r2book.pdf
+            r2book.md
             r2book.epub
             r2book.info.gz
             r2book-gmi.tar.gz
