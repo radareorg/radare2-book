@@ -13,30 +13,31 @@ posix_pushd() {
   fi
 
   # Save the current directory on the stack
-  DIR_STACK=("$PWD" "${DIR_STACK[@]}")
+  DIR_STACK="$PWD $DIR_STACK"
 
   # Change to the new directory
   cd "${DIR}" || return 1
 
   # Print the new stack
-  echo "${DIR_STACK[@]}"
+  echo "$DIR_STACK"
 }
 
 # Function to pop a directory off the stack
 posix_popd() {
-  if [ ${#DIR_STACK[@]} -eq 0 ]; then
+  if [ -z "$DIR_STACK" ]; then
     echo "popd: directory stack empty"
     return 1
   fi
 
-  # Change to the top directory on the stack
-  cd "${DIR_STACK[0]}" || return 1
+  # Extract the first directory from the stack
+  DIR=$(echo "$DIR_STACK" | awk '{print $1}')
+  DIR_STACK=$(echo "$DIR_STACK" | cut -d' ' -f2-)
 
-  # Remove the top directory from the stack
-  DIR_STACK=("${DIR_STACK[@]:1}")
+  # Change to the directory
+  cd "$DIR" || return 1
 
   # Print the new stack
-  echo "${DIR_STACK[@]}"
+  echo "$DIR_STACK"
 }
 
 RV=0
