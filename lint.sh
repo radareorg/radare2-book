@@ -1,10 +1,9 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 RV=0
 find_markdown_files() {
   (echo "$1" | grep "://") && return
   local D=`dirname "$1"`
-  echo $D
   pushd "$D" > /dev/null
   local F=`basename "$1"`
   local file="$F"
