@@ -16,6 +16,9 @@ PANDOC_PDF_OPTIONS+=-H pandoc/header.tex --listings
 ## Add a cover and hide title text page
 PANDOC_PDF_OPTIONS+=-B pandoc/cover.tex -V title:
 
+# MD specific pandoc arguments
+PANDOC_MD_OPTIONS+=--wrap=preserve
+
 pdf:
 	pandoc $(CHAPTERS) $(PANDOC_OPTIONS) $(PANDOC_PDF_OPTIONS) -o r2book.pdf
 
@@ -30,8 +33,8 @@ info: texi
 	makeinfo --force --no-split r2book.texi
 	gzip -9n r2book.info
 
-one r2book.md:
-	sys/one.sh > r2book.md
+one:
+	pandoc $(CHAPTERS) $(PANDOC_OPTIONS) $(PANDOC_MD_OPTIONS) -o r2book.md
 
 GOPATH?=$(HOME)/go
 GOBIN?=$(GOPATH)/bin
