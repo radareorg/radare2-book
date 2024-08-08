@@ -181,19 +181,19 @@ js     - jump target set
 
 A target opcode is translated into a comma separated list of ESIL expressions.
 
-```
+```x86asm
 xor eax, eax    ->    0,eax,=,1,zf,=
 ```
 
 Memory access is defined by brackets operation:
 
-```
+```x86asm
 mov eax, [0x80480]   ->   0x80480,[],eax,=
 ```
 
 Default operand size is determined by size of operation destination.
 
-```
+```x86asm
 movb $0, 0x80480     ->   0,0x80480,=[1]
 ```
 
@@ -202,7 +202,7 @@ The `?` operator uses the value of its argument to decide whether to evaluate th
 1. Is the value zero?      -> Skip it.
 2. Is the value non-zero?  -> Evaluate it.
 
-```
+```x86asm
 cmp eax, 123  ->   123,eax,==,$z,zf,=
 jz eax        ->   zf,?{,eax,eip,=,}
 ```
@@ -344,7 +344,7 @@ fmulp ST(1), ST(0)      =>      TODO,fmulp ST(1),ST(0)
 
 ### ESIL Disassembly Example
 
-```console
+```x86asm
 [0x1000010f8]> e asm.esil=true
 [0x1000010f8]> pd $r @ entry0
 0x1000010f8    55           8,rsp,-=,rbp,rsp,=[8]
@@ -410,14 +410,14 @@ Other operations require bindings to external functionalities to work. In this c
 
 * Io Get/Set
 
-  ```
+  ```x86asm
   Out ax, 44
   44,ax,:ou
   ```
 
 * Selectors (cs,ds,gs...)
 
-  ```
+  ```x86asm
   Mov eax, ds:[ebp+8]
   Ebp,8,+,:ds,eax,=
   ```

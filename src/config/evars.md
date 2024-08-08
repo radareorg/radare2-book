@@ -25,7 +25,7 @@ Changes syntax flavor for disassembler between Intel and AT&T. At the moment, th
 
 A boolean value to set the pseudo syntax in the disassembly. "False" indicates a native one, defined by the current architecture, "true" activates a pseudocode strings format. For example, it'll transform :
 
-```
+```x86asm
 |           0x080483ff      e832000000     call 0x8048436
 |           0x08048404      31c0           xor eax, eax
 |           0x08048406      0205849a0408   add al, byte [0x8049a84]
@@ -35,7 +35,7 @@ A boolean value to set the pseudo syntax in the disassembly. "False" indicates a
 
 to
 
-```
+```x86asm
 |           0x080483ff      e832000000     0x8048436 ()
 |           0x08048404      31c0           eax = 0
 |           0x08048406      0205849a0408   al += byte [0x8049a84]
@@ -83,7 +83,7 @@ A boolean value used to replace register names with arguments or their associate
 
 For example, if you have something like this:
 
-```
+```x86asm
 |           0x080483ea      83c404         add esp, 4
 |           0x080483ed      68989a0408     push 0x8049a98
 |           0x080483f7      e870060000     call sym.imp.scanf
@@ -93,7 +93,7 @@ For example, if you have something like this:
 
 This variable changes it to:
 
-```
+```x86asm
 |           0x080483ea      83c404         add SP, 4
 |           0x080483ed      68989a0408     push 0x8049a98
 |           0x080483f7      e870060000     call sym.imp.scanf
@@ -113,13 +113,13 @@ A boolean value which substitutes pc relative expressions in disassembly. When t
 
 For example:
 
-```
+```x86asm
 0x5563844a0181      488d3d7c0e00.  lea rdi, [rip + 0xe7c]    ; str.argv__2d_:__s
 ```
 
 When turned on, this variable lets you display the above instruction as:
 
-```
+```x86asm
 0x5563844a0181      488d3d7c0e00.  lea rdi, str.argv__2d_:__s    ; 0x5563844a1004 ; "argv[%2d]: %s\n"
 ```
 
@@ -129,13 +129,13 @@ Boolean which shows offsets in disassembly prefixed with the name of the section
 
 That means, from something like:
 
-```
+```x86asm
 0x000067ea      488d0def0c01.  lea rcx, [0x000174e0]
 ```
 
 to the one below, when toggled on.
 
-```
+```x86asm
 0x000067ea      488d0def0c01.  lea rcx, [fmap.LOAD1.0x000174e0]
 ```
 

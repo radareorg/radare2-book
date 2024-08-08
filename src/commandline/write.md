@@ -130,7 +130,7 @@ OFFSET : assembly
 
 This script will run the `?e ..` command in r2 and then write the string 'Hello' at 0x200 offset
 
-```
+```console
 # rapatch example
 :?e hello world
 0x200 "Hello"

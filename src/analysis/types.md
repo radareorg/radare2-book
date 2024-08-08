@@ -181,7 +181,7 @@ Once the struct is linked, radare2 tries to propagate structure offset in the fu
 
 Note sometimes the emulation may not be accurate, for example as below :
 
-````
+```x86asm
 |0x000006da  push rbp
 |0x000006db  mov rbp, rsp
 |0x000006de  sub rsp, 0x10
@@ -189,8 +189,7 @@ Note sometimes the emulation may not be accurate, for example as below :
 |0x000006e7  call sym.imp.malloc         ;  void *malloc(size_t size)
 |0x000006ec  mov qword [local_8h], rax
 |0x000006f0  mov rax, qword [local_8h]
-
-````
+```
 
 The return value of `malloc` may differ between two emulations, so you have to set the hint for return value manually using `ahr` command, so run `tl` or `aat` command after setting up the return value hint.
 

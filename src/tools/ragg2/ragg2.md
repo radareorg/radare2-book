@@ -19,7 +19,7 @@ int main() {
 
 That small C program can be compiled with ragg2 like this:
 
-```console
+```x86asm
 $ ragg2 -a x86 -b32 a.c
 e900000000488d3516000000bf01000000b80400000248c7c20d0000000f0531c0c348656c6c6f20576f726c640a00
 
@@ -88,7 +88,7 @@ Usage: ragg2 [-FOLsrxhvz] [-a arch] [-b bits] [-k os] [-o file] [-I path]
 
 ### First Example
 
-```console
+```x86asm
 $ cat hello.r
 exit@syscall(1);
 
@@ -324,7 +324,7 @@ In case you just want to execute the input, you may use the `-x` option.
 -x          execute (just-in-time)
 ```
 
-```console
+```c
 $ cat code1.c
 int main()
 {

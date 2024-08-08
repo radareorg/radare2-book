@@ -326,7 +326,7 @@ Apart from predefined algorithms to identify functions there is a way to specify
 a function prelude with a configuration option `anal.prelude`. For example, like
 `e anal.prelude = 0x554889e5` which means
 
-```
+```x86asm
 push rbp
 mov rbp, rsp
 ```
