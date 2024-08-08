@@ -9,7 +9,7 @@ function Link(el)
   return el
 end
 
--- Fix HTML new lines
+-- Parse all allowed raw HTML code for markdownlint MD033
 function RawInline(raw)
   if raw.format == 'html' and raw.text == '<br>' then
     return pandoc.LineBreak()

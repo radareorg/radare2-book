@@ -1,0 +1,102 @@
+// Configuration for markdownlint (DavidAnson)
+// https://github.com/DavidAnson/markdownlint/blob/main/schema/.markdownlint.jsonc
+{
+  // Default state for all rules
+  "default": true,
+
+  // MD003/heading-style : Heading style : https://github.com/DavidAnson/markdownlint/blob/v0.34.0/doc/md003.md
+  "MD003": {
+    // Heading style
+    "style": "atx"
+  },
+
+  // MD004/ul-style : Unordered list style : https://github.com/DavidAnson/markdownlint/blob/v0.34.0/doc/md004.md
+  "MD004": {
+    // List style
+    "style": "asterisk"
+  },
+
+
+  // MD010/no-hard-tabs : Hard tabs : https://github.com/DavidAnson/markdownlint/blob/v0.34.0/doc/md010.md
+  "MD010": {
+    // Include code blocks
+    "code_blocks": false,
+    // Fenced code languages to ignore
+    "ignore_code_languages": [],
+    // Number of spaces for each hard tab
+    "spaces_per_tab": 1
+  },
+
+  // MD013/line-length : Line length : https://github.com/DavidAnson/markdownlint/blob/v0.34.0/doc/md013.md
+  "MD013": false,
+
+  // MD014/commands-show-output : Dollar signs used before commands without showing output : https://github.com/DavidAnson/markdownlint/blob/v0.34.0/doc/md014.md
+  "MD014": false,
+
+  // MD024/no-duplicate-heading : Multiple headings with the same content : https://github.com/DavidAnson/markdownlint/blob/v0.34.0/doc/md024.md
+  "MD024": {
+    // Only check sibling headings
+    "siblings_only": true
+  },
+
+  // MD026/no-trailing-punctuation : Trailing punctuation in heading : https://github.com/DavidAnson/markdownlint/blob/v0.34.0/doc/md026.md
+  "MD026": {
+    // Punctuation characters
+    "punctuation": ".,;:。，；：！"
+  },
+
+  // MD033/no-inline-html : Inline HTML : https://github.com/DavidAnson/markdownlint/blob/v0.34.0/doc/md033.md
+  "MD033": {
+    // Allowed elements (requires to implement them in pandoc-filter.lua)
+    "allowed_elements": ["br"]
+  },
+
+  // MD035/hr-style : Horizontal rule style : https://github.com/DavidAnson/markdownlint/blob/v0.34.0/doc/md035.md
+  "MD035": {
+    // Horizontal rule style
+    "style": "---"
+  },
+
+  // MD036/no-emphasis-as-heading : Emphasis used instead of a heading : https://github.com/DavidAnson/markdownlint/blob/v0.34.0/doc/md036.md
+  "MD036": false,
+
+  // MD040/fenced-code-language : Fenced code blocks should have a language specified : https://github.com/DavidAnson/markdownlint/blob/v0.34.0/doc/md040.md
+  "MD040": false,
+
+  // MD041/first-line-heading/first-line-h1 : First line in a file should be a top-level heading : https://github.com/DavidAnson/markdownlint/blob/v0.34.0/doc/md041.md
+  "MD041": false,
+
+  // MD043/required-headings : Required heading structure : https://github.com/DavidAnson/markdownlint/blob/v0.34.0/doc/md043.md
+  "MD043": false,
+
+  // MD046/code-block-style : Code block style : https://github.com/DavidAnson/markdownlint/blob/v0.34.0/doc/md046.md
+  "MD046": {
+    // Block style
+    "style": "fenced"
+  },
+
+  // MD048/code-fence-style : Code fence style : https://github.com/DavidAnson/markdownlint/blob/v0.34.0/doc/md048.md
+  "MD048": {
+    // Code fence style
+    "style": "backtick"
+  },
+
+  // MD049/emphasis-style : Emphasis style : https://github.com/DavidAnson/markdownlint/blob/v0.34.0/doc/md049.md
+  "MD049": {
+    // Emphasis style
+    "style": "underscore"
+  },
+
+  // MD050/strong-style : Strong style : https://github.com/DavidAnson/markdownlint/blob/v0.34.0/doc/md050.md
+  "MD050": {
+    // Strong style
+    "style": "asterisk"
+  },
+
+  // MD055/table-pipe-style : Table pipe style : https://github.com/DavidAnson/markdownlint/blob/v0.34.0/doc/md055.md
+  "MD055": {
+    // Table pipe style
+    "style": "leading_and_trailing"
+  }
+
+}
