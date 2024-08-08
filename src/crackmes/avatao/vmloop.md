@@ -1,6 +1,6 @@
 ### .vmloop
 
-```
+```console
 [offset]> fcn.vmloop
 ```
 
@@ -25,14 +25,14 @@ first function argument (as you may have recognized, the automatic analysis of
 arguments and local variables was not entirely correct), and we also know that
 _vmloop_'s first argument is the bytecode. So lets rename local_3:
 
-```
+```console
 :> afvn local_3 bytecode
 ```
 
 Next, _sym.memory_ is put into another local variable at _rbp-8_ that r2 did not
 recognize. So let's define it!
 
-```
+```console
 :> afv 8 memory qword
 ```
 
@@ -56,7 +56,7 @@ is valid, we arrive at the code piece that uses the jump table:
 The jump table's base is at 0x400ec0, so lets define that memory area as a
 series of qwords:
 
-```
+```console
 [0x00400a74]> s 0x00400ec0
 [0x00400ec0]> Cd 8 @@=`?s $$ $$+8*0x17 8`
 ```
@@ -71,7 +71,7 @@ series of qwords:
 
 This is how the disassembly looks like after we add this metadata:
 
-```
+```console
 [0x00400ec0]> pd 0x18
             ; DATA XREF from 0x00400a76 (unk)
             0x00400ec0 .qword 0x0000000000400a80
@@ -109,7 +109,7 @@ We get the message "Wrong!", and the function just returns 0. This means that
 those are not valid instructions (they are valid bytecode though, they can be
 e.g. parameters!) We should flag 0x400c04 accordingly:
 
-```
+```console
 [0x00400ec0]> f not_instr @ 0x0000000000400c04
 ```
 
@@ -117,7 +117,7 @@ As for the other offsets, they all seem to be doing something meaningful, so we
 can assume they belong to valid instructions. I'm going to flag them using the
 instructions' ASCII values:
 
-```
+```console
 [0x00400ec0]> f instr_A @ 0x0000000000400a80
 [0x00400ec0]> f instr_C @ 0x0000000000400b6d
 [0x00400ec0]> f instr_D @ 0x0000000000400b17
@@ -147,7 +147,7 @@ As I've mentioned previously, the function itself is pretty short, and easy to
 read, especially with our annotations. But a promise is a promise, so here is
 how we can create the missing basic blocks for the instructions:
 
-```
+```console
 [0x00400ec0]> afb+ 0x00400a45 0x00400a80 0x00400ab6-0x00400a80 0x400c15
 [0x00400ec0]> afb+ 0x00400a45 0x00400ab6 0x00400aec-0x00400ab6 0x400c15
 [0x00400ec0]> afb+ 0x00400a45 0x00400aec 0x00400b17-0x00400aec 0x400c15
@@ -162,7 +162,7 @@ how we can create the missing basic blocks for the instructions:
 It is also apparent from the disassembly that besides the instructions there
 are three more basic blocks. Lets create them too!
 
-```
+```console
 [0x00400ec0]> afb+ 0x00400a45 0x00400c15 0x00400c2d-0x00400c15 0x400c3c 0x00400c2d
 [0x00400ec0]> afb+ 0x00400a45 0x00400c2d 0x00400c3c-0x00400c2d 0x400c4d 0x00400c3c
 [0x00400ec0]> afb+ 0x00400a45 0x00400c3c 0x00400c4d-0x00400c3c 0x400c61
@@ -217,7 +217,7 @@ We should also realize that these blocks put the number of bytes they eat up of
 the bytecode (1 byte instruction + 1 or 2 bytes arguments = 2 or 3) into a local
 variable at 0xc. r2 did not recognize this local var, so lets do it manually!
 
-```
+```console
 :> afv 0xc instr_ptr_step dword
 ```
 
@@ -243,7 +243,7 @@ The next one that does not call a function:
 This is a one argument instruction, and it puts its argument to 0x6020c0. Flag
 that address!
 
-```
+```console
 :> f sym.written_by_instr_C 4 @ 0x6020c0
 ```
 
@@ -275,7 +275,7 @@ flag.
 
 The function this instruction calls is at offset 0x40080d, so lets seek there!
 
-```
+```console
 [offset]> 0x40080d
 ```
 
@@ -313,7 +313,7 @@ function returns from here too, if the argument is zero. Although this function
 is really tiny, I am going to stick with my methodology, and rename the local
 vars:
 
-```
+```console
 :> afvn local_1 arg1
 :> afvn local_2 arg2
 ```
@@ -335,7 +335,7 @@ modify the value stored at 0x602088, so this "M" branch will be able to modify
 bytes other than the first. Based on this assumption, I'll flag 0x602088 as
 _sym.current_memory_ptr_:
 
-```
+```console
 :> f sym.current_memory_ptr 8 @ 0x602088
 ```
 
@@ -378,13 +378,13 @@ offsets with _-g_, and use reverse4 for both binaries. Also, we create the
 graphs for comparing _instr_A_ to _instr_S_ and for comparing _instr_S_ to
 _instr_A_.
 
-```
+```console
 [0x00 ~]$ radiff2 -g 0x40080d,0x40089f  reverse4 reverse4 | xdot -
 ```
 
 ![instr_S graph1](img/instr_S/graph1.png)
 
-```
+```console
 [0x00 ~]$ radiff2 -g 0x40089f,0x40080d  reverse4 reverse4 | xdot -
 ```
 
@@ -424,7 +424,7 @@ Again, simple: it calls _instr_S(arg1, 1)_.
 
 It's local var rename time again!
 
-```
+```console
 :> afvn local_0_1 const_M
 :> afvn local_0_2 const_P
 :> afvn local_3 arg1
@@ -445,7 +445,7 @@ MuCH reV3rse!" string, but remember, this is also the one that can be used only
 
 Another simple one, rename local vars anyways!
 
-```
+```console
 :> afvn local_1 arg1
 ```
 
@@ -458,7 +458,7 @@ This function XORs the value at _sym.current_memory_ptr_ with _arg1_.
 This one is not as simple as the previous ones, but it's not that complicated
 either. Since I'm obviously obsessed with variable renaming:
 
-```
+```console
 :> afvn local_3 arg1
 :> afvn local_0_4 arg1_and_0x3f
 ```

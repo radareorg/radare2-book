@@ -8,7 +8,7 @@ A new stable release is typically published every month.
 
 The radare development repository is often more stable than the 'stable' releases. To obtain the latest version:
 
-```
+```console
 $ git clone https://github.com/radareorg/radare2.git
 ```
 
@@ -16,25 +16,25 @@ This will probably take a while, so take a coffee break and continue reading thi
 
 To update your local copy of the repository, use `git pull` anywhere in the radare2 source code tree:
 
-```
+```console
 $ git pull
 ```
 
 If you have local modifications of the source, you can revert them (and lose them!) with:
 
-```
+```console
 $ git reset --hard HEAD
 ```
 
 Or send us a patch:
 
-```
+```console
 $ git diff > radare-foo.patch
 ```
 
 The most common way to get r2 updated and installed system wide is by using:
 
-```
+```console
 $ sys/install.sh
 ```
 
@@ -68,7 +68,7 @@ Cleaning up the source tree is important to avoid problems like linking to old o
 
 The following commands may help you to get your git clone up to date:
 
-```
+```console
 $ git clean -xdf
 $ git reset --hard origin/master
 $ git pull
@@ -76,7 +76,7 @@ $ git pull
 
 If you want to remove previous installations from your system, you must run the following commands:
 
-```
+```console
 $ ./configure --prefix=/usr/local
 $ make purge
 ```

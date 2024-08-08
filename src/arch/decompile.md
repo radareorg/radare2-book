@@ -24,7 +24,7 @@ You may find it's output quite verbose and noisy, but handy and fast, and that s
 
 Another benefit of `pdc` is that it is available for ALL architectures supported by r2.
 
-```
+```console
 [0x100003a48]> pdc
 int sym.func.100003a48 (int x0, int x1) {
         x8 = [x0 + 0x60]  // arg1
@@ -55,7 +55,7 @@ This decompiler is available via `r2pm` and is sits after the `pdd` command. It 
 
 This plugin can be configured with the `e r2dec.` variables:
 
-```
+```console
 [0x00000000]> e??r2dec.
        r2dec.asm: if true, shows pseudo next to the assembly.
     r2dec.blocks: if true, shows only scopes blocks.
@@ -70,7 +70,7 @@ This plugin can be configured with the `e r2dec.` variables:
 
 In this example we show how `pdda` works, displaying the two columns:
 
-```
+```console
 [0x100003a48]> pdda
 ; assembly                     | /* r2dec pseudo code output */
                                | /* /bin/ls @ 0x100003a48 */
@@ -110,7 +110,7 @@ Note that the quality of the decompilation of r2ghidra compared to ghidra is not
 
 The plugin can be configured with the `e r2ghidra.` variables:
 
-```
+```console
 [0x00000000]> e??r2ghidra.
       r2ghidra.casts: Show type casts where needed
     r2ghidra.cmt.cpp: C++ comment style
@@ -130,7 +130,7 @@ The plugin can be configured with the `e r2ghidra.` variables:
 
 In this example we see how `pdgo` works, displaying the
 
-```
+```console
 [0x100003a48]> pdgo
 0x100003a48 |ulong sym.func.100003a48(int64_t param_1, int64_t param_2) {
             |    ulong uVar1;

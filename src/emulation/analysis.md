@@ -10,7 +10,7 @@ still sometimes required, particularly when deobfuscating or unpacking code. To
 show the emulation process, you can set `asm.emu` variable which will show
 calculated register and memory values as comments in the disassembly:
 
-```
+```console
 [0x00001660]> e asm.emu=true
 [0x00001660]> pdf
 . (fcn) fcn.00001660 40
@@ -39,7 +39,7 @@ Apart from the basic ESIL VM setup, you can change its behavior with other optio
 
 The debugger APIs can be configured to use different backends, to communicate with a local or remote GDB server, use the native debugger, a specific virtualization or emulation engine like Unicorn or BOCHS, but there's also an ESIL backend.
 
-```
+```console
 [0x00000000]> dL
 0  ---  bf       LGPL3
 1  ---  bochs    LGPL3

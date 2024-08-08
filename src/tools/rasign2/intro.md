@@ -2,7 +2,7 @@
 
 The `rasign2` tool allows you to quickly create signature files. To create a SDB signature file named `libc_sigs2.sdb` for the `libc.so.6` binary, simply run:
 
-```
+```console
 $ rasign2 -o libc_sigs2.sdb libc.so.6
 [x] Analyze all flags starting with sym. and entry0 (aa)
 generated zignatures: 2870
@@ -10,7 +10,7 @@ generated zignatures: 2870
 
 The above is equivalent to:
 
-```
+```console
 $ r2 libc.so.6
 [0x00024330]> aa # analyze the file finding functions
 [x] Analyze all flags starting with sym. and entry0 (aa)
@@ -21,7 +21,7 @@ generated zignatures: 2870
 
 The '-a' flag can be added to increase the amount of analysis performed. This will result in more functions discovered and more zignatures created.
 
-```
+```console
 $ rasign2 -a -o /tmp/libc_sigs2.sdb libc.so.6
 [x] Analyze all flags starting with sym. and entry0 (aa)
 [x] Analyze function calls (aac)
@@ -38,7 +38,7 @@ generated zignatures: 2955
 
 There are 3 different output methods. Using `-o` to create an SDB is shown above. The `-r` flag will print the discovered signatures to stdout as r2 commands.
 
-```
+```console
 $ rasign2 -r hello_world  |grep main
 [x] Analyze all flags starting with sym. and entry0 (aa)
 generated zignatures: 17
@@ -53,8 +53,8 @@ za main h 44004dffff87483150d4f315ea8426b4d0c471ce4c56176c874513b24d0266b4
 
 The `-j` flag will print results in JSON format.
 
-```
-rasign2 -j hello_world
+```console
+$ rasign2 -j hello_world
 [x] Analyze all flags starting with sym. and entry0 (aa)
 generated zignatures: 17
 [{"name":"main","bytes":"554889e54883ec20488d051b01000048894...
@@ -62,8 +62,8 @@ generated zignatures: 17
 
 See the help menu for more details:
 
-```
-rasign2 -h
+```console
+$ rasign2 -h
 Usage: rasign2 [options] [file]
  -a [-a]          add extra 'a' to analysis command
  -o sigs.sdb      add signatures to file, create if it does not exist

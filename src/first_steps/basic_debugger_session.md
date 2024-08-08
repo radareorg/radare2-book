@@ -2,7 +2,7 @@
 
 To debug a program, start radare with the `-d` option. Note that you can attach to a running process by specifying its PID, or you can start a new program by specifying its name and parameters:
 
-```
+```console
 $ pidof mc
 32220
 $ r2 -d 32220
@@ -28,7 +28,7 @@ Be warned that certain malware or other tricky programs can actually execute cod
 
 Below is a list of most common commands used with debugger:
 
-```
+```console
 > d?            ; get help on debugger commands
 > ds 3          ; step 3 times
 > db 0x8048920  ; setup a breakpoint
@@ -47,7 +47,7 @@ That way you will neither need to remember many commands nor to keep program sta
 
 To enter visual debugger mode use `Vpp`:
 
-```
+```console
 [0xb7f0c8c0]> Vpp
 ```
 

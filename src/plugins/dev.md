@@ -129,7 +129,7 @@ struct r_lib_struct_t radare_plugin = {
 
 To build and install this plugin just type this:
 
-```
+```console
 $ make
 $ sudo make install
 ```

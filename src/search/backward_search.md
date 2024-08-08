@@ -2,7 +2,7 @@
 
 Sometimes you want to find a keyword backwards. This is, before the current offset, to do this you can seek back and search forward by adding some search.from/to restrictions, or use the `/b` command.
 
-```
+```console
 [0x100001200]> / nop
 0x100004b15 hit0_0 .STUWabcdefghiklmnopqrstuvwxbin/ls.
 0x100004f50 hit0_1 .STUWabcdefghiklmnopqrstuwx1] [file .
@@ -15,7 +15,7 @@ Sometimes you want to find a keyword backwards. This is, before the current offs
 
 Note that `/b` is doing the same as `/`, but backward, so what if we want to use `/x` backward? We can use `/bx`, and the same goes for other search subcommands:
 
-```
+```console
 [0x100001200]> /x 90
 0x100001a23 hit1_0 90
 0x10000248f hit1_1 90

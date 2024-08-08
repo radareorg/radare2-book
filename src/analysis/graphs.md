@@ -25,7 +25,7 @@ Let's dive into the world of radare2 graphs and unlock new dimensions in your an
 
 Radare2 supports various types of graph available through commands starting with `ag`:
 
-```
+```console
 [0x00005000]> ag?
 Usage: ag<graphtype><format> [addr]
 Graph commands:
@@ -127,7 +127,7 @@ To easily execute the printed commands, it is possible to prepend a dot to the c
 
 This is a sample r2 script to create a graph using commands:
 
-```
+```console
 [0x00000000]> e scr.utf8=0
 [0x00000000]> agn foo
 [0x00000000]> agn bar

@@ -8,21 +8,21 @@ So, when radare reads a block of bytes, it is the task of an IO plugin to get th
 
 * Debugging URIs
 
-```
+```console
 $ r2 dbg:///bin/ls
 $ r2 pid://1927
 ```
 
 * Remote sessions
 
-```
+```console
 $ r2 rap://:1234
 $ r2 rap://<host>:1234//bin/ls
 ```
 
 * Virtual buffers
 
-```
+```console
 $ r2 malloc://512
 shortcut for
 $ r2 -
@@ -30,7 +30,7 @@ $ r2 -
 
 You can get a list of the radare IO plugins by typing `radare2 -L`:
 
-```
+```console
 $ r2 -L
 rw_  ar       Open ar/lib files [ar|lib]://[file//path] (LGPL3)
 rw_  bfdbg    BrainFuck Debugger (bfdbg://path/to/file) (LGPL3)

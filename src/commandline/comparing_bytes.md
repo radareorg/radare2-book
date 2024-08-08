@@ -2,7 +2,7 @@
 
 For most generic reverse engineering tasks like finding the differences between two binary files, which bytes has changed, find differences in the graphs of the code analysis results, and other diffing operations you can just use radiff2:
 
-```
+```console
 $ radiff2 -h
 ```
 
@@ -10,7 +10,7 @@ Inside r2, the functionalities exposed by radiff2 are available with the `c` com
 
 `c` (short for "compare") allows you to compare arrays of bytes from different sources. The command accepts input in a number of formats and then compares it against values found at current seek position.
 
-```
+```console
 [0x00404888]> c?
 Usage: c[?dfx] [argument]   # Compare
 | c [string]               Compare a plain with escaped chars string
@@ -40,7 +40,7 @@ Usage: c[?dfx] [argument]   # Compare
 
 To compare memory contents at current seek position against a given string of values, use `cx`:
 
-```
+```console
 [0x08048000]> p8 4
 7f 45 4c 46
 
@@ -53,19 +53,19 @@ Compare 3/4 equal bytes
 Another subcommand of the `c` command is `cc` which stands for "compare code".
 To compare a byte sequence with a sequence in memory:
 
-```
+```console
 [0x4A13B8C0]> cc 0x39e8e089 @ 0x4A13B8C0
 ```
 
 To compare contents of two functions specified by their names:
 
-```
+```console
 [0x08049A80]> cc sym.main2 @ sym.main
 ```
 
 `c8` compares a quadword from the current seek (in the example below, 0x00000000) against a math expression:
 
-```
+```console
 [0x00000000]> c8 4
 
 Compare 1/8 equal bytes (0%)
@@ -76,7 +76,7 @@ Compare 1/8 equal bytes (0%)
 
 The number parameter can, of course, be math expressions which use flag names and anything allowed in an expression:
 
-```
+```console
 [0x00000000]> cx 7f469046
 
 Compare 2/4 equal bytes
@@ -86,8 +86,8 @@ Compare 2/4 equal bytes
 
 You can use the compare command to find differences between a current block and a file previously dumped to a disk:
 
-```
-r2 /bin/true
+```console
+$ r2 /bin/true
 [0x08049A80]> s 0
 [0x08048000]> cf /bin/true
 Compare 512/512 equal bytes

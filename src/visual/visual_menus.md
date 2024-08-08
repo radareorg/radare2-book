@@ -13,7 +13,7 @@ There are a couple of keystrokes in Visual Mode that will lead to some menus wit
 
 This visual mode can be used to navigate through the program like in the visual disassembly view, but having some extra visual modes to follow references, etc
 
-```
+```console
 [0x00000000]> Vv
 .-- functions ----- pdr ---------------------------------.
 | (a)nalyze   (-)delete (x)xrefs (X)refs (j/k) next/prev |
@@ -37,7 +37,7 @@ The Vd menu can be used to redefine information in the current function or instr
 
 This is the list of actions:
 
-```
+```console
 [0x00000000]> Vd
 [Vd]- Define current block as:                                                                   
  $    define flag size

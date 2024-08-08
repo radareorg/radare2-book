@@ -29,7 +29,7 @@ A minimalistic mathematical expression evaluator for the shell that is useful fo
 
 Examples
 
-```
+```console
 $ rax2 1337
 0x539
 
@@ -81,7 +81,7 @@ The command-line assembler and disassembler. It supports a wide range of archite
 
 For example assembling and disassembling a nop for java:
 
-```
+```console
 $ rasm2 -a java 'nop'
 00
 
@@ -110,14 +110,14 @@ Versatile command-line hashing tool that is part of the radare2 framework. It's 
 
 Here are few usage examples:
 
-```
+```console
 $ rahash2 file
 file: 0x00000000-0x00000007 sha256: 887cfbd0d44aaff69f7bdbedebd282ec96191cce9d7fa7336298a18efc3c7a5a
 ```
 
 Algorithms can be selected by specifying them separated with the `-a` flag.
 
-```
+```console
 $ rahash2 -a md5 file
 file: 0x00000000-0x00000007 md5: d1833805515fc34b46c2b9de553f599d
 ```
@@ -160,7 +160,7 @@ This feature is conceptually based on shellforge4, but only linux/osx x86-32/64 
 
 It can also compile a specific low level domain specific language and generate tiny binaries without the need of any system compiler or toolchain as exemplified below:
 
-```
+```console
 $ cat hi.r
 /* hello world in r_egg */
 write@syscall(4); //x64 write@syscall(1);

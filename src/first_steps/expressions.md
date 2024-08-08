@@ -7,7 +7,7 @@ as well as binary and boolean ones.
 
 To evaluate mathematical expressions prepend them with command `?`:
 
-```
+```console
 [0xb7f9d810]> ?vi 0x8048000
 134512640
 [0xv7f9d810]> ?vi 0x8048000+34
@@ -45,14 +45,14 @@ Supported arithmetic operations are:
 
 For example, using the `?vi` command we the the integer (base10) value resulting it from evaluating the given math expression
 
-```
+```console
 [0x00000000]> ?vi 1+2+3
 6
 ```
 
 To use of binary OR should quote the whole command to avoid executing the `|` pipe:
 
-```
+```console
 [0x00000000]> "? 1 | 2"
 hex     0x3
 octal   03
@@ -97,14 +97,14 @@ $b    block size
 
 Some more examples:
 
-```
+```console
 [0x4A13B8C0]> ? $m + $l
 140293837812900 0x7f98b45df4a4 03771426427372244 130658.0G 8b45d000:04a4 140293837812900 10100100 140293837812900.0 -0.000000
 ```
 
 Disassembling the very next instruction after the current one
 
-```
+```console
 [0x4A13B8C0]> pd 1 @ +$l
 0x4A13B8C2   call 0x4a13c000
 ```

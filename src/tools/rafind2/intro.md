@@ -2,7 +2,7 @@
 
 Rafind2 is the command line fronted of the `r_search` library. Which allows you to search for strings, sequences of bytes with binary masks, etc
 
-```
+```console
 $ rafind2 -h
 Usage: rafind2 [-mXnzZhqv] [-a align] [-b sz] [-f/t from/to] [-[e|s|S] str] [-x hex] -|file|dir ..
  -a [align] only accept aligned hits
@@ -29,7 +29,7 @@ Usage: rafind2 [-mXnzZhqv] [-a align] [-b sz] [-f/t from/to] [-[e|s|S] str] [-x 
 
 That's how to use it, first we'll search for "lib" inside the `/bin/ls` binary.
 
-```
+```console
 $ rafind2 -s lib /bin/ls
 0x5f9
 0x675
@@ -42,13 +42,13 @@ Note that the output is pretty minimal, and shows the offsets where the string `
 
 Counting results:
 
-```
+```console
 $ rafind2 -s lib /bin/ls | wc -l
 ```
 
 Displaying results with context:
 
-```
+```console
 $ export F=/bin/ls
 $ for a in `rafind2 -s lib $F` ; do \
     r2 -ns $a -qc'x 32' $F ; done
@@ -66,14 +66,14 @@ $ for a in `rafind2 -s lib $F` ; do \
 
 rafind2 can also be used as a replacement of `file` to identify the mimetype of a file using the internal magic database of radare2.
 
-```
+```console
 $ rafind2 -i /bin/ls
 0x00000000 1 Mach-O
 ```
 
 Also works as a `strings` replacement, similar to what you do with rabin2 -z, but without caring about parsing headers and obeying binary sections.
 
-```
+```console
 $ rafind2 -z /bin/ls| grep http
 0x000076e5 %http://www.apple.com/appleca/root.crl0\r
 0x00007ae6 https://www.apple.com/appleca/0

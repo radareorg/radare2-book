@@ -164,8 +164,8 @@ This feature has broken and not been resolved at the time of writing these words
 
 To save your analysis for now, write your own script which records the function name, variable name, etc. for example:
 
-```sh
-vim sample_A.r2
+```console
+$ vim sample_A.r2
 
 e scr.utf8 = false
 s 0x000403ce0

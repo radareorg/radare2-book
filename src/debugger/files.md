@@ -8,7 +8,7 @@ So, at any time in the debugging session you can replace the stdio file descript
 
 This functionality is also available in r2frida by using the dd command prefixed with a backslash. In r2 you may want to see the output of dd? for proper details.
 
-```
+```console
 [0x00000000]> dd?
 Usage: dd  Manage file descriptors for child process (* to show r2 commands)
 | dd[*]                      list file descriptors

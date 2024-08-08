@@ -4,7 +4,7 @@ The concept of sections is tied to the information extracted from the binary. We
 
 Displaying information about sections:
 
-```
+```console
 [0x00005310]> iS
 [Sections]
 00 0x00000000     0 0x00000000     0 ----
@@ -35,13 +35,13 @@ om fd vaddr [size] [paddr] [rwx] [name]
 
 For Example:
 
-```
+```console
 [0x0040100]> om 4 0x00000100 0x00400000 0x0001ae08 rwx test
 ```
 
 You can also use `om` command to view information about mapped sections:
 
-```
+```console
 [0x00401000]> om
  6 fd: 4 +0x0001ae08 0x00000100 - 0x004000ff rwx test
  5 fd: 3 +0x00000000 0x00000000 - 0x0000055f r-- fmap.LOAD0
@@ -57,6 +57,6 @@ It is also possible to delete the mapped section using the `om-mapid` command.
 
 For Example:
 
-```
+```console
 [0x00401000]> om-6
 ```

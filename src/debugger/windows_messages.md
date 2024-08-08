@@ -4,7 +4,7 @@ On Windows, you can use `dbW` while debugging to set a breakpoint for the messag
 
 Get a list of the current process windows with  `dW` :
 
-```
+```console
 [0x7ffe885c1164]> dW
 .----------------------------------------------------.
 | Handle      | PID   | TID    | Class Name          |
@@ -19,21 +19,21 @@ Get a list of the current process windows with  `dW` :
 
 Set the breakpoint with a message type, together with either the window class name or its handle:
 
-```
+```console
 [0x7ffe885c1164]> dbW WM_KEYDOWN Edit
 Breakpoint set.
 ```
 
 Or
 
-```
+```console
 [0x7ffe885c1164]> dbW WM_KEYDOWN 0x002c048a
 Breakpoint set.
 ```
 
 If you aren't sure which window you should put a breakpoint on, use `dWi` to identify it with your mouse:
 
-```
+```console
 [0x7ffe885c1164]> dWi
 Move cursor to the window to be identified. Ready? y
 Try to get the child? y

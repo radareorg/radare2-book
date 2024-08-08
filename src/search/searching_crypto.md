@@ -4,8 +4,8 @@
 
 radare2 is capable of finding **expanded** keys with `/ca` command for AES and SM4 block ciphers. It searches from current seek position up to the `search.distance` limit, or until end of file is reached. You can interrupt current search by pressing `Ctrl-C`. For example, to look for AES keys in a memory dump:
 
-```
-0x00000000]> /ca aes
+```console
+[0x00000000]> /ca aes
 Searching 40 bytes in [0x0-0x1ab]
 hits: 1
 0x000000fb hit0_0 6920e299a5202a6d656e636869746f2a
@@ -17,7 +17,7 @@ For AES, the output length gives you the size of the AES key used: 128, 192 or 2
 
 `/cr` command implements the search of private keys (RSA and ECC). `/cd` command implements a similar feature to search certificates.
 
-```
+```console
 [0x00000000]> /cr
 Searching 11 bytes in [0x0-0x15a]
 hits: 2
@@ -30,7 +30,7 @@ hits: 2
 
 There is the possibility to delimit entropy sections for later use with `\s` command:
 
-```
+```console
 [0x00000000]> b
 0x100
 [0x00000000]> b 4096
@@ -59,7 +59,7 @@ The blocksize is increased to 4096 bytes from the default 100 bytes so that the 
 
 Sometimes it is useful to search if some data blocks in a binary match a given digest. The command `/h` implement such feature. For example running the following command:
 
-```
+```console
 [0x00000000]> /h sha256 83264abaf298b9238ca63cb2fd9ff0f41a7a1520ee2a17c56df459fc806de1d6 512
 INFO: Searching sha256 for 512 byte length
 INFO: Search in range 0x00000000 and 0x00000284

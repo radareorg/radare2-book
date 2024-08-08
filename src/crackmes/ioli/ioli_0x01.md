@@ -2,7 +2,7 @@
 
 This second challenge is designed to introduce you to more advanced reverse engineering techniques using Radare2. The objective is to find the correct password to unlock the program by examining the binary’s disassembly.
 
-```
+```console
 $ ./crackme0x01
 IOLI Crackme Level 0x01
 Password: test
@@ -47,7 +47,7 @@ Now it's probably a good time to make another blind guess trying the value by ru
 
 Let's go step by step to solve the second IOLI crackme. We can start by trying what we learned in the previous challenge by listing the strings with `rabin2`:
 
-```
+```console
 $ rabin2 -z ./crackme0x01
 [Strings]
 nth paddr      vaddr      len size section type  string
@@ -60,7 +60,7 @@ nth paddr      vaddr      len size section type  string
 
 This isn't going to be as easy as 0x00. Let's try disassembly with r2.
 
-```
+```console
 $ r2 ./crackme0x01 
 [0x08048330]> aa
 INFO: Analyze all flags starting with sym. and entry0 (aa)
@@ -116,14 +116,14 @@ This will print the disassembly of the main function, or the `main()` that every
 
 If you look carefully, you'll see a `cmp` instruction, with a constant, 0x149a. `cmp` is an x86 compare instruction, and the 0x in front of it specifies it is in base 16, or hex (hexadecimal).
 
-```
+```console
 [0x08048330]> pdf@main~cmp
 0x0804842b    817dfc9a140. cmp dword [ebp + 0xfffffffc], 0x149a
 ```
 
 You can use radare2's `?` command to display 0x149a in another numeric base.
 
-```
+```console
 [0x08048330]> ? 0x149a
 int32   5274
 uint32  5274
@@ -141,7 +141,7 @@ trits   0t21020100
 
 So now we know that 0x149a is 5274 in decimal. Let's try this as a password.
 
-```
+```console
 $ ./crackme0x01
 IOLI Crackme Level 0x01
 Password: 5274
@@ -150,7 +150,7 @@ Password OK :)
 
 Bingo, the password was 5274. In this case, the password function at 0x0804842b was comparing the input against the value, 0x149a in hex. Since user input is usually decimal, it was a safe bet that the input was intended to be in decimal, or 5274. Now, since we're hackers, and curiosity drives us, let's see what happens when we input in hex.
 
-```
+```console
 $ ./crackme0x01
 IOLI Crackme Level 0x01
 Password: 0x149a

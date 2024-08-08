@@ -12,7 +12,7 @@ The most common radare2 analysis command sequence is `aa`, which stands for "ana
 
 Take some time to understand what each command does and the results after running them to find the best one for your needs.
 
-```
+```console
 [0x08048440]> aa
 [0x08048440]> pdf @ main
 		   ; DATA XREF from 0x08048457 (entry0)
@@ -82,7 +82,7 @@ One of the most important "basic" analysis commands is the set of `af` subcomman
 "analyze function". Using this command you can either allow automatic analysis of the particular
 function or perform completely manual one.
 
-```
+```console
 [0x00000000]> af?
 Usage: af
 | af ([name]) ([addr])                  analyze functions (start at addr or $$)
@@ -132,7 +132,7 @@ the one specified by name as an argument, `aff` to readjust the function after a
 Apart from those semi-automatic ways to edit/analyze the function, you can hand craft it in the manual mode with `af+` command and edit basic blocks of it using `afb` commands.
 Before changing the basic blocks of the function it is recommended to check the already presented ones:
 
-```
+```console
 [0x00003ac0]> afb
 0x00003ac0 0x00003b7f 01:001A 191 f 0x00003b7f
 0x00003b7f 0x00003b84 00:0000 5 j 0x00003b92 f 0x00003b84
@@ -146,7 +146,7 @@ Before changing the basic blocks of the function it is recommended to check the 
 
 Before we start, let's prepare a binary file first. Write in `example.c`:
 
-```C
+```c
 int code_block()
 {
   int result = 0;
@@ -162,7 +162,7 @@ then compile with `gcc -c example.c -m32 -O0 -fno-pie`, and open the object file
 
 Since we haven't analyzed it yet, the `pdf` command will not print out the disassembly here:
 
-```
+```console
 $ r2 example.o 
 [0x08000034]> pdf
 p: Cannot find function at 0x08000034
@@ -193,14 +193,14 @@ our goal is to handcraft a function with the following structure
 
 create a function at 0x8000034 named code_block:
 
-```
+```console
 [0x8000034]> af+ 0x8000034 code_block
 ```
 
 In most cases, we use jump or call instructions as code block boundaries. so the range of first block is from `0x08000034 push ebp` to `0x08000048 jmp 0x8000052`.
 use `afb+` command to add it.
 
-```
+```console
 [0x08000034]> afb+ code_block 0x8000034 0x800004a-0x8000034 0x8000052
 ```
 
@@ -208,20 +208,20 @@ note that the basic syntax of `afb+` is `afb+ function_address block_address blo
 
 the next block (0x08000052 ~ 0x08000056) is more likeyly an if conditional statement which has two branches. It will jump to 0x800004a if `jle-less or equal`, otherwise (the fail condition) jump to next instruction -- 0x08000058.:
 
-```
+```console
 [0x08000034]> afb+ code_block 0x8000052 0x8000058-0x8000052 0x800004a 0x8000058
 ```
 
 follow the control flow and create the remaining two blocks (two branches) :
 
-```
+```console
 [0x08000034]> afb+ code_block 0x800004a 0x8000052-0x800004a 0x8000052
 [0x08000034]> afb+ code_block 0x8000058 0x800005d-0x8000058
 ```
 
 check our work:
 
-```
+```console
 [0x08000034]> afb
 0x08000034 0x0800004a 00:0000 22 j 0x08000052
 0x0800004a 0x08000052 00:0000 8 j 0x08000052
@@ -279,7 +279,7 @@ The most commonly used `ax` commands are `axt` and `axf`, especially as a part o
 scripts. Lets say we see the string in the data or a code section and want to find all places
 it was referenced from, we should use `axt`:
 
-```
+```console
 [0x0001783a]> pd 2
 ;-- str.02x:
 ; STRING XREF from 0x00005de0 (sub.strlen_d50)
@@ -299,7 +299,7 @@ sub.strlen_d50 0x5de0 [STRING] lea rcx, str.02x
 
 There are also some useful commands under `axt`. Use `axtg` to generate radare2 commands which will help you to create graphs according to the XREFs.
 
-```
+```console
 [0x08048320]> s main
 [0x080483e0]> axtg
 agn 0x8048337 "entry0 + 23"
@@ -311,7 +311,7 @@ Use `axt*` to split the radare2 commands and set flags on those corresponding XR
 
 Also under `ax` is `axg`, which finds the path between two points in the file by showing an XREFs graph to reach the location or function. For example:
 
-```
+```console
 :> axg sym.imp.printf
 - 0x08048a5c fcn 0x08048a5c sym.imp.printf
   - 0x080483e5 fcn 0x080483e0 main
@@ -476,7 +476,7 @@ Usage: ah[lba-]  Analysis Hints
 
 One of the most common cases is to set a particular numeric base for immediates:
 
-```
+```console
 [0x00003d54]> ahi?
 Usage: ahi [2|8|10|10u|16|bodhipSs] [@ offset]   Define numeric base
 | ahi <base>  set numeric base (2, 8, 10, 16)
@@ -506,7 +506,7 @@ Usage: ahi [2|8|10|10u|16|bodhipSs] [@ offset]   Define numeric base
 It is notable that some analysis stages or commands add the internal analysis hints,
 which can be checked with `ah` command:
 
-```
+```console
 [0x00003d54]> ah
  0x00003d54 - 0x00003d54 => immbase=2
 [0x00003d54]> ah*
@@ -518,7 +518,7 @@ relocation, which is unknown for radare2, thus we can change the value manually.
 The current analysis information about a particular opcode can be checked with `ao` command.
 We can use `ahc` command for performing such a change:
 
-```
+```console
 [0x00003cee]> pd 2
 0x00003cee      e83d080100     call sub.__errno_location_530
 0x00003cf3      85c0           test eax, eax
@@ -574,7 +574,7 @@ As you can see, despite the unchanged disassembly view the jump address in opcod
 If anything of the previously described didn't help, you can simply override shown disassembly with anything you
 like:
 
-```
+```console
 [0x00003d54]> pd 2
 0x00003d54      0583000000     add eax, 10000011b
 0x00003d59      3d13010000     cmp eax, 0x113

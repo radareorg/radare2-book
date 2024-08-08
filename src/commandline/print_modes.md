@@ -6,7 +6,7 @@ Binary data can be represented as integers, shorts, longs, floats, timestamps, h
 
 Below is a list of available print modes listed by `p?`:
 
-```
+```console
 [0x00005310]> p?
 |Usage: p[=68abcdDfiImrstuxz] [arg|len] [@addr]
 | p[b|B|xb] [len] ([S])   bindump N bits skipping S bytes
@@ -47,7 +47,7 @@ Below is a list of available print modes listed by `p?`:
 
 Tip: when using json output, you can append the `~{}` to the command to get a pretty-printed version of the output:
 
-```
+```console
 [0x00000000]> oj
 [{"raised":false,"fd":563280,"uri":"malloc://512","from":0,"writable":true,"size":512,"overlaps":false}]
 [0x00000000]> oj~{}
@@ -78,7 +78,7 @@ For more on the magical powers of `~` see the help in `?@?`, and the [Command Fo
 
 #### 8 bits Hexpair List of Bytes
 
-```
+```console
 [0x00404888]> p8 16
 31ed4989d15e4889e24883e4f0505449
 ```
@@ -91,7 +91,7 @@ For more on the magical powers of `~` see the help in `?@?`, and the [Command Fo
 
 Currently supported timestamp output modes are:
 
-```
+```console
 [0x00404888]> pt?
 |Usage: pt [dn]  print timestamps
 | pt.  print current time
@@ -103,7 +103,7 @@ Currently supported timestamp output modes are:
 
 For example, you can 'view' the current buffer as timestamps in the ntfs time:
 
-```
+```console
 [0x08048000]> e cfg.bigendian = false
 [0x08048000]> pt 4
 29:04:32948 23:12:36 +0000
@@ -114,7 +114,7 @@ For example, you can 'view' the current buffer as timestamps in the ntfs time:
 
 As you can see, the endianness affects the result. Once you have printed a timestamp, you can grep the output, for example, by year:
 
-```
+```console
 [0x08048000]> pt ~1974 | wc -l
 15
 [0x08048000]> pt ~2022
@@ -146,7 +146,7 @@ The default date format can be configured using the `cfg.datefmt` variable. Form
 
 There are print modes available for all basic types. If you are interested in a more complex structure, type `pf??` for format characters and `pf???` for examples:
 
-```
+```console
 [0x00499999]> pf??
 |pf: pf[.k[.f[=v]]|[v]]|[n]|[0|cnt][fmt] [a0 a1 ...]
 | Format:
@@ -188,7 +188,7 @@ There are print modes available for all basic types. If you are interested in a 
 
 Use triple-question-mark `pf???` to get some examples using print format strings.
 
-```
+```console
 [0x00499999]> pf???
 |pf: pf[.k[.f[=v]]|[v]]|[n]|[0|cnt][fmt] [a0 a1 ...]
 | Examples:
@@ -219,12 +219,12 @@ Use triple-question-mark `pf???` to get some examples using print format strings
 
 Some examples are below:
 
-```
+```console
 [0x4A13B8C0]> pf i
 0x00404888 = 837634441
 ```
 
-```
+```console
 [0x4A13B8C0]> pf
 0x00404888 = 837634432.000000
 ```
@@ -258,7 +258,7 @@ If we need to create a .c file containing a binary blob, use the `pc` command, t
 
 We can also just temporarily override this block size by expressing it as an argument.
 
-```
+```console
 [0xB7F8E810]> pc 32
 #define _BUFFER_SIZE 32
 unsigned char buffer[_BUFFER_SIZE] = {
@@ -267,7 +267,7 @@ unsigned char buffer[_BUFFER_SIZE] = {
 
 That cstring can be used in many programming languages, not just C.
 
-```
+```console
 [0x7fcd6a891630]> pcs
 "\x48\x89\xe7\xe8\x68\x39\x00\x00\x49\x89\xc4\x8b\x05\xef\x16\x22\x00\x5a\x48\x8d\x24\xc4\x29\xc2\x52\x48\x89\xd6\x49\x89\xe5\x48\x83\xe4\xf0\x48\x8b\x3d\x06\x1a
 ```
@@ -276,7 +276,7 @@ That cstring can be used in many programming languages, not just C.
 
 Strings are probably one of the most important entry points when starting to reverse engineer a program because they usually reference information about functions' actions (asserts, debug or info messages...). Therefore, radare supports various string formats:
 
-```
+```console
 [0x00000000]> ps?
 |Usage: ps[bijqpsuwWxz+] [N]  Print String
 | ps       print string
@@ -296,7 +296,7 @@ Strings are probably one of the most important entry points when starting to rev
 
 Most strings are zero-terminated. Below there is an example using the debugger to continue the execution of a program until it executes the 'open' syscall. When we recover the control over the process, we get the arguments passed to the syscall, pointed by %ebx. In the case of the 'open' call, it is a zero terminated string which we can inspect using `psz`.
 
-```
+```console
 [0x4A13B8C0]> dcs open
 0x4a14fc24 syscall(5) open ( 0x4a151c91 0x00000000 0x00000000 ) = 0xffffffda
 [0x4A13B8C0]> dr
@@ -313,7 +313,7 @@ Most strings are zero-terminated. Below there is an example using the debugger t
 
 It is also possible to print various packed data types using the `pf` command:
 
-```
+```console
 [0xB7F08810]> pf xxS @ rsp
 0x7fff0d29da30 = 0x00000001
 0x7fff0d29da34 = 0x00000000
@@ -322,7 +322,7 @@ It is also possible to print various packed data types using the `pf` command:
 
 This can be used to look at the arguments passed to a function. To achieve this, simply pass a 'format memory string' as an argument to `pf`, and temporally change the current seek position/offset using `@`. It is also possible to define arrays of structures with `pf`. To do this, prefix the format string with a numeric value. You can also define a name for each field of the structure by appending them as a space-separated arguments list.
 
-```
+```console
 [0x4A13B8C0]> pf 2*xw pointer type @ esp
 0x00404888 [0] {
    pointer :
@@ -337,7 +337,7 @@ This can be used to look at the arguments passed to a function. To achieve this,
 
 A practical example for using `pf` on a binary of a GStreamer plugin:
 
-```
+```console
 $ radare2 /usr/lib/gstreamer-1.0/libgstflv.so
 [0x00006020]> aa; pdf @ sym.gst_plugin_flv_get_desc
 [x] Analyze all flags starting with sym. and entry0 (aa)
@@ -367,7 +367,7 @@ The `pd` command is used to disassemble code. It accepts a numeric value to spec
 * `d` : disassembly N opcodes   count of opcodes
 * `D` : asm.arch disassembler   bsize bytes
 
-```
+```console
 [0x00404888]> pd 1
 ;-- entry0:
 0x00404888    31ed         xor ebp, ebp
@@ -377,7 +377,7 @@ The `pd` command is used to disassemble code. It accepts a numeric value to spec
 
 The architecture flavor for the disassembler is defined by the `asm.arch` eval variable. You can use `e asm.arch=??` to list all available architectures.
 
-```
+```console
 [0x00005310]> e asm.arch=??
 _dAe  _8_16      6502        LGPL3   6502/NES/C64/Tamagotchi/T-1000 CPU
 _dAe  _8         8051        PD      8051 Intel CPU
@@ -409,7 +409,7 @@ _d__  _32        lanai       GPL3    LANAI
 
 There are multiple options which can be used to configure the output of the disassembler. All these options are described in `e? asm.`
 
-```
+```console
 [0x00005310]> e? asm.
 asm.anal: Analyze code and refs while disassembling (see anal.strings)
 asm.arch: Set the arch to be used by asm

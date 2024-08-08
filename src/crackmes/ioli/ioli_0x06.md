@@ -2,8 +2,8 @@
 
 nearly a routine to check this binary (not complete output in the following):
 
-```shell
-rabin2 -z ./crackme0x06
+```console
+$ rabin2 -z ./crackme0x06
 [Strings]
 nth paddr      vaddr      len size section type  string
 -------------------------------------------------------
@@ -13,7 +13,7 @@ nth paddr      vaddr      len size section type  string
 3   0x00000763 0x08048763 24  25   .rodata ascii IOLI Crackme Level 0x06\n
 4   0x0000077c 0x0804877c 10  11   .rodata ascii Password:
 
-rabin2 -I ./crackme0x06
+$ rabin2 -I ./crackme0x06
 arch     x86
 baddr    0x8048000
 bintype  elf
@@ -33,7 +33,7 @@ va       true
 
 and analyze it then decompile main
 
-```C
+```c
 [0x08048400]> pdd@main
 /* r2dec pseudo code output */
 /* ./crackme0x06 @ 0x8048607 */
@@ -64,7 +64,7 @@ int32_t main (int32_t arg_10h) {
 
 main has 3 arguments `argc, argv, envp`, and this program is compiled with GCC, so the stack should be like this :
 
-```sh
+```
 [esp + 0x10] - envp
 [esp + 0x0c] - argv
 [esp + 0x08] - argc
@@ -73,7 +73,7 @@ main has 3 arguments `argc, argv, envp`, and this program is compiled with GCC, 
 
 enter the `check()` and decompile it. this function is different from 0x05 now. but they still have similar code structure.
 
-```C
+```c
 int32_t check (char * s, int32_t arg_ch) {
     char * var_dh;
     uint32_t var_ch;
@@ -115,7 +115,7 @@ label_0:
 
 Correct the `sscanf` part and `parell` part, both of them were generated incorrectly:
 
-```C
+```c
 int32_t check (char * s, void* envp)
 {
     var_ch = 0;
@@ -135,7 +135,7 @@ int32_t check (char * s, void* envp)
 
  no more info, we have to reverse `parell()` again.
 
-```C
+```c
 #include <stdint.h>
 
 uint32_t parell (char * s, char * arg_ch) {
@@ -157,7 +157,7 @@ uint32_t parell (char * s, char * arg_ch) {
 
 well, there is a new check condition in `parell()` -- `dummy (var_4h, arg_ch) == 0`. then reverse dummy!
 
-```C
+```c
 [0x080484b4]> pdd@sym.dummy
 /* r2dec pseudo code output */
 /* ./crackme0x06 @ 0x80484b4 */
@@ -196,7 +196,7 @@ label_1:
 
 looks like a loop to process string. we can beautify it.
 
-```C
+```c
 [0x080484b4]> pdd@sym.dummy
 /* r2dec pseudo code output */
 /* ./crackme0x06 @ 0x80484b4 */
@@ -217,7 +217,7 @@ There are 3 constraints to crackme_0x06:
 * Odd Number
 * should have an environment variable whose name started with "LOL".
 
-```sh
+```console
 $ ./crackme0x06
 IOLI Crackme Level 0x06
 Password: 12346

@@ -2,7 +2,7 @@
 
 Radare2 can also work with data types. You can use standard C data types or define your own using C. Currently, there is a support for structs, unions, function signatures, and enums.
 
-```
+```console
 [0x00000000]> t?
 Usage: t   # cparse types commands
 | t                          List all loaded types
@@ -48,7 +48,7 @@ You can View loaded types in r2 using `ts` for structures, `tu` for unions, `tf`
 
 You can also cast pointers to data types and view data in there accordingly with `tp`. EX:
 
-```
+```console
 [0x00400511]> tp person = 0x7fff170a46b0
        age : 0x7fff170a46b0 = 20
        name : (*0x4005b0) 0x7fff170a46b4 = My name

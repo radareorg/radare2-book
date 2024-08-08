@@ -4,7 +4,7 @@ Console access is wrapped in API that permits to show the output of any command 
 
 To enable colors support by default, add a corresponding configuration option to the .radare2 configuration file:
 
-```
+```console
 $ echo 'e scr.color=1' >> ~/.radare2rc
 ```
 

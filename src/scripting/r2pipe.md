@@ -30,7 +30,7 @@ Here there are some examples about scripting with r2pipe in different languages
 
 ### Python
 
-```
+```console
 $ pip install r2pipe
 ```
 
@@ -47,7 +47,7 @@ print(r2.cmdj("aflj"))  # evaluates JSONs and returns an object
 
 Use this command to install the r2pipe bindings
 
-```
+```console
 $ npm install r2pipe
 ```
 
@@ -74,7 +74,7 @@ Checkout the GIT repository for more examples and details.
 
 ### Go
 
-```
+```console
 $ r2pm -i r2pipe-go
 ```
 
@@ -106,7 +106,7 @@ func main() {
 
 ### Rust
 
-```
+```console
 $ cat Cargo.toml
 ...
 [dependencies]
@@ -129,7 +129,7 @@ fn main() {
 
 ### Ruby
 
-```
+```console
 $ gem install r2pipe
 ```
 

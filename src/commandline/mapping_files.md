@@ -12,7 +12,7 @@ radare2 is able to open files and map portions of them at random places in memor
 
 Opening files (and mapping them) is done using the `o` (open) command. Let's read the help:
 
-```
+```console
 [0x00000000]> o?
 |Usage: o [com- ] [file] ([offset])
 | o                         list opened files
@@ -45,7 +45,7 @@ Opening files (and mapping them) is done using the `o` (open) command. Let's rea
 
 Prepare a simple layout:
 
-```sh
+```console
 $ rabin2 -l /bin/ls
 [Linked libraries]
 libselinux.so.1
@@ -58,13 +58,13 @@ libc.so.6
 
 Map a file:
 
-```
+```console
 [0x00001190]> o /bin/zsh 0x499999
 ```
 
 List mapped files:
 
-```
+```console
 [0x00000000]> o
 - 6 /bin/ls @ 0x0 ; r
 - 10 /lib/ld-linux.so.2 @ 0x100000000 ; r
@@ -73,18 +73,18 @@ List mapped files:
 
 Print hexadecimal values from /bin/zsh:
 
-```
+```console
 [0x00000000]> px @ 0x499999
 ```
 
 Unmap files using the `o-` command. Pass the required file descriptor to it as an argument:
 
-```
+```console
 [0x00000000]> o-14
 ```
 
 You can also view the ascii table showing the list of the opened files:
 
-```
+```console
 [0x00000000]> ob=
 ```

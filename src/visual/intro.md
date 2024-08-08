@@ -19,7 +19,7 @@ The Visual mode uses "print modes" which are basically different panels that you
 
 Notice that the top of the panel contains the command which is used, for example for the disassembly panel:
 
-```
+```console
 [0x00404890 16% 120 /bin/ls]> pd $r @ entry0
 ```
 

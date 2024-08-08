@@ -20,13 +20,13 @@ Download the Termux application from the [official site](https://github.com/term
 
 First time installation of termux require updating the repo to fetch all the available packages.
 
-```
+```console
 $ pkg update && pkg upgrade -y
 ```
 
 ##### Install required packages
 
-```
+```console
 $ pkg install build-essential git python3 binutils wget pkg-config
 ```
 
@@ -34,7 +34,7 @@ build-essential contains all the required build tool like make,gcc etc.
 
 ##### Download or clone Radare2 repo
 
-```
+```console
 $ git clone https://github.com/radareorg/radare2
 ```
 
@@ -44,14 +44,14 @@ If you are limited by disk space, you can either clone the repository with a dep
 
 Building and installing Radare2 after cloning the repository is straightforward using the following commands:
 
-```
+```sh
 cd radare2
 sh sys/install.sh
 ```
 
 It will install required packages if you already didn't and start the installation.
 
-```
+```console
 ~/radare2 $ sh sys/install.sh
 /data/data/com.termux/files/home/radare2
 Termux environment detected. Installing necessary packages

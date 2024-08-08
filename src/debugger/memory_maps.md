@@ -4,7 +4,7 @@ The ability to understand and manipulate the memory maps of a debugged program i
 
 First, let's see the help message for `dm`, the command which is responsible for handling memory maps:
 
-```
+```console
 [0x55f2104cf620]> dm?
 Usage: dm   # Memory maps commands
 | dm                               List memory maps of target process
@@ -34,7 +34,7 @@ In this chapter, we'll go over some of the most useful subcommands of `dm` using
 
 First things first - open a program in debugging mode:
 
-```
+```console
 $ r2 -d helloworld
 Process with PID 20304 started...
 = attach 20304 20304
@@ -48,7 +48,7 @@ asm.bits 64
 
 Let's use `dm` to print the memory maps of the binary we've just opened:
 
-```
+```console
 [0x7f133f022fb0]> dm
 0x0000563a0113a000 - usr   4K s r-x /tmp/helloworld /tmp/helloworld ; map.tmp_helloworld.r_x
 0x0000563a0133a000 - usr   8K s rw- /tmp/helloworld /tmp/helloworld ; map.tmp_helloworld.rw
@@ -65,14 +65,14 @@ For those of you who prefer a more visual way, you can use `dm=` to see the memo
 
 If you want to know the memory-map you are currently in, use `dm.`:
 
-```
+```console
 [0x7f133f022fb0]> dm.
 0x00007f947eed9000 # 0x00007f947eefe000 * usr   148K s r-x /usr/lib/ld-2.27.so /usr/lib/ld-2.27.so ; map.usr_lib_ld_2.27.so.r_x
 ```
 
 Using `dmm` we can "List modules (libraries, binaries loaded in memory)", this is quite a handy command to see which modules were loaded.
 
-```
+```console
 [0x7fa80a19dfb0]> dmm
 0x55ca23a4a000 /tmp/helloworld
 0x7fa80a19d000 /usr/lib/ld-2.27.so
@@ -82,7 +82,7 @@ Using `dmm` we can "List modules (libraries, binaries loaded in memory)", this i
 
 We can see that along with our `helloworld` binary itself, another library was loaded which is `ld-2.27.so`. We don't see `libc` yet and this is because radare2 breaks before `libc` is loaded to memory. Let's use `dcu` (**d**ebug **c**ontinue **u**ntil) to execute our program until the entry point of the program, which radare flags as `entry0`.
 
-```
+```console
 [0x7fa80a19dfb0]> dcu entry0
 Continue until 0x55ca23a4a520 using 1 bpsize
 hit breakpoint at: 55ca23a4a518
@@ -96,7 +96,7 @@ Now we can see that `libc-2.27.so` was loaded as well, great!
 
 Speaking of `libc`, a popular task for binary exploitation is to find the address of a specific symbol in a library. With this information in hand, you can build, for example, an exploit which uses ROP. This can be achieved using the `dmi` command. So if we want, for example, to find the address of [`system()`](http://man7.org/linux/man-pages/man3/system.3.html) in the loaded `libc`, we can simply execute the following command:
 
-```
+```console
 [0x55ca23a4a520]> dmi libc system
 514 0x00000000 0x7fa809de1000  LOCAL  FILE    0 system.c
 515 0x00043750 0x7fa809e24750  LOCAL  FUNC 1221 do_system
@@ -111,7 +111,7 @@ Similar to the `dm.` command, with `dmi.` you can see the closest symbol to the 
 
 Another useful command is to list the sections of a specific library. In the following example we'll list the sections of `ld-2.27.so`:
 
-```
+```console
 [0x55a7ebf09520]> dmS ld-2.27
 [Sections]
 00 0x00000000     0 0x00000000     0 ---- ld-2.27.so.

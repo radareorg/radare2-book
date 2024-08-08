@@ -23,7 +23,7 @@ There are many use cases for ESIL in radare2, not just bare code emulation:
 
 To view the ESIL representation of your program, use the `ao~esil` command or enable the `asm.esil` configuration variable. This will let you verify how the code is uplifted from assembly to ESIL and understand better how that works internally.
 
-```
+```console
 [0x00001660]> pdf
 . (fcn) fcn.00001660 40
 |   fcn.00001660 ();

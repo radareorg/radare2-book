@@ -6,7 +6,7 @@ This is the help message of rax2, this tool can be used in the command-line or i
 
 Inside r2, the functionality of rax2 is available under the ? command. For example:
 
-```
+```console
 [0x00000000]> ? 3+4
 ```
 
@@ -22,7 +22,7 @@ The syntax in which the numbers are represented define the base, for example:
 
 This is the help message of rax2 -h, which will show you a bunch more syntaxes
 
-```
+```console
 $ rax2 -h
 Usage: rax2 [options] [expr ...]
   =[base]                      ;  rax2 =10 0x46 -> output in base 10
@@ -75,7 +75,7 @@ Some examples:
 
 Calculator:
 
-```sh
+```console
 $ rax2 3+0x80
 0x83
 $ rax2 -d "1<<8"
@@ -84,7 +84,7 @@ $ rax2 -d "1<<8"
 
 Base conversion:
 
-```sh
+```console
 $ rax2 '=2' 73303325
 100010111101000010100011101b
 ```
@@ -93,7 +93,7 @@ The single quote for `'=2'` is not mandatory for bash but is necessary for some 
 
 Conversion in hex string
 
-```sh
+```console
 $ rax2 -s 4142
 AB
 $ rax2 -S AB
@@ -104,7 +104,7 @@ $ rax2 -S < bin.foo
 
 Endianness conversion:
 
-```sh
+```console
 $ rax2 -e 33
 0x21000000
 $ rax2 -e 0x21000000
@@ -113,14 +113,14 @@ $ rax2 -e 0x21000000
 
 Base64 decoding
 
-```sh
+```console
 $ rax2 -D ZQBlAA== | rax2 -S
 65006500
 ```
 
 Randomart:
 
-```sh
+```console
 $ rax2 -K 90203010
 +--[0x10302090]---+
 |Eo. .            |

@@ -19,7 +19,7 @@ int main() {
 
 That small C program can be compiled with ragg2 like this:
 
-```
+```console
 $ ragg2 -a x86 -b32 a.c
 e900000000488d3516000000bf01000000b80400000248c7c20d0000000f0531c0c348656c6c6f20576f726c640a00
 
@@ -88,7 +88,7 @@ Usage: ragg2 [-FOLsrxhvz] [-a arch] [-b bits] [-k os] [-o file] [-I path]
 
 ### First Example
 
-```
+```console
 $ cat hello.r
 exit@syscall(1);
 
@@ -135,14 +135,14 @@ int main()
 
 One can get raw machine code of the above program like this:
 
-```sh
+```console
 $ ragg2 code1.c
 eb0e66666666662e0f1f84000000000050bf01000000488d359f000000ba0d000000e81900000031ff89442404e85e00000031d289042489d059c30f1f440000897c24fc48897424f0895424ec8b5424fc895424dc488b7424f048897424d08b5424ec895424cc8b7c24dc488b7424d08b5424ccb8010000000f0548894424e0488b4424e089c1894c24c88b4424c8c3897c24fc8b7c24fc897c24ec8b7c24ecb83c0000000f0548894424f0488b4424f089c1894c24e88b4424e8c348656c6c6f20576f726c640a00
 ```
 
 If you want it in a file, you may use the '-O' flag which uses the default filename or you may specify the output filename using '-o' option.
 
-```sh
+```console
 $ ragg2 -O code1.c
 $ cat code1
 eb0e66666666662e0f1f84000000000050bf01000000488d359f000000ba0d000000e81900000031ff89442404e85e00000031d289042489d059c30f1f440000897c24fc48897424f0895424ec8b5424fc895424dc488b7424f048897424d08b5424ec895424cc8b7c24dc488b7424d08b5424ccb8010000000f0548894424e0488b4424e089c1894c24c88b4424c8c3897c24fc8b7c24fc897c24ec8b7c24ecb83c0000000f0548894424f0488b4424f089c1894c24e88b4424e8c348656c6c6f20576f726c640a00
@@ -150,7 +150,7 @@ eb0e66666666662e0f1f84000000000050bf01000000488d359f000000ba0d000000e81900000031
 
 Printing as in raw
 
-```sh
+```console
 $ ragg2 -o code1.raw code1.c
 $ cat code1.raw
 eb0e66666666662e0f1f84000000000050bf01000000488d359f000000ba0d000000e81900000031ff89442404e85e00000031d289042489d059c30f1f440000897c24fc48897424f0895424ec8b5424fc895424dc488b7424f048897424d08b5424ec895424cc8b7c24dc488b7424d08b5424ccb8010000000f0548894424e0488b4424e089c1894c24c88b4424c8c3897c24fc8b7c24fc897c24ec8b7c24ecb83c0000000f0548894424f0488b4424f089c1894c24e88b4424e8c348656c6c6f20576f726c640a00
@@ -164,7 +164,7 @@ The above is a basic 'raw' output. ragg2 offers a number of output format option
 
 The following is 'c' format output - shellcode which can be readily used in your C program.
 
-```sh
+```console
 $ ragg2 -f c -o code1.c.c code1.c
 $ cat code1.c.c
 const unsigned char cstr[201] = ""\
@@ -204,7 +204,7 @@ int main()
 
 Compile and run it.
 
-```
+```console
 $ gcc code1.c.c -o code1.c.elf -zexecstack
 code1.c.c: In function ‘main’:
 code1.c.c:14:19: warning: initialization from incompatible pointer type [-Wincompatible-pointer-types]
@@ -218,7 +218,7 @@ Similar to how the above code is readily usable in C programs, ragg2 can emit py
 
 To generate an executable binary for your native architecture, you may use the '-F' option.
 
-```sh
+```console
 $ ragg2 -F -o code1.elf code1.c
 $ ./code1.elf
 Hello World
@@ -226,7 +226,7 @@ Hello World
 
 You may specify the binary format output.
 
-```sh
+```console
 $ ragg2 -f elf -o code1_f.elf code1.c
 $ ./code1_f.elf
 Hello World
@@ -234,7 +234,7 @@ Hello World
 
 or
 
-```sh
+```console
 $ ragg2 -f mach0 -o code1_f.mach0 code1.c
 $ file code1_f.mach0
 code1_f.mach0: Mach-O 64-bit x86_64 executable
@@ -244,7 +244,7 @@ Same with the 'PE' format.
 
 In the above examples, the target architecture is the architecture of your machine. But target architecture can explicitly be specified using the '-a' option.
 
-```sh
+```console
 $ ragg2 -f raw -a x86 -b 32 code1.c
 eb4e66666666662e0f1f840000000000575683ec108b4424208b4c241c8b54241c8b742420bf66000000894c240889f18944240489f85389d3cd805b8944240c8b44240c8904248b042483c4105e5fc3535683ec24e8000000005881c0661e0000b9010000008d9083e2ffffbe0d000000c704240100000089542404c74424080d00000089c389442420894c241c89742418e82900000031c9c70424000000008b5c242089442414894c2410e86f00000031c083c4245e5bc30f1f80000000005553575683ec148b4424308b4c242c8b5424288b7424288b7c242c8b5c2430bd04000000894c240c89f98954240889da8944240489e85389f3cd805b894424108b4424108904248b042483c4145e5f5b5dc366666666662e0f1f84000000000083ec088b44240c8b4c240cba0100000089042489d05389cbcd805b8944240483c408c348656c6c6f20576f726c640a00
 ```
@@ -258,7 +258,7 @@ The '-b' option can be used to specify the bits. One can see the supported archi
 
 The '-r' flag can be used to generate binary output instead of the above hex-string style output.
 
-```sh
+```console
 $ ragg2 -f raw -r code1.c | rax2 -S
 efbfbd31efbfbdefbfbd4424efbfbd5e31d28924efbfbdefbfbd59efbfbd44efbfbd7c24efbfbd48efbfbd
 7424efbfbdefbfbd5424efbfbdefbfbd5424efbfbdefbfbd5424efbfbd48efbfbd7424efbfbd48efbfbd74
@@ -268,7 +268,7 @@ bfbd4424efbfbdefbfbdefbfbdefbfbd4c24c88b4424efbfbdc3897c24efbfbdefbfbd7c24efbfbd
 bd4c24efbfbdefbfbd4424efbfbdefbfbd48656c6c6f20576f726c640a
 ```
 
-```
+```console
 $ ragg2 -f raw -a x86 -b 64 -r code1.c | xxd
 00000000: eb0e 6666 6666 662e 0f1f 8400 0000 0000  ..fffff.........
 00000010: 50bf 0100 0000 488d 359f 0000 00ba 0d00  P.....H.5.......
@@ -287,7 +287,7 @@ $ ragg2 -f raw -a x86 -b 64 -r code1.c | xxd
 
 Using '-z' flag instead of '-r' would generate a C-style hex-string output.
 
-```sh
+```console
 $ ragg2 -f raw -z code1.c
 "\xeb\x0e\x66\x66\x66\x66\x66\x2e\x0f\x1f\x84\x00\x00\x00\x00\x00\x50\xbf\x01\x00\x00\x00\x48\x8d\x35\x9f\x00\x00\x00\xba\x0d\x00\x00\x00\xe8\x19\x00\x00\x00\x31\xff\x89\x44\x24\x04\xe8\x5e\x00\x00\x00\x31\xd2\x89\x04\x24\x89\xd0\x59\xc3\x0f\x1f\x44\x00\x00\x89\x7c\x24\xfc\x48\x89\x74\x24\xf0\x89\x54\x24\xec\x8b\x54\x24\xfc\x89\x54\x24\xdc\x48\x8b\x74\x24\xf0\x48\x89\x74\x24\xd0\x8b\x54\x24\xec\x89\x54\x24\xcc\x8b\x7c\x24\xdc\x48\x8b\x74\x24\xd0\x8b\x54\x24\xcc\xb8\x01\x00\x00\x00\x0f\x05\x48\x89\x44\x24\xe0\x48\x8b\x44\x24\xe0\x89\xc1\x89\x4c\x24\xc8\x8b\x44\x24\xc8\xc3\x89\x7c\x24\xfc\x8b\x7c\x24\xfc\x89\x7c\x24\xec\x8b\x7c\x24\xec\xb8\x3c\x00\x00\x00\x0f\x05\x48\x89\x44\x24\xf0\x48\x8b\x44\x24\xf0\x89\xc1\x89\x4c\x24\xe8\x8b\x44\x24\xe8\xc3\x48\x65\x6c\x6c\x6f\x20\x57\x6f\x72\x6c\x64\x0a\x00"
 ```
@@ -296,14 +296,14 @@ Instead of using C, a domain specific language designed for ragg2 can also be us
 
 The `-e` option can be used if you want to input the code as an argument to ragg2 and not as a file. Note that you can only use ragg2 language here(and not C).
 
-```sh
+```console
 $ ragg2 -e "exit@syscall(60); write@syscall(4); main@global(128) {write(1, \"Hello World\n\", 13); exit(0);}" 
 554889e54881ec8000000048c7c00d00000050c7452048656c6cc745246f20576fc74528726c640ac7452c00000000c7453000000000488d452048898518000000488b45185048c7c00100000050488b3c24488b742408488b54241048c7c0040000000f054883c41848c7c00000000050488b3c2448c7c03c0000000f054883c4084881c4800000005dc3
 ```
 
 Other options like architecture, bits, output file format etc., can be used here too.
 
-```sh
+```console
 $ ragg2 -e "exit@syscall(60); write@syscall(4); main@global(128) {write(1, \"Hello World\n\", 13); exit(0);}"  -f elf -o output.elf
 $ file output.elf
 output.elf: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), statically linked, corrupted section header size
@@ -324,7 +324,7 @@ In case you just want to execute the input, you may use the `-x` option.
 -x          execute (just-in-time)
 ```
 
-```sh
+```console
 $ cat code1.c
 int main()
 {

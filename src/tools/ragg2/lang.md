@@ -30,7 +30,7 @@ Use `cat(1)` or the preprocessor to concatenate multiple files to be compiled.
 
 eggs can use a hashbang to make them executable.
 
-```sh
+```console
 $ head -n1 hello.r
 #!/usr/bin/ragg2 -X
 $ ./hello.r
@@ -41,7 +41,7 @@ Hello World!
 
 The execution of the code is done as in a flow. The first function to be defined will be the first one to be executed. If you want to run main\(\) just do like this:
 
-```
+```sh
 #!/usr/bin/ragg2 -X
 main();
   ...
@@ -123,7 +123,7 @@ Supported as raw pointers. TODO: enhance this feature
 
 Sometimes r\_egg programs will break or just not work as expected. Use the 'trace' architecture to get a arch-backend call trace:
 
-```sh
+```console
 $ ragg2 -a trace -s yourprogram.r
 ```
 
@@ -145,7 +145,7 @@ Ragg2 supports local variables assignment by math operating, including the follo
 
 The return value is stored in the a0 register, this register is set when calling a function or when typing a variable name without assignment.
 
-```sh
+```console
 $ cat test.r
 add@global(4) {
 	.var0 = .arg0 + .arg1;

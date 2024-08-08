@@ -31,7 +31,7 @@ functionality - and they are very well documented. I encourage you to read the
 available docs, and use the built-in help (by appending a ? to any command)
 extensively! E.g.:
 
-```
+```console
 [0x00000000]> ?
 Usage: [.][times][cmd][~grep][@[@iter]addr!size][|>pipe] ; ...
 Append '?' to any char command to get detailed help

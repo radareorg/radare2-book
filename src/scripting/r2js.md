@@ -19,13 +19,13 @@ The **rlang** plugin will be selected depending on the file extension. In this c
 
 For example:
 
-```sh
+```console
 $ r2 -i foo.r2.js /bin/ls
 ```
 
 If you want to go back to the shell after running the script use the `-q` flag:
 
-```sh
+```console
 $ r2 -qi foo.r2.js /bin/ls
 ```
 
@@ -33,7 +33,7 @@ $ r2 -qi foo.r2.js /bin/ls
 
 To enter the `r2js` repl you can use the `-j` command or flag.
 
-```sh
+```console
 0$ r2 -j
 QuickJS - Type "\h" for help
 [r2js]>
@@ -41,7 +41,7 @@ QuickJS - Type "\h" for help
 
 Same command/flag works in the r2 shell too:
 
-```sh
+```console
 [0x00000000]> -j
 QuickJS - Type "\h" for help
 [r2js]>
@@ -76,7 +76,7 @@ Radare2 supports the same esm-blob file format used by Frida, and if you don't w
 
 For example:
 
-```sh
+```console
 $ r2frida-compile -o foo.r2.js foo.ts
 $ r2 -qi foo.r2.js -
 ```

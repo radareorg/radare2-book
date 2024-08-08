@@ -1,6 +1,6 @@
 ### IOLI 0x04
 
-```C
+```c
 [0x080483d0]> pdd@main
 /* r2dec pseudo code output */
 /* ./crackme0x04 @ 0x8048509 */
@@ -27,7 +27,7 @@ int32_t main (void) {
 
 Let's enter check.
 
-```C
+```c
 #include <stdint.h>
 
 int32_t check (char * s) {
@@ -70,7 +70,7 @@ label_0:
 
 manually analyze with both the assembly and pseudo code we can simply write down the C-like code to describe this function:
 
-```C
+```c
 #include <stdint.h>
 int32_t check(char *s)
 {
@@ -91,13 +91,13 @@ int32_t check(char *s)
 
 In short, it calculates the Digit Sum of a number (add a number digit by digit. for example, 96 => 9 + 6 = 15) :
 
-```sh
-./crackme0x04
+```console
+$ ./crackme0x04
 IOLI Crackme Level 0x04
 Password: 12345
 Password OK!
 
-./crackme0x04
+$ ./crackme0x04
 IOLI Crackme Level 0x04
 Password: 96
 Password OK!

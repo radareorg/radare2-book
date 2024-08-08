@@ -11,7 +11,7 @@ The [radare2-extras](https://github.com/radareorg/radare2-extras) repository con
 
 ### Package Database
 
-```
+```console
 $ r2pm -U
 $R2PM_DBDIR: No such file or directory.
 Run 'r2pm init' to initialize the package repository
@@ -29,8 +29,8 @@ r2pm database initialized. Use 'r2pm -U' to update later today
 
 The packages database is pulled from the [radare2-pm](https://github.com/radareorg/radare2-pm) repository. At any point of the time we can update the database using `r2pm -U`:
 
-```
-r2pm -U
+```console
+$ r2pm -U
 HEAD is now at 7522928 Fix syntax
 Updating 7522928..1c139e0
 Fast-forward
@@ -43,7 +43,7 @@ Already up to date.
 
 There are many commands available to let you install or uninstall anything easily:
 
-```
+```console
 $ r2pm -h
 Usage: r2pm [-flags] [pkgs...]
 Commands:
@@ -76,7 +76,7 @@ Commands:
 
 For example `lang-python3` (which is used for writing r2 plugins in Python):
 
-```
+```console
 $ r2pm -i lang-python3
 ...
 mkdir -p ~/.config/radare2/plugins
@@ -88,13 +88,13 @@ Note that if we used `-i` switch it installs the plugin in the `$HOME` directory
 
 After this we will be able to see the plugin in the list of installed:
 
-```bash
+```console
 $ r2pm -l
 lang-python3
 ```
 
 To uninstall the plugin just simply run
 
-```bash
+```console
 $ r2pm -u lang-python3
 ```

@@ -14,7 +14,7 @@ There's also rlang, which lets you use radare2's inner workings from different p
 
 As mentioned before many commands can be executed in sequence by using `;` the semicolon operator.
 
-```
+```console
 [0x00404800]> pd 1 ; ao 1
  0x00404800  b827e66100   mov eax, 0x61e627  ; "tab"
 address: 0x404800
@@ -72,26 +72,26 @@ family: cpu
 And of course it's possible to redirect the output of an r2 command into a file, using the `>` and `>>`
 commands
 
-```
+```console
 [0x00404800]> px 10 @ `ao~ptr[1]` > example.txt
 [0x00404800]> px 10 @ `ao~ptr[1]` >> example.txt
 ```
 
 Radare2 also provides quite a few Unix type file processing commands like head, tail, cat, grep and many more. One such command is [Uniq](https://en.wikipedia.org/wiki/Uniq), which can be used to filter a file to display only non-duplicate content. So to make a new file with only unique strings, you can do:
 
-```
+```console
 [0x00404800]> uniq file > uniq_file
 ```
 
 Other than stdout, you can specify other file descriptors to be redirected like in the posix shell:
 
-```
+```console
 [0x00404800]> aaa 2> /dev/null
 ```
 
 The [head](https://en.wikipedia.org/wiki/Head_%28Unix%29) command can be used to see the first N number of lines in the file, similarly [tail](https://en.wikipedia.org/wiki/Tail_(Unix)) command allows the last N number of lines to be seen.
 
-```
+```console
 [0x00404800]> head 3 foodtypes.txt
 Proteins
 Fats
@@ -103,7 +103,7 @@ Water
 
 Similarly, sorting the content is also possible with the [sort](https://en.wikipedia.org/wiki/Sort_%28Unix%29) command. A typical example could be:
 
-```
+```console
 [0x00404800]> cat foods.txt
 Lentils
 Avocado

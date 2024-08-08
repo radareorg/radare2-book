@@ -2,7 +2,7 @@
 
 Rarun2 is a tool allowing to setup a specified execution environment - redefine stdin/stdout, pipes, change the environment variables and other settings useful to craft the boundary conditions you need to run a binary for debugging.
 
-```bash
+```console
 $ rarun2 -h
 Usage: rarun2 -v|-t|script.rr2 [directive ..]
 ```
@@ -17,7 +17,7 @@ One of the most common usage cases - redirect the output of debugged program in 
 
 Here is the basic profile example:
 
-```
+```sh
 program=/bin/ls
 arg1=/bin
 # arg2=hello
@@ -75,7 +75,7 @@ When this script is executed with rarun2, it will:
 
 This setup is often used for debugging, testing, or analyzing programs in a controlled environment, especially in the context of reverse engineering or security research.
 
-```bash
+```console
 $ cat foo.rr2
 #!/usr/bin/rarun2
 program=./pp400
@@ -88,7 +88,7 @@ chdir=/tmp
 
 ### Using a program via TCP/IP
 
-```
+```console
 $ nc -l 9999
 $ rarun2 program=/bin/ls connect=localhost:9999
 ```
@@ -97,7 +97,7 @@ $ rarun2 program=/bin/ls connect=localhost:9999
 
 1 - open a new terminal and type 'tty' to get a terminal name:
 
-```
+```console
 $ tty ; clear ; sleep 999999
 /dev/ttyS010
 ```
@@ -112,6 +112,6 @@ stdio=/dev/ttys010
 
 3 - Launch the following radare2 command:
 
-```bash
+```console
 $ r2 -r foo.rr2 -d /bin/ls
 ```

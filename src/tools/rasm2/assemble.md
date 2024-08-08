@@ -6,14 +6,14 @@ In radare2, the assembler and disassembler logic is implemented in the r_asm_* A
 
 Rasm2 can be used to quickly copy-paste hexpairs that represent a given machine instruction. The following line is assembling this mov instruction for x86/32.
 
-```
+```console
 $ rasm2 -a x86 -b 32 'mov eax, 33'
 b821000000
 ```
 
 Apart from the specifying the input as an argument, you can also pipe it to rasm2:
 
-```
+```console
 $ echo 'push eax;nop;nop' | rasm2 -f -
 5090
 ```
@@ -60,7 +60,7 @@ selfstop:
 
 Now we can assemble it in place:
 
-```
+```console
 [0x00000000]> e asm.bits = 32
 [0x00000000]> wx `!rasm2 -f a.rasm`
 [0x00000000]> pd 20

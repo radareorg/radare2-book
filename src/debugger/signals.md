@@ -2,7 +2,7 @@
 
 You can send signals to the target process, or change the behaviour of the the debugger and signal handler associated with the `dk` command.
 
-```
+```console
 [0x00000000]> dk?
 Usage: dk  Signal commands
 | dk                         list all signal handlers of child process
@@ -19,7 +19,7 @@ To change the behaviour of the r2 debugger when the target process receives a sp
 
 These are the list of signals with their associated numbers:
 
-```
+```console
 [0x00000000]> dk
 32 SIGRTMIN 30 SIGPWR 14 SIGALRM 31 SIGSYS 15 SIGTERM 16 SIGSTKFLT
 17 SIGCHLD 10 SIGUSR1 11 SIGSEGV 12 SIGUSR2 13 SIGPIPE 18 SIGCONT
