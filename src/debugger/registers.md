@@ -82,6 +82,7 @@ rip = 0x7f1fab84c630
 rflags = 0x00000200
 rsp = 0x7fff386b5080
 ```
+
 Current state of registers
 
 ```
@@ -142,7 +143,6 @@ Usually not all registers are transferred in the same buffer, this is because th
 In the case of GDB, XML format is choosen to describe all this information, in radare2 we use our own space/tab separated document which can be dumped or changed at any time with the `drp` and `arp` commands (note one is for debugging sessions, and the other will be used for the static esil emulation).
 
 Radare2 is able to parse the gdb xml register profile and generate one in the radare2 syntax when connecting to unknown targets that support those commands.
-
 
 ### Reading The Profile
 
@@ -288,4 +288,3 @@ Values can be stored and represented in different endianness when working in loc
 The way this information is represented in the reg profile is with a line starting with `^`. The next letter will tell the register profile the endianness to use which can be **b**ig, **l**ittle or **m**iddle.
 
 You can find an usage example for this feature in the register profile for the native debugger for s390x architecture.
-

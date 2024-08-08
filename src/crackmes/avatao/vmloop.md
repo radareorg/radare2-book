@@ -19,26 +19,26 @@ entire function is just 542 bytes long, so we certainly could reverse it without
 the aid of the graph mode, but since this writeup aims to include as much r2
 wisdom as possible, I'm going to show you how to define basic blocks.
 
-First, lets analyze what we already have! First, *rdi* is put into local_3.
-Since the application is a 64bit Linux executable, we know that *rdi* is the
+First, lets analyze what we already have! First, _rdi_ is put into local_3.
+Since the application is a 64bit Linux executable, we know that _rdi_ is the
 first function argument (as you may have recognized, the automatic analysis of
 arguments and local variables was not entirely correct), and we also know that
-*vmloop*'s first argument is the bytecode. So lets rename local_3:
+_vmloop_'s first argument is the bytecode. So lets rename local_3:
 
 ```
 :> afvn local_3 bytecode
 ```
 
-Next, *sym.memory* is put into another local variable at *rbp-8* that r2 did not
+Next, _sym.memory_ is put into another local variable at _rbp-8_ that r2 did not
 recognize. So let's define it!
 
 ```
 :> afv 8 memory qword
 ```
 
-> ***r2 tip***: The *afv [idx] [name] [type]* command is used to define local
+> _**r2 tip**_: The _afv [idx] [name] [type]_ command is used to define local
 > variable at [frame pointer - idx] with the name [name] and type [type]. You
-> can also remove local variables using the *afv- [idx]* command.
+> can also remove local variables using the _afv- [idx]_ command.
 
 In the next block, the program checks one byte of bytecode, and if it is 0, the
 function returns with 1.
@@ -61,11 +61,11 @@ series of qwords:
 [0x00400ec0]> Cd 8 @@=`?s $$ $$+8*0x17 8`
 ```
 
-> ***r2 tip***: Except for the *?s*, all parts of this command should be
-> familiar now, but lets recap it! *Cd* defines a memory area as data, and 8 is
-> the size of that memory area. *@@* is an iterator that make the preceding
-> command run for every element that *@@* holds. In this example it holds a
-> series generated using the *?s* command. *?s* simply generates a series from
+> _**r2 tip**_: Except for the _?s_, all parts of this command should be
+> familiar now, but lets recap it! _Cd_ defines a memory area as data, and 8 is
+> the size of that memory area. _@@_ is an iterator that make the preceding
+> command run for every element that _@@_ holds. In this example it holds a
+> series generated using the _?s_ command. _?s_ simply generates a series from
 > the current seek (*$$*) to current seek + 8*0x17 (*$$+8*0x17*) with a step
 > of 8.
 
@@ -132,14 +132,14 @@ instructions' ASCII values:
 Ok, so these offsets were not on the graph, so it is time to define basic blocks
 for them!
 
-> ***r2 tip***: You can define basic blocks using the *afb+* command. You have
+> _**r2 tip**_: You can define basic blocks using the _afb+_ command. You have
 > to supply what function the block belongs to, where does it start, and what is
 > its size. If the block ends in a jump, you have to specify where does it jump
 > too. If the jump is a conditional jump, the false branch's destination address
 > should be specified too.
 
 We can get the start and end addresses of these basic blocks from the full disasm
-of *vmloop*.
+of _vmloop_.
 
 ![vmloop full](img/vmloop/vmloop-full.png)
 
@@ -178,14 +178,14 @@ And here is the graph in its full glory after a bit of manual restructuring:
 I think it worth it, don't you? :) (Well, the restructuring did not really worth
 it, because it is apparently not stored when you save the project.)
 
-> ***r2 tip***: You can move the selected node around in graph view using the
+> _**r2 tip**_: You can move the selected node around in graph view using the
 > HJKL keys.
 
 By the way, here is how IDA's graph of this same function looks like for comparison:
 
 ![IDA graph](img/vmloop_ida.png)
 
-As we browse through the disassembly of the *instr_LETTER* basic blocks, we
+As we browse through the disassembly of the _instr_LETTER_ basic blocks, we
 should realize a few things. The first: all of the instructions starts with a
 sequence like these:
 
@@ -193,12 +193,12 @@ sequence like these:
 
 ![vmloop bb-0ab6](img/vmloop/bb-0ab6.png)
 
-It became clear now that the 9 dwords at *sym.instr_dirty* are not simply
+It became clear now that the 9 dwords at _sym.instr_dirty_ are not simply
 indicators that an instruction got executed, but they are used to count how many
 times an instruction got called. Also I should have realized earlier that
-*sym.good_if_le_9* (0x6020f0) is part of this 9 dword array, but yeah, well, I
+_sym.good_if_le_9_ (0x6020f0) is part of this 9 dword array, but yeah, well, I
 didn't, I have to live with it... Anyways, what the condition
-"*sym.good_if_le_9* have to be lesser or equal 9" really means is that *instr_P*
+"_sym.good_if_le_9_ have to be lesser or equal 9" really means is that _instr_P_
 can not be executed more than 9 times:
 
 ![vmloop bb-0b42](img/vmloop/bb-0b42.png)
@@ -221,8 +221,8 @@ variable at 0xc. r2 did not recognize this local var, so lets do it manually!
 :> afv 0xc instr_ptr_step dword
 ```
 
-If we look at *instr_J* we can see that this is an exception to the above rule,
-since it puts the return value of the called function into *instr_ptr_step*
+If we look at _instr_J_ we can see that this is an exception to the above rule,
+since it puts the return value of the called function into _instr_ptr_step_
 instead of a constant 2 or 3:
 
 ![vmloop bb-0bc1](img/vmloop/bb-0bc1.png)
@@ -231,9 +231,9 @@ And speaking of exceptions, here are the two instructions that do not call funct
 
 ![vmloop bb-0be5](img/vmloop/bb-0be5.png)
 
-This one simply puts the next bytecode (the first the argument) into *eax*, and
-jumps to the end of *vmloop*. So this is the VM's *ret* instruction, and we know
-that *vmloop* has to return "\*", so "R\*" should be the last two bytes of our
+This one simply puts the next bytecode (the first the argument) into _eax_, and
+jumps to the end of _vmloop_. So this is the VM's _ret_ instruction, and we know
+that _vmloop_ has to return "\*", so "R\*" should be the last two bytes of our
 bytecode.
 
 The next one that does not call a function:
@@ -247,31 +247,31 @@ that address!
 :> f sym.written_by_instr_C 4 @ 0x6020c0
 ```
 
-Oh, and by the way, I do have a hunch that *instr_C* also had a function call in
+Oh, and by the way, I do have a hunch that _instr_C_ also had a function call in
 the original code, but it got inlined by the compiler. Anyways, so far we have
 these two instructions:
 
-- *instr_R(a1):* returns with *a1*
-- *instr_C(a1):* writes *a1* to *sym.written_by_instr_C*
+* _instr_R(a1):_ returns with _a1_
+* _instr_C(a1):_ writes _a1_ to _sym.written_by_instr_C_
 
 And we also know that these accept one argument,
 
-- instr_I
-- instr_D
-- instr_P
-- instr_X
-- instr_J
+* instr_I
+* instr_D
+* instr_P
+* instr_X
+* instr_J
 
 and these accept two:
 
-- instr_A
-- instr_S
+* instr_A
+* instr_S
 
 What remains is the reversing of the seven functions that are called by the
 instructions, and finally the construction of a valid bytecode that gives us the
 flag.
 
-###instr_A
+### instr_A
 
 The function this instruction calls is at offset 0x40080d, so lets seek there!
 
@@ -279,23 +279,23 @@ The function this instruction calls is at offset 0x40080d, so lets seek there!
 [offset]> 0x40080d
 ```
 
-> ***r2 tip:*** In visual mode you can just hit \<Enter\> when the current line is
+> _**r2 tip:**_ In visual mode you can just hit \<Enter\> when the current line is
 > a jump or a call, and r2 will seek to the destination address.
 
 If we seek to that address from the graph mode, we are presented with a message
 that says "Not in a function. Type 'df' to define it here. This is because the
 function is called from a basic block r2 did not recognize, so r2 could not
-find the function either. Lets obey, and type *df*! A function is indeed created, but
-we want some meaningful name for it. So press *dr* while still in visual mode,
-and name this function *instr_A*!
+find the function either. Lets obey, and type _df_! A function is indeed created, but
+we want some meaningful name for it. So press _dr_ while still in visual mode,
+and name this function _instr_A_!
 
 ![instr_A minimap](img/instr_A/instr_A_minimap.png)
 
-> ***r2 tip:*** You should realize that these commands are all part of the same
-> menu system in visual mode I was talking about when we first used *Cd* to
-> declare *sym.memory* as data.
+> _**r2 tip:**_ You should realize that these commands are all part of the same
+> menu system in visual mode I was talking about when we first used _Cd_ to
+> declare _sym.memory_ as data.
 
-Ok, now we have our shiny new *fcn.instr_A*, lets reverse it! We can see from
+Ok, now we have our shiny new _fcn.instr_A_, lets reverse it! We can see from
 the shape of the minimap that probably there is some kind cascading
 if-then-elif, or a switch-case statement involved in this function. This is one
 of the reasons the minimap is so useful: you can recognize some patterns at a
@@ -306,7 +306,7 @@ going to do this using full graph. The first basic blocks:
 
 ![instr_A bb-080d](img/instr_A/bb-080d.png)
 
-The two function arguments (*rdi* and *rsi*) are stored in local variables, and
+The two function arguments (_rdi_ and _rsi_) are stored in local variables, and
 the first is compared to 0. If it is, the function returns (you can see it on
 the minimap), otherwise the same check is executed on the second argument. The
 function returns from here too, if the argument is zero. Although this function
@@ -319,7 +319,7 @@ vars:
 ```
 
 And we have arrived to the predicted switch-case statement, and we can see that
-*arg1*'s value is checked against "M", "P", and "C".
+_arg1_'s value is checked against "M", "P", and "C".
 
 ![instr_A switch values](img/instr_A/switch-values.png)
 
@@ -327,13 +327,13 @@ This is the "M" branch:
 
 ![instr_A switch-M](img/instr_A/switch-M.png)
 
-It basically loads an address from offset 0x602088 and adds *arg2* to the byte
+It basically loads an address from offset 0x602088 and adds _arg2_ to the byte
 at that address. As r2 kindly shows us in a comment, 0x602088 initially holds
-the address of *sym.memory*, the area where we have to construct the "Such VM!
+the address of _sym.memory_, the area where we have to construct the "Such VM!
 MuCH reV3rse!" string. It is safe to assume that somehow we will be able to
 modify the value stored at 0x602088, so this "M" branch will be able to modify
 bytes other than the first. Based on this assumption, I'll flag 0x602088 as
-*sym.current_memory_ptr*:
+_sym.current_memory_ptr_:
 
 ```
 :> f sym.current_memory_ptr 8 @ 0x602088
@@ -344,48 +344,50 @@ Moving on to the "P" branch:
 ![instr_A switch-P](img/instr_A/switch-P.png)
 
 Yes, this is the piece of code that allows us to modify
-*sym.current_memory_ptr*: it adds *arg2* to it.
+_sym.current_memory_ptr_: it adds _arg2_ to it.
 
 Finally, the "C" branch:
 
 ![instr_A switch-C](img/instr_A/switch-C.png)
 
-Well, it turned out that *instr_C* is not the only instruction that modifies 
-*sym.written_by_instr_C*: this piece of code adds *arg2* to it.
+Well, it turned out that _instr_C_ is not the only instruction that modifies
+_sym.written_by_instr_C_: this piece of code adds _arg2_ to it.
 
-And that was *instr_A*, lets summarize it! Depending on the first argument, this
+And that was _instr_A_, lets summarize it! Depending on the first argument, this
 instruction does the following:
 
-- *arg1* == "M": adds *arg2* to the byte at *sym.current_memory_ptr*.
-- *arg1* == "P": steps *sym.current_memory_ptr* by *arg2* bytes.
-- *arg1* == "C": adds *arg2* to the value at *sym.written_by_instr_C*.
+* _arg1_ == "M": adds _arg2_ to the byte at _sym.current_memory_ptr_.
+* _arg1_ == "P": steps _sym.current_memory_ptr_ by _arg2_ bytes.
+* _arg1_ == "C": adds _arg2_ to the value at _sym.written_by_instr_C_.
 
-###instr_S
+### instr_S
 
 This function is not recognized either, so we have to manually define it like we
-did with *instr_A*. After we do, and take a look at the minimap, scroll through
+did with _instr_A_. After we do, and take a look at the minimap, scroll through
 the basic blocks, it is pretty obvious that these two functions are very-very
-similar. We can use *radiff2* to see the difference.
+similar. We can use _radiff2_ to see the difference.
 
-> ***r2 tip:*** radiff2 is used to compare binary files. There's a few options
+> _**r2 tip:**_ radiff2 is used to compare binary files. There's a few options
 > we can control the type of binary diffing the tool does, and to what kind of
 > output format we want. One of the cool features is that it can generate
-> [DarumGrim](http://www.darungrim.org/)-style bindiff graphs using the *-g*
+> [DarumGrim](http://www.darungrim.org/)-style bindiff graphs using the _-g_
 > option.
 
 Since now we want to diff two functions from the same binary, we specify the
-offsets with *-g*, and use reverse4 for both binaries. Also, we create the
-graphs for comparing *instr_A* to *instr_S* and for comparing *instr_S* to
-*instr_A*.
+offsets with _-g_, and use reverse4 for both binaries. Also, we create the
+graphs for comparing _instr_A_ to _instr_S_ and for comparing _instr_S_ to
+_instr_A_.
 
 ```
 [0x00 ~]$ radiff2 -g 0x40080d,0x40089f  reverse4 reverse4 | xdot -
 ```
+
 ![instr_S graph1](img/instr_S/graph1.png)
 
 ```
 [0x00 ~]$ radiff2 -g 0x40089f,0x40080d  reverse4 reverse4 | xdot -
 ```
+
 ![instr_S graph2](img/instr_S/graph2.png)
 
 A sad truth reveals itself after a quick glance at these graphs: radiff2 is a
@@ -396,29 +398,29 @@ is something I'm definitely going to take a deeper look at after I've finished
 this writeup.
 
 Anyways, after we get over the shock of being lied to, we can easily recognize
-that *instr_S* is basically a reverse-*instr_A*: where the latter does addition,
+that _instr_S_ is basically a reverse-_instr_A_: where the latter does addition,
 the former does subtraction. To summarize this:
 
-- *arg1* == "M": subtracts *arg2* from the byte at *sym.current_memory_ptr*.
-- *arg1* == "P": steps *sym.current_memory_ptr* backwards by *arg2* bytes.
-- *arg1* == "C": subtracts *arg2* from the value at *sym.written_by_instr_C*.
+* _arg1_ == "M": subtracts _arg2_ from the byte at _sym.current_memory_ptr_.
+* _arg1_ == "P": steps _sym.current_memory_ptr_ backwards by _arg2_ bytes.
+* _arg1_ == "C": subtracts _arg2_ from the value at _sym.written_by_instr_C_.
 
-###instr_I
+### instr_I
 
 ![instr_I](img/instr_I/instr_I.png)
 
-This one is simple, it just calls *instr_A(arg1, 1)*. As you may have noticed
+This one is simple, it just calls _instr_A(arg1, 1)_. As you may have noticed
 the function call looks like `call fcn.0040080d` instead of `call fcn.instr_A`.
 This is because when you save and open a project, function names get lost -
 another thing to examine and patch in r2!
 
-###instr_D
+### instr_D
 
 ![instr_D](img/instr_D/instr_D.png)
 
-Again, simple: it calls *instr_S(arg1, 1)*.
+Again, simple: it calls _instr_S(arg1, 1)_.
 
-###instr_P
+### instr_P
 
 It's local var rename time again!
 
@@ -432,14 +434,14 @@ It's local var rename time again!
 
 This function is pretty straightforward also, but there is one oddity: const_M
 is never used. I don't know why it is there - maybe it is supposed to be some
-kind of distraction? Anyways, this function simply writes *arg1* to
-*sym.current_memory_ptr*, and than calls *instr_I("P")*. This basically means
-that *instr_P* is used to write one byte, and put the pointer to the next byte.
+kind of distraction? Anyways, this function simply writes _arg1_ to
+_sym.current_memory_ptr_, and than calls _instr_I("P")_. This basically means
+that _instr_P_ is used to write one byte, and put the pointer to the next byte.
 So far this would seem the ideal instruction to construct most of the "Such VM!
 MuCH reV3rse!" string, but remember, this is also the one that can be used only
 9 times!
 
-###instr_X
+### instr_X
 
 Another simple one, rename local vars anyways!
 
@@ -449,9 +451,9 @@ Another simple one, rename local vars anyways!
 
 ![instr_X](img/instr_X/instr_X.png)
 
-This function XORs the value at *sym.current_memory_ptr* with *arg1*.
+This function XORs the value at _sym.current_memory_ptr_ with _arg1_.
 
-###instr_J
+### instr_J
 
 This one is not as simple as the previous ones, but it's not that complicated
 either. Since I'm obviously obsessed with variable renaming:
@@ -463,19 +465,19 @@ either. Since I'm obviously obsessed with variable renaming:
 
 ![instr_J](img/instr_J/instr_J.png)
 
-After the result of *arg1 & 0x3f* is put into a local variable, *arg1 & 0x40* is
-checked against 0. If it isn't zero, *arg1_and_0x3f* is negated:
+After the result of _arg1 & 0x3f_ is put into a local variable, _arg1 & 0x40_ is
+checked against 0. If it isn't zero, _arg1_and_0x3f_ is negated:
 
 ![instr_J bb-09e1](img/instr_J/bb-09e1.png)
 
-The next branching: if *arg1* >= 0, then the function returns *arg1_and_0x3f*,
+The next branching: if _arg1_ >= 0, then the function returns _arg1_and_0x3f_,
 
 ![instr_J bb-09e4](img/instr_J/bb-09e4.png)
 
 ![instr_J bb-0a1a](img/instr_J/bb-0a1a.png)
 
 else the function branches again, based on the value of
-*sym.written_by_instr_C*:
+_sym.written_by_instr_C_:
 
 ![instr_J bb-09ef](img/instr_J/bb-09ef.png)
 
@@ -483,14 +485,14 @@ If it is zero, the function returns 2,
 
 ![instr_J bb-0a13](img/instr_J/bb-0a13.png)
 
-else it is checked if *arg1_and_0x3f* is a negative number,
+else it is checked if _arg1_and_0x3f_ is a negative number,
 
 ![instr_J bb-09f9](img/instr_J/bb-09f9.png)
 
-and if it is, *sym.good_if_ne_zero* is incremented by 1:
+and if it is, _sym.good_if_ne_zero_ is incremented by 1:
 
 ![instr_J bb-09ff](img/instr_J/bb-09ff.png)
 
-After all this, the function returns with *arg1_and_0x3f*:
+After all this, the function returns with _arg1_and_0x3f_:
 
 ![instr_J bb-0a0e](img/instr_J/bb-0a0e.png)

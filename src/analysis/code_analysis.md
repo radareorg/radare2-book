@@ -114,6 +114,7 @@ Usage: af
 | afv[absrx]?                           manipulate args, registers and variables in function
 | afx                                   list function references
 ```
+
 You can use `afl` to list the functions found by the analysis.
 
 There are a lot of useful commands under `afl` such as `aflj`, which lists the function in JSON format and `aflm`, which lists the functions in the syntax found in makefiles.
@@ -144,6 +145,7 @@ Before changing the basic blocks of the function it is recommended to check the 
 ### Hand craft function
 
 Before we start, let's prepare a binary file first. Write in `example.c`:
+
 ```C
 int code_block()
 {
@@ -155,9 +157,11 @@ int code_block()
   return result;
 }
 ```
-then compile with `gcc -c example.c -m32 -O0 -fno-pie`, and open the object file `example.o` with radare2. 
+
+then compile with `gcc -c example.c -m32 -O0 -fno-pie`, and open the object file `example.o` with radare2.
 
 Since we haven't analyzed it yet, the `pdf` command will not print out the disassembly here:
+
 ```
 $ r2 example.o 
 [0x08000034]> pdf
@@ -182,18 +186,19 @@ p: Cannot find function at 0x08000034
             0x0800005c      c3             ret
 
 ```
+
 our goal is to handcraft a function with the following structure
 
 ![analyze_one](analyze_one.png)
 
-
 create a function at 0x8000034 named code_block:
+
 ```
 [0x8000034]> af+ 0x8000034 code_block
 ```
 
 In most cases, we use jump or call instructions as code block boundaries. so the range of first block is from `0x08000034 push ebp` to `0x08000048 jmp 0x8000052`.
-use `afb+` command to add it. 
+use `afb+` command to add it.
 
 ```
 [0x08000034]> afb+ code_block 0x8000034 0x800004a-0x8000034 0x8000052
@@ -208,12 +213,14 @@ the next block (0x08000052 ~ 0x08000056) is more likeyly an if conditional state
 ```
 
 follow the control flow and create the remaining two blocks (two branches) :
+
 ```
 [0x08000034]> afb+ code_block 0x800004a 0x8000052-0x800004a 0x8000052
 [0x08000034]> afb+ code_block 0x8000058 0x800005d-0x8000058
 ```
 
 check our work:
+
 ```
 [0x08000034]> afb
 0x08000034 0x0800004a 00:0000 22 j 0x08000052
@@ -233,11 +240,11 @@ There are two very important commands for this: `afc` and `afB`. The latter is a
 
 There are 5 important program wide half-automated analysis commands:
 
- - `aab` - perform basic-block analysis ("Nucleus" algorithm)
- - `aac` - analyze function calls from one (selected or current function)
- - `aaf` - analyze all function calls
- - `aar` - analyze data references
- - `aad` - analyze pointers to pointers references
+* `aab` - perform basic-block analysis ("Nucleus" algorithm)
+* `aac` - analyze function calls from one (selected or current function)
+* `aaf` - analyze all function calls
+* `aar` - analyze data references
+* `aad` - analyze pointers to pointers references
 
 Those are only generic semi-automated reference searching algorithms. Radare2 provides a
 wide choice of manual references' creation of any kind. For this fine-grained control
@@ -312,6 +319,7 @@ Also under `ax` is `axg`, which finds the path between two points in the file by
     - 0x08048337 fcn 0x08048320 entry0
   - 0x08048425 fcn 0x080483e0 main
 ```
+
 Use `axg*` to generate radare2 commands which will help you to create graphs using `agn` and `age` commands, according to the XREFs.
 
 Apart from predefined algorithms to identify functions there is a way to specify
@@ -330,12 +338,12 @@ on x86\_64 platform. It should be specified _before_ any analysis commands.
 Radare2 allows to change the behavior of almost any analysis stages or commands.
 There are different kinds of the configuration options:
 
- - Flow control
- - Basic blocks control
- - References control
- - IO/Ranges
- - Jump tables analysis control
- - Platform/target specific options
+* Flow control
+* Basic blocks control
+* References control
+* IO/Ranges
+* Jump tables analysis control
+* Platform/target specific options
 
 #### Control flow configuration
 
@@ -363,11 +371,11 @@ binaries for embedded systems, it is often a case. Thus - this option.
 The most crucial options that change the analysis results drastically. Sometimes some can be
 disabled to save the time and memory when analyzing big binaries.
 
-- `anal.jmp.ref` - to allow references creation for unconditional jumps
-- `anal.jmp.cref` - same, but for conditional jumps
-- `anal.datarefs` - to follow the data references in code
-- `anal.refstr` - search for strings in data references
-- `anal.strings` - search for strings and creating references
+* `anal.jmp.ref` - to allow references creation for unconditional jumps
+* `anal.jmp.cref` - same, but for conditional jumps
+* `anal.datarefs` - to follow the data references in code
+* `anal.refstr` - search for strings in data references
+* `anal.strings` - search for strings and creating references
 
 Note that strings references control is disabled by default because it increases the analysis time.
 
@@ -375,16 +383,16 @@ Note that strings references control is disabled by default because it increases
 
 There are a few options for this:
 
-- `anal.limits` - enables the range limits for analysis operations
-- `anal.from` - starting address of the limit range
-- `anal.to` - the corresponding end of the limit range
-- `anal.in` - specify search boundaries for analysis. You can set it to `io.maps`, `io.sections.exec`, `dbg.maps` and many more. For example:
-  - To analyze a specific memory map with `anal.from` and `anal.to`, set `anal.in = dbg.maps`.
-  - To analyze in the boundaries set by `anal.from` and `anal.to`, set `anal.in=range`.
-  - To analyze in the current mapped segment or section, you can put `anal.in=bin.segment` or `anal.in=bin.section`, respectively.
-  - To analyze in the current memory map, specify `anal.in=dbg.map`.
-  - To analyze in the stack or heap, you can set `anal.in=dbg.stack` or `anal.in=dbg.heap`.
-  - To analyze in the current function or basic block, you can specify `anal.in=anal.fcn` or `anal.in=anal.bb`.
+* `anal.limits` - enables the range limits for analysis operations
+* `anal.from` - starting address of the limit range
+* `anal.to` - the corresponding end of the limit range
+* `anal.in` - specify search boundaries for analysis. You can set it to `io.maps`, `io.sections.exec`, `dbg.maps` and many more. For example:
+  * To analyze a specific memory map with `anal.from` and `anal.to`, set `anal.in = dbg.maps`.
+  * To analyze in the boundaries set by `anal.from` and `anal.to`, set `anal.in=range`.
+  * To analyze in the current mapped segment or section, you can put `anal.in=bin.segment` or `anal.in=bin.section`, respectively.
+  * To analyze in the current memory map, specify `anal.in=dbg.map`.
+  * To analyze in the stack or heap, you can set `anal.in=dbg.stack` or `anal.in=dbg.heap`.
+  * To analyze in the current function or basic block, you can specify `anal.in=anal.fcn` or `anal.in=anal.bb`.
 
 Please see `e anal.in=??` for the complete list.
 
@@ -397,8 +405,8 @@ option. Eventually, algorithms moved into the default analysis loops once they s
 every supported platform/target/testcase.
 Two more options can affect the jump tables analysis results too:
 
-- `anal.jmp.indir` - follow the indirect jumps, some jump tables rely on them
-- `anal.datarefs` - follow the data references, some jump tables use those
+* `anal.jmp.indir` - follow the indirect jumps, some jump tables rely on them
+* `anal.datarefs` - follow the data references, some jump tables use those
 
 #### Platform specific controls
 

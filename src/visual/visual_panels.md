@@ -17,6 +17,7 @@ Panels can be accessed by using `v` or by using `!` from the visual mode.
 ![Panels Overview](panels_overview.png)
 
 ### Commands
+
 ```
 |Visual Ascii Art Panels:
 | |      split the current panel vertically

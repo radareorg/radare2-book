@@ -1,6 +1,7 @@
 ### Code Entrypoints
 
 The `-e` option passed to rabin2 will show entrypoints for given binary. Two examples:
+
 ```
 $ rabin2 -e /bin/ls
 [Entrypoints]

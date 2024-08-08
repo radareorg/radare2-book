@@ -1,6 +1,6 @@
 ## Calling Conventions
 
-Radare2 uses calling conventions to help in identifying function formal arguments and return types. 
+Radare2 uses calling conventions to help in identifying function formal arguments and return types.
 It is used also as a guide for basic function prototype and type propagation.
 
 ```
@@ -27,7 +27,7 @@ amd64
 ms
 ```
 
-* To display function prototype of standard library functions you have `afcf` command 
+* To display function prototype of standard library functions you have `afcf` command
 
 ```
 [0x00000000]> afcf printf

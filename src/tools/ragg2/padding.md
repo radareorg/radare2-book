@@ -9,12 +9,12 @@ Ragg2, a tool in the radare2 suite, offers various options for padding and patch
   * Append strings (-S)
 
 * Patching Existing Data:
- * Patch dword or qword at a given offset (-d, -D)
- * Patch hex pairs at a given offset (-w)
+  * Patch dword or qword at a given offset (-d, -D)
+  * Patch hex pairs at a given offset (-w)
 
 * Adding Padding:
- * Add padding after compilation (-p)
- * Options include NOP, trap instructions, or specific byte sequences
+  * Add padding after compilation (-p)
+  * Options include NOP, trap instructions, or specific byte sequences
 
 From `ragg2 -h`:
 

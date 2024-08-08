@@ -2,6 +2,7 @@
 
 Apart from simple sequencing and looping, radare2 allows to write
 simple macros, using this construction:
+
 ```
 [0x00404800]> (qwe; pd 4; ao)
 ```
@@ -32,12 +33,14 @@ family: cpu
 ```
 
 To list available macroses simply call `(*`:
+
 ```
 [0x00404800]> (*
 (qwe ; pd 4; ao)
 ```
 
 And if want to remove some macro, just add '-' before the name:
+
 ```
 [0x00404800]> (-qwe)
 Macro 'qwe' removed.
@@ -59,11 +62,12 @@ simple scripting situations. To create a macro that takes arguments you simply a
 0x004047d9	and rsp, 0xfffffffffffffff0
 [0x004047d6]>
 ```
+
 As you can see, the arguments are named by index, starting from 0: $0, $1, ...
 
 ### Aliases
 
-The command to create, manage and run command aliases is the `$`. This is also the prefix used for aliases files, this chapter will dig 
+The command to create, manage and run command aliases is the `$`. This is also the prefix used for aliases files, this chapter will dig
 
 * Variable (like flags)
 * Commands (simplest macros)
@@ -117,6 +121,7 @@ test input
 ```
 
 To undefine alias, use `$alias=`:
+
 ```
 [0x00404800]> $pmore='b 300;px'
 [0x00404800]> $

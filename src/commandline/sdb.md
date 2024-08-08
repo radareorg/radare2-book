@@ -7,17 +7,17 @@ SDB is a simple string key/value database based on djb’s cdb disk storage and 
 There’s also the sdbtypes: a vala library that implements several data structures on top of an sdb or a memcache instance.
 
 SDB supports:
-    
-- namespaces (multiple sdb paths)
-- atomic database sync (never corrupted)
-- bindings for vala, luvit, newlisp and nodejs
-- commandline frontend for sdb databases
-- memcache client and server with sdb backend
-- arrays support (syntax sugar)
-- json parser/getter
 
+* namespaces (multiple sdb paths)
+* atomic database sync (never corrupted)
+* bindings for vala, luvit, newlisp and nodejs
+* commandline frontend for sdb databases
+* memcache client and server with sdb backend
+* arrays support (syntax sugar)
+* json parser/getter
 
 ### Usage example
+
 Let's create a database!
 
 ```bash
@@ -74,9 +74,11 @@ $ rm -f d
 ```
 
 ### So what ?
+
 So, you can now do this inside your radare2 sessions!
 
 Let's take a simple binary, and check what is already _sdbized_.
+
 ```
 $ cat test.c
 int main(){
@@ -100,7 +102,8 @@ fd.6
 [0x08048320]> k bin/fd.6/*
 archs=0:0:x86:32
 ```
-The file corresponding to the sixth file descriptor is a x86_32 binary. 
+
+The file corresponding to the sixth file descriptor is a x86_32 binary.
 
 ```
 [0x08048320]> k anal/meta/*
@@ -109,6 +112,7 @@ meta.s.0x80484d0=12,SGVsbG8gd29ybGQ=
 [0x08048320]> ?b64- SGVsbG8gd29ybGQ=
 Hello world
 ```
+
 Strings are stored encoded in base64.
 
 ---
@@ -133,24 +137,33 @@ List keys
 k *
 k anal/*
 ```
+
 Set a key
+
 ```
 k foo=bar
 ```
+
 Get the value of a key
+
 ```
 k foo
 ```
 
 List all syscalls
+
 ```
 k syscall/*~^0x
 ```
+
 List all comments
+
 ```
 k anal/meta/*~.C.
 ```
+
 Show a comment at given offset:
+
 ```
 k %anal/meta/[1]meta.C.0x100005000
 ```

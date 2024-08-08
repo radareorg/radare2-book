@@ -8,7 +8,7 @@ Players must get familiar with the radare2 toolchain, assembly language and the 
 
 The intial implementation of the r2wars game was done in a Python r2pipe script. But this served as a proof-of-concept for another more performant implementation written in `C#` and available on this repository. This implementation is the one used in the official competitions at r2con.
 
-* https://github.com/radareorg/r2wars
+* <https://github.com/radareorg/r2wars>
 
 ### Supported Architectures
 

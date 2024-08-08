@@ -34,4 +34,3 @@ f sym.optarg 8 0x0021f5f8
 f sym.stdout 8 0x0021f5e8
 f sym.program_invocation_short_name 8 0x0021f5e0
 ```
-

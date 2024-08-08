@@ -3,9 +3,11 @@
 Console access is wrapped in API that permits to show the output of any command as ANSI, W32 Console or HTML formats. This allows radare's core to run inside environments with limited displaying capabilities, like kernels or embedded devices. It is still possible to receive data from it in your favorite format.
 
 To enable colors support by default, add a corresponding configuration option to the .radare2 configuration file:
+
 ```
 $ echo 'e scr.color=1' >> ~/.radare2rc
 ```
+
 Note that enabling colors is not a boolean option. Instead, it is a number because there are different color depth levels. This is:
 
 * 0: black and white

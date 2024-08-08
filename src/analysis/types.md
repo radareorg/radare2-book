@@ -76,6 +76,7 @@ void *
 ### Loading types
 
 There are three easy ways to define a new type:
+
 * Directly from the string using `td` command
 * From the file using `to <filename>` command
 * Open  an `$EDITOR` to type the definitions in place using `to -`
@@ -208,14 +209,17 @@ Lets see a simple example of [R]SI-relative addressing
 [0x000052f0]> pd 1
 0x000052f0      mov rax, qword [rsi + 8]    ; [0x8:8]=0
 ```
+
 Here `8` - is some offset in the memory, where `rsi` probably holds
 some structure pointer. Imagine that we have the following structures
+
 ```
 
 [0x000052f0]> "td struct ms { char b[8]; int member1; int member2; };"
 [0x000052f0]> "td struct ms1 { uint64_t a; int member1; };"
 [0x000052f0]> "td struct ms2 { uint16_t a; int64_t b; int member1; };"
 ```
+
 Now we need to set the proper structure member offset instead of `8` in this instruction.
 At first, we need to list available types matching this offset:
 
@@ -300,6 +304,7 @@ you can find the whole list of format specifier in `pf??`:
 -----------------------------------------------------
 
 ```
+
 there are basically 3 mandatory keys for defining basic data types:
 `X=type`
 `type.X=format_specifier`

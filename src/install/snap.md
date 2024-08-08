@@ -20,6 +20,7 @@ But to allow using this radare commands without this prefix, it can be solved ei
 Also if `r2pm` gets used it can also be useful to add the user local prefix `~/.local/share/radare2/prefix/bin`.
 
 So as an example could be somthing like this:
+
 ```sh
 PATH="$HOME/.local/share/radare2/prefix/bin:/snap/radare2/current/bin:$PATH"
 ```

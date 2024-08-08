@@ -16,15 +16,15 @@ ragg2 uses the `spp` preprocessor. So you can use defines, build conditionals an
 
 Sometimes you just need to replace at compile time a single entity on multiple places. Aliases are translated into 'equ' statements in assembly language. This is just an assembler-level keyword redefinition.
 
-* ` AF_INET@alias(2);`
-* ` printf@alias(0x8053940);`
+* `AF_INET@alias(2);`
+* `printf@alias(0x8053940);`
 
 #### Includes
 
 Use `cat(1)` or the preprocessor to concatenate multiple files to be compiled.
 
-* ` INCDIR@alias("/usr/include/ragg2");`
-* ` sys-osx.r@include(INCDIR);`
+* `INCDIR@alias("/usr/include/ragg2");`
+* `sys-osx.r@include(INCDIR);`
 
 #### Hashbang
 
@@ -111,7 +111,7 @@ There's a work-in-progress libc-like library written completely in r\_egg
 * `.pc`
 * `.sp`
 
-__Attention:__ All the numbers after `.var` and `.arg` mean the offset with the
+**Attention:** All the numbers after `.var` and `.arg` mean the offset with the
 
 top of stack, not variable symbols.
 
@@ -201,5 +201,5 @@ Supported syntax for comments are the multiline:
 
 and for singline line comments use these:
 
-* ` // single line comment`
-* ` # single line comment`
+* `// single line comment`
+* `# single line comment`

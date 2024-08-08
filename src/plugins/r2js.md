@@ -33,6 +33,6 @@ Some notes on this code:
 * Register a plugin by passing the plugin type and a function
 * The initialization function returns a object describing it
 
-This code runs inside radare2, this means that it will be *fast*, and by fast I mean faster than Python, r2pipe and will be closer to the `C` plugins. Not just for running, but also for loading, because the js runtime is already there, use r2js plugins if possible if you care about performance.
+This code runs inside radare2, this means that it will be _fast_, and by fast I mean faster than Python, r2pipe and will be closer to the `C` plugins. Not just for running, but also for loading, because the js runtime is already there, use r2js plugins if possible if you care about performance.
 
 You can find other plugin examples in the examples directory in radare2.

@@ -31,6 +31,7 @@ flatpak run org.radare.iaito
 ### CLI Configuration
 
 To allow usage of CLI radare applications you need to define the following aliases:
+
 ```sh
 alias r2='flatpak run --command=r2 org.radare.iaito'
 alias r2agent='flatpak run --command=r2agent org.radare.iaito'
@@ -53,6 +54,7 @@ alias rax2='flatpak run --command=rax2 org.radare.iaito'
 With this commands, by default no local files will be accesible.
 To allow acces to a folder please use the special permissions procedure explained below or use `zenity` inside the flatpak sandbox to open a dialog using XDG portals.
 Example:
+
 ```console
 $ alias r2='flatpak run --command=r2 org.radare.iaito'
 $ r2 -
@@ -78,21 +80,25 @@ flatpak run com.github.tchx84.Flatseal
 Alternatively this can be configured via CLI using `flatpak override`, here there are some examples on how to configure it:
 
 * To allow radare plugins to connect to your network or Internet:
+
 ```sh
 flatpak override --user --share=network org.radare.iaito
 ```
 
 * To allow some plugins to attach to a usb device:
+
 ```sh
 flatpak override --user --device=all org.radare.iaito
 ```
 
 * To allow some plugins to access to an specific folder not selected by the GUI (with optional `:ro` to only allow read only):
+
 ```sh
 flatpak override --user --filesystem=/mnt/hdd:ro org.radare.iaito
 ```
 
 * To reset back to default required permissions this command can be used:
+
 ```sh
 flatpak override --user --reset org.radare.iaito
 ```

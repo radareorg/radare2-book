@@ -118,6 +118,7 @@ Seek to an address 0x0. An alternative command is simply `0x0`
 ```
 
 Print current address:
+
 ```
 [0x00000000]> s
 0x0
@@ -209,5 +210,5 @@ There are several more commands and features to follow and analyze pointers:
 * pdp : disassemble following pointers in stack for ropchain gadgets
 * pxw/pxq : word/qword hexdumps
 * ahp : set pointer hints for analysis
-* :iP : diversity pointer infromation from 
+* :iP : diversity pointer infromation from
 * pxt : delta pointer table dumping, handy for manual switch table analysis

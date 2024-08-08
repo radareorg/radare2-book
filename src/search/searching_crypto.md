@@ -1,6 +1,7 @@
 ## Searching for Cryptography materials
 
 ### Searching expanded keys
+
 radare2 is capable of finding **expanded** keys with `/ca` command for AES and SM4 block ciphers. It searches from current seek position up to the `search.distance` limit, or until end of file is reached. You can interrupt current search by pressing `Ctrl-C`. For example, to look for AES keys in a memory dump:
 
 ```
@@ -13,6 +14,7 @@ hits: 1
 For AES, the output length gives you the size of the AES key used: 128, 192 or 256 bits. If you are simply looking for plaintext AES keys in your binary, `/ca` will not find them they must have been expanded by the key expansion algorithm.
 
 ### Searching private keys and certificates
+
 `/cr` command implements the search of private keys (RSA and ECC). `/cd` command implements a similar feature to search certificates.
 
 ```
@@ -23,7 +25,8 @@ hits: 2
 ```
 
 ### Entropy analysis
-`p=e` might give some hints if high entropy sections are found trying to cover up a hardcoded secret. 
+
+`p=e` might give some hints if high entropy sections are found trying to cover up a hardcoded secret.
 
 There is the possibility to delimit entropy sections for later use with `\s` command:
 

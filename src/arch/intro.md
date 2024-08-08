@@ -57,4 +57,3 @@ The "pseudo" syntax may be somewhat easier for a human to understand than the de
 		  0x00405e24    64483314252. xor %fs:0x28, %rdx
 		  0x00405e2d    4889d8       mov %rbx, %rax
 ```
-

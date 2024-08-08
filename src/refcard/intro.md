@@ -81,7 +81,6 @@ allows us to print it in utf-16, pascal, zero terminated, .. formats.
 | psp [offset] | Print pascal string            |
 | psw [offset] | Print wide string              |
 
-
 ## Visual mode
 
 The visual mode is the standard interactive interface of radare2.
@@ -127,7 +126,6 @@ have to press keys to get the actions happen instead of commands.
 | yY             | Copy and paste selection                          |
 | z              | fold/unfold comments in diassembly                |
 
-
 ## Searching
 
 There are many situations where we need to find a value inside a binary
@@ -165,6 +163,7 @@ where the `/` command may search for the given value.
 This feature has broken and not been resolved at the time of writing these words (Nov.16th 2020). check [#Issue 6945: META - Project files](https://github.com/radareorg/radare2/issues/6945) and [#Issue 17034](https://github.com/radareorg/radare2/issues/17034) for more details.
 
 To save your analysis for now, write your own script which records the function name, variable name, etc. for example:
+
 ```sh
 vim sample_A.r2
 

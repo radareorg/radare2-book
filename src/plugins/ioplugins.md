@@ -7,22 +7,29 @@ IO plugins are the ones used to wrap the open, read, write and 'system' on virtu
 So, when radare reads a block of bytes, it is the task of an IO plugin to get these bytes from any place and put them into internal buffer. An IO plugin is chosen by a file's URI to be opened. Some examples:
 
 * Debugging URIs
+
 ```
 $ r2 dbg:///bin/ls
 $ r2 pid://1927
 ```
+
 * Remote sessions
+
 ```
 $ r2 rap://:1234
 $ r2 rap://<host>:1234//bin/ls
 ```
+
 * Virtual buffers
+
 ```
 $ r2 malloc://512
 shortcut for
 $ r2 -
 ```
+
 You can get a list of the radare IO plugins by typing `radare2 -L`:
+
 ```
 $ r2 -L
 rw_  ar       Open ar/lib files [ar|lib]://[file//path] (LGPL3)
@@ -57,7 +64,6 @@ rw_  zip      Open zip files [apk|ipa|zip|zipall]://[file//path] (BSD)
 ```
 
 An example of how to write a plugin is available in this commit: [here](https://github.com/radareorg/radare2/pull/20574/commits/f9abd3026c37961a485656447eff7bff616322bf).
-
 
 1) Write r2 IO plugin with Makefile (for Linux only)
 
@@ -214,6 +220,7 @@ R_API RLibStruct radare_plugin = {
 
 Do not forget to include your definition of `r_io_plugin_dap` in `libr/include/r_io.h`:
 At this line: [here](https://github.com/radareorg/radare2/blob/f9abd3026c37961a485656447eff7bff616322bf/libr/include/r_io.h#L590), add:
+
 ```c
 extern RIOPlugin r_io_plugin_dap;
 ```

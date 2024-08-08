@@ -3,6 +3,7 @@
 Radare2 allows manual search for assembly code looking like a syscall operation.
 For example on ARM platform usually they are represented by the `svc` instruction,
 on the others can be a different instructions, e.g. `syscall` on x86 PC.
+
 ```
 [0x0001ece0]> /ad/ svc
 ...
@@ -41,6 +42,7 @@ the addresses where particular syscalls were found and list them.
 To reduce searching time it is possible to [restrict the searching](../search/configurating_the_search.md) range for only executable segments or sections with `/as @e:search.in=io.maps.x`
 
 Using the [ESIL emulation](../emulation/intro.md) radare2 can print syscall arguments in the disassembly output. To enable the linear (but very rough) emulation use `asm.emu` configuration variable:
+
 ```
 [0x0001ece0]> e asm.emu=true
 [0x0001ece0]> s 0x000187c2
@@ -67,6 +69,7 @@ In case of executing `aae` (or `aaaa` which calls `aae`) command radare2 will pu
 ```
 
 It also can be interactively navigated through within HUD mode (`V_`)
+
 ```
 0> syscall.sd_ble_gap_disconnect
  - 0x000187b2  syscall.sd_ble_gap_disconnect

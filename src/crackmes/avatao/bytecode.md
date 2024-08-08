@@ -4,31 +4,31 @@ Well, we did the reverse engineering part, now we have to write a program for
 the VM with the instruction set described in the previous paragraph. Here is
 the program's functional specification:
 
-- the program must return "*"
-- *sym.memory* has to contain the string "Such VM! MuCH reV3rse!" after
+* the program must return "*"
+* _sym.memory_ has to contain the string "Such VM! MuCH reV3rse!" after
   execution
-- all 9 instructions have to be used at least once
-- *sym.good_if_ne_zero* should not be zero
-- instr_P is not allowed to be used more than 9 times
+* all 9 instructions have to be used at least once
+* _sym.good_if_ne_zero_ should not be zero
+* instr_P is not allowed to be used more than 9 times
 
 Since this document is about reversing, I'll leave the programming part to the
 fellow reader :) But I'm not going to leave you empty-handed, I'll give you one
 advice: Except for "J", all of the instructions are simple, easy to use, and it
 should not be a problem to construct the "Such VM! MuCH reV3rse!" using them.
 "J" however is a bit complicated compared to the others. One should realize that
-its sole purpose is to make *sym.good_if_ne_zero* bigger than zero, which is a
-requirement to access the flag. In order to increment *sym.good_if_ne_zero*,
+its sole purpose is to make _sym.good_if_ne_zero_ bigger than zero, which is a
+requirement to access the flag. In order to increment _sym.good_if_ne_zero_,
 three conditions should be met:
 
-- *arg1* should be a negative number, otherwise we would return early
-- *sym.written_by_instr_C* should not be 0 when "J" is called. This means that
+* _arg1_ should be a negative number, otherwise we would return early
+* _sym.written_by_instr_C_ should not be 0 when "J" is called. This means that
   "C", "AC", or "SC" instructions should be used before calling "J".
-- *arg1_and_0x3f* should be negative when checked. Since 0x3f's sign bit is
-  zero, no matter what *arg1* is, the result of *arg1* & 0x3f will always be
-  non-negative. But remember that "J" negates *arg1_and_0x3f* if *arg1* & 0x40
-  is not zero. This basically means that *arg1*'s 6th bit should be 1
-  (0x40 = 01000000b). Also, because *arg1_and_0x3f* can't be 0 either, at least
-  one of *arg1*'s 0th, 1st, 2nd, 3rd, 4th or 5th bits should be 1 (0x3f =
+* _arg1_and_0x3f_ should be negative when checked. Since 0x3f's sign bit is
+  zero, no matter what _arg1_ is, the result of _arg1_ & 0x3f will always be
+  non-negative. But remember that "J" negates _arg1_and_0x3f_ if _arg1_ & 0x40
+  is not zero. This basically means that _arg1_'s 6th bit should be 1
+  (0x40 = 01000000b). Also, because _arg1_and_0x3f_ can't be 0 either, at least
+  one of _arg1_'s 0th, 1st, 2nd, 3rd, 4th or 5th bits should be 1 (0x3f =
   00111111b).
 
 I think this is enough information, you can go now and write that program. Or,

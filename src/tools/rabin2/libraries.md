@@ -1,6 +1,7 @@
 ### List Libraries
 
 Rabin2 can list libraries used by a binary with the `-l` option:
+
 ```
 $ rabin2 -l `which r2`
 [Linked libraries]
@@ -29,7 +30,9 @@ libc.so.6
 
 22 libraries
 ```
+
 Lets check the output with `ldd` command:
+
 ```
 $ ldd `which r2`
 linux-vdso.so.1 (0x00007fffba38e000)

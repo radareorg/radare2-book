@@ -3,6 +3,7 @@
 If you want to search for a certain assembler opcodes, you can use `/a` commands.
 
 The command `/ad/ jmp [esp]` searches for the specified category of assembly mnemonic:
+
 ```
 [0x00404888]> /ad/ jmp qword [rdx]
 f hit_0 @ 0x0040e50d   # 2: jmp qword [rdx]
@@ -15,6 +16,7 @@ f hit_6 @ 0x00419c43   # 3: jmp qword [rdx]
 ```
 
 The command `/a jmp eax` assembles a string to machine code, and then searches for the resulting bytes:
+
 ```
 [0x00404888]> /a jmp eax
 hits: 1

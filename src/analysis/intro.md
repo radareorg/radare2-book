@@ -34,13 +34,12 @@ These operations are handled by the `a` (analyze) command family:
 In fact, `a` namespace is one of the biggest in radare2 tool and allows to control
 very different parts of the analysis:
 
- - Code flow analysis
- - Data references analysis
- - Using loaded symbols
- - Managing different type of graphs, like CFG and call graph
- - Manage variables
- - Manage types
- - Emulation using ESIL VM
- - Opcode introspection
- - Objects information, like virtual tables
-
+* Code flow analysis
+* Data references analysis
+* Using loaded symbols
+* Managing different type of graphs, like CFG and call graph
+* Manage variables
+* Manage types
+* Emulation using ESIL VM
+* Opcode introspection
+* Objects information, like virtual tables

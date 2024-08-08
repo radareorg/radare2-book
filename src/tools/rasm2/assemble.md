@@ -86,4 +86,3 @@ Assembling also is accessible in radare2 visual mode through pressing `A` key to
 The cool thing of writing assembly using the visual assembler interface that the changes are done in memory until you press enter.
 
 So you can check the size of the code and which instructions is overlapping before committing the changes.
-

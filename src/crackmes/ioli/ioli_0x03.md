@@ -134,7 +134,7 @@ print(''.join([chr(ord(i)-0x3) for i in 'SdvvzrugRN$$$']))
 print(''.join([chr(ord(i)-0x3) for i in 'LqydolgSdvvzrug$']))
 ```
 
-the easier way is to `run` the decryption code, that means debug it or emulate it. I used radare2 ESIL emulator but it got stuck when executed ` call dword imp.strlen`. And I can't find the usage of hooking function / skip instruction in radare2.  The following is an example to show u how to emulate ESIL.
+the easier way is to `run` the decryption code, that means debug it or emulate it. I used radare2 ESIL emulator but it got stuck when executed `call dword imp.strlen`. And I can't find the usage of hooking function / skip instruction in radare2.  The following is an example to show u how to emulate ESIL.
 
 ```sh
 [0x08048414]> s 0x08048445		# the 'sub al, 0x03'

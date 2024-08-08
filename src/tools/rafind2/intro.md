@@ -28,6 +28,7 @@ Usage: rafind2 [-mXnzZhqv] [-a align] [-b sz] [-f/t from/to] [-[e|s|S] str] [-x 
 ```
 
 That's how to use it, first we'll search for "lib" inside the `/bin/ls` binary.
+
 ```
 $ rafind2 -s lib /bin/ls
 0x5f9
@@ -36,6 +37,7 @@ $ rafind2 -s lib /bin/ls
 ...
 $
 ```
+
 Note that the output is pretty minimal, and shows the offsets where the string `lib` is found. We can then use this output to feed other tools.
 
 Counting results:

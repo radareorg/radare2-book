@@ -19,16 +19,17 @@ Download the Termux application from the [official site](https://github.com/term
 #### Update & Upgrade
 
 First time installation of termux require updating the repo to fetch all the available packages.
+
 ```
 $ pkg update && pkg upgrade -y
 ```
 
 ##### Install required packages
 
-
 ```
 $ pkg install build-essential git python3 binutils wget pkg-config
 ```
+
 build-essential contains all the required build tool like make,gcc etc.
 
 ##### Download or clone Radare2 repo
@@ -36,8 +37,8 @@ build-essential contains all the required build tool like make,gcc etc.
 ```
 $ git clone https://github.com/radareorg/radare2
 ```
-If you are limited by disk space, you can either clone the repository with a depth of 1 by adding `--depth 1` in clone command or build from a tarball. Cloning the repository provides the most up-to-date code, whereas tarballs are only generated during releases, which may not contains latest update and bug fixes.
 
+If you are limited by disk space, you can either clone the repository with a depth of 1 by adding `--depth 1` in clone command or build from a tarball. Cloning the repository provides the most up-to-date code, whereas tarballs are only generated during releases, which may not contains latest update and bug fixes.
 
 ##### Build and Installation
 
@@ -47,6 +48,7 @@ Building and installing Radare2 after cloning the repository is straightforward 
 cd radare2
 sh sys/install.sh
 ```
+
 It will install required packages if you already didn't and start the installation.
 
 ```

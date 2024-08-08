@@ -38,7 +38,7 @@ There are three different methods to define new types:
 
 1. Defining a new type from r2 shell immediately, to do this you will use `td` command, and put the whole line between double quotes. For example:
 
-`"td struct person {int age; char *name; char *address;};"`
+   `"td struct person {int age; char *name; char *address;};"`
 
 2. You can also use `to -` to open a text editor and write your own types in there. This is preferable when you got too many types to define.
 
@@ -55,4 +55,3 @@ You can also cast pointers to data types and view data in there accordingly with
        address : (*0x4005b8) 0x7fff170a46bc = My age
 [0x00400511]> 
 ```
-

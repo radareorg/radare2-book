@@ -6,7 +6,7 @@ Highlighting all aspects of radare2, this congress brings the oportunity to ever
 
 The congress was started as a 2 days filled with trainings and presentations.
 
-* https://rada.re/con
+* <https://rada.re/con>
 
 Other rules and aspects that make r2con a special conference:
 

@@ -2,7 +2,7 @@
 
 This is the official book of the radare project.
 
-*This is a collaborative and community-driven project, if you want to improve the status of the documentation check out the contributing chapter and submit pullrequests to the repository*
+_This is a collaborative and community-driven project, if you want to improve the status of the documentation check out the contributing chapter and submit pullrequests to the repository_
 
 * [GitHub](https://github.com/radareorg/radare2-book)
 * [PDF](https://github.com/radareorg/radare2-book/releases/latest/download/r2book.pdf)

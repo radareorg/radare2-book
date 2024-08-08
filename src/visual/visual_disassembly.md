@@ -32,12 +32,13 @@ Pressing lowercase `c` toggles the cursor mode. When this mode is active, the cu
 
 The cursor is used to select a range of bytes or simply to point to a byte. You can use the cursor to create a named flag at specific location. To do so, seek to the required position, then press `f` and enter a name for a flag.
 If the file was opened in write mode using the `-w` flag or the `o+` command, you can also use the cursor to overwrite a selected range with new values. To do so, select a range of bytes (with HJKL and SHIFT key pressed), then press `i` and enter the hexpair values for the new data. The data will be repeated as needed to fill the range selected. For example:
+
 ```
 <select 10 bytes in visual mode using SHIFT+HJKL>
 <press 'i' and then enter '12 34'>
 ```
-The 10 bytes you have selected will be changed to "12 34 12 34 12 ...".
 
+The 10 bytes you have selected will be changed to "12 34 12 34 12 ...".
 
 The Visual Assembler is a feature that provides a live-preview while you type in new instructions to patch
 into the disassembly. To use it, seek or place the cursor at the wanted location and hit the 'A' key. To provide multiple instructions, separate them with semicolons, `;`.
@@ -96,14 +97,11 @@ changed using the `e` command. All configuration keys can also be edited through
 This HUD can be accessed using the `e` key in visual mode. The editor allows you to easily examine and change radare2's configuration. For example, if you want to change something about the disassembly display, select `asm` from the list, navigate to the item you wish to modify it, then select it by hitting `Enter`.
 If the item is a boolean variable, it will toggle, otherwise you will be prompted to provide a new value.
 
-
 ![First Select asm](select_asm.png)
-
 
 Example switch to pseudo disassembly:
 
 ![Pseudo disassembly disabled](pseudo_disable.png)
-
 
 ![Pseudo disassembly enabled](pseudo_enable.png)
 
@@ -133,8 +131,8 @@ e asm.bits = 16
 0000:4876      48             dec ax
 0000:4877      89e2           mov dx, sp
 ```
-This latest operation can also be done using `&` in Visual mode.
 
+This latest operation can also be done using `&` in Visual mode.
 
 #### asm.pseudo: Enable pseudo syntax
 

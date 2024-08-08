@@ -26,6 +26,7 @@ The resulting build includes the following projects:
 * [r2pipe](https://pypi.org/project/r2pipe/) (for Python)
 
 To use this docker image you can use either:
+
 ```sh
 docker run -ti radare/radare2
 podman run -ti docker.io/radare/radare2
@@ -33,11 +34,13 @@ nerdctl run -ti radare/radare2
 ```
 
 To use the docker image as one shot so it removes everything inside the container on exit just add `--rm` as follows:
+
 ```sh
 docker run --rm -ti radare/radare2
 ```
 
 Another example to use for debugging inside the docker:
+
 ```sh
 docker run --tty --interactive --privileged --cap-add=SYS_PTRACE --security-opt seccomp=unconfined --security-opt apparmor=unconfined radare/radare2
 ```
@@ -72,7 +75,6 @@ Also, you can select the architecture (`amd64` / `arm64`) to compile the image b
 
 This Dockerfile also used by Remnux distribution from SANS, and is available on the [Docker Hub](https://hub.docker.com/r/remnux/radare2), but it might not contain latest changes.
 
-
 ### Run a container as r2web server
 
 By default both images are intended to be used in a interactive terminal.
@@ -80,11 +82,13 @@ By default both images are intended to be used in a interactive terminal.
 But both can also be launched directly to use the radare2 web UI.
 
 The do so it can be launched using the following command:
+
 ```sh
 docker run -p 9090:9090 radare/radare2 r2 -c '=h' -
 ```
 
 Or the following docker-compose structure:
+
 ```yaml
 version: "3.8"
 services:
@@ -97,6 +101,7 @@ services:
 ```
 
 Or if debugging functionality is required:
+
 ```yaml
 version: "3.8"
 services:

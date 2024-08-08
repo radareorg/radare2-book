@@ -4,11 +4,13 @@ One of the most common task in automation is looping through something,
 there are multiple ways to do this in radare2.
 
 We can loop over flags:
+
 ```
 @@ flagname-regex
 ```
 
 For example, we want to see function information with `afi` command:
+
 ```
 [0x004047d6]> afi
 #
@@ -33,22 +35,28 @@ args: 0
 diff: type: new
 [0x004047d6]>
 ```
+
 Now let's say, for example, that we'd like see a particular field from this output for all functions found by analysis. We can do that with a loop over all function flags (whose names begin with `fcn.`):
+
 ```
 [0x004047d6]> fs functions
 [0x004047d6]> afi @@ fcn.* ~name
 ```
+
 This command will extract the `name` field from the `afi` output of every flag with a name
 matching the regexp `fcn.*`.
 There are also a predefined loop called `@@f`, which runs your command on every functions found by r2:
+
 ```
 [0x004047d6]> afi @@f ~name
 ```  
 
 We can also loop over a list of offsets, using the following syntax:
+
 ```
 @@=1 2 3 ... N
 ```
+
 For example, say we want to see the opcode information for 2 offsets: the current one, and at current + 2:
 
 ```
@@ -78,11 +86,13 @@ cond: al
 family: cpu
 [0x004047d6]>
 ```
+
 Note we're using the `$$` variable which evaluates to the current offset. Also note
 that `$$+2` is evaluated before looping, so we can use the simple arithmetic expressions.
 
 A third way to loop is by having the offsets be loaded from a file. This file should contain
 one offset per line.
+
 ```
 [0x004047d0]> ?v $$ > offsets.txt
 [0x004047d0]> ?v $$+2 >> offsets.txt
@@ -95,6 +105,7 @@ mov r9, rdx
 ```
 
 radare2 also offers various `foreach` constructs for looping. One of the most useful is for looping through all the instructions of a function:
+
 ```
 [0x004047d0]> pdf
 / (fcn) entry0 42
@@ -130,33 +141,36 @@ mov rdi, main
 call sym.imp.__libc_start_main
 hlt
 ```
+
 In this example the command `pi 1` runs over all the instructions in the current function (entry0).
 There are other options too (not complete list, check `@@?` for more information):
- - `@@k sdbquery` - iterate over all offsets returned by that sdbquery
- - `@@t`- iterate over on all threads (see dp)
- - `@@b` - iterate over all basic blocks of current function (see afb)
- - `@@f` - iterate over all functions (see aflq)
+
+* `@@k sdbquery` - iterate over all offsets returned by that sdbquery
+* `@@t`- iterate over on all threads (see dp)
+* `@@b` - iterate over all basic blocks of current function (see afb)
+* `@@f` - iterate over all functions (see aflq)
 
 The last kind of looping lets you loop through predefined iterator types:
 
- - symbols
- - imports
- - registers
- - threads
- - comments
- - functions
- - flags
+* symbols
+* imports
+* registers
+* threads
+* comments
+* functions
+* flags
 
 This is done using the `@@@` command. The previous example of listing information about functions can also be done using the `@@@` command:
 
 ```
 [0x004047d6]> afi @@@ functions ~name
 ```
+
 This will extract `name` field from `afi` output and will output a huge list of
 function names. We can choose only the second column, to remove the redundant `name:` on every line:
+
 ```
 [0x004047d6]> afi @@@ functions ~name[1]
 ```
 
 **Beware, @@@ is not compatible with JSON commands.**
-

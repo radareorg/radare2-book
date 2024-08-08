@@ -70,7 +70,7 @@ r2pipe.open('/bin/ls', (err, res) => {
 
 Checkout the GIT repository for more examples and details.
 
-https://github.com/radareorg/radare2-r2pipe/blob/master/nodejs/r2pipe/README.md
+<https://github.com/radareorg/radare2-r2pipe/blob/master/nodejs/r2pipe/README.md>
 
 ### Go
 
@@ -112,6 +112,7 @@ $ cat Cargo.toml
 [dependencies]
 r2pipe = "*"
 ```
+
 ```rust
 #[macro_use]
 extern crate r2pipe;
@@ -131,6 +132,7 @@ fn main() {
 ```
 $ gem install r2pipe
 ```
+
 ```ruby
 require 'r2pipe'
 puts 'r2pipe ruby api demo'
@@ -298,7 +300,6 @@ public static int main (string[] args) {
 ```
 
 ### NewLisp
-
 
 ```lisp
 (load "r2pipe.lsp")

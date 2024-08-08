@@ -25,9 +25,11 @@ pdb.useragent = Microsoft-Symbol-Server/6.11.0001.402
 Using the variable `pdb.server` you can change the address where radare2 will try to
 download the PDB file by the GUID stored in the executable header.
 You can make use of multiple symbol servers by separating each URL with a space:
+
 ```
 e pdb.server = https://msdl.microsoft.com/download/symbols https://symbols.mozilla.org
 ```
+
 On Windows,  you can also use local network share paths (UNC paths) as symbol servers.
 
 Usually, there is no reason to change default `pdb.useragent`, but who knows where

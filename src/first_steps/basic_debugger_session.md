@@ -27,6 +27,7 @@ dcu main
 Be warned that certain malware or other tricky programs can actually execute code before `main()` and thus you'll be unable to control them. (Like the program constructor or the tls initializers)
 
 Below is a list of most common commands used with debugger:
+
 ```
 > d?            ; get help on debugger commands
 > ds 3          ; step 3 times
@@ -59,10 +60,12 @@ With the `c` key you can toggle the cursor mode to mark a byte range selection
 
 In visual mode you can enter regular radare commands by prepending them with `:`.
 For example, to dump a one block of memory contents at ESI:
+
 ```
 <Press ':'>
 x @ esi
 ```
+
 To get help on visual mode, press `?`. To scroll the help screen, use arrows. To
 exit the help view, press `q`.
 

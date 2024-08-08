@@ -4,10 +4,13 @@ The typical work involved in reversing binary files makes powerful annotation ca
 Radare offers multiple ways to store and retrieve such metadata.
 
 By following common basic UNIX principles, it is easy to write a small utility in a scripting language which uses `objdump`, `otool` or any other existing utility to obtain information from a binary and to import it into radare. For example, take a look at `idc2r.py` shipped with [radare2ida](https://github.com/radareorg/radare2-extras/tree/master/r2ida). To use it, invoke it as `idc2r.py file.idc > file.r2`. It reads an IDC file exported from an IDA Pro database and produces an r2 script containing the same comments, names of functions and other data. You can import the resulting 'file.r2' by using the dot `.` command of radare:
+
 ```
 [0x00000000]> . file.r2
 ```
+
 The `.` command is used to interpret Radare commands from external sources, including files and program output. For example, to omit generation of an intermediate file and import the script directly you can use this combination:
+
 ```
 [0x00000000]> .!idc2r.py < file.idc
 ```
@@ -112,4 +115,3 @@ will create a link. It will be shown in the disassembly comments:
 Note `,(locale-help.txt)` appeared in the comments, if we press `,` again in the visual mode, it
 will open the file. Using this mechanism we can create a long descriptions of some particular places
 in disassembly, link datasheets or related articles.
-

@@ -32,6 +32,7 @@ Let's see some examples:
 0x00000040  d68b 3148 348b 03a0 8b0f c200 5d25 7074
 0x00000050  7500 00e1 ffe8 58fe 4dc4 00e0 dbc8 b885
 ```
+
 ```
 [0x08049790]> e zoom.byte=p
 [0x08049790]> pz // or pzp
@@ -42,6 +43,7 @@ Let's see some examples:
 0x00000040  a774 96c3 b1a4 6c8e a07c 6a8f 8983 6a62
 0x00000050  7d66 625f 7ea4 7ea6 b4b6 8b57 a19f 71a2
 ```
+
 ```
 [0x08049790]> eval zoom.byte = flags
 [0x08049790]> pz // or pzf
@@ -53,6 +55,7 @@ Let's see some examples:
 0x00406eb5  feff ff0f 1f84 0000 0000 0041 8801 4983
 0x00406ec5  c001 4983 c201 4983 c101 e9ec feff ff0f
 ```
+
 ```
 [0x08049790]> e zoom.byte=F
 [0x08049790]> pO // or pzF

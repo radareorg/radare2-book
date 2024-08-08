@@ -13,7 +13,7 @@ But it is also possible to use Nim, C (via Emscripten), Vlang, and many other la
 You can run r2js scripts like you do with any other script:
 
 * Using the `-i` flag on the system shell when launching r2.
-* With the `. ` command inside the radare2 shell.
+* With the `.` command inside the radare2 shell.
 
 The **rlang** plugin will be selected depending on the file extension. In this case the `qjs` rlang plugin handles the `.r2.js` extension.
 
@@ -72,7 +72,7 @@ var R = new R2Papi(r2);
 
 Frida-tools ship a TypeScript compiler that targets ESM and generates a single file containing all the js compiled files from a TypeScript project.
 
-Radare2 supports the same esm-blob file format used by Frida, and if you don't want to depend on Python you can also use the native one distributed with the *r2frida* plugin named `r2frida-compile`.
+Radare2 supports the same esm-blob file format used by Frida, and if you don't want to depend on Python you can also use the native one distributed with the _r2frida_ plugin named `r2frida-compile`.
 
 For example:
 

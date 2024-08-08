@@ -102,4 +102,3 @@ IOLI Crackme Level 0x04
 Password: 96
 Password OK!
 ```
-

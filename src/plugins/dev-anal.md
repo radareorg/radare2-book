@@ -108,14 +108,16 @@ R_API RLibStruct radare_plugin = {
 };
 #endif
 ```
+
 After compiling radare2 will list this plugin in the output:
+
 ```
 _dA_  _8_16      snes        LGPL3   SuperNES CPU
 ```
 
-**snes_op_table**.h: https://github.com/radareorg/radare2/blob/master/libr/asm/arch/snes/snes_op_table.h
+**snes_op_table**.h: <https://github.com/radareorg/radare2/blob/master/libr/asm/arch/snes/snes_op_table.h>
 
 Example:
 
-* **6502**: https://github.com/radareorg/radare2/commit/64636e9505f9ca8b408958d3c01ac8e3ce254a9b
-* **SNES**: https://github.com/radareorg/radare2/commit/60d6e5a1b9d244c7085b22ae8985d00027624b49
+* **6502**: <https://github.com/radareorg/radare2/commit/64636e9505f9ca8b408958d3c01ac8e3ce254a9b>
+* **SNES**: <https://github.com/radareorg/radare2/commit/60d6e5a1b9d244c7085b22ae8985d00027624b49>
