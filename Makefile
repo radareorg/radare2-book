@@ -1,6 +1,6 @@
 all: pdf epub
 
-.PHONY: lint lint-fix epub pdf gmi texi info one
+.PHONY: all lint lint-fix epub pdf gmi texi info one
 
 # CHAPTERS=$(shell find src -iname *.md)
 CHAPTERS=$(shell grep -Eoi '\([^\)]+' src/SUMMARY.md | sed -e 's,^.,src/,')
