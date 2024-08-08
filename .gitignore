@@ -14,6 +14,7 @@ _book/*
 *.bak
 *.log
 gmi/
+r2book.md
 r2book.pdf
 r2book.epub
 r2book.texi

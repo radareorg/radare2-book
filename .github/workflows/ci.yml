@@ -11,13 +11,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Linting
+        run: sys/lint.sh
       - name: Install dependencies
         run: |
           sudo apt-get --assume-yes update
           sudo apt-get --assume-yes install pandoc texlive-xetex texinfo
           go install github.com/n0x1m/md2gmi@latest
-      - name: Linting
-        run: sh lint.sh
       - name: Build ebooks
         run: make pdf epub info gmi one
       - name: Upload artifacts

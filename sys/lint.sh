@@ -1,5 +1,7 @@
 #!/bin/sh
 
+cd $(dirname "$0")/..
+
 posix_pushd() {
   if [ $# -eq 0 ]; then
     echo "Usage: pushd <directory>"

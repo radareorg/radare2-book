@@ -1,6 +1,6 @@
 all: pdf epub
 
-.PHONY: epub pdf gmi texi info
+.PHONY: epub pdf gmi texi info one
 
 # CHAPTERS=$(shell find src -iname *.md)
 CHAPTERS=$(shell grep -Eoi '\([^\)]+' src/SUMMARY.md | sed -e 's,^.,src/,')
@@ -25,13 +25,13 @@ epub:
 texi:
 	pandoc $(CHAPTERS) $(PANDOC_OPTIONS) -o r2book.texi
 
-one r2book.md:
-	sh one.sh > r2book.md
-
 info: texi
 	rm -f r2book.info r2book.info.gz
 	makeinfo --force --no-split r2book.texi
 	gzip -9n r2book.info
+
+one r2book.md:
+	sys/one.sh > r2book.md
 
 GOPATH?=$(HOME)/go
 GOBIN?=$(GOPATH)/bin
