@@ -1,14 +1,6 @@
 all: pdf epub
 
-.PHONY: epub pdf pdf_old gmi texi info
-
-pdf_old: node_modules
-	npm run build
-	npm run pdf
-
-node_modules:
-	mkdir -p node_modules
-	npm i
+.PHONY: epub pdf gmi texi info
 
 # CHAPTERS=$(shell find src -iname *.md)
 CHAPTERS=$(shell grep -Eoi '\([^\)]+' src/SUMMARY.md | sed -e 's,^.,src/,')
