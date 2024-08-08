@@ -20,7 +20,7 @@ SDB supports:
 
 Let's create a database!
 
-```bash
+```console
 $ sdb d hello=world
 $ sdb d hello
 world
@@ -28,7 +28,7 @@ world
 
 Using arrays:
 
-```sh
+```console
 $ sdb - '[]list=1,2' '[0]list' '[0]list=foo' '[]list' '[+1]list=bar'
 1
 foo
@@ -40,7 +40,7 @@ bar
 
 Let's play with json:
 
-```sh
+```console
 $ sdb d g='{"foo":1,"bar":{"cow":3}}'
 $ sdb d g?bar.cow
 3
@@ -50,7 +50,7 @@ $ sdb - user='{"id":123}' user?id=99 user?id
 
 Using the command line without any disk database:
 
-```sh
+```console
 $ sdb - foo=bar foo a=3 +a -a
 bar
 4
@@ -69,7 +69,7 @@ a=3
 
 Remove the database
 
-```sh
+```console
 $ rm -f d
 ```
 
@@ -79,7 +79,7 @@ So, you can now do this inside your radare2 sessions!
 
 Let's take a simple binary, and check what is already _sdbized_.
 
-```
+```console
 $ cat test.c
 int main(){
 	puts("Hello world\n");
@@ -87,7 +87,7 @@ int main(){
 $ gcc test.c -o test
 ```
 
-```
+```console
 $ r2 -A ./test
 [0x08048320]> k **
 bin
@@ -96,7 +96,7 @@ syscall
 debug
 ```
 
-```
+```console
 [0x08048320]> k bin/**
 fd.6
 [0x08048320]> k bin/fd.6/*
@@ -105,7 +105,7 @@ archs=0:0:x86:32
 
 The file corresponding to the sixth file descriptor is a x86_32 binary.
 
-```
+```console
 [0x08048320]> k anal/meta/*
 meta.s.0x80484d0=12,SGVsbG8gd29ybGQ=
 [...]

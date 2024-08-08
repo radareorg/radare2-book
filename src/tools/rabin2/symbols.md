@@ -2,8 +2,8 @@
 
 With rabin2, the generated symbols list format is similar to the imports list. Use the `-s` option to get it:
 
-```
-rabin2 -s /bin/ls | head
+```console
+$ rabin2 -s /bin/ls | head
 [Symbols]
 
 nth paddr       vaddr      bind   type   size lib name
@@ -21,7 +21,7 @@ nth paddr       vaddr      bind   type   size lib name
 
 With the `-sr` option rabin2 produces a radare2 script instead. It can later be passed to the core to automatically flag all symbols and to define corresponding byte ranges as functions and data blocks.
 
-```
+```console
 $ rabin2 -sr /bin/ls | head
 fs symbols
 f sym.obstack_allocated_p 56 0x000150a0

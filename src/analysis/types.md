@@ -6,7 +6,7 @@ the internal SDB, thus are introspectable with `k` command.
 
 Most of the related commands are located in `t` namespace:
 
-```
+```console
 [0x00000000]> t?
 | Usage: t   # cparse types commands
 | t                          List all loaded types
@@ -45,7 +45,7 @@ depending on the binary or debuggee platform/compiler.
 Basic types can be listed using `t` command. For the structured types
 you need to use `ts`, for unions use `tu` and for enums — `te`.
 
-```
+```console
 [0x00000000]> t
 char
 char *
@@ -81,7 +81,7 @@ There are three easy ways to define a new type:
 * From the file using `to <filename>` command
 * Open  an `$EDITOR` to type the definitions in place using `to -`
 
-```
+```console
 [0x00000000]> "td struct foo {char* a; int b;}"
 [0x00000000]> cat ~/radare2-regressions/bins/headers/s3.h
 struct S1 {
@@ -97,7 +97,7 @@ S1
 
 Also note there is a config option to specify include directories for types parsing
 
-```
+```console
 [0x00000000]> e? dir.types
 dir.types: Default path to look for cparse type files
 [0x00000000]> e dir.types
@@ -112,7 +112,7 @@ into the sequence of `pf` commands. See more about [print format](../commandline
 
 The `tp` command uses the `pf` string to print all the members of type at the current offset/given address:
 
-```
+```console
 [0x00000000]> "td struct foo {char* a; int b;}"
 [0x00000000]> wx 68656c6c6f000c000000
 [0x00000000]> wz world @ 0x00000010 ; wx 17 @ 0x00000016
@@ -129,7 +129,7 @@ pf zd a b
 
 Also, you could fill your own data into the struct and print it using `tpx` command
 
-```
+```console
 [0x00000000]> tpx foo 414243440010000000
  a : 0x00000000 = "ABCD"
  b : 0x00000005 = 16
@@ -140,7 +140,7 @@ Also, you could fill your own data into the struct and print it using `tpx` comm
 The `tp` command just performs a temporary cast. But if we want to link some address or variable
 with the chosen type, we can use `tl` command to store the relationship in SDB.
 
-```
+```console
 [0x000051c0]> tl S1 = 0x51cf
 [0x000051c0]> tll
 (S1)
@@ -151,7 +151,7 @@ with the chosen type, we can use `tl` command to store the relationship in SDB.
 
 Moreover, the link will be shown in the disassembly output or visual mode:
 
-```
+```console
 [0x000051c0 15% 300 /bin/ls]> pd $r @ entry0
  ;-- entry0:
  0x000051c0      xor ebp, ebp
@@ -174,7 +174,7 @@ Moreover, the link will be shown in the disassembly output or visual mode:
 
 Once the struct is linked, radare2 tries to propagate structure offset in the function at current offset, to run this analysis on whole program or at any targeted functions after all structs are linked you have `aat` command:
 
-```
+```console
 [0x00000000]> aa?
 | aat [fcn]           Analyze all/given function to convert immediate to linked structure offsets (see tl?)
 ```
@@ -194,7 +194,7 @@ Note sometimes the emulation may not be accurate, for example as below :
 
 The return value of `malloc` may differ between two emulations, so you have to set the hint for return value manually using `ahr` command, so run `tl` or `aat` command after setting up the return value hint.
 
-```
+```console
 [0x000006da]> ah?
 | ahr val            set hint for return value of a function
 ```
@@ -205,7 +205,7 @@ There is one more important aspect of using types in radare2 - using `aht` you
 can change the immediate in the opcode to the structure offset.
 Lets see a simple example of [R]SI-relative addressing
 
-```
+```console
 [0x000052f0]> pd 1
 0x000052f0      mov rax, qword [rsi + 8]    ; [0x8:8]=0
 ```
@@ -213,8 +213,7 @@ Lets see a simple example of [R]SI-relative addressing
 Here `8` - is some offset in the memory, where `rsi` probably holds
 some structure pointer. Imagine that we have the following structures
 
-```
-
+```console
 [0x000052f0]> "td struct ms { char b[8]; int member1; int member2; };"
 [0x000052f0]> "td struct ms1 { uint64_t a; int member1; };"
 [0x000052f0]> "td struct ms2 { uint16_t a; int64_t b; int member1; };"
@@ -223,7 +222,7 @@ some structure pointer. Imagine that we have the following structures
 Now we need to set the proper structure member offset instead of `8` in this instruction.
 At first, we need to list available types matching this offset:
 
-```
+```console
 [0x000052f0]> ahts 8
 ms.member1
 ms1.member1
@@ -233,7 +232,7 @@ Note, that `ms2` is not listed, because it has no members with offset `8`.
 After listing available options we can link it to the chosen offset at
 the current address:
 
-```
+```console
 [0x000052f0]> aht ms1.member1
 [0x000052f0]> pd 1
 0x000052f0      488b4608       mov rax, qword [rsi + ms1.member1]    ; [0x8:8]=0
@@ -243,7 +242,7 @@ the current address:
 
 * Printing all fields in enum using `te` command
 
-```
+```console
 [0x00000000]> "td enum Foo {COW=1,BAR=2};"
 [0x00000000]> te Foo
 COW = 0x1
@@ -252,7 +251,7 @@ BAR = 0x2
 
 * Finding matching enum member for given bitfield and vice-versa
 
-```
+```console
 [0x00000000]> te Foo 0x1
 COW
 [0x00000000]> teb Foo COW
@@ -263,7 +262,7 @@ COW
 
 To see the internal representation of the types you can use `tk` command:
 
-```
+```console
 [0x000051c0]> tk~S1
 S1=struct
 struct.S1=x,y,z
@@ -362,7 +361,7 @@ defines the elements of `X` as comma separated values. After that, we just defin
 
 For example. we can have a struct like this one:
 
-```
+```c
 struct _FILETIME {
 	DWORD dwLowDateTime;
 	DWORD dwHighDateTime;
@@ -402,7 +401,7 @@ func.X.cc=calling_convention
 
 It should be self-explanatory. Let's do strncasecmp as an example for x86 arch for Linux machines. According to man pages, strncasecmp is defined as the following:
 
-```
+```c
 int strcasecmp(const char *s1, const char *s2, size_t n);
 ```
 

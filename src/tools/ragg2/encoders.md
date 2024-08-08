@@ -2,7 +2,7 @@
 
 ragg2 offers a few ready-made shellcodes and encoders.
 
-```sh
+```console
 $ ragg2 -L
 shellcodes:
       exec : execute cmd=/bin/sh suid=false
@@ -12,7 +12,7 @@ encoders:
 
 Using the '-i' option, one can generate specify and generate the shellcode.
 
-```sh
+```console
 $ ragg2 -i exec
 31c048bbd19d9691d08c97ff48f7db53545f995257545eb03b0f05
 ```
@@ -21,21 +21,21 @@ Similar to the previous section, the output format(c, raw, elf etc.,) can be spe
 
 ragg2 offers an xor encoder too. The following are the relevant flags/options.
 
-```sh
+```console
 $ ragg2 -h
  -c [k=v]        set configuration options
  -E [encoder]    use specific encoder. see -L
  -L              list all plugins (shellcodes and encoders)
 ```
 
-```sh
+```console
 $ ragg2 -E xor -c key=32 -i exec
 6a1b596a205be8ffffffffc15e4883c60d301e48ffc6e2f911e0689bf1bdb6b1f0acb7df68d7fb73747fb97277747e901b2f25
 ```
 
 The same can be done with a .c or .r file output. The first one is the normal output(machine code) and the second is xor encoded.
 
-```sh
+```console
 $ ragg2 -a x86 -f raw code1.c
 eb0e66666666662e0f1f84000000000050bf01000000488d359f000000ba0d000000e81900000031ff89442404e85e00000031d289042489d059c30f1f440000897c24fc48897424f0895424ec8b5424fc895424dc488b7424f048897424d08b5424ec895424cc8b7c24dc488b7424d08b5424ccb8010000000f0548894424e0488b4424e089c1894c24c88b4424c8c3897c24fc8b7c24fc897c24ec8b7c24ecb83c0000000f0548894424f0488b4424f089c1894c24e88b4424e8c348656c6c6f20576f726c640a00
 

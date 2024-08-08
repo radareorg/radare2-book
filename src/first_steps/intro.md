@@ -14,7 +14,7 @@ The 'print' command is abbreviated as `p` and has a number of submodes — the s
 
 To be allowed to write files, specify the `-w` option to radare2 when opening a file. The `w` command can be used to write strings, hexpairs (`x` subcommand), or even assembly opcodes (`a` subcommand). Examples:
 
-```
+```console
 > w hello world         ; string
 > wx 90 90 90 90        ; hexpairs
 > wa jmp 0x8048140      ; assemble

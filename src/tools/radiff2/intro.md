@@ -10,7 +10,7 @@ Many of these diffing features are also available in the `c` command within the 
 
 You can learn more about this tool by checking the help message or reading the manpage with `man radiff2`.
 
-```
+```console
 $ radiff2 -h
 Usage: radiff2 [-abBcCdjrspOxuUvV] [-A[A]] [-g sym] [-m graph_mode][-t %] [file] [file]
   -a [arch]  specify architecture plugin to use (x86, arm, ..)
@@ -95,7 +95,7 @@ radiff2 -O bin1 bin2
 
 To compare two binaries and generate a patch file, you can use the following command:
 
-```sh
+```console
 $ echo hello > 1
 $ echo hallo > 2
 $ radiff2 -r 1 2
@@ -107,7 +107,7 @@ $
 
 Note the `-r` flag will generate an r2 script, which can then be used to generate one binary from the other one using radare2 like this:
 
-```sh
+```console
 $ rahash2 -a md5 1 2
 1: 0x00000000-0x00000005 md5: b1946ac92492d2347c6235b4d2611184
 2: 0x00000000-0x00000005 md5: aee97cb3ad288ef0add6c6b5b5fae48a

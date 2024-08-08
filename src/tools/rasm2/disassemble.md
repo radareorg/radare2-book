@@ -4,14 +4,14 @@ Disassembling is the inverse action of assembling. Rasm2 takes hexpair as an inp
 
 To do this we can use the `-d` option of rasm2 like this:
 
-```
+```console
 $ rasm2 -a x86 -b 32 -d '90'
 nop
 ```
 
 or for java:
 
-```sh
+```console
 $ rasm2 -a java 'nop'
 00
 
@@ -19,7 +19,7 @@ Rasm2 also have the `-D` flag to show the disassembly like `-d` does, but includ
 
 In radare2 there are many commands to perform a disassembly from a specific place in memory.
 
-```sh
+```console
 $ rasm2 -a x86 -b 32 'mov eax, 33'
 b821000000
 

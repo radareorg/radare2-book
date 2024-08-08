@@ -4,19 +4,19 @@ Flags are conceptually similar to bookmarks. They associate a name with a given 
 
 To create a flag:
 
-```
+```console
 [0x4A13B8C0]> f flag_name @ offset
 ```
 
 You can remove a flag by appending the `-` character to command. Most commands accept `-` as argument-prefix as an indication to delete something.
 
-```
+```console
 [0x4A13B8C0]> f-flag_name
 ```
 
 To switch between or create new flagspaces use the `fs` command:
 
-```
+```console
 [0x00005310]> fs?
 |Usage: fs [*] [+-][flagspace|addr] # Manage flagspaces
 | fs            display flagspaces
@@ -47,7 +47,7 @@ To switch between or create new flagspaces use the `fs` command:
 
 Here there are some command examples:
 
-```
+```console
 [0x4A13B8C0]> fs symbols ; select only flags in symbols flagspace
 [0x4A13B8C0]> f          ; list only flags in symbols flagspace
 [0x4A13B8C0]> fs *       ; select all flagspaces
@@ -62,7 +62,7 @@ You can rename flags with `fr`.
 Every flag name should be unique for addressing reasons. But it is quite a common need
 to have the flags, for example inside the functions, with simple and ubiquitous names like `loop` or `return`. For this purpose you can use so called "local" flags, which are tied to the function where they reside. It is possible to add them using `f.` command:
 
-```
+```console
 [0x00003a04]> pd 10
 |      0x00003a04      48c705c9cc21.  mov qword [0x002206d8], 0xffffffffffffffff ;
 [0x2206d8:8]=0
@@ -101,7 +101,7 @@ to have the flags, for example inside the functions, with simple and ubiquitous 
 
 radare2 offers flag zones, which lets you label different offsets on the scrollbar, for making it easier to navigate through large binaries. You can set a flag zone on the current seek using:
 
-```
+```console
 [0x00003a04]> fz flag-zone-name
 ```
 

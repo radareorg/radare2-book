@@ -2,7 +2,7 @@
 
 Rabin2 can list libraries used by a binary with the `-l` option:
 
-```
+```console
 $ rabin2 -l `which r2`
 [Linked libraries]
 libr_core.so
@@ -33,7 +33,7 @@ libc.so.6
 
 Lets check the output with `ldd` command:
 
-```
+```console
 $ ldd `which r2`
 linux-vdso.so.1 (0x00007fffba38e000)
 libr_core.so => /usr/lib64/libr_core.so (0x00007f94b4678000)

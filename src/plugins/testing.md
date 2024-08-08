@@ -2,14 +2,14 @@
 
 This plugin is used by rasm2 and r2. You can verify that the plugin is properly loaded with this command:
 
-```bash
+```console
 $ rasm2 -L | grep mycpu
 _d  mycpu        My CPU disassembler  (LGPL3)
 ```
 
 Let's open an empty file using the 'mycpu' arch and write some random code there.
 
-```
+```console
 $ r2 -
  -- I endians swap
 [0x00000000]> e asm.arch=mycpu
@@ -29,6 +29,6 @@ $ r2 -
 
 Yay! it works.. and the mandatory oneliner too!
 
-```bash
+```console
 $ r2 -nqamycpu -cwoR -cpd' 10' -
 ```

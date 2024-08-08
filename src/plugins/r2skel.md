@@ -11,7 +11,7 @@ The repository have different type of plugins and scripts organized by language 
 
 ## Installation
 
-```
+```console
 $ r2pm -ci r2skel
 ```
 
@@ -19,7 +19,7 @@ $ r2pm -ci r2skel
 
 If the r2pm bindir is not in your PATH you can spawn the tool with `r2pm -r`:
 
-```
+```console
 $ r2pm -r r2skel
 r2skel [-lL] | [template] [new-directory]
 Options:
@@ -53,7 +53,7 @@ $
 
 Now you are ready to create your first example:
 
-```
+```console
 $ r2pm -r r2skel r2-plugin-core-js coreplug
 $ cd coreplug
 $ make

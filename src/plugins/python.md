@@ -139,8 +139,8 @@ For this you need to do this:
 
     You can combine everything in one file and load it using `-i` option:
 
-    ```
-    r2 -I mycpu.py some_file.bin
+    ```console
+    $ r2 -I mycpu.py some_file.bin
     ```
 
 Or you can load it from the r2 shell: `#!python mycpu.py`

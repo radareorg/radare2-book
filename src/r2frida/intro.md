@@ -17,13 +17,13 @@ Some of the most relevant features include:
 
 Install r2frida via radare2 package manager:
 
-```sh
+```console
 $ r2pm -ci r2frida
 ```
 
 Now you should be able to test if the system session works by running the following command:
 
-```sh
+```console
 $ r2 frida://0
 ```
 

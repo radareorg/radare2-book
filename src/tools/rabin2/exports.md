@@ -2,7 +2,7 @@
 
 Rabin2 is able to find exports. For example:
 
-```
+```console
 $ rabin2 -E /usr/lib/libr_bin.so | head
 [Exports]
 

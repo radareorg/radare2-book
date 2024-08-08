@@ -4,7 +4,7 @@ Radare2 allows manual search for assembly code looking like a syscall operation.
 For example on ARM platform usually they are represented by the `svc` instruction,
 on the others can be a different instructions, e.g. `syscall` on x86 PC.
 
-```
+```console
 [0x0001ece0]> /ad/ svc
 ...
 0x000187c2   # 2: svc 0x76
@@ -18,7 +18,7 @@ to setup those configuration options accordingly. You can use `asl` command
 to check if syscalls' support is set up properly and as you expect.
 The command lists syscalls supported for your platform.
 
-```
+```console
 [0x0001ece0]> asl
 ...
 sd_softdevice_enable = 0x80.16
@@ -30,7 +30,7 @@ sd_softdevice_is_enabled = 0x80.18
 If you setup ESIL stack with `aei` or `aeim`, you can use `/as` command to search
 the addresses where particular syscalls were found and list them.
 
-```
+```console
 [0x0001ece0]> aei
 [0x0001ece0]> /as
 0x000187c2 sd_ble_gap_disconnect
@@ -43,7 +43,7 @@ To reduce searching time it is possible to [restrict the searching](../search/co
 
 Using the [ESIL emulation](../emulation/intro.md) radare2 can print syscall arguments in the disassembly output. To enable the linear (but very rough) emulation use `asm.emu` configuration variable:
 
-```
+```console
 [0x0001ece0]> e asm.emu=true
 [0x0001ece0]> s 0x000187c2
 [0x000187c2]> pdf~svc
@@ -53,7 +53,7 @@ Using the [ESIL emulation](../emulation/intro.md) radare2 can print syscall argu
 
 In case of executing `aae` (or `aaaa` which calls `aae`) command radare2 will push found syscalls to a special `syscall.` flagspace, which can be useful for automation purpose:
 
-```
+```console
 [0x000187c2]> fs
 0    0 * imports
 1    0 * symbols
@@ -70,7 +70,7 @@ In case of executing `aae` (or `aaaa` which calls `aae`) command radare2 will pu
 
 It also can be interactively navigated through within HUD mode (`V_`)
 
-```
+```console
 0> syscall.sd_ble_gap_disconnect
  - 0x000187b2  syscall.sd_ble_gap_disconnect
    0x000187c2  syscall.sd_ble_gap_disconnect.0
@@ -81,7 +81,7 @@ It also can be interactively navigated through within HUD mode (`V_`)
 
 When debugging in radare2, you can use `dcs` to continue execution until the next syscall. You can also run `dcs*` to trace all syscalls.
 
-```
+```console
 [0xf7fb9120]> dcs*
 Running child until syscalls:-1 
 child stopped with signal 133
@@ -95,7 +95,7 @@ child stopped with signal 133
 
 radare2 also has a syscall name to syscall number utility. You can return the syscall name of a given syscall number or vice versa, without leaving the shell.
 
-```
+```console
 [0x08048436]> asl 1
 exit
 [0x08048436]> asl write

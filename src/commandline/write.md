@@ -11,7 +11,7 @@ r -10 @ 33  ; strip 10 bytes at offset 33
 
 Write bytes using the `w` command. It accepts multiple input formats like inline assembly, endian-friendly dwords, files, hexpair files, wide strings:
 
-```
+```console
 [0x00404888]> w?
 Usage: w[x] [str] [<file] [<<EOF] [@addr]  
 | w[1248][+-][n]       increment/decrement byte,word..
@@ -46,7 +46,7 @@ Usage: w[x] [str] [<file] [<<EOF] [@addr]
 
 Some examples:
 
-```
+```console
  [0x00000000]> wx 123456 @ 0x8048300
  [0x00000000]> wv 0x8048123 @ 0x8049100
  [0x00000000]> wa jmp 0x8048320
@@ -57,7 +57,7 @@ Some examples:
 The `wo` command (write over) has many subcommands, each combines the existing data with the new data using
 an operator. The command is applied to the current block. Supported operators include XOR, ADD, SUB...
 
-```
+```console
 [0x4A13B8C0]> wo?
 |Usage: wo[asmdxoArl24] [hexpairs] @ addr[:bsize]
 |Example:
@@ -84,7 +84,7 @@ an operator. The command is applied to the current block. Supported operators in
 
 It is possible to implement cipher-algorithms using radare core primitives and `wo`. A sample session performing xor(90) + add(01, 02):
 
-```
+```console
 [0x7fcd6a891630]> px
 - offset -       0 1  2 3  4 5  6 7  8 9  A B  C D  E F
 0x7fcd6a891630  4889 e7e8 6839 0000 4989 c48b 05ef 1622
@@ -138,12 +138,12 @@ This script will run the `?e ..` command in r2 and then write the string 'Hello'
 
 ### Applying rapatches
 
-```
+```console
 $ r2 -P rapatch.txt target-program.txt
 ```
 
 Or for scripted patching like `patch(1)`:
 
-```
+```console
 $ r2 -w -q -P rapatch.txt target-program.txt
 ```

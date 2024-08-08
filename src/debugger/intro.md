@@ -13,7 +13,7 @@ Process memory is treated as a plain file. All mapped memory pages of a debugged
 
 Communication between radare and the debugger IO layer is wrapped into `system()` calls, which accept a string as an argument, and executes it as a command. An answer is then buffered in the output console, its contents can be additionally processed by a script. Access to the IO system is achieved with `=!`. Most IO plugins provide help with `=!?` or `=!help`. For example:
 
-```
+```console
 $ r2 -d /bin/ls
 ...
 [0x7fc15afa3cc0]> =!help

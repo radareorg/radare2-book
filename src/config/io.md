@@ -2,7 +2,7 @@
 
 The IO implementation is very complex and can be configured in many ways to serve the way the user needs. This chapter will introduce you to some of the most important configuration options under the eval.
 
-```
+```console
 [0x100003a84]> e??io.
              io.0xff: use this value instead of 0xff to fill unallocated areas
              io.aslr: disable ASLR for spawn and such

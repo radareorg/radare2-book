@@ -47,7 +47,7 @@ When python is installed ensure to set the bin directory in your PATH, so you ca
 
 Now you are ready to install meson and ninja, the radare2 build tools with pip:
 
-```
+```sh
 pip install ninja
 pip install meson
 ```
@@ -73,7 +73,7 @@ Check the following options during the Wizard steps.
 
 Follow these steps to clone the Radare2 git repository.
 
-```
+```sh
 git clone https://github.com/radareorg/radare2
 ```
 

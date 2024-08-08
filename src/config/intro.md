@@ -6,7 +6,7 @@ To prevent radare2 from parsing this file at startup, pass it the `-N` option.
 
 All the configuration of radare2 is done with the `eval` commands. A typical startup configuration file looks like this:
 
-```sh
+```console
 $ cat ~/.radare2rc
 e scr.color = 1
 e dbg.bep   = loader
@@ -14,7 +14,7 @@ e dbg.bep   = loader
 
 The configuration can also be changed with `-e` <config=value> command-line option. This way you can adjust configuration from the command line, keeping the .radare2rc file intact. For example, to start with empty configuration and then adjust `scr.color` and `asm.syntax` the following line may be used:
 
-```sh
+```console
 $ radare2 -N -e scr.color=1 -e asm.syntax=intel -d /bin/ls
 ```
 
@@ -78,7 +78,7 @@ A simpler alternative to the `e` command is accessible from the visual mode. Typ
 For configuration values that can take one of several values, you can use the `=?` operator to get a list
 of valid values:
 
-```
+```console
 [0x00000000]> e scr.nkey = ?
 scr.nkey = fun, hit, flag
 ```

@@ -24,7 +24,7 @@ Key features of rahash2 include:
 
 This is an example usage:
 
-```
+```console
 $ rahash2 -a md5 -s "hello world"
 ```
 
@@ -40,7 +40,7 @@ It can also be used to find which blocks have changed between more than one samp
 
 This can be useful when analyzing ram dumps from a virtual machine for example. Use this command for this:
 
-```
+```console
 $ rahash2 -B 1M -b -a sha256 /bin/ls
 ```
 
@@ -48,7 +48,7 @@ $ rahash2 -B 1M -b -a sha256 /bin/ls
 
 The rabin2 tool parses the binary headers of the files, but it also have the ability to use the rhash plugins to compute checksum of sections in the binary.
 
-```
+```console
 $ rabin2 -K md5 -S /bin/ls
 ```
 
@@ -56,7 +56,7 @@ $ rabin2 -K md5 -S /bin/ls
 
 To calculate a checksum of current block when running radare2, use the `ph` command. Pass an algorithm name to it as a parameter. An example session:
 
-```
+```console
 $ radare2 /bin/ls
 [0x08049790]> bf entry0
 [0x08049790]> ph md5
@@ -65,7 +65,7 @@ d2994c75adaa58392f953a448de5fba7
 
 You can use all hashing algorithms supported by `rahash2`:
 
-```
+```console
 [0x00000000]> ph?
 md5
 sha1
@@ -109,7 +109,7 @@ crc64iso
 
 The `ph` command accepts an optional numeric argument to specify length of byte range to be hashed, instead of default block size. For example:
 
-```
+```console
 [0x08049A80]> ph md5 32
 9b9012b00ef7a94b5824105b7aaad83b
 [0x08049A80]> ph md5 64

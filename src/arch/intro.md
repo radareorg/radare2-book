@@ -8,13 +8,13 @@ It was a working and unix friendly solution, but it was inefficient as it repeat
 
 So there was a need to create a generic disassembler library to support multiple plugins for different architectures. We can list the current loaded plugins with
 
-```
+```console
 $ rasm2 -L
 ```
 
 Or from inside radare2:
 
-```
+```console
 > e asm.arch=??
 ```
 
@@ -24,7 +24,7 @@ Nowadays, the disassembler support is one of the basic features of radare. It no
 
 To see the disassembly, use the `pd` command. It accepts a numeric argument to specify how many opcodes of current block you want to see. Most of the commands in radare consider the current block size as the default limit for data input. If you want to disassemble more bytes, set a new block size using the `b` command.
 
-```
+```console
 [0x00000000]> b 100    ; set block size to 100
 [0x00000000]> pd       ; disassemble 100 bytes
 [0x00000000]> pd 3     ; disassemble 3 opcodes
@@ -35,7 +35,7 @@ The `pD` command works like `pd` but accepts the number of input bytes as its ar
 
 The "pseudo" syntax may be somewhat easier for a human to understand than the default assembler notations. But it can become annoying if you read lots of code. To play with it:
 
-```
+```console
 [0x00405e1c]> e asm.pseudo = true
 [0x00405e1c]> pd 3
 		  ; JMP XREF from 0x00405dfa (fcn.00404531)

@@ -3,7 +3,7 @@
 OK, enough of praising r2, lets start reversing this stuff. First, you have to
 know your enemy:
 
-```
+```console
 [0x00 avatao]$ rabin2 -I reverse4
 pic      false
 canary   true
@@ -36,7 +36,7 @@ binsz    8620
 So, its a dynamically linked, stripped, 64bit Linux executable - nothing fancy
 here. Let's try to run it:
 
-```
+```console
 [0x00 avatao]$ ./reverse4
 ?
 Size of data: 2623
@@ -53,7 +53,7 @@ either "Wrong!", nothing or something else, presumably our flag. But do not
 waste any more time monkeyfuzzing the executable, let's fire up r2, because in
 asm we trust!
 
-```
+```console
 [0x00 avatao]$ r2 -A reverse4
  -- Heisenbug: A bug that disappears or alters its behavior when one attempts to probe or isolate it.
 [0x00400720]>
@@ -66,7 +66,7 @@ asm we trust!
 It is a good practice to create a project, so we can save our progress, and we
 can come back at a later time:
 
-```
+```console
 [0x00400720]> Ps avatao_reverse4
 avatao_reverse4
 [0x00400720]>
@@ -77,7 +77,7 @@ avatao_reverse4
 
 We can list all the strings r2 found:
 
-```
+```console
 [0x00400720]> fs strings
 [0x00400720]> f
 0x00400e98 7 str.Wrong_
@@ -107,7 +107,7 @@ be solved. So I usually just take a look at the entry point(s) and see if I can
 figure out something from there. Nevertheless, I'll show you how to find where
 these strings are used:
 
-```
+```console
 [0x00400720]> axt @@=`f~[0]`
 d 0x400cb5 mov edi, str.Size_of_data:__u_n
 d 0x400d1d mov esi, str.Such_VM__MuCH_reV3rse_

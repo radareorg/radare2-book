@@ -2,7 +2,7 @@
 
 a weird "wtf?" string.
 
-```sh
+```console
 $ rabin2 -z ./crackme0x07
 [Strings]
 nth paddr      vaddr      len size section type  string
@@ -29,7 +29,7 @@ int32_t main (int32_t arg_10h) {
 
 due to the symbol info lost, neither `aa` nor `aaa` show the name of functions. we can double check this in "flagspace". Radare2 use fcn_080485b9 as the function name. It's a common case in reverse engineering that we don't have any symbol info of the binary.
 
-```sh
+```console
 [0x080487fd]> fs symbols
 [0x080487fd]> f
 0x08048400 33 entry0
@@ -39,7 +39,7 @@ due to the symbol info lost, neither `aa` nor `aaa` show the name of functions. 
 
 decompile the `fcn_080485b9()`:
 
-```C
+```c
 [0x080485b9]> pdfc
             ; CALL XREF from main @ 0x80486d4
 / 118: fcn.080485b9 (char *s, int32_t arg_ch);
@@ -93,7 +93,7 @@ decompile the `fcn_080485b9()`:
 
 we got familiar with this code structure in the previous challenges (the check function). It's not difficult for us even we don't have the symbol info. you can also use `afn` command to rename the function name if you like.
 
-```C
+```c
 int32_t fcn_080485b9 (char * s, void* envp)
 {
     var_ch = 0;
@@ -112,7 +112,7 @@ int32_t fcn_080485b9 (char * s, void* envp)
 
 most part of crackme 0x07 is the same with 0x06. and it can be solved by the same password & environment:
 
-```sh
+```console
 $ export LOLAA=help
 $ ./cracke0x07
 IOLI Crackme Level 0x07
@@ -122,7 +122,7 @@ Password OK!
 
 wait ... where is the 'wtf?'. Often, we would like to find the cross reference (xref) to strings (or data, functions, etc.) in reverse engineering. The related commands in Radare2 are under "ax" namespace:
 
-```sh
+```console
 [0x08048400]> f
 0x080487a8 5 str.LOLO
 0x080487ad 21 str.Password_Incorrect
@@ -140,7 +140,7 @@ Macro 'findstref' removed.
 
 the `[DATA] mov dword [esp], str.wtf` at `0x804865c` is an instruction of fcn.080485b9. But the analysis in my PC ignores the remained instructions and only display the incomplete assembly. the range of fcn.080485b9 should be `0x080485b9 ~ 0x0804867c` . we can reset block size and print opcodes.
 
-```
+```console
 [0x08040000]> s 0x080485b9
 [0x080485b9]> b 230
 [0x08048400]> pd

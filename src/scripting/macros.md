@@ -3,14 +3,14 @@
 Apart from simple sequencing and looping, radare2 allows to write
 simple macros, using this construction:
 
-```
+```console
 [0x00404800]> (qwe; pd 4; ao)
 ```
 
 This will define a macro called 'qwe' which runs sequentially first 'pd 4' then 'ao'.
 Calling the macro using syntax `.(macro)` is simple:
 
-```
+```console
 [0x00404800]> (qwe; pd 4; ao)
 [0x00404800]> .(qwe)
 0x00404800  mov eax, 0x61e627      ; "tab"
@@ -34,14 +34,14 @@ family: cpu
 
 To list available macroses simply call `(*`:
 
-```
+```console
 [0x00404800]> (*
 (qwe ; pd 4; ao)
 ```
 
 And if want to remove some macro, just add '-' before the name:
 
-```
+```console
 [0x00404800]> (-qwe)
 Macro 'qwe' removed.
 [0x00404800]>
@@ -50,7 +50,7 @@ Macro 'qwe' removed.
 Moreover, it's possible to create a macro that takes arguments, which comes in handy in some
 simple scripting situations. To create a macro that takes arguments you simply add them to macro definition.
 
-```
+```console
 [0x00404800]
 [0x004047d0]> (foo x y; pd $0; s +$1)
 [0x004047d0]> .(foo 5 6)
@@ -102,19 +102,19 @@ Usage: $alias[=cmd] [args...]  Alias commands and data (See ?$? for help on $var
 
 The general usage of the feature is: `$alias=cmd`
 
-```
+```console
 [0x00404800]> $disas=pdf
 ```
 
 The above command will create an alias `disas` for `pdf`. The following command prints the disassembly of the main function.
 
-```
+```console
 [0x00404800]> $disas @ main
 ```
 
 Apart from commands, you can also alias a text to be printed, when called.
 
-```
+```console
 [0x00404800]> $my_alias=$test input
 [0x00404800]> $my_alias
 test input
@@ -122,7 +122,7 @@ test input
 
 To undefine alias, use `$alias=`:
 
-```
+```console
 [0x00404800]> $pmore='b 300;px'
 [0x00404800]> $
 $pmore
@@ -133,14 +133,14 @@ $pmore
 
 A single `$` in the above will list all defined aliases. It's also possible check the aliased command of an alias:
 
-```
+```console
 [0x00404800]> $pmore?
 b 200; px
 ```
 
 Can we create an alias contains alias ? The answer is yes:
 
-```
+```console
 [0x00404800]> $pStart='s 0x0;$pmore'
 [0x00404800]> $pStart
 - offset -   0 1  2 3  4 5  6 7  8 9  A B  C D  E F  0123456789ABCDEF
@@ -164,7 +164,7 @@ Can we create an alias contains alias ? The answer is yes:
 
 If a file accessed from the repl starts with the dollar sign it will be treated as a virtual one that lives in memory only for the current session of radare2. They are handy when you don't want to depend on the filesystem to create or read files. For example in webassembly environments or other sandboxed executions.
 
-```
+```console
 [0x00000000]> echo hello > $world
 [0x00000000]> cat $world
 hello
@@ -182,7 +182,7 @@ hello
 
 This is a short syntax for accessing and modifying flags, use them as numeric variables.
 
-```
+```console
 [0x00000000]> $foo:=4
 [0x00000000]> s foo
 [0x00000004]> $foo+=4

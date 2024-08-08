@@ -55,7 +55,7 @@ sometimes for a quick understanding of the symbols stored in it.
 Apart from the basic scenario of just opening a file, PDB information can be additionally
 manipulated by the `id` commands:
 
-```
+```console
 [0x000051c0]> id?
 |Usage: id Debug information
 | Output mode:
@@ -79,7 +79,7 @@ related PDB files will be loaded automatically.
 DWARF information loading, on the other hand, is completely automated. You don't
 need to run any commands/change any options:
 
-```
+```console
 r2 `which rabin2`
 [0x00002437 8% 300 /usr/local/bin/rabin2]> pd $r
 0x00002437  jne 0x2468                  ;[1]

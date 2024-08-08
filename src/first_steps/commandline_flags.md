@@ -4,7 +4,7 @@ Radare2 can be used directly from the command line, allowing you to run commands
 
 For example, if we want to show 10 bytes from the entrypoint directly from the system shell we can use:
 
-```
+```console
 $ r2 -q -c 'p8 10 @ entry0' /bin/ls
 ```
 
@@ -14,13 +14,13 @@ Command-line flags are options you add when starting radare2. These flags let yo
 
 We can set some options at startup time with the `-e` flag like this:
 
-```
+```sh
 r2 -e scr.color=0 -e io.cache=true /bin/ls
 ```
 
 The help message, accessed by running radare2 with the -h flag, shows all available options. It's a quick reference for radare2's capabilities. By exploring this message, you can discover features you might not know about.
 
-```
+```console
 $ radare2 -h
 Usage: r2 [-ACdfjLMnNqStuvwzX] [-P patch] [-p prj] [-a arch] [-b bits] [-c cmd]
           [-s addr] [-B baddr] [-m maddr] [-i script] [-e k=v] file|pid|-|--|=
@@ -78,54 +78,54 @@ At first sight it may seem like there are so many options and without some pract
 
 Open a file in write mode and do not parse the headers (raw mode).
 
-```bash
+```console
 $ r2 -nw file
 ```
 
 Quickly get into the r2 shell opening a 1KB malloc virtual file, handy for testing things. note that a single dash is an alias for malloc://1024
 
-```
+```console
 $ r2 -
 ```
 
 Specify which sub-binary you want to select when opening a fatbin file:
 
-```
+```console
 $ r2 -a ppc -b 32 ls.fat
 ```
 
 Run a script before entering the prompt:
 
-```
+```console
 $ r2 -i patch.r2 target.bin
 ```
 
 Execute a command and quit without entering the interactive mode:
 
-```
+```console
 $ r2 -qc ij hi.bin > imports.json
 ```
 
 Set the configuration variable:
 
-```
+```console
 $ r2 -e scr.color=0 blah.bin
 ```
 
 Spawn and start debugging a program:
 
-```
+```console
 $ r2 -d ls
 ```
 
 Attach to an already running process by its process id (PID):
 
-```
+```console
 $ r2 -d 1234
 ```
 
 Load an existing project file:
 
-```
+```console
 $ r2 -p test
 ```

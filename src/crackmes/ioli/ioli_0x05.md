@@ -2,7 +2,7 @@
 
 check again, it uses `scanf()` to get our input and pass it to `check()` as parameter.
 
-```C
+```c
 [0x080483d0]> pdd@main
 /* r2dec pseudo code output */
 /* ./crackme0x05 @ 0x8048540 */
@@ -29,7 +29,7 @@ int32_t main (void) {
 
 the check() function:
 
-```C
+```c
 /* r2dec pseudo code output */
 /* ./crackme0x05 @ 0x80484c8 */
 #include <stdint.h>
@@ -74,7 +74,7 @@ label_0:
 
 The same, we can write our own C-like pseudo code.
 
-```C
+```c
 #include <stdint.h>
 int32_t check(char *s)
 {
@@ -95,7 +95,7 @@ int32_t check(char *s)
 
 The if condition becomes `var_8h == 0x10`. In addition, a new function call - `parell(s)` replace the `printf("password OK")`now. The next step is to reverse sym.parell.
 
-```C
+```c
 [0x08048484]> s sym.parell
 [0x08048484]> pdd@sym.parell
 /* r2dec pseudo code output */
@@ -143,7 +143,7 @@ The `mov dword [esp], eax` is the nearest instruction to sscanf (and it's equiva
 
 Finally we have the corrected pseudo code:
 
-```C
+```c
 uint32_t parell (char * s) {
     sscanf (s, %d, &var_4h);
     if ((var_4h & 1) == 0) {
@@ -161,13 +161,13 @@ Now there are 2 constraints:
 
 The password is at our fingertips now.
 
-```sh
-./crackme0x05
+```console
+$ ./crackme0x05
 IOLI Crackme Level 0x05
 Password: 88
 Password OK!
 
-./crackme0x05
+$ ./crackme0x05
 IOLI Crackme Level 0x05
 Password: 12346
 Password OK!

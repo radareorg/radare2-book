@@ -12,7 +12,7 @@ Note that there are I/O plugins that use GDB, WinDbg, or Wine as back-ends, and 
 
 To build on a system using `acr` and `GNU Make` (e.g. on _BSD systems_):
 
-```sh
+```console
 $ ./configure --prefix=/usr
 $ gmake
 $ sudo gmake install
@@ -20,7 +20,7 @@ $ sudo gmake install
 
 There is also a simple script to do this automatically:
 
-```sh
+```console
 $ sys/install.sh
 ```
 
@@ -28,7 +28,7 @@ $ sys/install.sh
 
 To build and run radare2 in your home just run the sys/user.sh script.
 
-```sh
+```console
 $ sys/user.sh
 ```
 
@@ -36,7 +36,7 @@ $ sys/user.sh
 
 You can build radare2 statically along with all other tools with the command:
 
-```sh
+```console
 $ sys/static.sh
 ```
 
@@ -44,19 +44,19 @@ $ sys/static.sh
 
 You can use meson/ninja to build (or muon/samu):
 
-```sh
+```console
 $ meson b && ninja -C b
 ```
 
 There's a helper script in sys/ to make the meson experience a little bit simpler:
 
-```sh
+```console
 $ sys/meson.py --prefix=/usr --shared --install
 ```
 
 If you want to build locally:
 
-```sh
+```console
 $ sys/meson.py --prefix=/home/$USER/r2meson --local --shared --install
 ```
 

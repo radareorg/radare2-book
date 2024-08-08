@@ -4,7 +4,7 @@ This section is based on the <https://radare.today> article "[binary diffing](ht
 
 Without any parameters, `radiff2` by default shows what bytes are changed and their corresponding offsets:
 
-```
+```console
 $ radiff2 genuine cracked
 0x000081e0 85c00f94c0 => 9090909090 0x000081e0
 0x0007c805 85c00f84c0 => 9090909090 0x0007c805
@@ -18,7 +18,7 @@ Notice how the two jumps are nop'ed.
 
 For bulk processing, you may want to have a higher-level overview of differences. This is why radare2 is able to compute the distance and the percentage of similarity between two files with the `-s` option:
 
-```
+```console
 $ radiff2 -s /bin/true /bin/false
 similarity: 0.97
 distance: 743
@@ -26,14 +26,14 @@ distance: 743
 
 If you want more concrete data, it's also possible to count the differences, with the `-c` option:
 
-```
+```console
 $ radiff2 -c genuine cracked
 2
 ```
 
 If you are unsure whether you are dealing with similar binaries, with `-C` flag you can check there are matching functions. It this mode, it will give you three columns for all functions: "First file offset", "Percentage of matching" and "Second file offset".
 
-```
+```console
 $ radiff2 -C /bin/false /bin/true
   entry0  0x4013e8 |   MATCH  (0.904762) | 0x4013e2  entry0
   sym.imp.__libc_start_main  0x401190 |   MATCH  (1.000000) | 0x401190  sym.imp.__libc_start_main
@@ -47,7 +47,7 @@ $ radiff2 -C /bin/false /bin/true
 Moreover, we can ask radiff2 to perform analysis first - adding `-A` option will run `aaa` on the binaries.
 And we can specify binaries architecture for this analysis too using
 
-```
+```console
 $ radiff2 -AC -a x86 /bin/true /bin/false | grep UNMATCH
 [x] Analyze all flags starting with sym. and entry0 (aa)
 [x] Analyze len bytes of instructions for references (aar)

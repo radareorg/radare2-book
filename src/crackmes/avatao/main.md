@@ -3,7 +3,7 @@
 As I was saying, I usually take a look at the entry point, so let's just do
 that:
 
-```
+```console
 [0x00400720]> s main
 [0x00400c63]>
 ```
@@ -52,7 +52,7 @@ Lets read main node-by-node! The first block looks like this:
 We can see that the program reads a word (2 bytes) into the local variable named
 _local_10_6_, and than compares it to 0xbb8. That's 3000 in decimal:
 
-```
+```console
 [0x00400c63]> ? 0xbb8
 3000 0xbb8 05670 2.9K 0000:0bb8 3000 10111000 3000.0 0.000000f 0.000000
 ```
@@ -73,7 +73,7 @@ So now we know that the local variable _local_10_6_ is the size of the input
 data - so lets name it accordingly (remember, you can open the r2 shell from
 visual mode using the _:_ key!):
 
-```
+```console
 :> afvn local_10_6 input_size
 ```
 
@@ -87,7 +87,7 @@ After this an _input_size_ bytes long memory chunk is allocated, and filled with
 data from the standard input. The address of this memory chunk is stored in
 _local_10_ - time to use _afvn_ again:
 
-```
+```console
 :> afvn local_10 input_data
 ```
 
@@ -96,7 +96,7 @@ First, an 512 (0x200) bytes memory chunk is zeroed out at offset 0x00602120.
 A quick glance at XREFS to this address reveals that this memory is indeed used
 somewhere in the application:
 
-```
+```console
 :> axt 0x00602120
 d 0x400cfe mov edi, 0x602120
 d 0x400d22 mov edi, 0x602120
@@ -106,7 +106,7 @@ d 0x400a51 mov qword [rbp - 8], 0x602120
 
 Since it probably will be important later on, we should label it:
 
-```
+```console
 :> f sym.memory 0x200 0x602120
 ```
 
@@ -118,7 +118,7 @@ Since it probably will be important later on, we should label it:
 While we are here, we should also declare that memory chunk as data, so it will
 show up as a hexdump in disassembly view:
 
-```
+```console
 :> Cd 0x200 @ sym.memory
 ```
 
@@ -139,7 +139,7 @@ _input_data_ to _bytecode_ and _input_size_ to _bytecode_length_. This is not
 really necessary in a small project like this, but it's a good practice to name
 stuff according to their purpose (just like when you are writing programs).
 
-```
+```console
 :> af vmloop 0x400a45
 :> afvn input_size bytecode_length
 :> afvn input_data bytecode
@@ -192,7 +192,7 @@ on the result:
 It's pretty obvious that _local_10_4_ is the loop counter, so lets name it
 accordingly:
 
-```
+```console
 :> afvn local_10_4 i
 ```
 
@@ -215,7 +215,7 @@ we are dealing with a virtual machine. In that context, this message probably
 means that we have to use every available instructions. Whether we executed an
 instruction or not is stored at 0x6020e0 - so lets flag that memory area:
 
-```
+```console
 :> f sym.instr_dirty 4*9 0x6020e0
 ```
 
@@ -230,7 +230,7 @@ where offsets are described as displacements from the current instruction
 pointer, which makes implementing PIE easier. Anyways, r2 is nice enough to
 display the actual address (0x602104). Got the address, flag it!
 
-```
+```console
 :> f sym.good_if_ne_zero 4 0x602104
 ```
 
@@ -252,7 +252,7 @@ if it's lesser, or equal to 9, we finally reach our destination, and get the fla
 
 As usual, we should flag 0x6020f0:
 
-```
+```console
 :> f sym.good_if_le_9 4 0x6020f0
 ```
 

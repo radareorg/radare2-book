@@ -8,7 +8,7 @@ The original [radare book](http://www.radare.org/get/radare.pdf) was written by 
 
 Many thanks to everyone who have contributed to this book.
 
-```
+```console
 $ git log | grep ^Author | cut -d ':' -f 2- | cut -d '<' -f 1 | sort -u |xargs echo '* '
 ```
 

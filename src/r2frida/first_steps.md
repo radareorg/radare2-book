@@ -2,13 +2,13 @@
 
 If there's nothing after the peekaboo (`://`) you will get introduced into the visual uri maker which let's you select the target device, communication channel, and application/process to attach or spawn to start tracing from it.
 
-```bash
+```console
 $ r2 frida://
 ```
 
 You can invoke the help menu via the following command:
 
-```
+```console
 $ r2 'frida://?'
 r2 frida://[action]/[link]/[device]/[target]
 * action = list | apps | attach | spawn | launch
@@ -50,7 +50,7 @@ ERROR: Cannot open 'frida://?'
 
 The `:i` commands are useful to check some basic information about the runtime:
 
-```
+```console
 [0x100610000]> :i
 arch                arm
 bits                64
@@ -76,7 +76,7 @@ cwd                 /private/var/root
 
 Here we can use `:is` to enumerate the symbols present in the process.
 
-```
+```console
 [0x100610000]> :is
 0x10060c000 s _mh_execute_header
 0x100610000 s main
@@ -86,7 +86,7 @@ Here we can use `:is` to enumerate the symbols present in the process.
 
 We can also enumerate imports using `:ii`:
 
-```
+```console
 [0x55d13c11061c]> :ii
 0x7fa7d2170a4b f r_sys_getenv /home/hex/Tools/radare2/libr/util/libr_util.so
 0x7fa7d1fd61e0 f read /usr/lib/x86_64-linux-gnu/libc-2.31.so
@@ -95,7 +95,7 @@ We can also enumerate imports using `:ii`:
 
 The same goes for exports using `:iE`:
 
-```
+```console
 [0x100610000]> :iE
 0x10060c000 v _mh_execute_header
 0x100610000 f main
@@ -105,7 +105,7 @@ The same goes for exports using `:iE`:
 
 To view the libraries in memory, we can use `:il`, and we'll see some basic information such as their base address:
 
-```
+```console
 [0x100610000]> :il
 0x000000010060c000 0x0000000100614000 arm_hello_ios
 0x0000000101154000 0x00000001013fc000 substitute-loader.dylib
@@ -117,7 +117,7 @@ To view the libraries in memory, we can use `:il`, and we'll see some basic info
 
 We can get virtual memory maps using `:dm`:
 
-```
+```console
 [0x1021d8058]> :dm
 0x00000001021d4000 - 0x00000001021d8000 r-x /private/var/root/arm_hello_ios
 0x00000001021d8000 - 0x00000001021dc000 r-x /private/var/root/arm_hello_ios
@@ -130,7 +130,7 @@ We can get virtual memory maps using `:dm`:
 
 And we can get the full ranges using `:dmm`:
 
-```
+```console
 [0x1021d8058]> :dmm
 0x00000001021d4000 - 0x00000001021e4000 r-x /private/var/root/arm_hello_ios
 0x00000001021e4000 - 0x0000000102328000 rwx /usr/lib/libsubstrate.dylib
@@ -148,7 +148,7 @@ iOS and macOS apps are usually made or containing some objc metadata that is imp
 
 We can list the ObjC classes in memory using the `:icl` command:
 
-```
+```console
 [0x00000000]> :icl
 Obfuscator
 Challenge3

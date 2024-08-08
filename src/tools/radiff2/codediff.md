@@ -6,7 +6,7 @@ To understand this feature we will start by using the basic delta diffing from t
 
 Note that radiff2 permits to specify the arch/bits/.. settings using these flags:
 
-```
+```console
 $ radiff2 -h | grep -e arch -e bits
 -a [arch]  specify architecture plugin to use (x86, arm, ..)
 -b [bits]  specify register size for arch (16 (thumb), 32, 64, ..)
@@ -14,7 +14,7 @@ $ radiff2 -h | grep -e arch -e bits
 
 Let's test it out!
 
-```
+```console
 $ cat 1
 j0X40PZHf5sOf5A0PRXRj0X40hXXshXf5wwPj0X4050binHPTXRQSPTUVWaPYS4J4A
 $ cat 2
@@ -23,7 +23,7 @@ j0X4PX0PZHf5sOf5A0PRXRj0X40hXXshXf5wwPj0X4050binHPTXRQSPTUVWaPYS4J
 
 Wen can compare the changes as disassembly like this:
 
-```
+```console
 $ radiff2 -D 5 6
   push 0x30
   pop rax

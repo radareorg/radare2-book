@@ -4,7 +4,7 @@ The radare2 search engine is based on work done by esteve, plus multiple feature
 
 Searching is accessed with `/` command.
 
-```
+```console
 [0x00000000]> /?
 |Usage: /[!bf] [arg]Search stuff (see 'e??search' for options)
 |Use io.va for searching in non virtual addressing spaces
@@ -57,7 +57,7 @@ Note that '/\*' is not a command - it starts a multiline comment. Type '\*/' to 
 
 Options are controlled by the `search.` variables.
 
-```
+```console
 [0x00000000]> e??search
         search.align: only catch aligned search hits
         search.chunk: chunk size for /+ (default size is asm.bits/8
@@ -82,7 +82,7 @@ variable first. Note the difference between `map` and `maps` - `map` will only
 search the map that you are currently in, while `maps` will search all memory
 maps, with options to narrow the search by permissions.
 
-```
+```console
 [0x00000000]> e search.in=?
 raw
 block

@@ -3,7 +3,7 @@
 Watchers are used to record memory at 2 different points in time, then report
 if and how it changed.
 
-```
+```console
 [0x00000000]> cw?
 Usage: cw [args]  Manage compare watchers; See if and how memory changes
 | cw??            Show more info about watchers
@@ -19,7 +19,7 @@ Usage: cw [args]  Manage compare watchers; See if and how memory changes
 First, create one with `cw addr sz cmd`. This will record `sz` bytes at `addr`.
 The command is stored and used to print the memory when shown.
 
-```
+```console
 # Create a watcher at 0x0 of size 4 using p8 as the command
 [0x00000000]> cw 0 4 p8
 ```
@@ -29,7 +29,7 @@ report if the bytes changed and run the command given at creation with the size
 and address. When an address is an optional argument, the command will apply
 to all watchers if you don't pass one.
 
-```
+```console
 # Introduce a change to the block of data we're watching
 [0x00000000]> wx 11223344
 # Update all watchers
@@ -43,7 +43,7 @@ to all watchers if you don't pass one.
 You may overwrite any watcher by creating another at the same address. This
 will discard the existing watcher completely.
 
-```
+```console
 # Overwrite our existing watcher to display a bistream instead of
 # hexpairs, and make the watched area larger
 [0x00000000]> cw 0 8 pB
@@ -64,7 +64,7 @@ your new base state when updating with `cwu`. Any existing "new" state from
 running `cwu` previously is lost in this process. Showing a watcher without
 updating will still run the command, but it will not report changes.
 
-```
+```console
 # Create a basic watcher
 [0x00000000]> cw 0 4 p8
 [0x00000000]> cw
@@ -92,7 +92,7 @@ updating will still run the command, but it will not report changes.
 Watched memory areas may overlap with no ill effects, but may have unexpected
 results if you update some but not others.
 
-```
+```console
 # Create a watcher that watches 512 bytes starting at 0
 [0x00000000]> cw 0 0x200 p8
 # Create a watcher that watches 16 bytes starting at 0x100
@@ -116,7 +116,7 @@ cw 0x00000100 16 p8 # differs
 
 Here is an example of using a disassembly command to watch code being modified.
 
-```
+```console
 # Write an initial binary blob for the example
 [0x00000000]> wx 5053595a
 # Use pD since it counts by bytes

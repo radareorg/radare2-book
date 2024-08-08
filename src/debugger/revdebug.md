@@ -5,7 +5,7 @@ Radare2 has reverse debugger, that can seek the program counter backward.
 Firstly you need to save program state at the point that you want to start recording.
 The syntax for recording is:
 
-```
+```console
 [0x004028a0]> dts+
 ```
 
@@ -13,7 +13,7 @@ You can use `dts` commands for recording and managing program states.
 After recording the states, you can seek pc back and forth to any points after saved address.
 So after recording, you can try single step back:
 
-```
+```console
 [0x004028a0]> 2dso
 [0x004028a0]> dr rip
 0x004028ae
@@ -29,7 +29,7 @@ until desired point.
 
 Or you can also try continue back:
 
-```
+```console
 [0x004028a0]> db 0x004028a2
 [0x004028a0]> 10dso
 [0x004028a0]> dr rip
@@ -44,7 +44,7 @@ So once set a breakpoint, you can back to it any time.
 
 You can see current recorded program states using `dts`:
 
-```
+```console
 [0x004028a0]> dts
 session: 0   at:0x004028a0   ""
 session: 1   at:0x004028c2   ""
@@ -56,7 +56,7 @@ than entire dump.
 
 And also can add comment:
 
-```
+```console
 [0x004028c2]> dtsC 0 program start
 [0x004028c2]> dtsC 1 decryption start
 [0x004028c2]> dts
@@ -71,7 +71,7 @@ many records.
 Program records can exported to file and of course import it.
 Export/Import records to/from file:
 
-```
+```console
 [0x004028c2]> dtst records_for_test
 Session saved in records_for_test.session and dump in records_for_test.dump
 [0x004028c2]> dtsf records_for_test
@@ -82,13 +82,13 @@ session: 1, 0x4028c2 diffs: 0
 Moreover, you can do reverse debugging in ESIL mode.
 In ESIL mode, program state can be managed by `aets` commands.
 
-```
+```console
 [0x00404870]> aets+
 ```
 
 And step back by `aesb`:
 
-```
+```console
 [0x00404870]> aer rip
 0x00404870
 [0x00404870]> 5aeso

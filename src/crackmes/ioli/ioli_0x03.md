@@ -2,7 +2,7 @@
 
 crackme 0x03, let's skip the string check part and analyze it directly.
 
-```C
+```c
 [0x08048360]> aaa
 [0x08048360]> pdd@sym.main
 /* r2dec pseudo code output */
@@ -54,8 +54,8 @@ int32_t main (void) {
 
 Here comes the`sym.test`, called with two parameters. One is var_4h (our input from `scanf()`). The other is var_ch. The value of var_ch (as the parameter of `test()`) can be calculated like it did in crackme_0x02. It's  0x52b24. Try it!
 
-```sh
-./crackme0x03
+```console
+$ ./crackme0x03
 IOLI Crackme Level 0x03
 Password: 338724
 Password OK!!! :)
@@ -136,7 +136,7 @@ print(''.join([chr(ord(i)-0x3) for i in 'LqydolgSdvvzrug$']))
 
 the easier way is to `run` the decryption code, that means debug it or emulate it. I used radare2 ESIL emulator but it got stuck when executed `call dword imp.strlen`. And I can't find the usage of hooking function / skip instruction in radare2.  The following is an example to show u how to emulate ESIL.
 
-```sh
+```console
 [0x08048414]> s 0x08048445		# the 'sub al, 0x03'
 [0x08048445]> aei				# init VM
 [0x08048445]> aeim				# init memory
@@ -181,8 +181,8 @@ dead at 0x00000000
 
 By the way, u can also open the file and use write data command to decrypt data.
 
-```sh
-r2 -w ./crackme0x03
+```console
+$ r2 -w ./crackme0x03
 [0x08048360]> aaa
 [0x08048360]> fs strings
 [0x08048360]> f

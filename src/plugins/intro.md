@@ -19,7 +19,7 @@ All of them can be installed via r2pm.
 
 See [r2skel](r2skel.md)
 
-```
+```console
 $ ls libr/*/p | grep : | awk -F / '{ print $2 }'
 anal      # analysis plugins
 asm       # assembler/disassembler plugins

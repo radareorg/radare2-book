@@ -4,7 +4,7 @@ Data diffing with radiff2 allows you to compare binary data between files of dif
 
 For example, comparing two files with `radiff2 -x` shows the differences in two column hexdump+ascii format:
 
-```
+```console
 $ cat 1
 hello
 $ cat 2
@@ -16,14 +16,14 @@ $ radiff2 -x 1 2
 
 Also in hexII format:
 
-```
+```console
 $ radiff2 -X 1 2
 0x00000000! .h.e.l.l.o0a         .h.a.l.l.o0a    
 ```
 
 or even the unified diff format using the `-U` flag:
 
-```
+```console
 $ radiff2 -U 1 2
 --- /tmp/r_diff.61dd4e41da041	2024-07-22 14:07:37.682683431 +0200
 +++ /tmp/r_diff.61dd4e41da06b	2024-07-22 14:07:37.682683431 +0200
@@ -40,7 +40,7 @@ Let's understand the output because in your terminal you'll see some green and r
 
 When comparing files of different sizes, we will need to use the `-d` flag which performs a delta-diffing algorithm, trying to find the patterns of bytes that has been added or removed when a specific change is found.
 
-```sh
+```console
 $ cat 1 
 hello
 $ cat 3
@@ -57,7 +57,7 @@ $
 
 For JSON output, use radiff2 -j -d to get detailed diff information in JSON format:
 
-```
+```console
 $ radiff2 -j -d 1 3 |jq .
 INFO: File size differs 6 vs 11
 {

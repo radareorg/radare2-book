@@ -12,7 +12,7 @@ The command-line assembler and disassembler that is part of the radare2 framewor
 
 ### Help
 
-```
+```console
 $ rasm2 -h
 Usage: rasm2 [-ACdDehLBvw] [-a arch] [-b bits] [-o addr] [-s syntax]
              [-f file] [-F fil:ter] [-i skip] [-l len] 'code'|hex|0101b|-
@@ -59,7 +59,7 @@ Environment:
 
 Plugins for supported target architectures can be listed with the `-L` option. Knowing a plugin name, you can use it by specifying its name to the `-a` option
 
-```
+```console
 $ rasm2 -L
 _dAe  8 16       6502        LGPL3   6502/NES/C64/Tamagotchi/T-1000 CPU
 _dAe  8          8051        PD      8051 Intel CPU

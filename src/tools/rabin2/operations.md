@@ -3,7 +3,7 @@
 rabin2 allows you to do some modifications/extraction operations on a file. You do so with **-O** option
 and one of the predefined strings to specify the required operation. All the possible strings are:
 
-```
+```console
 $ rabin2 -O h
 Operation string:
   Change Entrypoint: e/0x8048000

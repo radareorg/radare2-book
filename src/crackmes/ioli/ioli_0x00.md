@@ -4,7 +4,7 @@ This first challenge is designed to introduce you to the basics of reverse engin
 
 By executing the program you may see something like this:
 
-```
+```console
 $ ./crackme0x00
 IOLI Crackme Level 0x00
 Password: 1234
@@ -76,7 +76,7 @@ What about this string? It hasn’t appeared when running the application yet.
 
 Let’s try using it as the password.
 
-```
+```console
 $ ./crackme0x00
 IOLI Crackme Level 0x00
 Password: 250382

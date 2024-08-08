@@ -3,7 +3,7 @@
 The `cmd.hit` configuration variable is used to define a radare2 command to be executed when a matching entry is found by the search engine. If you want to run several commands, separate them with `;`. Alternatively, you can arrange them in a separate script, and then invoke it as a whole with `. script-file-name` command.
 For example:
 
-```
+```console
 [0x00404888]> e cmd.hit = p8 8
 [0x00404888]> / lib
 Searching 3 bytes from 0x00400000 to 0x0041ae08: 6c 69 62

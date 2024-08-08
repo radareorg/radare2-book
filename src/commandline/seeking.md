@@ -6,7 +6,7 @@ The argument is a math expression that can contain flag names, parenthesis, addi
 
 Some example commands:
 
-```
+```console
 [0x00000000]> s 0x10
 [0x00000010]> s+4
 [0x00000014]> s-
@@ -24,19 +24,19 @@ Instead of using just numbers, we can use complex expressions, or basic arithmet
 
 To do this, check the ?$? Help message which describes the internal variables that can be used in the expressions. For example, this is the same as doing s+4 .
 
-```
+```console
 [0x00000000]> s $$+4
 ```
 
 From the debugger (or when emulating) we can also use the register names as references. They are loaded as flags with the `.dr*` command, which happens under the hood.
 
-```
+```console
 [0x00000000]> s rsp+0x40
 ```
 
 Here's the full help of the `s` command. We will explain in more detail below.
 
-```
+```console
 [0x00000000]> s?
 Usage: s   # Help for the seek commands. See ?$? to see all variables
 | s               print current address
@@ -79,7 +79,7 @@ Usage: s   # Help for the seek commands. See ?$? to see all variables
 
 If you want to inspect the result of a math expression, you can evaluate it using the `?` command. Simply pass the expression as an argument. The result can be displayed in hexadecimal, decimal, octal or binary formats.
 
-```
+```console
 > ? 0x100+200
 0x1C8 ; 456d ; 710o ; 1100 1000
 ```
@@ -93,13 +93,13 @@ In the visual mode, you can press `u` (undo) or `U` (redo) inside the seek histo
 As a test file, let's use a simple `hello_world.c` compiled in Linux ELF format.
 After we compile it let's open it with radare2:
 
-```
+```console
 $ r2 hello_world
 ```
 
 Now we have the command prompt:
 
-```
+```console
 [0x00400410]>
 ```
 
@@ -112,14 +112,14 @@ such as hex, octal, binary or decimal.
 
 Seek to an address 0x0. An alternative command is simply `0x0`
 
-```
+```console
 [0x00400410]> s 0x0
 [0x00000000]>
 ```
 
 Print current address:
 
-```
+```console
 [0x00000000]> s
 0x0
 [0x00000000]>
@@ -129,14 +129,14 @@ There is an alternate way to print current position: `?v $$`.
 
 Seek N positions forward, space is optional:
 
-```
+```console
 [0x00000000]> s+ 128
 [0x00000080]>
 ```
 
 Undo last two seeks to return to the initial address:
 
-```
+```console
 [0x00000080]> s-
 [0x00000000]> s-
 [0x00400410]>
@@ -146,7 +146,7 @@ We are back at _0x00400410_.
 
 There's also a command to show the seek history:
 
-```
+```console
 [0x00400410]> s*
 f undo_3 @ 0x400410
 f undo_2 @ 0x40041a
@@ -160,7 +160,7 @@ f redo_0 @ 0x4005b4
 
 Another important `s` subcommand is the `s..` one which permits to seek to another address taking the higher nibbles of the current address as reference, this technique works great for kernel, aslr or large binaries where you really don't want to type different or large numbers everytime.
 
-```
+```console
 [0x100003a84]> s..00
 [0x100003a00]> s..3b00
 [0x100003b00]> s..0000
@@ -176,14 +176,14 @@ The r2 shell provides many ways to do this, that's because reading pointers from
 
 Use the `*` command, which acts like in C. It reads the the value from the given address (`$$` stands for current seek) and honors `asm.bits` and `cfg.bigendian`.
 
-```
+```console
 [0x004000c8]> s `*$$`
 [0x0040032e]>
 ```
 
 This is the help message from the * command, which can be used as an alias for `wv` to write a value or to read from memory like the brackets syntax would do on any math expression in r2:
 
-```
+```console
 [0x100003a84]> *
 Usage: *<addr>[=[0x]value]  Pointer read/write data/values
 | *entry0=cc           write trap in entrypoint
@@ -195,7 +195,7 @@ Usage: *<addr>[=[0x]value]  Pointer read/write data/values
 
 Note that * can be also expressed as a math expression using the brackets syntax:
 
-```
+```console
 [0x100003a84]> ?v [$$]
 0xa9ba6ffcd503237f
 [0x100003a84]>

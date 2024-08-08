@@ -2,7 +2,7 @@
 
 ESIL stands for 'Evaluable Strings Intermediate Language'. It aims to describe a [Forth](https://en.wikipedia.org/wiki/Forth_%28programming_language%29)-like representation for every target CPU opcode semantics. ESIL representations can be evaluated (interpreted) in order to emulate individual instructions. Each command of an ESIL expression is separated by a comma. Its virtual machine can be described as this:
 
-```
+```c
    while ((word=haveCommand())) {
      if (word.isOperator()) {
        esilOperators[word](esil);
@@ -37,7 +37,7 @@ r2's visual mode is great to inspect the ESIL evaluations.
 
 There are 3 environment variables that are important for watching what a program does:
 
-```
+```console
 [0x00000000]> e emu.str = true
 ```
 
@@ -48,7 +48,7 @@ One problem with this is that it is a lot of information to take in at once and 
 The third important variable is `asm.esil`. This switches your disassembly to no longer show you the actual disassembled instructions, but instead now shows you corresponding ESIL expressions that describe what the instruction does.
 So if you want to take a look at how instructions are expressed in ESIL simply set "asm.esil" to true.
 
-```
+```console
 [0x00000000]> e asm.esil = true
 ```
 
@@ -58,7 +58,7 @@ In visual mode you can also toggle this by simply typing `O`.
 
 * "ae" : Evaluate ESIL expression.
 
-```
+```console
 [0x00000000]> "ae 1,1,+"
 0x2
 [0x00000000]>
@@ -66,21 +66,21 @@ In visual mode you can also toggle this by simply typing `O`.
 
 * "aes" : ESIL Step.
 
-```
+```console
 [0x00000000]> aes
 [0x00000000]>10aes
 ```
 
 * "aeso" : ESIL Step Over.
 
-```
+```console
 [0x00000000]> aeso
 [0x00000000]>10aeso
 ```
 
 * "aesu" : ESIL Step Until.
 
-```
+```console
 [0x00001000]> aesu 0x1035
 ADDR BREAK
 [0x00001019]>
@@ -88,7 +88,7 @@ ADDR BREAK
 
 * "ar" : Show/modify ESIL registry.
 
-```
+```console
 [0x00001ec7]> ar r_00 = 0x1035
 [0x00001ec7]> ar r_00
 0x00001035
@@ -215,7 +215,7 @@ zf,?{,eip,esp,=[],eax,eip,=,$r,esp,-=,}
 
 Whitespaces, newlines and other chars are ignored. So the first thing when processing a ESIL program is to remove spaces:
 
-```
+```c
 esil = r_str_replace (esil, " ", "", R_TRUE);
 ```
 
@@ -344,7 +344,7 @@ fmulp ST(1), ST(0)      =>      TODO,fmulp ST(1),ST(0)
 
 ### ESIL Disassembly Example
 
-```
+```console
 [0x1000010f8]> e asm.esil=true
 [0x1000010f8]> pd $r @ entry0
 0x1000010f8    55           8,rsp,-=,rbp,rsp,=[8]
@@ -379,7 +379,7 @@ fmulp ST(1), ST(0)      =>      TODO,fmulp ST(1),ST(0)
 
 To ease ESIL parsing we should have a way to express introspection expressions to extract the data that we want. For example, we may want to get the target address of a jump. The parser for ESIL expressions should offer an API to make it possible to extract information by analyzing the expressions easily.
 
-```
+```console
 >  ao~esil,opcode
 opcode: jmp 0x10000465a
 esil: 0x10000465a,rip,=

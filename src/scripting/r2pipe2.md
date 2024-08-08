@@ -25,7 +25,7 @@ The { object takes the mandatory "cmd" parameter, but can also handle two more f
 
 Let's check the help:
 
-```
+```console
 [0x00000000]> {?
 Usage: {"cmd":"...","json":false,"trim":true} # `cmd` is required
 [0x00000000]>
@@ -33,7 +33,7 @@ Usage: {"cmd":"...","json":false,"trim":true} # `cmd` is required
 
 For example:
 
-```
+```console
 [0x00000000]> '{"cmd":"?e hello"}
 {"res":"hello\n","error":false,"value":256,"code":0,"code":0}
 [0x00000000]>

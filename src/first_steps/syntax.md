@@ -64,7 +64,7 @@ Note that the environment variables will be different depending on how we execut
 * spawning processes with ! (get some context details, like offset, file, ..)
 * r2pipe environment (`R2PIPE_IN` and `R2PIPE_OUT` with the pipe descriptors)
 
-```
+```console
 [0x00000000]> !export | grep R2_
 export R2_ARCH="arm"
 export R2_BITS="64"
@@ -83,7 +83,7 @@ export R2_XOFFSET="0x00000000"
 
 We can also find the location in memory of the RCore instance in the current process. This can be useful when injecting code inside radare2 (like when injecting r2 via r2frida or using native api calls on live runtimes without having to pass pointers or depend on RLang setups) We may learn more about this in the scripting chapter.
 
-```
+```console
 [0x00000000]> %~R2
 R2CORE=0x140018000
 [0x00000000]>
@@ -185,7 +185,7 @@ The purpose of this syntax rings some bells when you use the `*` suffix or the `
 
 For example, we can load the symbols from a binary in disk by running the following line:
 
-```
+```console
 > .!rabin2 -rs $R2_FILE
 ```
 
