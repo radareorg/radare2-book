@@ -12,10 +12,10 @@ Radare2's graph capabilities offer a multifaceted approach to visualizing variou
 
 These graphical representations serve multiple purposes:
 
-- Quickly identify complex structures and patterns that might be missed in text-based analysis.
-- Facilitate easier navigation through large codebases.
-- Aid in understanding the overall architecture and design of the program.
-- Assist in locating potential vulnerabilities or points of interest for further investigation.
+* Quickly identify complex structures and patterns that might be missed in text-based analysis.
+* Facilitate easier navigation through large codebases.
+* Aid in understanding the overall architecture and design of the program.
+* Assist in locating potential vulnerabilities or points of interest for further investigation.
 
 In the following sections, we'll explore the various graph commands available in radare2, demonstrating how to generate, navigate, and interpret these visual aids to supercharge your reverse engineering workflow.
 
@@ -68,7 +68,7 @@ outputs the custom graph in JSON format.
 
 Here's a short description for every output format available:
 
-### Ascii Art 
+### Ascii Art
 
 Command: `agf`
 
@@ -100,9 +100,9 @@ Command: `agfj`
 
 Prints a JSON string representing the graph.
 
-- In case of the `f` format (basic blocks of function), it will have detailed information about the function and will also contain the disassembly of the function (use `J` format for the formatted disassembly.
+* In case of the `f` format (basic blocks of function), it will have detailed information about the function and will also contain the disassembly of the function (use `J` format for the formatted disassembly).
 
-- In all other cases, it will only have basic information about the nodes of the graph (id, title, body, and edges).
+* In all other cases, it will only have basic information about the nodes of the graph (id, title, body, and edges).
 
 ### Graph Modelling Language
 

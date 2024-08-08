@@ -12,7 +12,7 @@ hallo
 $ radiff2 -x 1 2
   offset     0 1 2 3 4 5 6 7 01234567    0 1 2 3 4 5 6 7 01234567
 0x00000000! 68656c6c6f0a     hello.     68616c6c6f0a     hallo.
-``` 
+```
 
 Also in hexII format:
 

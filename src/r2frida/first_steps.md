@@ -47,7 +47,9 @@ ERROR: Cannot open 'frida://?'
 ## Process Info
 
 ### Basic information about the app and environemnt
+
 The `:i` commands are useful to check some basic information about the runtime:
+
 ```
 [0x100610000]> :i
 arch                arm
@@ -71,7 +73,9 @@ cwd                 /private/var/root
 ```
 
 ### Enumerating symbols
+
 Here we can use `:is` to enumerate the symbols present in the process.
+
 ```
 [0x100610000]> :is
 0x10060c000 s _mh_execute_header
@@ -81,6 +85,7 @@ Here we can use `:is` to enumerate the symbols present in the process.
 ```
 
 We can also enumerate imports using `:ii`:
+
 ```
 [0x55d13c11061c]> :ii
 0x7fa7d2170a4b f r_sys_getenv /home/hex/Tools/radare2/libr/util/libr_util.so
@@ -89,6 +94,7 @@ We can also enumerate imports using `:ii`:
 ```
 
 The same goes for exports using `:iE`:
+
 ```
 [0x100610000]> :iE
 0x10060c000 v _mh_execute_header
@@ -96,7 +102,9 @@ The same goes for exports using `:iE`:
 ```
 
 ### Enumerating loaded libraries
+
 To view the libraries in memory, we can use `:il`, and we'll see some basic information such as their base address:
+
 ```
 [0x100610000]> :il
 0x000000010060c000 0x0000000100614000 arm_hello_ios
@@ -108,6 +116,7 @@ To view the libraries in memory, we can use `:il`, and we'll see some basic info
 ### Enumerating memory ranges
 
 We can get virtual memory maps using `:dm`:
+
 ```
 [0x1021d8058]> :dm
 0x00000001021d4000 - 0x00000001021d8000 r-x /private/var/root/arm_hello_ios
@@ -120,6 +129,7 @@ We can get virtual memory maps using `:dm`:
 ```
 
 And we can get the full ranges using `:dmm`:
+
 ```
 [0x1021d8058]> :dmm
 0x00000001021d4000 - 0x00000001021e4000 r-x /private/var/root/arm_hello_ios
@@ -146,4 +156,3 @@ Challenge2
 Challenge1
 AppDelegate
 ```
-

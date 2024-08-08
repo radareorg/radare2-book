@@ -29,7 +29,7 @@ rpath    NONE
 binsz    8620
 ```
 
-> ***r2 tip:*** rabin2 is one of the handy tools that comes with radare2. It can
+> _**r2 tip:**_ rabin2 is one of the handy tools that comes with radare2. It can
 > be used to extract information (imports, symbols, libraries, etc.) about
 > binary executables. As always, check the help (rabin2 -h)!
 
@@ -59,9 +59,9 @@ asm we trust!
 [0x00400720]>
 ```
 
-> ***r2 tip:*** The -A switch runs *aaa* command at start to analyze all
+> _**r2 tip:**_ The -A switch runs _aaa_ command at start to analyze all
 > referenced code, so we will have functions, strings, XREFS, etc. right at the
-> beginning. As usual, you can get help with *?*.
+> beginning. As usual, you can get help with _?_.
 
 It is a good practice to create a project, so we can save our progress, and we
 can come back at a later time:
@@ -72,7 +72,7 @@ avatao_reverse4
 [0x00400720]>
 ```
 
-> ***r2 tip:*** You can save a project using Ps [file], and load one using Po [file].
+> _**r2 tip:**_ You can save a project using Ps [file], and load one using Po [file].
 > With the -p option, you can load a project when starting r2.
 
 We can list all the strings r2 found:
@@ -91,11 +91,11 @@ We can list all the strings r2 found:
 [0x00400720]>
 ```
 
-> ***r2 tip***: r2 puts so called flags on important/interesting offsets, and
+> _**r2 tip**_: r2 puts so called flags on important/interesting offsets, and
 > organizes these flags into flagspaces (strings, functions, symbols, etc.) You
-> can list all flagspaces using *fs*, and switch the current one using
-> *fs [flagspace]* (the default is \*, which means all the flagspaces). The
-> command *f* prints all flags from the currently selected flagspace(s).
+> can list all flagspaces using _fs_, and switch the current one using
+> _fs [flagspace]_ (the default is \*, which means all the flagspaces). The
+> command _f_ prints all flags from the currently selected flagspace(s).
 
 OK, the strings looks interesting, especially the one at 0x00400f92. It seems to
 hint that this crackme is based on a virtual machine. Keep that in mind!
@@ -117,11 +117,11 @@ d 0x400db4 mov edi, str.You_won__The_flag_is:__s_n
 d 0x400dd2 mov edi, str.Your_getting_closer_
 ```
 
-> ***r2 tip***: We can list cross-references to addresses using the *axt [addr]*
-> command (similarly, we can use *axf* to list references from the address).
-> The *@@* is an iterator, it just runs the command once for every arguments
+> _**r2 tip**_: We can list cross-references to addresses using the _axt [addr]_
+> command (similarly, we can use _axf_ to list references from the address).
+> The _@@_ is an iterator, it just runs the command once for every arguments
 > listed.
 >
-> The argument list in this case comes from the command *f~[0]*. It lists the
-> strings from the executable with *f*, and uses the internal grep command *~*
-> to select only the first column (*[0]*) that contains the strings' addresses.
+> The argument list in this case comes from the command _f~[0]_. It lists the
+> strings from the executable with _f_, and uses the internal grep command _~_
+> to select only the first column (_[0]_) that contains the strings' addresses.

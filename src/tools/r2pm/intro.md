@@ -9,7 +9,7 @@ Radare2 has its own **package manager** for managing external plugins or tools t
 
 The [radare2-extras](https://github.com/radareorg/radare2-extras) repository contains a lot of third-party packages that aim to be updated and maintained (but also less used than the ones shipped in the main repository), so it's a great place to check before writing your own plugin as maybe this thing was done already by someone else.
 
-#### Package Database
+### Package Database
 
 ```
 $ r2pm -U
@@ -72,7 +72,7 @@ Commands:
  -v                show version
 ```
 
-#### Sample Session
+### Sample Session
 
 For example `lang-python3` (which is used for writing r2 plugins in Python):
 

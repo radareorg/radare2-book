@@ -65,29 +65,29 @@ To view the ESIL representation of your program, use the `ao~esil` command or en
 
 To manually set up imprecise ESIL emulation, run the following sequence of commands:
 
-- `aei` to initialize the ESIL VM
-- `aeim` to initialize ESIL VM memory (stack)
-- `aeip` to set the initial ESIL VM IP (instruction pointer)
-- a sequence of `aer` commands to set the initial register values.
+* `aei` to initialize the ESIL VM
+* `aeim` to initialize ESIL VM memory (stack)
+* `aeip` to set the initial ESIL VM IP (instruction pointer)
+* a sequence of `aer` commands to set the initial register values.
 
 While performing emulation, please remember that the ESIL VM cannot emulate external calls system calls, nor SIMD instructions. Thus, the most common scenario is to emulate only a small chunk of code like encryption, decryption, unpacking, or a calculation.
 
 After successfully setting up the ESIL VM, we can interact with it like a normal debugging session.
 The command interface for the ESIL VM is almost identical to the debugging interface:
 
-- `aes` to step (or `s` key in visual mode)
-- `aesi` to step over function calls
-- `aesu <address>` to step until some specified address
-- `aesue <ESIL expression>` to step until some specified ESIL expression is met
-- `aec` to continue until break (Ctrl-C). This one is rarely used due to the omnipresence of external calls
+* `aes` to step (or `s` key in visual mode)
+* `aesi` to step over function calls
+* `aesu <address>` to step until some specified address
+* `aesue <ESIL expression>` to step until some specified ESIL expression is met
+* `aec` to continue until break (Ctrl-C). This one is rarely used due to the omnipresence of external calls
 
 In visual mode, all of the debugging hotkeys will also work in ESIL emulation mode.
 
 In addition to normal emulation, it's also possible to record and replay sessions:
 
-- `aets` to list all current ESIL R&R sessions
-- `aets+` to create a new one
-- `aesb` to step back in the current ESIL R&R session
+* `aets` to list all current ESIL R&R sessions
+* `aets+` to create a new one
+* `aesb` to step back in the current ESIL R&R session
 
 You can read more about this operation mode in the [Reverse Debugging](../debugger/revdebug.md) chapter.
 
@@ -99,26 +99,26 @@ To change some of the behaviours of the emulation engine in radare2 you can use 
 
 `[0x00000000]> e??esil.`
 
-- esil.addr.size: maximum address size in accessed by the ESIL VM
-- esil.breakoninvalid: break esil execution when instruction is invalid
-- esil.dfg.mapinfo: use mapinfo for esil dfg
-- esil.dfg.maps: set ro maps for esil dfg
-- esil.exectrap: trap when executing code in non-executable memory
-- esil.fillstack: initialize ESIL stack with (random, debruijn, sequence, zeros, ...)
-- esil.gotolimit: maximum number of gotos per ESIL expression
-- esil.iotrap: invalid read or writes produce a trap exception
-- esil.maxsteps: If !=0 defines the maximum amount of steps to perform on aesu/aec/..
-- esil.mdev.range: specify a range of memory to be handled by cmd.esil.mdev
-- esil.nonull: prevent memory read, memory write at null pointer
-- esil.prestep: step before esil evaluation in `de` commands
-- esil.romem: set memory as read-only for ESIL
-- esil.stack.addr: set stack address in ESIL VM
-- esil.stack.depth: number of elements that can be pushed on the esilstack
-- esil.stack.pattern: specify fill pattern to initialize the stack (0, w, d, i)
-- esil.stack.size: set stack size in ESIL VM
-- esil.stats: statistics from ESIL emulation stored in sdb
-- esil.timeout: a timeout (in seconds) for when we should give up emulating
-- esil.verbose: show ESIL verbose level (0, 1, 2)
+* esil.addr.size: maximum address size in accessed by the ESIL VM
+* esil.breakoninvalid: break esil execution when instruction is invalid
+* esil.dfg.mapinfo: use mapinfo for esil dfg
+* esil.dfg.maps: set ro maps for esil dfg
+* esil.exectrap: trap when executing code in non-executable memory
+* esil.fillstack: initialize ESIL stack with (random, debruijn, sequence, zeros, ...)
+* esil.gotolimit: maximum number of gotos per ESIL expression
+* esil.iotrap: invalid read or writes produce a trap exception
+* esil.maxsteps: If !=0 defines the maximum amount of steps to perform on aesu/aec/..
+* esil.mdev.range: specify a range of memory to be handled by cmd.esil.mdev
+* esil.nonull: prevent memory read, memory write at null pointer
+* esil.prestep: step before esil evaluation in `de` commands
+* esil.romem: set memory as read-only for ESIL
+* esil.stack.addr: set stack address in ESIL VM
+* esil.stack.depth: number of elements that can be pushed on the esilstack
+* esil.stack.pattern: specify fill pattern to initialize the stack (0, w, d, i)
+* esil.stack.size: set stack size in ESIL VM
+* esil.stats: statistics from ESIL emulation stored in sdb
+* esil.timeout: a timeout (in seconds) for when we should give up emulating
+* esil.verbose: show ESIL verbose level (0, 1, 2)
 
 ## Problems
 

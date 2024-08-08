@@ -20,7 +20,7 @@ There are multiple ways to find the strings embedded inside a binary, which are 
 * Check the manpage and help message of rabin2
   * Use `man rabin2` and `rabin2 -h` in your terminal
 * Load the binary with radare2
-  * Append the question mark to the `i` and `iz` commands to find relevant 
+  * Append the question mark to the `i` and `iz` commands to find relevant
   * Understand the difference between `iz`, `izz` and `izzz`
 * Read the output of those commands and make a blind guess
 

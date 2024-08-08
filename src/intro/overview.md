@@ -2,7 +2,7 @@
 
 The Radare2 project provides a collection of command-line tools, APIs and scripting capabilities that focus on several aspects of reverse engineering.
 
-This chapter will give you a quick understanding of them, but you can check the dedicated sections for each tool at the end of this book. 
+This chapter will give you a quick understanding of them, but you can check the dedicated sections for each tool at the end of this book.
 
 **radare2**
 
@@ -14,12 +14,12 @@ Once you've opened a file, radare2 provides a wide array of commands for explora
 
 Some key features accessible through the radare2 command include:
 
-- Hex editing capabilities
-- Advanced code analysis and disassembly
-- Debugging functionality
-- Binary patching
-- Data visualization tools
-- Scripting support for automation and extending functionality
+* Hex editing capabilities
+* Advanced code analysis and disassembly
+* Debugging functionality
+* Binary patching
+* Data visualization tools
+* Scripting support for automation and extending functionality
 
 The radare2 command serves as the primary interface to these features, offering a flexible and powerful environment for reverse engineering, malware analysis, exploit development, and general binary exploration.
 
@@ -50,10 +50,10 @@ awesome
 
 Another important tool distributed with radare2, rabin2 is designed to analyze binary files and extract various types of information from them. It supports a wide range of file formats (depending on which plugins are loaded or compiled in), the most famous ones are:
 
-- ELF (Executable and Linkable Format)
-- PE (Portable Executable)
-- Mach-O (Mach Object)
-- Java CLASS files
+* ELF (Executable and Linkable Format)
+* PE (Portable Executable)
+* Mach-O (Mach Object)
+* Java CLASS files
 
 Key features and uses of rabin2 include:
 
@@ -71,13 +71,13 @@ rabin2 can be used standalone from the command line or integrated within other r
 
 The command-line assembler and disassembler. It supports a wide range of architectures and can be used independently of the main radare2 tool. Key features include:
 
-- Multi-architecture support: Can handle numerous architectures including x86, x86-64, ARM, MIPS, PowerPC, SPARC, and many others.
-- Bi-directional operation: Functions as both an assembler (converting human-readable assembly code to machine code) and a disassembler (converting machine code back to assembly).
-- Flexible input/output: Accepts input as hexadecimal strings, raw binary files, or text files containing assembly code.
-- Shellcode generation: Useful for security research and exploit development.
-- Inline assembly: Allows for quick assembly of individual instructions or small code snippets.
-- Syntax highlighting: Provides colored output for better readability when disassembling.
-- Plugins: Supports architecture-specific plugins for extended functionality.
+* Multi-architecture support: Can handle numerous architectures including x86, x86-64, ARM, MIPS, PowerPC, SPARC, and many others.
+* Bi-directional operation: Functions as both an assembler (converting human-readable assembly code to machine code) and a disassembler (converting machine code back to assembly).
+* Flexible input/output: Accepts input as hexadecimal strings, raw binary files, or text files containing assembly code.
+* Shellcode generation: Useful for security research and exploit development.
+* Inline assembly: Allows for quick assembly of individual instructions or small code snippets.
+* Syntax highlighting: Provides colored output for better readability when disassembling.
+* Plugins: Supports architecture-specific plugins for extended functionality.
 
 For example assembling and disassembling a nop for java:
 

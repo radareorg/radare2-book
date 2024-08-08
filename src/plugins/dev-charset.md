@@ -1,7 +1,7 @@
 ## Charset Plugins
 
 1. Create a file in `radare2/libr/util/d/yourfile.sdb.txt`. The extension .sdb.txt is important.
-2. Edit the file `radare2/libr/util/charset.c`. 
+2. Edit the file `radare2/libr/util/charset.c`.
   -add `extern SdbGperf gperf_latin_1_ISO_8859_1_western_european;`.
   -then add your variable `&gperf_latin_1_ISO_8859_1_western_european,` in `static const SdbGperf *gperfs[]`
 3. Update the Makefile: `radare2/libr/util/Makefile`:
@@ -15,4 +15,4 @@ Congratulation! You can now type the command:
 e cfg.charset=latin_1_ISO_8859_1_western_european;
 ```
 
-If you have any issue with this tutorial you can check out the example at https://github.com/radareorg/radare2/pull/19627/files.
+If you have any issue with this tutorial you can check out the example at <https://github.com/radareorg/radare2/pull/19627/files>.

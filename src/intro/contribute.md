@@ -14,4 +14,3 @@ Suggested contributions include:
 Please get permission to port any content you do not own/did not create before you put it in the Radare2 book.
 
 See <https://github.com/radareorg/radare2/blob/master/DEVELOPERS.md> for general help on contributing to radare2.
-

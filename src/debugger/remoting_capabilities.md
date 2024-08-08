@@ -113,4 +113,3 @@ Connected to: <host> at port <port>
 ```
 
 The `=<` command will send the output from the execution of `cmd` to the remote connection number N (or the last one used if no id specified).
-

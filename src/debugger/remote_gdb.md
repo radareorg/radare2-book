@@ -108,4 +108,3 @@ And then connect to it like you would to any gdbserver. For example, with radare
 ```
 $ r2 -d gdb://localhost:8000
 ```
-

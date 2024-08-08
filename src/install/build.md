@@ -10,7 +10,7 @@ Currently, the debugger layer can be used on Windows, GNU/Linux (Intel x86 and x
 
 Note that there are I/O plugins that use GDB, WinDbg, or Wine as back-ends, and therefore rely on presence of corresponding third-party tools (in case of remote debugging - just on the target machine).
 
-To build on a system using `acr` and `GNU Make` (e.g. on *BSD systems*):
+To build on a system using `acr` and `GNU Make` (e.g. on _BSD systems_):
 
 ```sh
 $ ./configure --prefix=/usr

@@ -88,8 +88,6 @@ chdir=/tmp
 
 ### Using a program via TCP/IP
 
-
-
 ```
 $ nc -l 9999
 $ rarun2 program=/bin/ls connect=localhost:9999

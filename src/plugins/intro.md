@@ -66,6 +66,7 @@ You can use the `?` as value to get the possible values in the associated eval v
 e asm.arch=?   # list assembler/disassembler plugins
 e anal.arch=?  # list analysis plugins
 ```
+
 ## Notes
 
 Note there are some inconsistencies that most likely will be fixed in the future radare2 versions.

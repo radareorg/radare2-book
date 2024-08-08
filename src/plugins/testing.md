@@ -26,9 +26,9 @@ $ r2 -
            0x00000010    1382         add r8, r2
            0x00000012    7f15         ret
 ```
+
 Yay! it works.. and the mandatory oneliner too!
 
 ```bash
 $ r2 -nqamycpu -cwoR -cpd' 10' -
 ```
-

@@ -175,4 +175,3 @@ the `[DATA] mov dword [esp], str.wtf` at `0x804865c` is an instruction of fcn.08
 ```
 
 `test eax, ea;je 0x804867b` will jump to `leave; ret`, which forever skips the str.wtf part. only use `aa` to analyze this binary can display the whole function.
-

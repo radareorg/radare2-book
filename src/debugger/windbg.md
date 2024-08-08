@@ -45,7 +45,9 @@ In case of VMWare
 	[_/tmp/winkd.pipe________]
 	From: Server To: Virtual Machine
 ```
+
 Configure the VirtualBox Machine like this:
+
 ```
     Preferences -> Serial Ports -> Port 1
 
@@ -55,7 +57,9 @@ Configure the VirtualBox Machine like this:
                  [v] Create Pipe
     Port/File Path: [_/tmp/winkd.pipe____]
 ```
+
 Or just spawn the VM with qemu like this:
+
 ```
 $ qemu-system-x86_64 -chardev socket,id=serial0,\
      path=/tmp/winkd.pipe,nowait,server \
@@ -70,9 +74,11 @@ Enable KD over network (KDNet) on Windows 7 or later likes this:
 bcdedit /debug on
 bcdedit /dbgsettings net hostip:w.x.y.z port:n
 ```
+
 Starting from Windows 8 there is no way to enforce debugging
 for every boot, but it is possible to always show the advanced boot options,
 which allows to enable kernel debugging:
+
 ```
 bcedit /set {globalsettings} advancedoptions true
 ```
@@ -118,12 +124,14 @@ the target and we will get stuck here:
 ```
 
 In order to skip that trap we will need to change eip and run 'dc' twice:
+
 ```
 dr eip=eip+1
 dc
 dr eip=eip+1
 dc
 ```
+
 Now the Windows VM will be interactive again. We will need to kill r2 and
 attach again to get back to control the kernel.
 
@@ -140,7 +148,7 @@ local and remote user and kernel mode debugging.
 You can use the debugging DLLs included on Windows or get the latest version from Microsoft's [download page](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/debugger-download-tools) (recommended).
 
 > You cannot use DLLs from the Microsoft Store's `WinDbg Preview` app folder directly as they are not marked as executable for normal users.
-
+>
 > radare2 will try to load `dbgeng.dll` from the `_NT_DEBUGGER_EXTENSION_PATH` environment variable before using Windows' default library search path.
 
 #### Using the plugin
@@ -150,12 +158,15 @@ To use the `windbg` plugin, pass the same command-line options as you would for 
 ```
 > r2 -d "windbg://-remote tcp:server=Server,port=Socket"
 ```
+
 ```
 > r2 -d "windbg://MyProgram.exe \"my arg\""
 ```
+
 ```
 > r2 -d "windbg://-k net:port=<n>,key=<MyKey>"
 ```
+
 ```
 > r2 -d "windbg://-z MyDumpFile.dmp"
 ```

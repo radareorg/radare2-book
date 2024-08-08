@@ -8,6 +8,7 @@ Resize the file using the `r` command. It accepts a numeric argument. A positive
 r 1024      ; resize the file to 1024 bytes
 r -10 @ 33  ; strip 10 bytes at offset 33
 ```
+
 Write bytes using the `w` command. It accepts multiple input formats like inline assembly, endian-friendly dwords, files, hexpair files, wide strings:
 
 ```

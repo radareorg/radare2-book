@@ -22,6 +22,7 @@ j0X4PX0PZHf5sOf5A0PRXRj0X40hXXshXf5wwPj0X4050binHPTXRQSPTUVWaPYS4J
 ```
 
 Wen can compare the changes as disassembly like this:
+
 ```
 $ radiff2 -D 5 6
   push 0x30
@@ -40,5 +41,3 @@ So we can see that the second file added an extra `push rax + pop rax` which is 
 If you are looking for some more advanced bindiffing tool for code you may want to have a look at the `r2diaphora` and the zignatures features under the `z` command in the radare2 shell.
 
 It's also possible to compare the changes between two functions using the `-g` flag, but you'll need to analize both binaries using the `-A` flag, and tell the symbol name as target.
-
-

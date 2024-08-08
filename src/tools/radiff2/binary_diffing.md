@@ -1,8 +1,9 @@
 ### Binary Diffing
 
-This section is based on the http://radare.today article "[binary diffing](https://radareorg.github.io/blog/posts/binary-diffing/)"
+This section is based on the <https://radare.today> article "[binary diffing](https://radareorg.github.io/blog/posts/binary-diffing/)"
 
 Without any parameters, `radiff2` by default shows what bytes are changed and their corresponding offsets:
+
 ```
 $ radiff2 genuine cracked
 0x000081e0 85c00f94c0 => 9090909090 0x000081e0
@@ -12,9 +13,11 @@ $ rasm2 -d 85c00f94c0
 test eax, eax
 sete al
 ```
+
 Notice how the two jumps are nop'ed.
 
 For bulk processing, you may want to have a higher-level overview of differences. This is why radare2 is able to compute the distance and the percentage of similarity between two files with the `-s` option:
+
 ```
 $ radiff2 -s /bin/true /bin/false
 similarity: 0.97
@@ -22,6 +25,7 @@ distance: 743
 ```
 
 If you want more concrete data, it's also possible to count the differences, with the `-c` option:
+
 ```
 $ radiff2 -c genuine cracked
 2
@@ -39,8 +43,10 @@ $ radiff2 -C /bin/false /bin/true
   fcn.000045e0   24 0x45e0 | UNMATCH  (0.916667) | 0x45f0    24 fcn.000045f0
   ...
 ```
+
 Moreover, we can ask radiff2 to perform analysis first - adding `-A` option will run `aaa` on the binaries.
 And we can specify binaries architecture for this analysis too using
+
 ```
 $ radiff2 -AC -a x86 /bin/true /bin/false | grep UNMATCH
 [x] Analyze all flags starting with sym. and entry0 (aa)

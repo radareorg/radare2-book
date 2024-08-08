@@ -7,6 +7,7 @@ are fluent in C. For various reasons it might be easier to implement it out of t
 will need to create single C file, called `asm_mycpu.c` and makefile for it.
 
 The key thing of RAsm plugin is a structure
+
 ```c
 RAsmPlugin r_asm_plugin_mycpu = {
 	.name = "mycpu",
@@ -97,6 +98,7 @@ R_API RLibStruct radare_plugin = {
 ```
 
 After compiling radare2 will list this plugin in the output:
+
 ```
 _d__  _8_32      mycpu        LGPL3   MYCPU
 ```
@@ -115,13 +117,13 @@ List of affected files:
 Check out how the NIOS II CPU disassembly plugin was implemented by reading those commits:
 
 Implement RAsm plugin:
-https://github.com/radareorg/radare2/commit/933dc0ef6ddfe44c88bbb261165bf8f8b531476b
+<https://github.com/radareorg/radare2/commit/933dc0ef6ddfe44c88bbb261165bf8f8b531476b>
 
 Implement RAnal plugin:
-https://github.com/radareorg/radare2/commit/ad430f0d52fbe933e0830c49ee607e9b0e4ac8f2
+<https://github.com/radareorg/radare2/commit/ad430f0d52fbe933e0830c49ee607e9b0e4ac8f2>
 
 ### Implementing a new pseudo architecture
 
 This is an simple plugin for z80 that you may use as example:
 
-https://github.com/radareorg/radare2/commit/8ff6a92f65331cf8ad74cd0f44a60c258b137a06
+<https://github.com/radareorg/radare2/commit/8ff6a92f65331cf8ad74cd0f44a60c258b137a06>

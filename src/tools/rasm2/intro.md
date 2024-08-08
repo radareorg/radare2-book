@@ -2,13 +2,13 @@
 
 The command-line assembler and disassembler that is part of the radare2 framework. It supports a wide range of architectures and can be used independently of the main radare2 tool. Key features include:
 
-- Multi-architecture support: Can handle numerous architectures including x86, x86-64, ARM, MIPS, PowerPC, SPARC, and many others.
-- Bi-directional operation: Functions as both an assembler (converting human-readable assembly code to machine code) and a disassembler (converting machine code back to assembly).
-- Flexible input/output: Accepts input as hexadecimal strings, raw binary files, or text files containing assembly code.
-- Shellcode generation: Useful for security research and exploit development.
-- Inline assembly: Allows for quick assembly of individual instructions or small code snippets.
-- Syntax highlighting: Provides colored output for better readability when disassembling.
-- Plugins: Supports architecture-specific plugins for extended functionality.
+* Multi-architecture support: Can handle numerous architectures including x86, x86-64, ARM, MIPS, PowerPC, SPARC, and many others.
+* Bi-directional operation: Functions as both an assembler (converting human-readable assembly code to machine code) and a disassembler (converting machine code back to assembly).
+* Flexible input/output: Accepts input as hexadecimal strings, raw binary files, or text files containing assembly code.
+* Shellcode generation: Useful for security research and exploit development.
+* Inline assembly: Allows for quick assembly of individual instructions or small code snippets.
+* Syntax highlighting: Provides colored output for better readability when disassembling.
+* Plugins: Supports architecture-specific plugins for extended functionality.
 
 ### Help
 

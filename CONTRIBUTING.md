@@ -16,9 +16,9 @@ Unofficial translations or third party books are more than welcome, but in this 
 
 ### Gender Language
 
-We don't discriminate users by it's gender, race, age or beliefs. 
+We don't discriminate users by it's gender, race, age or beliefs.
 
-So for example, avoid the use of gender-specific when writing instructions or explaning actions. (Use *they* instead of *he/she*)
+So for example, avoid the use of gender-specific when writing instructions or explaning actions. (Use _they_ instead of _he/she_)
 
 ### AI and Language Models
 

@@ -8,56 +8,56 @@ that:
 [0x00400c63]>
 ```
 
-> ***r2 tip:*** You can go to any offset, flag, expression, etc. in the
-> executable using the *s* command (seek). You can use references, like *$$*
-> (current offset), you can undo (*s-*) or redo (*s+*) seeks, search strings
-> (*s/ [string]*) or hex values (*s/x 4142*), and a lot of other useful stuff.
-> Make sure to check out *s?*!
+> _**r2 tip:**_ You can go to any offset, flag, expression, etc. in the
+> executable using the _s_ command (seek). You can use references, like _$$_
+> (current offset), you can undo (_s-_) or redo (_s+_) seeks, search strings
+> (_s/ [string]_) or hex values (_s/x 4142_), and a lot of other useful stuff.
+> Make sure to check out _s?_!
 
-Now that we are at the beginning of the main function, we could use *p* to show
-a disassembly (*pd*, *pdf*), but r2 can do something much cooler: it has a
+Now that we are at the beginning of the main function, we could use _p_ to show
+a disassembly (_pd_, _pdf_), but r2 can do something much cooler: it has a
 visual mode, and it can display graphs similar to IDA, but way cooler, since
 they are ASCII-art graphs :)
 
-> ***r2 tip:*** The command family *p* is used to print stuff. For example it can
-> show disassembly (*pd*), disassembly of the current function (*pdf*), print
-> strings (*ps*), hexdump (*px*), base64 encode/decode data (*p6e*, *p6d*), or
-> print raw bytes (*pr*) so you can for example dump parts of the binary to other
-> files. There are many more functionalities, check *?*!
+> _**r2 tip:**_ The command family _p_ is used to print stuff. For example it can
+> show disassembly (_pd_), disassembly of the current function (_pdf_), print
+> strings (_ps_), hexdump (_px_), base64 encode/decode data (_p6e_, _p6d_), or
+> print raw bytes (_pr_) so you can for example dump parts of the binary to other
+> files. There are many more functionalities, check _?_!
 
 R2 also has a minimap view which is incredibly useful for getting an overall
 look at a function:
 
 ![main functions's minimap](img/main/main_minimap.png)
 
-> ***r2 tip:*** With command *V* you can enter the so-called visual mode, which
-> has several views. You can switch between them using *p* and *P*. The graph
-> view can be displayed by hitting *V* in visual mode (or using *VV* at the
+> _**r2 tip:**_ With command _V_ you can enter the so-called visual mode, which
+> has several views. You can switch between them using _p_ and _P_. The graph
+> view can be displayed by hitting _V_ in visual mode (or using _VV_ at the
 > prompt).
 >
-> Hitting *p* in graph view will bring up the minimap. It displays the
+> Hitting _p_ in graph view will bring up the minimap. It displays the
 > basic blocks and the connections between them in the current function, and it
 > also shows the disassembly of the currently selected block (marked with @@@@@
 > on the minimap). You can select the next or the previous block using the
 > \*\<TAB\>\* and the \*\<SHIFT\>\<TAB\>\* keys respectively. You can also
-> select the true or the false branches using the *t* and the *f* keys.
+> select the true or the false branches using the _t_ and the _f_ keys.
 >
-> It is possible to bring up the prompt in visual mode using the *:* key, and
-> you can use *o* to seek.
+> It is possible to bring up the prompt in visual mode using the _:_ key, and
+> you can use _o_ to seek.
 
 Lets read main node-by-node! The first block looks like this:
 
 ![main bb-0c63](img/main/bb-0c63.png)
 
 We can see that the program reads a word (2 bytes) into the local variable named
-*local_10_6*, and than compares it to 0xbb8. That's 3000 in decimal:
+_local_10_6_, and than compares it to 0xbb8. That's 3000 in decimal:
 
 ```
 [0x00400c63]> ? 0xbb8
 3000 0xbb8 05670 2.9K 0000:0bb8 3000 10111000 3000.0 0.000000f 0.000000
 ```
 
-> ***r2 tip***: yep, *?* will evaluate expressions, and print the result in
+> _**r2 tip**_: yep, _?_ will evaluate expressions, and print the result in
 > various formats.
 
 If the value is greater than 3000, then it will be forced to be 3000:
@@ -69,23 +69,23 @@ There are a few things happening in the next block:
 ![main bb-0cac](img/main/bb-0cac.png)
 
 First, the "Size of data: " message we saw when we run the program is printed.
-So now we know that the local variable *local_10_6* is the size of the input
+So now we know that the local variable _local_10_6_ is the size of the input
 data - so lets name it accordingly (remember, you can open the r2 shell from
-visual mode using the *:* key!):
+visual mode using the _:_ key!):
 
 ```
 :> afvn local_10_6 input_size
 ```
 
-> ***r2 tip***: The *af* command family is used to analyze functions. This
+> _**r2 tip**_: The _af_ command family is used to analyze functions. This
 > includes manipulating arguments and local variables too, which is accessible
-> via the *afv* commands. You can list function arguments (*afa*),  local
-> variables (*afv*), or you can even rename them (*afan*, *afvn*). Of course
+> via the _afv_ commands. You can list function arguments (_afa_),  local
+> variables (_afv_), or you can even rename them (_afan_, _afvn_). Of course
 > there are lots of other features too - as usual: use the "?", Luke!
 
-After this an *input_size* bytes long memory chunk is allocated, and filled with
+After this an _input_size_ bytes long memory chunk is allocated, and filled with
 data from the standard input. The address of this memory chunk is stored in
-*local_10* - time to use *afvn* again:
+_local_10_ - time to use _afvn_ again:
 
 ```
 :> afvn local_10 input_data
@@ -110,10 +110,10 @@ Since it probably will be important later on, we should label it:
 :> f sym.memory 0x200 0x602120
 ```
 
-> ***r2 tip***: Flags can be managed using the *f* command family. We've just
+> _**r2 tip**_: Flags can be managed using the _f_ command family. We've just
 > added the flag sym.memory to a 0x200 bytes long memory area at 0x602120. It is
-> also possible to remove (*f-name*), rename (*fr [old] [new]*), add comment
-> (*fC [name] [cmt]*) or even color (*fc [name] [color]*) flags.
+> also possible to remove (_f-name_), rename (_fr [old] [new]_), add comment
+> (_fC [name] [cmt]_) or even color (_fc [name] [color]_) flags.
 
 While we are here, we should also declare that memory chunk as data, so it will
 show up as a hexdump in disassembly view:
@@ -122,10 +122,10 @@ show up as a hexdump in disassembly view:
 :> Cd 0x200 @ sym.memory
 ```
 
-> ***r2 tip***: The command family *C* is used to manage metadata. You can set
-> (*CC*) or edit (*CC*) comments, declare memory areas as data (*Cd*), strings
-> (*Cs*), etc. These commands can also be issued via a menu in visual mode
-> invoked by pressing *d*.
+> _**r2 tip**_: The command family _C_ is used to manage metadata. You can set
+> (_CC_) or edit (_CC_) comments, declare memory areas as data (_Cd_), strings
+> (_Cs_), etc. These commands can also be issued via a menu in visual mode
+> invoked by pressing _d_.
 
 The only remaining thing in this block is a function call to 0x400a45 with the
 input data as an argument. The function's return value is compared to "*", and
@@ -134,8 +134,8 @@ a conditional jump is executed depending on the result.
 Earlier I told you that this crackme is probably based on a virtual machine.
 Well, with that information in mind, one can guess that this function will be
 the VM's main loop, and the input data is the instructions the VM will execute.
-Based on this hunch, I've named this function *vmloop*, and renamed
-*input_data* to *bytecode* and *input_size* to *bytecode_length*. This is not
+Based on this hunch, I've named this function _vmloop_, and renamed
+_input_data_ to _bytecode_ and _input_size_ to _bytecode_length_. This is not
 really necessary in a small project like this, but it's a good practice to name
 stuff according to their purpose (just like when you are writing programs).
 
@@ -145,7 +145,7 @@ stuff according to their purpose (just like when you are writing programs).
 :> afvn input_data bytecode
 ```
 
-> ***r2 tip***: The *af* command is used to analyze a function with a given name
+> _**r2 tip**_: The _af_ command is used to analyze a function with a given name
 > at the given address. The other two commands should be familiar from earlier.
 
 After renaming local variables, flagging that memory area, and renaming the VM
@@ -153,13 +153,13 @@ loop function the disassembly looks like this:
 
 ![main bb-0cac_meta](img/main/bb-0cac_meta.png)
 
-So, back to that conditional jump. If *vmloop* returns anything else than "*",
+So, back to that conditional jump. If _vmloop_ returns anything else than "*",
 the program just exits without giving us our flag. Obviously we don't want that,
 so we follow the false branch.
 
 ![main bb-0d1d](img/main/bb-0d1d.png)
 
-Now we see that a string in that 512 bytes memory area (*sym.memory*) gets
+Now we see that a string in that 512 bytes memory area (_sym.memory_) gets
 compared to "Such VM! MuCH reV3rse!". If they are not equal, the program prints
 the bytecode, and exits:
 
@@ -168,28 +168,28 @@ the bytecode, and exits:
 OK, so now we know that we have to supply a bytecode that will generate that
 string when executed. As we can see on the minimap, there are still a few more
 branches ahead, which probably means more conditions to meet. Lets investigate
-them before we delve into *vmloop*!
+them before we delve into _vmloop_!
 
 If you take a look at the minimap of the whole function, you can probably
-recognize that there is some kind of loop starting at block *[_0d34_]*, and it
+recognize that there is some kind of loop starting at block _[_0d34_]_, and it
 involves the following nodes:
 
-- [_0d34_]
-- [_0d65_]
-- [_0d3d_]
-- [_0d61_]
+* [_0d34_]
+* [_0d65_]
+* [_0d3d_]
+* [_0d61_]
 
 Here are the assembly listings for those blocks. The first one puts 0 into local
-variable *local_10_4*:
+variable _local_10_4_:
 
 ![main bb-0d34](img/main/bb-0d34.png)
 
-And this one compares *local_10_4* to 8, and executing a conditional jump based
+And this one compares _local_10_4_ to 8, and executing a conditional jump based
 on the result:
 
 ![main bb-0d65](img/main/bb-0d65.png)
 
-It's pretty obvious that *local_10_4* is the loop counter, so lets name it
+It's pretty obvious that _local_10_4_ is the loop counter, so lets name it
 accordingly:
 
 ```
@@ -239,7 +239,7 @@ directly in the disassembly, but r2 displays them as comments:
 
 ![main bb-0d6b_meta](img/main/bb-0d6b_meta.png)
 
-If *sym.good_if_ne_zero* is zero, we get a message ("Your getting closer!"), and
+If _sym.good_if_ne_zero_ is zero, we get a message ("Your getting closer!"), and
 then the program exits. If it is non-zero, we move to the last check:
 
 ![main bb-0d75](img/main/bb-0d75.png)
@@ -261,12 +261,12 @@ the program reads a bytecode from the standard input, and feeds it to a virtual
 machine. After VM execution, the program's state have to satisfy these
 conditions in order to reach the goodboy code:
 
-- *vmloop*'s return value has to be "*"
-- *sym.memory* has to contain the string "Such VM! MuCH reV3rse!"
-- all 9 elements of *sym.instr_dirty* array should not be zero (probably means
+* _vmloop_'s return value has to be "*"
+* _sym.memory_ has to contain the string "Such VM! MuCH reV3rse!"
+* all 9 elements of _sym.instr_dirty_ array should not be zero (probably means
   that all instructions had to be used at least once)
-- *sym.good_if_ne_zero* should not be zero
-- *sym.good_if_le_9* has to be lesser or equal to 9
+* _sym.good_if_ne_zero_ should not be zero
+* _sym.good_if_le_9_ has to be lesser or equal to 9
 
 This concludes our analysis of the main function, we can now move on to the VM
 itself.

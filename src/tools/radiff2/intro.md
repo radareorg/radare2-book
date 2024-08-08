@@ -57,7 +57,6 @@ Graph Output formats: (-m [mode])
   i          Interactive ascii art
 ```
 
-
 ### Practical examples
 
 Here are a few practical examples of how to use radiff2:

@@ -14,7 +14,7 @@ Because this writeup aims to show some of r2's features besides how the crackmes
 can be solved, I will explain every r2 command I use in blockquote paragraphs
 like this one:
 
-> ***r2 tip:*** Always use ? or -h to get more information!
+> _**r2 tip:**_ Always use ? or -h to get more information!
 
 If you know r2, and just interested in the crackme, feel free to skip those
 parts! Also keep in mind please, that because of this tutorial style I'm going
@@ -70,7 +70,7 @@ use the git version!
 
 Some highly recommended reading materials:
 
-- [Cheatsheet by pwntester](https://github.com/pwntester/cheatsheets/blob/master/radare2.md)
-- [Radare2 Book](https://www.gitbook.com/book/radareorg/radare2-book/details)
-- [Radare2 Blog](http://radare.today)
-- [Radare2 Wiki](https://github.com/radareorg/radare2/wiki)
+* [Cheatsheet by pwntester](https://github.com/pwntester/cheatsheets/blob/master/radare2.md)
+* [Radare2 Book](https://www.gitbook.com/book/radareorg/radare2-book/details)
+* [Radare2 Blog](https://radare.today)
+* [Radare2 Wiki](https://github.com/radareorg/radare2/wiki)

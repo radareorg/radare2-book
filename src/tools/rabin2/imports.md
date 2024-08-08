@@ -31,4 +31,3 @@ nth vaddr      bind   type   lib name
 ...
 
 ```
-

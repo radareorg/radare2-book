@@ -74,6 +74,7 @@ Usage: rax2 [options] [expr ...]
 Some examples:
 
 Calculator:
+
 ```sh
 $ rax2 3+0x80
 0x83
@@ -82,13 +83,16 @@ $ rax2 -d "1<<8"
 ```
 
 Base conversion:
+
 ```sh
 $ rax2 '=2' 73303325
 100010111101000010100011101b
 ```
+
 The single quote for `'=2'` is not mandatory for bash but is necessary for some shell like zsh.
 
 Conversion in hex string
+
 ```sh
 $ rax2 -s 4142
 AB
@@ -99,6 +103,7 @@ $ rax2 -S < bin.foo
 ```
 
 Endianness conversion:
+
 ```sh
 $ rax2 -e 33
 0x21000000
@@ -107,12 +112,14 @@ $ rax2 -e 0x21000000
 ```
 
 Base64 decoding
+
 ```sh
 $ rax2 -D ZQBlAA== | rax2 -S
 65006500
 ```
 
 Randomart:
+
 ```sh
 $ rax2 -K 90203010
 +--[0x10302090]---+

@@ -77,6 +77,7 @@ Using `dmm` we can "List modules (libraries, binaries loaded in memory)", this i
 0x55ca23a4a000 /tmp/helloworld
 0x7fa80a19d000 /usr/lib/ld-2.27.so
 ```
+
 > Note that the output of `dm` subcommands, and `dmm` specifically, might be different in various systems and different binaries.
 
 We can see that along with our `helloworld` binary itself, another library was loaded which is `ld-2.27.so`. We don't see `libc` yet and this is because radare2 breaks before `libc` is loaded to memory. Let's use `dcu` (**d**ebug **c**ontinue **u**ntil) to execute our program until the entry point of the program, which radare flags as `entry0`.

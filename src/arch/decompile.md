@@ -128,7 +128,7 @@ The plugin can be configured with the `e r2ghidra.` variables:
 [0x00000000]>
 ```
 
-In this example we see how `pdgo` works, displaying the 
+In this example we see how `pdgo` works, displaying the
 
 ```
 [0x100003a48]> pdgo

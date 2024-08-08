@@ -26,7 +26,7 @@ Breakpoint set.
 
 Or
 
-``` 
+```
 [0x7ffe885c1164]> dbW WM_KEYDOWN 0x002c048a
 Breakpoint set.
 ```

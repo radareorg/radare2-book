@@ -21,6 +21,7 @@ nth paddr      vaddr      len size section type  string
 
 With the `-zr` option, this information is represented as a radare2 commands list. It can be used in a radare2 session to automatically create a flag space called "strings" pre-populated with flags for all strings found by rabin2.
 Furthermore, this script will mark corresponding byte ranges as strings instead of code.
+
 ```
 $ rabin2 -zr /bin/ls | head
 fs stringsf str.dev_ino_pop 12 @ 0x000160f8

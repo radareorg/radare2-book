@@ -1,6 +1,6 @@
 ## Command Syntax
 
-In a single line we can describe the syntax of the radare2 commands like this: 
+In a single line we can describe the syntax of the radare2 commands like this:
 
 ```
  .- ignore special characters, same as full command quotes "?e hi > ho"
@@ -97,7 +97,7 @@ The standard UNIX pipe `|` is also available in the radare2 shell. You can use i
 
 The `~` is a special character that is used by the console filtering features. It can be chained multiple times to perform multiple filters like grepping, xml or json indentation, head/tail operations, select column of output, etc
 
-You may find that `~` is very similar to using the unix `|` pipe, but this 
+You may find that `~` is very similar to using the unix `|` pipe, but this
 
 As you may expect appending a question mark will display the help message.
 

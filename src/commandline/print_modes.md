@@ -216,11 +216,14 @@ Use triple-question-mark `pf???` to get some examples using print format strings
 | pf.foo rr (eax)reg1 (eip)reg2                Create object referencing to register values
 | pf tt troll plop                             print time stamps with labels troll and plop
 ```
+
 Some examples are below:
+
 ```
 [0x4A13B8C0]> pf i
 0x00404888 = 837634441
 ```
+
 ```
 [0x4A13B8C0]> pf
 0x00404888 = 837634432.000000

@@ -26,6 +26,7 @@ Notice that the top of the panel contains the command which is used, for example
 ## Getting Help
 
 To see help on all key bindings defined for visual mode, press `?`:
+
 ```
 Visual mode help:
  ?        show this help

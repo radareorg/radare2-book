@@ -4,11 +4,11 @@ Radare2 uses several environment variables to determine where to look for import
 
 This will display information such as:
 
-- The version of radare2 you're using
-- Installation prefix path
-- Locations of various resource directories (e.g. for plugins, scripts, configuration files)
-- File paths for things like the radare2 history file and cache
-- Extensions used for shared libraries on your system
+* The version of radare2 you're using
+* Installation prefix path
+* Locations of various resource directories (e.g. for plugins, scripts, configuration files)
+* File paths for things like the radare2 history file and cache
+* Extensions used for shared libraries on your system
 
 The exact values will depend on your operating system and how radare2 was built and installed. Understanding these variables can be helpful for troubleshooting or customizing your radare2 setup.
 
@@ -60,8 +60,8 @@ Radare2 allows users to customize their experience through configuration files. 
 The main configuration files are typically located in the user's home directory:
 
 * `~/.radare2rc`
-* `~/.config/radare2/radare2rc 
-* `~/.config/radare2/radare2rc.d/ 
+* `~/.config/radare2/radare2rc
+* `~/.config/radare2/radare2rc.d/
 
 An important feature is the `R2_RCFILE` environment variable. This variable allows users to specify a custom path to their radare2 configuration file. By setting this variable, users can override the default locations and use a configuration file from any location on their system.
 
