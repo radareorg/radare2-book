@@ -11,8 +11,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Linting
-        run: sys/lint.sh
+      - name: Linting file references
+        run: sys/lintrefs.sh
+      - name: Linting markdown format
+        uses: DavidAnson/markdownlint-cli2-action@v16
+        with:
+          globs: |
+            *.md
+            !r2book.md
+            src/**/*.md
       - name: Install dependencies
         run: |
           sudo apt-get --assume-yes update

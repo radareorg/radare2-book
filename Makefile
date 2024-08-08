@@ -1,6 +1,6 @@
 all: pdf epub
 
-.PHONY: epub pdf gmi texi info one
+.PHONY: lint lint-fix epub pdf gmi texi info one
 
 # CHAPTERS=$(shell find src -iname *.md)
 CHAPTERS=$(shell grep -Eoi '\([^\)]+' src/SUMMARY.md | sed -e 's,^.,src/,')
@@ -51,3 +51,16 @@ gmi:
 	mv .a.a gmi/SUMMARY.gmi
 	ln -v gmi/SUMMARY.gmi gmi/index.gmi
 	tar -czf r2book-gmi.tar.gz -C gmi .
+
+# Linting
+MDLINT_GLOBS='*.md' 'src/**/*.md' '!r2book.md'
+node_modules/.bin/markdownlint-cli2:
+	npm install --no-save markdownlint-cli2
+
+lint: node_modules/.bin/markdownlint-cli2
+	sys/lintrefs.sh
+	node_modules/.bin/markdownlint-cli2 $(MDLINT_GLOBS)
+
+lint-fix: node_modules/.bin/markdownlint-cli2
+	node_modules/.bin/markdownlint-cli2 $(MDLINT_GLOBS) --fix
+	sys/lintrefs.sh

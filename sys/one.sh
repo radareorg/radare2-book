@@ -2,4 +2,4 @@
 
 cd $(dirname "$0")/..
 
-cat `sys/lint.sh`
+cat `sys/lintrefs.sh`
