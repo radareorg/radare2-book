@@ -8,3 +8,11 @@ function Link(el)
   end
   return el
 end
+
+-- Fix HTML new lines
+function RawInline(raw)
+  if raw.format == 'html' and raw.text == '<br>' then
+    return pandoc.LineBreak()
+  end
+  return raw
+end
