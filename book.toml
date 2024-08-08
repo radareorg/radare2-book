@@ -13,7 +13,7 @@ create-missing = false
 default-theme = "light"
 preferred-dark-theme = "ayu"
 git-repository-url = "https://github.com/radareorg/radare2-book"
-edit-url-template = "https://github.com/radareorg/radare2-book/edit/master/src/{path}"
+edit-url-template = "https://github.com/radareorg/radare2-book/edit/master/{path}"
 site-url = "/"
 
 [output.html.search]
