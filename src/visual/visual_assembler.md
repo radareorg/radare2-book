@@ -4,11 +4,11 @@ You can use Visual Mode to assemble code pressing the `A` key inside the `V`isua
 
 For example let's replace the `push` by a `jmp`:
 
-![Before](../pics/before.png)
+![Before](before.png)
 
 Notice the preview of the disassembly and arrows:
 
-![After](../pics/after.png)
+![After](after.png)
 
 In order to patch the file you must open it in read-write mode (`r2 -w`), but if you are inside radare2, you can reopen the file in rw mode with `oo+`.
 

@@ -4,7 +4,7 @@ Below is a list of the most frequently used configuration variables. You can get
 
 The `e??` command to get help on all the evaluable configuration variables of radare2. As long as the output of this command is pretty large you can combine it with the internal grep `~` to filter for what you are looking for:
 
-![e??~color](../pics/e--color.png)
+![e??~color](e--color.png)
 
 The Visual mode has an eval browser that is accessible through the `Vbe` command.
 
