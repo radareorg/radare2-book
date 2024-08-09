@@ -86,7 +86,7 @@
 * [Disassembling](arch/intro.md)
   * [Decompilers](arch/decompile.md)
   * [Metadata](arch/metadata.md)
-  * [Architectures](arch/intro.md)
+  * [Architectures](arch/plugins.md)
   * [Notes on 8051](arch/8051.md)
 * [Analysis](analysis/intro.md)
   * [Code Analysis](analysis/code_analysis.md)
