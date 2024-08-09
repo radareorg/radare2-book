@@ -1,12 +1,12 @@
 all: pdf epub
 
-.PHONY: all lint lint-fix epub pdf gmi texi info one
+.PHONY: all lint lint-fix epub pdf gmi texi info one one-online
 
 # CHAPTERS=$(shell find src -iname *.md)
 CHAPTERS=$(shell grep -Eoi '\([^\)]+' src/SUMMARY.md | sed -e 's,^.,src/,')
 
 # Global pandoc arguments
-PANDOC_OPTIONS+=-f markdown+rebase_relative_paths
+PANDOC_OPTIONS+=--from markdown+rebase_relative_paths
 PANDOC_OPTIONS+=--metadata-file=pandoc/metadata.yaml
 PANDOC_OPTIONS+=--lua-filter=pandoc/filter.lua
 
@@ -17,7 +17,14 @@ PANDOC_PDF_OPTIONS+=-H pandoc/header.tex --listings
 PANDOC_PDF_OPTIONS+=-B pandoc/cover.tex -V title:
 
 # MD specific pandoc arguments
+PANDOC_MD_OPTIONS+=--to markdown+backtick_code_blocks
 PANDOC_MD_OPTIONS+=--wrap=preserve
+
+# MD external paths
+GIT_COMMIT:=$(shell git rev-parse HEAD)
+URL_PREFIX:=https://github.com/radareorg/radare2-book
+URL_MD_PREFIX:=$(URL_PREFIX)/blob/$(GIT_COMMIT)/
+URL_IMAGE_PREFIX:=$(URL_PREFIX)/raw/$(GIT_COMMIT)/
 
 pdf:
 	pandoc $(CHAPTERS) $(PANDOC_OPTIONS) $(PANDOC_PDF_OPTIONS) -o r2book.pdf
@@ -35,6 +42,12 @@ info: texi
 
 one:
 	pandoc $(CHAPTERS) $(PANDOC_OPTIONS) $(PANDOC_MD_OPTIONS) -o r2book.md
+
+one-online: one
+	sed -i -E \
+		-e 's,\((src/[0-9A-Za-z./_-]+.md)\),($(URL_MD_PREFIX)\1),g' \
+		-e 's,\(((src|images)/[0-9A-Za-z./_-]+.(png|jpg))\),($(URL_IMAGE_PREFIX)\1),g' \
+		r2book.md
 
 GOPATH?=$(HOME)/go
 GOBIN?=$(GOPATH)/bin
