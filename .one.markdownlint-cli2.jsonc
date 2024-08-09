@@ -1,0 +1,41 @@
+// Configuration for single markdown output for markdownlint (DavidAnson)
+{
+  // Ignore files referenced by .gitignore (only valid at root)
+  "gitignore": false,
+
+  // Configure linting
+  // https://github.com/DavidAnson/markdownlint/blob/main/schema/.markdownlint.jsonc
+  "config": {
+    // Default state for all rules
+    "default": false,
+
+    // Path to configuration file to extend
+    "extends": null,
+
+    // MD001/heading-increment : Heading levels should only increment by one level at a time : https://github.com/DavidAnson/markdownlint/blob/v0.34.0/doc/md001.md
+    "MD001": true,
+
+    // MD024/no-duplicate-heading : Multiple headings with the same content : https://github.com/DavidAnson/markdownlint/blob/v0.34.0/doc/md024.md
+    "MD024": {
+      // Only check sibling headings
+      "siblings_only": true
+    },
+
+    // MD051/link-fragments : Link fragments should be valid : https://github.com/DavidAnson/markdownlint/blob/v0.34.0/doc/md051.md
+    "MD051": true,
+
+    // MD052/reference-links-images : Reference links and images should use a label that is defined : https://github.com/DavidAnson/markdownlint/blob/v0.34.0/doc/md052.md
+    "MD052": {
+      // Include shortcut syntax
+      "shortcut_syntax": false
+    },
+
+    // MD053/link-image-reference-definitions : Link and image reference definitions should be needed : https://github.com/DavidAnson/markdownlint/blob/v0.34.0/doc/md053.md
+    "MD053": {
+      // Ignored definitions
+      "ignored_definitions": [
+        "//"
+      ]
+    }
+  }
+}
