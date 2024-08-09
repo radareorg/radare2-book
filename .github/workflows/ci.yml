@@ -26,7 +26,7 @@ jobs:
           sudo apt-get --assume-yes install pandoc texlive-xetex texinfo
           go install github.com/n0x1m/md2gmi@latest
       - name: Build ebooks
-        run: make pdf epub info gmi one
+        run: make pdf epub info gmi one-online
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
