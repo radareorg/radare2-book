@@ -16,14 +16,23 @@ jobs:
       - name: Linting markdown format
         uses: DavidAnson/markdownlint-cli2-action@v16
         with:
-          globs: |
-            *.md
-            !r2book.md
-            src/**/*.md
-      - name: Install dependencies
+          config: src/.markdownlint.jsonc
+          globs: src/**/*.md
+      - name: Install pandoc
         run: |
           sudo apt-get --assume-yes update
-          sudo apt-get --assume-yes install pandoc texlive-xetex texinfo
+          sudo apt-get --assume-yes install pandoc
+      - name: Build single markdown file
+        run: make one
+      - name: Linting single markdown format
+        uses: DavidAnson/markdownlint-cli2-action@v16
+        with:
+          config: .one.markdownlint-cli2.jsonc
+          globs: r2book.md
+      - name: Install xelatex and md2gmi
+        run: |
+          sudo apt-get --assume-yes update
+          sudo apt-get --assume-yes install texlive-xetex texinfo
           go install github.com/n0x1m/md2gmi@latest
       - name: Build ebooks
         run: make pdf epub info gmi one-online
