@@ -40,6 +40,6 @@ Those magic patterns a defined according to the [file command's magic pattern fo
 -- 0 120eb
 0x00009f64 0 hit0_0 ZIP Zip archive data, at least v2.0 to extract
 0x000120d5 0 hit0_1 End of Zip archive
-```console
+```
 
 It also allows to defined and search with custom pattern files.
