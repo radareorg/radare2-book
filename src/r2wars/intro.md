@@ -6,9 +6,9 @@ The game was originally implemented by pancake as a toy r2pipe.py script in 2016
 
 Years later the game was reimplemented in C# by SkUaTeR and used for the r2wars competitions during r2con. Check the links below:
 
-* https://www.youtube.com/watch?v=PB0AFBqFwGQ
-* https://www.youtube.com/watch?v=i61v8Uvxhqk
-* https://github.com/radareorg/r2wars
+* [r2wars for n00bs (captain banana)](https://www.youtube.com/watch?v=PB0AFBqFwGQ)
+* [Competing at r2con](https://www.youtube.com/watch?v=i61v8Uvxhqk)
+* [r2wars github repository](https://github.com/radareorg/r2wars)
 
 ## How It Works
 
