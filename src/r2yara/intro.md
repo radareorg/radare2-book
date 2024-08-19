@@ -97,4 +97,4 @@ SHA256_Constants
 0x001937e5: yara4.SHA256_Constants_3 : a5dbb5e9
 ```
 
-As soon as a pattern is identified, a flag is created at the pattern address which can be used for further analysis like any other [flags](#commandline-flags).
+As soon as a pattern is identified, a flag is created at the pattern address.
