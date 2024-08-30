@@ -16,11 +16,26 @@ radare2.rabin2 -z /bin/sleep
 
 This way, you can maintain a stable version alongside a development version without conflicts.
 
-But to allow using this radare commands without this prefix, it can be solved either by using shell alias or by adding `/snap/radare2/current/bin` to your `PATH` environment.
-Also if `r2pm` gets used it can also be useful to add the user local prefix `~/.local/share/radare2/prefix/bin`.
-
-So as an example could be somthing like this:
+To allow using radare commands without this prefix, it can be solved by using shell aliases. So as an example could be something like this:
 
 ```sh
-PATH="$HOME/.local/share/radare2/prefix/bin:/snap/radare2/current/bin:$PATH"
+alias r2='radare2.r2'
+alias r2agent='radare2.r2agent'
+alias r2frida-compile='radare2.r2frida-compile'
+alias r2p='radare2.r2p'
+alias r2pm='radare2.r2pm'
+alias r2r='radare2.r2r'
+alias rabin2='radare2.rabin2'
+alias radiff2='radare2.radiff2'
+alias rafind2='radare2.rafind2'
+alias ragg2='radare2.ragg2'
+alias rahash2='radare2.rahash2'
+alias rarun2='radare2.rarun2'
+alias rasign2='radare2.rasign2'
+alias rasm2='radare2.rasm2'
+alias ravc2='radare2.ravc2'
+alias rax2='radare2.rax2'
+alias sleighc='radare2.sleighc'
+alias yara='radare2.yara'
+alias yarac='radare2.yarac'
 ```
