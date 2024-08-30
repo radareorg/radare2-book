@@ -362,8 +362,9 @@ For now, radare2 also allows you to change the maximum basic block size with `an
 dealing with obfuscated code. Beware that some of basic blocks
 control options may disappear in the future in favor of more automated ways to set those.
 
-For some unusual binaries or targets, there is an option `anal.noncode`. Radare2 doesn't try
-to analyze data sections as a code by default. But in some cases - malware, packed binaries,
+For some unusual binaries or targets, there is an option `anal.in=?` that will only analyze executable
+regions by default, but you can force a different section or specify different boundaries. Radare2
+doesn't try to analyze data sections as a code by default. But in some cases - malware, packed binaries,
 binaries for embedded systems, it is often a case. Thus - this option.
 
 #### Reference control
