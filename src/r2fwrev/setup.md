@@ -40,4 +40,3 @@ e cfg.bigendian=true|false
 For example a big endian ARM-Thumb environment can be configured like this:
 
 `$ r2 -a arm -b 16 -e cfg.bigendian=true`
-

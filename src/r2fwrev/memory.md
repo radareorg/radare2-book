@@ -109,7 +109,7 @@ We have already mapped the firmware to the base address using the `-m` commandli
 
 But now we need to create a new map for the RAM. Let's imagine our device have 8MB of ram located at address 0x4000_0000:
 
-```
+```console
 > on malloc://8M 0x40000000
 ```
 
@@ -119,7 +119,7 @@ The second argument tells where this file needs to be mapped in memory.
 
 We can verify that everything worked as expected by using the `om` command like this:
 
-```
+```console
 [0x00000000]> om
 - 2 fd: 4 +0x00000000 0x80000000 - 0x087fffff r-x
 * 1 fd: 3 +0x00000000 0x40000000 - 0x007fffff rwx
@@ -128,7 +128,7 @@ We can verify that everything worked as expected by using the `om` command like 
 
 Naming maps is done with the `omn.` command:
 
-```
+```console
 [0x00000000]> omn. FLASH @ entry0
 [0x00000000]> omn. RAM
 - 2 fd: 4 +0x00000000 0x80000000 - 0x087fffff r-x FLASH
@@ -138,5 +138,9 @@ Naming maps is done with the `omn.` command:
 
 We can change the permissions of each map using the `omp` command but bear in mind that we won't be able to make a page writeable if the underlying file descriptor is read-only.
 
-To write the contents of a file inside a map we may use the `wff` command
+To write the contents of a file inside a map we may use the `wff` command.
 
+```console
+[0x00000000]> wff?
+| wf[fs] -|file  write contents of file at current offset
+```
