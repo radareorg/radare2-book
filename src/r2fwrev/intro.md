@@ -116,7 +116,7 @@ So now we can update our script to use `r2 -m 0x80000000` and set a flag in the 
 
 Flash dumps usually contain more than just code, the memory layout may differ depending on the device and we can find different setups for the MMU depending on the time of execution.
 
-Most of the time the code will run in *real* mode, which means that there are no memory protections or isolated executions of different programs. So we can assume the following blocks to be mapped in memory:
+Most of the time the code will run in real mode, which means that there are no memory protections or isolated executions of different programs. So we can assume the following blocks to be mapped in memory:
 
 * Flash at address zero
 * RAM memory (used for stack and heap)
