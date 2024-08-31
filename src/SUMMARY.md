@@ -134,6 +134,7 @@
 * [R2Frida](r2frida/intro.md)
   * [First Steps](r2frida/first_steps.md)
 * [R2Yara](r2yara/intro.md)
+* [Firmware](r2fwrev/intro.md)
 * [Crackmes](crackmes/intro.md)
   * [IOLI](crackmes/ioli/intro.md)
     * [IOLI 0x00](crackmes/ioli/ioli_0x00.md)
