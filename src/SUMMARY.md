@@ -137,7 +137,7 @@
 * [Firmware Reversing](r2fwrev/intro.md)
   * [Setup](r2fwrev/setup.md)
   * [Memory](r2fwrev/memory.md)
-  * [Devices](r2fwrev/device.md)
+  * [Devices](r2fwrev/devices.md)
 * [Crackmes](crackmes/intro.md)
   * [IOLI](crackmes/ioli/intro.md)
     * [IOLI 0x00](crackmes/ioli/ioli_0x00.md)
