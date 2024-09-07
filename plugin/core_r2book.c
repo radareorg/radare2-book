@@ -70,7 +70,7 @@ static char *indentcode(char *r, int *col) {
 	*r++ = ' ';
 	*r++ = ' ';
 	*r++ = ' ';
-	strcpy (r, Color_YELLOW);
+	strcpy (r, Color_CYAN);
 	int l = strlen (r);
 	r += l;
 	*col += l;
@@ -86,13 +86,21 @@ static char *md2txt(const char *in) {
 	bool spcode = false;
 	while (*in) {
 		if (col == 0 && spcode) {
-			if (!strncmp (in, "    ", 4)) {
+			if (r_str_startswith (in, "    ")) {
 				iscode = spcode = false;
 				strcpy (r, Color_RESET);
 				r += strlen (r);
 			}
 		}
 		switch (*in) {
+		case '#':
+			if (!iscode) {
+				strcpy (r, Color_YELLOW);
+				col += strlen (Color_YELLOW);
+				r += strlen (Color_YELLOW);
+			}
+			*r++ = '#';
+			break;
 		case ' ':
 			if (col == 0 && in[1] == ' ') {
 				const char *arg = r_str_trim_head_ro (in);
@@ -104,15 +112,20 @@ static char *md2txt(const char *in) {
 			}
 			break;
 		case '`':
-			if (col == 0) {
-				if (!strncmp (in, "```", 3)) {
+			if (col < 6) {
+				if (r_str_startswith (in, "```")) {
+					while (*in && *in != '\n') {
+						in++;
+						col = 0;
+					}
 					iscode = !iscode;
-					if (!iscode) {
+					if (iscode) {
+						r = indentcode (r, &col);
+					} else {
 						strcpy (r, Color_RESET);
 						col += strlen (Color_RESET);
 						r += strlen (Color_RESET);
 					}
-					in += 2;
 				} else {
 					*r++ = *in;
 				}
@@ -225,29 +238,44 @@ static void r2book_view(RCore *core, const char *path) {
 
 	char *firstline = NULL;
 	r_cons_enable_mouse (true);
+	r_cons_show_cursor (false);
+
 	while (!stop) {
 		int h, w = r_cons_get_size (&h);
-		char *si = r_str_ansi_crop (index, 0, scroll[0], split - 2, scroll[0] + h - 3);
+		char *si = r_str_ansi_crop (index, 0, scroll[0], split - 2, scroll[0] + h - 2);
 		char *_sb = r_str_wrap (body, w - split - 4);
-		char *sb = r_str_ansi_crop (_sb, 0, scroll[1], w, scroll[1] + h - 1);
+		char *sb = r_str_ansi_crop (_sb, 0, scroll[1], w, scroll[1] + h - 2);
 		free (_sb);
 		if (si && sb) {
+			int i;
 			r_cons_clear00 ();
 			if (col) {
-				r_cons_print ("--- SUMMARY.md -");
+				r_cons_gotoxy (split, 1);
+				r_cons_print (".");
+				for (i = split; i < w; i++) {
+					r_cons_print ("-");
+				}
+				r_cons_gotoxy (split, h);
+				r_cons_print ("'");
+				for (i = split; i < w; i++) {
+					r_cons_print ("-");
+				}
 			} else {
-				r_cons_print ("--[ SUMMARY.md ]");
+				for (i = 0; i < split - 1; i++) {
+					r_cons_print ("-");
+				}
+				r_cons_print (".");
+				r_cons_gotoxy (0, h);
+				for (i = 0; i < split - 1; i++) {
+					r_cons_print ("-");
+				}
+				r_cons_print ("'");
 			}
-			int i;
-			for (i = 16; i < split - 1; i++) {
-				r_cons_print ("-");
-			}
-			r_cons_println (".");
 			sb = r_str_append (sb, Color_RESET);
 			r_cons_printat (sb, split + 2, 2);
 			/// r_cons_print (Color_RESET);
-			r_cons_printat (si, 0, 3);
-			r_cons_line (split, 2, split + 1, h + 1, '|');
+			r_cons_printat (si, 0, 2);
+			r_cons_line (split, 2, split + 1, h, '|');
 		}
 		char *sinl = strchr (si, '*');
 		if (sinl) {
@@ -261,6 +289,7 @@ static void r2book_view(RCore *core, const char *path) {
 		}
 		free (si);
 		free (sb);
+		r_cons_gotoxy (0, 0);
 		r_cons_flush ();
 		int ch = r_cons_readchar ();
 		ch = r_cons_arrow_to_hjkl (ch);
@@ -316,7 +345,7 @@ static void r2book_view(RCore *core, const char *path) {
 			break;
 		case 'G':
 			{
-				int lines = r_str_char_count (col?body:index, '\n');
+				const int lines = r_str_char_count (col? body: index, '\n');
 				scroll[col] = lines - (h / 2);
 			}
 			break;
@@ -326,12 +355,14 @@ static void r2book_view(RCore *core, const char *path) {
 			R_FREE (body);
 			goto reload;
 			break;
+		case '[':
 		case 'h':
 			split--;
-			if (split < 1) {
-				split = 0;
+			if (split < 2) {
+				split = 2;
 			}
 			break;
+		case ']':
 		case 'l':
 			split++;
 			if (split >= w - 2) {
@@ -343,6 +374,9 @@ static void r2book_view(RCore *core, const char *path) {
 			if (split >= w - 2) {
 				split = w - 2;
 			}
+			break;
+		case ' ':
+			scroll[1] += 10;
 			break;
 		case 'j':
 			scroll[col]++;
@@ -416,6 +450,8 @@ static void r2book_view(RCore *core, const char *path) {
 		}
 	}
 	r_cons_enable_mouse (false);
+	r_cons_show_cursor (true);
+	r_cons_clear00 ();
 	free (index);
 	free (body);
 }
