@@ -1,4 +1,4 @@
-/* radare - Copyright 2020 pancake */
+/* radare - Copyright 2020-2024 pancake */
 
 #include <r_types.h>
 #include <r_core.h>
@@ -350,7 +350,8 @@ static void r2book_view(RCore *core, const char *path) {
 				char *files = r_sys_cmd_strf ("cd %s ; find * -iname '*.md' | sed -e 's,.md,,'", R2BOOK_HOME);
 				char *p = r_cons_hud_string (files);
 				// char *p = r_core_cmd_strf (core, "r2book~...");
-				if (p && *p) {
+				if (R_STR_ISNOTEMPTY (p)) {
+					scroll[1] = 0;
 				// 	free (path);	
 					path = p;
 					free (index);
@@ -391,7 +392,7 @@ static int r_cmd_r2book(void *user, const char *input) {
 	} else if (!strncmp (input, "r2book", 6)) {
 		const char *arg = r_str_trim_head_ro (input + 6);
 		if (R_STR_ISEMPTY (arg)) {
-			arg = "intro";
+			arg = "intro/intro";
 		}
 		r2book_view (core, arg);
 		return true;
