@@ -218,9 +218,12 @@ static void r2book_view(RCore *core, const char *path) {
 	int scroll[2] = {0, 0};
 	reload:
 
+	free (index);
 	index = r2book_index_str (core);
+	free (body);
 	body = r2book_body_str (core, path);
 
+	char *firstline = NULL;
 	r_cons_enable_mouse (true);
 	while (!stop) {
 		int h, w = r_cons_get_size (&h);
@@ -241,10 +244,20 @@ static void r2book_view(RCore *core, const char *path) {
 			}
 			r_cons_println (".");
 			sb = r_str_append (sb, Color_RESET);
-			r_cons_printat (sb, split + 2, 1);
+			r_cons_printat (sb, split + 2, 2);
 			/// r_cons_print (Color_RESET);
 			r_cons_printat (si, 0, 3);
 			r_cons_line (split, 2, split + 1, h + 1, '|');
+		}
+		char *sinl = strchr (si, '*');
+		if (sinl) {
+			free (firstline);
+			firstline = strdup (r_str_trim_head_ro (sinl + 1));
+			r_str_ansi_strip (firstline);
+			sinl = strchr (firstline, '\n');
+			if (sinl) {
+				*sinl = 0;
+			}
 		}
 		free (si);
 		free (sb);
@@ -254,6 +267,40 @@ static void r2book_view(RCore *core, const char *path) {
 		switch (ch) {
 		case 9: // TAB
 			col = !col;
+			break;
+		case '\r':
+		case '\n':
+			if (col) {
+				scroll[col]++;
+			} else {
+				char *summary = r_file_slurp (R2BOOK_HOME"/SUMMARY.md", NULL);
+				if (summary) {
+					char *kw = r_str_newf ("[%s", firstline);
+					char *s = strstr (summary, kw);
+					if (s) {
+						char *nl = strchr (s, '\n');
+						if (nl) {
+							*nl = 0;
+						}
+						char *par = strchr (s, '(');
+						if (par) {
+							s = par + 1;
+							par = strstr (s, ".md)");
+							if (par) {
+								*par = 0;
+								scroll[1] = 0;
+								char *p = strdup (s);
+								// free (path);
+								path = p;
+								goto reload;
+							}
+						}
+					}
+				} else {
+					R_LOG_ERROR ("Cannot open summary");
+					r_sys_sleep (1);
+				}
+			}
 			break;
 		case '!':
 			r_sys_cmdf ("echo;cd '%s/..'; PS1='$ ' sh", R2BOOK_HOME);
@@ -275,8 +322,8 @@ static void r2book_view(RCore *core, const char *path) {
 			break;
 		case 'e':
 			edit_page (core, path);
-			free (index);
-			free (body);
+			R_FREE (index);
+			R_FREE (body);
 			goto reload;
 			break;
 		case 'h':
@@ -333,8 +380,8 @@ static void r2book_view(RCore *core, const char *path) {
 					char *ch = strstr (p, ".md:");
 					*ch = 0;
 					path = p;
-					free (index);
-					free (body);
+					R_FREE (index);
+					R_FREE (body);
 					free (files);
 					goto reload;
 				}
@@ -354,8 +401,8 @@ static void r2book_view(RCore *core, const char *path) {
 					scroll[1] = 0;
 				// 	free (path);	
 					path = p;
-					free (index);
-					free (body);
+					R_FREE (index);
+					R_FREE (body);
 					free (files);
 					goto reload;
 				}

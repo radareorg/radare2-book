@@ -11,12 +11,13 @@ CFLAGS+=-g -fPIC
 # CFLAGS+=-fsanitize=address
 
 all:
-	$(CC) $(CFLAGS) $(R2_CFLAGS) $(R2_LDFLAGS) core_r2book.c -shared -o core_r2book.$(EXT_SO)
+	$(CC) $(CFLAGS) $(R2_CFLAGS) $(R2_LDFLAGS) \
+		core_r2book.c -shared -o core_r2book.$(EXT_SO)
 	$(MAKE) install
 
-install:
+user-install install:
 	mkdir -p $(R2_USER_PLUGINS)
 	cp *.$(EXT_SO) $(R2_USER_PLUGINS)
 
-uninstall:
+uninstall user-uninstall:
 	rm -f $(R2_USER_PLUGINS)/core_r2book.$(EXT_SO)
