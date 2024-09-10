@@ -39,3 +39,17 @@ alias sleighc='radare2.sleighc'
 alias yara='radare2.yara'
 alias yarac='radare2.yarac'
 ```
+
+### Iaito Snap
+
+Also **iaito**, as a radare GUI, can be installed using this packaging system.
+
+To install it is required to run the following command:
+
+```sh
+sudo snap install iaito --classic
+```
+
+In the same way radare2 snap include a set of commands, iaito snap also include radare2 commands prefixed with `iaito.` (for example `iaito.r2`, `iaito.rax2`,...).
+This commands can be used from CLI, and allow to use the same environment as iaito GUI.
+But to use radare2 from CLI it is prefered to install and use the main `radare2` snap package.
