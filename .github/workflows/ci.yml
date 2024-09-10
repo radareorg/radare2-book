@@ -3,7 +3,7 @@ name: Create documents with make
 on:
   push:
     branches:
-      - '*'
+      - master
   pull_request:
 
 jobs:
