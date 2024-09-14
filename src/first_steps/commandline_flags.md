@@ -82,7 +82,7 @@ Open a file in write mode and do not parse the headers (raw mode).
 $ r2 -nw file
 ```
 
-Quickly get into the r2 shell opening a 1KB malloc virtual file, handy for testing things. note that a single dash is an alias for malloc://1024
+Quickly get into the r2 shell opening a 512B malloc virtual file, handy for testing things. note that a single dash is an alias for malloc://512
 
 ```console
 $ r2 -
