@@ -41,7 +41,7 @@ It can also be used to find which blocks have changed between more than one samp
 This can be useful when analyzing ram dumps from a virtual machine for example. Use this command for this:
 
 ```console
-$ rahash2 -B 1M -b -a sha256 /bin/ls
+$ rahash2 -B -b 1M -a sha256 /bin/ls
 ```
 
 ### Hashing with rabin2
