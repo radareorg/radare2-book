@@ -9,22 +9,19 @@ Years later the game was reimplemented in C# by SkUaTeR and used for the r2wars 
 * [r2wars for n00bs (captain banana)](https://www.youtube.com/watch?v=PB0AFBqFwGQ)
 * [Competing at r2con](https://www.youtube.com/watch?v=i61v8Uvxhqk)
 * [r2wars github repository](https://github.com/radareorg/r2wars)
+* [Writeup from 2019](https://anisse.astier.eu/r2wars-2019.html)
 
 ## How It Works
 
-The game takes place in a virtual memory space of 1024 bytes (from address 0 to 1023). Bots are written in assembly language for various architectures. They take turns executing one instruction at a time. A bot loses if it:
+The game takes place in a virtual memory space of 1024 bytes (from address 0 to 1023). Bots are written in assembly language for various architectures. They take turns executing one instruction at a time. A bot loses if it tries to access an invalid memory address (outside the 0-1023 range) or executes an invalid instruction. Battles also have a 4000 cycle limit to prevent endless rounds.
 
-Tries to access an invalid memory address (outside the 0-1023 range) or executes an invalid instruction.
+In order to bypass `rep` tricks and make the game more competitive when mixing different CPU architectures bot turns switch depending on cycles, instead of steps. This is, memory operations are slower than register ones, branches also have a cost, etc. You must have all those restrictions in mind when developing your bots in order to win.
 
-Battles also have a 4000 cycle limit to prevent endless rounds.
-
-In order to bypass `rep` tricks and make the game more competitive when mixing different CPU architectures bot turns switch depending on cycles, instead of steps. This is, memory operations are slower than register ones, branches also have a cost, etc. You must have in mind all those restrictions when developing your bots in order to win.
-
-r2wars supports multiple architectures thanks to ESIL (Evaluated Strings Intermediate Language) which translates opcodes from supported architectures a generic form that can be executed in aportable way. Supported architectures by r2wars include x86, ARM and MIPS, but technically, any other architecture supported by r2 is valid.
+r2wars supports multiple architectures thanks to ESIL (Evaluated Strings Intermediate Language) which translates opcodes from supported architectures a generic form that can be executed in a portable way. Supported architectures by r2wars include x86, ARM and MIPS, but technically, any other architecture supported by r2 is valid.
 
 ## Common Techniques
 
-There are several ways to Successful r2wars bots often use these strategies:
+Successful r2wars bots often use these strategies:
 
 * Self-location: Bots need to know where they are in memory to avoid overwriting themselves.
 * Scanning: Search for the opponent's code in memory.
