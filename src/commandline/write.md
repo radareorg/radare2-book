@@ -23,7 +23,7 @@ Usage: w[x] [str] [<file] [<<EOF] [@addr]
 | waF f.asm            assemble file and write bytes and show 'wx' op with hexpair bytes of assembled code
 | wao[?] op            modify opcode (change conditional of jump. nop, etc)
 | wA[?] r 0            alter/modify opcode at current seek (see wA?)
-| wb 010203            fill current block with cyclic hexpairs
+| wb 011001            write bits in bit big endian (see pb)
 | wB[-]0xVALUE         set or unset bits with given value
 | wc                   list all write changes
 | wc[?][jir+-*?]       write cache undo/commit/reset/list (io.cache)
