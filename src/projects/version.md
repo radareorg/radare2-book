@@ -105,4 +105,3 @@ RAVC2_USER=[name]
 ### Conclusion
 
 Radare2's versioning system with `ravc2` allows for efficient project management, enabling users to track progress, collaborate, and ensure that their analysis history is well-documented. Whether you use `rvc` or integrate with Git, version control in Radare2 provides flexibility and powerful tools for maintaining analysis continuity.
-

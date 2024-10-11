@@ -2,9 +2,9 @@
 
 Projects in Radare2 are a way to save and restore metadata for your analysis sessions. A project stores all session data such as commands, analysis results, and optional binaries. This makes it easy to resume work later without needing to repeat previous steps. When a project is saved, Radare2 creates a dedicated directory with the project name containing:
 
-- An `.r2` script: A file that stores all commands needed to recreate the session.
-- Optional **sdb** files: These store structured data, including flags, types, and other annotations.
-- A copy of the binary file you are analyzing (optional).
+* An `.r2` script: A file that stores all commands needed to recreate the session.
+* Optional **sdb** files: These store structured data, including flags, types, and other annotations.
+* A copy of the binary file you are analyzing (optional).
 
 You can start working on a binary and then save your progress by assigning a project name using the `P` command. Below is a step-by-step guide on how to manage projects in Radare2.
 
@@ -67,6 +67,10 @@ When you save a project, Radare2 generates an `.r2` script in the project's dire
 
 ```console
 [0x00000000]> Ps my_project
+[master (root-commit) b4b06ef] default message
+ Author: user <user@localhost>
+ 1 file changed, 10549 insertions(+)
+ create mode 100644 rc.r2
 ```
 
 You can also use `P+` to save without checking for changes:
