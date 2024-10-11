@@ -11,6 +11,7 @@ $ cat Makefile
 BADDR=0x8000000
 all:
     r2 -i script.r2 -m $BADDR dump.bin
+
 $ cat script.r2
 f entry0=0x8005320
 s entry0
