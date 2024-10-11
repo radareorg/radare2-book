@@ -87,6 +87,8 @@
   * [Usage](projects/usage.md)
   * [Annotations](projects/annotations.md)
   * [Handmade Setup](projects/handmade.md)
+  * [Versioning](projects/version.md)
+  * [Challenges](projects/challenges.md)
 * [Disassembling](arch/intro.md)
   * [Decompilers](arch/decompile.md)
   * [Metadata](arch/metadata.md)
