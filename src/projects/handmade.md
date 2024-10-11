@@ -2,11 +2,11 @@
 
 When you need full control and complete flexibility over your project metadata, you can choose to create a set of scripts that manage your binary analysis. This allows you to:
 
-- Load the binary.
-- Set the base address.
-- Configure the memory layout.
-- Run specific analysis commands.
-- Have full control on the steps
+* Load the binary.
+* Set the base address.
+* Configure the memory layout.
+* Run specific analysis commands.
+* Have full control on the steps
 
 Note that having full control on the commands you run is important in a variety os sutations (read the section on challenges for more details).
 

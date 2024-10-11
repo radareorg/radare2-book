@@ -52,7 +52,7 @@ Radare2 allows you to import and export projects as zip files using the `Pz` com
 To export the currently loaded project into a zip file:
 
 ```console
-[0x00000000]> Pze foo.zrp 
+[0x00000000]> Pze foo.zrp
 ```
 
 The `.zrp` file (Zipped Radare Project) can later be imported using `Pzi`. This will load the contents into your project home directory and commit a new version if versioning is enabled.
@@ -101,16 +101,16 @@ There are several configuration options available to control how projects are st
 
 Here are some key project-related options:
 
-- `prj.alwaysprompt`: Determines whether Radare2 always prompts before saving a project.
-- `prj.files`: Specifies whether to save a copy of the analyzed binary in the project directory.
-- `prj.gpg`: Enables encryption of project files using GPG.
-- `prj.history`: Specifies whether to save the command history with the project.
-- `prj.name`: Stores the name of the current project.
-- `prj.sandbox`: Isolates the project in a sandboxed environment.
-- `prj.vc`: Enables version control for projects.
-- `prj.vc.message`: Stores a commit message for the project (if version control is enabled).
-- `prj.vc.type`: Specifies the version control system used (e.g., Git).
-- `prj.zip`: Determines whether to save the project in a zip format.
+* `prj.alwaysprompt`: Determines whether Radare2 always prompts before saving a project.
+* `prj.files`: Specifies whether to save a copy of the analyzed binary in the project directory.
+* `prj.gpg`: Enables encryption of project files using GPG.
+* `prj.history`: Specifies whether to save the command history with the project.
+* `prj.name`: Stores the name of the current project.
+* `prj.sandbox`: Isolates the project in a sandboxed environment.
+* `prj.vc`: Enables version control for projects.
+* `prj.vc.message`: Stores a commit message for the project (if version control is enabled).
+* `prj.vc.type`: Specifies the version control system used (e.g., Git).
+* `prj.zip`: Determines whether to save the project in a zip format.
 
 These options allow you to customize project behavior based on your needs.
 

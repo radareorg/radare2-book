@@ -39,8 +39,8 @@ To start versioning your project, you need to initialize a repository. You can c
 $ ravc2 init [git | rvc]
 ```
 
-- `git`: Initializes a Git repository inside your project directory.
-- `rvc`: Initializes an `rvc` repository, Radare2’s internal version control.
+* `git`: Initializes a Git repository inside your project directory.
+* `rvc`: Initializes an `rvc` repository, Radare2’s internal version control.
 
 #### 2. Creating and Listing Branches
 

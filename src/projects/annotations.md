@@ -23,14 +23,17 @@ Usage: ano  [*] # function annotations
 
 ### Key Features
 
-1. **Persistent Across Sessions:**
-   Annotations are stored globally in the `~/.local/share/radare2/cache` directory. This ensures that they are accessible across different sessions, even if the project is closed and reopened later.
+**Persistent Across Sessions:**
 
-2. **Multiline Annotations:**
-   Annotations can contain multiple lines of text, making them ideal for storing detailed notes, such as decompilation output, comments, or any other observations about a function.
+Annotations are stored globally in the `~/.local/share/radare2/cache` directory. This ensures that they are accessible across different sessions, even if the project is closed and reopened later.
 
-3. **Cross-Project:**
-   Since annotations are not tied to any specific project, they can be shared across different projects that analyze the same binary. This is useful when working with multiple teams or revisiting an old analysis.
+**Multiline Annotations:**
+
+Annotations can contain multiple lines of text, making them ideal for storing detailed notes, such as decompilation output, comments, or any other observations about a function.
+
+**Cross-Project:**
+
+Since annotations are not tied to any specific project, they can be shared across different projects that analyze the same binary. This is useful when working with multiple teams or revisiting an old analysis.
 
 ### Examples
 
