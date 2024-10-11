@@ -6,7 +6,7 @@ The main inconvenience of these projects is that comments, flags or function nam
 
 This setup requires some level of consistency from the users and also must get used to the workflow to avoid
 
-As long as handmade projects are organized in directories and files it is ideal to use it with git, allowing other people to jump into the same files and have a proper versioned 
+As long as handmade projects are organized in directories and files it is ideal to use it with git, allowing other people to jump into the same files and have a proper versioned.
 
 ### Setup the files
 
