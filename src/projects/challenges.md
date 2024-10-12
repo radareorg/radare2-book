@@ -1,6 +1,6 @@
 ## Challenges Managing Projects
 
-Managing metadata during binary analysis is a critical aspect of reverse engineering. Metadata includes function names, comments, analysis flags, decompilation results, and much more. However, there are several inherent challenges that reverse engineering tools need to address to ensure efficient project management. Let's explore some of these challenges:
+Managing metadata during binary analysis is a critical aspect of reverse engineering. Metadata includes function and variable names, comments, analysis flags, decompilation results, and much more. However, there are several inherent challenges that reverse engineering tools need to address to ensure efficient project management. Let's explore some of these challenges:
 
 ### Key Challenges
 
@@ -15,6 +15,12 @@ As tools evolve, their analysis algorithms and metadata formats may change. This
 **Metadata Storage and Analysis Dependency**
 
 The order in which metadata is stored and loaded is crucial. For example, you cannot name a function before it is analyzed, and any changes to the analysis steps could affect the final outcome. This creates dependencies between analysis steps and metadata storage.
+
+**Metadata Origin**
+
+Some of the patches applied into the file come from the bin parser, like symbol names or reloc patches. But others can be defined by analysis commands or even by user scripts or the user itself. Knowing who created this information is relevant to the project because it helps understand the consequences of each action r2 performs in the binary.
+
+All tools available out there have no way to correlate consequences with the trigger that is the origin of the metadata created.
 
 **Impact of Analysis Order**
 
@@ -45,6 +51,8 @@ User-specific settings can influence how analysis and metadata are registered. F
 **Handling Incremental Metadata Patches**
 
 Metadata must be updated incrementally during the analysis. Each change to the analysis (e.g., renaming a function, adding a comment) must be stacked properly, and failure to do so can lead to inconsistency or corruption of the project state.
+
+Timestamping every single element in memory may help creating a proper log to do/undo every action you perform inside r2. But this is currently not possible for all operations, and also note that different io layers can be swapped at any time breaking the whole scope of the data.
 
 ### Why These Challenges Matter
 

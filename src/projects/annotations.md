@@ -1,8 +1,13 @@
 ## Annotations
 
-Annotations are a powerful feature introduced in Radare2 5.9.6 that allows users to associate cross-project metadata with specific functions. Unlike comments or other metadata that are tied to a specific project or session, annotations are persistent and stored globally. This makes them particularly useful for tracking notes and observations across different projects without needing to worry about manually saving them.
+Annotations are a handy feature introduced in Radare2 5.9.6 that allows users to associate cross-project metadata with specific functions. Unlike comments or other metadata that are tied to a specific project or session, annotations are persistent and stored globally. This makes them particularly useful for tracking notes and observations across different projects without needing to worry about manually saving them.
 
-The annotations are associated with each function and stored in a dedicated cache directory, making them available even after you leave the session. You can think of annotations as a place to store function-specific notes, decompilation output, or other important information that you want to keep handy.
+The annotations are associated with the filename and function address, and it's stored in a dedicated cache directory, making them available even after you leave the session. You can think of annotations as a place to store function-specific notes, decompilation output, or other important information that you want to keep handy.
+
+```
+R2_CACHEDIR=~/.local/share/radare2/cache/
+${R2_CACHEDIR}/ano.${filename}.{func_address}.txt
+```
 
 ### Using the ano
 
@@ -10,14 +15,15 @@ Annotations can be managed using the `ano` command. Below is an overview of the 
 
 ```console
 [0x00000000]> ano?
-Usage: ano  [*] # function annotations
-| ano            show or edit annotations for the current function
-| ano-*          remove all annotations of the current file
-| ano*           dump all annotations in `ano=` commands
-| ano=[b64text]  set annotation text in base64 for current function
-| anoe           edit annotation
-| anos           show annotation
-| anol           show the first line of function annotation if any
+Usage: ano  [*] # function anotations
+| ano                show or edit annotations for the current function
+| ano-*              remove all annotations for current file
+| ano-$$             remove annotations for current function
+| ano*               dump all annotations in ano= commands
+| ano=[base64:]text  set anotation text in base64 for current function
+| anoe               edit annotation using cfg.editor
+| anos               show current function annotation
+| anol               display first line of function annotation if any
 [0x00000000]>
 ```
 
@@ -25,11 +31,15 @@ Usage: ano  [*] # function annotations
 
 **Persistent Across Sessions:**
 
-Annotations are stored globally in the `~/.local/share/radare2/cache` directory. This ensures that they are accessible across different sessions, even if the project is closed and reopened later.
+Annotations are stored globally in the XDG cache directory. This ensures that they are accessible across different sessions, even if no project is used.
 
 **Multiline Annotations:**
 
 Annotations can contain multiple lines of text, making them ideal for storing detailed notes, such as decompilation output, comments, or any other observations about a function.
+
+Only the first line of the annotation will be displayed in the disassembly. Take this in mind when writing them to make them look nicer in the disassembly listing.
+
+You can disable this feature by toggling the `e asm.anos` eval variable.
 
 **Cross-Project:**
 
@@ -73,19 +83,22 @@ To remove all annotations for the current file, you can use the `ano-*` command:
 [0x00000000]> ano-*
 ```
 
-### Annotations in Action: Using Annotations to Cache Decompilation Output
+### Annotations In Action
+
+*Using Annotations to Cache Decompilation Output*
 
 Annotations can also be used to improve efficiency when working with decompiled code. For example, the `-e cache=true` setting in Radare2 enables the caching of decompiled output. This prevents Radare2 from having to re-decompile the same function multiple times, thus saving time during the analysis.
 
 Here's an example of how this works:
 
-1. Decompiling a function in language mode normally requires Radare2 to call the decompiler for each function.
-2. By enabling caching with `-e cache=true`, Radare2 will store the decompilation output in an annotation. The next time you view the same function, the cached annotation will be used instead of calling the decompiler again.
+* Decompiling a function using AI requires consuming tokens or cpu time, which tends to be slow and expensive.
+* By enabling caching with `-e cache=true`, Decai will store the decompilation output in an annotation. The next time you view the same function, the cached annotation will be used instead of calling the decompiler again.
 
 This is particularly helpful when working with large binaries or performing repetitive decompilation tasks.
 
 ```bash
-$ r2 -e cache=true <binary>
+$ r2pm -ci decai # install the decai decompiler
+$ r2 -c 'decai -e cache=true' <binary>
 ```
 
 By leveraging annotations in this way, you can significantly reduce the overhead of reprocessing functions during analysis.

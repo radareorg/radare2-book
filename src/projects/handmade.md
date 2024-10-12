@@ -6,7 +6,7 @@ When you need full control and complete flexibility over your project metadata, 
 * Set the base address.
 * Configure the memory layout.
 * Run specific analysis commands.
-* Have full control on the steps
+* Add comments, set dwords, rename functions, ..
 
 Note that having full control on the commands you run is important in a variety os sutations (read the section on challenges for more details).
 
@@ -60,7 +60,7 @@ And to reload them:
 
 You can apply this same principle to comments (`CC*`), function names (`afn*@@F`), and more.
 
-### Default Script Behavior
+### Default Script Example
 
 If you save an `.r2` script in the same directory as the binary, Radare2 will prompt you to run it upon opening the binary. This can save time by eliminating the need to use the `-i` flag:
 
