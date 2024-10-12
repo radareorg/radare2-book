@@ -91,7 +91,3 @@ jeje
 Radare2 also provides a mechanism for users to define actions that are performed when leaving the shell. The `cmd.exit` configuration variable can be set to run specific commands or scripts when the session ends. For example, you could create a `.r2.js` script that saves all comments and function names before closing the session.
 
 However, it’s important to remember that it’s up to the user to manage and manually update project scripts with new flags, analysis commands, or comments. While this approach requires more effort, it offers unmatched flexibility.
-
-### Conclusion
-
-The handmade project approach in Radare2 provides full control over your workflow but requires meticulous organization and manual updates. Over time, these processes will improve, and user contributions are always welcome, whether through feedback or pull requests.

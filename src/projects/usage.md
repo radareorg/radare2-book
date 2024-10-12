@@ -1,12 +1,28 @@
 ## Using Projects
 
-Projects in Radare2 are a way to save and restore metadata for your analysis sessions. A project stores all session data such as commands, analysis results, and optional binaries. This makes it easy to resume work later without needing to repeat previous steps. When a project is saved, Radare2 creates a dedicated directory with the project name containing:
+Projects in Radare2 cover the way to save and restore metadata for your analysis sessions. A project stores all session data such as commands, analysis results, and optional binaries. This makes it easy to resume work later without needing to repeat previous steps. When a project is saved, Radare2 creates a dedicated directory with the project name containing:
 
 * An `.r2` script: A file that stores all commands needed to recreate the session.
 * Optional **sdb** files: These store structured data, including flags, types, and other annotations.
-* A copy of the binary file you are analyzing (optional).
+* A copy of the binary file you are analyzing (optional when `-e prj.files` is set).
 
 You can start working on a binary and then save your progress by assigning a project name using the `P` command. Below is a step-by-step guide on how to manage projects in Radare2.
+
+### Warning
+
+Projects has been always a topic of concern in r2land. The reason is because main devs don't use them and taking into account the whole perspective of the problems (see challenges section) when dealing with that in a tool as powerful and flexible as r2 it makes it hard to cope with every single aspect and we never wanted to announce it as a stable or desirable feature.
+
+Taking into account that users known and care about <10% of the whole set of features of r2 it should be possible to create a simplified version of projects to cover only for those cases. We encourage everyone to read this chapter carefully, test all the related capabilities, submit patches and suggest ideas for improving them. Thanks in advance!
+
+### In Short
+
+Use the `r2 -p` flag to list and select the project you want to open (if that was previously created).
+
+When you are analyzing a program and want to save the project use the `P` command to do that like this: `P+projectname`.
+
+Projects are kept in `dir.projects` in your home directory by default and structure the data in directories and files, containing r2 scripts and other companion files.
+
+Note that if you want to export or import the project you must use the `Pz` command, which creates a zip file in the current directory or given path, which makes it ideal to send it to anyone else to continue working on that. Project metadata is versioned using ravc2 which makes use of `git` if available in the system, which lets you have better control on the changes over time.
 
 ### Configuring the Project Directory
 
@@ -73,7 +89,7 @@ When you save a project, Radare2 generates an `.r2` script in the project's dire
  create mode 100644 rc.r2
 ```
 
-You can also use `P+` to save without checking for changes:
+You can also use `P+` to save without checking if there was any change made since it was loaded:
 
 ```console
 [0x00000000]> P+ my_project
@@ -122,6 +138,4 @@ These options allow you to customize project behavior based on your needs.
 
 Projects also work in Iaito, the graphical interface for Radare2. In Iaito, project management options are available through the user interface, making it easy to create, open, and save projects without using the command line.
 
-### Conclusion
-
-Using projects in Radare2 allows for efficient management of analysis sessions. Whether you're working on a large binary or doing a quick reverse engineering task, projects ensure that your work is saved and can be resumed later without hassle.
+When starting **iaito** a dialog to select a file or project is shown, those projects reuse the same commands and apis than radare2, both tools may behave the same way.

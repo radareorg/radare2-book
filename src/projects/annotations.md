@@ -85,14 +85,14 @@ To remove all annotations for the current file, you can use the `ano-*` command:
 
 ### Annotations In Action
 
-*Using Annotations to Cache Decompilation Output*
+_Using Annotations to Cache Decompilation Output_
 
-Annotations can also be used to improve efficiency when working with decompiled code. For example, the `-e cache=true` setting in Radare2 enables the caching of decompiled output. This prevents Radare2 from having to re-decompile the same function multiple times, thus saving time during the analysis.
+Annotations can also be used to improve efficiency when working with decompiled code. For example, the `decai -e cache=true` setting in Radare2 enables the caching of decompiled output. This prevents Radare2 from having to re-decompile the same function multiple times, thus saving time during the analysis.
 
 Here's an example of how this works:
 
 * Decompiling a function using AI requires consuming tokens or cpu time, which tends to be slow and expensive.
-* By enabling caching with `-e cache=true`, Decai will store the decompilation output in an annotation. The next time you view the same function, the cached annotation will be used instead of calling the decompiler again.
+* By enabling caching with `decai -e cache=true`, Decai will store the decompilation output in an annotation. The next time you view the same function, the cached annotation will be used instead of calling the decompiler again.
 
 This is particularly helpful when working with large binaries or performing repetitive decompilation tasks.
 
@@ -102,7 +102,3 @@ $ r2 -c 'decai -e cache=true' <binary>
 ```
 
 By leveraging annotations in this way, you can significantly reduce the overhead of reprocessing functions during analysis.
-
-### Conclusion
-
-Annotations are an essential tool for efficiently managing function-specific metadata across multiple sessions and projects. Whether you are adding notes, decompilation output, or general observations, annotations allow you to persist important information and retrieve it at any time. The ability to use annotations for caching decompilation results further enhances the analysis workflow, saving both time and effort.

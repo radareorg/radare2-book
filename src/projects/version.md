@@ -2,11 +2,9 @@
 
 Radare2 includes a built-in version control system that operates similarly to Git, offering project versioning under the command `ravc2` (or its API counterpart, `rvc`). This allows users to manage their project history, track changes, revert to previous versions, and more. Radare2's project versioning system integrates seamlessly with Git, allowing you to choose between Radare2's versioning system or wrapping Git under the same interface.
 
-### Why Use Version Control in Radare2?
-
 Versioning projects can be especially useful when collaborating with others or tracking complex analyses. Since Radare2 projects are essentially scripts, they are easy to read, review, and compare between different versions. This makes version control a great tool for managing your analysis history and for collaborative work.
 
-### Basic Usage of `ravc2`
+### Basic Usage of ravc2
 
 Below is the basic syntax for using `ravc2`. This command offers a range of actions to initialize repositories, manage branches, commit changes, and view project history.
 
@@ -29,9 +27,9 @@ Actions:
  RAVC2_USER=[n]                override cfg.user value to author commit
 ```
 
-### Key `ravc2` Actions Explained
+### Versioning Actions Explained
 
-#### 1. Initializing a Repository
+#### Initializing a Repository
 
 To start versioning your project, you need to initialize a repository. You can choose between `rvc` (Radare2's native version control) or `git`.
 
@@ -42,7 +40,7 @@ $ ravc2 init [git | rvc]
 * `git`: Initializes a Git repository inside your project directory.
 * `rvc`: Initializes an `rvc` repository, Radare2’s internal version control.
 
-#### 2. Creating and Listing Branches
+#### Creating and Listing Branches
 
 You can create a new branch or list existing branches using the `branch` command:
 
@@ -52,7 +50,7 @@ $ ravc2 branch [name]
 
 If a branch name is provided, a new branch with that name will be created. If no name is provided, Radare2 will list all the branches in the repository.
 
-#### 3. Committing Changes
+#### Committing Changes
 
 Once you've made changes to your project, you can commit them with a message. You can specify which files to commit, or leave it empty to commit all changes.
 
@@ -60,7 +58,7 @@ Once you've made changes to your project, you can commit them with a message. Yo
 $ ravc2 commit "Your commit message" [files...]
 ```
 
-#### 4. Checking Out Branches
+#### Checking Out Branches
 
 Switch to a different branch using the `checkout` command:
 
@@ -70,7 +68,7 @@ $ ravc2 checkout [branch]
 
 This will update your project to the state of the selected branch.
 
-#### 5. Viewing Project Status
+#### Viewing Project Status
 
 To see the current status of your project, such as which files have been modified or staged for commit, use the `status` command:
 
@@ -78,7 +76,7 @@ To see the current status of your project, such as which files have been modifie
 $ ravc2 status
 ```
 
-#### 6. Resetting Uncommitted Changes
+#### Resetting Uncommitted Changes
 
 If you want to discard all uncommitted changes and revert to the last committed state, use the `reset` command:
 
@@ -86,7 +84,7 @@ If you want to discard all uncommitted changes and revert to the last committed 
 $ ravc2 reset
 ```
 
-#### 7. Viewing Commit History
+#### Viewing Commit History
 
 To view the full commit history of your project, use the `log` command. This will list all commits made to the project:
 
@@ -101,7 +99,3 @@ You can override the author name of your commits using the `RAVC2_USER` environm
 ```console
 RAVC2_USER=[name]
 ```
-
-### Conclusion
-
-Radare2's versioning system with `ravc2` allows for efficient project management, enabling users to track progress, collaborate, and ensure that their analysis history is well-documented. Whether you use `rvc` or integrate with Git, version control in Radare2 provides flexibility and powerful tools for maintaining analysis continuity.
