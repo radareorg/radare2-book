@@ -10,6 +10,6 @@ Please contribute by updating and improving the contents.
 * [Github](https://github.com/radareorg/radare2-book)
 * [Read it Online](https://book.rada.re/)
 
-Read the [CONTRIBUTING.md](https://github.com/radareorg/radare2-book/blob/master/CONTRIBUTING.md) guidelines before submiting a pull request to the github repository.
+Read the [CONTRIBUTING.md](https://github.com/radareorg/radare2-book/blob/master/CONTRIBUTING.md) guidelines before submitting a pull request to the github repository.
 
 Thanks!
