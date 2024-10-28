@@ -48,7 +48,7 @@ Usage: yr [action] [args..]   load and run yara rules inside r2
 
 ### Rule management
 
-The plugin include two rules files by default in the folder `rules` of the plugin. The already loaded rules can be listed:
+The plugin loads automatically the rules files from the folder `rules-yara3` in the folder `$R2PM_PLUGDIR`. The already loaded rules can be listed:
 
 ```console
 [0x00055a40]> yrl
