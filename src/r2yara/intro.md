@@ -7,7 +7,7 @@ r2yara is the integration of [Yara](https://virustotal.github.io/yara/) into rad
 r2yara is maintained in a separate repository. It can be installed with the `r2pm` package manager:
 
 ```console
-$ r2pm -ci r2frida
+$ r2pm -ci r2yara
 ```
 
 The package manager handle automatically the installation and compilation of the Yara library.
