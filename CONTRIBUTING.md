@@ -1,6 +1,6 @@
 # Contributing to the radare2 book
 
-The easiest way to contribute to the book is by submiting pullrequests on the project repository, this can be done directly from the github webpage by pressing the pencil button on any .md file or forking and cloning the repository like you would do with any other git project.
+The easiest way to contribute to the book is by submitting pull requests on the project repository, this can be done directly from the github webpage by pressing the pencil button on any .md file or forking and cloning the repository like you would do with any other git project.
 
 * [radare2-book repository](https://github.com/radareorg/radare2-book)
 
@@ -10,7 +10,7 @@ There are some basic rules (with its reasoning) to follow in order to contribute
 
 ### Official documentation must be written in English
 
-Despite we value the importance of human languages, even the minoritary ones we must value the fact that the contributions are rare and having multiple translations of the book won't help on having it's contents upto date.
+Despite we value the importance of human languages, even the minoritary ones we must value the fact that the contributions are rare and having multiple translations of the book won't help on having it's contents up to date.
 
 Unofficial translations or third party books are more than welcome, but in this repository we focus on having a clear and unified guide to be used for everyone, and nowadays, English is the most accessible human language towards this.
 
@@ -35,7 +35,7 @@ In other words use language models wisely. As a helper tool to better describe a
 There are few linting rules and CI checks, but the situation will be improved over time, patches that break the CI won't be accepted.
 
 * Check your vocabulary for typos, proper wording, etc.
-* Avoid the use of images (plain text is prefered)
+* Avoid the use of images (plain text is preferred)
 * Do not embed binary data in markdown files
 * Contents must be Latex, Gemini and Markdown friendly
 
