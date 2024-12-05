@@ -50,6 +50,7 @@
     * [Padding](tools/ragg2/padding.md)
   * [Rahash2](tools/rahash2/intro.md)
     * [Rahash Tool](tools/rahash2/rahash_tool.md)
+    * [Encoding and Encryption](tools/rahash2/encode.md)
 * [Configuration](config/intro.md)
   * [Files](config/files.md)
   * [Colors](config/colors.md)
