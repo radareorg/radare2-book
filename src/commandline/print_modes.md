@@ -70,11 +70,43 @@ For more on the magical powers of `~` see the help in `?@?`, and the [Command Fo
 
 `px` gives a user-friendly output showing 16 pairs of numbers per row with offsets and raw representations:
 
-![hexprint](print_modes_px.png)
+```console
+[0x00000000]> px
+- offset -   0 1  2 3  4 5  6 7  8 9  A B  C D  E F  0123456789ABCDEF
+0x00000000  6ad5 e6a9 85dc 6339 63d9 b3b8 84bb 00d0  j.....c9c.......
+0x00000010  407b 849d 13eb f6cc 0a8b 64e2 d395 33e3  @{........d...3.
+0x00000020  08e8 3801 d013 0414 2702 4bdb 1283 876e  ..8.....'.K....n
+```
 
-#### Show Hexadecimal Words Dump (32 bits)
+`pxw` shows 32-bit word dump:
 
-![wordprint](print_modes_pxw.png)
+```console
+[0x00000000]> pxw
+0x00000000  0xa9e6d56a 0x3963dc85 0xb8b3d963 0xd000bb84  j.....c9c.......
+0x00000010  0x9d847b40 0xccf6eb13 0xe2648b0a 0xe33395d3  @{........d...3.
+0x00000020  0x0138e808 0x140413d0 0xdb4b0227 0x6e878312  ..8.....'.K....n
+```
+
+Endianness configuration can changes the way the hexadecimal view is displayed:
+
+```console
+[0x00000000]> e cfg.bigendian
+false
+[0x00000000]> e cfg.bigendian = true
+[0x00000000]> pxw
+0x00000000  0x6ad5e6a9 0x85dc6339 0x63d9b3b8 0x84bb00d0  j.....c9c.......
+0x00000010  0x407b849d 0x13ebf6cc 0x0a8b64e2 0xd39533e3  @{........d...3.
+0x00000020  0x08e83801 0xd0130414 0x27024bdb 0x1283876e  ..8.....'.K....n
+```
+
+`pxq` show 64-bit quad-words dump:
+
+```console
+[0x00000000]> pxq
+0x00000000  0x3963dc85a9e6d56a  0xd000bb84b8b3d963   j.....c9c.......
+0x00000010  0xccf6eb139d847b40  0xe33395d3e2648b0a   @{........d...3.
+0x00000020  0x140413d00138e808  0x6e878312db4b0227   ..8.....'.K....n
+```
 
 #### 8 bits Hexpair List of Bytes
 
@@ -82,10 +114,6 @@ For more on the magical powers of `~` see the help in `?@?`, and the [Command Fo
 [0x00404888]> p8 16
 31ed4989d15e4889e24883e4f0505449
 ```
-
-#### Show Hexadecimal Quad-words Dump (64 bits)
-
-![pxq](print_modes_pxq.png)
 
 ### Date/Time Formats
 
