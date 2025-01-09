@@ -32,3 +32,7 @@ You can create your own color theme, but radare2 have its own predefined ones. U
 After selecting one, you can compare between the color scheme of the shell and the current theme by pressing Ctrl-Shift and then right arrow key for the toggle.
 
 In visual mode use the `R` key to randomize colors or choose the next theme in the list.
+
+If you were to create your own color scheme, in radare2, running `ec*` you will see the different variables and their hex colour codes. Change them how you feel following this [example](https://www.radare.org/advent/14.html): `ec call red`. When you are done live testing, you can export your theme with `ec* > mytheme.r2`  and load it `. mytheme.r2`.
+
+For a more permanent solution, themes live in `radare2/libr/cons/d` where you can copy your already made r2 theme. In `libr/cons`, run `make -C d themes.c` to prevent having to rebuild radare2 each time you tweak your theme. Restart radare2 and your theme will be live.
