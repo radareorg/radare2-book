@@ -21,7 +21,6 @@ The resulting build includes the following projects:
 * [radare2](https://github.com/radareorg/radare2)
 * [r2ghidra](https://github.com/radareorg/r2ghidra)
 * [r2frida](https://github.com/nowsecure/r2frida) (only in supported platforms)
-* [r2dec](https://github.com/wargio/r2dec-js)
 * [r2yara](https://github.com/radareorg/r2yara)
 * [r2ai](https://github.com/radareorg/r2ai) (only decai r2plugin)
 * [r2pipe](https://pypi.org/project/r2pipe/) (for Python)
