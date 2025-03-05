@@ -15,7 +15,7 @@ Apart from the specifying the input as an argument, you can also pipe it to rasm
 
 ```console
 $ echo 'push eax;nop;nop' | rasm2 -f -
-5090
+509090
 ```
 
 As you have seen, rasm2 can assemble one or many instructions. In line by separating them with a semicolon `;`, but can also read that from a file, using generic nasm/gas/.. syntax and directives. You can check the rasm2 manpage for more details on this.
