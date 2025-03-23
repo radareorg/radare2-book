@@ -4,7 +4,7 @@ One of the main development principles of radare2 is its portability, therefor r
 
 Most contributors use GNU/Linux with GCC or macOS with Clang, so those would be the better supported platforms, or at least the most tested. But it is also possible to build with TinyCC, Emscripten, Microsoft Visual Studio, SunStudio, ...)
 
-The debugger feature can be opt-out at compile time, this is because sometimes you are ont interested in having such feature in a specific build (web assembly, specific sandbox usage, etc) or maybe it is because you are porting radare2 on a platform that the debugger is not yet supported. Use the `--without-debugger` configure flag to do that.
+The debugger feature can be opt-out at compile time, this is because sometimes you are not interested in having such feature in a specific build (web assembly, specific sandbox usage, etc) or maybe it is because you are porting radare2 on a platform that the debugger is not yet supported. Use the `--without-debugger` configure flag to do that.
 
 Currently, the debugger layer can be used on Windows, GNU/Linux (Intel x86 and x86_64, MIPS, and ARM), OS X, FreeBSD, NetBSD, and OpenBSD (Intel x86 and x86_64)..
 
