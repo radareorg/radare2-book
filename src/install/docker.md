@@ -23,7 +23,7 @@ The resulting build includes the following projects:
 * [r2frida](https://github.com/nowsecure/r2frida) (only in supported platforms)
 * [r2dec](https://github.com/wargio/r2dec-js)
 * [r2yara](https://github.com/radareorg/r2yara)
-* [r2ai](https://github.com/radareorg/r2ai) (only decai r2plugin)
+* [r2ai](https://github.com/radareorg/r2ai)
 * [r2pipe](https://pypi.org/project/r2pipe/) (for Python)
 
 To use this docker image you can use either:

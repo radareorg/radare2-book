@@ -103,4 +103,4 @@ flatpak override --user --filesystem=/mnt/hdd:ro org.radare.iaito
 flatpak override --user --reset org.radare.iaito
 ```
 
-The Flatpak version of iaito comes bundled with several useful plugins: [r2dec](https://github.com/wargio/r2dec-js), [r2ghidra](https://github.com/radareorg/r2ghidra), [r2frida](https://github.com/nowsecure/r2frida), [r2yara](https://github.com/radareorg/r2yara), and [decai](https://github.com/radareorg/r2ai). These plugins enhance the functionality of radare2, providing additional capabilities for decompilation, integration with Ghidra, dynamic analysis with Frida, and YARA rule matching.
+The Flatpak version of iaito comes bundled with several useful plugins: [r2dec](https://github.com/wargio/r2dec-js), [r2ghidra](https://github.com/radareorg/r2ghidra), [r2frida](https://github.com/nowsecure/r2frida), [r2yara](https://github.com/radareorg/r2yara), and [r2ai](https://github.com/radareorg/r2ai). These plugins enhance the functionality of radare2, providing additional capabilities for decompilation, integration with Ghidra, dynamic analysis with Frida, and YARA rule matching.
