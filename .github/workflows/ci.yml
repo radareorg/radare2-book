@@ -15,7 +15,7 @@ jobs:
       - name: Linting file references
         run: sys/lintrefs.sh
       - name: Linting markdown format
-        uses: DavidAnson/markdownlint-cli2-action@v19
+        uses: DavidAnson/markdownlint-cli2-action@v20
         with:
           config: src/.markdownlint.jsonc
           globs: src/**/*.md
@@ -26,7 +26,7 @@ jobs:
       - name: Build single markdown file
         run: make one
       - name: Linting single markdown format
-        uses: DavidAnson/markdownlint-cli2-action@v19
+        uses: DavidAnson/markdownlint-cli2-action@v20
         with:
           config: .one.markdownlint-cli2.jsonc
           globs: r2book.md
