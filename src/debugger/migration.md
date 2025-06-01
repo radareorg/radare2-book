@@ -22,13 +22,13 @@ Use `rarun2` (`libpath=$PWD:/tmp/lib`, `arg2=hello`, `setenv=FOO=BAR` ...) see `
 
 ### How to script radare2 ?
 
-`r2 -i <scriptfile> ...` - run a script **after** loading the file => [[video](http://asciinema.org/a/12020)]
+`r2 -i <scriptfile> ...` - run a script **after** loading the file => [demo video](http://asciinema.org/a/12020)
 
 `r2 -I <scriptfile> ...` - run a script **before** loading the file
 
-`r2 -c $@ | awk $@`  - run through awk to get asm from function => [[link](http://sprunge.us/dEOK)]
+`r2 -c $@ | awk $@`  - run through awk to get asm from function
 
-`[0x80480423]> . scriptfile` - interpret this file => [[video](http://asciinema.org/a/12017)]
+`[0x80480423]> . scriptfile` - interpret this file => [ascii video](http://asciinema.org/a/12017)
 
 `[0x80480423]> #!c` - enter C repl  (see `#!` to list all available RLang plugins)  => [[video](http://asciinema.org/a/12019)], everything have to be done in a oneliner or a .c file must be passed as an argument.
 

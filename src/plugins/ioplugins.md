@@ -63,7 +63,7 @@ rwd  winedbg  Wine-dbg io and debug.io plugin for r2 (MIT)
 rw_  zip      Open zip files [apk|ipa|zip|zipall]://[file//path] (BSD)
 ```
 
-An example of how to write a plugin is available in this commit: [here](https://github.com/radareorg/radare2/pull/20574/commits/f9abd3026c37961a485656447eff7bff616322bf).
+An example of how to write a plugin is available in [this commit](https://github.com/radareorg/radare2/pull/20574/commits/f9abd3026c37961a485656447eff7bff616322bf).
 
 1) Write r2 IO plugin with Makefile (for Linux only)
 
@@ -219,7 +219,6 @@ R_API RLibStruct radare_plugin = {
 ```
 
 Do not forget to include your definition of `r_io_plugin_dap` in `libr/include/r_io.h`:
-At this line: [here](https://github.com/radareorg/radare2/blob/f9abd3026c37961a485656447eff7bff616322bf/libr/include/r_io.h#L590), add:
 
 ```c
 extern RIOPlugin r_io_plugin_dap;

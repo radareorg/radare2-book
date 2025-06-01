@@ -45,7 +45,7 @@ Below is a list of available print modes listed by `p?`:
 [0x00005310]>
 ```
 
-Tip: when using json output, you can append the `~{}` to the command to get a pretty-printed version of the output:
+> Tip: when using **JSON** output, you can append the `~{}` to the command to get a pretty-printed version of the output:
 
 ```console
 [0x00000000]> oj
