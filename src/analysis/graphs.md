@@ -1,8 +1,8 @@
 # Graph
 
-Uunderstanding the structure and flow of a program is crucial. While linear disassembly and text-based analysis have their place, graphs provide a powerful visual representation that can significantly enhance your understanding of complex code.
+Understanding the structure and flow of a program is crucial. While linear disassembly and text-based analysis have their place, graphs provide a powerful visual representation that can significantly enhance your understanding of complex code.
 
-Radare2's graph capabilities offer a multifaceted approach to visualizing various aspects of a program code structures:
+Radare2's graph capabilities offer a multifaceted approach to visualizing various aspects of a program's code structures:
 
 * **Control Flow Graphs (CFG)**: Visualize the logical flow between basic blocks within a function, making it easier to identify loops, conditional branches, and execution paths.
 
@@ -74,13 +74,13 @@ Command: `agf`
 
 Displays the graph directly to stdout using ASCII art to represent blocks and edges.
 
-_Warning: displaying large graphs directly to stdout might prove to be computationally expensive and will make r2 not responsive for some time. In case of a doubt, prefer using the interactive view (explained below)._
+_Warning: displaying large graphs directly to stdout might prove to be computationally expensive and will make r2 not responsive for some time. In case of doubt, prefer using the interactive view (explained below)._
 
 ### Interactive Ascii Art
 
 Command: `agfv`
 
-Displays the ASCII graph in an interactive view similar to `VV` which allows to move the screen, zoom in / zoom out, ...
+Displays the ASCII graph in an interactive view similar to `VV` which allows to move the screen, zoom in or out, ...
 
 ### Tiny Ascii Art
 
@@ -116,11 +116,17 @@ Prints the GML source code representing the graph, which can be interpreted by p
 
 Prints key-value strings representing the graph that was stored by sdb (radare2's string database).
 
+### Mermaid
+
+**Command**: `agfm`
+
+Prints a [Mermaid](https://mermaid.js.org/) diagram representing the graph, which can be embedded and rendered directly in markdown environments that support Mermaid, such as GitHub, mkdocs or web-based viewers.
+
 ## Create your own graph
 
 **Commands**: `agn` and `age` for nodes and edges, `agg` to render
 
-Prints r2 commands that would recreate the desired graph. The commands to construct the graph are `agn [title] [body]` to add a node and `age [title1] [title2]` to add an edge.
+Prints r2 commands that recreate the desired graph. The commands to construct the graph are `agn [title] [body]` to add a node and `age [title1] [title2]` to add an edge.
 The `[body]` field can be expressed in base64 to include special formatting (such as newlines).
 
 To easily execute the printed commands, it is possible to prepend a dot to the command (`.agf*`).
@@ -155,7 +161,7 @@ Command: `agfw`
 
 Radare2 will convert the graph to dot format, use the `dot` program to convert it to a `.gif` image and then try to find an already installed viewer on your system (`xdg-open`, `open`, ...) and display the graph there.
 
-The extension of the output image can be set with the `graph.extension` config variable. Available extensions are `png, jpg, gif, pdf, ps`.
+The output image extension can be set with the `graph.extension` config variable. Available extensions are `png, jpg, gif, pdf, ps`.
 
 _Note: for particularly large graphs, the most recommended extension is `svg` as it will produce images of much smaller size_
 
