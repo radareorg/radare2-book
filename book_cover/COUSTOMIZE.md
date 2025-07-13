@@ -1,6 +1,6 @@
 # Print on demand Radare2 Book Cover
 
-This repository contains a cover design for the Radare2 book.
+This folder contains a cover design for the Radare2 book.
 
 ## Cover Details
 
@@ -22,7 +22,7 @@ If you are using a different book format or want to make graphical changes:
 
 - The **red area** (in the `page_layout` layer) indicates the **bleed margin**.
 - The **green area** shows the **printable region**.
-- Before exporting the final PDF, make sure to **hide the `page_layout` layer**.
+- Before exporting the final PDF, make sure to hide the `page_layout` layer.
 
 ![Cover Layout Guide](r2_book_cover.png)
 
