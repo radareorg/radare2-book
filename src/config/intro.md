@@ -1,8 +1,8 @@
 # Configuration
 
-The core reads `~/.config/radare2/radare2rc` while starting. You can add `e` commands to this file to tune the radare2 configuration to your taste.
+The core reads [configuration files](files.md) while starting. You can add `e` commands to these files to tune the radare2 configuration to your taste.
 
-To prevent radare2 from parsing this file at startup, pass it the `-N` option.
+To prevent radare2 from parsing these files at startup, pass it the `-N` option.
 
 All the configuration of radare2 is done with the `eval` commands. A typical startup configuration file looks like this:
 
@@ -12,7 +12,7 @@ e scr.color = 1
 e dbg.bep   = loader
 ```
 
-The configuration can also be changed with `-e` <config=value> command-line option. This way you can adjust configuration from the command line, keeping the .radare2rc file intact. For example, to start with empty configuration and then adjust `scr.color` and `asm.syntax` the following line may be used:
+The configuration can also be changed with `-e` <config=value> command-line option. This way you can adjust configuration from the command line, keeping the configuration files intact. For example, to start with empty configuration and then adjust `scr.color` and `asm.syntax` the following line may be used:
 
 ```console
 $ radare2 -N -e scr.color=1 -e asm.syntax=intel -d /bin/ls
