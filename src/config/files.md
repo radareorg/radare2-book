@@ -60,8 +60,8 @@ Radare2 allows users to customize their experience through configuration files. 
 The main configuration files are typically located in the user's home directory:
 
 * `~/.radare2rc`
-* `~/.config/radare2/radare2rc
-* `~/.config/radare2/radare2rc.d/
+* `$XDG_CONFIG_HOME/radare2/rc` or `~/.config/radare2/rc`
+* `$XDG_CONFIG_HOME/radare2/rc.d/*` or `~/.config/radare2/rc.d/*`
 
 An important feature is the `R2_RCFILE` environment variable. This variable allows users to specify a custom path to their radare2 configuration file. By setting this variable, users can override the default locations and use a configuration file from any location on their system.
 
