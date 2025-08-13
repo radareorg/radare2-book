@@ -157,7 +157,7 @@ uint32_t parell (char * s) {
 Now there are 2 constraints:
 
 * Digit Sum is 16 (0x10)
-* Must be an odd number (1 & number == 0)
+* Must be an even number (1 & number == 0)
 
 The password is at our fingertips now.
 
