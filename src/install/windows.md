@@ -82,14 +82,14 @@ All Radare2 code is managed with Git and hosted on [GitHub](https://github.com/r
 
 To install Git for Windows, follow these steps:
 
-1. Download Git for Windows from the [official website](https://git-scm.com/download/win).
+* Download Git for Windows from the [official website](https://git-scm.com/download/win).
 
-2. In the installation wizard, choose the following options:
+* In the installation wizard, choose the following options:
 
-* Use a TrueType font in all console windows
-* Use Git from the Windows Command Prompt
-* Use the native Windows Secure Channel library (instead of OpenSSL)
-* Checkout Windows-style, commit Unix-style line endings (`core.autocrlf=true`)
-* Use Windows' default console window (instead of Mintty)
+  * Use a TrueType font in all console windows
+  * Use Git from the Windows Command Prompt
+  * Use the native Windows Secure Channel library (instead of OpenSSL)
+  * Checkout Windows-style, commit Unix-style line endings (`core.autocrlf=true`)
+  * Use Windows' default console window (instead of Mintty)
 
-3. After installation, verify it by running `git --version` to confirm Git is available.
+*. After installation, verify it by running `git --version` to confirm Git is available.
