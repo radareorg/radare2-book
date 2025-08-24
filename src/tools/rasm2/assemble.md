@@ -2,7 +2,7 @@
 
 Assembling is the action to take a computer instruction in human readable form (using mnemonics) and convert that into a bunch of bytes that can be executed by a machine.
 
-In radare2, the assembler and disassembler logic is implemented in the r_asm_* API, and can be used with the pa and pad commands from the commandline as well as using `rasm2`.
+In radare2, the assembler and disassembler logic is implemented in the r_arch API (r_asm and r_anal were merged into r_arch), and can be used with the pa and pad commands from the commandline as well as using `rasm2`.
 
 Rasm2 can be used to quickly copy-paste hexpairs that represent a given machine instruction. The following line is assembling this mov instruction for x86/32.
 

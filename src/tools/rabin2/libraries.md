@@ -12,12 +12,12 @@ libr_cons.so
 libr_config.so
 libr_bin.so
 libr_debug.so
-libr_anal.so
+libr_arch.so
 libr_reg.so
 libr_bp.so
 libr_io.so
 libr_fs.so
-libr_asm.so
+libr_arch.so
 libr_syscall.so
 libr_hash.so
 libr_magic.so
@@ -43,12 +43,12 @@ libr_cons.so => /usr/lib64/libr_cons.so (0x00007f94b4000000)
 libr_config.so => /usr/lib64/libr_config.so (0x00007f94b3dfa000)
 libr_bin.so => /usr/lib64/libr_bin.so (0x00007f94b3afd000)
 libr_debug.so => /usr/lib64/libr_debug.so (0x00007f94b38d2000)
-libr_anal.so => /usr/lib64/libr_anal.so (0x00007f94b2fbd000)
+libr_arch.so => /usr/lib64/libr_arch.so (0x00007f94b2fbd000)
 libr_reg.so => /usr/lib64/libr_reg.so (0x00007f94b2db4000)
 libr_bp.so => /usr/lib64/libr_bp.so (0x00007f94b2baf000)
 libr_io.so => /usr/lib64/libr_io.so (0x00007f94b2944000)
 libr_fs.so => /usr/lib64/libr_fs.so (0x00007f94b270e000)
-libr_asm.so => /usr/lib64/libr_asm.so (0x00007f94b1c69000)
+libr_arch.so => /usr/lib64/libr_arch.so (0x00007f94b1c69000)
 libr_syscall.so => /usr/lib64/libr_syscall.so (0x00007f94b1a63000)
 libr_hash.so => /usr/lib64/libr_hash.so (0x00007f94b185a000)
 libr_magic.so => /usr/lib64/libr_magic.so (0x00007f94b164d000)

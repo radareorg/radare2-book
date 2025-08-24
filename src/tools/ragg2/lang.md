@@ -2,7 +2,7 @@
 
 The code of `r_egg` is compiled as in a flow. It is a one-pass compiler; this means that you have to define the proper stackframe size at the beginning of the function, and you have to define the functions in order to avoid getting compilation errors.
 
-The compiler generates assembly code for x86-{32,64} and arm. But it aims to support more platforms. This code is the compiled with `r_asm` and injected into a tiny binary with `r_bin`.
+The compiler generates assembly code for x86-{32,64} and arm. But it aims to support more platforms. This code is compiled with the r_arch interface (r_asm and r_anal merged into r_arch) and injected into a tiny binary with `r_bin`.
 
 You may like to use `r_egg` to create standalone binaries, position-independent raw eggs to be injected on running processes or to patch on-disk binaries.
 
