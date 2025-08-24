@@ -75,12 +75,12 @@ node_modules/.bin/markdownlint-cli2:
 	npm install --no-save markdownlint-cli2
 
 lint: node_modules/.bin/markdownlint-cli2
-	sys/lintrefs.sh
+	sys/lintrefs2.sh
 	node_modules/.bin/markdownlint-cli2 $(MDLINT_GLOBS) --config $(MDLINT_CONFIG)
 
 lint-fix: node_modules/.bin/markdownlint-cli2
 	node_modules/.bin/markdownlint-cli2 $(MDLINT_GLOBS) --config $(MDLINT_CONFIG) --fix
-	sys/lintrefs.sh
+	sys/lintrefs2.sh
 
 lint-one: node_modules/.bin/markdownlint-cli2 lint one
 	node_modules/.bin/markdownlint-cli2 r2book.md --config .one.markdownlint-cli2.jsonc
