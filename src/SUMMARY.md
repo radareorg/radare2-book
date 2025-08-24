@@ -1,4 +1,4 @@
-# Summary
+# SUMMARY
 
 * [Introduction](intro/intro.md)
   * [History](intro/history.md)
@@ -26,8 +26,8 @@
   * [Rarun2](tools/rarun2/intro.md)
   * [r2pm](tools/r2pm/intro.md)
   * [Rabin2](tools/rabin2/intro.md)
-    * [File Types](tools/rabin2/file_identification.md)
-    * [Entrypoint](tools/rabin2/entrypoints.md)
+    * [Headers](tools/rabin2/headers.md)
+    * [Entrypoints](tools/rabin2/entrypoints.md)
     * [Imports](tools/rabin2/imports.md)
     * [Exports](tools/rabin2/exports.md)
     * [Symbols](tools/rabin2/symbols.md)
@@ -84,7 +84,7 @@
   * [Visual Panels](visual/visual_panels.md)
 * [Searching](search/intro.md)
   * [Basic Searches](search/basic_searches.md)
-  * [Configurating the Search](search/configurating_the_search.md)
+  * [Search Options](search/search_options.md)
   * [Pattern Search](search/pattern_search.md)
   * [Automation](search/automation.md)
   * [Backward Search](search/backward_search.md)

@@ -1,4 +1,4 @@
-## Configuring Search Options
+## Search Options
 
 The radare2 search engine can be configured through several configuration variables, modifiable with the `e` command.
 
