@@ -1,10 +1,12 @@
-## Building from Source
+## Downloading
 
 You can get radare from the GitHub repository: [https://github.com/radareorg/radare2](https://github.com/radareorg/radare2)
 
 Binary packages are available for a number of operating systems (Ubuntu, Maemo, Gentoo, Windows, iPhone, and so on). But you are highly encouraged to get the source and compile it yourself to better understand the dependencies, to make examples more accessible and, of course, to have the most recent version.
 
-A new stable release is typically published every month.
+Downloadable versions of the latest releases of Radare2 are available in [https://github.com/radareorg/radare2/releases](GitHub) itself.
+
+For distributions we aim to recommend the use of release source tarballs to build the program. But users may probably want to use the last code from **git** that's why we always mention "use r2 from git", because we don't aim to fix bugs in releases, always test your bug or problems in the last development branch `master`.
 
 The radare development repository is often more stable than the 'stable' releases. To obtain the latest version:
 
@@ -20,35 +22,40 @@ To update your local copy of the repository, use `git pull` anywhere in the rada
 $ git pull
 ```
 
-If you have local modifications of the source, you can revert them (and lose them!) with:
-
-```console
-$ git reset --hard HEAD
-```
-
-Or send us a patch:
-
-```console
-$ git diff > radare-foo.patch
-```
-
-The most common way to get r2 updated and installed system wide is by using:
+The most common way to get r2 updated and installed system wide is by using, but we may learn more about building 
 
 ```console
 $ sys/install.sh
 ```
 
-### Building with meson + ninja
+### r2env
 
-There is also a work-in-progress support for Meson.
-
-Using clang and ld.gold makes the build faster:
+r2env is a lightweight tool version managers: either clone the repo and add its `bin` to your PATH and enable shell integration, or install via pip. The simplest option:
 
 ```bash
-CC=clang LDFLAGS=-fuse-ld=gold meson . release --buildtype=release --prefix ~/.local/stow/radare2/release
-ninja -C release
-# ninja -C release install
+pip install r2env
 ```
+
+This makes the `r2env` command available and sets up shims for `r2` / `radare2` so the active version is used automatically.
+
+Replace `<version-or-ref>` with a tag, branch, or other reference you want to install.
+
+```bash
+r2env install <version-or-ref>
+```
+
+Use the familiar global / local / shell commands:
+
+```bash
+r2env global <version>   # set the default radare2 for all shells (writes a global version file)
+r2env local <version>    # set a version for the current project directory (creates a .r2env-version)
+r2env shell <version>    # temporarily use a version for the current shell session
+r2env versions           # list installed versions and show the currently active one
+```
+
+Pick a version by reading the release notes — decide between stable vs nightly based on your feature needs, plugins, and compatibility. Install the tag or branch that matches those requirements.
+
+To remove a build later, use `r2env uninstall` (see the repo README for the exact syntax and any extra flags). If anything behaves unexpectedly, consult the r2env GitHub README for up-to-date flags, usage details, and platform-specific dependencies.
 
 ### Helper Scripts
 
@@ -62,21 +69,3 @@ By default it will be installed in `/usr/local`, but you can specify a different
 
 This is useful for developers, because it permits them to just run 'make' and try changes without having to run make install again.
 
-### Cleaning Up
-
-Cleaning up the source tree is important to avoid problems like linking to old objects files or not updating objects after an ABI change.
-
-The following commands may help you to get your git clone up to date:
-
-```console
-$ git clean -xdf
-$ git reset --hard origin/master
-$ git pull
-```
-
-If you want to remove previous installations from your system, you must run the following commands:
-
-```console
-$ ./configure --prefix=/usr/local
-$ make purge
-```
