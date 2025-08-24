@@ -37,37 +37,37 @@ va       true
 
 What each important field means
 
-- arch / asm.arch: CPU architecture family (x86, arm, mips, etc.).
-- bits / asm.bits: Operand width / target word size (32 / 64).
-- bintype / file.type: Binary container format (elf / pe / mach0 / coredump / raw).
-- class: More specific layout (e.g. ELF64 / ELF32).
-- endian: Endianness (little / big).
-- machine: Human-readable CPU model.
-- intrp: Program interpreter (dynamic loader), e.g. /lib64/ld-linux-x86-64.so.2.
-- binsz: Total size of the file in bytes.
-- havecode: Whether executable code sections have been detected.
-- nx: NX / DEP enabled (true when the binary's segments are not executable where they shouldn't be).
-- canary: Stack-smashing protector (stack canary) presence (true/false).
-- relro: RELocation Read-Only status; typical values: none / partial / full.
-- pic / pie: Whether the binary is position-independent (PIC for shared objects, PIE for executables). In rabin2 output `pic` is generally true for shared objects and position-independent executables.
-- rpath / runpath: RPATH or RUNPATH embedded in the binary (or NONE).
-- static: Whether the binary is fully statically linked.
-- stripped: Symbols stripped from the binary (true when symbol tables are absent).
-- lsyms / linenum: Presence of local symbols or line number info (debug information).
-- pcalign: Preferred alignment for program/sections.
-- minopsz / maxopsz: Minimum/maximum instruction sizes reported for the architecture.
-- va: Whether the binary uses virtual addresses (i.e. mapped with proper virtual addressing).
-- crypto: Whether cryptographic features (or crypto sections) were detected — usually false for normal binaries.
+* arch / asm.arch: CPU architecture family (x86, arm, mips, etc.).
+* bits / asm.bits: Operand width / target word size (32 / 64).
+* bintype / file.type: Binary container format (elf / pe / mach0 / coredump / raw).
+* class: More specific layout (e.g. ELF64 / ELF32).
+* endian: Endianness (little / big).
+* machine: Human-readable CPU model.
+* intrp: Program interpreter (dynamic loader), e.g. /lib64/ld-linux-x86-64.so.2.
+* binsz: Total size of the file in bytes.
+* havecode: Whether executable code sections have been detected.
+* nx: NX / DEP enabled (true when the binary's segments are not executable where they shouldn't be).
+* canary: Stack-smashing protector (stack canary) presence (true/false).
+* relro: RELocation Read-Only status; typical values: none / partial / full.
+* pic / pie: Whether the binary is position-independent (PIC for shared objects, PIE for executables). In rabin2 output `pic` is generally true for shared objects and position-independent executables.
+* rpath / runpath: RPATH or RUNPATH embedded in the binary (or NONE).
+* static: Whether the binary is fully statically linked.
+* stripped: Symbols stripped from the binary (true when symbol tables are absent).
+* lsyms / linenum: Presence of local symbols or line number info (debug information).
+* pcalign: Preferred alignment for program/sections.
+* minopsz / maxopsz: Minimum/maximum instruction sizes reported for the architecture.
+* va: Whether the binary uses virtual addresses (i.e. mapped with proper virtual addressing).
+* crypto: Whether cryptographic features (or crypto sections) were detected — usually false for normal binaries.
 
 Mapping rabin2 fields to checksec output
 
 The popular checksec.sh script reports security hardening flags like RELRO, Canary, NX, PIE, RPATH/RUNPATH. You can get the same information with rabin2 -I:
 
-- RELRO: map to `relro` (none / partial / full)
-- Stack Canary: `canary` (true/false)
-- NX / DEP: `nx` (true/false)
-- PIE: `pic` / `asm.bits` + PIE detection (rabin2 reports `pic`/`pie`-related properties)
-- RPATH/RUNPATH: `rpath` (or `runpath` if present)
+* RELRO: map to `relro` (none / partial / full)
+* Stack Canary: `canary` (true/false)
+* NX / DEP: `nx` (true/false)
+* PIE: `pic` / `asm.bits` + PIE detection (rabin2 reports `pic`/`pie`-related properties)
+* RPATH/RUNPATH: `rpath` (or `runpath` if present)
 
 Because rabin2 reads binary headers directly (using rbin), it can be used as a drop-in replacement for checksec in many cases. Example quick checks:
 
@@ -112,14 +112,14 @@ Relating rabin2 to radare2 interactive info commands (iH / ih)
 
 Inside a radare2 session there are a family of `i` (info) commands that provide quick access to the same metadata you get from rabin2. The most relevant to headers are the header/info variants — typically invoked as `iH` (capital H) and `ih` in the radare2 command set. They expose the binary header metadata, interpreter, section/segment hints, security flags, and other attributes discovered by the rbin subsystem.
 
-- `iH` / `ih`: show headers and high-level metadata when working interactively. They allow you to inspect the same security flags (NX, RELRO, canary, PIE) and interpreter/settings without leaving an r2 session.
-- `i?` family: there are many other `i*` commands (imports, exports, libraries, sections, strings) that correlate directly to rabin2's `-i`, `-E`, `-l`, `-S`, `-z`, etc.
+* `iH` / `ih`: show headers and high-level metadata when working interactively. They allow you to inspect the same security flags (NX, RELRO, canary, PIE) and interpreter/settings without leaving an r2 session.
+* `i?` family: there are many other `i*` commands (imports, exports, libraries, sections, strings) that correlate directly to rabin2's `-i`, `-E`, `-l`, `-S`, `-z`, etc.
 
 Note: rabin2 is essentially a command-line wrapper around the rbin API — the same code radare2 uses internally — so the information is consistent between both tools. Use rabin2 for quick external inspection and `iH`/`ih` when you are already inside an r2 analysis session.
 
 Examples and practical tips
 
-- Quick security triage of a binary (checksec replacement):
+* Quick security triage of a binary (checksec replacement):
 
 ```console
 # single-line human friendly output (tailor with awk/rg/jq)
@@ -132,7 +132,7 @@ $ rabin2 -Ir /bin/ls
 $ rabin2 -I -S -l -i -z /bin/ls
 ```
 
-- Automating checks (example shell snippet):
+* Automating checks (example shell snippet):
 
 ```bash
 #!/usr/bin/env bash
@@ -145,7 +145,7 @@ pic=$(echo "$info" | awk '/^pic/{print $2}')
 printf "RELRO=%s\nCANARY=%s\nNX=%s\nPIC=%s\n" "$relro" "$canary" "$nx" "$pic"
 ```
 
-- When you want r2 to automatically adopt the environment detected by rabin2 (arch/endianness/bits), pipe `rabin2 -Ir` output into radare2 or include it in your r2 session scripts.
+* When you want r2 to automatically adopt the environment detected by rabin2 (arch/endianness/bits), pipe `rabin2 -Ir` output into radare2 or include it in your r2 session scripts.
 
 Summary
 

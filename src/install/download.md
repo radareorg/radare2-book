@@ -22,7 +22,7 @@ To update your local copy of the repository, use `git pull` anywhere in the rada
 $ git pull
 ```
 
-The most common way to get r2 updated and installed system wide is by using, but we may learn more about building 
+The most common way to get r2 updated and installed system wide is by using, but we may learn more about building
 
 ```console
 $ sys/install.sh
@@ -44,17 +44,6 @@ Replace `<version-or-ref>` with a tag, branch, or other reference you want to in
 r2env install <version-or-ref>
 ```
 
-Use the familiar global / local / shell commands:
-
-```bash
-r2env global <version>   # set the default radare2 for all shells (writes a global version file)
-r2env local <version>    # set a version for the current project directory (creates a .r2env-version)
-r2env shell <version>    # temporarily use a version for the current shell session
-r2env versions           # list installed versions and show the currently active one
-```
-
-Pick a version by reading the release notes — decide between stable vs nightly based on your feature needs, plugins, and compatibility. Install the tag or branch that matches those requirements.
-
 To remove a build later, use `r2env uninstall` (see the repo README for the exact syntax and any extra flags). If anything behaves unexpectedly, consult the r2env GitHub README for up-to-date flags, usage details, and platform-specific dependencies.
 
 ### Helper Scripts
@@ -68,4 +57,3 @@ Symstalling is the process of installing all the programs, libraries, documentat
 By default it will be installed in `/usr/local`, but you can specify a different prefix using the argument `--prefix`.
 
 This is useful for developers, because it permits them to just run 'make' and try changes without having to run make install again.
-
