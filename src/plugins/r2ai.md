@@ -6,9 +6,8 @@ This chapter explains how to install r2ai, basic usage from the r2 shell and exa
 
 ### Key components
 
-- r2ai-plugin (native C plugin, recommended) — adds the `r2ai` command to r2
-- decai (r2js) — `decai` command focused on AI-assisted decompilation
-- r2ai-python / r2ai-server — older Python-based client/server helpers (deprecated in favor of local ollama or r2ai-server)
+* r2ai-plugin (native C plugin, recommended) — adds the `r2ai` command to r2
+* decai (r2js) — `decai` command focused on AI-assisted decompilation
 
 ### Installation
 
@@ -18,10 +17,8 @@ Recommended: use the radare2 package manager (r2pm).
 
 ```
 $ r2pm -s r2ai
-r2ai-py             run a local language model integrated with radare2
-r2ai-py-plugin      r2ai plugin for radare2
 r2ai-plugin         r2ai plugin rewritten in plain C
-r2ai-server         start a language model webserver in local
+r2ai-mcp         radare2 Model Context Protocol server
 decai               r2ai r2js subproject with focus on LLM decompilation for radare2
 ```
 
@@ -71,7 +68,7 @@ Once installed, r2ai exposes the `r2ai` command inside r2. Typical ways to launc
 - From the r2 shell (native plugin):
 
 ```
-$ r2 -qc r2ai-r /path/to/binary
+$ r2 -qc "r2ai -a solve this crackme" /path/to/binary
 ```
 
 - Using r2pm to run the packaged application:
@@ -187,8 +184,8 @@ Configuration and models
 
 ```
 [0x00002d30]> decai -e api=ollama
-[0x00002d30]> decai -e model=codegeex4:latest
-[0x00002d30]> decai -d main
+[0x00002d30]> decai -e model=gpt-oss
+[0x00002d30]> decai -d
 ```
 
 decai supports an Auto mode that chains queries and uses function-calling style interactions with the model to refine outputs and solve higher-level tasks (for example: find vulnerabilities, produce patches, or generate documentation).
@@ -200,17 +197,18 @@ Auto mode allows r2ai/decai to perform multi-step tasks automatically (for examp
 Example (decai auto mode):
 
 ```
-[0x00002d30]> decai -a "Find buffer overflows and propose a short patch for the current function"
+[0x00002d30]> decai -a Find buffer overflows and propose a short patch for the current function
 ```
 
 Note: Auto mode depends heavily on the model and the chosen API. Always validate the results produced by the model — LLM output can be incorrect or hallucinated.
 
-### r2mcp (model control / management) — short note
+### r2mcp - model context protocol
 
-Some workflows mention a "model control" helper (often abbreviated r2mcp in some communities) or the r2ai-server which helps managing and serving local models (llamacpp, llamafile, ollama, etc.).
+r2mcp is a small extension for the radare2 reverse‑engineering framework hosted at https://github.com/radareorg/radare2-mcp. It ties radare2 into the MCP-related workflow implemented by that repository (see the project page for the exact feature set and protocol details). In short, r2mcp is meant to extend radare2 with additional functionality so radare2 can exchange data or be driven by other tools that speak the MCP interface implemented by the project.
 
-- r2ai provides server-side helpers (`r2ai-server`) and integration with tools such as Ollama or local llama-based runtimes. These tools let you list available local models and serve them via a local HTTP/OpenAPI endpoint consumed by r2ai/decai.
-- If you need a model control protocol or management tool, check the r2ai repository's `server/` and `dist/docker/` folders and the project README for the most up-to-date instructions.
+Common use cases include automating or orchestrating analysis tasks, integrating radare2 into multi‑tool pipelines, driving radare2 from external GUIs or scripts, and enabling remote or programmatic control of radare2 for tasks such as batch decompilation, indexed scanning, or CTF/problem‑solving automation. Because it is an adapter/plugin, it’s useful wherever you want radare2’s analysis and disassembly capabilities accessible through a standardized programmatic interface rather than only through the interactive shell.
+
+To use r2mcp, clone the repository and follow the project’s README/build instructions on the GitHub page (installation methods for radare2 extensions vary; many projects provide a simple build/install or an r2pm package). After installing, enable or load the r2mcp plugin according to the repo instructions and then use the provided MCP commands or network interface to connect other tools or scripts to radare2. For exact installation steps, configuration options, example commands and usage examples, see the project repository: https://github.com/radareorg/radare2-mcp. If you’d like, paste the README here and I can produce a ready‑to‑use README summary or step‑by‑step install guide.
 
 ### Troubleshooting and tips
 
