@@ -139,7 +139,7 @@ the decompiled code looks well except the `sscanf()` function. It can be easily 
 ....
 ```
 
-The `mov dword [esp], eax` is the nearest instruction to sscanf (and it's equivalent to a push instruction). It stores the string 's' to the stack top (arg1).  `mov dword [var_sp_4h], 0x8048668` push '%d' as arg2 into stack. var_8h (esp + 0x8) which keeps the address of var_4h is the arg3.
+The `mov dword [esp], eax` is the nearest instruction to sscanf (and it's equivalent to a push instruction). It stores the string 's' to the stack top (arg1).  `mov dword [var_sp_4h], 0x8048668` push '%d' as arg2 into stack. var_8h (esp + 0x8) which keeps the address of `var_4h` is the arg3.
 
 Finally we have the corrected pseudo code:
 
