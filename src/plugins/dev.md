@@ -2,11 +2,11 @@
 
 radare2 splits the logic of a CPU into several modules. You should write more than one plugin to get full support for a specific arch. Let's see which are those:
 
-* `r_asm` : assembler and disassembler
-* `r_anal` : code analysis (opcode,type,esil,..)
-* `r_reg` : registers
-* `r_syscall` : system calls
-* `r_debug` : debugger
+* `r_arch` architecture plugin (assemble, disassemble, analyze, ESIL uplift and register profiles)
+* `r_anal` types, code and data analysis plugins
+* `r_reg` registers arena definitions
+* `r_syscall` system calls databases
+* `r_debug` debugger and emulation runtimes
 
 The most basic feature you usually want to support from a specific architecture is the disassembler. You first need to read into a human readable form the bytes in there.
 
@@ -16,120 +16,23 @@ To configure which plugins you want to compile use the `./configure-plugins` scr
 
 You may find some examples of external plugins in [radare2-extras](https://github.com/radareorg/radare2-extras) repository.
 
-### Writing the r_asm plugin
+### Writing the RArch plugin
 
-The official way to make third-party plugins is to distribute them into a separate repository. This is a sample disasm plugin:
+Note: As of recent versions, the `r_asm` and `r_anal` plugin interfaces were merged into a unified `r_arch` API. New architectures (CPUs) and full architecture support (disassembly plus analysis/uplift) must be implemented as `r_arch` plugins.
+
+The recommended way to start a new plugin project is to use r2skel to scaffold the basic directory layout and files for an `r_arch` plugin. r2skel will create a ready-to-edit skeleton including build files and a minimal source that links against the `r_arch` API.
+
+General guidance:
+
+* Implement architecture-specific assembly/disassembly, analysis/op detection, ESIL uplift and register profile handlers inside the `r_arch` plugin.
+* Prefer packaging your plugin as an external repository (third-party plugin) so it can be maintained independently from the core tree.
+* Use pkg-config with the `r_arch` package for compile and link flags, for example:
 
 ```Makefile
-$ cd my-cpu
-$ cat Makefile
-NAME=mycpu
-R2_PLUGIN_PATH=$(shell r2 -hh|grep R2_LIBR_PLUGINS|awk '{print $$2}')
-CFLAGS=-g -fPIC $(shell pkg-config --cflags r_asm)
-LDFLAGS=-shared $(shell pkg-config --libs r_asm)
-OBJS=$(NAME).o
-SO_EXT=$(shell uname|grep -q Darwin && echo dylib || echo so)
-LIB=$(NAME).$(SO_EXT)
-
-all: $(LIB)
-
-clean:
-	rm -f $(LIB) $(OBJS)
-
-$(LIB): $(OBJS)
-	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJS) -o $(LIB)
-
-install:
-	cp -f $(NAME).$(SO_EXT) $(R2_PLUGIN_PATH)
-
-uninstall:
-	rm -f $(R2_PLUGIN_PATH)/$(NAME).$(SO_EXT)
+CFLAGS=-g -fPIC $(shell pkg-config --cflags r_arch)
+LDFLAGS=-shared $(shell pkg-config --libs r_arch)
 ```
 
-```c
-$ cat mycpu.c
-/* example r_asm plugin by pancake at 2014 */
+For examples and inspiration, check existing architecture plugins in the radare2 repository and the radare2-extras collection. If you need a minimal starting point, run `r2skel` and choose the architecture/plugin template.
 
-#include <r_asm.h>
-#include <r_lib.h>
-
-#define OPS 17
-
-static const char *ops[OPS*2] = {
-	"nop", NULL,
-	"if", "r",
-	"ifnot", "r",
-	"add", "rr",
-	"addi", "ri",
-	"sub", "ri",
-	"neg", "ri",
-	"xor", "ri",
-	"mov", "ri",
-	"cmp", "rr",
-	"load", "ri",
-	"store", "ri",
-	"shl", "ri",
-	"br", "r",
-	"bl", "r",
-	"ret", NULL,
-	"sys", "i"
-};
-
-/* Main function for disassembly */
-//b for byte, l for length
-static int disassemble (RAsm *a, RAsmOp *op, const ut8 *b, int l) {
-	char arg[32];
-        int idx = (b[0]&0xf)\*2;
-	op->size = 2;
-	if (idx>=(OPS*2)) {
-		strcpy (op->buf_asm, "invalid");
-		return -1;
-	}
-	strcpy (op->buf_asm, ops[idx]);
-	if (ops[idx+1]) {
-		const char \*p = ops[idx+1];
-		arg[0] = 0;
-		if (!strcmp (p, "rr")) {
-			sprintf (arg, "r%d, r%d", b[1]>>4, b[1]&0xf);
-		} else
-		if (!strcmp (p, "i")) {
-			sprintf (arg, "%d", (char)b[1]);
-		} else
-		if (!strcmp (p, "r")) {
-			sprintf (arg, "r%d, r%d", b[1]>>4, b[1]&0xf);
-		} else
-		if (!strcmp (p, "ri")) {
-			sprintf (arg, "r%d, %d", b[1]>>4, (char)b[1]&0xf);
-		}
-		if (*arg) {
-			strcat (op->buf_asm, " ");
-			strcat (op->buf_asm, arg);
-		}
-	}
-	return op->size;
-}
-
-/* Structure of exported functions and data */
-RAsmPlugin r_asm_plugin_mycpu = {
-        .name = "mycpu",
-        .arch = "mycpu",
-        .license = "LGPL3",
-        .bits = 32,
-        .desc = "My CPU disassembler",
-        .disassemble = &disassemble,
-};
-
-#ifndef CORELIB
-struct r_lib_struct_t radare_plugin = {
-        .type = R_LIB_TYPE_ASM,
-        .data = &r_asm_plugin_mycpu
-};
-#endif
-```
-
-To build and install this plugin just type this:
-
-```console
-$ make
-$ sudo make install
-```
+**Deprecated**: The old separate `r_asm` (disassembler) and `r_anal` (analysis) plugin examples are obsolete and should not be used for implementing new architectures. Use `r_arch` + r2skel instead.
