@@ -70,7 +70,7 @@
   * [Mapping Files](commandline/mapping_files.md)
   * [Print Modes](commandline/print_modes.md)
   * [Flags](commandline/flags.md)
-  * [RTables (comma)](commandline/comma.md)
+  * [RTables](commandline/comma.md)
   * [Write](commandline/write.md)
   * [Zoom](commandline/zoom.md)
   * [Yank/Paste](commandline/yank_paste.md)
