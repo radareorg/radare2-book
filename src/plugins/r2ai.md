@@ -15,34 +15,18 @@ Recommended: use the radare2 package manager (r2pm).
 
 * List available r2ai packages:
 
-```
+```bash
 $ r2pm -s r2ai
-r2ai-plugin         r2ai plugin rewritten in plain C
-r2ai-mcp         radare2 Model Context Protocol server
-decai               r2ai r2js subproject with focus on LLM decompilation for radare2
+r2ai      r2ai plugin written in plain C
+r2mcp     radare2 Model Context Protocol server
+decai     LLM-based decompiler written in r2js
 ```
 
 * Install the recommended native plugin and decai:
 
-```
-$ r2pm -i r2ai-plugin
-$ r2pm -i decai
-```
-
-From sources
-
-* Clone the r2ai repo and build the component you need. The top-level Makefile guides you to subprojects:
-
-```
-$ make
-Usage: Run 'make' in the following subdirectories instead
-src/    - Modern C rewrite in form of a native r2 plugin
-py/     - The old Python cli and r2 plugin
-decai/  - r2js plugin with focus on decompiling
-server/ - shellscript to easily run llamacpp and other
-$ cd src
-$ make
-$ sudo make install      # if you want system-wide install
+```bash
+$ r2pm -Uci r2ai
+$ r2pm -Uci decai
 ```
 
 Notes about API keys
@@ -63,27 +47,13 @@ $ chmod 600 ~/.r2ai.openai-key
 
 ### Running r2ai from radare2
 
-Once installed, r2ai exposes the `r2ai` command inside r2. Typical ways to launch it:
+Once installed, the `r2ai` command will be available inside the radare2 shell.
 
-* From the r2 shell (native plugin):
-
-```
+```console
 $ r2 -qc "r2ai -a solve this crackme" /path/to/binary
 ```
 
-* Using r2pm to run the packaged application:
-
-```
-$ r2pm -r r2ai
-```
-
-* If running from the repo or built artifacts, there may be a launcher script such as `r2ai.sh`:
-
-```
-$ ./r2ai.sh /path/to/binary
-```
-
-General configuration can be saved via your radare2 config file (for example `~/.radare2rc`) using `r2ai -e` or `r2ai -E` options. Example to set default API and model:
+General configuration can be saved via your radare2 config file (for example `~/.radare2rc`) using `r2ai -e` options. Example to set default API and model:
 
 ```
 r2ai -e api=anthropic
@@ -95,36 +65,22 @@ r2ai -e max_tokens=64000
 
 From inside radare2 (after opening a binary):
 
-* Start r2 and invoke r2ai in interactive mode (native plugin):
-
-```
-[0x00400500]> r2ai
-r2ai> help
-```
-
 * Ask general questions or embed r2 outputs: you can pipe the output of r2 commands to the assistant (r2ai supports embedding the result of r2 commands into the prompt to give context about functions, strings, graphs, etc.).
 
-Example: ask what a function does (pseudo-commands shown):
+**Example**: ask what a function does (pseudo-commands shown):
 
-```
-[0x00400500]> s sym.main
-[0x00400500]> pdf
-[0x00400500]> r2ai -q "Explain what the current function does in two sentences and list the possible vulnerabilities"
-```
-
-* Use r2ai from the shell in repl or batch mode (depending on the installed component):
-
-```
-$ r2pm -r r2ai                   # launch r2ai UI/interactive client
-$ r2ai -q "What does function at 0x401000 do?" --attach /path/to/binary
+```console
+[0x00400500]> s sym.main ; af
+[0x00400500]> r2ai -d Explain what the current function does in two sentences and list the possible vulnerabilities
 ```
 
-Scripting and automation
-
-* r2ai is scriptable via r2pipe: you can write scripts that call r2 commands, gather output, and query the model programmatically.
+As long as r2pipe is the main scripting interface for radare2, automating actions that reuse r2ai is as easy as running the `r2ai` command via r2js or your language of choice, harvest the output and work on that.
 
 Use cases
 
+* Solve crackmes with no interactions
+* Improve decompilation output
+* Better function signatures and Type propagation
 * Quick summary and explanation of unfamiliar functions
 * Identify potential vulnerabilities (buffer overflows, format-string bugs, etc.)
 * Suggest variable/argument names and produce human-readable documentation
@@ -188,7 +144,7 @@ Configuration and models
 [0x00002d30]> decai -d
 ```
 
-decai supports an Auto mode that chains queries and uses function-calling style interactions with the model to refine outputs and solve higher-level tasks (for example: find vulnerabilities, produce patches, or generate documentation).
+decai also supports an Auto mode that chains queries and uses function-calling style interactions with the model to refine outputs and solve higher-level tasks (for example: find vulnerabilities, produce patches, or generate documentation).
 
 ### Auto mode
 
@@ -200,23 +156,49 @@ Example (decai auto mode):
 [0x00002d30]> decai -a Find buffer overflows and propose a short patch for the current function
 ```
 
-Note: Auto mode depends heavily on the model and the chosen API. Always validate the results produced by the model — LLM output can be incorrect or hallucinated.
+**Note**: Auto mode depends heavily on the model and the chosen API. Always validate the results produced by the model — LLM output can be incorrect or hallucinated.
+
+```console
+[0x00002d30]> decai -a solve this crackme
+```
 
 ### r2mcp - model context protocol
 
 r2mcp is the model context protocol server that permits the use of radare2 with AI agents, the source can be pulled from [https://github.com/radareorg/radare2-mcp](github) but it is usually installed via r2pm.
 
-* TODO: explain how to configure it Visual Studio, MAI or Claude
-* TODO: Example usage
+An MCP server acts like a modernized inetd, utilizing JSON-RPC via stdio to present tools with descriptions, enabling AI models to understand and execute these tools automatically in workflows to address user queries effectively.
+
+In Mai, Cursor, Visual Studio, Claude, Kiro, Zed, .. just press **CMD+,** to get into settings and add the r2mcp server in the config file (`claude_desktop_config.json` for example)
+
+```json
+{
+    "mcpServers": {
+        "radare2": {
+            "command": "r2pm",
+            "args": ["-r", "r2mcp"]
+        }
+    }
+}
+```
+
+**NOTE** to reduce the amount of tools and therefor use less context for the MCP tooling use the `-m` flag.
+
+```shell
+$ r2pm -r r2mcp -h
+Usage: r2mcp [-flags]
+ -c [cmd]   run those commands before entering the mcp loop
+ -d [pdc]   select a different decompiler (pdc by default)
+ -h         show this help
+ -m         expose minimum amount of tools
+ -n         do not load any plugin or radare2rc
+ -v         show version
+$
+```
 
 ### Troubleshooting and tips
 
+* If the r2ai native plugin is not loaded set the `R2_DEBUG=1` environment and check the logs
 * If the model returns garbage or is too verbose, tune the `prompt`/`model`/`max_tokens` config via `r2ai -e` or `decai -e`.
 * For offline/local usage prefer Ollama or a local llama binary to reduce latency and avoid sending sensitive binaries to third-party APIs.
 * Always pin the model and prompt for reproducible results in analysis workflows.
-
-### Further reading
-
-* r2ai git: [https://github.com/radareorg/r2ai](repository)
-* decai (inside the r2ai repo)
-* r2pm: the radare2 package manager (to install r2ai packages)
+* The `deterministic` variable lowers the temperature and `top_*` settings to always get the same output
