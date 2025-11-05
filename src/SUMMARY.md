@@ -107,6 +107,7 @@
   * [Graph commands](analysis/graphs.md)
 * [Emulation](emulation/intro.md)
   * [Introduction to ESIL](emulation/esil.md)
+  * [ESIL Pins](emulation/pins.md)
   * [Computed Analysis](emulation/analysis.md)
 * [Scripting](scripting/intro.md)
   * [R2JS](scripting/r2js.md)
