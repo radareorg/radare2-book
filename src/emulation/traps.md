@@ -8,10 +8,10 @@ When a trap is triggered, ESIL can execute custom commands, log events, or halt 
 
 ESIL traps are controlled through several configuration variables that determine when traps are enabled and what happens when they occur:
 
-- `esil.iotrap`: Enables traps for invalid I/O operations, such as reading or writing to unmapped memory.
-- `esil.exectrap`: Enables traps for execution attempts in non-executable memory regions.
-- `esil.traprevert`: When set, reverts the entire ESIL expression on trap instead of just the program counter.
-- `cmd.esil.trap`: Defines the command to execute when a trap is triggered. For example, `?e trap detected` will print a message with trap details.
+* `esil.iotrap`: Enables traps for invalid I/O operations, such as reading or writing to unmapped memory.
+* `esil.exectrap`: Enables traps for execution attempts in non-executable memory regions.
+* `esil.traprevert`: When set, reverts the entire ESIL expression on trap instead of just the program counter.
+* `cmd.esil.trap`: Defines the command to execute when a trap is triggered. For example, `?e trap detected` will print a message with trap details.
 
 These settings allow fine-tuned control over trap behavior, letting you focus on specific types of errors or automate responses.
 
@@ -19,17 +19,17 @@ These settings allow fine-tuned control over trap behavior, letting you focus on
 
 radare2 defines several trap types, each representing a different kind of exceptional condition:
 
-- `R_ANAL_TRAP_NONE` (0): No trap condition.
-- `R_ANAL_TRAP_UNHANDLED` (1): Unhandled interrupt or exception.
-- `R_ANAL_TRAP_BREAKPOINT` (2): Simulated breakpoint, often triggered by the `$$` operation.
-- `R_ANAL_TRAP_DIVBYZERO` (3): Division by zero in mathematical operations.
-- `R_ANAL_TRAP_WRITE_ERR` (4): Attempt to write to invalid memory.
-- `R_ANAL_TRAP_READ_ERR` (5): Attempt to read from invalid memory or alignment error.
-- `R_ANAL_TRAP_EXEC_ERR` (6): Execution in non-executable memory.
-- `R_ANAL_TRAP_INVALID` (7): Invalid instruction or operation.
-- `R_ANAL_TRAP_UNALIGNED` (8): Unaligned memory access.
-- `R_ANAL_TRAP_TODO` (9): Unimplemented operation.
-- `R_ANAL_TRAP_HALT` (10): Execution halt.
+* `R_ANAL_TRAP_NONE` (0): No trap condition.
+* `R_ANAL_TRAP_UNHANDLED` (1): Unhandled interrupt or exception.
+* `R_ANAL_TRAP_BREAKPOINT` (2): Simulated breakpoint, often triggered by the `$$` operation.
+* `R_ANAL_TRAP_DIVBYZERO` (3): Division by zero in mathematical operations.
+* `R_ANAL_TRAP_WRITE_ERR` (4): Attempt to write to invalid memory.
+* `R_ANAL_TRAP_READ_ERR` (5): Attempt to read from invalid memory or alignment error.
+* `R_ANAL_TRAP_EXEC_ERR` (6): Execution in non-executable memory.
+* `R_ANAL_TRAP_INVALID` (7): Invalid instruction or operation.
+* `R_ANAL_TRAP_UNALIGNED` (8): Unaligned memory access.
+* `R_ANAL_TRAP_TODO` (9): Unimplemented operation.
+* `R_ANAL_TRAP_HALT` (10): Execution halt.
 
 Each trap type provides specific information about the error, helping you diagnose issues in emulated code.
 
