@@ -58,7 +58,6 @@ radare2 comes with several built-in pins for common operations:
 
 These provide basic implementations for return values, memory copying, string length calculation, and printing.
 
-
 ### Practical Examples
 
 Let's explore some real-world scenarios where ESIL pins shine.
