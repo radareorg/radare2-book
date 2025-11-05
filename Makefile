@@ -1,3 +1,5 @@
+VERSION=6.0.0
+
 all: pdf epub
 
 .PHONY: all lint lint-fix epub pdf gmi texi info one one-online
