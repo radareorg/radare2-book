@@ -1,7 +1,7 @@
 ## Plugins in Python
 
 At first, to be able to write a plugins in Python for radare2 you need to install
-r2lang plugin: `r2pm -i lang-python`.
+r2lang plugin: `r2pm -i rlang-python`.
 Note - in the following examples there are missing functions of the actual decoding
 for the sake of readability!
 
