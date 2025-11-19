@@ -8,7 +8,7 @@ If you want to add support for the gdb, you can see the register profile in the 
 
 ### More to come
 
-* Related article: <https://radare.today/posts/extending-r2-with-new-plugins/>
+* Related article: <https://radareorg.github.io/blog/posts/extending-r2-with-new-plugins/>
 
 Some commits related to "Implementing a new architecture"
 
