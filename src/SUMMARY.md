@@ -144,6 +144,8 @@
   * [Packaging](plugins/r2pm.md)
 * [R2Frida](r2frida/intro.md)
   * [First Steps](r2frida/first_steps.md)
+* [R2Renef](r2renef/intro.md)
+  * [First Steps](r2renef/first_steps.md)
 * [R2Yara](r2yara/intro.md)
 * [Firmware Reversing](r2fwrev/intro.md)
   * [Setup](r2fwrev/setup.md)
