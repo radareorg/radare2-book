@@ -124,8 +124,6 @@ Load a script file:
 [+] Script loaded
 ```
 
-
-
 ### Hook Management
 
 List active hooks:
@@ -162,7 +160,7 @@ Monitor hooks in real-time:
 [0x7f8a1c2b0]> :exec Module.findExport("encrypt_buffer", "libexample.so")
 ```
 
-2. Navigate and analyze with radare2:
+1. Navigate and analyze with radare2:
 
 ```console
 [0x7f8a1c2b0]> s 0x7a5c102000
@@ -170,7 +168,7 @@ Monitor hooks in real-time:
 [0x7a5c102000]> pdf
 ```
 
-3. Hook the function via Lua script and load with `:l`.
+1. Hook the function via Lua script and load with `:l`.
 
 ### Example: Monitoring Library Loading
 
