@@ -14,6 +14,7 @@ All of them can be installed via r2pm.
 * r2ghidra - use the Ghidra decompiler from radare2
 * r2dec - a decompiler written in JS for r2
 * r2yara - loading, scanning and creating Yara rules
+* [r2renef](../r2renef/intro.md) - use the Renef instrumentation tool from radare2
 
 ## Skeletons
 
