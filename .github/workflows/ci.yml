@@ -38,7 +38,7 @@ jobs:
       - name: Build ebooks
         run: make pdf epub info gmi one-online
       - name: Upload artifacts
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: r2book
           path: |
