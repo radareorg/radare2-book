@@ -84,7 +84,7 @@ jobs:
         with:
           fetch-depth: 0 # Download all git history and tags
       - name: Download artifacts
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v8
         with:
           name: r2book
       - name: Create GitHub release
