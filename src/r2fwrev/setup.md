@@ -15,7 +15,7 @@ all:
 $ cat script.r2
 f entry0=0x8005320
 s entry0
-CC evertyhing starts here
+CC everything starts here
 afr
 ```
 
