@@ -90,6 +90,7 @@
   * [Automation](search/automation.md)
   * [Backward Search](search/backward_search.md)
   * [Search in Assembly](search/search_in_assembly.md)
+  * [ROP Gadgets](search/rop_gadgets.md)
   * [Cryptographic Materials](search/searching_crypto.md)
 * [Disassembling](arch/intro.md)
   * [Decompilers](arch/decompile.md)

@@ -37,7 +37,7 @@ anal.depth)
 | /p patternsize          search for pattern of given size
 | /P patternsize          search similar blocks
 | /r[erwx][?] sym.printf  analyze opcode reference an offset (/re for esil)
-| /R [grepopcode]         search for matching ROP gadgets, semicolon-separated
+| /g[?RCJ] [op;op]        search for ROP/COP/JOP gadgets matching given opstr
 | /s                      search for all syscalls in a region (EXPERIMENTAL)
 | /v[1248] value          look for an `cfg.bigendian` 32bit value
 | /V[1248] min max        look for an `cfg.bigendian` 32bit value in range
