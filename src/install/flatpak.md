@@ -28,6 +28,15 @@ During the installation process, you may be prompted to confirm the installation
 flatpak run org.radare.iaito
 ```
 
+### Enable optional Web UI
+
+By default neither the web component nor the network permissions are enabled, if you want to be able to start the web UI from menu `Edit > Start web server` you need to run this commands:
+
+```sh
+flatpak install --user org.radare.iaito.webui
+flatpak override --user --share=network org.radare.iaito
+```
+
 ### CLI Configuration
 
 To allow usage of CLI radare applications you need to define the following aliases:
@@ -35,20 +44,27 @@ To allow usage of CLI radare applications you need to define the following alias
 ```sh
 alias r2='flatpak run --command=r2 org.radare.iaito'
 alias r2agent='flatpak run --command=r2agent org.radare.iaito'
+alias r2frida-compile='flatpak run --command=r2frida-compile org.radare.iaito'
 alias r2p='flatpak run --command=r2p org.radare.iaito'
 alias r2pm='flatpak run --command=r2pm --share=network --devel org.radare.iaito'
 alias r2r='flatpak run --command=r2r org.radare.iaito'
+alias r2sdb='flatpak run --command=r2sdb org.radare.iaito'
 alias rabin2='flatpak run --command=rabin2 org.radare.iaito'
 alias radare2='flatpak run --command=radare2 org.radare.iaito'
 alias radiff2='flatpak run --command=radiff2 org.radare.iaito'
 alias rafind2='flatpak run --command=rafind2 org.radare.iaito'
+alias rafs2='flatpak run --command=rafs2 org.radare.iaito'
 alias ragg2='flatpak run --command=ragg2 org.radare.iaito'
 alias rahash2='flatpak run --command=rahash2 org.radare.iaito'
+alias rapatch2='flatpak run --command=rapatch2 org.radare.iaito'
 alias rarun2='flatpak run --command=rarun2 org.radare.iaito'
 alias rasign2='flatpak run --command=rasign2 org.radare.iaito'
 alias rasm2='flatpak run --command=rasm2 org.radare.iaito'
 alias ravc2='flatpak run --command=ravc2 org.radare.iaito'
 alias rax2='flatpak run --command=rax2 org.radare.iaito'
+alias sleighc='flatpak run --command=sleighc org.radare.iaito'
+alias yara='flatpak run --command=yara org.radare.iaito'
+alias yarac='flatpak run --command=yarac org.radare.iaito'
 ```
 
 With this commands, by default no local files will be accesible.
