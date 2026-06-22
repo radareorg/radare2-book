@@ -14,6 +14,7 @@
   * [Flatpak releases](install/flatpak.md)
   * [Snap releases](install/snap.md)
   * [Docker containers](install/docker.md)
+  * [Nix](install/nix.md)
   * [Troubleshooting](install/troubleshooting.md)
 * [First Steps](first_steps/intro.md)
   * [Commandline](first_steps/commandline_flags.md)
