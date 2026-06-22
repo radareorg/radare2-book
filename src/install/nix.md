@@ -1,6 +1,6 @@
 ## Nix
 
-radare2 ships a [Nix](https://nixos.org) flake for reproducible builds and development environments on Linux and macOS.
+radare2 ships a [Nix](https://nixos.org) flake for reproducible builds and development environments on Linux and macOS. The packaging lives in `dist/nix/` and a redirect shim in the repository root ties it to the lock file.
 
 ### Running radare2
 
