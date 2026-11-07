@@ -16,4 +16,6 @@ This structured approach ensures that you not only learn how to solve each speci
 
 Contents based on the [dustri](http://dustri.org/b/defeating-ioli-with-radare2.html) tutorials.
 
-The binaries are available at [mirror](https://github.com/radareorg/radare2-book/raw/master/src/crackmes/ioli/IOLI-crackme.tar.gz)
+The binaries are available at [mirror](https://github.com/radareorg/radare2-book/raw/master/src/crackmes/ioli/IOLI-crackme.tar.gz).
+
+The original binaries are 32-bit only (Linux x86, Windows x86 and Windows CE on ARM). If you want to practice on a 64-bit system or on another architecture, [IOLI crackmes, rebuilt](https://github.com/itwaseasy/IOLI-crackmes-rebuilt) provides the same ten crackmes compiled from C sources for Linux and Windows on x86, x86-64 and arm64, and for macOS on x86-64 and arm64. They keep the logic, conditions, calls and strings of the originals, but addresses and stack offsets differ, so use the original binaries to follow the walkthroughs in this chapter step by step.
